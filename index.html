@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HACCP Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f4f4f4;
+}
+
+.header{
+background:#00703c;
+color:white;
+padding:15px;
+font-size:22px;
+text-align:center;
+}
+
+.dashboard{
+padding:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.tile{
+background:white;
+padding:30px;
+text-align:center;
+font-size:18px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+
+.section{
+padding:20px;
+display:none;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:10px;
+font-size:16px;
+box-sizing:border-box;
+}
+
+button{
+background:#00703c;
+color:white;
+border:none;
+padding:15px;
+font-size:18px;
+width:100%;
+margin-top:10px;
+border-radius:6px;
+}
+
+.back{
+background:#666;
+}
+
+canvas{
+border:2px solid #ccc;
+background:white;
+width:100%;
+height:200px;
+}
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="header">
+HACCP Dashboard
+</div>
+
+<div id="dashboard" class="dashboard">
+
+<div class="tile" onclick="openSection('temp')">Temperature Checks</div>
+<div class="tile" onclick="openSection('clean')">Cleaning Records</div>
+<div class="tile" onclick="openSection('trace')">Traceability Logs</div>
+<div class="tile" onclick="openSection('prod')">Production Logs</div>
+<div class="tile" onclick="openSection('probe')">Probe Calibration</div>
+<div class="tile" onclick="openSection('weekly')">Weekly Compliance</div>
+
+</div>
+
+
+<!-- TEMPERATURE -->
+
+<div id="temp" class="section">
+
+<h2>Temperature Check</h2>
+
+<label>Area</label>
+<input id="t_area">
+
+<label>Temperature</label>
+<input id="t_temp">
+
+<label>Staff Name</label>
+<input id="t_staff">
+
+<label>Notes</label>
+<textarea id="t_notes"></textarea>
+
+<label>Photo</label>
+<input type="file" id="t_photo" accept="image/*" capture="environment">
+
+<h3>Signature</h3>
+<canvas id="t_sig"></canvas>
+
+<button onclick="saveTemp()">Generate HACCP Record</button>
+
+<button class="back" onclick="back()">Back</button>
+
+</div>
+
+
+<!-- CLEANING -->
+
+<div id="clean" class="section">
+
+<h2>Cleaning Record</h2>
+
+<label>Area Cleaned</label>
+<input id="c_area">
+
+<label>Cleaning Chemical Used</label>
+<input id="c_chem">
+
+<label>Staff</label>
+<input id="c_staff">
+
+<label>Notes</label>
+<textarea id="c_notes"></textarea>
+
+<label>Photo</label>
+<input type="file" id="c_photo" accept="image/*" capture="environment">
+
+<h3>Signature</h3>
+<canvas id="c_sig"></canvas>
+
+<button onclick="saveClean()">Generate HACCP Record</button>
+
+<button class="back" onclick="back()">Back</button>
+
+</div>
+
+
+<!-- TRACEABILITY -->
+
+<div id="trace" class="section">
+
+<h2>Traceability Log</h2>
+
+<label>Product</label>
+<input id="tr_product">
+
+<label>Supplier</label>
+<input id="tr_supplier">
+
+<label>Batch Number</label>
+<input id="tr_batch">
+
+<label>Staff</label>
+<input id="tr_staff">
+
+<h3>Signature</h3>
+<canvas id="tr_sig"></canvas>
+
+<button onclick="saveTrace()">Generate HACCP Record</button>
+
+<button class="back" onclick="back()">Back</button>
+
+</div>
+
+
+<!-- PRODUCTION -->
+
+<div id="prod" class="section">
+
+<h2>Production Log</h2>
+
+<label>Product Produced</label>
+<input id="p_product">
+
+<label>Quantity</label>
+<input id="p_qty">
+
+<label>Staff</label>
+<input id="p_staff">
+
+<label>Notes</label>
+<textarea id="p_notes"></textarea>
+
+<h3>Signature</h3>
+<canvas id="p_sig"></canvas>
+
+<button onclick="saveProd()">Generate HACCP Record</button>
+
+<button class="back" onclick="back()">Back</button>
+
+</div>
+
+
+<!-- PROBE -->
+
+<div id="probe" class="section">
+
+<h2>Probe Calibration</h2>
+
+<label>Probe ID</label>
+<input id="pr_id">
+
+<label>Ice Test Temp</label>
+<input id="pr_temp">
+
+<label>Staff</label>
+<input id="pr_staff">
+
+<h3>Signature</h3>
+<canvas id="pr_sig"></canvas>
+
+<button onclick="saveProbe()">Generate HACCP Record</button>
+
+<button class="back" onclick="back()">Back</button>
+
+</div>
+
+
+<!-- WEEKLY -->
+
+<div id="weekly" class="section">
+
+<h2>Weekly Compliance</h2>
+
+<label>Week Starting</label>
+<input type="date" id="w_week">
+
+<label>Manager Notes</label>
+<textarea id="w_notes"></textarea>
+
+<h3>Manager Signature</h3>
+<canvas id="w_sig"></canvas>
+
+<button onclick="saveWeekly()">Generate Report</button>
+
+<button class="back" onclick="back()">Back</button>
+
+</div>
+
+
+<script>
+
+let pads={}
+
+window.onload=function(){
+
+document.querySelectorAll("canvas").forEach(c=>{
+c.width=c.offsetWidth
+c.height=200
+pads[c.id]=new SignaturePad(c)
+})
+
+}
+
+function openSection(id){
+
+document.getElementById("dashboard").style.display="none"
+
+document.querySelectorAll(".section").forEach(s=>{
+s.style.display="none"
+})
+
+document.getElementById(id).style.display="block"
+
+}
+
+function back(){
+
+document.querySelectorAll(".section").forEach(s=>{
+s.style.display="none"
+})
+
+document.getElementById("dashboard").style.display="grid"
+
+}
+
+
+async function addPhoto(pdf,file){
+
+if(!file)return
+
+let reader=new FileReader()
+
+reader.onload=function(e){
+
+pdf.addPage()
+
+pdf.addImage(e.target.result,'JPEG',10,20,190,250)
+
+}
+
+reader.readAsDataURL(file)
+
+}
+
+
+function createPDF(title,lines,signature,photo){
+
+const { jsPDF } = window.jspdf
+
+let pdf=new jsPDF()
+
+pdf.setFontSize(16)
+
+pdf.text(title,20,20)
+
+pdf.setFontSize(11)
+
+let y=40
+
+lines.forEach(l=>{
+
+pdf.text(l,20,y)
+
+y+=8
+
+})
+
+if(signature && !pads[signature].isEmpty()){
+
+let sig=pads[signature].toDataURL()
+
+pdf.addImage(sig,'PNG',20,y,80,30)
+
+}
+
+pdf.save(title+".pdf")
+
+}
+
+
+function saveTemp(){
+
+createPDF("Temperature Check",[
+"Area: "+t_area.value,
+"Temp: "+t_temp.value,
+"Staff: "+t_staff.value,
+"Notes: "+t_notes.value
+],'t_sig',t_photo.files[0])
+
+}
+
+
+function saveClean(){
+
+createPDF("Cleaning Record",[
+"Area: "+c_area.value,
+"Chemical: "+c_chem.value,
+"Staff: "+c_staff.value,
+"Notes: "+c_notes.value
+],'c_sig',c_photo.files[0])
+
+}
+
+
+function saveTrace(){
+
+createPDF("Traceability Log",[
+"Product: "+tr_product.value,
+"Supplier: "+tr_supplier.value,
+"Batch: "+tr_batch.value,
+"Staff: "+tr_staff.value
+],'tr_sig')
+
+}
+
+
+function saveProd(){
+
+createPDF("Production Log",[
+"Product: "+p_product.value,
+"Quantity: "+p_qty.value,
+"Staff: "+p_staff.value,
+"Notes: "+p_notes.value
+],'p_sig')
+
+}
+
+
+function saveProbe(){
+
+createPDF("Probe Calibration",[
+"Probe: "+pr_id.value,
+"Ice Temp: "+pr_temp.value,
+"Staff: "+pr_staff.value
+],'pr_sig')
+
+}
+
+
+function saveWeekly(){
+
+createPDF("Weekly Compliance",[
+"Week: "+w_week.value,
+"Notes: "+w_notes.value
+],'w_sig')
+
+}
+
+</script>
+
+</body>
+</html>

@@ -604,7 +604,35 @@ display: flex; align-items: center; justify-content: center;
     <div class="form-grid">
       <div class="form-card" data-form="clean-redmeat">
         <div class="form-icon" style="background:#e8f5ee">🧼</div>
-        <div class="form-info"><div class="form-name">Red Meat Dept Cleaning</div><div class="form-desc">Daily & weekly cleaning schedule with chemicals</div></div>
+        <div class="form-info"><div class="form-name">Red Meat Dept Cleaning</div><div class="form-desc">Daily &amp; weekly cleaning schedule with chemicals</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="clean-fruitveg">
+        <div class="form-icon" style="background:#e8f5e9">🥦</div>
+        <div class="form-info"><div class="form-name">Fruit &amp; Veg Cleaning</div><div class="form-desc">Daily AM/PM and weekly deep clean</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="clean-stockroom">
+        <div class="form-icon" style="background:#f3e5f5">📦</div>
+        <div class="form-info"><div class="form-name">Grocery Stockroom Cleaning</div><div class="form-desc">Daily and weekly cleaning schedule</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOODS INWARDS -->
+
+  <div class="category-section">
+    <div class="category-label">🚚 Goods Inwards</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="goods-chilled">
+        <div class="form-icon" style="background:#e3f2fd">🧊</div>
+        <div class="form-info"><div class="form-name">Goods Inwards Chilled/Frozen</div><div class="form-desc">Temp check, supplier, accept/reject, dating</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="goods-ambient">
+        <div class="form-icon" style="background:#fff8e1">📦</div>
+        <div class="form-info"><div class="form-name">Goods Inwards Ambient</div><div class="form-desc">Food safety checks, delivery docket, dating</div></div>
         <div class="form-arrow">›</div>
       </div>
     </div>
@@ -1771,10 +1799,6 @@ display: flex; align-items: center; justify-content: center;
 
 <!-- LIGHTBOX -->
 
-<div class="lightbox" id="lightbox" data-action="closeLightbox">
-  <button class="lightbox-close" data-action="closeLightbox">✕</button>
-  <img id="lightbox-img" src="" alt="Photo evidence">
-  <div class="lightbox-info" id="lightbox-info"></div>
 </div>
 
 <script>
@@ -1917,6 +1941,15 @@ var cookedMeats = [
 var salamiOlives = [
   'Mixed Olives','Sundried Tomatoes','Cheese Filled Peppers','Chorizo Extra',
   'Pre pack Mixed olives','Pre pack Sundried tomatoes','Pre pack Cheese filled peppers','Pre Pack Stuffing'
+];
+var fruitVegTempUnits = [
+  ['Display Fridge Veg 1','0-5degC'],
+  ['Display Fridge Veg 2','0-5degC'],
+  ['Display Fridge Fruit','0-5degC'],
+  ['Salad Fridge','0-5degC'],
+  ['Walk-in Back-up','0-5degC'],
+  ['Berry Fridge 1','0-5degC'],
+  ['Berry Fridge 2','0-5degC']
 ];
 
 var cleaningItems = {
@@ -2253,6 +2286,116 @@ function sendEmail(subject, formId) {
 }
 
 // ========== BUILD ALL TABLES ==========
+function makeFruitVegCleaningTable() {
+  var tbody = document.getElementById('clean-fruitveg-body');
+  if (!tbody) return;
+  var dailyItems = [
+    ['Floor','Floors','Mop & bucket/degreaser'],
+    ['Scales','Scales','Sanitiser'],
+    ['Juicer','Juicer','Wash up liq/Sanitiser'],
+    ['Salad display','Salad display area','Sanitiser'],
+    ['Potato stands','Potato stands','Sanitiser']
+  ];
+  dailyItems.forEach(function(item) {
+    var tr = document.createElement('tr');
+    var cells = '<td class="area-name">' + item[0] + '</td><td class="area-name">' + item[1] + '</td><td class="chem-name">' + item[2] + '</td>';
+    for (var i = 0; i < 14; i++) cells += '<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit"></td>';
+    tr.innerHTML = cells;
+    tbody.appendChild(tr);
+  });
+  var weeklyHeader = document.createElement('tr');
+  weeklyHeader.innerHTML = '<td colspan="17" class="clean-section-header">WEEKLY DEEP CLEAN</td>';
+  tbody.appendChild(weeklyHeader);
+  var weeklyItems = [
+    ['All shelving','Shelving units','Degreaser'],
+    ['Cold rooms','Cold room walls/floors','Degreaser/Sanitiser'],
+    ['Display fridges','Interior walls','Degreaser/Sanitiser'],
+    ['Potato hoppers','Hoppers & surrounds','Degreaser']
+  ];
+  weeklyItems.forEach(function(item) {
+    var tr = document.createElement('tr');
+    var cells = '<td class="area-name">' + item[0] + '</td><td class="area-name">' + item[1] + '</td><td class="chem-name">' + item[2] + '</td>';
+    for (var i = 0; i < 14; i++) cells += '<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit"></td>';
+    tr.innerHTML = cells;
+    tbody.appendChild(tr);
+  });
+}
+
+function makeStockroomCleaningTable() {
+  var tbody = document.getElementById('clean-stockroom-body');
+  if (!tbody) return;
+  var items = [
+    ['Yard','Degreaser/Mop'],
+    ['Back-up cold room','Degreaser/Sanitiser'],
+    ['Ground floor stockroom','Degreaser/Mop'],
+    ['First floor stockroom','Degreaser/Mop'],
+    ['Sluice room','Degreaser/Sanitiser'],
+    ['Bailer area','Degreaser/Mop'],
+    ['Returns area','Degreaser/Mop'],
+    ['Frozen back-up','Degreaser/Sanitiser'],
+    ['Dairy back-up','Degreaser/Sanitiser'],
+    ['Office','Sanitiser']
+  ];
+  var dailyHeader = document.createElement('tr');
+  dailyHeader.innerHTML = '<td colspan="9" class="clean-section-header">DAILY CLEANING SCHEDULE</td>';
+  tbody.appendChild(dailyHeader);
+  items.forEach(function(item) {
+    var tr = document.createElement('tr');
+    var cells = '<td class="area-name">' + item[0] + '</td><td class="chem-name">' + item[1] + '</td>';
+    for (var i = 0; i < 7; i++) cells += '<td><input type="checkbox"></td>';
+    tr.innerHTML = cells;
+    tbody.appendChild(tr);
+  });
+  var weeklyHeader = document.createElement('tr');
+  weeklyHeader.innerHTML = '<td colspan="9" class="clean-section-header">WEEKLY DEEP CLEAN</td>';
+  tbody.appendChild(weeklyHeader);
+  var weeklyItems = [
+    ['Full deep clean - all areas','Degreaser/Sanitiser'],
+    ['Racking & shelving','Degreaser'],
+    ['Light fittings & vents','Damp cloth']
+  ];
+  weeklyItems.forEach(function(item) {
+    var tr = document.createElement('tr');
+    var cells = '<td class="area-name">' + item[0] + '</td><td class="chem-name">' + item[1] + '</td>';
+    for (var i = 0; i < 7; i++) cells += '<td><input type="checkbox"></td>';
+    tr.innerHTML = cells;
+    tbody.appendChild(tr);
+  });
+}
+
+function makeGoodsInwardsRows(bodyId) {
+  var tbody = document.getElementById(bodyId);
+  if (!tbody) return;
+  for (var i = 0; i < 20; i++) {
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td><input type="text" style="width:100%;border:none;padding:3px;font-family:inherit;font-size:11px"></td>' +
+      '<td><input type="text" style="width:100%;border:none;padding:3px;font-family:inherit;font-size:11px"></td>' +
+      '<td><input type="text" style="width:100%;border:none;padding:3px;font-family:inherit;font-size:11px"></td>' +
+      '<td><input type="text" style="width:100%;border:none;padding:3px;font-family:inherit;font-size:11px"></td>' +
+      '<td><input type="text" style="width:100%;border:none;padding:3px;font-family:inherit;font-size:11px"></td>' +
+      '<td><input type="text" style="width:100%;border:none;padding:3px;font-family:inherit;font-size:11px"></td>' +
+      '<td><input type="text" style="width:100%;border:none;padding:3px;font-family:inherit;font-size:11px"></td>' +
+      '<td><input type="text" style="width:100%;border:none;padding:3px;font-family:inherit;font-size:11px"></td>' +
+      '<td><input type="text" style="width:100%;border:none;padding:3px;font-family:inherit;font-size:11px"></td>' +
+      '<td><input type="text" style="width:100%;border:none;padding:3px;font-family:inherit;font-size:11px"></td>';
+    tbody.appendChild(tr);
+  }
+}
+
+function collectCleaningRows2(bodyId) {
+  var rows = [];
+  document.querySelectorAll('#' + bodyId + ' tr').forEach(function(tr) {
+    var area = tr.querySelector('.area-name');
+    if (!area) return;
+    var checks = tr.querySelectorAll('input[type=checkbox]');
+    var inputs = tr.querySelectorAll('input[type=text]');
+    var days = Array.from(checks).map(function(c) { return c.checked ? 'v' : ''; });
+    var texts = Array.from(inputs).map(function(i) { return i.value.trim(); });
+    rows.push([area.textContent.trim()].concat(days).concat(texts));
+  });
+  return rows;
+}
+
 function init() {
   makeTempRows(meatTempUnits, 'meat-temp-body');
   makeTempRows(prepackTempUnits, 'prepack-temp-body');

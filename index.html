@@ -1779,14 +1779,14 @@ display: flex; align-items: center; justify-content: center;
 
 <script>
 // ========== DATA ==========
-const DAYS = ['Mon','Tue','Wed','Thur','Fri','Sat','Sun'];
+var DAYS = ['Mon','Tue','Wed','Thur','Fri','Sat','Sun'];
 
-const meatTempUnits = [
+var meatTempUnits = [
   ['Fish Display Unit','0-5degC'],['Poultry','0-5degC'],['Pork','0-5degC'],
   ['Raw Meat','0-5degC'],['Walk in fridge','0-5degC'],['Pre-pack fish doors','0-5degC']
 ];
 
-const prepackTempUnits = [
+var prepackTempUnits = [
   ['1. Stand up juice fridge at front door','0-5degC'],
   ['2. Meat spider at food academy','0-5degC'],
   ['3. Meat spider at food academy','0-5degC'],
@@ -1809,7 +1809,7 @@ const prepackTempUnits = [
   ['20. Meal deck','0-5degC']
 ];
 
-const dairyTempUnits = [
+var dairyTempUnits = [
   ['1. Milk','0-5degC'],['2. Cream/Deserts/Juice','0-5degC'],
   ['3. Yoghurts','0-5degC'],['4. Cheese','0-5degC'],['5. Spreads','0-5degC'],
   ['6. Dairy Special Offers','0-5degC'],['7. Fish Fridge','0-5degC'],
@@ -1817,7 +1817,7 @@ const dairyTempUnits = [
   ['12. Milk Dispenser at Coffee Machine','0-5degC']
 ];
 
-const frozenTempUnits = [
+var frozenTempUnits = [
   ['1. Ice Cream Bay 1 Door','-23degC'],['2. Ice Cream Bay 1 Well','-23degC'],
   ['3. Ice Cream Bay 2 Door','-23degC'],['4. Ice Cream Bay 2 Well','-23degC'],
   ['5. Ice Cream Bay 3 Door','-23degC'],['6. Ice Cream Bay 3 Well','-23degC'],
@@ -1831,7 +1831,7 @@ const frozenTempUnits = [
   ['20. Back-up Freezer','-18degC']
 ];
 
-const sandwiches = [
+var sandwiches = [
   {name:'B.L.T. on White', ingr:'Bread, Bacon, Lettuce, Tomatoes, Mayonnaise'},
   {name:'B.L.T. on Brown', ingr:'Bread, Bacon, Lettuce, Tomatoes, Mayonnaise'},
   {name:'Bacon & Boiled Egg White', ingr:'Bread, Bacon, Boiled Egg, Mayonnaise'},
@@ -1852,7 +1852,7 @@ const sandwiches = [
   {name:'Ham, Cheese & Coleslaw', ingr:'White bread, Butter, Ham, Cheese, Coleslaw'}
 ];
 
-const wraps = [
+var wraps = [
   {name:'Chicken Tikka', ingr:'Wrap, Chicken, Tikka sauce, Cheese, Red onion, Lettuce'},
   {name:'Egg Mayo Salad', ingr:'Wrap, Egg, Cheese, Lettuce, Mayonnaise'},
   {name:'Chicken & Stuffing', ingr:'Wrap, Chicken, Stuffing, Mayonnaise'},
@@ -1862,7 +1862,7 @@ const wraps = [
   {name:'Crunchy Tuna', ingr:'Wrap, Tuna, Lettuce, Onion, Mayonnaise'}
 ];
 
-const pizzas = [
+var pizzas = [
   {name:'Cheese Pizza', ingr:'Pizza base, Pizza sauce, Mozzarella cheese'},
   {name:'Ham & Mushroom', ingr:'Pizza base, Pizza sauce, Ham, Mushroom, Mozzarella cheese'},
   {name:'Ham & Sweetcorn', ingr:'Pizza base, Pizza sauce, Ham, Sweetcorn, Mozzarella cheese'},
@@ -1872,7 +1872,7 @@ const pizzas = [
   {name:'Spicy Pepperoni', ingr:'Pizza base, Pizza sauce, Pepperoni, Onions, Jalapenos, Mozzarella cheese'}
 ];
 
-const saladsMade = [
+var saladsMade = [
   {name:'Egg Mayo', ingr:'Egg, Mayo'},
   {name:'Carrot & Broccoli', ingr:'Carrot, Broccoli, Mayo'},
   {name:'Cheese Mix', ingr:'Cheese, Scallions, Mayo'},
@@ -1881,7 +1881,7 @@ const saladsMade = [
   {name:'Chicken Noodle', ingr:'Noodles, Chicken, Veg, Chilli Sauce'}
 ];
 
-const saladsPrepack = [
+var saladsPrepack = [
   {name:'Egg Mayo', ingr:'Egg, Mayo'},
   {name:'Beetroot', ingr:''},
   {name:'Asian Noodles', ingr:''},
@@ -1903,23 +1903,23 @@ const saladsPrepack = [
   {name:'Summer Salad', ingr:'Veg, Egg, Mayonnaise'}
 ];
 
-const savouries = [
+var savouries = [
   'Beef Lasagne','Chicken & Mushroom Vol au Vent',
   'Red Pepper Goats Cheese Quiche','Black pudding s. rolls','Honey & mustard s. rolls'
 ];
 
-const cookedMeats = [
+var cookedMeats = [
   "Ryan's Low Salt","Honey Glazed","Moriarty's Turkey","Carroll's Crumbed",
   "Turkey OTB","Oak Smoked Ham","Corned Beef","Brady's Crumbed","Brady's Baked",
   "Hazlett","Wiltshire Ham OTB"
 ];
 
-const salamiOlives = [
+var salamiOlives = [
   'Mixed Olives','Sundried Tomatoes','Cheese Filled Peppers','Chorizo Extra',
   'Pre pack Mixed olives','Pre pack Sundried tomatoes','Pre pack Cheese filled peppers','Pre Pack Stuffing'
 ];
 
-const cleaningItems = {
+var cleaningItems = {
   'DAILY CLEANING SCHEDULE': [
     ['Scales, bags, shelves','Sanitiser'],
     ['Raw Servovers','Sanitiser, glass cleaner'],
@@ -1958,7 +1958,7 @@ const cleaningItems = {
   ]
 };
 
-const complianceDepts = [
+var complianceDepts = [
   { name: '1. Serveover Raw/Fish', items: ['Mince control','Fish Tracker','Temperature Checks','Daily cleaning schedule','Weekly cleaning schedule','Burger control sheet','PBOB Trace','Pork and Bacon Trace','Breaded chicken trace','Beef Trace'] },
   { name: '2. Cold Deli', items: ['Cooked meat tracker','Sandwich tracker','Salami & olive tracker','Savoury tracker','Salad tracker','Temp checks','Daily cleaning schedule','Weekly cleaning schedule'] },
   { name: '3. Hot Food Bar/Bakery', items: ['After cook sheet','Hot holding sheet','Temp checks bakery','Daily cleaning schedule','Weekly cleaning schedule'] },
@@ -1971,12 +1971,12 @@ const complianceDepts = [
 
 // ========== INIT FUNCTIONS ==========
 function makeTempRows(units, bodyId) {
-  const tbody = document.getElementById(bodyId);
+  var tbody = document.getElementById(bodyId);
   if (!tbody) return;
-  units.forEach(([name, target]) => {
-    const tr = document.createElement('tr');
-    let cells = '<td class="unit-name">' + (name) + '</td><td class="target">' + (target) + '</td>';
-    for (let i = 0; i < 14; i++) cells += '<td><input type="text" maxlength="6"></td>';
+  units.forEachfunction(([name, target]) {
+    var tr = document.createElement('tr');
+    var cells = '<td class="unit-name">' + (name) + '</td><td class="target">' + (target) + '</td>';
+    for (var i = 0; i < 14; i++) cells += '<td><input type="text" maxlength="6"></td>';
     cells += '<td><input type="text"></td>';
     tr.innerHTML = cells;
     tbody.appendChild(tr);
@@ -1984,16 +1984,16 @@ function makeTempRows(units, bodyId) {
 }
 
 function makeIUBDTable(containerId, products, cols) {
-  const container = document.getElementById(containerId);
+  var container = document.getElementById(containerId);
   if (!container) return;
-  let html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
-  DAYS.forEach(d => { for (let i = 0; i < cols.length; i++) html += '<th>' + (i===0?d:'') + '</th>'; });
+  var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
+  DAYS.forEach(function(d) { for (var i = 0; i < cols.length; i++) html += '<th>' + (i===0?d:'') + '</th>'; });
   html += '</tr><tr><th class="product-col"></th>';
-  DAYS.forEach(() => { cols.forEach(c => { html += '<th style="font-size:10px">' + (c) + '</th>'; }); });
+  DAYS.forEachfunction(() { cols.forEach(function(c) { html += '<th style="font-size:10px">' + (c) + '</th>'; }); });
   html += '</tr></thead><tbody>';
-  products.forEach(p => {
+  products.forEach(function(p) {
     html += '<tr><td class="product-name">' + (p.name) + '' + (p.ingr ? '<small>' + p.ingr + '</small>' : '') + '</td>';
-    DAYS.forEach(() => { cols.forEach(() => { html += '<td><input type="text" maxlength="12"></td>'; }); });
+    DAYS.forEachfunction(() { cols.forEachfunction(() { html += '<td><input type="text" maxlength="12"></td>'; }); });
     html += '</tr>';
   });
   html += '</tbody></table>';
@@ -2001,16 +2001,16 @@ function makeIUBDTable(containerId, products, cols) {
 }
 
 function makeOUBDTable(containerId, products) {
-  const container = document.getElementById(containerId);
+  var container = document.getElementById(containerId);
   if (!container) return;
-  let html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
-  DAYS.forEach(d => { html += '<th></th><th>' + (d) + '</th><th></th>'; });
+  var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
+  DAYS.forEach(function(d) { html += '<th></th><th>' + (d) + '</th><th></th>'; });
   html += '</tr><tr><th class="product-col"></th>';
-  DAYS.forEach(() => { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>'; });
+  DAYS.forEachfunction(() { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>'; });
   html += '</tr></thead><tbody>';
-  products.forEach(name => {
+  products.forEach(function(name) {
     html += '<tr><td class="product-name">' + (name) + '</td>';
-    for (let i = 0; i < 21; i++) html += '<td><input type="text" maxlength="12"></td>';
+    for (var i = 0; i < 21; i++) html += '<td><input type="text" maxlength="12"></td>';
     html += '</tr>';
   });
   html += '</tbody></table>';
@@ -2018,16 +2018,16 @@ function makeOUBDTable(containerId, products) {
 }
 
 function makeCookedMeatsTable() {
-  const container = document.getElementById('cooked-meats-tables');
+  var container = document.getElementById('cooked-meats-tables');
   if (!container) return;
-  let html = '<table class="week-table"><thead><tr><th class="product-col" style="min-width:130px">Name of Product</th>';
-  DAYS.forEach(d => { html += '<th></th><th>' + (d) + '</th><th></th>'; });
+  var html = '<table class="week-table"><thead><tr><th class="product-col" style="min-width:130px">Name of Product</th>';
+  DAYS.forEach(function(d) { html += '<th></th><th>' + (d) + '</th><th></th>'; });
   html += '</tr><tr><th class="product-col"></th>';
-  DAYS.forEach(() => { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>'; });
+  DAYS.forEachfunction(() { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>'; });
   html += '</tr></thead><tbody>';
-  cookedMeats.forEach(name => {
+  cookedMeats.forEach(function(name) {
     html += '<tr><td class="product-name">' + (name) + '</td>';
-    for (let i = 0; i < 21; i++) html += '<td><input type="text" maxlength="12"></td>';
+    for (var i = 0; i < 21; i++) html += '<td><input type="text" maxlength="12"></td>';
     html += '</tr>';
   });
   html += '</tbody></table>';
@@ -2035,119 +2035,119 @@ function makeCookedMeatsTable() {
 }
 
 function makeFishRows() {
-  const tbody = document.getElementById('fish-body');
+  var tbody = document.getElementById('fish-body');
   if (!tbody) return;
-  for (let i = 0; i < 12; i++) {
-    const tr = document.createElement('tr');
-    let cells = '<td><input type="text" placeholder="Product name"></td>';
-    for (let d = 0; d < 6; d++) cells += '<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="12"></td><td><input type="text" maxlength="15"></td>';
+  for (var i = 0; i < 12; i++) {
+    var tr = document.createElement('tr');
+    var cells = '<td><input type="text" placeholder="Product name"></td>';
+    for (var d = 0; d < 6; d++) cells += '<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="12"></td><td><input type="text" maxlength="15"></td>';
     tr.innerHTML = cells;
     tbody.appendChild(tr);
   }
 }
 
 function makePorkRows() {
-  const tbody = document.getElementById('pork-body');
+  var tbody = document.getElementById('pork-body');
   if (!tbody) return;
-  for (let i = 0; i < 25; i++) {
-    const tr = document.createElement('tr');
+  for (var i = 0; i < 25; i++) {
+    var tr = document.createElement('tr');
     tr.innerHTML = '<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>';
     tbody.appendChild(tr);
   }
 }
 
 function makeLogRows(bodyId, cols, rows = 20) {
-  const tbody = document.getElementById(bodyId);
+  var tbody = document.getElementById(bodyId);
   if (!tbody) return;
-  for (let i = 0; i < rows; i++) {
-    const tr = document.createElement('tr');
+  for (var i = 0; i < rows; i++) {
+    var tr = document.createElement('tr');
     tr.innerHTML = Array(cols).fill('<td><input type="text"></td>').join('');
     tbody.appendChild(tr);
   }
 }
 
 function makeCleaningTable() {
-  const tbody = document.getElementById('clean-redmeat-body');
+  var tbody = document.getElementById('clean-redmeat-body');
   if (!tbody) return;
-  Object.entries(cleaningItems).forEach(([section, items]) => {
-    const headerRow = document.createElement('tr');
+  Object.entries(cleaningItems).forEachfunction(([section, items]) {
+    var headerRow = document.createElement('tr');
     headerRow.innerHTML = '<td colspan="9" class="clean-section-header">' + (section) + '</td>';
     tbody.appendChild(headerRow);
-    items.forEach(([area, chem]) => {
-      const tr = document.createElement('tr');
-      let cells = '<td class="area-name">' + (area) + '</td><td class="chem-name">' + (chem) + '</td>';
-      for (let i = 0; i < 7; i++) cells += '<td><input type="checkbox"></td>';
+    items.forEachfunction(([area, chem]) {
+      var tr = document.createElement('tr');
+      var cells = '<td class="area-name">' + (area) + '</td><td class="chem-name">' + (chem) + '</td>';
+      for (var i = 0; i < 7; i++) cells += '<td><input type="checkbox"></td>';
       tr.innerHTML = cells;
       tbody.appendChild(tr);
     });
   });
-  const sigRow = document.createElement('tr');
+  var sigRow = document.createElement('tr');
   sigRow.innerHTML = '<td colspan="2" style="font-weight:700;padding:8px;">Signature:</td>' + Array(7).fill('<td></td>').join('');
   tbody.appendChild(sigRow);
-  const mgrRow = document.createElement('tr');
+  var mgrRow = document.createElement('tr');
   mgrRow.innerHTML = '<td colspan="9" style="font-weight:700;padding:8px;">Managers signature:</td>';
   tbody.appendChild(mgrRow);
 }
 
 function makeComplianceTables() {
-  const container = document.getElementById('compliance-tables');
+  var container = document.getElementById('compliance-tables');
   if (!container) return;
-  complianceDepts.forEach(dept => {
-    let html = '<div style="margin-bottom:16px">\n      <table class="compliance-table">\n        <thead><tr><th style="min-width:120px">Dept</th><th>System</th><th colspan="3" style="text-align:center">Result (0/3/5)</th><th>Issues</th><th>Action Taken</th></tr></thead>\n        <tbody>';
-    dept.items.forEach((item, i) => {
+  complianceDepts.forEach(function(dept) {
+    var html = '<div style="margin-bottom:16px">\n      <table class="compliance-table">\n        <thead><tr><th style="min-width:120px">Dept</th><th>System</th><th colspan="3" style="text-align:center">Result (0/3/5)</th><th>Issues</th><th>Action Taken</th></tr></thead>\n        <tbody>';
+    dept.items.forEachfunction((item, i) {
       html += '<tr>\n        ' + (i===0 ? '<td class="dept" rowspan="' + dept.items.length + '">' + dept.name + '</td>' : '') + '\n        <td class="system">' + (item) + '</td>\n        <td style="text-align:center;width:90px">\n          <div class="score-radio">\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="0">0</label>\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="3">3</label>\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="5">5</label>\n          </div>\n        </td>\n        <td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>\n        <td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>\n      </tr>';
     });
-    const maxScore = dept.items.length * 5;
+    var maxScore = dept.items.length * 5;
     html += '<tr class="max-row"><td colspan="2">Max Result = ' + (maxScore) + ' &nbsp;&nbsp; Actual result =</td>\n      <td colspan="2"><input type="text" placeholder="Actual" style="border:1px solid #ddd;padding:4px;width:80px;border-radius:4px;font-family:inherit"></td>\n      <td colspan="2" style="font-size:11px;color:var(--muted)">(Actual/max) x100 = %result</td>\n    </tr>';
     html += '</tbody></table></div>';
     container.innerHTML += html;
   });
 
   // Dept zones
-  const zones = document.getElementById('dept-zones');
-  const deptNames = [
+  var zones = document.getElementById('dept-zones');
+  var deptNames = [
     '1.Serve over deli - Raw Meat/Fish','2.Serve over deli - Ready to eat foods',
     '3.Serve over - Hot Food bar, salad bar, bakery','4.Deli Pre Pack',
     '5. Fruit & vegetable','6. Dairy','7. Frozen','8. Goods Inwards & Yard'
   ];
-  let zhtml = '<table class="compliance-table"><thead><tr><th>Department</th><th>Red</th><th>Orange</th><th>Green</th></tr></thead><tbody>';
-  deptNames.forEach(d => {
+  var zhtml = '<table class="compliance-table"><thead><tr><th>Department</th><th>Red</th><th>Orange</th><th>Green</th></tr></thead><tbody>';
+  deptNames.forEach(function(d) {
     zhtml += '<tr><td>' + (d) + '</td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:var(--red)"></td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:var(--orange)"></td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:var(--green)"></td>\n    </tr>';
   });
   zhtml += '</tbody></table>';
   zones.innerHTML = zhtml;
 }
 
-let butcherBatchCount = 0;
+var butcherBatchCount = 0;
 function addButcherBatch() {
   butcherBatchCount++;
-  const container = document.getElementById('butcher-batches');
-  const div = document.createElement('div');
+  var container = document.getElementById('butcher-batches');
+  var div = document.createElement('div');
   div.style.cssText = 'background:white;border:1px solid #ddd;border-radius:8px;padding:14px;margin-bottom:12px;';
   div.innerHTML = '<div style="font-weight:600;color:var(--green-dark);margin-bottom:10px;font-size:13px">Batch ' + (butcherBatchCount) + '</div>\n    <div class="field-row">\n      <div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date"></div>\n      <div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text"></div>\n    </div>\n    <div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date"></div>\n    <div class="section-title" style="font-size:12px;margin:10px 0 8px">Ingredients</div>\n    <table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead>\n    <tbody>' + (Array(5).fill('<tr><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td></tr>').join('')) + '</tbody></table>';
   container.appendChild(div);
 }
 
 // ========== SIGNATURES (built-in canvas, no CDN) ==========
-const sigPads = {};
+var sigPads = {};
 
 function initSig(canvasId) {
-  const canvas = document.getElementById(canvasId);
+  var canvas = document.getElementById(canvasId);
   if (!canvas || sigPads[canvasId]) return;
   canvas.width = canvas.parentElement.offsetWidth || 320;
   canvas.height = parseInt(canvas.getAttribute('height')) || 80;
-  const ctx = canvas.getContext('2d');
+  var ctx = canvas.getContext('2d');
   ctx.strokeStyle = '#1a1a1a';
   ctx.lineWidth = 2;
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
-  let drawing = false;
-  let lastX = 0, lastY = 0;
+  var drawing = false;
+  var lastX = 0, lastY = 0;
 
   function getPos(e) {
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas.width / rect.width;
+    var scaleY = canvas.height / rect.height;
     if (e.touches) {
       return {
         x: (e.touches[0].clientX - rect.left) * scaleX,
@@ -2163,7 +2163,7 @@ function initSig(canvasId) {
   function startDraw(e) {
     e.preventDefault();
     drawing = true;
-    const pos = getPos(e);
+    var pos = getPos(e);
     lastX = pos.x; lastY = pos.y;
     ctx.beginPath();
     ctx.arc(pos.x, pos.y, 1, 0, Math.PI * 2);
@@ -2173,7 +2173,7 @@ function initSig(canvasId) {
   function draw(e) {
     if (!drawing) return;
     e.preventDefault();
-    const pos = getPos(e);
+    var pos = getPos(e);
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(pos.x, pos.y);
@@ -2201,18 +2201,18 @@ function clearSig(id) {
 }
 
 // ========== NAVIGATION ==========
-let currentForm = null;
+var currentForm = null;
 function showForm(id) {
   document.getElementById('home').style.display = 'none';
   if (currentForm) document.getElementById(currentForm).style.display = 'none';
-  const screen = document.getElementById(id);
+  var screen = document.getElementById(id);
   screen.style.display = 'block';
   currentForm = id;
   document.getElementById('backBtn').style.display = 'block';
   document.getElementById('navTitle').textContent = screen.querySelector('h2').textContent;
   window.scrollTo(0, 0);
-  setTimeout(() => {
-    screen.querySelectorAll('canvas').forEach(c => initSig(c.id));
+  setTimeoutfunction(() {
+    screen.querySelectorAll('canvas').forEach(function(c) { return initSig(c.id)); };
   }, 100);
 }
 function goHome() {
@@ -2226,13 +2226,13 @@ function goHome() {
 
 // ========== EMAIL ==========
 function sendEmail(subject, formId) {
-  const emailInput = document.getElementById('email-' + (formId) + '');
-  const to = emailInput ? emailInput.value : '';
-  const body = '' + (subject) + '\nMoriarty Group SuperValu\nCompleted via HACCP Digital System\n\nPlease see attached or review the digital record.';
+  var emailInput = document.getElementById('email-' + (formId) + '');
+  var to = emailInput ? emailInput.value : '';
+  var body = '' + (subject) + '\nMoriarty Group SuperValu\nCompleted via HACCP Digital System\n\nPlease see attached or review the digital record.';
   window.location.href = 'mailto:' + (to) + '?subject=' + (encodeURIComponent(subject + ' - Moriarty Group')) + '&body=' + (encodeURIComponent(body)) + '';
-  const toast = document.getElementById('toast');
+  var toast = document.getElementById('toast');
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3000);
+  setTimeout(function() { toast.classList.remove('show'); }, 3000);
 }
 
 // ========== BUILD ALL TABLES ==========
@@ -2250,16 +2250,16 @@ function init() {
   makeCookedMeatsTable();
   makeOUBDTable('salami-table', salamiOlives);
   // Cheese - blank rows
-  const cheeseContainer = document.getElementById('cheese-table');
+  var cheeseContainer = document.getElementById('cheese-table');
   if (cheeseContainer) {
-    let html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
-    DAYS.forEach(d => { html += '<th></th><th>' + (d) + '</th><th></th>'; });
+    var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
+    DAYS.forEach(function(d) { html += '<th></th><th>' + (d) + '</th><th></th>'; });
     html += '</tr><tr><th class="product-col"></th>';
-    DAYS.forEach(() => { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>'; });
+    DAYS.forEachfunction(() { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>'; });
     html += '</tr></thead><tbody>';
-    for (let i = 0; i < 10; i++) {
+    for (var i = 0; i < 10; i++) {
       html += '<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name"></td>';
-      for (let j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
+      for (var j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
       html += '</tr>';
     }
     html += '</tbody></table>';
@@ -2336,7 +2336,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ========== GOOGLE SHEETS INTEGRATION ==========
-const SHEETS_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE';
+var SHEETS_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE';
 
 async function submitToSheets(formId, rows) {
   var ts = formTimestamps[formId] || new Date().toLocaleString('en-IE', { timeZone: 'Europe/Dublin', hour12: false });
@@ -2363,20 +2363,20 @@ async function submitToSheets(formId, rows) {
 }
 
 function showToast(msg, duration = 3000) {
-  const toast = document.getElementById('toast');
+  var toast = document.getElementById('toast');
   toast.textContent = msg;
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), duration);
+  setTimeout(function() { toast.classList.remove('show'); }, duration);
 }
 
 // ---- Collect helpers ----
 function collectTempRows(bodyId, unitList) {
-  const rows = [];
-  const trs = document.querySelectorAll('#' + (bodyId) + ' tr');
-  trs.forEach((tr, i) => {
-    const inputs = tr.querySelectorAll('input');
-    const vals = Array.from(inputs).map(inp => inp.value.trim());
-    if (vals.some(v => v !== '')) {
+  var rows = [];
+  var trs = document.querySelectorAll('#' + (bodyId) + ' tr');
+  trs.forEachfunction((tr, i) {
+    var inputs = tr.querySelectorAll('input');
+    var vals = Array.from(inputs).map(function(inp) { return inp.value.trim()); };
+    if (vals.some(function(v) { return v !== '')) ; }{
       rows.push([unitList[i][0], unitList[i][1], ...vals]);
     }
   });
@@ -2384,48 +2384,48 @@ function collectTempRows(bodyId, unitList) {
 }
 
 function collectTableRows(tableWrapId) {
-  const rows = [];
-  const container = document.getElementById(tableWrapId);
+  var rows = [];
+  var container = document.getElementById(tableWrapId);
   if (!container) return rows;
-  container.querySelectorAll('tbody tr').forEach(tr => {
-    const inputs = tr.querySelectorAll('input[type=text]');
-    const vals = Array.from(inputs).map(i => i.value.trim());
-    if (vals.some(v => v !== '')) rows.push(vals);
+  container.querySelectorAll('tbody tr').forEach(function(tr) {
+    var inputs = tr.querySelectorAll('input[type=text]');
+    var vals = Array.from(inputs).map(function(i) { return i.value.trim()); };
+    if (vals.some(function(v) { return v !== '')) rows.push(vals); };
   });
   return rows;
 }
 
 function collectLogRows(bodyId) {
-  const rows = [];
-  document.querySelectorAll('#' + (bodyId) + ' tr').forEach(tr => {
-    const inputs = tr.querySelectorAll('input[type=text]');
-    const vals = Array.from(inputs).map(i => i.value.trim());
-    if (vals.some(v => v !== '')) rows.push(vals);
+  var rows = [];
+  document.querySelectorAll('#' + (bodyId) + ' tr').forEach(function(tr) {
+    var inputs = tr.querySelectorAll('input[type=text]');
+    var vals = Array.from(inputs).map(function(i) { return i.value.trim()); };
+    if (vals.some(function(v) { return v !== '')) rows.push(vals); };
   });
   return rows;
 }
 
 function collectCleaningRows() {
-  const rows = [];
-  document.querySelectorAll('#clean-redmeat-body tr').forEach(tr => {
-    const area = tr.querySelector('.area-name');
-    const chem = tr.querySelector('.chem-name');
+  var rows = [];
+  document.querySelectorAll('#clean-redmeat-body tr').forEach(function(tr) {
+    var area = tr.querySelector('.area-name');
+    var chem = tr.querySelector('.chem-name');
     if (!area) return;
-    const checks = tr.querySelectorAll('input[type=checkbox]');
-    const days = Array.from(checks).map(c => c.checked ? 'v' : '');
+    var checks = tr.querySelectorAll('input[type=checkbox]');
+    var days = Array.from(checks).map(function(c) { return c.checked ? 'v' : ''); };
     rows.push([area.textContent.trim(), chem ? chem.textContent.trim() : '', ...days]);
   });
   return rows;
 }
 
 function collectComplianceRows() {
-  const rows = [];
-  complianceDepts.forEach(dept => {
-    dept.items.forEach((item, i) => {
-      const key = 'score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '';
-      const checked = document.querySelector('input[name="' + (key) + '"]:checked');
-      const score = checked ? checked.value : '';
-      const tds = document.querySelectorAll('input[name="' + (key) + '"]');
+  var rows = [];
+  complianceDepts.forEach(function(dept) {
+    dept.items.forEachfunction((item, i) {
+      var key = 'score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '';
+      var checked = document.querySelector('input[name="' + (key) + '"]:checked');
+      var score = checked ? checked.value : '';
+      var tds = document.querySelectorAll('input[name="' + (key) + '"]');
       // find the two text inputs in same row
       rows.push([dept.name, item, score, '', '']);
     });
@@ -2435,7 +2435,7 @@ function collectComplianceRows() {
 
 // ---- Submit handlers per form ----
 function submitForm(formId) {
-  let rows = [];
+  var rows = [];
   switch(formId) {
     case 'temp-meat':    rows = collectTempRows('meat-temp-body', meatTempUnits); break;
     case 'temp-prepack': rows = collectTempRows('prepack-temp-body', prepackTempUnits); break;
@@ -2470,20 +2470,20 @@ function submitForm(formId) {
 }
 
 // ========== TIMESTAMP & PHOTO EVIDENCE ==========
-const formTimestamps = {};
-const formPhotos = {};
+var formTimestamps = {};
+var formPhotos = {};
 
 function recordTimestamp(formId) {
-  const now = new Date();
-  const options = {
+  var now = new Date();
+  var options = {
     weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
     hour: '2-digit', minute: '2-digit', second: '2-digit',
     timeZone: 'Europe/Dublin', hour12: false
   };
-  const ts = now.toLocaleString('en-IE', options);
+  var ts = now.toLocaleString('en-IE', options);
   formTimestamps[formId] = ts;
-  const tsText = document.querySelector('#ts-' + formId + ' .ts-text');
-  const tsBtn = document.querySelector('#ts-' + formId + ' .ts-btn');
+  var tsText = document.querySelector('#ts-' + formId + ' .ts-text');
+  var tsBtn = document.querySelector('#ts-' + formId + ' .ts-btn');
   if (tsText) { tsText.textContent = ts; tsText.classList.add('recorded'); }
   if (tsBtn) { tsBtn.textContent = 'Update'; tsBtn.classList.add('recorded-btn'); }
   showToast('Timestamp recorded: ' + ts);
@@ -2491,8 +2491,8 @@ function recordTimestamp(formId) {
 
 function handlePhotos(input, formId) {
   if (!formPhotos[formId]) formPhotos[formId] = [];
-  const files = Array.from(input.files);
-  const grid = document.getElementById('photo-grid-' + formId);
+  var files = Array.from(input.files);
+  var grid = document.getElementById('photo-grid-' + formId);
   files.forEach(function(file) {
     var reader = new FileReader();
     reader.onload = function(e) {

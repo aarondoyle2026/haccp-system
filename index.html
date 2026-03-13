@@ -1,428 +1,2580 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 <head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HACCP Dashboard</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Moriarty Group – HACCP System</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+:root {
+  --green: #00703c;
+  --green-dark: #005a30;
+  --green-light: #e8f5ee;
+  --green-mid: #c2e0ce;
+  --accent: #ffcc00;
+  --text: #1a1a1a;
+  --muted: #666;
+  --border: #d0d0d0;
+  --bg: #f4f6f4;
+  --white: #ffffff;
+  --red: #d32f2f;
+  --orange: #e65100;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-body{
-font-family:Arial;
-margin:0;
-background:#f4f4f4;
+/* ========= NAV ========= */
+.top-nav {
+background: var(–green);
+color: white;
+padding: 12px 16px;
+display: flex;
+align-items: center;
+gap: 12px;
+position: sticky;
+top: 0;
+z-index: 100;
+box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.back-btn {
+background: rgba(255,255,255,0.2);
+border: none;
+color: white;
+padding: 6px 12px;
+border-radius: 6px;
+cursor: pointer;
+font-size: 14px;
+font-family: inherit;
+display: none;
+}
+.nav-title { font-size: 16px; font-weight: 600; flex: 1; }
+.nav-logo { font-size: 12px; opacity: 0.8; text-align: right; line-height: 1.2; }
+
+/* ========= HOME ========= */
+#home { display: block; }
+.home-header {
+background: linear-gradient(135deg, var(–green-dark), var(–green));
+color: white;
+padding: 28px 20px 24px;
+text-align: center;
+}
+.home-header .brand { font-size: 22px; font-weight: 700; letter-spacing: 1.5px; }
+.home-header .sub { font-size: 12px; opacity: 0.75; margin-top: 2px; letter-spacing: 2px; }
+.home-header .title { font-size: 15px; font-weight: 500; margin-top: 10px; opacity: 0.9; }
+
+.category-section { padding: 16px 16px 8px; }
+.category-label {
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–muted);
+padding: 0 4px;
+margin-bottom: 10px;
+}
+.form-grid { display: flex; flex-direction: column; gap: 8px; }
+.form-card {
+background: white;
+border-radius: 10px;
+padding: 14px 16px;
+display: flex;
+align-items: center;
+gap: 14px;
+cursor: pointer;
+border: 1px solid var(–border);
+transition: all 0.15s;
+-webkit-tap-highlight-color: transparent;
+}
+.form-card:active { transform: scale(0.98); background: var(–green-light); }
+.form-icon {
+width: 40px; height: 40px;
+border-radius: 10px;
+display: flex; align-items: center; justify-content: center;
+font-size: 20px;
+flex-shrink: 0;
+}
+.form-info { flex: 1; }
+.form-name { font-size: 14px; font-weight: 600; color: var(–text); }
+.form-desc { font-size: 12px; color: var(–muted); margin-top: 2px; }
+.form-arrow { color: var(–muted); font-size: 16px; }
+
+/* ========= FORM SCREENS ========= */
+.form-screen { display: none; padding-bottom: 40px; }
+.form-header {
+background: white;
+border-bottom: 3px solid var(–green);
+padding: 16px;
+}
+.form-header h2 { font-size: 17px; font-weight: 700; color: var(–green-dark); }
+.form-header p { font-size: 12px; color: var(–muted); margin-top: 4px; }
+.form-body { padding: 16px; }
+
+/* ========= FIELDS ========= */
+.field-group { margin-bottom: 16px; }
+.field-label { font-size: 12px; font-weight: 600; color: var(–muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block; }
+.field-input {
+width: 100%;
+padding: 10px 12px;
+border: 1.5px solid var(–border);
+border-radius: 8px;
+font-size: 14px;
+font-family: inherit;
+background: white;
+color: var(–text);
+transition: border-color 0.15s;
+}
+.field-input:focus { outline: none; border-color: var(–green); }
+.field-row { display: flex; gap: 10px; }
+.field-row .field-group { flex: 1; }
+
+/* ========= WEEKLY TABLE ========= */
+.week-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -16px; padding: 0 16px 8px; }
+.week-table { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 12px; }
+.week-table th {
+background: var(–green);
+color: white;
+padding: 7px 5px;
+text-align: center;
+font-weight: 600;
+font-size: 11px;
+border: 1px solid var(–green-dark);
+white-space: nowrap;
+}
+.week-table th.product-col { background: var(–green-dark); text-align: left; padding-left: 8px; min-width: 130px; }
+.week-table td {
+border: 1px solid var(–border);
+padding: 4px 3px;
+text-align: center;
+vertical-align: middle;
+}
+.week-table td.product-name {
+font-size: 11px;
+font-weight: 600;
+text-align: left;
+padding: 6px 8px;
+background: var(–green-light);
+line-height: 1.3;
+}
+.week-table td.product-name small { font-weight: 400; color: var(–muted); display: block; }
+.week-table td.sub-header {
+background: #f0f0f0;
+font-size: 10px;
+font-weight: 700;
+color: var(–muted);
+padding: 3px;
+}
+.week-table input[type=text] {
+width: 100%;
+border: none;
+background: transparent;
+text-align: center;
+font-size: 11px;
+font-family: inherit;
+padding: 2px;
+color: var(–text);
+}
+.week-table input[type=text]:focus { outline: 1px solid var(–green); border-radius: 3px; background: #fffde7; }
+.week-table tr:hover td { background-color: rgba(0,112,60,0.03); }
+.week-table td.product-name:hover { background: var(–green-light); }
+
+/* ========= TEMP TABLE ========= */
+.temp-table { font-size: 12px; }
+.temp-table th.unit-col { min-width: 160px; text-align: left; padding-left: 8px; }
+.temp-table th.temp-col { min-width: 55px; }
+.temp-table td.unit-name { text-align: left; padding: 6px 8px; font-size: 11px; background: #fafafa; }
+.temp-table td.target { font-weight: 600; color: var(–green-dark); font-size: 11px; background: var(–green-light); }
+.corrective-row td { background: #fff8e1 !important; font-size: 10px; font-style: italic; }
+
+/* ========= LOG TABLE ========= */
+.log-table { border-collapse: collapse; width: 100%; font-size: 12px; }
+.log-table th { background: var(–green); color: white; padding: 8px 6px; text-align: left; font-weight: 600; font-size: 11px; border: 1px solid var(–green-dark); }
+.log-table td { border: 1px solid var(–border); padding: 4px 4px; vertical-align: middle; }
+.log-table input[type=text] { width: 100%; border: none; background: transparent; font-size: 12px; font-family: inherit; padding: 4px 2px; color: var(–text); }
+.log-table input[type=text]:focus { outline: 1px solid var(–green); border-radius: 3px; background: #fffde7; }
+.log-table tr:nth-child(even) td { background: #fafafa; }
+
+/* ========= CLEANING TABLE ========= */
+.clean-table { border-collapse: collapse; width: 100%; min-width: 420px; font-size: 12px; }
+.clean-table th { background: var(–green); color: white; padding: 7px 5px; font-size: 11px; font-weight: 600; border: 1px solid var(–green-dark); text-align: center; }
+.clean-table th.area-col { text-align: left; padding-left: 8px; min-width: 150px; }
+.clean-table th.chem-col { min-width: 100px; text-align: left; padding-left: 8px; }
+.clean-table th.day-col { min-width: 32px; }
+.clean-table td { border: 1px solid var(–border); padding: 5px 4px; text-align: center; vertical-align: middle; }
+.clean-table td.area-name { text-align: left; padding: 5px 8px; font-size: 11px; background: #fafafa; }
+.clean-table td.chem-name { text-align: left; padding: 5px 8px; font-size: 11px; color: var(–muted); }
+.clean-section-header { background: var(–green-dark) !important; color: white !important; font-weight: 700 !important; font-size: 11px !important; text-align: left !important; padding: 5px 8px !important; letter-spacing: 0.5px; }
+.clean-table input[type=checkbox] { width: 16px; height: 16px; cursor: pointer; accent-color: var(–green); }
+
+/* ========= COMPLIANCE TABLE ========= */
+.compliance-zone { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.zone-badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.zone-green { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.zone-orange { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+.zone-red { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+.compliance-table { border-collapse: collapse; width: 100%; font-size: 12px; }
+.compliance-table th { background: var(–green); color: white; padding: 7px 6px; text-align: left; font-size: 11px; font-weight: 600; border: 1px solid var(–green-dark); }
+.compliance-table td { border: 1px solid var(–border); padding: 6px; font-size: 12px; vertical-align: middle; }
+.compliance-table td.dept { font-weight: 700; color: var(–green-dark); background: var(–green-light); }
+.compliance-table td.system { color: var(–text); }
+.score-radio { display: flex; gap: 6px; justify-content: center; }
+.score-radio label { cursor: pointer; display: flex; flex-direction: column; align-items: center; font-size: 10px; gap: 2px; }
+.score-radio input[type=radio] { accent-color: var(–green); }
+.max-row td { background: #f5f5f5; font-weight: 600; font-size: 11px; }
+
+/* ========= SIGNATURE ========= */
+.sig-box {
+border: 2px dashed var(–border);
+border-radius: 8px;
+background: white;
+position: relative;
+overflow: hidden;
+}
+.sig-box canvas { display: block; width: 100%; touch-action: none; }
+.sig-clear {
+position: absolute;
+top: 6px; right: 8px;
+background: rgba(255,255,255,0.9);
+border: 1px solid var(–border);
+border-radius: 5px;
+padding: 3px 8px;
+font-size: 11px;
+cursor: pointer;
+font-family: inherit;
+color: var(–red);
 }
 
-.header{
-background:#00703c;
-color:white;
-padding:15px;
-font-size:22px;
-text-align:center;
+/* ========= BUTTONS ========= */
+.btn-row { display: flex; gap: 10px; margin-top: 20px; }
+.btn {
+flex: 1;
+padding: 14px;
+border: none;
+border-radius: 10px;
+font-size: 15px;
+font-weight: 600;
+font-family: inherit;
+cursor: pointer;
+transition: all 0.15s;
+}
+.btn-primary { background: var(–green); color: white; }
+.btn-primary:active { background: var(–green-dark); }
+.btn-secondary { background: white; color: var(–green); border: 2px solid var(–green); }
+
+/* ========= INFO BOX ========= */
+.info-box {
+background: var(–green-light);
+border-left: 3px solid var(–green);
+border-radius: 6px;
+padding: 10px 12px;
+font-size: 11px;
+color: var(–muted);
+margin-bottom: 14px;
+line-height: 1.5;
+}
+.info-box strong { color: var(–text); }
+
+.section-title {
+font-size: 13px;
+font-weight: 700;
+color: var(–green-dark);
+margin: 18px 0 10px;
+padding-bottom: 6px;
+border-bottom: 2px solid var(–green-light);
 }
 
-.dashboard{
-padding:20px;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
+.email-field { display: flex; gap: 8px; align-items: flex-end; }
+.email-field .field-group { flex: 1; margin-bottom: 0; }
+.email-send-btn {
+background: var(–green);
+color: white;
+border: none;
+border-radius: 8px;
+padding: 10px 14px;
+font-size: 13px;
+cursor: pointer;
+font-family: inherit;
+font-weight: 600;
+white-space: nowrap;
 }
 
-.tile{
-background:white;
-padding:30px;
-text-align:center;
-font-size:18px;
-border-radius:8px;
-box-shadow:0 2px 6px rgba(0,0,0,0.2);
+.toast {
+position: fixed;
+bottom: 24px;
+left: 50%;
+transform: translateX(-50%) translateY(100px);
+background: var(–green-dark);
+color: white;
+padding: 12px 20px;
+border-radius: 20px;
+font-size: 13px;
+font-weight: 500;
+z-index: 999;
+transition: transform 0.3s;
+white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ========= PHOTO & TIMESTAMP ========= */
+.photo-timestamp-box {
+background: white;
+border: 1.5px solid var(–border);
+border-radius: 10px;
+overflow: hidden;
+margin-bottom: 14px;
+}
+.timestamp-display {
+background: #1e1e2e;
+color: #cdd6f4;
+padding: 12px 16px;
+display: flex;
+align-items: center;
+gap: 10px;
+flex-wrap: wrap;
+}
+.ts-icon { font-size: 18px; }
+.ts-text {
+font-family: ‘Courier New’, monospace;
+font-size: 13px;
+flex: 1;
+min-width: 160px;
+color: #a6e3a1;
+}
+.ts-text.recorded { color: #a6e3a1; font-weight: 600; }
+.ts-btn {
+background: rgba(166,227,161,0.2);
+border: 1px solid rgba(166,227,161,0.4);
+color: #a6e3a1;
+padding: 6px 14px;
+border-radius: 6px;
+font-size: 12px;
+font-weight: 600;
+font-family: inherit;
+cursor: pointer;
+transition: background 0.15s;
+white-space: nowrap;
+}
+.ts-btn:active { background: rgba(166,227,161,0.4); }
+.ts-btn.recorded-btn {
+background: rgba(166,227,161,0.15);
+color: #6c7086;
+border-color: rgba(108,112,134,0.3);
 }
 
-.section{
-padding:20px;
-display:none;
+.photo-upload-area { padding: 12px; }
+.photo-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 8px;
+margin-bottom: 10px;
+}
+.photo-thumb {
+position: relative;
+aspect-ratio: 1;
+border-radius: 8px;
+overflow: hidden;
+border: 1px solid var(–border);
+background: #f0f0f0;
+}
+.photo-thumb img {
+width: 100%; height: 100%;
+object-fit: cover;
+display: block;
+}
+.photo-thumb .photo-label {
+position: absolute;
+bottom: 0; left: 0; right: 0;
+background: rgba(0,0,0,0.6);
+color: white;
+font-size: 9px;
+padding: 3px 5px;
+text-align: center;
+line-height: 1.2;
+}
+.photo-thumb .photo-delete {
+position: absolute;
+top: 4px; right: 4px;
+width: 20px; height: 20px;
+background: rgba(211,47,47,0.85);
+border: none;
+border-radius: 50%;
+color: white;
+font-size: 12px;
+display: flex; align-items: center; justify-content: center;
+cursor: pointer;
+line-height: 1;
+}
+.photo-add-btn {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+width: 100%;
+padding: 12px;
+background: var(–green-light);
+border: 2px dashed var(–green);
+border-radius: 8px;
+color: var(–green-dark);
+font-size: 14px;
+font-weight: 600;
+font-family: inherit;
+cursor: pointer;
+transition: background 0.15s;
+}
+.photo-add-btn:active { background: var(–green-mid); }
+.photo-count-badge {
+display: inline-block;
+background: var(–green);
+color: white;
+border-radius: 10px;
+padding: 1px 8px;
+font-size: 11px;
+font-weight: 700;
+margin-left: 4px;
 }
 
-input,textarea{
-width:100%;
-padding:10px;
-margin-top:5px;
-margin-bottom:10px;
-font-size:16px;
-box-sizing:border-box;
+/* Lightbox */
+.lightbox {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(0,0,0,0.92);
+z-index: 1000;
+align-items: center;
+justify-content: center;
+flex-direction: column;
 }
-
-button{
-background:#00703c;
-color:white;
-border:none;
-padding:15px;
-font-size:18px;
-width:100%;
-margin-top:10px;
-border-radius:6px;
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 95vw; max-height: 80vh; border-radius: 8px; object-fit: contain; }
+.lightbox-info { color: white; font-size: 12px; margin-top: 10px; opacity: 0.8; text-align: center; }
+.lightbox-close {
+position: absolute;
+top: 16px; right: 16px;
+background: rgba(255,255,255,0.15);
+border: none; color: white;
+width: 36px; height: 36px;
+border-radius: 50%;
+font-size: 18px;
+cursor: pointer;
+display: flex; align-items: center; justify-content: center;
 }
-
-.back{
-background:#666;
-}
-
-canvas{
-border:2px solid #ccc;
-background:white;
-width:100%;
-height:200px;
-}
-
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-
 </head>
-
 <body>
 
-<div class="header">
-HACCP Dashboard
+<div class="top-nav">
+  <button class="back-btn" id="backBtn" data-action="goHome">← Back</button>
+  <div class="nav-title" id="navTitle">HACCP System</div>
+  <div class="nav-logo">MORIARTY<br>GROUP</div>
 </div>
 
-<div id="dashboard" class="dashboard">
+<!-- HOME SCREEN -->
 
-<div class="tile" onclick="openSection('temp')">Temperature Checks</div>
-<div class="tile" onclick="openSection('clean')">Cleaning Records</div>
-<div class="tile" onclick="openSection('trace')">Traceability Logs</div>
-<div class="tile" onclick="openSection('prod')">Production Logs</div>
-<div class="tile" onclick="openSection('probe')">Probe Calibration</div>
-<div class="tile" onclick="openSection('weekly')">Weekly Compliance</div>
+<div id="home">
+  <div class="home-header">
+    <div class="brand">MORIARTY GROUP</div>
+    <div class="sub">SUPERVALU · ESTD 1987</div>
+    <div class="title">📋 HACCP Food Safety System</div>
+  </div>
 
+  <!-- TEMPERATURE CHECKS -->
+
+  <div class="category-section">
+    <div class="category-label">🌡️ Temperature Checks</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="temp-meat">
+        <div class="form-icon" style="background:#e8f5ee">🥩</div>
+        <div class="form-info"><div class="form-name">Meat Dept Temperature</div><div class="form-desc">Fish Display, Poultry, Pork, Raw Meat, Walk-in</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="temp-prepack">
+        <div class="form-icon" style="background:#e8f5ee">🧊</div>
+        <div class="form-info"><div class="form-name">Pre-pack Dept Temperature</div><div class="form-desc">20 refrigerated units – AM & PM checks</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="temp-dairy">
+        <div class="form-icon" style="background:#fff8e1">🥛</div>
+        <div class="form-info"><div class="form-name">Dairy Dept Temperature</div><div class="form-desc">Milk, Cheese, Yoghurts, Fish Fridge, Coffee Machine</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="temp-frozen">
+        <div class="form-icon" style="background:#e3f2fd">❄️</div>
+        <div class="form-info"><div class="form-name">Frozen Temperature</div><div class="form-desc">Ice cream, freezer wells, back-up freezer – AM & PM</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="temp-fruitveg">
+        <div class="form-icon" style="background:#e8f5e9">🥦</div>
+        <div class="form-info"><div class="form-name">Fruit &amp; Veg Temperature</div><div class="form-desc">Display fridges, Salad Fridge, Walk-in, Berry Fridges</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACEABILITY LOGS -->
+
+  <div class="category-section">
+    <div class="category-label">📦 Traceability Logs</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="trace-sandwich">
+        <div class="form-icon" style="background:#fff3e0">🥪</div>
+        <div class="form-info"><div class="form-name">Pre-Pack Sandwich Tracker</div><div class="form-desc">11 sandwich types – IUBD & UBD daily log</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-wrap">
+        <div class="form-icon" style="background:#fff3e0">🌯</div>
+        <div class="form-info"><div class="form-name">Pre-Pack Wrap Tracker</div><div class="form-desc">7 wrap types – IUBD & UBD daily log</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-pizza">
+        <div class="form-icon" style="background:#fce4ec">🍕</div>
+        <div class="form-info"><div class="form-name">Pre-Pack Pizza Tracker</div><div class="form-desc">7 pizza types – IUBD & UBD daily log</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-salad-made">
+        <div class="form-icon" style="background:#e8f5e9">🥗</div>
+        <div class="form-info"><div class="form-name">Salads Made in Store</div><div class="form-desc">IUBD, Date Made, Display Date</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-salad-prepack">
+        <div class="form-icon" style="background:#e8f5e9">🥙</div>
+        <div class="form-info"><div class="form-name">Pre-Pack Salads</div><div class="form-desc">IUBD/OUBD, Date Made/Opened, Display Date</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-savouries">
+        <div class="form-icon" style="background:#f3e5f5">🥧</div>
+        <div class="form-info"><div class="form-name">Savouries Traceability</div><div class="form-desc">Quiche, pate, baked potatoes, samosa, spring rolls</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-cooked-meats">
+        <div class="form-icon" style="background:#fbe9e7">🍖</div>
+        <div class="form-info"><div class="form-name">Cooked Meat Traceability</div><div class="form-desc">OUBD, Bulk DU, Slice DU daily log</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-salami">
+        <div class="form-icon" style="background:#fbe9e7">🫒</div>
+        <div class="form-info"><div class="form-name">Salami / Olives Traceability</div><div class="form-desc">OUBD, Date Opened, Use By Date</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-cheese">
+        <div class="form-icon" style="background:#fff9c4">🧀</div>
+        <div class="form-info"><div class="form-name">Cheese Traceability</div><div class="form-desc">OUBD, Date Opened, Use By Date</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-fish">
+        <div class="form-icon" style="background:#e3f2fd">🐟</div>
+        <div class="form-info"><div class="form-name">Fish Tracker (Serve-over)</div><div class="form-desc">Country of origin, Display Until, Traceability No.</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-pork">
+        <div class="form-icon" style="background:#fce4ec">🥓</div>
+        <div class="form-info"><div class="form-name">Pork & Bacon Traceability</div><div class="form-desc">OUBD, Date Cut/Displayed, Scales Use By, Batch No</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="trace-butcher">
+        <div class="form-icon" style="background:#fce4ec">🔪</div>
+        <div class="form-info"><div class="form-name">Prep by Butcher / Fishmonger</div><div class="form-desc">Batch traceability – ingredients & use by dates</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTION LOGS -->
+
+  <div class="category-section">
+    <div class="category-label">⚙️ Production Logs</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="prod-mince">
+        <div class="form-icon" style="background:#fbe9e7">🥩</div>
+        <div class="form-info"><div class="form-name">Mince Control Sheet</div><div class="form-desc">Temperature, batch code, scales use by, date removed</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+      <div class="form-card" data-form="prod-burger">
+        <div class="form-icon" style="background:#fff3e0">🍔</div>
+        <div class="form-info"><div class="form-name">Burger Control Sheet</div><div class="form-desc">Meat used, batch code, burger mix, scales use by</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLEANING -->
+
+  <div class="category-section">
+    <div class="category-label">🧹 Cleaning Schedules</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="clean-redmeat">
+        <div class="form-icon" style="background:#e8f5ee">🧼</div>
+        <div class="form-info"><div class="form-name">Red Meat Dept Cleaning</div><div class="form-desc">Daily & weekly cleaning schedule with chemicals</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLIANCE -->
+
+  <div class="category-section">
+    <div class="category-label">✅ Compliance</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="compliance">
+        <div class="form-icon" style="background:#e8eaf6">📊</div>
+        <div class="form-info"><div class="form-name">HACCP Compliance Report</div><div class="form-desc">Weekly audit – all departments scored 0/3/5</div></div>
+        <div class="form-arrow">›</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:20px"></div>
 </div>
 
+<!-- ===================== FORM SCREENS ===================== -->
 
-<!-- TEMPERATURE -->
+<!-- MEAT TEMPERATURE -->
 
-<div id="temp" class="section">
-
-<h2>Temperature Check</h2>
-
-<label>Area</label>
-<input id="t_area">
-
-<label>Temperature</label>
-<input id="t_temp">
-
-<label>Staff Name</label>
-<input id="t_staff">
-
-<label>Notes</label>
-<textarea id="t_notes"></textarea>
-
-<label>Photo</label>
-<input type="file" id="t_photo" accept="image/*" capture="environment">
-
-<h3>Signature</h3>
-<canvas id="t_sig"></canvas>
-
-<button onclick="saveTemp()">Generate HACCP Record</button>
-
-<button class="back" onclick="back()">Back</button>
-
+<div id="temp-meat" class="form-screen">
+  <div class="form-header">
+    <h2>🥩 Meat Dept Temperature Checklist</h2>
+    <p>Check AM & PM daily with hand-held probe. Recheck after 1hr if unacceptable.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="meat-week"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="week-table temp-table">
+        <thead>
+          <tr>
+            <th class="unit-col product-col">Refrigerated Unit</th>
+            <th class="temp-col">Target</th>
+            <th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th>
+            <th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th>
+            <th style="min-width:80px">Comments</th>
+          </tr>
+          <tr>
+            <th class="product-col"></th><th></th>
+            <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
+            <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="meat-temp-body"></tbody>
+      </table>
+    </div>
+    <div class="section-title">Corrective Action / Recheck</div>
+    <textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>
+    <div class="section-title">Signatures</div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-meat-am" height="80"></canvas><button class="sig-clear" data-clearsig="sig-meat-am">Clear</button></div></div>
+      <div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-meat-pm" height="80"></canvas><button class="sig-clear" data-clearsig="sig-meat-pm">Clear</button></div></div>
+    </div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-meat-mgr" height="80"></canvas><button class="sig-clear" data-clearsig="sig-meat-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-temp-meat">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="temp-meat">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-temp-meat">
+        <div class="photo-grid" id="photo-grid-temp-meat"></div>
+        <label class="photo-add-btn" for="photo-input-temp-meat">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-temp-meat" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-meat">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="temp-meat" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" id="email-meat" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn" data-sendemail="Meat Temperature Checklist" data-emailid="meat">Send</button></div>
+  </div>
 </div>
 
+<!-- PRE-PACK TEMPERATURE -->
 
-<!-- CLEANING -->
-
-<div id="clean" class="section">
-
-<h2>Cleaning Record</h2>
-
-<label>Area Cleaned</label>
-<input id="c_area">
-
-<label>Cleaning Chemical Used</label>
-<input id="c_chem">
-
-<label>Staff</label>
-<input id="c_staff">
-
-<label>Notes</label>
-<textarea id="c_notes"></textarea>
-
-<label>Photo</label>
-<input type="file" id="c_photo" accept="image/*" capture="environment">
-
-<h3>Signature</h3>
-<canvas id="c_sig"></canvas>
-
-<button onclick="saveClean()">Generate HACCP Record</button>
-
-<button class="back" onclick="back()">Back</button>
-
+<div id="temp-prepack" class="form-screen">
+  <div class="form-header">
+    <h2>🧊 Pre-pack Dept Temperature Checklist</h2>
+    <p>Check product/air temp twice daily. Recheck after 1hr if unacceptable.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="prepack-week"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="week-table temp-table">
+        <thead>
+          <tr>
+            <th class="unit-col product-col">Refrigerated Unit</th><th class="temp-col">Target</th>
+            <th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th>
+            <th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th>
+            <th style="min-width:80px">Comments</th>
+          </tr>
+          <tr>
+            <th class="product-col"></th><th></th>
+            <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
+            <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="prepack-temp-body"></tbody>
+      </table>
+    </div>
+    <div class="section-title">Corrective Action / Recheck</div>
+    <textarea class="field-input" rows="3" placeholder="Record any corrective actions..."></textarea>
+    <div class="section-title">Signatures</div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-prepack-am" height="80"></canvas><button class="sig-clear" data-clearsig="sig-prepack-am">Clear</button></div></div>
+      <div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-prepack-pm" height="80"></canvas><button class="sig-clear" data-clearsig="sig-prepack-pm">Clear</button></div></div>
+    </div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-prepack-mgr" height="80"></canvas><button class="sig-clear" data-clearsig="sig-prepack-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-temp-prepack">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="temp-prepack">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-temp-prepack">
+        <div class="photo-grid" id="photo-grid-temp-prepack"></div>
+        <label class="photo-add-btn" for="photo-input-temp-prepack">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-temp-prepack" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-prepack">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="temp-prepack" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" id="email-prepack" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn" data-sendemail="Pre-pack Temperature Checklist" data-emailid="prepack">Send</button></div>
+  </div>
 </div>
 
+<!-- DAIRY TEMPERATURE -->
 
-<!-- TRACEABILITY -->
-
-<div id="trace" class="section">
-
-<h2>Traceability Log</h2>
-
-<label>Product</label>
-<input id="tr_product">
-
-<label>Supplier</label>
-<input id="tr_supplier">
-
-<label>Batch Number</label>
-<input id="tr_batch">
-
-<label>Staff</label>
-<input id="tr_staff">
-
-<h3>Signature</h3>
-<canvas id="tr_sig"></canvas>
-
-<button onclick="saveTrace()">Generate HACCP Record</button>
-
-<button class="back" onclick="back()">Back</button>
-
+<div id="temp-dairy" class="form-screen">
+  <div class="form-header">
+    <h2>🥛 Dairy Dept Temperature Checklist</h2>
+    <p>Check product/air temp twice daily. All units target 0–5°C.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="week-table temp-table">
+        <thead>
+          <tr>
+            <th class="unit-col product-col">Refrigerated Unit</th><th class="temp-col">Target</th>
+            <th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th>
+            <th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th>
+            <th style="min-width:80px">Comments</th>
+          </tr>
+          <tr>
+            <th class="product-col"></th><th></th>
+            <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
+            <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="dairy-temp-body"></tbody>
+      </table>
+    </div>
+    <div class="section-title">Corrective Action / Recheck</div>
+    <textarea class="field-input" rows="3" placeholder="Record any corrective actions..."></textarea>
+    <div class="section-title">Signatures</div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-dairy-am" height="80"></canvas><button class="sig-clear" data-clearsig="sig-dairy-am">Clear</button></div></div>
+      <div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-dairy-pm" height="80"></canvas><button class="sig-clear" data-clearsig="sig-dairy-pm">Clear</button></div></div>
+    </div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-dairy-mgr" height="80"></canvas><button class="sig-clear" data-clearsig="sig-dairy-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-temp-dairy">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="temp-dairy">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-temp-dairy">
+        <div class="photo-grid" id="photo-grid-temp-dairy"></div>
+        <label class="photo-add-btn" for="photo-input-temp-dairy">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-temp-dairy" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-dairy">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="temp-dairy" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
 </div>
 
+<!-- FROZEN TEMPERATURE -->
 
-<!-- PRODUCTION -->
-
-<div id="prod" class="section">
-
-<h2>Production Log</h2>
-
-<label>Product Produced</label>
-<input id="p_product">
-
-<label>Quantity</label>
-<input id="p_qty">
-
-<label>Staff</label>
-<input id="p_staff">
-
-<label>Notes</label>
-<textarea id="p_notes"></textarea>
-
-<h3>Signature</h3>
-<canvas id="p_sig"></canvas>
-
-<button onclick="saveProd()">Generate HACCP Record</button>
-
-<button class="back" onclick="back()">Back</button>
-
+<div id="temp-frozen" class="form-screen">
+  <div class="form-header">
+    <h2>❄️ Frozen Temperature Checklist</h2>
+    <p>Check product/air temp twice daily. Ice cream: -23°C, all others: -18°C.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="week-table temp-table">
+        <thead>
+          <tr>
+            <th class="unit-col product-col">Refrigerated Unit</th><th class="temp-col">Target</th>
+            <th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th>
+            <th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th>
+            <th style="min-width:80px">Comments</th>
+          </tr>
+          <tr>
+            <th class="product-col"></th><th></th>
+            <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
+            <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="frozen-temp-body"></tbody>
+      </table>
+    </div>
+    <div class="section-title">Corrective Action / Recheck</div>
+    <textarea class="field-input" rows="3" placeholder="Record any corrective actions..."></textarea>
+    <div class="section-title">Signatures</div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-frozen-am" height="80"></canvas><button class="sig-clear" data-clearsig="sig-frozen-am">Clear</button></div></div>
+      <div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-frozen-pm" height="80"></canvas><button class="sig-clear" data-clearsig="sig-frozen-pm">Clear</button></div></div>
+    </div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-frozen-mgr" height="80"></canvas><button class="sig-clear" data-clearsig="sig-frozen-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-temp-frozen">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="temp-frozen">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-temp-frozen">
+        <div class="photo-grid" id="photo-grid-temp-frozen"></div>
+        <label class="photo-add-btn" for="photo-input-temp-frozen">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-temp-frozen" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-frozen">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="temp-frozen" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
 </div>
 
+<!-- SANDWICH TRACKER -->
 
-<!-- PROBE -->
-
-<div id="probe" class="section">
-
-<h2>Probe Calibration</h2>
-
-<label>Probe ID</label>
-<input id="pr_id">
-
-<label>Ice Test Temp</label>
-<input id="pr_temp">
-
-<label>Staff</label>
-<input id="pr_staff">
-
-<h3>Signature</h3>
-<canvas id="pr_sig"></canvas>
-
-<button onclick="saveProbe()">Generate HACCP Record</button>
-
-<button class="back" onclick="back()">Back</button>
-
+<div id="trace-sandwich" class="form-screen">
+  <div class="form-header">
+    <h2>🥪 Pre-Pack Sandwich Traceability Log</h2>
+    <p>Complete daily when placing stock on the counter.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="info-box"><strong>IUBD</strong> = Ingredient Use By Date &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date<br>Procedure: Record all dates. Remove from sale on evening of Display Until Date.</div>
+    <div class="week-table-wrap" id="sandwich-tables"></div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-sandwich" height="90"></canvas><button class="sig-clear" data-clearsig="sig-sandwich">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-sandwich-mgr" height="90"></canvas><button class="sig-clear" data-clearsig="sig-sandwich-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-sandwich">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-sandwich">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-sandwich">
+        <div class="photo-grid" id="photo-grid-trace-sandwich"></div>
+        <label class="photo-add-btn" for="photo-input-trace-sandwich">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-sandwich" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-sandwich">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-sandwich" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
 </div>
 
+<!-- WRAP TRACKER -->
 
-<!-- WEEKLY -->
-
-<div id="weekly" class="section">
-
-<h2>Weekly Compliance</h2>
-
-<label>Week Starting</label>
-<input type="date" id="w_week">
-
-<label>Manager Notes</label>
-<textarea id="w_notes"></textarea>
-
-<h3>Manager Signature</h3>
-<canvas id="w_sig"></canvas>
-
-<button onclick="saveWeekly()">Generate Report</button>
-
-<button class="back" onclick="back()">Back</button>
-
+<div id="trace-wrap" class="form-screen">
+  <div class="form-header">
+    <h2>🌯 Pre-Pack Wrap Traceability Log</h2>
+    <p>Complete daily when placing stock on the counter.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="info-box"><strong>IUBD</strong> = Ingredient Use By Date &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date</div>
+    <div class="week-table-wrap" id="wrap-tables"></div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-wrap" height="90"></canvas><button class="sig-clear" data-clearsig="sig-wrap">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-wrap-mgr" height="90"></canvas><button class="sig-clear" data-clearsig="sig-wrap-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-wrap">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-wrap">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-wrap">
+        <div class="photo-grid" id="photo-grid-trace-wrap"></div>
+        <label class="photo-add-btn" for="photo-input-trace-wrap">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-wrap" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-wrap">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-wrap" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
 </div>
 
+<!-- PIZZA TRACKER -->
+
+<div id="trace-pizza" class="form-screen">
+  <div class="form-header">
+    <h2>🍕 Pre-Pack Pizza Traceability Log</h2>
+    <p>Complete daily when placing stock on the counter.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="info-box"><strong>IUBD</strong> = Ingredient Use By Date &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date</div>
+    <div class="week-table-wrap" id="pizza-tables"></div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-pizza" height="90"></canvas><button class="sig-clear" data-clearsig="sig-pizza">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-pizza-mgr" height="90"></canvas><button class="sig-clear" data-clearsig="sig-pizza-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-pizza">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-pizza">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-pizza">
+        <div class="photo-grid" id="photo-grid-trace-pizza"></div>
+        <label class="photo-add-btn" for="photo-input-trace-pizza">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-pizza" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-pizza">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-pizza" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- SALADS MADE IN STORE -->
+
+<div id="trace-salad-made" class="form-screen">
+  <div class="form-header">
+    <h2>🥗 Salads (Made in Store) Traceability Log</h2>
+    <p>Complete daily when placing stock on the counter.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="info-box"><strong>IUBD</strong> = Ingr. Use By Date &nbsp;|&nbsp; <strong>DM</strong> = Date Made &nbsp;|&nbsp; <strong>DD</strong> = Display Date (DM +2 days)</div>
+    <div class="week-table-wrap" id="salad-made-tables"></div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-salad-made" height="90"></canvas><button class="sig-clear" data-clearsig="sig-salad-made">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-salad-made-mgr" height="90"></canvas><button class="sig-clear" data-clearsig="sig-salad-made-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-salad-made">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-salad-made">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-salad-made">
+        <div class="photo-grid" id="photo-grid-trace-salad-made"></div>
+        <label class="photo-add-btn" for="photo-input-trace-salad-made">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-salad-made" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-salad-made">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-salad-made" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- PRE-PACK SALADS -->
+
+<div id="trace-salad-prepack" class="form-screen">
+  <div class="form-header">
+    <h2>🥙 Salads (Pre-pack in Store) Traceability Log</h2>
+    <p>Complete daily when placing stock on the counter.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="info-box"><strong>IUBD/OUBD</strong> = Use By Date &nbsp;|&nbsp; <strong>DM/DO</strong> = Date Made/Opened &nbsp;|&nbsp; <strong>DD</strong> = Display Date (DM/DO +1 day)</div>
+    <div class="week-table-wrap" id="salad-prepack-tables"></div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-salad-pp" height="90"></canvas><button class="sig-clear" data-clearsig="sig-salad-pp">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-salad-pp-mgr" height="90"></canvas><button class="sig-clear" data-clearsig="sig-salad-pp-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-salad-prepack">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-salad-prepack">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-salad-prepack">
+        <div class="photo-grid" id="photo-grid-trace-salad-prepack"></div>
+        <label class="photo-add-btn" for="photo-input-trace-salad-prepack">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-salad-prepack" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-salad-prepack">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-salad-prepack" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- SAVOURIES -->
+
+<div id="trace-savouries" class="form-screen">
+  <div class="form-header">
+    <h2>🥧 Savouries Traceability Log</h2>
+    <p>Quiche, pate, baked potatoes, samosa, spring rolls, bhaji</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="info-box"><strong>OUBD</strong> = Original Use By Date &nbsp;|&nbsp; <strong>DO</strong> = Date Opened &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date<br>Savouries: Date opened + 2 days (1 day counter + 1 day customer scales date)</div>
+    <div class="week-table-wrap" id="savouries-table"></div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-savouries" height="90"></canvas><button class="sig-clear" data-clearsig="sig-savouries">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-savouries-mgr" height="90"></canvas><button class="sig-clear" data-clearsig="sig-savouries-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-savouries">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-savouries">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-savouries">
+        <div class="photo-grid" id="photo-grid-trace-savouries"></div>
+        <label class="photo-add-btn" for="photo-input-trace-savouries">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-savouries" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-savouries">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-savouries" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- COOKED MEATS -->
+
+<div id="trace-cooked-meats" class="form-screen">
+  <div class="form-header">
+    <h2>🍖 Cooked Meat Traceability Log</h2>
+    <p>Complete daily when placing stock on the counter.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="info-box"><strong>OUBD</strong> = Original Use By Date &nbsp;|&nbsp; <strong>Bulk DU</strong> = opening date +3 days &nbsp;|&nbsp; <strong>Slice DU</strong> = sliced day +1 day</div>
+    <div class="week-table-wrap" id="cooked-meats-tables"></div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-cooked" height="90"></canvas><button class="sig-clear" data-clearsig="sig-cooked">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-cooked-mgr" height="90"></canvas><button class="sig-clear" data-clearsig="sig-cooked-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-cooked-meats">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-cooked-meats">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-cooked-meats">
+        <div class="photo-grid" id="photo-grid-trace-cooked-meats"></div>
+        <label class="photo-add-btn" for="photo-input-trace-cooked-meats">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-cooked-meats" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-cooked-meats">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-cooked-meats" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- SALAMI / OLIVES -->
+
+<div id="trace-salami" class="form-screen">
+  <div class="form-header">
+    <h2>🫒 Salami / Olives Traceability Log</h2>
+    <p>Complete daily when placing stock on the counter.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="info-box"><strong>OUBD</strong> = Original Use By Date &nbsp;|&nbsp; <strong>DO</strong> = Date Opened &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date<br>Salami: date opened +1 month &nbsp;|&nbsp; Olives: date opened +3 days</div>
+    <div class="week-table-wrap" id="salami-table"></div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-salami" height="90"></canvas><button class="sig-clear" data-clearsig="sig-salami">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-salami-mgr" height="90"></canvas><button class="sig-clear" data-clearsig="sig-salami-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-salami">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-salami">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-salami">
+        <div class="photo-grid" id="photo-grid-trace-salami"></div>
+        <label class="photo-add-btn" for="photo-input-trace-salami">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-salami" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-salami">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-salami" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- CHEESE -->
+
+<div id="trace-cheese" class="form-screen">
+  <div class="form-header">
+    <h2>🧀 Cheese Traceability Log</h2>
+    <p>Complete daily when placing stock on the counter.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="info-box"><strong>OUBD</strong> = Original Use By Date &nbsp;|&nbsp; <strong>DO</strong> = Date Opened &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date<br>Record all dates. Remove from sale on evening of Display Until Date.</div>
+    <div class="week-table-wrap" id="cheese-table"></div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-cheese" height="90"></canvas><button class="sig-clear" data-clearsig="sig-cheese">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-cheese-mgr" height="90"></canvas><button class="sig-clear" data-clearsig="sig-cheese-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-cheese">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-cheese">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-cheese">
+        <div class="photo-grid" id="photo-grid-trace-cheese"></div>
+        <label class="photo-add-btn" for="photo-input-trace-cheese">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-cheese" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-cheese">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-cheese" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- FISH TRACKER -->
+
+<div id="trace-fish" class="form-screen">
+  <div class="form-header">
+    <h2>🐟 Serve-over Fish Tracker</h2>
+    <p>Note all dates. Remove from sale on evening of Display Until Date.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Name of Supplier</label><input class="field-input" type="text" placeholder="Supplier name"></div>
+    </div>
+    <div class="info-box">
+      <strong>Fresh Fish:</strong> Display Until = Delivery Date +3 days &nbsp;|&nbsp; Scales Date = 2 days<br>
+      <strong>Frozen Fish:</strong> Display Until = Date of Defrost +4 days &nbsp;|&nbsp; Scales Date = 2 days<br>
+      <strong>Shellfish:</strong> Display Until = Use By Date -1 day &nbsp;|&nbsp; Scales Date = 1 day
+    </div>
+    <div class="week-table-wrap">
+      <table class="week-table">
+        <thead>
+          <tr>
+            <th class="product-col" style="min-width:120px">Product Name</th>
+            <th colspan="3">Monday</th><th colspan="3">Tuesday</th><th colspan="3">Wednesday</th>
+            <th colspan="3">Thursday</th><th colspan="3">Friday</th><th colspan="3">Saturday</th>
+          </tr>
+          <tr>
+            <th class="product-col"></th>
+            <th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th>
+            <th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th>
+            <th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th>
+            <th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th>
+            <th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th>
+            <th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th>
+          </tr>
+        </thead>
+        <tbody id="fish-body"></tbody>
+      </table>
+    </div>
+    <div class="field-group" style="margin-top:12px"><label class="field-label">Completed By</label><input class="field-input" type="text" placeholder="Name"></div>
+    <div class="section-title">Signature</div>
+    <div class="field-group"><div class="sig-box"><canvas id="sig-fish" height="90"></canvas><button class="sig-clear" data-clearsig="sig-fish">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-fish">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-fish">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-fish">
+        <div class="photo-grid" id="photo-grid-trace-fish"></div>
+        <label class="photo-add-btn" for="photo-input-trace-fish">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-fish" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-fish">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-fish" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- PORK & BACON -->
+
+<div id="trace-pork" class="form-screen">
+  <div class="form-header">
+    <h2>🥓 Pork & Bacon Traceability Log</h2>
+    <p>Record product details daily.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="log-table">
+        <thead><tr><th>Product</th><th>Original Use By Date (Unopened)</th><th>Date Open / Cut / Displayed</th><th>Scales Use By</th><th>Batch No.</th><th>Signature</th></tr></thead>
+        <tbody id="pork-body"></tbody>
+      </table>
+    </div>
+    <div class="section-title">Manager Signature</div>
+    <div class="field-group"><div class="sig-box"><canvas id="sig-pork" height="90"></canvas><button class="sig-clear" data-clearsig="sig-pork">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-pork">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-pork">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-pork">
+        <div class="photo-grid" id="photo-grid-trace-pork"></div>
+        <label class="photo-add-btn" for="photo-input-trace-pork">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-pork" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-pork">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-pork" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- BUTCHER BATCH -->
+
+<div id="trace-butcher" class="form-screen">
+  <div class="form-header">
+    <h2>🔪 Prep by Butcher / Fishmonger Traceability</h2>
+    <p>Batch traceability sheet – complete for each production batch.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Commencing</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Product Name</label><input class="field-input" type="text" placeholder="Product name"></div>
+    </div>
+    <div class="field-group"><label class="field-label">Day of the Week</label><input class="field-input" type="text" placeholder="e.g. Monday"></div>
+    <div id="butcher-batches"></div>
+    <button data-action="addBatch" style="background:var(--green-light);border:1px solid var(--green);color:var(--green-dark);padding:10px 18px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;width:100%;margin-top:8px">+ Add Batch</button>
+    <div class="section-title">Food Safety Champion Signature</div>
+    <div class="field-group"><div class="sig-box"><canvas id="sig-butcher" height="90"></canvas><button class="sig-clear" data-clearsig="sig-butcher">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-trace-butcher">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="trace-butcher">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-trace-butcher">
+        <div class="photo-grid" id="photo-grid-trace-butcher"></div>
+        <label class="photo-add-btn" for="photo-input-trace-butcher">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-trace-butcher" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-butcher">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="trace-butcher" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- MINCE CONTROL -->
+
+<div id="prod-mince" class="form-screen">
+  <div class="form-header">
+    <h2>🥩 Mince Control Sheet</h2>
+    <p>Record details each time mince is produced.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="log-table">
+        <thead><tr><th>Date / Time of Production</th><th>Name of Person Who Made the Mince</th><th>Type of Meat Used & Batch Code</th><th>Type of Cut</th><th>Temp After Chilling (before placing on display)</th><th>Scales 'Use By'</th><th>Date Removed from Sale</th></tr></thead>
+        <tbody id="mince-body"></tbody>
+      </table>
+    </div>
+    <div class="section-title">Manager Signature</div>
+    <div class="field-group"><div class="sig-box"><canvas id="sig-mince" height="90"></canvas><button class="sig-clear" data-clearsig="sig-mince">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-prod-mince">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="prod-mince">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-prod-mince">
+        <div class="photo-grid" id="photo-grid-prod-mince"></div>
+        <label class="photo-add-btn" for="photo-input-prod-mince">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-prod-mince" accept="image/*" capture="environment" multiple style="display:none" data-photoid="prod-mince">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="prod-mince" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- BURGER CONTROL -->
+
+<div id="prod-burger" class="form-screen">
+  <div class="form-header">
+    <h2>🍔 Burger Control Sheet</h2>
+    <p>Record details each time burgers are produced.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="log-table">
+        <thead><tr><th>Date / Time of Production</th><th>Name of Person Who Made Them</th><th>Type of Meat Used & Batch Code</th><th>Burger Mix</th><th>Scales 'Use By'</th><th>Date Removed from Sale</th></tr></thead>
+        <tbody id="burger-body"></tbody>
+      </table>
+    </div>
+    <div class="section-title">Manager Signature</div>
+    <div class="field-group"><div class="sig-box"><canvas id="sig-burger" height="90"></canvas><button class="sig-clear" data-clearsig="sig-burger">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-prod-burger">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="prod-burger">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-prod-burger">
+        <div class="photo-grid" id="photo-grid-prod-burger"></div>
+        <label class="photo-add-btn" for="photo-input-prod-burger">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-prod-burger" accept="image/*" capture="environment" multiple style="display:none" data-photoid="prod-burger">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="prod-burger" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- RED MEAT CLEANING -->
+
+<div id="clean-redmeat" class="form-screen">
+  <div class="form-header">
+    <h2>🧼 Red Meat Dept Cleaning Schedule</h2>
+    <p>Please initial relevant box when each item has been thoroughly cleaned.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="clean-table">
+        <thead><tr><th class="area-col">Area / Item to be Cleaned</th><th class="chem-col">Chemical Used</th><th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th><th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th></tr></thead>
+        <tbody id="clean-redmeat-body"></tbody>
+      </table>
+    </div>
+    <div class="info-box" style="margin-top:12px"><strong>REMEMBER: ALWAYS CLEAN AS YOU GO</strong></div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-clean" height="90"></canvas><button class="sig-clear" data-clearsig="sig-clean">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-clean-mgr" height="90"></canvas><button class="sig-clear" data-clearsig="sig-clean-mgr">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-clean-redmeat">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="clean-redmeat">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-clean-redmeat">
+        <div class="photo-grid" id="photo-grid-clean-redmeat"></div>
+        <label class="photo-add-btn" for="photo-input-clean-redmeat">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-clean-redmeat" accept="image/*" capture="environment" multiple style="display:none" data-photoid="clean-redmeat">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="clean-redmeat" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- COMPLIANCE REPORT -->
+
+<div id="compliance" class="form-screen">
+  <div class="form-header">
+    <h2>📊 HACCP System Compliance Report</h2>
+    <p>Weekly audit of all departments.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Completed By</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="section-title">Zone Key</div>
+    <div class="compliance-zone">
+      <div class="zone-badge zone-green">🟢 Green = 80% and above</div>
+      <div class="zone-badge zone-orange">🟠 Orange = 70%–79%</div>
+      <div class="zone-badge zone-red">🔴 Red (DANGER ZONE) = 69% and below</div>
+    </div>
+    <div class="info-box">
+      <strong>0</strong> = Serious errors (missing days, no corrective action, missing dates, records not signed off)<br>
+      <strong>3</strong> = Minor errors (corrective action not complete, time missing, incorrect shelf life, not meeting target)<br>
+      <strong>5</strong> = Detail correct, reflective and with correction action
+    </div>
+    <div class="section-title">Department Scores</div>
+    <div id="compliance-tables"></div>
+    <div class="section-title">Overall Result</div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Overall Result</label><input class="field-input" type="text" placeholder="e.g. Green / 85%"></div>
+      <div class="field-group"><label class="field-label">Previous Results</label><input class="field-input" type="text" placeholder="Previous %"></div>
+    </div>
+    <div class="section-title">Department Zones (tick)</div>
+    <div id="dept-zones"></div>
+    <div class="section-title">Completed By Signature</div>
+    <div class="field-group"><div class="sig-box"><canvas id="sig-compliance" height="90"></canvas><button class="sig-clear" data-clearsig="sig-compliance">Clear</button></div></div>
+        <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-compliance">
+        <span class="ts-icon">🕐</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="compliance">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-compliance">
+        <div class="photo-grid" id="photo-grid-compliance"></div>
+        <label class="photo-add-btn" for="photo-input-compliance">
+          <span>📷</span> Add Photo Evidence
+          <input type="file" id="photo-input-compliance" accept="image/*" capture="environment" multiple style="display:none" data-photoid="compliance">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="compliance" style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+  </div>
+</div>
+
+<!-- FRUIT & VEG TEMPERATURE -->
+
+<div id="temp-fruitveg" class="form-screen">
+  <div class="form-header">
+    <h2>Fruit &amp; Veg Dept Temperature Checklist</h2>
+    <p>Check product/air temp twice daily with hand-held probe. All units target 0-5 degrees C.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="week-table temp-table">
+        <thead>
+          <tr>
+            <th class="product-col" style="min-width:150px">Refrigerated Unit</th><th class="temp-col">Target</th>
+            <th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th>
+            <th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th>
+            <th style="min-width:100px">Comments</th>
+          </tr>
+          <tr>
+            <th class="product-col"></th><th></th>
+            <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
+            <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="fruitveg-temp-body"></tbody>
+      </table>
+    </div>
+    <div class="info-box">*Check product/air temperature twice daily. If there is an unacceptable temperature recheck after one hour. If the problem persists report to the Food Safety Champion and contact the Refrigeration Service Company.</div>
+    <div class="section-title">Corrective Action / Recheck</div>
+    <textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-fv-am" height="80"></canvas><button class="sig-clear" data-clearsig="sig-fv-am">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-fv-pm" height="80"></canvas><button class="sig-clear" data-clearsig="sig-fv-pm">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Managers Signature</label><div class="sig-box"><canvas id="sig-fv-mgr" height="80"></canvas><button class="sig-clear" data-clearsig="sig-fv-mgr">Clear</button></div></div>
+    <div class="section-title">Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-temp-fruitveg">
+        <span class="ts-icon">&#128336;</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="temp-fruitveg">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-temp-fruitveg">
+        <div class="photo-grid" id="photo-grid-temp-fruitveg"></div>
+        <label class="photo-add-btn" for="photo-input-temp-fruitveg">
+          <span>&#128247;</span> Add Photo Evidence
+          <input type="file" id="photo-input-temp-fruitveg" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-fruitveg">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="temp-fruitveg" style="width:100%;margin-bottom:10px;margin-top:14px">Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+
+  </div>
+</div>
+
+<!-- FRUIT & VEG CLEANING -->
+
+<div id="clean-fruitveg" class="form-screen">
+  <div class="form-header">
+    <h2>Fruit &amp; Veg Cleaning Record</h2>
+    <p>Please initial relevant box when each item has been thoroughly cleaned.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="clean-table" style="min-width:600px">
+        <thead>
+          <tr>
+            <th class="area-col">Area</th><th class="area-col">Areas to be Cleaned</th><th class="chem-col">Chemical</th>
+            <th>M AM</th><th>M PM</th><th>T AM</th><th>T PM</th><th>W AM</th><th>W PM</th>
+            <th>T AM</th><th>T PM</th><th>F AM</th><th>F PM</th><th>S AM</th><th>S PM</th><th>S AM</th><th>S PM</th>
+          </tr>
+        </thead>
+        <tbody id="clean-fruitveg-body"></tbody>
+      </table>
+    </div>
+    <div class="info-box">REMEMBER ALWAYS CLEAN AS YOU GO</div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-cfv" height="80"></canvas><button class="sig-clear" data-clearsig="sig-cfv">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Managers Signature</label><div class="sig-box"><canvas id="sig-cfv-mgr" height="80"></canvas><button class="sig-clear" data-clearsig="sig-cfv-mgr">Clear</button></div></div>
+    <div class="section-title">Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-clean-fruitveg">
+        <span class="ts-icon">&#128336;</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="clean-fruitveg">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-clean-fruitveg">
+        <div class="photo-grid" id="photo-grid-clean-fruitveg"></div>
+        <label class="photo-add-btn" for="photo-input-clean-fruitveg">
+          <span>&#128247;</span> Add Photo Evidence
+          <input type="file" id="photo-input-clean-fruitveg" accept="image/*" capture="environment" multiple style="display:none" data-photoid="clean-fruitveg">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="clean-fruitveg" style="width:100%;margin-bottom:10px;margin-top:14px">Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+
+  </div>
+</div>
+
+<!-- GROCERY STOCKROOM CLEANING -->
+
+<div id="clean-stockroom" class="form-screen">
+  <div class="form-header">
+    <h2>Grocery Stockroom Cleaning Record</h2>
+    <p>Please initial relevant box when each item has been thoroughly cleaned.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="clean-table" style="min-width:500px">
+        <thead>
+          <tr>
+            <th class="area-col">Area</th><th class="chem-col">Chemical</th>
+            <th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th>
+            <th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th>
+          </tr>
+        </thead>
+        <tbody id="clean-stockroom-body"></tbody>
+      </table>
+    </div>
+    <div class="info-box">REMEMBER ALWAYS CLEAN AS YOU GO</div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-csr" height="80"></canvas><button class="sig-clear" data-clearsig="sig-csr">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Managers Signature</label><div class="sig-box"><canvas id="sig-csr-mgr" height="80"></canvas><button class="sig-clear" data-clearsig="sig-csr-mgr">Clear</button></div></div>
+    <div class="section-title">Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-clean-stockroom">
+        <span class="ts-icon">&#128336;</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="clean-stockroom">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-clean-stockroom">
+        <div class="photo-grid" id="photo-grid-clean-stockroom"></div>
+        <label class="photo-add-btn" for="photo-input-clean-stockroom">
+          <span>&#128247;</span> Add Photo Evidence
+          <input type="file" id="photo-input-clean-stockroom" accept="image/*" capture="environment" multiple style="display:none" data-photoid="clean-stockroom">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="clean-stockroom" style="width:100%;margin-bottom:10px;margin-top:14px">Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+
+  </div>
+</div>
+
+<!-- GOODS INWARDS CHILLED/FROZEN -->
+
+<div id="goods-chilled" class="form-screen">
+  <div class="form-header">
+    <h2>Goods Inwards Chilled/Frozen Check Sheet</h2>
+    <p>Target temp for chilled foods: max 5 degrees C. Frozen foods: between -15 degrees C retail pack.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Signed Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th>Date</th><th>Supplier</th><th>Temp Check</th>
+            <th>Food Safety Checks (Cross Contamination, hygiene of vehicle, personnel, condition of packaging)</th>
+            <th>Delivery Docket / Invoice No</th><th>Product Dating</th>
+            <th>Product Name</th><th>Accept / Reject</th><th>Delivery Comments</th><th>Signature &amp; Any Comments</th>
+          </tr>
+        </thead>
+        <tbody id="goods-chilled-body"></tbody>
+      </table>
+    </div>
+    <div class="info-box">Conduct Receiving Inspection as per Goods Inwards SOP. Record the details of any rejections in the non-conformance Check sheet.</div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Managers Signature</label><div class="sig-box"><canvas id="sig-gc-mgr" height="80"></canvas><button class="sig-clear" data-clearsig="sig-gc-mgr">Clear</button></div></div>
+    <div class="section-title">Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-goods-chilled">
+        <span class="ts-icon">&#128336;</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="goods-chilled">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-goods-chilled">
+        <div class="photo-grid" id="photo-grid-goods-chilled"></div>
+        <label class="photo-add-btn" for="photo-input-goods-chilled">
+          <span>&#128247;</span> Add Photo Evidence
+          <input type="file" id="photo-input-goods-chilled" accept="image/*" capture="environment" multiple style="display:none" data-photoid="goods-chilled">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="goods-chilled" style="width:100%;margin-bottom:10px;margin-top:14px">Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+
+  </div>
+</div>
+
+<!-- GOODS INWARDS AMBIENT -->
+
+<div id="goods-ambient" class="form-screen">
+  <div class="form-header">
+    <h2>Goods Inwards Ambient Check Sheet</h2>
+    <p>Conduct Receiving Inspection as per Goods Inwards SOP.</p>
+  </div>
+  <div class="form-body">
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date"></div>
+      <div class="field-group"><label class="field-label">Signed Food Safety Champion</label><input class="field-input" type="text" placeholder="Name"></div>
+    </div>
+    <div class="week-table-wrap">
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th>Date</th><th>Supplier</th><th>Temp Check</th>
+            <th>Food Safety Checks (Cross Contamination, hygiene of vehicle, personnel, condition of packaging)</th>
+            <th>Delivery Docket / Invoice No</th><th>Product Dating</th>
+            <th>Product Name</th><th>Accept / Reject</th><th>Delivery Comments</th><th>Signature &amp; Any Comments</th>
+          </tr>
+        </thead>
+        <tbody id="goods-ambient-body"></tbody>
+      </table>
+    </div>
+    <div class="info-box">Record the details of any rejections in the non-conformance Check sheet.</div>
+    <div class="section-title">Signatures</div>
+    <div class="field-group"><label class="field-label">Managers Signature</label><div class="sig-box"><canvas id="sig-ga-mgr" height="80"></canvas><button class="sig-clear" data-clearsig="sig-ga-mgr">Clear</button></div></div>
+    <div class="section-title">Photo Evidence &amp; Timestamp</div>
+    <div class="photo-timestamp-box">
+      <div class="timestamp-display" id="ts-goods-ambient">
+        <span class="ts-icon">&#128336;</span>
+        <span class="ts-text">Tap to record timestamp</span>
+        <button class="ts-btn" data-timestamp="goods-ambient">Record Time</button>
+      </div>
+      <div class="photo-upload-area" id="photo-area-goods-ambient">
+        <div class="photo-grid" id="photo-grid-goods-ambient"></div>
+        <label class="photo-add-btn" for="photo-input-goods-ambient">
+          <span>&#128247;</span> Add Photo Evidence
+          <input type="file" id="photo-input-goods-ambient" accept="image/*" capture="environment" multiple style="display:none" data-photoid="goods-ambient">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" data-submitform="goods-ambient" style="width:100%;margin-bottom:10px;margin-top:14px">Submit to Google Sheets</button>
+    <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn">Send</button></div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast">✅ Email opened!</div>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox" data-action="closeLightbox">
+  <button class="lightbox-close" data-action="closeLightbox">✕</button>
+  <img id="lightbox-img" src="" alt="Photo evidence">
+  <div class="lightbox-info" id="lightbox-info"></div>
+</div>
 
 <script>
+// ========== DATA ==========
+const DAYS = ['Mon','Tue','Wed','Thur','Fri','Sat','Sun'];
 
-let pads={}
+const meatTempUnits = [
+  ['Fish Display Unit','0-5degC'],['Poultry','0-5degC'],['Pork','0-5degC'],
+  ['Raw Meat','0-5degC'],['Walk in fridge','0-5degC'],['Pre-pack fish doors','0-5degC']
+];
 
-window.onload=function(){
+const prepackTempUnits = [
+  ['1. Stand up juice fridge at front door','0-5degC'],
+  ['2. Meat spider at food academy','0-5degC'],
+  ['3. Meat spider at food academy','0-5degC'],
+  ['4. Meat spider at food academy','0-5degC'],
+  ['5. Superquinn spider','0-5degC'],
+  ['6. Spider fishmonger','0-5degC'],
+  ['7. Dairy spider at fish pre pack','0-5degC'],
+  ['8. Ham spider fridge','0-5degC'],
+  ['9. Provisions promo bay',''],
+  ['10. Food Academy Fridge','0-5degC'],
+  ['11. Butchers Prepack','0-5degC'],
+  ['12. Prepared by the Butcher','0-5degC'],
+  ['13. Poultry','0-5degC'],
+  ['14. Cheese Prepack','0-5degC'],
+  ['15. Bacon/Special Offers','0-5degC'],
+  ['16. Sausages/Rashers','0-5degC'],
+  ['17. Pudding/Superquinn/Continental','0-5degC'],
+  ['18. Cooked Meats/Signature Range','0-5degC'],
+  ['19. Ready meals','0-5degC'],
+  ['20. Meal deck','0-5degC']
+];
 
-document.querySelectorAll("canvas").forEach(c=>{
-c.width=c.offsetWidth
-c.height=200
-pads[c.id]=new SignaturePad(c)
-})
+const dairyTempUnits = [
+  ['1. Milk','0-5degC'],['2. Cream/Deserts/Juice','0-5degC'],
+  ['3. Yoghurts','0-5degC'],['4. Cheese','0-5degC'],['5. Spreads','0-5degC'],
+  ['6. Dairy Special Offers','0-5degC'],['7. Fish Fridge','0-5degC'],
+  ['10. Dairy Back-up','0-5degC'],['11. Milk Fridge at Coffee Machine','0-5degC'],
+  ['12. Milk Dispenser at Coffee Machine','0-5degC']
+];
 
+const frozenTempUnits = [
+  ['1. Ice Cream Bay 1 Door','-23degC'],['2. Ice Cream Bay 1 Well','-23degC'],
+  ['3. Ice Cream Bay 2 Door','-23degC'],['4. Ice Cream Bay 2 Well','-23degC'],
+  ['5. Ice Cream Bay 3 Door','-23degC'],['6. Ice Cream Bay 3 Well','-23degC'],
+  ['7. Ice Cream Stick Fridge','-23degC'],
+  ['8. Special Offer Well no 1','-18degC'],['9. Potato Product Well','-18degC'],
+  ['10. Chip Well','-18degC'],['11. Chicken and Burger Well','-18degC'],
+  ['12. Veg Well','-18degC'],['13. Ready Meal Well','-18degC'],
+  ['14. Special Offer Well no 2','-18degC'],['15. Fish Product Well','-18degC'],
+  ['16. Fish Well','-18degC'],['17. Pizza Well 1','-18degC'],
+  ['18. Pizza Well 2','-18degC'],['19. Vegetarian Food Well','-18degC'],
+  ['20. Back-up Freezer','-18degC']
+];
+
+const sandwiches = [
+  {name:'B.L.T. on White', ingr:'Bread, Bacon, Lettuce, Tomatoes, Mayonnaise'},
+  {name:'B.L.T. on Brown', ingr:'Bread, Bacon, Lettuce, Tomatoes, Mayonnaise'},
+  {name:'Bacon & Boiled Egg White', ingr:'Bread, Bacon, Boiled Egg, Mayonnaise'},
+  {name:'Bacon & Boiled Egg Brown', ingr:'Bread, Bacon, Boiled Egg, Mayonnaise'},
+  {name:'Chicken & Bacon (White)', ingr:'White Bread, Chicken, Bacon, Mayonnaise'},
+  {name:'Chicken & Bacon (Brown)', ingr:'Brown Bread, Chicken, Bacon, Mayonnaise'},
+  {name:'Chicken & Stuffing (White)', ingr:'White Bread, Chicken, Stuffing, Mayonnaise'},
+  {name:'Chicken & Stuffing (Brown)', ingr:'Brown Bread, Chicken, Stuffing, Mayonnaise'},
+  {name:'Chicken Tikka', ingr:'White Bread, Chicken, Tikka sauce, Cheese, Red onion, Lettuce'},
+  {name:'Egg Mayo', ingr:'White Bread, Egg, Cheese, Lettuce, Mayonnaise'},
+  {name:'Tuna Salad', ingr:'Brown Bread, Tuna, Cheese, Mayonnaise'},
+  {name:'Turkey & Egg Mayo', ingr:'White Bread, Turkey, Egg, Red onion, Mayonnaise'},
+  {name:'Ham & Smoked Cheese (White)', ingr:'White Bread, Ham, Smoked cheese, Tomato relish, Mayonnaise, Mixed leaves'},
+  {name:'Ham & Smoked Cheese (Brown)', ingr:'Brown Bread, Ham, Smoked cheese, Tomato relish, Mayonnaise, Mixed leaves'},
+  {name:'BLTC on Brown', ingr:'Brown Bread, Bacon, Lettuce, Tomato, Cheese, Mayonnaise'},
+  {name:'BLTC on White', ingr:'White Bread, Bacon, Lettuce, Tomato, Cheese, Mayonnaise'},
+  {name:'Ham and Cheese', ingr:'White bread, Butter, Ham, Cheese'},
+  {name:'Ham, Cheese & Coleslaw', ingr:'White bread, Butter, Ham, Cheese, Coleslaw'}
+];
+
+const wraps = [
+  {name:'Chicken Tikka', ingr:'Wrap, Chicken, Tikka sauce, Cheese, Red onion, Lettuce'},
+  {name:'Egg Mayo Salad', ingr:'Wrap, Egg, Cheese, Lettuce, Mayonnaise'},
+  {name:'Chicken & Stuffing', ingr:'Wrap, Chicken, Stuffing, Mayonnaise'},
+  {name:'Tuna Salad', ingr:'Wrap, Tuna, Cheese, Mayonnaise'},
+  {name:'Turkey & Egg Mayo', ingr:'Wrap, Turkey, Egg, Red onion, Mayonnaise'},
+  {name:'Sweet Chili Chicken', ingr:'Wrap, Chicken, Red onion, Spinach, Sweet Chili sauce, Mayonnaise'},
+  {name:'Crunchy Tuna', ingr:'Wrap, Tuna, Lettuce, Onion, Mayonnaise'}
+];
+
+const pizzas = [
+  {name:'Cheese Pizza', ingr:'Pizza base, Pizza sauce, Mozzarella cheese'},
+  {name:'Ham & Mushroom', ingr:'Pizza base, Pizza sauce, Ham, Mushroom, Mozzarella cheese'},
+  {name:'Ham & Sweetcorn', ingr:'Pizza base, Pizza sauce, Ham, Sweetcorn, Mozzarella cheese'},
+  {name:'Meat Pizza', ingr:'Pizza base, Pizza sauce, Pepperoni, Chicken, Ham, Mozzarella cheese'},
+  {name:'Pepperoni & Pepper', ingr:'Pizza base, Pizza sauce, Pepperoni, Peppers, Mozzarella cheese'},
+  {name:'Vegetable Deluxe', ingr:'Pizza base, Pizza sauce, Tomato, Peppers, Red onion, Mushrooms, Sweet corn, Mozzarella'},
+  {name:'Spicy Pepperoni', ingr:'Pizza base, Pizza sauce, Pepperoni, Onions, Jalapenos, Mozzarella cheese'}
+];
+
+const saladsMade = [
+  {name:'Egg Mayo', ingr:'Egg, Mayo'},
+  {name:'Carrot & Broccoli', ingr:'Carrot, Broccoli, Mayo'},
+  {name:'Cheese Mix', ingr:'Cheese, Scallions, Mayo'},
+  {name:'Mix Salad', ingr:'Loose Veg'},
+  {name:'Summer Salad', ingr:'Loose veg, Egg, Mayo'},
+  {name:'Chicken Noodle', ingr:'Noodles, Chicken, Veg, Chilli Sauce'}
+];
+
+const saladsPrepack = [
+  {name:'Egg Mayo', ingr:'Egg, Mayo'},
+  {name:'Beetroot', ingr:''},
+  {name:'Asian Noodles', ingr:''},
+  {name:'Pasta Spinach Pinenut', ingr:''},
+  {name:'Coleslaw', ingr:'Veg, Mayo'},
+  {name:'Tuna Mix', ingr:''},
+  {name:'Chunky Potato', ingr:''},
+  {name:'Mash Potato Salad', ingr:''},
+  {name:'Green Lentil Multigrain', ingr:''},
+  {name:'Carrot, Broccoli & Cranberry', ingr:''},
+  {name:'Chipotle Coleslaw', ingr:''},
+  {name:'Basil & Pesto', ingr:''},
+  {name:'Lemon Cous Cous', ingr:''},
+  {name:'Creamy Tomato Pasta', ingr:''},
+  {name:'Carrot, Ginger, Chia Seeds', ingr:''},
+  {name:'Cheese Mix', ingr:'Cheese, Scallions, Mayonnaise'},
+  {name:'Cheese Coleslaw', ingr:'Veg, Cheese, Mayonnaise'},
+  {name:'Mix Salad', ingr:'Veg'},
+  {name:'Summer Salad', ingr:'Veg, Egg, Mayonnaise'}
+];
+
+const savouries = [
+  'Beef Lasagne','Chicken & Mushroom Vol au Vent',
+  'Red Pepper Goats Cheese Quiche','Black pudding s. rolls','Honey & mustard s. rolls'
+];
+
+const cookedMeats = [
+  "Ryan's Low Salt","Honey Glazed","Moriarty's Turkey","Carroll's Crumbed",
+  "Turkey OTB","Oak Smoked Ham","Corned Beef","Brady's Crumbed","Brady's Baked",
+  "Hazlett","Wiltshire Ham OTB"
+];
+
+const salamiOlives = [
+  'Mixed Olives','Sundried Tomatoes','Cheese Filled Peppers','Chorizo Extra',
+  'Pre pack Mixed olives','Pre pack Sundried tomatoes','Pre pack Cheese filled peppers','Pre Pack Stuffing'
+];
+
+const cleaningItems = {
+  'DAILY CLEANING SCHEDULE': [
+    ['Scales, bags, shelves','Sanitiser'],
+    ['Raw Servovers','Sanitiser, glass cleaner'],
+    ['Bins','Degreaser'],
+    ['Equipment/trays/chopping boards - raw & fish','Wash up liq'],
+    ['Fish equipment sink & shelf below','Wash up liq, Degreaser'],
+    ['Hot seal wrap unit','Sanitiser'],
+    ['SELs/Garnishing','Sanitiser'],
+    ['Stainless steel serveover','Stainless Steel spray'],
+    ['Hands sink/Requisites','Degreaser/sanitiser'],
+    ['Wooden block/Table legs','Block brush'],
+    ['Table tops','Sanitiser'],
+    ['Doors/handles','Sanitiser'],
+    ['Telephone','Sanitiser'],
+    ['Equipment sink & hand sink requisites - top and bottom','Wash up liq'],
+    ['Knife rack','Sanitiser'],
+    ['Scales','Sanitiser'],
+    ['Burger press','Wash up liq, degreaser'],
+    ['Mincer head','Wash up liq, degreaser'],
+    ['Mincer','Wash up liq, degreaser'],
+    ['Ice Machine','Stainless steel cleaner'],
+    ['Coldroom - floor, door handle, floor swept','Degreaser, Floorbrush'],
+    ['Rubber around fridge door','']
+  ],
+  'WEEKLY CLEANING SCHEDULE': [
+    ['Prep room racking','Degreaser'],
+    ['Serveover - Raw','Degreaser'],
+    ['Serveover - Fish','Degreaser'],
+    ['Prep area - walls & tables','Degreaser'],
+    ['Returns trolleys','Degreaser'],
+    ['Stainless steel - Raw','Stainless steel cleaner'],
+    ['Raw coldroom - floor, shelving','Degreaser'],
+    ['Display shelving - fish & raw','Degreaser'],
+    ['Stainless steel - Fish','Stainless steel'],
+    ['Ice Machine - presses inside and out including door handles','Defrosted/clean, Sanitiser']
+  ]
+};
+
+const complianceDepts = [
+  { name: '1. Serveover Raw/Fish', items: ['Mince control','Fish Tracker','Temperature Checks','Daily cleaning schedule','Weekly cleaning schedule','Burger control sheet','PBOB Trace','Pork and Bacon Trace','Breaded chicken trace','Beef Trace'] },
+  { name: '2. Cold Deli', items: ['Cooked meat tracker','Sandwich tracker','Salami & olive tracker','Savoury tracker','Salad tracker','Temp checks','Daily cleaning schedule','Weekly cleaning schedule'] },
+  { name: '3. Hot Food Bar/Bakery', items: ['After cook sheet','Hot holding sheet','Temp checks bakery','Daily cleaning schedule','Weekly cleaning schedule'] },
+  { name: '4. Prepack Deli Food Safety', items: ['Temperature checks','Deep clean UTD'] },
+  { name: '5. Fruit & Veg Food Safety', items: ['Temperature checks','Deep clean UTD'] },
+  { name: '6. Dairy Food Safety', items: ['Temperature Checks','Deep Clean'] },
+  { name: '7. Frozen Food Safety', items: ['Load Levels','Temperature Checks','Deep clean UTD'] },
+  { name: '8. Goods Inwards Food Safety', items: ['FSR1 - Fresh Van checks','FSR2 - Dry Grocery Van checks','Cleaning schedule - Daily','Cleaning schedule - Deep clean'] }
+];
+
+// ========== INIT FUNCTIONS ==========
+function makeTempRows(units, bodyId) {
+  const tbody = document.getElementById(bodyId);
+  if (!tbody) return;
+  units.forEach(([name, target]) => {
+    const tr = document.createElement('tr');
+    let cells = '<td class="unit-name">' + (name) + '</td><td class="target">' + (target) + '</td>';
+    for (let i = 0; i < 14; i++) cells += '<td><input type="text" maxlength="6"></td>';
+    cells += '<td><input type="text"></td>';
+    tr.innerHTML = cells;
+    tbody.appendChild(tr);
+  });
 }
 
-function openSection(id){
-
-document.getElementById("dashboard").style.display="none"
-
-document.querySelectorAll(".section").forEach(s=>{
-s.style.display="none"
-})
-
-document.getElementById(id).style.display="block"
-
+function makeIUBDTable(containerId, products, cols) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  let html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
+  DAYS.forEach(d => { for (let i = 0; i < cols.length; i++) html += '<th>' + (i===0?d:'') + '</th>'; });
+  html += '</tr><tr><th class="product-col"></th>';
+  DAYS.forEach(() => { cols.forEach(c => { html += '<th style="font-size:10px">' + (c) + '</th>'; }); });
+  html += '</tr></thead><tbody>';
+  products.forEach(p => {
+    html += '<tr><td class="product-name">' + (p.name) + '' + (p.ingr ? '<small>' + p.ingr + '</small>' : '') + '</td>';
+    DAYS.forEach(() => { cols.forEach(() => { html += '<td><input type="text" maxlength="12"></td>'; }); });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
 }
 
-function back(){
-
-document.querySelectorAll(".section").forEach(s=>{
-s.style.display="none"
-})
-
-document.getElementById("dashboard").style.display="grid"
-
+function makeOUBDTable(containerId, products) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  let html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
+  DAYS.forEach(d => { html += '<th></th><th>' + (d) + '</th><th></th>'; });
+  html += '</tr><tr><th class="product-col"></th>';
+  DAYS.forEach(() => { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>'; });
+  html += '</tr></thead><tbody>';
+  products.forEach(name => {
+    html += '<tr><td class="product-name">' + (name) + '</td>';
+    for (let i = 0; i < 21; i++) html += '<td><input type="text" maxlength="12"></td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
 }
 
-
-async function addPhoto(pdf,file){
-
-if(!file)return
-
-let reader=new FileReader()
-
-reader.onload=function(e){
-
-pdf.addPage()
-
-pdf.addImage(e.target.result,'JPEG',10,20,190,250)
-
+function makeCookedMeatsTable() {
+  const container = document.getElementById('cooked-meats-tables');
+  if (!container) return;
+  let html = '<table class="week-table"><thead><tr><th class="product-col" style="min-width:130px">Name of Product</th>';
+  DAYS.forEach(d => { html += '<th></th><th>' + (d) + '</th><th></th>'; });
+  html += '</tr><tr><th class="product-col"></th>';
+  DAYS.forEach(() => { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>'; });
+  html += '</tr></thead><tbody>';
+  cookedMeats.forEach(name => {
+    html += '<tr><td class="product-name">' + (name) + '</td>';
+    for (let i = 0; i < 21; i++) html += '<td><input type="text" maxlength="12"></td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
 }
 
-reader.readAsDataURL(file)
-
+function makeFishRows() {
+  const tbody = document.getElementById('fish-body');
+  if (!tbody) return;
+  for (let i = 0; i < 12; i++) {
+    const tr = document.createElement('tr');
+    let cells = '<td><input type="text" placeholder="Product name"></td>';
+    for (let d = 0; d < 6; d++) cells += '<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="12"></td><td><input type="text" maxlength="15"></td>';
+    tr.innerHTML = cells;
+    tbody.appendChild(tr);
+  }
 }
 
-
-function createPDF(title,lines,signature,photo){
-
-const { jsPDF } = window.jspdf
-
-let pdf=new jsPDF()
-
-pdf.setFontSize(16)
-
-pdf.text(title,20,20)
-
-pdf.setFontSize(11)
-
-let y=40
-
-lines.forEach(l=>{
-
-pdf.text(l,20,y)
-
-y+=8
-
-})
-
-if(signature && !pads[signature].isEmpty()){
-
-let sig=pads[signature].toDataURL()
-
-pdf.addImage(sig,'PNG',20,y,80,30)
-
+function makePorkRows() {
+  const tbody = document.getElementById('pork-body');
+  if (!tbody) return;
+  for (let i = 0; i < 25; i++) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>';
+    tbody.appendChild(tr);
+  }
 }
 
-pdf.save(title+".pdf")
-
+function makeLogRows(bodyId, cols, rows = 20) {
+  const tbody = document.getElementById(bodyId);
+  if (!tbody) return;
+  for (let i = 0; i < rows; i++) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = Array(cols).fill('<td><input type="text"></td>').join('');
+    tbody.appendChild(tr);
+  }
 }
 
-
-function saveTemp(){
-
-createPDF("Temperature Check",[
-"Area: "+t_area.value,
-"Temp: "+t_temp.value,
-"Staff: "+t_staff.value,
-"Notes: "+t_notes.value
-],'t_sig',t_photo.files[0])
-
+function makeCleaningTable() {
+  const tbody = document.getElementById('clean-redmeat-body');
+  if (!tbody) return;
+  Object.entries(cleaningItems).forEach(([section, items]) => {
+    const headerRow = document.createElement('tr');
+    headerRow.innerHTML = '<td colspan="9" class="clean-section-header">' + (section) + '</td>';
+    tbody.appendChild(headerRow);
+    items.forEach(([area, chem]) => {
+      const tr = document.createElement('tr');
+      let cells = '<td class="area-name">' + (area) + '</td><td class="chem-name">' + (chem) + '</td>';
+      for (let i = 0; i < 7; i++) cells += '<td><input type="checkbox"></td>';
+      tr.innerHTML = cells;
+      tbody.appendChild(tr);
+    });
+  });
+  const sigRow = document.createElement('tr');
+  sigRow.innerHTML = '<td colspan="2" style="font-weight:700;padding:8px;">Signature:</td>' + Array(7).fill('<td></td>').join('');
+  tbody.appendChild(sigRow);
+  const mgrRow = document.createElement('tr');
+  mgrRow.innerHTML = '<td colspan="9" style="font-weight:700;padding:8px;">Managers signature:</td>';
+  tbody.appendChild(mgrRow);
 }
 
+function makeComplianceTables() {
+  const container = document.getElementById('compliance-tables');
+  if (!container) return;
+  complianceDepts.forEach(dept => {
+    let html = '<div style="margin-bottom:16px">\n      <table class="compliance-table">\n        <thead><tr><th style="min-width:120px">Dept</th><th>System</th><th colspan="3" style="text-align:center">Result (0/3/5)</th><th>Issues</th><th>Action Taken</th></tr></thead>\n        <tbody>';
+    dept.items.forEach((item, i) => {
+      html += '<tr>\n        ' + (i===0 ? '<td class="dept" rowspan="' + dept.items.length + '">' + dept.name + '</td>' : '') + '\n        <td class="system">' + (item) + '</td>\n        <td style="text-align:center;width:90px">\n          <div class="score-radio">\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="0">0</label>\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="3">3</label>\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="5">5</label>\n          </div>\n        </td>\n        <td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>\n        <td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>\n      </tr>';
+    });
+    const maxScore = dept.items.length * 5;
+    html += '<tr class="max-row"><td colspan="2">Max Result = ' + (maxScore) + ' &nbsp;&nbsp; Actual result =</td>\n      <td colspan="2"><input type="text" placeholder="Actual" style="border:1px solid #ddd;padding:4px;width:80px;border-radius:4px;font-family:inherit"></td>\n      <td colspan="2" style="font-size:11px;color:var(--muted)">(Actual/max) x100 = %result</td>\n    </tr>';
+    html += '</tbody></table></div>';
+    container.innerHTML += html;
+  });
 
-function saveClean(){
-
-createPDF("Cleaning Record",[
-"Area: "+c_area.value,
-"Chemical: "+c_chem.value,
-"Staff: "+c_staff.value,
-"Notes: "+c_notes.value
-],'c_sig',c_photo.files[0])
-
+  // Dept zones
+  const zones = document.getElementById('dept-zones');
+  const deptNames = [
+    '1.Serve over deli - Raw Meat/Fish','2.Serve over deli - Ready to eat foods',
+    '3.Serve over - Hot Food bar, salad bar, bakery','4.Deli Pre Pack',
+    '5. Fruit & vegetable','6. Dairy','7. Frozen','8. Goods Inwards & Yard'
+  ];
+  let zhtml = '<table class="compliance-table"><thead><tr><th>Department</th><th>Red</th><th>Orange</th><th>Green</th></tr></thead><tbody>';
+  deptNames.forEach(d => {
+    zhtml += '<tr><td>' + (d) + '</td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:var(--red)"></td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:var(--orange)"></td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:var(--green)"></td>\n    </tr>';
+  });
+  zhtml += '</tbody></table>';
+  zones.innerHTML = zhtml;
 }
 
-
-function saveTrace(){
-
-createPDF("Traceability Log",[
-"Product: "+tr_product.value,
-"Supplier: "+tr_supplier.value,
-"Batch: "+tr_batch.value,
-"Staff: "+tr_staff.value
-],'tr_sig')
-
+let butcherBatchCount = 0;
+function addButcherBatch() {
+  butcherBatchCount++;
+  const container = document.getElementById('butcher-batches');
+  const div = document.createElement('div');
+  div.style.cssText = 'background:white;border:1px solid #ddd;border-radius:8px;padding:14px;margin-bottom:12px;';
+  div.innerHTML = '<div style="font-weight:600;color:var(--green-dark);margin-bottom:10px;font-size:13px">Batch ' + (butcherBatchCount) + '</div>\n    <div class="field-row">\n      <div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date"></div>\n      <div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text"></div>\n    </div>\n    <div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date"></div>\n    <div class="section-title" style="font-size:12px;margin:10px 0 8px">Ingredients</div>\n    <table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead>\n    <tbody>' + (Array(5).fill('<tr><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td></tr>').join('')) + '</tbody></table>';
+  container.appendChild(div);
 }
 
+// ========== SIGNATURES (built-in canvas, no CDN) ==========
+const sigPads = {};
 
-function saveProd(){
+function initSig(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || sigPads[canvasId]) return;
+  canvas.width = canvas.parentElement.offsetWidth || 320;
+  canvas.height = parseInt(canvas.getAttribute('height')) || 80;
+  const ctx = canvas.getContext('2d');
+  ctx.strokeStyle = '#1a1a1a';
+  ctx.lineWidth = 2;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  let drawing = false;
+  let lastX = 0, lastY = 0;
 
-createPDF("Production Log",[
-"Product: "+p_product.value,
-"Quantity: "+p_qty.value,
-"Staff: "+p_staff.value,
-"Notes: "+p_notes.value
-],'p_sig')
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    if (e.touches) {
+      return {
+        x: (e.touches[0].clientX - rect.left) * scaleX,
+        y: (e.touches[0].clientY - rect.top) * scaleY
+      };
+    }
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY
+    };
+  }
 
+  function startDraw(e) {
+    e.preventDefault();
+    drawing = true;
+    const pos = getPos(e);
+    lastX = pos.x; lastY = pos.y;
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, 1, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function draw(e) {
+    if (!drawing) return;
+    e.preventDefault();
+    const pos = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+    lastX = pos.x; lastY = pos.y;
+  }
+
+  function stopDraw(e) { drawing = false; }
+
+  canvas.addEventListener('mousedown', startDraw);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stopDraw);
+  canvas.addEventListener('mouseleave', stopDraw);
+  canvas.addEventListener('touchstart', startDraw, { passive: false });
+  canvas.addEventListener('touchmove', draw, { passive: false });
+  canvas.addEventListener('touchend', stopDraw);
+
+  sigPads[canvasId] = { canvas, ctx, clear: function() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }};
 }
 
-
-function saveProbe(){
-
-createPDF("Probe Calibration",[
-"Probe: "+pr_id.value,
-"Ice Temp: "+pr_temp.value,
-"Staff: "+pr_staff.value
-],'pr_sig')
-
+function clearSig(id) {
+  if (sigPads[id]) sigPads[id].clear();
 }
 
-
-function saveWeekly(){
-
-createPDF("Weekly Compliance",[
-"Week: "+w_week.value,
-"Notes: "+w_notes.value
-],'w_sig')
-
+// ========== NAVIGATION ==========
+let currentForm = null;
+function showForm(id) {
+  document.getElementById('home').style.display = 'none';
+  if (currentForm) document.getElementById(currentForm).style.display = 'none';
+  const screen = document.getElementById(id);
+  screen.style.display = 'block';
+  currentForm = id;
+  document.getElementById('backBtn').style.display = 'block';
+  document.getElementById('navTitle').textContent = screen.querySelector('h2').textContent;
+  window.scrollTo(0, 0);
+  setTimeout(() => {
+    screen.querySelectorAll('canvas').forEach(c => initSig(c.id));
+  }, 100);
+}
+function goHome() {
+  if (currentForm) document.getElementById(currentForm).style.display = 'none';
+  document.getElementById('home').style.display = 'block';
+  document.getElementById('backBtn').style.display = 'none';
+  document.getElementById('navTitle').textContent = 'HACCP System';
+  currentForm = null;
+  window.scrollTo(0, 0);
 }
 
+// ========== EMAIL ==========
+function sendEmail(subject, formId) {
+  const emailInput = document.getElementById('email-' + (formId) + '');
+  const to = emailInput ? emailInput.value : '';
+  const body = '' + (subject) + '\nMoriarty Group SuperValu\nCompleted via HACCP Digital System\n\nPlease see attached or review the digital record.';
+  window.location.href = 'mailto:' + (to) + '?subject=' + (encodeURIComponent(subject + ' - Moriarty Group')) + '&body=' + (encodeURIComponent(body)) + '';
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ========== BUILD ALL TABLES ==========
+function init() {
+  makeTempRows(meatTempUnits, 'meat-temp-body');
+  makeTempRows(prepackTempUnits, 'prepack-temp-body');
+  makeTempRows(dairyTempUnits, 'dairy-temp-body');
+  makeTempRows(frozenTempUnits, 'frozen-temp-body');
+  makeIUBDTable('sandwich-tables', sandwiches, ['IUBD','UBD']);
+  makeIUBDTable('wrap-tables', wraps, ['IUBD','UBD']);
+  makeIUBDTable('pizza-tables', pizzas, ['IUBD','UBD']);
+  makeIUBDTable('salad-made-tables', saladsMade, ['IUBD','DM','DD']);
+  makeIUBDTable('salad-prepack-tables', saladsPrepack, ['IUBD/OUBD','DM/DO','DD']);
+  makeOUBDTable('savouries-table', savouries);
+  makeCookedMeatsTable();
+  makeOUBDTable('salami-table', salamiOlives);
+  // Cheese - blank rows
+  const cheeseContainer = document.getElementById('cheese-table');
+  if (cheeseContainer) {
+    let html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
+    DAYS.forEach(d => { html += '<th></th><th>' + (d) + '</th><th></th>'; });
+    html += '</tr><tr><th class="product-col"></th>';
+    DAYS.forEach(() => { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>'; });
+    html += '</tr></thead><tbody>';
+    for (let i = 0; i < 10; i++) {
+      html += '<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name"></td>';
+      for (let j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+    cheeseContainer.innerHTML = html;
+  }
+  makeFishRows();
+  makePorkRows();
+  makeLogRows('mince-body', 7, 20);
+  makeLogRows('burger-body', 6, 20);
+  makeCleaningTable();
+  makeComplianceTables();
+  addButcherBatch();
+  makeTempRows(fruitVegTempUnits, 'fruitveg-temp-body');
+  makeFruitVegCleaningTable();
+  makeStockroomCleaningTable();
+  makeGoodsInwardsRows('goods-chilled-body');
+  makeGoodsInwardsRows('goods-ambient-body');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  init();
+
+  // ===== WIRE UP PHOTO FILE INPUTS via data-photoid =====
+  document.querySelectorAll('input[data-photoid]').forEach(function(input) {
+    input.addEventListener('change', function() {
+      handlePhotos(this, this.getAttribute('data-photoid'));
+    });
+  });
+
+  // ===== EVENT DELEGATION - handles all data-* button clicks =====
+  document.addEventListener('click', function(e) {
+    var el = e.target;
+    // Walk up max 3 levels to find the clickable element
+    for (var i = 0; i < 3; i++) {
+      if (!el || el === document) break;
+
+      if (el.getAttribute('data-form')) {
+        showForm(el.getAttribute('data-form'));
+        return;
+      }
+      if (el.getAttribute('data-clearsig')) {
+        clearSig(el.getAttribute('data-clearsig'));
+        return;
+      }
+      if (el.getAttribute('data-submitform')) {
+        submitForm(el.getAttribute('data-submitform'));
+        return;
+      }
+      if (el.getAttribute('data-timestamp')) {
+        recordTimestamp(el.getAttribute('data-timestamp'));
+        return;
+      }
+      if (el.getAttribute('data-action') === 'goHome') {
+        goHome();
+        return;
+      }
+      if (el.getAttribute('data-action') === 'closeLightbox') {
+        closeLightbox(e);
+        return;
+      }
+      if (el.getAttribute('data-action') === 'addBatch') {
+        addButcherBatch();
+        return;
+      }
+      if (el.getAttribute('data-sendemail')) {
+        var subject = el.getAttribute('data-sendemail');
+        var emailId = el.getAttribute('data-emailid');
+        sendEmail(subject, emailId);
+        return;
+      }
+      el = el.parentElement;
+    }
+  });
+});
+
+// ========== GOOGLE SHEETS INTEGRATION ==========
+const SHEETS_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE';
+
+async function submitToSheets(formId, rows) {
+  var ts = formTimestamps[formId] || new Date().toLocaleString('en-IE', { timeZone: 'Europe/Dublin', hour12: false });
+  var photos = formPhotos[formId] || [];
+  var enhanced = rows.map(function(row) {
+    return row.concat([ts, photos.length > 0 ? photos.length + ' photo(s)' : 'No photos']);
+  });
+  if (!SHEETS_URL || SHEETS_URL.includes('PASTE_YOUR')) {
+    showToast('[!] Google Sheets URL not configured yet. See setup guide.', 4000);
+    return;
+  }
+  showToast('... Submitting to Google Sheets...', 2000);
+  try {
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ formId: formId, rows: enhanced, timestamp: ts, photoCount: photos.length })
+    });
+    showToast('[OK] Submitted! ' + (photos.length > 0 ? photos.length + ' photo(s) recorded.' : ''), 3000);
+  } catch (err) {
+    showToast('[X] Could not reach Google Sheets. Check WiFi.', 4000);
+  }
+}
+
+function showToast(msg, duration = 3000) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), duration);
+}
+
+// ---- Collect helpers ----
+function collectTempRows(bodyId, unitList) {
+  const rows = [];
+  const trs = document.querySelectorAll('#' + (bodyId) + ' tr');
+  trs.forEach((tr, i) => {
+    const inputs = tr.querySelectorAll('input');
+    const vals = Array.from(inputs).map(inp => inp.value.trim());
+    if (vals.some(v => v !== '')) {
+      rows.push([unitList[i][0], unitList[i][1], ...vals]);
+    }
+  });
+  return rows;
+}
+
+function collectTableRows(tableWrapId) {
+  const rows = [];
+  const container = document.getElementById(tableWrapId);
+  if (!container) return rows;
+  container.querySelectorAll('tbody tr').forEach(tr => {
+    const inputs = tr.querySelectorAll('input[type=text]');
+    const vals = Array.from(inputs).map(i => i.value.trim());
+    if (vals.some(v => v !== '')) rows.push(vals);
+  });
+  return rows;
+}
+
+function collectLogRows(bodyId) {
+  const rows = [];
+  document.querySelectorAll('#' + (bodyId) + ' tr').forEach(tr => {
+    const inputs = tr.querySelectorAll('input[type=text]');
+    const vals = Array.from(inputs).map(i => i.value.trim());
+    if (vals.some(v => v !== '')) rows.push(vals);
+  });
+  return rows;
+}
+
+function collectCleaningRows() {
+  const rows = [];
+  document.querySelectorAll('#clean-redmeat-body tr').forEach(tr => {
+    const area = tr.querySelector('.area-name');
+    const chem = tr.querySelector('.chem-name');
+    if (!area) return;
+    const checks = tr.querySelectorAll('input[type=checkbox]');
+    const days = Array.from(checks).map(c => c.checked ? 'v' : '');
+    rows.push([area.textContent.trim(), chem ? chem.textContent.trim() : '', ...days]);
+  });
+  return rows;
+}
+
+function collectComplianceRows() {
+  const rows = [];
+  complianceDepts.forEach(dept => {
+    dept.items.forEach((item, i) => {
+      const key = 'score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '';
+      const checked = document.querySelector('input[name="' + (key) + '"]:checked');
+      const score = checked ? checked.value : '';
+      const tds = document.querySelectorAll('input[name="' + (key) + '"]');
+      // find the two text inputs in same row
+      rows.push([dept.name, item, score, '', '']);
+    });
+  });
+  return rows;
+}
+
+// ---- Submit handlers per form ----
+function submitForm(formId) {
+  let rows = [];
+  switch(formId) {
+    case 'temp-meat':    rows = collectTempRows('meat-temp-body', meatTempUnits); break;
+    case 'temp-prepack': rows = collectTempRows('prepack-temp-body', prepackTempUnits); break;
+    case 'temp-dairy':   rows = collectTempRows('dairy-temp-body', dairyTempUnits); break;
+    case 'temp-frozen':  rows = collectTempRows('frozen-temp-body', frozenTempUnits); break;
+    case 'trace-sandwich':     rows = collectTableRows('sandwich-tables'); break;
+    case 'trace-wrap':         rows = collectTableRows('wrap-tables'); break;
+    case 'trace-pizza':        rows = collectTableRows('pizza-tables'); break;
+    case 'trace-salad-made':   rows = collectTableRows('salad-made-tables'); break;
+    case 'trace-salad-prepack':rows = collectTableRows('salad-prepack-tables'); break;
+    case 'trace-savouries':    rows = collectTableRows('savouries-table'); break;
+    case 'trace-cooked-meats': rows = collectTableRows('cooked-meats-tables'); break;
+    case 'trace-salami':       rows = collectTableRows('salami-table'); break;
+    case 'trace-cheese':       rows = collectTableRows('cheese-table'); break;
+    case 'trace-fish':         rows = collectLogRows('fish-body'); break;
+    case 'trace-pork':         rows = collectLogRows('pork-body'); break;
+    case 'prod-mince':         rows = collectLogRows('mince-body'); break;
+    case 'prod-burger':        rows = collectLogRows('burger-body'); break;
+    case 'clean-redmeat':      rows = collectCleaningRows(); break;
+    case 'compliance':         rows = collectComplianceRows(); break;
+    case 'temp-fruitveg':      rows = collectTempRows('fruitveg-temp-body', fruitVegTempUnits); break;
+    case 'clean-fruitveg':     rows = collectCleaningRows2('clean-fruitveg-body'); break;
+    case 'clean-stockroom':    rows = collectCleaningRows2('clean-stockroom-body'); break;
+    case 'goods-chilled':      rows = collectLogRows('goods-chilled-body'); break;
+    case 'goods-ambient':      rows = collectLogRows('goods-ambient-body'); break;
+  }
+  if (rows.length === 0) {
+    showToast('[!] No data entered yet.', 3000);
+    return;
+  }
+  submitToSheets(formId, rows);
+}
+
+// ========== TIMESTAMP & PHOTO EVIDENCE ==========
+const formTimestamps = {};
+const formPhotos = {};
+
+function recordTimestamp(formId) {
+  const now = new Date();
+  const options = {
+    weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    timeZone: 'Europe/Dublin', hour12: false
+  };
+  const ts = now.toLocaleString('en-IE', options);
+  formTimestamps[formId] = ts;
+  const tsText = document.querySelector('#ts-' + formId + ' .ts-text');
+  const tsBtn = document.querySelector('#ts-' + formId + ' .ts-btn');
+  if (tsText) { tsText.textContent = ts; tsText.classList.add('recorded'); }
+  if (tsBtn) { tsBtn.textContent = 'Update'; tsBtn.classList.add('recorded-btn'); }
+  showToast('Timestamp recorded: ' + ts);
+}
+
+function handlePhotos(input, formId) {
+  if (!formPhotos[formId]) formPhotos[formId] = [];
+  const files = Array.from(input.files);
+  const grid = document.getElementById('photo-grid-' + formId);
+  files.forEach(function(file) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var ts = formTimestamps[formId] || new Date().toLocaleString('en-IE', {
+        timeZone: 'Europe/Dublin', hour12: false,
+        day: '2-digit', month: '2-digit', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+      var photoObj = { dataUrl: e.target.result, name: file.name, timestamp: ts };
+      var idx = formPhotos[formId].push(photoObj) - 1;
+      renderPhotoThumb(grid, photoObj, formId, idx);
+      updatePhotoCount(formId);
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
+}
+
+function renderPhotoThumb(grid, photo, formId, idx) {
+  var div = document.createElement('div');
+  div.className = 'photo-thumb';
+  var img = document.createElement('img');
+  img.src = photo.dataUrl;
+  img.alt = 'Photo ' + (idx+1);
+  img.addEventListener('click', function() { openLightbox(formId, idx); });
+  var lbl = document.createElement('div');
+  lbl.className = 'photo-label';
+  lbl.textContent = photo.timestamp;
+  var delBtn = document.createElement('button');
+  delBtn.className = 'photo-delete';
+  delBtn.textContent = 'x';
+  (function(f, i) {
+    delBtn.addEventListener('click', function() { deletePhoto(f, i, delBtn); });
+  })(formId, idx);
+  div.appendChild(img);
+  div.appendChild(lbl);
+  div.appendChild(delBtn);
+  grid.appendChild(div);
+}
+function deletePhoto(formId, idx, btn) {
+  formPhotos[formId].splice(idx, 1);
+  var grid = document.getElementById('photo-grid-' + formId);
+  grid.innerHTML = '';
+  formPhotos[formId].forEach(function(p, i) { renderPhotoThumb(grid, p, formId, i); });
+  updatePhotoCount(formId);
+}
+
+function updatePhotoCount(formId) {
+  var count = formPhotos[formId] ? formPhotos[formId].length : 0;
+  var btn = document.querySelector('#photo-area-' + formId + ' .photo-add-btn');
+  if (!btn) return;
+  var badge = btn.querySelector('.photo-count-badge');
+  if (count > 0) {
+    if (!badge) { badge = document.createElement('span'); badge.className = 'photo-count-badge'; btn.appendChild(badge); }
+    badge.textContent = count + ' photo' + (count !== 1 ? 's' : '');
+  } else {
+    if (badge) badge.remove();
+  }
+}
+
+function openLightbox(formId, idx) {
+  var photo = formPhotos[formId] && formPhotos[formId][idx];
+  if (!photo) return;
+  document.getElementById('lightbox-img').src = photo.dataUrl;
+  document.getElementById('lightbox-info').textContent = photo.name + '  -  ' + photo.timestamp;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox(e) {
+  if (e) { e.stopPropagation(); }
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightbox-img').src = '';
+}
 </script>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox" data-action="closeLightbox">
+  <button class="lightbox-close" data-action="closeLightbox">✕</button>
+  <img id="lightbox-img" src="" alt="Photo evidence">
+  <div class="lightbox-info" id="lightbox-info"></div>
+</div>
 
 </body>
 </html>

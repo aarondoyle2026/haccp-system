@@ -22,11 +22,11 @@
   --orange: #e65100;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+body { font-family: 'Inter', sans-serif; background: #f4f6f4; color: #1a1a1a; min-height: 100vh; }
 
 /* ========= NAV ========= */
 .top-nav {
-background: var(–green);
+background: #00703c;
 color: white;
 padding: 12px 16px;
 display: flex;
@@ -54,7 +54,7 @@ display: none;
 /* ========= HOME ========= */
 #home { display: block; }
 .home-header {
-background: linear-gradient(135deg, var(–green-dark), var(–green));
+background: linear-gradient(135deg, #005a30, #00703c);
 color: white;
 padding: 28px 20px 24px;
 text-align: center;
@@ -69,7 +69,7 @@ font-size: 11px;
 font-weight: 700;
 letter-spacing: 1.5px;
 text-transform: uppercase;
-color: var(–muted);
+color: #666;
 padding: 0 4px;
 margin-bottom: 10px;
 }
@@ -82,11 +82,11 @@ display: flex;
 align-items: center;
 gap: 14px;
 cursor: pointer;
-border: 1px solid var(–border);
+border: 1px solid #d0d0d0;
 transition: all 0.15s;
 -webkit-tap-highlight-color: transparent;
 }
-.form-card:active { transform: scale(0.98); background: var(–green-light); }
+.form-card:active { transform: scale(0.98); background: #e8f5ee; }
 .form-icon {
 width: 40px; height: 40px;
 border-radius: 10px;
@@ -95,36 +95,36 @@ font-size: 20px;
 flex-shrink: 0;
 }
 .form-info { flex: 1; }
-.form-name { font-size: 14px; font-weight: 600; color: var(–text); }
-.form-desc { font-size: 12px; color: var(–muted); margin-top: 2px; }
-.form-arrow { color: var(–muted); font-size: 16px; }
+.form-name { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+.form-desc { font-size: 12px; color: #666; margin-top: 2px; }
+.form-arrow { color: #666; font-size: 16px; }
 
 /* ========= FORM SCREENS ========= */
 .form-screen { display: none; padding-bottom: 40px; }
 .form-header {
 background: white;
-border-bottom: 3px solid var(–green);
+border-bottom: 3px solid #00703c;
 padding: 16px;
 }
-.form-header h2 { font-size: 17px; font-weight: 700; color: var(–green-dark); }
-.form-header p { font-size: 12px; color: var(–muted); margin-top: 4px; }
+.form-header h2 { font-size: 17px; font-weight: 700; color: #005a30; }
+.form-header p { font-size: 12px; color: #666; margin-top: 4px; }
 .form-body { padding: 16px; }
 
 /* ========= FIELDS ========= */
 .field-group { margin-bottom: 16px; }
-.field-label { font-size: 12px; font-weight: 600; color: var(–muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block; }
+.field-label { font-size: 12px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block; }
 .field-input {
 width: 100%;
 padding: 10px 12px;
-border: 1.5px solid var(–border);
+border: 1.5px solid #d0d0d0;
 border-radius: 8px;
 font-size: 14px;
 font-family: inherit;
 background: white;
-color: var(–text);
+color: #1a1a1a;
 transition: border-color 0.15s;
 }
-.field-input:focus { outline: none; border-color: var(–green); }
+.field-input:focus { outline: none; border-color: #00703c; }
 .field-row { display: flex; gap: 10px; }
 .field-row .field-group { flex: 1; }
 
@@ -132,18 +132,18 @@ transition: border-color 0.15s;
 .week-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -16px; padding: 0 16px 8px; }
 .week-table { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 12px; }
 .week-table th {
-background: var(–green);
+background: #00703c;
 color: white;
 padding: 7px 5px;
 text-align: center;
 font-weight: 600;
 font-size: 11px;
-border: 1px solid var(–green-dark);
+border: 1px solid #005a30;
 white-space: nowrap;
 }
-.week-table th.product-col { background: var(–green-dark); text-align: left; padding-left: 8px; min-width: 130px; }
+.week-table th.product-col { background: #005a30; text-align: left; padding-left: 8px; min-width: 130px; }
 .week-table td {
-border: 1px solid var(–border);
+border: 1px solid #d0d0d0;
 padding: 4px 3px;
 text-align: center;
 vertical-align: middle;
@@ -153,15 +153,15 @@ font-size: 11px;
 font-weight: 600;
 text-align: left;
 padding: 6px 8px;
-background: var(–green-light);
+background: #e8f5ee;
 line-height: 1.3;
 }
-.week-table td.product-name small { font-weight: 400; color: var(–muted); display: block; }
+.week-table td.product-name small { font-weight: 400; color: #666; display: block; }
 .week-table td.sub-header {
 background: #f0f0f0;
 font-size: 10px;
 font-weight: 700;
-color: var(–muted);
+color: #666;
 padding: 3px;
 }
 .week-table input[type=text] {
@@ -172,39 +172,39 @@ text-align: center;
 font-size: 11px;
 font-family: inherit;
 padding: 2px;
-color: var(–text);
+color: #1a1a1a;
 }
-.week-table input[type=text]:focus { outline: 1px solid var(–green); border-radius: 3px; background: #fffde7; }
+.week-table input[type=text]:focus { outline: 1px solid #00703c; border-radius: 3px; background: #fffde7; }
 .week-table tr:hover td { background-color: rgba(0,112,60,0.03); }
-.week-table td.product-name:hover { background: var(–green-light); }
+.week-table td.product-name:hover { background: #e8f5ee; }
 
 /* ========= TEMP TABLE ========= */
 .temp-table { font-size: 12px; }
 .temp-table th.unit-col { min-width: 160px; text-align: left; padding-left: 8px; }
 .temp-table th.temp-col { min-width: 55px; }
 .temp-table td.unit-name { text-align: left; padding: 6px 8px; font-size: 11px; background: #fafafa; }
-.temp-table td.target { font-weight: 600; color: var(–green-dark); font-size: 11px; background: var(–green-light); }
+.temp-table td.target { font-weight: 600; color: #005a30; font-size: 11px; background: #e8f5ee; }
 .corrective-row td { background: #fff8e1 !important; font-size: 10px; font-style: italic; }
 
 /* ========= LOG TABLE ========= */
 .log-table { border-collapse: collapse; width: 100%; font-size: 12px; }
-.log-table th { background: var(–green); color: white; padding: 8px 6px; text-align: left; font-weight: 600; font-size: 11px; border: 1px solid var(–green-dark); }
-.log-table td { border: 1px solid var(–border); padding: 4px 4px; vertical-align: middle; }
-.log-table input[type=text] { width: 100%; border: none; background: transparent; font-size: 12px; font-family: inherit; padding: 4px 2px; color: var(–text); }
-.log-table input[type=text]:focus { outline: 1px solid var(–green); border-radius: 3px; background: #fffde7; }
+.log-table th { background: #00703c; color: white; padding: 8px 6px; text-align: left; font-weight: 600; font-size: 11px; border: 1px solid #005a30; }
+.log-table td { border: 1px solid #d0d0d0; padding: 4px 4px; vertical-align: middle; }
+.log-table input[type=text] { width: 100%; border: none; background: transparent; font-size: 12px; font-family: inherit; padding: 4px 2px; color: #1a1a1a; }
+.log-table input[type=text]:focus { outline: 1px solid #00703c; border-radius: 3px; background: #fffde7; }
 .log-table tr:nth-child(even) td { background: #fafafa; }
 
 /* ========= CLEANING TABLE ========= */
 .clean-table { border-collapse: collapse; width: 100%; min-width: 420px; font-size: 12px; }
-.clean-table th { background: var(–green); color: white; padding: 7px 5px; font-size: 11px; font-weight: 600; border: 1px solid var(–green-dark); text-align: center; }
+.clean-table th { background: #00703c; color: white; padding: 7px 5px; font-size: 11px; font-weight: 600; border: 1px solid #005a30; text-align: center; }
 .clean-table th.area-col { text-align: left; padding-left: 8px; min-width: 150px; }
 .clean-table th.chem-col { min-width: 100px; text-align: left; padding-left: 8px; }
 .clean-table th.day-col { min-width: 32px; }
-.clean-table td { border: 1px solid var(–border); padding: 5px 4px; text-align: center; vertical-align: middle; }
+.clean-table td { border: 1px solid #d0d0d0; padding: 5px 4px; text-align: center; vertical-align: middle; }
 .clean-table td.area-name { text-align: left; padding: 5px 8px; font-size: 11px; background: #fafafa; }
-.clean-table td.chem-name { text-align: left; padding: 5px 8px; font-size: 11px; color: var(–muted); }
-.clean-section-header { background: var(–green-dark) !important; color: white !important; font-weight: 700 !important; font-size: 11px !important; text-align: left !important; padding: 5px 8px !important; letter-spacing: 0.5px; }
-.clean-table input[type=checkbox] { width: 16px; height: 16px; cursor: pointer; accent-color: var(–green); }
+.clean-table td.chem-name { text-align: left; padding: 5px 8px; font-size: 11px; color: #666; }
+.clean-section-header { background: #005a30 !important; color: white !important; font-weight: 700 !important; font-size: 11px !important; text-align: left !important; padding: 5px 8px !important; letter-spacing: 0.5px; }
+.clean-table input[type=checkbox] { width: 16px; height: 16px; cursor: pointer; accent-color: #00703c; }
 
 /* ========= COMPLIANCE TABLE ========= */
 .compliance-zone { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
@@ -213,18 +213,18 @@ color: var(–text);
 .zone-orange { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
 .zone-red { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
 .compliance-table { border-collapse: collapse; width: 100%; font-size: 12px; }
-.compliance-table th { background: var(–green); color: white; padding: 7px 6px; text-align: left; font-size: 11px; font-weight: 600; border: 1px solid var(–green-dark); }
-.compliance-table td { border: 1px solid var(–border); padding: 6px; font-size: 12px; vertical-align: middle; }
-.compliance-table td.dept { font-weight: 700; color: var(–green-dark); background: var(–green-light); }
-.compliance-table td.system { color: var(–text); }
+.compliance-table th { background: #00703c; color: white; padding: 7px 6px; text-align: left; font-size: 11px; font-weight: 600; border: 1px solid #005a30; }
+.compliance-table td { border: 1px solid #d0d0d0; padding: 6px; font-size: 12px; vertical-align: middle; }
+.compliance-table td.dept { font-weight: 700; color: #005a30; background: #e8f5ee; }
+.compliance-table td.system { color: #1a1a1a; }
 .score-radio { display: flex; gap: 6px; justify-content: center; }
 .score-radio label { cursor: pointer; display: flex; flex-direction: column; align-items: center; font-size: 10px; gap: 2px; }
-.score-radio input[type=radio] { accent-color: var(–green); }
+.score-radio input[type=radio] { accent-color: #00703c; }
 .max-row td { background: #f5f5f5; font-weight: 600; font-size: 11px; }
 
 /* ========= SIGNATURE ========= */
 .sig-box {
-border: 2px dashed var(–border);
+border: 2px dashed #d0d0d0;
 border-radius: 8px;
 background: white;
 position: relative;
@@ -235,13 +235,13 @@ overflow: hidden;
 position: absolute;
 top: 6px; right: 8px;
 background: rgba(255,255,255,0.9);
-border: 1px solid var(–border);
+border: 1px solid #d0d0d0;
 border-radius: 5px;
 padding: 3px 8px;
 font-size: 11px;
 cursor: pointer;
 font-family: inherit;
-color: var(–red);
+color: #d32f2f;
 }
 
 /* ========= BUTTONS ========= */
@@ -257,36 +257,36 @@ font-family: inherit;
 cursor: pointer;
 transition: all 0.15s;
 }
-.btn-primary { background: var(–green); color: white; }
-.btn-primary:active { background: var(–green-dark); }
-.btn-secondary { background: white; color: var(–green); border: 2px solid var(–green); }
+.btn-primary { background: #00703c; color: white; }
+.btn-primary:active { background: #005a30; }
+.btn-secondary { background: white; color: #00703c; border: 2px solid #00703c; }
 
 /* ========= INFO BOX ========= */
 .info-box {
-background: var(–green-light);
-border-left: 3px solid var(–green);
+background: #e8f5ee;
+border-left: 3px solid #00703c;
 border-radius: 6px;
 padding: 10px 12px;
 font-size: 11px;
-color: var(–muted);
+color: #666;
 margin-bottom: 14px;
 line-height: 1.5;
 }
-.info-box strong { color: var(–text); }
+.info-box strong { color: #1a1a1a; }
 
 .section-title {
 font-size: 13px;
 font-weight: 700;
-color: var(–green-dark);
+color: #005a30;
 margin: 18px 0 10px;
 padding-bottom: 6px;
-border-bottom: 2px solid var(–green-light);
+border-bottom: 2px solid #e8f5ee;
 }
 
 .email-field { display: flex; gap: 8px; align-items: flex-end; }
 .email-field .field-group { flex: 1; margin-bottom: 0; }
 .email-send-btn {
-background: var(–green);
+background: #00703c;
 color: white;
 border: none;
 border-radius: 8px;
@@ -303,7 +303,7 @@ position: fixed;
 bottom: 24px;
 left: 50%;
 transform: translateX(-50%) translateY(100px);
-background: var(–green-dark);
+background: #005a30;
 color: white;
 padding: 12px 20px;
 border-radius: 20px;
@@ -318,7 +318,7 @@ white-space: nowrap;
 /* ========= PHOTO & TIMESTAMP ========= */
 .photo-timestamp-box {
 background: white;
-border: 1.5px solid var(–border);
+border: 1.5px solid #d0d0d0;
 border-radius: 10px;
 overflow: hidden;
 margin-bottom: 14px;
@@ -373,7 +373,7 @@ position: relative;
 aspect-ratio: 1;
 border-radius: 8px;
 overflow: hidden;
-border: 1px solid var(–border);
+border: 1px solid #d0d0d0;
 background: #f0f0f0;
 }
 .photo-thumb img {
@@ -411,20 +411,20 @@ justify-content: center;
 gap: 8px;
 width: 100%;
 padding: 12px;
-background: var(–green-light);
-border: 2px dashed var(–green);
+background: #e8f5ee;
+border: 2px dashed #00703c;
 border-radius: 8px;
-color: var(–green-dark);
+color: #005a30;
 font-size: 14px;
 font-weight: 600;
 font-family: inherit;
 cursor: pointer;
 transition: background 0.15s;
 }
-.photo-add-btn:active { background: var(–green-mid); }
+.photo-add-btn:active { background: #c2e0ce; }
 .photo-count-badge {
 display: inline-block;
-background: var(–green);
+background: #00703c;
 color: white;
 border-radius: 10px;
 padding: 1px 8px;
@@ -1341,7 +1341,7 @@ display: flex; align-items: center; justify-content: center;
     </div>
     <div class="field-group"><label class="field-label">Day of the Week</label><input class="field-input" type="text" placeholder="e.g. Monday"></div>
     <div id="butcher-batches"></div>
-    <button data-action="addBatch" style="background:var(--green-light);border:1px solid var(--green);color:var(--green-dark);padding:10px 18px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;width:100%;margin-top:8px">+ Add Batch</button>
+    <button data-action="addBatch" style="background:#e8f5ee;border:1px solid #00703c;color:#005a30;padding:10px 18px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;width:100%;margin-top:8px">+ Add Batch</button>
     <div class="section-title">Food Safety Champion Signature</div>
     <div class="field-group"><div class="sig-box"><canvas id="sig-butcher" height="90"></canvas><button class="sig-clear" data-clearsig="sig-butcher">Clear</button></div></div>
         <div class="section-title">📸 Photo Evidence &amp; Timestamp</div>
@@ -2148,7 +2148,7 @@ function makeComplianceTables() {
       html += '<tr>\n        ' + (i===0 ? '<td class="dept" rowspan="' + dept.items.length + '">' + dept.name + '</td>' : '') + '\n        <td class="system">' + (item) + '</td>\n        <td style="text-align:center;width:90px">\n          <div class="score-radio">\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="0">0</label>\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="3">3</label>\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="5">5</label>\n          </div>\n        </td>\n        <td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>\n        <td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>\n      </tr>';
     });
     var maxScore = dept.items.length * 5;
-    html += '<tr class="max-row"><td colspan="2">Max Result = ' + (maxScore) + ' &nbsp;&nbsp; Actual result =</td>\n      <td colspan="2"><input type="text" placeholder="Actual" style="border:1px solid #ddd;padding:4px;width:80px;border-radius:4px;font-family:inherit"></td>\n      <td colspan="2" style="font-size:11px;color:var(--muted)">(Actual/max) x100 = %result</td>\n    </tr>';
+    html += '<tr class="max-row"><td colspan="2">Max Result = ' + (maxScore) + ' &nbsp;&nbsp; Actual result =</td>\n      <td colspan="2"><input type="text" placeholder="Actual" style="border:1px solid #ddd;padding:4px;width:80px;border-radius:4px;font-family:inherit"></td>\n      <td colspan="2" style="font-size:11px;color:#666">(Actual/max) x100 = %result</td>\n    </tr>';
     html += '</tbody></table></div>';
     container.innerHTML += html;
   });
@@ -2162,7 +2162,7 @@ function makeComplianceTables() {
   ];
   var zhtml = '<table class="compliance-table"><thead><tr><th>Department</th><th>Red</th><th>Orange</th><th>Green</th></tr></thead><tbody>';
   deptNames.forEach(function(d) {
-    zhtml += '<tr><td>' + (d) + '</td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:var(--red)"></td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:var(--orange)"></td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:var(--green)"></td>\n    </tr>';
+    zhtml += '<tr><td>' + (d) + '</td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:#d32f2f"></td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:#e65100"></td>\n      <td style="text-align:center"><input type="checkbox" style="accent-color:#00703c"></td>\n    </tr>';
   });
   zhtml += '</tbody></table>';
   zones.innerHTML = zhtml;
@@ -2174,7 +2174,7 @@ function addButcherBatch() {
   var container = document.getElementById('butcher-batches');
   var div = document.createElement('div');
   div.style.cssText = 'background:white;border:1px solid #ddd;border-radius:8px;padding:14px;margin-bottom:12px;';
-  div.innerHTML = '<div style="font-weight:600;color:var(--green-dark);margin-bottom:10px;font-size:13px">Batch ' + (butcherBatchCount) + '</div>\n    <div class="field-row">\n      <div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date"></div>\n      <div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text"></div>\n    </div>\n    <div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date"></div>\n    <div class="section-title" style="font-size:12px;margin:10px 0 8px">Ingredients</div>\n    <table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead>\n    <tbody>' + (Array(5).fill('<tr><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td></tr>').join('')) + '</tbody></table>';
+  div.innerHTML = '<div style="font-weight:600;color:#005a30;margin-bottom:10px;font-size:13px">Batch ' + (butcherBatchCount) + '</div>\n    <div class="field-row">\n      <div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date"></div>\n      <div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text"></div>\n    </div>\n    <div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date"></div>\n    <div class="section-title" style="font-size:12px;margin:10px 0 8px">Ingredients</div>\n    <table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead>\n    <tbody>' + (Array(5).fill('<tr><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td></tr>').join('')) + '</tbody></table>';
   container.appendChild(div);
 }
 

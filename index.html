@@ -1973,9 +1973,10 @@ var complianceDepts = [
 function makeTempRows(units, bodyId) {
   var tbody = document.getElementById(bodyId);
   if (!tbody) return;
-  units.forEachfunction(([name, target]) {
+  units.forEach(function(unit) {
+    var name = unit[0]; var target = unit[1];
     var tr = document.createElement('tr');
-    var cells = '<td class="unit-name">' + (name) + '</td><td class="target">' + (target) + '</td>';
+    var cells = '<td class="unit-name">' + name + '</td><td class="target">' + target + '</td>';
     for (var i = 0; i < 14; i++) cells += '<td><input type="text" maxlength="6"></td>';
     cells += '<td><input type="text"></td>';
     tr.innerHTML = cells;
@@ -1987,13 +1988,26 @@ function makeIUBDTable(containerId, products, cols) {
   var container = document.getElementById(containerId);
   if (!container) return;
   var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
-  DAYS.forEach(function(d) { for (var i = 0; i < cols.length; i++) html += '<th>' + (i===0?d:'') + '</th>'; });
+  var d, c, ci;
+  for (d = 0; d < DAYS.length; d++) {
+    for (ci = 0; ci < cols.length; ci++) {
+      html += '<th>' + (ci===0 ? DAYS[d] : '') + '</th>';
+    }
+  }
   html += '</tr><tr><th class="product-col"></th>';
-  DAYS.forEachfunction(() { cols.forEach(function(c) { html += '<th style="font-size:10px">' + (c) + '</th>'; }); });
+  for (d = 0; d < DAYS.length; d++) {
+    for (ci = 0; ci < cols.length; ci++) {
+      html += '<th style="font-size:10px">' + cols[ci] + '</th>';
+    }
+  }
   html += '</tr></thead><tbody>';
   products.forEach(function(p) {
-    html += '<tr><td class="product-name">' + (p.name) + '' + (p.ingr ? '<small>' + p.ingr + '</small>' : '') + '</td>';
-    DAYS.forEachfunction(() { cols.forEachfunction(() { html += '<td><input type="text" maxlength="12"></td>'; }); });
+    html += '<tr><td class="product-name">' + p.name + (p.ingr ? '<small>' + p.ingr + '</small>' : '') + '</td>';
+    for (d = 0; d < DAYS.length; d++) {
+      for (ci = 0; ci < cols.length; ci++) {
+        html += '<td><input type="text" maxlength="12"></td>';
+      }
+    }
     html += '</tr>';
   });
   html += '</tbody></table>';
@@ -2006,7 +2020,7 @@ function makeOUBDTable(containerId, products) {
   var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
   DAYS.forEach(function(d) { html += '<th></th><th>' + (d) + '</th><th></th>'; });
   html += '</tr><tr><th class="product-col"></th>';
-  DAYS.forEachfunction(() { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>'; });
+  for (var di=0; di < DAYS.length; di++) { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>'; }
   html += '</tr></thead><tbody>';
   products.forEach(function(name) {
     html += '<tr><td class="product-name">' + (name) + '</td>';
@@ -2023,7 +2037,7 @@ function makeCookedMeatsTable() {
   var html = '<table class="week-table"><thead><tr><th class="product-col" style="min-width:130px">Name of Product</th>';
   DAYS.forEach(function(d) { html += '<th></th><th>' + (d) + '</th><th></th>'; });
   html += '</tr><tr><th class="product-col"></th>';
-  DAYS.forEachfunction(() { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>'; });
+  for (var di3=0; di3 < DAYS.length; di3++) { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>'; }
   html += '</tr></thead><tbody>';
   cookedMeats.forEach(function(name) {
     html += '<tr><td class="product-name">' + (name) + '</td>';
@@ -2056,7 +2070,8 @@ function makePorkRows() {
   }
 }
 
-function makeLogRows(bodyId, cols, rows = 20) {
+function makeLogRows(bodyId, cols, rows) {
+  if (rows === undefined) rows = 20;
   var tbody = document.getElementById(bodyId);
   if (!tbody) return;
   for (var i = 0; i < rows; i++) {
@@ -2069,13 +2084,15 @@ function makeLogRows(bodyId, cols, rows = 20) {
 function makeCleaningTable() {
   var tbody = document.getElementById('clean-redmeat-body');
   if (!tbody) return;
-  Object.entries(cleaningItems).forEachfunction(([section, items]) {
+  Object.keys(cleaningItems).forEach(function(section) {
+    var items = cleaningItems[section];
     var headerRow = document.createElement('tr');
-    headerRow.innerHTML = '<td colspan="9" class="clean-section-header">' + (section) + '</td>';
+    headerRow.innerHTML = '<td colspan="9" class="clean-section-header">' + section + '</td>';
     tbody.appendChild(headerRow);
-    items.forEachfunction(([area, chem]) {
+    items.forEach(function(item) {
+      var area = item[0]; var chem = item[1];
       var tr = document.createElement('tr');
-      var cells = '<td class="area-name">' + (area) + '</td><td class="chem-name">' + (chem) + '</td>';
+      var cells = '<td class="area-name">' + area + '</td><td class="chem-name">' + chem + '</td>';
       for (var i = 0; i < 7; i++) cells += '<td><input type="checkbox"></td>';
       tr.innerHTML = cells;
       tbody.appendChild(tr);
@@ -2094,7 +2111,7 @@ function makeComplianceTables() {
   if (!container) return;
   complianceDepts.forEach(function(dept) {
     var html = '<div style="margin-bottom:16px">\n      <table class="compliance-table">\n        <thead><tr><th style="min-width:120px">Dept</th><th>System</th><th colspan="3" style="text-align:center">Result (0/3/5)</th><th>Issues</th><th>Action Taken</th></tr></thead>\n        <tbody>';
-    dept.items.forEachfunction((item, i) {
+    dept.items.forEach(function(item, i) {
       html += '<tr>\n        ' + (i===0 ? '<td class="dept" rowspan="' + dept.items.length + '">' + dept.name + '</td>' : '') + '\n        <td class="system">' + (item) + '</td>\n        <td style="text-align:center;width:90px">\n          <div class="score-radio">\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="0">0</label>\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="3">3</label>\n            <label><input type="radio" name="score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '" value="5">5</label>\n          </div>\n        </td>\n        <td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>\n        <td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>\n      </tr>';
     });
     var maxScore = dept.items.length * 5;
@@ -2211,8 +2228,8 @@ function showForm(id) {
   document.getElementById('backBtn').style.display = 'block';
   document.getElementById('navTitle').textContent = screen.querySelector('h2').textContent;
   window.scrollTo(0, 0);
-  setTimeoutfunction(() {
-    screen.querySelectorAll('canvas').forEach(function(c) { return initSig(c.id)); };
+  setTimeout(function() {
+    screen.querySelectorAll('canvas').forEach(function(c) { initSig(c.id); });
   }, 100);
 }
 function goHome() {
@@ -2255,7 +2272,7 @@ function init() {
     var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
     DAYS.forEach(function(d) { html += '<th></th><th>' + (d) + '</th><th></th>'; });
     html += '</tr><tr><th class="product-col"></th>';
-    DAYS.forEachfunction(() { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>'; });
+    for (var di=0; di < DAYS.length; di++) { html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>'; }
     html += '</tr></thead><tbody>';
     for (var i = 0; i < 10; i++) {
       html += '<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name"></td>';
@@ -2338,31 +2355,31 @@ document.addEventListener('DOMContentLoaded', function() {
 // ========== GOOGLE SHEETS INTEGRATION ==========
 var SHEETS_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE';
 
-async function submitToSheets(formId, rows) {
+function submitToSheets(formId, rows) {
   var ts = formTimestamps[formId] || new Date().toLocaleString('en-IE', { timeZone: 'Europe/Dublin', hour12: false });
   var photos = formPhotos[formId] || [];
   var enhanced = rows.map(function(row) {
     return row.concat([ts, photos.length > 0 ? photos.length + ' photo(s)' : 'No photos']);
   });
-  if (!SHEETS_URL || SHEETS_URL.includes('PASTE_YOUR')) {
+  if (!SHEETS_URL || SHEETS_URL.indexOf('PASTE_YOUR') !== -1) {
     showToast('[!] Google Sheets URL not configured yet. See setup guide.', 4000);
     return;
   }
-  showToast('... Submitting to Google Sheets...', 2000);
-  try {
-    await fetch(SHEETS_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ formId: formId, rows: enhanced, timestamp: ts, photoCount: photos.length })
-    });
+  showToast('Submitting to Google Sheets...', 2000);
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', SHEETS_URL, true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
     showToast('[OK] Submitted! ' + (photos.length > 0 ? photos.length + ' photo(s) recorded.' : ''), 3000);
-  } catch (err) {
+  };
+  xhr.onerror = function() {
     showToast('[X] Could not reach Google Sheets. Check WiFi.', 4000);
-  }
+  };
+  xhr.send(JSON.stringify({ formId: formId, rows: enhanced, timestamp: ts, photoCount: photos.length }));
 }
 
-function showToast(msg, duration = 3000) {
+function showToast(msg, duration) {
+  if (duration === undefined) duration = 3000;
   var toast = document.getElementById('toast');
   toast.textContent = msg;
   toast.classList.add('show');
@@ -2373,11 +2390,11 @@ function showToast(msg, duration = 3000) {
 function collectTempRows(bodyId, unitList) {
   var rows = [];
   var trs = document.querySelectorAll('#' + (bodyId) + ' tr');
-  trs.forEachfunction((tr, i) {
+  trs.forEach(function(tr, i) {
     var inputs = tr.querySelectorAll('input');
-    var vals = Array.from(inputs).map(function(inp) { return inp.value.trim()); };
-    if (vals.some(function(v) { return v !== '')) ; }{
-      rows.push([unitList[i][0], unitList[i][1], ...vals]);
+    var vals = Array.from(inputs).map(function(inp) { return inp.value.trim(); })
+    if (vals.some(function(v) { return v !== ''; })) {
+      rows.push([unitList[i][0], unitList[i][1]].concat(vals));
     }
   });
   return rows;
@@ -2389,8 +2406,8 @@ function collectTableRows(tableWrapId) {
   if (!container) return rows;
   container.querySelectorAll('tbody tr').forEach(function(tr) {
     var inputs = tr.querySelectorAll('input[type=text]');
-    var vals = Array.from(inputs).map(function(i) { return i.value.trim()); };
-    if (vals.some(function(v) { return v !== '')) rows.push(vals); };
+    var vals = Array.from(inputs).map(function(i) { return i.value.trim(); })
+    if (vals.some(function(v) { return v !== ''; })) { rows.push(vals); }
   });
   return rows;
 }
@@ -2399,8 +2416,8 @@ function collectLogRows(bodyId) {
   var rows = [];
   document.querySelectorAll('#' + (bodyId) + ' tr').forEach(function(tr) {
     var inputs = tr.querySelectorAll('input[type=text]');
-    var vals = Array.from(inputs).map(function(i) { return i.value.trim()); };
-    if (vals.some(function(v) { return v !== '')) rows.push(vals); };
+    var vals = Array.from(inputs).map(function(i) { return i.value.trim(); })
+    if (vals.some(function(v) { return v !== ''; })) { rows.push(vals); }
   });
   return rows;
 }
@@ -2412,8 +2429,8 @@ function collectCleaningRows() {
     var chem = tr.querySelector('.chem-name');
     if (!area) return;
     var checks = tr.querySelectorAll('input[type=checkbox]');
-    var days = Array.from(checks).map(function(c) { return c.checked ? 'v' : ''); };
-    rows.push([area.textContent.trim(), chem ? chem.textContent.trim() : '', ...days]);
+    var days = Array.from(checks).map(function(c) { return c.checked ? 'v' : ''; })
+    rows.push([area.textContent.trim(), chem ? chem.textContent.trim() : ''].concat(days));
   });
   return rows;
 }
@@ -2421,7 +2438,7 @@ function collectCleaningRows() {
 function collectComplianceRows() {
   var rows = [];
   complianceDepts.forEach(function(dept) {
-    dept.items.forEachfunction((item, i) {
+    dept.items.forEach(function(item, i) {
       var key = 'score-' + (dept.name.replace(/\s/g,'')) + '-' + (i) + '';
       var checked = document.querySelector('input[name="' + (key) + '"]:checked');
       var score = checked ? checked.value : '';

@@ -879,7 +879,7 @@ function goHome(){if(currentForm)document.getElementById(currentForm).style.disp
 function showToast(msg,dur){if(!dur)dur=3000;var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},dur);}
 
 // GOOGLE SHEETS
-var SHEETS_URL=https://script.google.com/macros/s/AKfycbwSi-5wyde8Fi2a_K01Ob4JEgHkP7pTXRk8hfqd57RdZd0ZZ1lIyoVYlAcTlVmGljPi/exec';
+var SHEETS_URL='https://script.google.com/macros/s/AKfycbwSi-5wyde8Fi2a_K01Ob4JEgHkP7pTXRk8hfqd57RdZd0ZZ1IlyoVYlAcTlVmGljPi/exec';
 var formTimestamps={},formPhotos={};
 
 function submitToSheets(formId,rows){var ts=formTimestamps[formId]||new Date().toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});var photos=formPhotos[formId]||[];if(!SHEETS_URL||SHEETS_URL.indexOf('PASTE_YOUR')!==-1){showToast('[!] Google Sheets URL not configured yet.',4000);return;}showToast('Submitting...',2000);var xhr=new XMLHttpRequest();xhr.open('POST',SHEETS_URL,true);xhr.setRequestHeader('Content-Type','application/json');xhr.onload=function(){showToast('✅ Submitted! '+(photos.length>0?photos.length+' photo(s) recorded.':''),3000);};xhr.onerror=function(){showToast('[X] Could not reach Google Sheets. Check WiFi.',4000);};xhr.send(JSON.stringify({formId:formId,rows:rows,timestamp:ts,photoCount:photos.length}));}

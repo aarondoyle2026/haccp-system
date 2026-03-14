@@ -1,1 +1,60 @@
 
+function doPost(e) {
+try {
+var data = JSON.parse(e.postData.contents);
+var formId = data.formId || ‘unknown’;
+var rows = data.rows || [];
+var timestamp = data.timestamp || new Date().toLocaleString();
+var names = {
+‘temp-meat’:‘Meat Temp’,‘temp-prepack’:‘Prepack Temp’,
+‘temp-dairy’:‘Dairy Temp’,‘temp-frozen’:‘Frozen Temp’,
+‘temp-fruitveg’:‘FruitVeg Temp’,‘temp-deli’:‘Deli Temp’,
+‘hotfood-chicken-temp’:‘Chicken Hourly’,‘hotfood-bar-temp’:‘Hot Bar Hourly’,
+‘hotfood-soup-temp’:‘Soup Kettle’,‘hotfood-after-cook’:‘After Cook’,
+‘hotfood-greaseshield’:‘GreaseShield’,‘hotfood-daily-clean’:‘HotFood Daily’,
+‘hotfood-weekly-clean’:‘HotFood Weekly’,‘cookedmeat-clean’:‘CM Daily Clean’,
+‘cookedmeat-weekly-clean’:‘CM Weekly Clean’,‘thawing-check’:‘Thawing Check’,
+‘deli-trace-stuffing’:‘Deli Stuffing’,‘deli-trace-butter’:‘Deli Butter’,
+‘deli-trace-chicken’:‘Deli Chicken’,‘deli-trace-saladveg’:‘Deli SaladVeg’,
+‘deli-trace-eggtuna’:‘Deli EggTuna’,‘trace-sandwich’:‘Sandwich Trace’,
+‘trace-wrap’:‘Wrap Trace’,‘trace-pizza’:‘Pizza Trace’,
+‘trace-salad-made’:‘Salad Made’,‘trace-salad-prepack’:‘Salad Prepack’,
+‘trace-savouries’:‘Savouries’,‘trace-cooked-meats’:‘Cooked Meats’,
+‘trace-salami’:‘Salami Olives’,‘trace-cheese’:‘Cheese Trace’,
+‘trace-fish’:‘Fish Tracker’,‘trace-pork’:‘Pork Bacon’,
+‘trace-butcher’:‘Butcher Trace’,‘prod-mince’:‘Mince Control’,
+‘prod-burger’:‘Burger Control’,‘clean-redmeat’:‘RedMeat Clean’,
+‘clean-fruitveg’:‘FruitVeg Clean’,‘clean-stockroom’:‘Stockroom Clean’,
+‘goods-chilled’:‘Goods Chilled’,‘goods-ambient’:‘Goods Ambient’,
+‘compliance’:‘Compliance’
+};
+var sheetName = names[formId] || formId;
+var ss = SpreadsheetApp.getActiveSpreadsheet();
+var sheet = ss.getSheetByName(sheetName);
+if (!sheet) {
+sheet = ss.insertSheet(sheetName);
+sheet.appendRow([‘Timestamp’,‘Form’].concat(Array(20).fill(‘Data’)));
+var h = sheet.getRange(1,1,1,22);
+h.setBackground(’#00703c’);
+h.setFontColor(’#ffffff’);
+h.setFontWeight(‘bold’);
+sheet.setFrozenRows(1);
+}
+rows.forEach(function(row) {
+sheet.appendRow([timestamp, formId].concat(row));
+});
+return ContentService
+.createTextOutput(JSON.stringify({status:‘ok’}))
+.setMimeType(ContentService.MimeType.JSON);
+} catch(err) {
+return ContentService
+.createTextOutput(JSON.stringify({status:‘error’,message:err.message}))
+.setMimeType(ContentService.MimeType.JSON);
+}
+}
+
+function doGet(e) {
+return ContentService
+.createTextOutput(JSON.stringify({status:‘online’,system:‘Moriarty HACCP’}))
+.setMimeType(ContentService.MimeType.JSON);
+}

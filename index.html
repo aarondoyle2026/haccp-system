@@ -428,7 +428,7 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 <div class="photo-timestamp-box"><div class="timestamp-display" id="ts-cookedmeat-clean"><span class="ts-icon">🕐</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" onclick="recordTimestamp('cookedmeat-clean')">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-cookedmeat-clean"></div><label class="photo-add-btn" for="photo-input-cookedmeat-clean">📷 Add Photo Evidence<input type="file" id="photo-input-cookedmeat-clean" accept="image/*" capture="environment" multiple style="display:none" data-photoid="cookedmeat-clean"></label></div></div>
 <button class="btn btn-primary" onclick="submitForm('cookedmeat-clean')"  style="width:100%;margin-bottom:10px;margin-top:14px">📊 Submit to Google Sheets</button>
 <div class="email-field"><div class="field-group"><label class="field-label">Email Report To</label><input class="field-input" type="email" placeholder="manager@moriartygroup.ie"></div><button class="email-send-btn" onclick="sendEmail('Cooked Meats &amp; Bakery Cleaning Schedule','cookedmeat-clean')">Send</button></div>
-</div></div> 
+</div></div>
 <div id="cookedmeat-weekly-clean" class="form-screen">
 <div class="form-header"><h2>🧹 Cooked Meats &amp; Bakery Weekly Cleaning Schedule</h2><p>Please initial relevant box when each item has been thoroughly cleaned.</p></div>
 <div class="form-body">
@@ -880,7 +880,7 @@ function goHome(){if(currentForm)document.getElementById(currentForm).style.disp
 function showToast(msg,dur){if(!dur)dur=3000;var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},dur);}
 
 // GOOGLE SHEETS
-var SHEETS_URL='https://script.google.com/macros/s/AKfycbwSi-5wyde8Fi2a_K01Ob4JEgHkP7pTXRk8hfqd57RdZd0ZZ1IlyoVYlAcTlVmGljPi/exec';
+var SHEETS_URL='https://script.google.com/macros/s/AKfycbx1tHskBEH2zw0e5l-xH8XMndwKaq9_GGYhtchReQ9E0asvYoLSLGsBcpSoMbEd_LAM/exec';
 var formTimestamps={},formPhotos={};
 
 function submitToSheets(formId,rows){var ts=formTimestamps[formId]||new Date().toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});var photos=formPhotos[formId]||[];if(!SHEETS_URL||SHEETS_URL.indexOf('PASTE_YOUR')!==-1){showToast('[!] Google Sheets URL not configured yet.',4000);return;}showToast('Submitting...',2000);var payload=JSON.stringify({formId:formId,rows:rows,timestamp:ts,photoCount:photos.length});fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:payload}).then(function(){showToast('✅ Submitted!'+(photos.length>0?' '+photos.length+' photo(s) recorded.':''),3000);}).catch(function(){showToast('[X] Could not reach Google Sheets. Check WiFi.',4000);});}

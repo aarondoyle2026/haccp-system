@@ -691,13 +691,13 @@ document.getElementById(‘backBtn’).style.display=‘none’;
 document.getElementById(‘navTitle’).textContent=‘HACCP System’;
 window.scrollTo(0,0);
 }
-async function saveForm(formId){
+function saveForm(formId){
 var we=document.getElementById(‘we-’+formId);
 var fsc=document.getElementById(‘fsc-’+formId);
 var now=new Date();
 var record={id:now.getTime(),formId:formId,weekKey:getWeekKey(),savedAt:now.toISOString(),weekEnding:we?we.value:’’,champion:fsc?fsc.value:’’,timestamp:formTimestamps[formId]||now.toLocaleString(‘en-IE’,{timeZone:‘Europe/Dublin’,hour12:false}),photos:(formPhotos[formId]||[]).map(function(p){return{dataUrl:p.dataUrl,name:p.name,timestamp:p.timestamp};}),photoCount:(formPhotos[formId]||[]).length};
-try{if(!db)await openDB();await dbPut(‘records’,record);showToast(’\u2705 Saved to Records!’);updateBannerCount();}
-catch(e){showToast(’\u274c Save failed: ‘+e.message);}
+var doSave=function(){dbPut(‘records’,record).then(function(){showToast(’\u2705 Saved to Records!’);updateBannerCount();}).catch(function(e){showToast(’\u274c Save failed: ‘+e.message);});};
+if(!db){openDB().then(function(){doSave();}).catch(function(e){showToast(’\u274c DB error: ‘+e.message);});}else{doSave();}
 }
 function updateBannerCount(){
 if(!db)return;

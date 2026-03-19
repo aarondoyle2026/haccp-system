@@ -3,327 +3,243 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
-<title>Moriarty Group – HACCP System Records</title>
+<title>Moriarty Group – HACCP System</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:100vh;}
 .top-nav{background:#00703c;color:white;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
-.nav-back{background:rgba(255,255,255,0.2);border:none;color:white;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-family:inherit;}
+.back-btn{background:rgba(255,255,255,0.2);border:none;color:white;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-family:inherit;display:none;}
 .nav-title{font-size:16px;font-weight:600;flex:1;}
 .nav-logo{font-size:12px;opacity:0.8;text-align:right;line-height:1.2;}
-.page{display:none;padding-bottom:60px;}
-.page.active{display:block;}
-.tab-bar{display:flex;background:white;border-bottom:2px solid #e8f5ee;position:sticky;top:52px;z-index:50;}
-.tab{flex:1;padding:11px 6px;text-align:center;font-size:12px;font-weight:600;color:#666;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;}
-.tab.active{color:#00703c;border-bottom-color:#00703c;}
-.week-banner{background:#00703c;color:white;border-radius:10px;padding:12px 14px;margin:12px 16px;display:flex;justify-content:space-between;align-items:center;}
-.wb-label{font-size:10px;font-weight:700;letter-spacing:0.08em;opacity:0.8;}
-.wb-week{font-size:15px;font-weight:700;margin-top:2px;}
-.wb-timer{font-size:12px;font-weight:700;margin-top:2px;}
-.completion-bar{height:6px;background:#d0d0d0;margin:0 16px 4px;border-radius:3px;}
-.completion-fill{height:100%;background:#00703c;border-radius:3px;transition:width 0.3s;}
-.completion-text{font-size:11px;color:#666;text-align:center;margin-bottom:12px;padding:0 16px;}
-.topsheet-card{background:white;border:1px solid #d0d0d0;border-radius:10px;margin:0 16px 10px;overflow:hidden;}
-.topsheet-card-header{background:#005a30;color:white;padding:9px 14px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;}
-.topsheet-row{padding:10px 14px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px;cursor:pointer;}
-.topsheet-row:last-child{border-bottom:none;}
-.topsheet-row:active{background:#f0f8f4;}
-.ts-status{font-size:16px;flex-shrink:0;}
-.ts-row-name{font-size:12px;font-weight:600;flex:1;}
-.ts-row-time{font-size:10px;color:#666;font-family:'Courier New',monospace;white-space:nowrap;}
-.ts-row-miss{font-size:10px;color:#e65100;font-weight:600;}
-.data-tools-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 16px;}
-.dt-btn{background:white;border:1.5px solid #d0d0d0;border-radius:10px;padding:12px;text-align:center;cursor:pointer;font-family:'Inter',sans-serif;}
-.dt-btn:active{border-color:#00703c;background:#e8f5ee;}
-.dt-icon{font-size:22px;margin-bottom:4px;}
-.dt-label{font-size:12px;font-weight:700;color:#1a1a1a;}
-.dt-sub{font-size:10px;color:#666;margin-top:2px;}
-.close-week-btn{background:#e65100;color:white;border:none;border-radius:8px;padding:10px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;width:calc(100% - 32px);margin:0 16px 8px;display:block;}
-.db-status{font-size:11px;color:#666;text-align:center;padding:6px 16px;font-family:'Courier New',monospace;}
-.db-status.ok{color:#2e7d32;}
-.db-status.err{color:#c62828;}
-.pw-list{padding:16px;}
-.pw-item{background:white;border:1px solid #d0d0d0;border-top:none;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
-.pw-item:first-child{border-top:1px solid #d0d0d0;border-radius:8px 8px 0 0;}
-.pw-item:last-child{border-radius:0 0 8px 8px;}
-.pw-item:only-child{border-radius:8px;}
-.pw-item:active{background:#e8f5ee;}
-.pw-label{font-size:13px;font-weight:600;color:#1a1a1a;}
-.pw-meta{font-size:11px;color:#666;font-family:'Courier New',monospace;margin-top:2px;}
-.pw-pct{font-size:15px;font-weight:700;}
-.empty-state{text-align:center;padding:40px 20px;color:#666;}
-.empty-state .es-icon{font-size:40px;margin-bottom:12px;}
-.empty-state p{font-size:14px;}
+#home{display:block;}
+.home-header{background:linear-gradient(135deg,#005a30,#00703c);color:white;padding:28px 20px 24px;text-align:center;}
+.home-header .brand{font-size:22px;font-weight:700;letter-spacing:1.5px;}
+.home-header .sub{font-size:12px;opacity:0.75;margin-top:2px;letter-spacing:2px;}
+.home-header .title{font-size:15px;font-weight:500;margin-top:10px;opacity:0.9;}
+.records-banner{background:#005a30;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-decoration:none;}
+.records-banner:active{background:#003d20;}
+.rb-left{display:flex;align-items:center;gap:10px;}
+.rb-icon{font-size:20px;}
+.rb-text{color:white;font-size:14px;font-weight:600;}
+.rb-sub{color:rgba(255,255,255,0.7);font-size:11px;margin-top:1px;}
+.rb-arrow{color:rgba(255,255,255,0.6);font-size:20px;}
+.category-section{padding:16px 16px 8px;}
+.category-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#666;padding:0 4px;margin-bottom:10px;}
+.form-grid{display:flex;flex-direction:column;gap:8px;}
+.form-card{background:white;border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;border:1px solid #d0d0d0;}
+.form-card:active{transform:scale(0.98);background:#e8f5ee;}
+.form-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.form-info{flex:1;}
+.form-name{font-size:14px;font-weight:600;color:#1a1a1a;}
+.form-desc{font-size:12px;color:#666;margin-top:2px;}
+.form-arrow{color:#666;font-size:16px;}
+.form-screen{display:none;padding-bottom:40px;}
+.form-header{background:white;border-bottom:3px solid #00703c;padding:16px;}
+.form-header h2{font-size:17px;font-weight:700;color:#005a30;}
+.form-header p{font-size:12px;color:#666;margin-top:4px;}
+.form-body{padding:16px;}
+.field-group{margin-bottom:16px;}
+.field-label{font-size:12px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block;}
+.field-input{width:100%;padding:10px 12px;border:1.5px solid #d0d0d0;border-radius:8px;font-size:14px;font-family:inherit;background:white;color:#1a1a1a;-webkit-appearance:none;}
+.field-input:focus{outline:none;border-color:#00703c;}
+.field-row{display:flex;gap:10px;}
+.field-row .field-group{flex:1;}
+.week-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;}
+.week-table{border-collapse:collapse;width:100%;min-width:600px;font-size:12px;}
+.week-table th{background:#00703c;color:white;padding:7px 5px;text-align:center;font-weight:600;font-size:11px;border:1px solid #005a30;white-space:nowrap;}
+.week-table th.product-col{background:#005a30;text-align:left;padding-left:8px;min-width:130px;}
+.week-table td{border:1px solid #d0d0d0;padding:4px 3px;text-align:center;vertical-align:middle;}
+.week-table td.product-name{font-size:11px;font-weight:600;text-align:left;padding:6px 8px;background:#e8f5ee;line-height:1.3;}
+.week-table td.product-name small{font-weight:400;color:#666;display:block;}
+.week-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;color:#1a1a1a;}
+.week-table input[type=text]:focus{outline:1px solid #00703c;border-radius:3px;background:#fffde7;}
+.temp-table th.unit-col{min-width:160px;text-align:left;padding-left:8px;}
+.temp-table th.temp-col{min-width:55px;}
+.temp-table td.unit-name{text-align:left;padding:6px 8px;font-size:11px;background:#fafafa;}
+.temp-table td.target{font-weight:600;color:#005a30;font-size:11px;background:#e8f5ee;}
+.log-table{border-collapse:collapse;width:100%;font-size:12px;}
+.log-table th{background:#00703c;color:white;padding:8px 6px;text-align:left;font-weight:600;font-size:11px;border:1px solid #005a30;}
+.log-table td{border:1px solid #d0d0d0;padding:4px;vertical-align:middle;}
+.log-table input[type=text]{width:100%;border:none;background:transparent;font-size:12px;font-family:inherit;padding:4px 2px;color:#1a1a1a;}
+.log-table tr:nth-child(even) td{background:#fafafa;}
+.clean-table{border-collapse:collapse;width:100%;min-width:420px;font-size:12px;}
+.clean-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:center;}
+.clean-table th.area-col{text-align:left;padding-left:8px;min-width:150px;}
+.clean-table th.chem-col{min-width:100px;text-align:left;padding-left:8px;}
+.clean-table th.day-col{min-width:32px;}
+.clean-table td{border:1px solid #d0d0d0;padding:5px 4px;text-align:center;vertical-align:middle;}
+.clean-table td.area-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;}
+.clean-table td.chem-name{text-align:left;padding:5px 8px;font-size:11px;color:#666;}
+.clean-section-header{background:#005a30!important;color:white!important;font-weight:700!important;font-size:11px!important;text-align:left!important;padding:5px 8px!important;}
+.clean-table input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:#00703c;}
+.clean-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;}
+.hourly-table{border-collapse:collapse;width:100%;font-size:11px;min-width:700px;}
+.hourly-table th{background:#00703c;color:white;padding:6px 4px;text-align:center;font-weight:600;font-size:10px;border:1px solid #005a30;white-space:nowrap;}
+.hourly-table th.time-col{min-width:45px;background:#005a30;}
+.hourly-table td{border:1px solid #d0d0d0;padding:3px 2px;text-align:center;vertical-align:middle;}
+.hourly-table td.time-cell{background:#e8f5ee!important;font-weight:600;font-size:11px;}
+.hourly-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:1px;}
+.gs-table{border-collapse:collapse;width:100%;font-size:12px;min-width:600px;}
+.gs-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:center;}
+.gs-table th.day-col{text-align:left;padding-left:8px;min-width:90px;}
+.gs-table td{border:1px solid #d0d0d0;padding:4px;text-align:center;vertical-align:middle;}
+.gs-table td.day-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;font-weight:600;}
+.gs-table td.week-header{background:#005a30!important;color:white!important;font-weight:700;font-size:11px;text-align:left;padding:5px 8px;}
+.gs-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;}
+.gs-table select{border:none;background:transparent;font-size:11px;font-family:inherit;width:100%;}
+.cook-table{border-collapse:collapse;width:100%;font-size:12px;min-width:550px;}
+.cook-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:left;padding-left:6px;}
+.cook-table td{border:1px solid #d0d0d0;padding:4px;vertical-align:middle;}
+.cook-table td.prod-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;}
+.cook-table td.section-hdr{background:#005a30!important;color:white!important;font-weight:700;font-size:11px;text-align:left;padding:5px 8px;}
+.cook-table input[type=text]{width:100%;border:none;background:transparent;font-size:11px;font-family:inherit;padding:2px;text-align:center;}
+.deli-trace-table{border-collapse:collapse;width:100%;font-size:11px;min-width:640px;}
+.deli-trace-table th{background:#00703c;color:white;padding:6px 4px;text-align:center;font-size:10px;font-weight:600;border:1px solid #005a30;white-space:nowrap;}
+.deli-trace-table th.prod-col{background:#005a30;text-align:left;padding-left:8px;min-width:120px;}
+.deli-trace-table td{border:1px solid #d0d0d0;padding:3px 2px;text-align:center;vertical-align:middle;}
+.deli-trace-table td.prod-name{text-align:left;padding:5px 8px;font-size:11px;font-weight:600;background:#e8f5ee;}
+.deli-trace-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:10px;font-family:inherit;padding:1px;}
+.compliance-zone{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.zone-badge{padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;}
+.zone-green{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;}
+.zone-orange{background:#fff3e0;color:#e65100;border:1px solid #ffcc80;}
+.zone-red{background:#ffebee;color:#c62828;border:1px solid #ef9a9a;}
+.compliance-table{border-collapse:collapse;width:100%;font-size:12px;}
+.compliance-table th{background:#00703c;color:white;padding:7px 6px;text-align:left;font-size:11px;font-weight:600;border:1px solid #005a30;}
+.compliance-table td{border:1px solid #d0d0d0;padding:6px;font-size:12px;vertical-align:middle;}
+.compliance-table td.dept{font-weight:700;color:#005a30;background:#e8f5ee;}
+.score-radio{display:flex;gap:6px;justify-content:center;}
+.score-radio label{cursor:pointer;display:flex;flex-direction:column;align-items:center;font-size:10px;gap:2px;}
+.score-radio input[type=radio]{accent-color:#00703c;}
+.max-row td{background:#f5f5f5;font-weight:600;font-size:11px;}
+.sig-box{border:2px dashed #d0d0d0;border-radius:8px;background:white;position:relative;overflow:hidden;}
+.sig-box canvas{display:block;width:100%;touch-action:none;}
+.sig-clear{position:absolute;top:6px;right:8px;background:rgba(255,255,255,0.9);border:1px solid #d0d0d0;border-radius:5px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit;color:#d32f2f;}
+.btn-save{background:#005a30;color:white;width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-bottom:10px;margin-top:14px;display:block;}
+.btn-save:active{background:#003d20;}
+.info-box{background:#e8f5ee;border-left:3px solid #00703c;border-radius:6px;padding:10px 12px;font-size:11px;color:#666;margin-bottom:14px;line-height:1.5;}
+.info-box strong{color:#1a1a1a;}
+.warn-box{background:#fff8e1;border-left:3px solid #e65100;border-radius:6px;padding:10px 12px;font-size:11px;color:#555;margin-bottom:14px;line-height:1.5;}
+.section-title{font-size:13px;font-weight:700;color:#005a30;margin:18px 0 10px;padding-bottom:6px;border-bottom:2px solid #e8f5ee;}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#005a30;color:white;padding:12px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:9999;transition:transform 0.3s;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:2000;align-items:flex-end;}
-.modal-overlay.open{display:flex;}
-.modal{background:white;border-radius:20px 20px 0 0;padding:18px;width:100%;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-.modal-title{font-size:15px;font-weight:700;}
-.modal-close{background:none;border:none;font-size:22px;cursor:pointer;color:#666;}
-.modal-actions{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;margin-top:16px;}
-.m-btn{padding:10px;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;text-align:center;}
-.m-btn-danger{background:white;color:#d32f2f;border:1.5px solid #d32f2f;}
-.m-btn-dark{background:#1a1a1a;color:white;}
-.m-btn-sec{background:white;color:#00703c;border:1.5px solid #00703c;}
-.ts-badge{background:#f4f6f4;border:1px solid #d0d0d0;border-radius:6px;padding:8px 12px;font-family:'Courier New',monospace;font-size:11px;color:#666;margin-bottom:12px;}
-.detail-field{margin-bottom:10px;}
-.detail-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#666;}
-.detail-value{font-size:14px;margin-top:2px;}
-.divider{height:1px;background:#d0d0d0;margin:12px 0;}
+.photo-timestamp-box{background:white;border:1.5px solid #d0d0d0;border-radius:10px;overflow:hidden;margin-bottom:14px;}
+.timestamp-display{background:#1e1e2e;color:#cdd6f4;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.ts-icon{font-size:18px;}
+.ts-text{font-family:'Courier New',monospace;font-size:13px;flex:1;min-width:160px;color:#a6e3a1;}
+.ts-text.recorded{color:#a6e3a1;font-weight:600;}
+.ts-btn{background:rgba(166,227,161,0.2);border:1px solid rgba(166,227,161,0.4);color:#a6e3a1;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;}
+.ts-btn.recorded-btn{background:rgba(166,227,161,0.15);color:#6c7086;border-color:rgba(108,112,134,0.3);}
+.photo-upload-area{padding:12px;}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
+.photo-thumb{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;border:1px solid #d0d0d0;background:#f0f0f0;}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.photo-thumb .photo-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);color:white;font-size:9px;padding:3px 5px;text-align:center;}
+.photo-thumb .photo-delete{position:absolute;top:4px;right:4px;width:20px;height:20px;background:rgba(211,47,47,0.85);border:none;border-radius:50%;color:white;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.photo-add-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;background:#e8f5ee;border:2px dashed #00703c;border-radius:8px;color:#005a30;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;align-items:center;justify-content:center;flex-direction:column;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:95vw;max-height:80vh;border-radius:8px;object-fit:contain;}
+.lightbox-info{color:white;font-size:12px;margin-top:10px;opacity:0.8;text-align:center;}
+.lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;}
 </style>
 </head>
 <body>
 <div class="top-nav">
-  <button class="nav-back" onclick="window.location.href='index.html'">&#8592; Forms</button>
-  <div class="nav-title">Records &amp; Top Sheet</div>
+  <button class="back-btn" id="backBtn" onclick="goBack()">&#8592; Back</button>
+  <div class="nav-title" id="navTitle">HACCP System</div>
   <div class="nav-logo">MORIARTY<br>GROUP</div>
 </div>
-<div class="tab-bar">
-  <div class="tab active" id="tab-topsheet" onclick="switchTab('topsheet')">&#128202; Top Sheet</div>
-  <div class="tab" id="tab-pastweeks" onclick="switchTab('pastweeks')">&#128197; Past Weeks</div>
-</div>
-<div class="page active" id="page-topsheet">
-  <div class="db-status" id="db-status-el">Connecting...</div>
-  <div id="week-banner-wrap"></div>
-  <div class="completion-bar"><div class="completion-fill" id="comp-fill" style="width:0%"></div></div>
-  <div class="completion-text" id="comp-text">Loading...</div>
-  <div id="topsheet-content"></div>
-  <div class="data-tools-row">
-    <button class="dt-btn" onclick="exportBackup()"><div class="dt-icon">&#128190;</div><div class="dt-label">Backup</div><div class="dt-sub">Download JSON</div></button>
-    <button class="dt-btn" onclick="document.getElementById('import-inp').click()"><div class="dt-icon">&#128194;</div><div class="dt-label">Restore</div><div class="dt-sub">Import backup</div></button>
+<div id="home">
+  <div class="home-header">
+    <div class="brand">MORIARTY GROUP</div>
+    <div class="sub">SUPERVALU &#183; ESTD 1987</div>
+    <div class="title">&#128203; HACCP Food Safety System</div>
   </div>
-  <input type="file" id="import-inp" accept=".json" style="display:none" onchange="importBackup(this)">
-  <button class="close-week-btn" onclick="closeWeekManually()">&#9888;&#65039; Close Week Early &amp; Archive</button>
-</div>
-<div class="page" id="page-pastweeks">
-  <div class="pw-list" id="past-weeks-list">
-    <div class="empty-state"><div class="es-icon">&#128197;</div><p>No completed weeks yet.<br>Weeks close Saturday at midnight.</p></div>
+  <a class="records-banner" href="records.html">
+    <div class="rb-left">
+      <div class="rb-icon">&#128202;</div>
+      <div><div class="rb-text">Weekly Records &amp; Top Sheet</div><div class="rb-sub" id="home-banner-sub">Tap to view records</div></div>
+    </div>
+    <div class="rb-arrow">&#8250;</div>
+  </a>
+  <div class="category-section">
+    <div class="category-label">&#127777;&#65039; Temperature Checks</div>
+    <div class="form-grid">
+      <div class="form-card" onclick="showForm('temp-meat')"><div class="form-icon" style="background:#e8f5ee">&#129385;</div><div class="form-info"><div class="form-name">Meat Dept Temperature</div><div class="form-desc">Fish Display, Poultry, Pork, Raw Meat, Walk-in</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" onclick="showForm('temp-prepack')"><div class="form-icon" style="background:#e8f5ee">&#129810;</div><div class="form-info"><div class="form-name">Pre-pack Dept Temperature</div><div class="form-desc">20 refrigerated units &#8211; AM &amp; PM checks</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" onclick="showForm('temp-dairy')"><div class="form-icon" style="background:#fff8e1">&#129371;</div><div class="form-info"><div class="form-name">Dairy Dept Temperature</div><div class="form-desc">Milk, Cheese, Yoghurts, Fish Fridge, Coffee Machine</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" onclick="showForm('temp-frozen')"><div class="form-icon" style="background:#e3f2fd">&#10052;&#65039;</div><div class="form-info"><div class="form-name">Frozen Temperature</div><div class="form-desc">Ice cream, freezer wells, back-up freezer</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" onclick="showForm('temp-fruitveg')"><div class="form-icon" style="background:#e8f5e9">&#129382;</div><div class="form-info"><div class="form-name">Fruit &amp; Veg Temperature</div><div class="form-desc">Display fridges, Salad Fridge, Walk-in, Berry Fridges</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" onclick="showForm('temp-deli')"><div class="form-icon" style="background:#fce4ec">&#127777;&#65039;</div><div class="form-info"><div class="form-name">Deli Temperature Checklist</div><div class="form-desc">Bakery &amp; Sandwich Bar &#8211; AM &amp; PM, 9 units, 0&#8211;5&#176;C</div></div><div class="form-arrow">&#8250;</div></div>
+    </div>
   </div>
 </div>
-<div class="toast" id="toast">&#9989; Done!</div>
-<div class="modal-overlay" id="recordModal"><div class="modal"><div class="modal-header"><div class="modal-title" id="modal-title">Record</div><button class="modal-close" onclick="closeModal()">&#10005;</button></div><div id="modal-body"></div><div class="modal-actions"><button class="m-btn m-btn-danger" onclick="deleteRecord()">&#128465;</button><button class="m-btn m-btn-dark" onclick="exportRecordPDF()">&#128247; PDF</button><button class="m-btn m-btn-sec" onclick="closeModal()">Close</button></div></div></div>
-<div class="modal-overlay" id="weekModal"><div class="modal"><div class="modal-header"><div class="modal-title" id="wm-title">Week Summary</div><button class="modal-close" onclick="closeWeekModal()">&#10005;</button></div><div id="wm-body"></div><div class="modal-actions"><button class="m-btn m-btn-danger" onclick="deletePastWeek()">&#128465;</button><button class="m-btn m-btn-dark" onclick="emailWeekPDF()">&#9993;&#65039; Email PDF</button><button class="m-btn m-btn-sec" onclick="closeWeekModal()">Close</button></div></div></div>
+<div class="toast" id="toast">&#9989; Saved!</div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><button class="lightbox-close" onclick="closeLightbox()">&#10005;</button><img id="lightbox-img" src="" alt=""><div class="lightbox-info" id="lightbox-info"></div></div>
 <script>
-var ALL_FORMS=[{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},{id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},{id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},{id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},{id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},{id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},{id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},{id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},{id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},{id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},{id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},{id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},{id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},{id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},{id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},{id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},{id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},{id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},{id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},{id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},{id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},{id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},{id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},{id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},{id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},{id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},{id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},{id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},{id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},{id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},{id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}];
+var DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+var meatTempUnits=[['Fish Display Unit','0-5°C'],['Poultry','0-5°C'],['Pork','0-5°C'],['Raw Meat','0-5°C'],['Walk in fridge','0-5°C'],['Pre-pack fish doors','0-5°C']];
+var prepackTempUnits=[['1. Stand up juice fridge at front door','0-5°C'],['2. Meat spider at food academy','0-5°C'],['3. Meat spider at food academy','0-5°C'],['4. Meat spider at food academy','0-5°C'],['5. Superquinn spider','0-5°C'],['6. Spider fishmonger','0-5°C'],['7. Dairy spider at fish pre pack','0-5°C'],['8. Ham spider fridge','0-5°C'],['9. Provisions promo bay',''],['10. Food Academy Fridge','0-5°C'],['11. Butchers Prepack','0-5°C'],['12. Prepared by the Butcher','0-5°C'],['13. Poultry','0-5°C'],['14. Cheese Prepack','0-5°C'],['15. Bacon/Special Offers','0-5°C'],['16. Sausages/Rashers','0-5°C'],['17. Pudding/Superquinn/Continental','0-5°C'],['18. Cooked Meats/Signature Range','0-5°C'],['19. Ready meals','0-5°C'],['20. Meal deck','0-5°C']];
+var dairyTempUnits=[['1. Milk','0-5°C'],['2. Cream/Deserts/Juice','0-5°C'],['3. Yoghurts','0-5°C'],['4. Cheese','0-5°C'],['5. Spreads','0-5°C'],['6. Dairy Special Offers','0-5°C'],['7. Fish Fridge','0-5°C'],['10. Dairy Back-up','0-5°C'],['11. Milk Fridge at Coffee Machine','0-5°C'],['12. Milk Dispenser at Coffee Machine','0-5°C']];
+var frozenTempUnits=[['1. Ice Cream Bay 1 Door','-23°C'],['2. Ice Cream Bay 1 Well','-23°C'],['3. Ice Cream Bay 2 Door','-23°C'],['4. Ice Cream Bay 2 Well','-23°C'],['5. Ice Cream Bay 3 Door','-23°C'],['6. Ice Cream Bay 3 Well','-23°C'],['7. Ice Cream Stick Fridge','-23°C'],['8. Special Offer Well no 1','-18°C'],['9. Potato Product Well','-18°C'],['10. Chip Well','-18°C'],['11. Chicken and Burger Well','-18°C'],['12. Veg Well','-18°C'],['13. Ready Meal Well','-18°C'],['14. Special Offer Well no 2','-18°C'],['15. Fish Product Well','-18°C'],['16. Fish Well','-18°C'],['17. Pizza Well 1','-18°C'],['18. Pizza Well 2','-18°C'],['19. Vegetarian Food Well','-18°C'],['20. Back-up Freezer','-18°C']];
+var fruitVegTempUnits=[['Display Fridge Veg 1','0-5°C'],['Display Fridge Veg 2','0-5°C'],['Display Fridge Fruit','0-5°C'],['Salad Fridge','0-5°C'],['Walk-in Back-up','0-5°C'],['Berry Fridge 1','0-5°C'],['Berry Fridge 2','0-5°C']];
+var deliTempUnits=[['Bakery Serveover Fridge 1','0-5°C'],['Bakery Serveover Fridge 2','0-5°C'],['Sandwich Bar Fridge','0-5°C'],['Sandwich Bar Serveover','0-5°C'],['Deli Counter Fridge 1','0-5°C'],['Deli Counter Fridge 2','0-5°C'],['Hot Food Serveover','0-5°C'],['Prep Fridge','0-5°C'],['Walk-in Chill','0-5°C']];
+
+var ALL_FORMS=[{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'}];
 
 var DB_NAME='MoriartyHACCP',DB_VER=1,db=null;
 function openDB(){return new Promise(function(res,rej){var r=indexedDB.open(DB_NAME,DB_VER);r.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('records')){var s=d.createObjectStore('records',{keyPath:'id'});s.createIndex('formId','formId',{unique:false});s.createIndex('weekKey','weekKey',{unique:false});}if(!d.objectStoreNames.contains('weeks'))d.createObjectStore('weeks',{keyPath:'weekKey'});};r.onsuccess=function(e){db=e.target.result;res(db);};r.onerror=function(e){rej(e.target.error);}});}
 function dbPut(store,obj){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).put(obj);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);}});}
 function dbGetAll(store){return new Promise(function(res,rej){var tx=db.transaction(store,'readonly');var r=tx.objectStore(store).getAll();r.onsuccess=function(e){res(e.target.result);};r.onerror=function(e){rej(e.target.error);}});}
-function dbDelete(store,key){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).delete(key);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);}});}
-
 function getWeekKey(){var d=new Date();var day=d.getDay();var s=new Date(d);s.setDate(d.getDate()-day);s.setHours(0,0,0,0);return s.toISOString().split('T')[0];}
-function getWeekLabel(wk){var s=new Date(wk+'T00:00:00');var e=new Date(s);e.setDate(e.getDate()+6);var f=function(d){return d.toLocaleDateString('en-IE',{day:'numeric',month:'short'});};return f(s)+' – '+f(e)+' '+e.getFullYear();}
-function getSatMidnight(wk){var s=new Date(wk+'T00:00:00');var e=new Date(s);e.setDate(e.getDate()+6);e.setHours(23,59,59,0);return e;}
 
-var allRecords=[],activeRecordId=null,activePastWeekId=null;
+var currentForm=null,formTimestamps={},formPhotos={},sigPads={};
 
-function switchTab(tab){
-var tabs=document.querySelectorAll('.tab');for(var ti=0;ti<tabs.length;ti++)tabs[ti].classList.remove('active');
-var pages=document.querySelectorAll('.page');for(var pi=0;pi<pages.length;pi++)pages[pi].classList.remove('active');
-document.getElementById('tab-'+tab).classList.add('active');
-document.getElementById('page-'+tab).classList.add('active');
-if(tab==='pastweeks')renderPastWeeks();
+function showForm(id){
+document.getElementById('home').style.display='none';
+if(currentForm)document.getElementById(currentForm).style.display='none';
+var scr=document.getElementById(id);if(!scr)return;
+scr.style.display='block';currentForm=id;
+document.getElementById('backBtn').style.display='block';
+var h2=scr.querySelector('h2');
+document.getElementById('navTitle').textContent=h2?h2.textContent:id;
+window.scrollTo(0,0);
+setTimeout(function(){var canvases=scr.querySelectorAll('canvas');for(var ci=0;ci<canvases.length;ci++){initSig(canvases[ci].id);}},100);
+}
+function goBack(){
+if(currentForm){document.getElementById(currentForm).style.display='none';currentForm=null;}
+document.getElementById('home').style.display='block';
+document.getElementById('backBtn').style.display='none';
+document.getElementById('navTitle').textContent='HACCP System';
+window.scrollTo(0,0);
+}
+function saveForm(formId){
+var we=document.getElementById('we-'+formId);
+var fsc=document.getElementById('fsc-'+formId);
+var now=new Date();
+var record={id:now.getTime(),formId:formId,weekKey:getWeekKey(),savedAt:now.toISOString(),weekEnding:we?we.value:'',champion:fsc?fsc.value:'',timestamp:formTimestamps[formId]||now.toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false}),photos:(formPhotos[formId]||[]).map(function(p){return{dataUrl:p.dataUrl,name:p.name,timestamp:p.timestamp};}),photoCount:(formPhotos[formId]||[]).length};
+var doSave=function(){dbPut('records',record).then(function(){showToast('✅ Saved to Records!');updateBannerCount();}).catch(function(e){showToast('❌ Save failed: '+e.message);});};
+if(!db){openDB().then(function(){doSave();}).catch(function(e){showToast('❌ DB error: '+e.message);});}else{doSave();}
+}
+function updateBannerCount(){
+if(!db)return;
+dbGetAll('records').then(function(recs){var wk=getWeekKey();var ids={};recs.filter(function(r){return r.weekKey===wk;}).forEach(function(r){ids[r.formId]=1;});var done=Object.keys(ids).length;document.getElementById('home-banner-sub').textContent=done+' of '+ALL_FORMS.length+' forms completed this week';});
 }
 function showToast(msg,dur){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},dur||3000);}
-
-function buildTopSheetHTML(recs){
-var wk=getWeekKey();
-allRecords=recs;
-var el=document.getElementById('db-status-el');
-el.textContent='● Storage active · '+recs.length+' record'+(recs.length!==1?'s':'')+' saved';
-el.className='db-status ok';
-var closes=getSatMidnight(wk);var diff=closes-new Date();
-var timer=diff>0?(Math.floor(diff/86400000)>0?Math.floor(diff/86400000)+'d ':'')+Math.floor((diff%86400000)/3600000)+'h '+Math.floor((diff%3600000)/60000)+'m remaining':'Week closing…';
-document.getElementById('week-banner-wrap').innerHTML='<div class="week-banner"><div><div class="wb-label">CURRENT WEEK</div><div class="wb-week">'+getWeekLabel(wk)+'</div><div class="wb-timer">'+timer+'</div></div><div style="text-align:right;font-size:10px;opacity:0.8;">Closes Saturday midnight</div></div>';
-var wkRecs=recs.filter(function(r){return r.weekKey===wk;});
-var subIds={};wkRecs.forEach(function(r){subIds[r.formId]=r;});
-var done=Object.keys(subIds).length,tot=ALL_FORMS.length,pct=Math.round(done/tot*100);
-document.getElementById('comp-fill').style.width=pct+'%';
-document.getElementById('comp-text').textContent=done+' of '+tot+' forms completed this week ('+pct+'%)';
-var cats={};ALL_FORMS.forEach(function(f){if(!cats[f.cat])cats[f.cat]=[];cats[f.cat].push(f);});
-var html='';
-Object.keys(cats).forEach(function(cat){
-html+='<div class="topsheet-card"><div class="topsheet-card-header">'+cat+'</div>';
-cats[cat].forEach(function(f){
-var rec=subIds[f.id];
-var status=rec?'✅':'⚠️';
-var meta=rec?new Date(rec.savedAt).toLocaleString('en-IE',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false})+(rec.champion?' · '+rec.champion:''):'';
-html+='<div class="topsheet-row" onclick="'+(rec?'openRecord('+rec.id+')':'window.location.href=\'index.html\'')+'"><div class="ts-status">'+status+'</div><div class="ts-row-name">'+f.name+'</div>'+(rec?'<div class="ts-row-time">'+meta+'</div>':'<div class="ts-row-miss">Not submitted</div>')+'</div>';
-});
-html+='</div>';
-});
-document.getElementById('topsheet-content').innerHTML=html;
-}
-
-function renderTopSheet(){
-dbGetAll('records').then(function(recs){
-buildTopSheetHTML(recs);
-checkWeekClose();
-}).catch(function(e){
-document.getElementById('db-status-el').textContent='Storage error: '+e.message;
-document.getElementById('db-status-el').className='db-status err';
-});
-}
-
-function openRecord(id){
-var r=allRecords.find(function(x){return x.id===id;});if(!r)return;
-activeRecordId=id;
-var fm=ALL_FORMS.find(function(f){return f.id===r.formId;});
-document.getElementById('modal-title').textContent=fm?fm.name:r.formId;
-var html='<div class="ts-badge">Saved: '+new Date(r.savedAt).toLocaleString('en-IE')+'</div>';
-if(r.weekEnding)html+='<div class="detail-field"><div class="detail-label">Week Ending</div><div class="detail-value">'+r.weekEnding+'</div></div>';
-if(r.champion)html+='<div class="detail-field"><div class="detail-label">Food Safety Champion</div><div class="detail-value">'+r.champion+'</div></div>';
-if(r.photoCount>0){html+='<div class="divider"></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#666;margin-bottom:8px;">Photos ('+r.photoCount+')</div><div style="display:flex;flex-wrap:wrap;gap:8px;">';r.photos.forEach(function(p){html+='<img src="'+p.dataUrl+'" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid #d0d0d0;">';});html+='</div>';}
-document.getElementById('modal-body').innerHTML=html;
-document.getElementById('recordModal').classList.add('open');
-}
-function closeModal(){document.getElementById('recordModal').classList.remove('open');activeRecordId=null;}
-function deleteRecord(){
-if(!confirm('Delete this record?'))return;
-dbDelete('records',activeRecordId).then(function(){
-return dbGetAll('records');
-}).then(function(recs){
-closeModal();buildTopSheetHTML(recs);
-});
-}
-function exportRecordPDF(){
-var r=allRecords.find(function(x){return x.id===activeRecordId;});if(!r)return;
-var fm=ALL_FORMS.find(function(f){return f.id===r.formId;});
-showToast('PDF export feature coming soon');
-}
-
-function checkWeekClose(){
-var now=new Date();var wk=getWeekKey();
-if(now>=getSatMidnight(wk)){
-dbGetAll('weeks').then(function(weeks){
-var found=weeks.filter(function(w){return w.weekKey===wk;}).length>0;
-if(!found)doCloseWeek(wk);
-});
-}
-}
-function closeWeekManually(){
-if(!confirm('Close the current week now and archive it?'))return;
-var wk=getWeekKey();
-dbGetAll('weeks').then(function(weeks){
-var found=weeks.filter(function(w){return w.weekKey===wk;}).length>0;
-if(found){showToast('This week is already closed.');return;}
-doCloseWeek(wk,function(){renderTopSheet();});
-});
-}
-function doCloseWeek(wk,cb){
-var recs=allRecords.filter(function(r){return r.weekKey===wk;});
-var ids={};recs.forEach(function(r){ids[r.formId]=r;});
-var done=Object.keys(ids).length;
-var week={weekKey:wk,label:getWeekLabel(wk),closedAt:new Date().toISOString(),completed:done,total:ALL_FORMS.length,pct:Math.round(done/ALL_FORMS.length*100),records:recs};
-dbPut('weeks',week).then(function(){
-showToast('✅ Week '+week.label+' archived.');
-if(cb)cb();
-});
-}
-
-function renderPastWeeks(){
-dbGetAll('weeks').then(function(weeks){
-var list=document.getElementById('past-weeks-list');
-if(!weeks.length){list.innerHTML='<div class="empty-state"><div class="es-icon">📅</div><p>No completed weeks yet.<br>Weeks close Saturday at midnight.</p></div>';return;}
-var sorted=weeks.slice().sort(function(a,b){return b.weekKey.localeCompare(a.weekKey);});
-list.innerHTML=sorted.map(function(w){var col=w.pct>=80?'#00703c':w.pct>=70?'#e65100':'#d32f2f';return'<div class="pw-item" onclick="openPastWeek(\''+w.weekKey+'\')"><div><div class="pw-label">'+w.label+'</div><div class="pw-meta">'+w.completed+' of '+w.total+' forms</div></div><div style="text-align:right;"><div class="pw-pct" style="color:'+col+';">'+w.pct+'%</div></div></div>';}).join('');
-}).catch(function(e){
-document.getElementById('past-weeks-list').innerHTML='<div class="empty-state"><div class="es-icon">⚠️</div><p>Error loading weeks</p></div>';
-});
-}
-
-function openPastWeek(weekKey){
-dbGetAll('weeks').then(function(weeks){
-var w=weeks.find(function(x){return x.weekKey===weekKey;});
-if(!w)return;
-activePastWeekId=weekKey;
-document.getElementById('wm-title').textContent=w.label;
-var html='<div class="ts-badge">Archived: '+new Date(w.closedAt).toLocaleString('en-IE')+'</div>';
-html+='<div class="detail-field"><div class="detail-label">Completion</div><div class="detail-value">'+w.completed+' of '+w.total+' forms ('+w.pct+'%)</div></div>';
-html+='<div class="divider"></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#666;margin-bottom:8px;">Forms Submitted</div>';
-w.records.forEach(function(r){
-var fm=ALL_FORMS.find(function(f){return f.id===r.formId;});
-html+='<div style="padding:8px 0;font-size:12px;border-bottom:1px solid #f0f0f0;">'+( fm?fm.name:r.formId)+'</div>';
-});
-document.getElementById('wm-body').innerHTML=html;
-document.getElementById('weekModal').classList.add('open');
-}).catch(function(e){
-showToast('Error loading week details');
-});
-}
-
-function closeWeekModal(){document.getElementById('weekModal').classList.remove('open');activePastWeekId=null;}
-
-function deletePastWeek(){
-if(!confirm('Delete this archived week?'))return;
-dbDelete('weeks',activePastWeekId).then(function(){
-closeWeekModal();renderPastWeeks();
-showToast('Week deleted');
-}).catch(function(e){
-showToast('Error deleting week');
-});
-}
-
-function emailWeekPDF(){
-showToast('Email feature coming soon');
-}
-
-function exportBackup(){
-dbGetAll('records').then(function(recs){
-dbGetAll('weeks').then(function(weeks){
-var backup={records:recs,weeks:weeks,exportedAt:new Date().toISOString()};
-var json=JSON.stringify(backup,null,2);
-var blob=new Blob([json],{type:'application/json'});
-var url=URL.createObjectURL(blob);
-var a=document.createElement('a');
-a.href=url;
-a.download='haccp-backup-'+new Date().toISOString().split('T')[0]+'.json';
-a.click();
-URL.revokeObjectURL(url);
-showToast('Backup downloaded');
-}).catch(function(e){showToast('Error creating backup');});
-}).catch(function(e){showToast('Error creating backup');});
-}
-
-function importBackup(input){
-if(!input.files.length)return;
-var file=input.files[0];
-var reader=new FileReader();
-reader.onload=function(e){
-try{
-var backup=JSON.parse(e.target.result);
-if(!backup.records||!Array.isArray(backup.records))throw new Error('Invalid backup format');
-var promises=[];
-backup.records.forEach(function(r){promises.push(dbPut('records',r));});
-backup.weeks.forEach(function(w){promises.push(dbPut('weeks',w));});
-Promise.all(promises).then(function(){
-renderTopSheet();
-showToast('✅ Backup restored successfully');
-input.value='';
-}).catch(function(err){
-showToast('Error restoring backup');
-});
-}catch(err){
-showToast('Invalid backup file');
-}
-};
-reader.readAsText(file);
-}
-
-setInterval(function(){
-var wk=getWeekKey();var closes=getSatMidnight(wk);var diff=closes-new Date();
-if(diff>0){var d=Math.floor(diff/86400000);var h=Math.floor((diff%86400000)/3600000);var m=Math.floor((diff%3600000)/60000);var timer=(d>0?d+'d ':'')+h+'h '+m+'m remaining';var el=document.querySelector('.wb-timer');if(el)el.textContent=timer;}
-},60000);
+function initSig(canvasId){var canvas=document.getElementById(canvasId);if(!canvas||sigPads[canvasId])return;canvas.width=canvas.parentElement.offsetWidth||320;canvas.height=parseInt(canvas.getAttribute('height'))||80;var ctx=canvas.getContext('2d');ctx.strokeStyle='#1a1a1a';ctx.lineWidth=2;ctx.lineCap='round';ctx.lineJoin='round';var drawing=false,lx=0,ly=0;function pos(e){var r=canvas.getBoundingClientRect();var sx=canvas.width/r.width,sy=canvas.height/r.height;if(e.touches)return{x:(e.touches[0].clientX-r.left)*sx,y:(e.touches[0].clientY-r.top)*sy};return{x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy};}function start(e){e.preventDefault();drawing=true;var p=pos(e);lx=p.x;ly=p.y;ctx.beginPath();ctx.arc(p.x,p.y,1,0,Math.PI*2);ctx.fill();}function move(e){if(!drawing)return;e.preventDefault();var p=pos(e);ctx.beginPath();ctx.moveTo(lx,ly);ctx.lineTo(p.x,p.y);ctx.stroke();lx=p.x;ly=p.y;}function stop(){drawing=false;}canvas.addEventListener('mousedown',start);canvas.addEventListener('mousemove',move);canvas.addEventListener('mouseup',stop);canvas.addEventListener('mouseleave',stop);canvas.addEventListener('touchstart',start,{passive:false});canvas.addEventListener('touchmove',move,{passive:false});canvas.addEventListener('touchend',stop);sigPads[canvasId]={clear:function(){ctx.clearRect(0,0,canvas.width,canvas.height);}};}
+function clearSig(id){if(sigPads[id])sigPads[id].clear();}
+function recordTimestamp(formId){var now=new Date();var ts=now.toLocaleString('en-IE',{weekday:'short',year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'Europe/Dublin',hour12:false});formTimestamps[formId]=ts;var el=document.querySelector('#ts-'+formId+' .ts-text');var btn=document.querySelector('#ts-'+formId+' .ts-btn');if(el){el.textContent=ts;el.classList.add('recorded');}if(btn){btn.textContent='Update';btn.classList.add('recorded-btn');}showToast('Timestamp recorded');}
+function handlePhotos(input,formId){if(!formPhotos[formId])formPhotos[formId]=[];var files=input.files;for(var fi=0;fi<files.length;fi++){(function(file){var reader=new FileReader();reader.onload=function(e){var ts=formTimestamps[formId]||new Date().toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false,day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});var obj={dataUrl:e.target.result,name:file.name,timestamp:ts};var idx=formPhotos[formId].push(obj)-1;var grid=document.getElementById('photo-grid-'+formId);renderPhotoThumb(grid,obj,formId,idx);};reader.readAsDataURL(file);})(files[fi]);}}
+function renderPhotoThumb(grid,photo,formId,idx){var div=document.createElement('div');div.className='photo-thumb';var img=document.createElement('img');img.src=photo.dataUrl;img.addEventListener('click',function(){openLightbox(formId,idx);});var lbl=document.createElement('div');lbl.className='photo-label';lbl.textContent=photo.timestamp;var del=document.createElement('button');del.className='photo-delete';del.textContent='x';(function(f,i){del.addEventListener('click',function(){deletePhoto(f,i);});})(formId,idx);div.appendChild(img);div.appendChild(lbl);div.appendChild(del);grid.appendChild(div);}
+function deletePhoto(formId,idx){formPhotos[formId].splice(idx,1);var g=document.getElementById('photo-grid-'+formId);g.innerHTML='';formPhotos[formId].forEach(function(p,i){renderPhotoThumb(g,p,formId,i);});}
+function openLightbox(formId,idx){var p=formPhotos[formId]&&formPhotos[formId][idx];if(!p)return;document.getElementById('lightbox-img').src=p.dataUrl;document.getElementById('lightbox-info').textContent=p.name+' - '+p.timestamp;document.getElementById('lightbox').classList.add('open');}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.getElementById('lightbox-img').src='';}
+function makeTempRows(units,bodyId){var tbody=document.getElementById(bodyId);if(!tbody)return;units.forEach(function(u){var tr=document.createElement('tr');var c='<td class="unit-name">'+u[0]+'</td><td class="target">'+u[1]+'</td>';for(var i=0;i<14;i++)c+='<td><input type="text" maxlength="6"></td>';c+='<td><input type="text"></td>';tr.innerHTML=c;tbody.appendChild(tr);});}
 
 document.addEventListener('DOMContentLoaded',function(){
-openDB().then(function(){renderTopSheet();}).catch(function(e){
-var el=document.getElementById('db-status-el');
-el.textContent='Storage error: '+e.message;el.className='db-status err';
-});
+openDB().then(function(){updateBannerCount();}).catch(function(e){console.log('DB error: '+e.message);});
 });
 </script>
 </body>

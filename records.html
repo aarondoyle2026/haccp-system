@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
 <title>Moriarty Group &#8211; HACCP Records</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"><\/script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -121,7 +121,7 @@ function dbGetAll(store){return new Promise(function(res,rej){var tx=db.transact
 function dbDelete(store,key){return new Promise(function(res,rej){var tx=db.transaction(store,‘readwrite’);tx.objectStore(store).delete(key);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);}});}
 
 function getWeekKey(){var d=new Date();var day=d.getDay();var s=new Date(d);s.setDate(d.getDate()-day);s.setHours(0,0,0,0);return s.toISOString().split(‘T’)[0];}
-function getWeekLabel(wk){var s=new Date(wk+‘T00:00:00’);var e=new Date(s);e.setDate(e.getDate()+6);var f=function(d){return d.toLocaleDateString(‘en-IE’,{day:‘numeric’,month:‘short’});};return f(s)+’ \u2013 ‘+f(e)+’ ’+e.getFullYear();}
+function getWeekLabel(wk){var s=new Date(wk+‘T00:00:00’);var e=new Date(s);e.setDate(e.getDate()+6);var f=function(d){return d.toLocaleDateString(‘en-IE’,{day:‘numeric’,month:‘short’});};return f(s)+’ – ‘+f(e)+’ ’+e.getFullYear();}
 function getSatMidnight(wk){var s=new Date(wk+‘T00:00:00’);var e=new Date(s);e.setDate(e.getDate()+6);e.setHours(23,59,59,0);return e;}
 
 var allRecords=[],activeRecordId=null,activePastWeekId=null;
@@ -135,16 +135,16 @@ if(tab===‘pastweeks’)renderPastWeeks();
 }
 function showToast(msg,dur){var t=document.getElementById(‘toast’);t.textContent=msg;t.classList.add(‘show’);setTimeout(function(){t.classList.remove(‘show’);},dur||3000);}
 
-async function renderTopSheet(){
-allRecords=await dbGetAll(‘records’);
+function buildTopSheetHTML(recs){
 var wk=getWeekKey();
+allRecords=recs;
 var el=document.getElementById(‘db-status-el’);
-el.textContent=’\u{1f7e2} Storage active \u00b7 ‘+allRecords.length+’ record’+(allRecords.length!==1?‘s’:’’)+’ saved’;
+el.textContent=‘● Storage active · ‘+recs.length+’ record’+(recs.length!==1?‘s’:’’)+’ saved’;
 el.className=‘db-status ok’;
 var closes=getSatMidnight(wk);var diff=closes-new Date();
 var timer=diff>0?(Math.floor(diff/86400000)>0?Math.floor(diff/86400000)+‘d ‘:’’)+Math.floor((diff%86400000)/3600000)+‘h ‘+Math.floor((diff%3600000)/60000)+‘m remaining’:‘Week closing…’;
 document.getElementById(‘week-banner-wrap’).innerHTML=’<div class="week-banner"><div><div class="wb-label">CURRENT WEEK</div><div class="wb-week">’+getWeekLabel(wk)+’</div><div class="wb-timer">’+timer+’</div></div><div style="text-align:right;font-size:10px;opacity:0.8;">Closes Saturday midnight</div></div>’;
-var wkRecs=allRecords.filter(function(r){return r.weekKey===wk;});
+var wkRecs=recs.filter(function(r){return r.weekKey===wk;});
 var subIds={};wkRecs.forEach(function(r){subIds[r.formId]=r;});
 var done=Object.keys(subIds).length,tot=ALL_FORMS.length,pct=Math.round(done/tot*100);
 document.getElementById(‘comp-fill’).style.width=pct+’%’;
@@ -155,14 +155,23 @@ Object.keys(cats).forEach(function(cat){
 html+=’<div class="topsheet-card"><div class="topsheet-card-header">’+cat+’</div>’;
 cats[cat].forEach(function(f){
 var rec=subIds[f.id];
-var status=rec?’\u2705’:’\u26a0\ufe0f’;
-var meta=rec?new Date(rec.savedAt).toLocaleString(‘en-IE’,{day:‘2-digit’,month:‘short’,hour:‘2-digit’,minute:‘2-digit’,hour12:false})+(rec.champion?’ \u00b7 ‘+rec.champion:’’):’’;
-html+=’<div class="topsheet-row" onclick="'+(rec?'openRecord('+rec.id+')':'window.location.href=\'index.html\'')+'"><div class="ts-status">’+status+’</div><div class="ts-row-name">’+f.name+’</div>’+(rec?’<div class="ts-row-time">’+meta+’</div>’:’<div class="ts-row-miss">Not submitted</div>’)+’</div>’;
+var status=rec?‘✅’:‘⚠️’;
+var meta=rec?new Date(rec.savedAt).toLocaleString(‘en-IE’,{day:‘2-digit’,month:‘short’,hour:‘2-digit’,minute:‘2-digit’,hour12:false})+(rec.champion?’ · ‘+rec.champion:’’):’’;
+html+=’<div class="topsheet-row" onclick="'+(rec?'openRecord('+rec.id+')':'window.location.href='index.html'')+'"><div class="ts-status">’+status+’</div><div class="ts-row-name">’+f.name+’</div>’+(rec?’<div class="ts-row-time">’+meta+’</div>’:’<div class="ts-row-miss">Not submitted</div>’)+’</div>’;
 });
 html+=’</div>’;
 });
 document.getElementById(‘topsheet-content’).innerHTML=html;
+}
+
+function renderTopSheet(){
+dbGetAll(‘records’).then(function(recs){
+buildTopSheetHTML(recs);
 checkWeekClose();
+}).catch(function(e){
+document.getElementById(‘db-status-el’).textContent=’Storage error: ’+e.message;
+document.getElementById(‘db-status-el’).className=‘db-status err’;
+});
 }
 
 function openRecord(id){
@@ -178,9 +187,13 @@ document.getElementById(‘modal-body’).innerHTML=html;
 document.getElementById(‘recordModal’).classList.add(‘open’);
 }
 function closeModal(){document.getElementById(‘recordModal’).classList.remove(‘open’);activeRecordId=null;}
-async function deleteRecord(){
+function deleteRecord(){
 if(!confirm(‘Delete this record?’))return;
-await dbDelete(‘records’,activeRecordId);allRecords=await dbGetAll(‘records’);closeModal();renderTopSheet();
+dbDelete(‘records’,activeRecordId).then(function(){
+return dbGetAll(‘records’);
+}).then(function(recs){
+closeModal();buildTopSheetHTML(recs);
+});
 }
 function exportRecordPDF(){
 var r=allRecords.find(function(x){return x.id===activeRecordId;});if(!r)return;
@@ -189,38 +202,53 @@ var jsPDF=window.jspdf.jsPDF;var doc=new jsPDF({orientation:‘portrait’,unit:
 var G=[0,112,60],D=[26,31,24],M=[102,102,102];
 doc.setFillColor(G[0],G[1],G[2]);doc.rect(0,0,210,28,‘F’);doc.setTextColor(255,255,255);doc.setFontSize(16);doc.setFont(‘helvetica’,‘bold’);doc.text(‘MORIARTY GROUP’,14,12);doc.setFontSize(8);doc.setFont(‘helvetica’,‘normal’);doc.text(‘SuperValu HACCP System’,14,19);doc.setFontSize(11);doc.setFont(‘helvetica’,‘bold’);doc.text((fm?fm.name:r.formId).toUpperCase(),196,12,{align:‘right’});doc.setFontSize(7);doc.setFont(‘helvetica’,‘normal’);doc.text(getWeekLabel(r.weekKey),196,19,{align:‘right’});
 var y=34;doc.setFontSize(8);doc.setTextColor(M[0],M[1],M[2]);doc.text(‘Saved: ‘+new Date(r.savedAt).toLocaleString(‘en-IE’),14,y);y+=8;
-if(r.weekEnding){doc.setFontSize(7);doc.setTextColor(M[0],M[1],M[2]);doc.setFont(‘helvetica’,‘bold’);doc.text(‘WEEK ENDING’,14,y);doc.setFontSize(10);doc.setTextColor(D[0],D[1],D[2]);doc.setFont(‘helvetica’,‘normal’);doc.text(r.weekEnding,14,y+4);y+=12;}
+if(r.weekEnding){doc.setFontSize(7);doc.setFont(‘helvetica’,‘bold’);doc.text(‘WEEK ENDING’,14,y);doc.setFontSize(10);doc.setTextColor(D[0],D[1],D[2]);doc.setFont(‘helvetica’,‘normal’);doc.text(r.weekEnding,14,y+4);y+=12;}
 if(r.champion){doc.setFontSize(7);doc.setTextColor(M[0],M[1],M[2]);doc.setFont(‘helvetica’,‘bold’);doc.text(‘FOOD SAFETY CHAMPION’,14,y);doc.setFontSize(10);doc.setTextColor(D[0],D[1],D[2]);doc.setFont(‘helvetica’,‘normal’);doc.text(r.champion,14,y+4);y+=12;}
 if(r.photoCount>0){y+=4;doc.setFillColor(232,245,238);doc.rect(14,y,182,6,‘F’);doc.setFontSize(7);doc.setFont(‘helvetica’,‘bold’);doc.setTextColor(G[0],G[1],G[2]);doc.text(‘PHOTOS (’+r.photoCount+’)’,16,y+4);y+=10;r.photos.forEach(function(p,i){try{doc.addImage(p.dataUrl,‘JPEG’,14+(i%3)*63,y,60,45);}catch(e){}if((i+1)%3===0)y+=48;});}
 doc.setFillColor(G[0],G[1],G[2]);doc.rect(0,287,210,10,‘F’);doc.setFontSize(7);doc.setTextColor(255,255,255);doc.setFont(‘helvetica’,‘normal’);doc.text(‘Moriarty Group SuperValu Generated: ‘+new Date().toLocaleString(‘en-IE’),105,293,{align:‘center’});
 doc.save(r.formId+’_’+r.weekKey+’.pdf’);
 }
 
-async function checkWeekClose(){
-var now=new Date();var wk=getWeekKey();if(now>=getSatMidnight(wk)){var weeks=await dbGetAll(‘weeks’);if(!weeks.find(function(w){return w.weekKey===wk;}))await doCloseWeek(wk);}
+function checkWeekClose(){
+var now=new Date();var wk=getWeekKey();
+if(now>=getSatMidnight(wk)){
+dbGetAll(‘weeks’).then(function(weeks){
+var found=weeks.filter(function(w){return w.weekKey===wk;}).length>0;
+if(!found)doCloseWeek(wk);
+});
 }
-async function closeWeekManually(){
+}
+function closeWeekManually(){
 if(!confirm(‘Close the current week now and archive it?’))return;
-var wk=getWeekKey();var weeks=await dbGetAll(‘weeks’);
-if(weeks.find(function(w){return w.weekKey===wk;})){showToast(‘This week is already closed.’);return;}
-await doCloseWeek(wk);renderTopSheet();
+var wk=getWeekKey();
+dbGetAll(‘weeks’).then(function(weeks){
+var found=weeks.filter(function(w){return w.weekKey===wk;}).length>0;
+if(found){showToast(‘This week is already closed.’);return;}
+doCloseWeek(wk,function(){renderTopSheet();});
+});
 }
-async function doCloseWeek(wk){
+function doCloseWeek(wk,cb){
 var recs=allRecords.filter(function(r){return r.weekKey===wk;});
 var ids={};recs.forEach(function(r){ids[r.formId]=r;});
 var done=Object.keys(ids).length;
 var week={weekKey:wk,label:getWeekLabel(wk),closedAt:new Date().toISOString(),completed:done,total:ALL_FORMS.length,pct:Math.round(done/ALL_FORMS.length*100),records:recs};
-await dbPut(‘weeks’,week);showToast(’\u2705 Week ‘+week.label+’ archived.’);
+dbPut(‘weeks’,week).then(function(){
+showToast(‘✅ Week ‘+week.label+’ archived.’);
+if(cb)cb();
+});
 }
 
-async function renderPastWeeks(){
-var weeks=await dbGetAll(‘weeks’);var list=document.getElementById(‘past-weeks-list’);
+function renderPastWeeks(){
+dbGetAll(‘weeks’).then(function(weeks){
+var list=document.getElementById(‘past-weeks-list’);
 if(!weeks.length){list.innerHTML=’<div class="empty-state"><div class="es-icon">📅</div><p>No completed weeks yet.<br>Weeks close Saturday at midnight.</p></div>’;return;}
 var sorted=weeks.slice().sort(function(a,b){return b.weekKey.localeCompare(a.weekKey);});
-list.innerHTML=sorted.map(function(w){var col=w.pct>=80?’#00703c’:w.pct>=70?’#e65100’:’#d32f2f’;return’<div class="pw-item" onclick="openPastWeek(\''+w.weekKey+'\')"><div><div class="pw-label">’+w.label+’</div><div class="pw-meta">Closed: ‘+new Date(w.closedAt).toLocaleDateString(‘en-IE’)+’  ‘+w.completed+’/’+w.total+’ forms</div></div><div class="pw-pct" style="color:'+col+'">’+w.pct+’%</div></div>’;}).join(’’);
+list.innerHTML=sorted.map(function(w){var col=w.pct>=80?’#00703c’:w.pct>=70?’#e65100’:’#d32f2f’;return’<div class="pw-item" onclick="openPastWeek(''+w.weekKey+'')"><div><div class="pw-label">’+w.label+’</div><div class="pw-meta">Closed: ‘+new Date(w.closedAt).toLocaleDateString(‘en-IE’)+’  ‘+w.completed+’/’+w.total+’ forms</div></div><div class="pw-pct" style="color:'+col+'">’+w.pct+’%</div></div>’;}).join(’’);
+});
 }
-async function openPastWeek(weekKey){
-var weeks=await dbGetAll(‘weeks’);var w=weeks.find(function(x){return x.weekKey===weekKey;});if(!w)return;
+function openPastWeek(weekKey){
+dbGetAll(‘weeks’).then(function(weeks){
+var w=weeks.filter(function(x){return x.weekKey===weekKey;})[0];if(!w)return;
 activePastWeekId=weekKey;document.getElementById(‘wm-title’).textContent=w.label;
 var ids={};(w.records||[]).forEach(function(r){ids[r.formId]=r;});
 var cats={};ALL_FORMS.forEach(function(f){if(!cats[f.cat])cats[f.cat]=[];cats[f.cat].push(f);});
@@ -229,14 +257,19 @@ var html=’<div class="ts-badge">Closed: ‘+new Date(w.closedAt).toLocaleStrin
 html+=’<div style="background:'+pCol+';color:white;border-radius:8px;padding:12px;text-align:center;margin-bottom:14px;"><div style="font-size:10px;font-weight:700;opacity:0.8;letter-spacing:0.1em;">COMPLETION</div><div style="font-size:26px;font-weight:700;">’+w.pct+’%</div><div style="font-size:12px;opacity:0.85;">’+w.completed+’ of ‘+w.total+’ forms</div></div>’;
 Object.keys(cats).forEach(function(cat){
 html+=’<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#666;margin:10px 0 5px;">’+cat+’</div>’;
-cats[cat].forEach(function(f){var rec=ids[f.id];var s=rec?’\u2705’:’\u274c’;var meta=rec?new Date(rec.savedAt).toLocaleString(‘en-IE’,{day:‘2-digit’,month:‘short’,hour:‘2-digit’,minute:‘2-digit’,hour12:false}):‘Not completed’;html+=’<div style="background:#f4f6f4;border-radius:6px;padding:7px 10px;margin-bottom:3px;display:flex;align-items:center;gap:8px;"><span>’+s+’</span><span style="flex:1;font-size:12px;font-weight:600;">’+f.name+’</span><span style="font-size:10px;color:#666;font-family:monospace;">’+meta+’</span></div>’;});
+cats[cat].forEach(function(f){var rec=ids[f.id];var s=rec?‘✅’:‘❌’;var meta=rec?new Date(rec.savedAt).toLocaleString(‘en-IE’,{day:‘2-digit’,month:‘short’,hour:‘2-digit’,minute:‘2-digit’,hour12:false}):‘Not completed’;html+=’<div style="background:#f4f6f4;border-radius:6px;padding:7px 10px;margin-bottom:3px;display:flex;align-items:center;gap:8px;"><span>’+s+’</span><span style="flex:1;font-size:12px;font-weight:600;">’+f.name+’</span><span style="font-size:10px;color:#666;font-family:monospace;">’+meta+’</span></div>’;});
 });
 document.getElementById(‘wm-body’).innerHTML=html;document.getElementById(‘weekModal’).classList.add(‘open’);
+});
 }
 function closeWeekModal(){document.getElementById(‘weekModal’).classList.remove(‘open’);activePastWeekId=null;}
-async function deletePastWeek(){if(!confirm(‘Delete this weekly archive?’))return;await dbDelete(‘weeks’,activePastWeekId);closeWeekModal();renderPastWeeks();}
-async function emailWeekPDF(){
-var weeks=await dbGetAll(‘weeks’);var w=weeks.find(function(x){return x.weekKey===activePastWeekId;});if(!w)return;
+function deletePastWeek(){
+if(!confirm(‘Delete this weekly archive?’))return;
+dbDelete(‘weeks’,activePastWeekId).then(function(){closeWeekModal();renderPastWeeks();});
+}
+function emailWeekPDF(){
+dbGetAll(‘weeks’).then(function(weeks){
+var w=weeks.filter(function(x){return x.weekKey===activePastWeekId;})[0];if(!w)return;
 var jsPDF=window.jspdf.jsPDF;var doc=new jsPDF({orientation:‘portrait’,unit:‘mm’,format:‘a4’});
 var G=[0,112,60],D=[26,31,24],M=[102,102,102];var pC=w.pct>=80?[46,125,50]:w.pct>=70?[230,81,0]:[211,47,47];
 doc.setFillColor(G[0],G[1],G[2]);doc.rect(0,0,210,30,‘F’);doc.setTextColor(255,255,255);doc.setFontSize(17);doc.setFont(‘helvetica’,‘bold’);doc.text(‘MORIARTY GROUP’,14,12);doc.setFontSize(8);doc.setFont(‘helvetica’,‘normal’);doc.text(‘SuperValu HACCP Weekly Top Sheet’,14,19);doc.setFontSize(12);doc.setFont(‘helvetica’,‘bold’);doc.text(w.label,196,12,{align:‘right’});doc.setFontSize(7);doc.setFont(‘helvetica’,‘normal’);doc.text(‘Closed: ‘+new Date(w.closedAt).toLocaleString(‘en-IE’),196,19,{align:‘right’});
@@ -245,22 +278,37 @@ var ids={};(w.records||[]).forEach(function(r){ids[r.formId]=r;});
 var cats={};ALL_FORMS.forEach(function(f){if(!cats[f.cat])cats[f.cat]=[];cats[f.cat].push(f);});
 Object.keys(cats).forEach(function(cat){
 doc.setFillColor(232,245,238);doc.rect(14,y,182,6,‘F’);doc.setFontSize(8);doc.setFont(‘helvetica’,‘bold’);doc.setTextColor(G[0],G[1],G[2]);doc.text(cat.toUpperCase(),16,y+4);y+=9;
-cats[cat].forEach(function(f){var rec=ids[f.id];var done=rec?’\u2705’:’\u274c’;var meta=rec?new Date(rec.savedAt).toLocaleString(‘en-IE’,{day:‘2-digit’,month:‘short’,hour:‘2-digit’,minute:‘2-digit’,hour12:false}):‘Not completed’;if(y>275){doc.addPage();y=14;}doc.setFontSize(8);doc.setFont(‘helvetica’,‘normal’);doc.setTextColor(D[0],D[1],D[2]);doc.text(done+’ ‘+f.name,18,y);doc.setFontSize(7);doc.setTextColor(M[0],M[1],M[2]);doc.text(meta,196,y,{align:‘right’});y+=7;});y+=3;
+cats[cat].forEach(function(f){var rec=ids[f.id];var done=rec?‘✅’:‘❌’;var meta=rec?new Date(rec.savedAt).toLocaleString(‘en-IE’,{day:‘2-digit’,month:‘short’,hour:‘2-digit’,minute:‘2-digit’,hour12:false}):‘Not completed’;if(y>275){doc.addPage();y=14;}doc.setFontSize(8);doc.setFont(‘helvetica’,‘normal’);doc.setTextColor(D[0],D[1],D[2]);doc.text(done+’ ‘+f.name,18,y);doc.setFontSize(7);doc.setTextColor(M[0],M[1],M[2]);doc.text(meta,196,y,{align:‘right’});y+=7;});y+=3;
 });
 doc.setFillColor(G[0],G[1],G[2]);doc.rect(0,287,210,10,‘F’);doc.setFontSize(7);doc.setFont(‘helvetica’,‘normal’);doc.setTextColor(255,255,255);doc.text(‘Moriarty Group SuperValu Generated: ‘+new Date().toLocaleString(‘en-IE’),105,293,{align:‘center’});
 var fn=‘HACCP_TopSheet_’+w.weekKey+’.pdf’;doc.save(fn);
 setTimeout(function(){alert(‘PDF saved! To email: Open Files app, find ‘+fn+’, tap Share then Mail.’);},800);
+});
 }
-async function exportBackup(){
-var recs=await dbGetAll(‘records’);var weeks=await dbGetAll(‘weeks’);
+function exportBackup(){
+dbGetAll(‘records’).then(function(recs){
+dbGetAll(‘weeks’).then(function(weeks){
 if(!recs.length&&!weeks.length){showToast(‘No data to export yet.’);return;}
 var blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),records:recs,weeks:weeks},null,2)],{type:‘application/json’});
 var url=URL.createObjectURL(blob);var a=document.createElement(‘a’);a.href=url;a.download=‘haccp-backup-’+new Date().toISOString().split(‘T’)[0]+’.json’;a.click();URL.revokeObjectURL(url);
+});
+});
 }
-async function importBackup(input){
+function importBackup(input){
 var file=input.files[0];if(!file)return;
 var reader=new FileReader();
-reader.onload=async function(e){try{var data=JSON.parse(e.target.result);if(!confirm(‘Merge ‘+(data.records||[]).length+’ records and ‘+(data.weeks||[]).length+’ weeks?’))return;for(var r of(data.records||[]))await dbPut(‘records’,r);for(var w of(data.weeks||[]))await dbPut(‘weeks’,w);allRecords=await dbGetAll(‘records’);showToast(’\u2705 Import complete.’);renderTopSheet();}catch(err){showToast(’\u274c Import failed: ‘+err.message);}};
+reader.onload=function(e){
+try{
+var data=JSON.parse(e.target.result);
+if(!confirm(‘Merge ‘+(data.records||[]).length+’ records and ‘+(data.weeks||[]).length+’ weeks?’))return;
+var recs=data.records||[];var wks=data.weeks||[];var i=0;
+function putNext(){
+if(i<recs.length){dbPut(‘records’,recs[i++]).then(putNext);}
+else{var j=0;function putWeek(){if(j<wks.length){dbPut(‘weeks’,wks[j++]).then(putWeek);}else{dbGetAll(‘records’).then(function(r){allRecords=r;showToast(‘✅ Import complete.’);renderTopSheet();});}}putWeek();}
+}
+putNext();
+}catch(err){showToast(‘❌ Import failed: ‘+err.message);}
+};
 reader.readAsText(file);input.value=’’;
 }
 setInterval(function(){

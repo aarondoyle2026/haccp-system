@@ -202,7 +202,6 @@ function openDB() {
     };
     req.onsuccess = function(e) { db = e.target.result; res(db); };
     req.onerror = function(e) { rej(e.target.error); };
-    req.onblocked = function() { rej(new Error('Database blocked')); };
   });
 }
 function dbGetAll(store) {
@@ -480,7 +479,12 @@ function doRestore(file) {
 document.addEventListener('DOMContentLoaded', function() {
 
   document.getElementById('btnBack').addEventListener('click', function() {
+    try { if (db) { db.close(); } } catch(e) {}
     window.location.href = 'index.html';
+  });
+
+  window.addEventListener('pagehide', function() {
+    try { if (db) { db.close(); } } catch(e) {}
   });
 
   document.getElementById('btnBackup').addEventListener('click', function() {

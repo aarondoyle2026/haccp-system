@@ -158,13 +158,13 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
     <div class="sub">SUPERVALU &#183; ESTD 1987</div>
     <div class="title">&#128203; HACCP Food Safety System</div>
   </div>
-  <div class="records-banner" id="records-banner-link">
+  <a class="records-banner" href="records.html">
     <div class="rb-left">
       <div class="rb-icon">&#128202;</div>
       <div><div class="rb-text">Weekly Records &amp; Top Sheet</div><div class="rb-sub" id="home-banner-sub">Tap to view records</div></div>
     </div>
     <div class="rb-arrow">&#8250;</div>
-  </div>
+  </a>
   <div class="category-section">
     <div class="category-label">&#127777;&#65039; Temperature Checks</div>
     <div class="form-grid">
@@ -1241,10 +1241,9 @@ document.addEventListener(‘DOMContentLoaded’, function() {
 // Open DB
 openDB().then(function() { updateBannerCount(); }).catch(function() {});
 
-// Records banner - close DB before navigating so Safari releases the connection
-document.getElementById(‘records-banner-link’).addEventListener(‘click’, function() {
+// Release DB when navigating away so records.html can open it cleanly
+window.addEventListener(‘pagehide’, function() {
 try { if (db) { db.close(); } } catch(e) {}
-window.location.href = ‘records.html’;
 });
 
 // Back button

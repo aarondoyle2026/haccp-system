@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
-<title>Moriarty Group \u2013 HACCP System Records</title>
+<title>Moriarty Group – HACCP System Records</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -78,13 +77,13 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 </head>
 <body>
 <div class="top-nav">
-  <button class="nav-back" id="nav-back-btn">&larr; Forms</button>
+  <button class="nav-back" onclick="window.location.href='index.html'">&#8592; Forms</button>
   <div class="nav-title">Records &amp; Top Sheet</div>
   <div class="nav-logo">MORIARTY<br>GROUP</div>
 </div>
 <div class="tab-bar">
-  <div class="tab active" id="tab-topsheet" data-tab="topsheet">&#128202; Top Sheet</div>
-  <div class="tab" id="tab-pastweeks" data-tab="pastweeks">&#128197; Past Weeks</div>
+  <div class="tab active" id="tab-topsheet" onclick="switchTab('topsheet')">&#128202; Top Sheet</div>
+  <div class="tab" id="tab-pastweeks" onclick="switchTab('pastweeks')">&#128197; Past Weeks</div>
 </div>
 <div class="page active" id="page-topsheet">
   <div class="db-status" id="db-status-el">Connecting...</div>
@@ -93,11 +92,11 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
   <div class="completion-text" id="comp-text">Loading...</div>
   <div id="topsheet-content"></div>
   <div class="data-tools-row">
-    <button class="dt-btn" id="btn-export-backup"><div class="dt-icon">&#128190;</div><div class="dt-label">Backup</div><div class="dt-sub">Download JSON</div></button>
-    <button class="dt-btn" id="btn-import-backup"><div class="dt-icon">&#128194;</div><div class="dt-label">Restore</div><div class="dt-sub">Import backup</div></button>
+    <button class="dt-btn" onclick="exportBackup()"><div class="dt-icon">&#128190;</div><div class="dt-label">Backup</div><div class="dt-sub">Download JSON</div></button>
+    <button class="dt-btn" onclick="document.getElementById('import-inp').click()"><div class="dt-icon">&#128194;</div><div class="dt-label">Restore</div><div class="dt-sub">Import backup</div></button>
   </div>
-  <input type="file" id="import-inp" accept=".json" style="display:none">
-  <button class="close-week-btn" id="btn-close-week">&#9888;&#65039; Close Week Early &amp; Archive</button>
+  <input type="file" id="import-inp" accept=".json" style="display:none" onchange="importBackup(this)">
+  <button class="close-week-btn" onclick="closeWeekManually()">&#9888;&#65039; Close Week Early &amp; Archive</button>
 </div>
 <div class="page" id="page-pastweeks">
   <div class="pw-list" id="past-weeks-list">
@@ -105,494 +104,227 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
   </div>
 </div>
 <div class="toast" id="toast">&#9989; Done!</div>
-<div class="modal-overlay" id="recordModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="modal-title">Record</div>
-      <button class="modal-close" id="btn-record-modal-close">&#10005;</button>
-    </div>
-    <div id="modal-body"></div>
-    <div class="modal-actions">
-      <button class="m-btn m-btn-danger" id="btn-delete-record">&#128465;</button>
-      <button class="m-btn m-btn-dark" id="btn-export-record-pdf">&#128247; PDF</button>
-      <button class="m-btn m-btn-sec" id="btn-record-modal-close2">Close</button>
-    </div>
-  </div>
-</div>
-<div class="modal-overlay" id="weekModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="wm-title">Week Summary</div>
-      <button class="modal-close" id="btn-week-modal-close">&#10005;</button>
-    </div>
-    <div id="wm-body"></div>
-    <div class="modal-actions">
-      <button class="m-btn m-btn-danger" id="btn-delete-past-week">&#128465;</button>
-      <button class="m-btn m-btn-dark" id="btn-email-week-pdf">&#9993;&#65039; Email PDF</button>
-      <button class="m-btn m-btn-sec" id="btn-week-modal-close2">Close</button>
-    </div>
-  </div>
-</div>
+<div class="modal-overlay" id="recordModal"><div class="modal"><div class="modal-header"><div class="modal-title" id="modal-title">Record</div><button class="modal-close" onclick="closeModal()">&#10005;</button></div><div id="modal-body"></div><div class="modal-actions"><button class="m-btn m-btn-danger" onclick="deleteRecord()">&#128465;</button><button class="m-btn m-btn-dark" onclick="exportRecordPDF()">&#128247; PDF</button><button class="m-btn m-btn-sec" onclick="closeModal()">Close</button></div></div></div>
+<div class="modal-overlay" id="weekModal"><div class="modal"><div class="modal-header"><div class="modal-title" id="wm-title">Week Summary</div><button class="modal-close" onclick="closeWeekModal()">&#10005;</button></div><div id="wm-body"></div><div class="modal-actions"><button class="m-btn m-btn-danger" onclick="deletePastWeek()">&#128465;</button><button class="m-btn m-btn-dark" onclick="emailWeekPDF()">&#9993;&#65039; Email PDF</button><button class="m-btn m-btn-sec" onclick="closeWeekModal()">Close</button></div></div></div>
 <script>
-var ALL_FORMS = [{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},{id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},{id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},{id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},{id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},{id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},{id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},{id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},{id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},{id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},{id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},{id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},{id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},{id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},{id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},{id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},{id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},{id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},{id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},{id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},{id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},{id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},{id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},{id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},{id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},{id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},{id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},{id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},{id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},{id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},{id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}];
+var ALL_FORMS=[{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},{id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},{id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},{id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},{id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},{id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},{id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},{id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},{id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},{id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},{id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},{id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},{id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},{id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},{id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},{id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},{id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},{id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},{id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},{id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},{id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},{id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},{id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},{id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},{id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},{id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},{id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},{id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},{id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},{id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},{id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}];
 
-var DB_NAME = ‘MoriartyHACCP’, DB_VER = 1, db = null;
+var DB_NAME='MoriartyHACCP',DB_VER=1,db=null;
+function openDB(){return new Promise(function(res,rej){var r=indexedDB.open(DB_NAME,DB_VER);r.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('records')){var s=d.createObjectStore('records',{keyPath:'id'});s.createIndex('formId','formId',{unique:false});s.createIndex('weekKey','weekKey',{unique:false});}if(!d.objectStoreNames.contains('weeks'))d.createObjectStore('weeks',{keyPath:'weekKey'});};r.onsuccess=function(e){db=e.target.result;res(db);};r.onerror=function(e){rej(e.target.error);}});}
+function dbPut(store,obj){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).put(obj);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);}});}
+function dbGetAll(store){return new Promise(function(res,rej){var tx=db.transaction(store,'readonly');var r=tx.objectStore(store).getAll();r.onsuccess=function(e){res(e.target.result);};r.onerror=function(e){rej(e.target.error);}});}
+function dbDelete(store,key){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).delete(key);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);}});}
 
-function openDB() {
-return new Promise(function(res, rej) {
-var r = indexedDB.open(DB_NAME, DB_VER);
-r.onupgradeneeded = function(e) {
-var d = e.target.result;
-if (!d.objectStoreNames.contains(‘records’)) {
-var s = d.createObjectStore(‘records’, {keyPath: ‘id’});
-s.createIndex(‘formId’, ‘formId’, {unique: false});
-s.createIndex(‘weekKey’, ‘weekKey’, {unique: false});
+function getWeekKey(){var d=new Date();var day=d.getDay();var s=new Date(d);s.setDate(d.getDate()-day);s.setHours(0,0,0,0);return s.toISOString().split('T')[0];}
+function getWeekLabel(wk){var s=new Date(wk+'T00:00:00');var e=new Date(s);e.setDate(e.getDate()+6);var f=function(d){return d.toLocaleDateString('en-IE',{day:'numeric',month:'short'});};return f(s)+' – '+f(e)+' '+e.getFullYear();}
+function getSatMidnight(wk){var s=new Date(wk+'T00:00:00');var e=new Date(s);e.setDate(e.getDate()+6);e.setHours(23,59,59,0);return e;}
+
+var allRecords=[],activeRecordId=null,activePastWeekId=null;
+
+function switchTab(tab){
+var tabs=document.querySelectorAll('.tab');for(var ti=0;ti<tabs.length;ti++)tabs[ti].classList.remove('active');
+var pages=document.querySelectorAll('.page');for(var pi=0;pi<pages.length;pi++)pages[pi].classList.remove('active');
+document.getElementById('tab-'+tab).classList.add('active');
+document.getElementById('page-'+tab).classList.add('active');
+if(tab==='pastweeks')renderPastWeeks();
 }
-if (!d.objectStoreNames.contains(‘weeks’)) {
-d.createObjectStore(‘weeks’, {keyPath: ‘weekKey’});
-}
-};
-r.onsuccess = function(e) { db = e.target.result; res(db); };
-r.onerror = function(e) { rej(e.target.error); };
+function showToast(msg,dur){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},dur||3000);}
+
+function buildTopSheetHTML(recs){
+var wk=getWeekKey();
+allRecords=recs;
+var el=document.getElementById('db-status-el');
+el.textContent='● Storage active · '+recs.length+' record'+(recs.length!==1?'s':'')+' saved';
+el.className='db-status ok';
+var closes=getSatMidnight(wk);var diff=closes-new Date();
+var timer=diff>0?(Math.floor(diff/86400000)>0?Math.floor(diff/86400000)+'d ':'')+Math.floor((diff%86400000)/3600000)+'h '+Math.floor((diff%3600000)/60000)+'m remaining':'Week closing…';
+document.getElementById('week-banner-wrap').innerHTML='<div class="week-banner"><div><div class="wb-label">CURRENT WEEK</div><div class="wb-week">'+getWeekLabel(wk)+'</div><div class="wb-timer">'+timer+'</div></div><div style="text-align:right;font-size:10px;opacity:0.8;">Closes Saturday midnight</div></div>';
+var wkRecs=recs.filter(function(r){return r.weekKey===wk;});
+var subIds={};wkRecs.forEach(function(r){subIds[r.formId]=r;});
+var done=Object.keys(subIds).length,tot=ALL_FORMS.length,pct=Math.round(done/tot*100);
+document.getElementById('comp-fill').style.width=pct+'%';
+document.getElementById('comp-text').textContent=done+' of '+tot+' forms completed this week ('+pct+'%)';
+var cats={};ALL_FORMS.forEach(function(f){if(!cats[f.cat])cats[f.cat]=[];cats[f.cat].push(f);});
+var html='';
+Object.keys(cats).forEach(function(cat){
+html+='<div class="topsheet-card"><div class="topsheet-card-header">'+cat+'</div>';
+cats[cat].forEach(function(f){
+var rec=subIds[f.id];
+var status=rec?'✅':'⚠️';
+var meta=rec?new Date(rec.savedAt).toLocaleString('en-IE',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false})+(rec.champion?' · '+rec.champion:''):'';
+html+='<div class="topsheet-row" onclick="'+(rec?'openRecord('+rec.id+')':'window.location.href=\'index.html\'')+'"><div class="ts-status">'+status+'</div><div class="ts-row-name">'+f.name+'</div>'+(rec?'<div class="ts-row-time">'+meta+'</div>':'<div class="ts-row-miss">Not submitted</div>')+'</div>';
 });
-}
-
-function dbPut(store, obj) {
-return new Promise(function(res, rej) {
-var tx = db.transaction(store, ‘readwrite’);
-tx.objectStore(store).put(obj);
-tx.oncomplete = res;
-tx.onerror = function(e) { rej(e.target.error); };
+html+='</div>';
 });
+document.getElementById('topsheet-content').innerHTML=html;
 }
 
-function dbGetAll(store) {
-return new Promise(function(res, rej) {
-var tx = db.transaction(store, ‘readonly’);
-var r = tx.objectStore(store).getAll();
-r.onsuccess = function(e) { res(e.target.result); };
-r.onerror = function(e) { rej(e.target.error); };
-});
-}
-
-function dbDelete(store, key) {
-return new Promise(function(res, rej) {
-var tx = db.transaction(store, ‘readwrite’);
-tx.objectStore(store).delete(key);
-tx.oncomplete = res;
-tx.onerror = function(e) { rej(e.target.error); };
-});
-}
-
-function getWeekKey() {
-var d = new Date();
-var day = d.getDay();
-var s = new Date(d);
-s.setDate(d.getDate() - day);
-s.setHours(0, 0, 0, 0);
-return s.toISOString().split(‘T’)[0];
-}
-
-function getWeekLabel(wk) {
-var s = new Date(wk + ‘T00:00:00’);
-var e = new Date(s);
-e.setDate(e.getDate() + 6);
-var f = function(d) { return d.toLocaleDateString(‘en-IE’, {day: ‘numeric’, month: ‘short’}); };
-return f(s) + ’ \u2013 ’ + f(e) + ’ ’ + e.getFullYear();
-}
-
-function getSatMidnight(wk) {
-var s = new Date(wk + ‘T00:00:00’);
-var e = new Date(s);
-e.setDate(e.getDate() + 6);
-e.setHours(23, 59, 59, 0);
-return e;
-}
-
-var allRecords = [], activeRecordId = null, activePastWeekId = null;
-
-function switchTab(tab) {
-var tabs = document.querySelectorAll(’.tab’);
-for (var ti = 0; ti < tabs.length; ti++) { tabs[ti].className = ‘tab’; }
-var pages = document.querySelectorAll(’.page’);
-for (var pi = 0; pi < pages.length; pi++) { pages[pi].className = ‘page’; }
-document.getElementById(‘tab-’ + tab).className = ‘tab active’;
-document.getElementById(‘page-’ + tab).className = ‘page active’;
-if (tab === ‘pastweeks’) { renderPastWeeks(); }
-}
-
-function showToast(msg, dur) {
-var t = document.getElementById(‘toast’);
-t.textContent = msg;
-t.className = ‘toast show’;
-setTimeout(function() { t.className = ‘toast’; }, dur || 3000);
-}
-
-function buildTopSheetHTML(recs) {
-var wk = getWeekKey();
-allRecords = recs;
-var el = document.getElementById(‘db-status-el’);
-el.textContent = ‘\u25cf Storage active \u00b7 ’ + recs.length + ’ record’ + (recs.length !== 1 ? ‘s’ : ‘’) + ’ saved’;
-el.className = ‘db-status ok’;
-var closes = getSatMidnight(wk);
-var diff = closes - new Date();
-var timer = diff > 0
-? (Math.floor(diff / 86400000) > 0 ? Math.floor(diff / 86400000) + ’d ’ : ‘’) + Math.floor((diff % 86400000) / 3600000) + ‘h ’ + Math.floor((diff % 3600000) / 60000) + ‘m remaining’
-: ‘Week closing\u2026’;
-document.getElementById(‘week-banner-wrap’).innerHTML =
-‘<div class="week-banner"><div><div class="wb-label">CURRENT WEEK</div><div class="wb-week">’ + getWeekLabel(wk) + ‘</div><div class="wb-timer">’ + timer + ‘</div></div><div style="text-align:right;font-size:10px;opacity:0.8;">Closes Saturday midnight</div></div>’;
-var wkRecs = [];
-for (var ri = 0; ri < recs.length; ri++) { if (recs[ri].weekKey === wk) { wkRecs.push(recs[ri]); } }
-var subIds = {};
-for (var si = 0; si < wkRecs.length; si++) { subIds[wkRecs[si].formId] = wkRecs[si]; }
-var done = Object.keys(subIds).length;
-var tot = ALL_FORMS.length;
-var pct = Math.round(done / tot * 100);
-document.getElementById(‘comp-fill’).style.width = pct + ‘%’;
-document.getElementById(‘comp-text’).textContent = done + ’ of ’ + tot + ’ forms completed this week (’ + pct + ‘%)’;
-var cats = {};
-for (var fi = 0; fi < ALL_FORMS.length; fi++) {
-var f = ALL_FORMS[fi];
-if (!cats[f.cat]) { cats[f.cat] = []; }
-cats[f.cat].push(f);
-}
-var html = ‘’;
-var catKeys = Object.keys(cats);
-for (var ci = 0; ci < catKeys.length; ci++) {
-var cat = catKeys[ci];
-html += ‘<div class="topsheet-card"><div class="topsheet-card-header">’ + cat + ‘</div>’;
-var catForms = cats[cat];
-for (var cfi = 0; cfi < catForms.length; cfi++) {
-var form = catForms[cfi];
-var rec = subIds[form.id];
-var status = rec ? ‘\u2705’ : ‘\u26a0\ufe0f’;
-var meta = rec
-? new Date(rec.savedAt).toLocaleString(‘en-IE’, {day: ‘2-digit’, month: ‘short’, hour: ‘2-digit’, minute: ‘2-digit’, hour12: false}) + (rec.champion ? ’ \u00b7 ’ + rec.champion : ‘’)
-: ‘’;
-var rowData = rec ? ‘data-recordid=”’ + rec.id + ‘”’ : ‘data-gotoforms=“1”’;
-html += ’<div class=“topsheet-row” ’ + rowData + ‘><div class="ts-status">’ + status + ‘</div><div class="ts-row-name">’ + form.name + ‘</div>’ + (rec ? ‘<div class="ts-row-time">’ + meta + ‘</div>’ : ‘<div class="ts-row-miss">Not submitted</div>’) + ‘</div>’;
-}
-html += ‘</div>’;
-}
-document.getElementById(‘topsheet-content’).innerHTML = html;
-attachTopsheetRowListeners();
-}
-
-function attachTopsheetRowListeners() {
-var rows = document.querySelectorAll(’.topsheet-row’);
-for (var i = 0; i < rows.length; i++) {
-(function(row) {
-row.addEventListener(‘click’, function() {
-var recId = row.getAttribute(‘data-recordid’);
-var goForms = row.getAttribute(‘data-gotoforms’);
-if (recId) {
-openRecord(parseInt(recId, 10));
-} else if (goForms) {
-window.location.href = ‘index.html’;
-}
-});
-})(rows[i]);
-}
-}
-
-function renderTopSheet() {
-dbGetAll(‘records’).then(function(recs) {
+function renderTopSheet(){
+dbGetAll('records').then(function(recs){
 buildTopSheetHTML(recs);
 checkWeekClose();
-}).catch(function(e) {
-document.getElementById(‘db-status-el’).textContent = ’Storage error: ’ + e.message;
-document.getElementById(‘db-status-el’).className = ‘db-status err’;
+}).catch(function(e){
+document.getElementById('db-status-el').textContent='Storage error: '+e.message;
+document.getElementById('db-status-el').className='db-status err';
 });
 }
 
-function openRecord(id) {
-var r = null;
-for (var i = 0; i < allRecords.length; i++) { if (allRecords[i].id === id) { r = allRecords[i]; break; } }
-if (!r) { return; }
-activeRecordId = id;
-var fm = null;
-for (var fi = 0; fi < ALL_FORMS.length; fi++) { if (ALL_FORMS[fi].id === r.formId) { fm = ALL_FORMS[fi]; break; } }
-document.getElementById(‘modal-title’).textContent = fm ? fm.name : r.formId;
-var html = ’<div class="ts-badge">Saved: ’ + new Date(r.savedAt).toLocaleString(‘en-IE’) + ‘</div>’;
-if (r.weekEnding) { html += ‘<div class="detail-field"><div class="detail-label">Week Ending</div><div class="detail-value">’ + r.weekEnding + ‘</div></div>’; }
-if (r.champion) { html += ‘<div class="detail-field"><div class="detail-label">Food Safety Champion</div><div class="detail-value">’ + r.champion + ‘</div></div>’; }
-if (r.photoCount > 0) {
-html += ‘<div class="divider"></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#666;margin-bottom:8px;">Photos (’ + r.photoCount + ‘)</div><div style="display:flex;flex-wrap:wrap;gap:8px;">’;
-for (var pi = 0; pi < r.photos.length; pi++) {
-html += ‘<img src="' + r.photos[pi].dataUrl + '" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid #d0d0d0;">’;
+function openRecord(id){
+var r=allRecords.find(function(x){return x.id===id;});if(!r)return;
+activeRecordId=id;
+var fm=ALL_FORMS.find(function(f){return f.id===r.formId;});
+document.getElementById('modal-title').textContent=fm?fm.name:r.formId;
+var html='<div class="ts-badge">Saved: '+new Date(r.savedAt).toLocaleString('en-IE')+'</div>';
+if(r.weekEnding)html+='<div class="detail-field"><div class="detail-label">Week Ending</div><div class="detail-value">'+r.weekEnding+'</div></div>';
+if(r.champion)html+='<div class="detail-field"><div class="detail-label">Food Safety Champion</div><div class="detail-value">'+r.champion+'</div></div>';
+if(r.photoCount>0){html+='<div class="divider"></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#666;margin-bottom:8px;">Photos ('+r.photoCount+')</div><div style="display:flex;flex-wrap:wrap;gap:8px;">';r.photos.forEach(function(p){html+='<img src="'+p.dataUrl+'" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid #d0d0d0;">';});html+='</div>';}
+document.getElementById('modal-body').innerHTML=html;
+document.getElementById('recordModal').classList.add('open');
 }
-html += ‘</div>’;
-}
-document.getElementById(‘modal-body’).innerHTML = html;
-document.getElementById(‘recordModal’).className = ‘modal-overlay open’;
-}
-
-function closeModal() {
-document.getElementById(‘recordModal’).className = ‘modal-overlay’;
-activeRecordId = null;
-}
-
-function deleteRecord() {
-if (!confirm(‘Delete this record?’)) { return; }
-dbDelete(‘records’, activeRecordId).then(function() {
-return dbGetAll(‘records’);
-}).then(function(recs) {
-closeModal();
-buildTopSheetHTML(recs);
+function closeModal(){document.getElementById('recordModal').classList.remove('open');activeRecordId=null;}
+function deleteRecord(){
+if(!confirm('Delete this record?'))return;
+dbDelete('records',activeRecordId).then(function(){
+return dbGetAll('records');
+}).then(function(recs){
+closeModal();buildTopSheetHTML(recs);
 });
 }
-
-function exportRecordPDF() {
-showToast(‘PDF export feature coming soon’);
+function exportRecordPDF(){
+var r=allRecords.find(function(x){return x.id===activeRecordId;});if(!r)return;
+var fm=ALL_FORMS.find(function(f){return f.id===r.formId;});
+showToast('PDF export feature coming soon');
 }
 
-function checkWeekClose() {
-var now = new Date();
-var wk = getWeekKey();
-if (now >= getSatMidnight(wk)) {
-dbGetAll(‘weeks’).then(function(weeks) {
-var found = false;
-for (var i = 0; i < weeks.length; i++) { if (weeks[i].weekKey === wk) { found = true; break; } }
-if (!found) { doCloseWeek(wk); }
+function checkWeekClose(){
+var now=new Date();var wk=getWeekKey();
+if(now>=getSatMidnight(wk)){
+dbGetAll('weeks').then(function(weeks){
+var found=weeks.filter(function(w){return w.weekKey===wk;}).length>0;
+if(!found)doCloseWeek(wk);
 });
 }
 }
-
-function closeWeekManually() {
-if (!confirm(‘Close the current week now and archive it?’)) { return; }
-var wk = getWeekKey();
-dbGetAll(‘weeks’).then(function(weeks) {
-var found = false;
-for (var i = 0; i < weeks.length; i++) { if (weeks[i].weekKey === wk) { found = true; break; } }
-if (found) { showToast(‘This week is already closed.’); return; }
-doCloseWeek(wk, function() { renderTopSheet(); });
+function closeWeekManually(){
+if(!confirm('Close the current week now and archive it?'))return;
+var wk=getWeekKey();
+dbGetAll('weeks').then(function(weeks){
+var found=weeks.filter(function(w){return w.weekKey===wk;}).length>0;
+if(found){showToast('This week is already closed.');return;}
+doCloseWeek(wk,function(){renderTopSheet();});
+});
+}
+function doCloseWeek(wk,cb){
+var recs=allRecords.filter(function(r){return r.weekKey===wk;});
+var ids={};recs.forEach(function(r){ids[r.formId]=r;});
+var done=Object.keys(ids).length;
+var week={weekKey:wk,label:getWeekLabel(wk),closedAt:new Date().toISOString(),completed:done,total:ALL_FORMS.length,pct:Math.round(done/ALL_FORMS.length*100),records:recs};
+dbPut('weeks',week).then(function(){
+showToast('✅ Week '+week.label+' archived.');
+if(cb)cb();
 });
 }
 
-function doCloseWeek(wk, cb) {
-var recs = [];
-for (var i = 0; i < allRecords.length; i++) { if (allRecords[i].weekKey === wk) { recs.push(allRecords[i]); } }
-var ids = {};
-for (var ri = 0; ri < recs.length; ri++) { ids[recs[ri].formId] = recs[ri]; }
-var done = Object.keys(ids).length;
-var week = {
-weekKey: wk,
-label: getWeekLabel(wk),
-closedAt: new Date().toISOString(),
-completed: done,
-total: ALL_FORMS.length,
-pct: Math.round(done / ALL_FORMS.length * 100),
-records: recs
-};
-dbPut(‘weeks’, week).then(function() {
-showToast(’\u2705 Week ’ + week.label + ’ archived.’);
-if (cb) { cb(); }
+function renderPastWeeks(){
+dbGetAll('weeks').then(function(weeks){
+var list=document.getElementById('past-weeks-list');
+if(!weeks.length){list.innerHTML='<div class="empty-state"><div class="es-icon">📅</div><p>No completed weeks yet.<br>Weeks close Saturday at midnight.</p></div>';return;}
+var sorted=weeks.slice().sort(function(a,b){return b.weekKey.localeCompare(a.weekKey);});
+list.innerHTML=sorted.map(function(w){var col=w.pct>=80?'#00703c':w.pct>=70?'#e65100':'#d32f2f';return'<div class="pw-item" onclick="openPastWeek(\''+w.weekKey+'\')"><div><div class="pw-label">'+w.label+'</div><div class="pw-meta">'+w.completed+' of '+w.total+' forms</div></div><div style="text-align:right;"><div class="pw-pct" style="color:'+col+';">'+w.pct+'%</div></div></div>';}).join('');
+}).catch(function(e){
+document.getElementById('past-weeks-list').innerHTML='<div class="empty-state"><div class="es-icon">⚠️</div><p>Error loading weeks</p></div>';
 });
 }
 
-function renderPastWeeks() {
-dbGetAll(‘weeks’).then(function(weeks) {
-var list = document.getElementById(‘past-weeks-list’);
-if (!weeks.length) {
-list.innerHTML = ‘<div class="empty-state"><div class="es-icon">📅</div><p>No completed weeks yet.<br>Weeks close Saturday at midnight.</p></div>’;
-return;
-}
-var sorted = weeks.slice().sort(function(a, b) { return b.weekKey.localeCompare(a.weekKey); });
-var html = ‘’;
-for (var i = 0; i < sorted.length; i++) {
-var w = sorted[i];
-var col = w.pct >= 80 ? ‘#00703c’ : (w.pct >= 70 ? ‘#e65100’ : ‘#d32f2f’);
-html += ‘<div class="pw-item" data-weekkey="' + w.weekKey + '"><div><div class="pw-label">’ + w.label + ‘</div><div class="pw-meta">’ + w.completed + ’ of ’ + w.total + ’ forms</div></div><div style="text-align:right;"><div class="pw-pct" style="color:' + col + ';">’ + w.pct + ‘%</div></div></div>’;
-}
-list.innerHTML = html;
-var items = list.querySelectorAll(’.pw-item’);
-for (var ii = 0; ii < items.length; ii++) {
-(function(item) {
-item.addEventListener(‘click’, function() {
-openPastWeek(item.getAttribute(‘data-weekkey’));
+function openPastWeek(weekKey){
+dbGetAll('weeks').then(function(weeks){
+var w=weeks.find(function(x){return x.weekKey===weekKey;});
+if(!w)return;
+activePastWeekId=weekKey;
+document.getElementById('wm-title').textContent=w.label;
+var html='<div class="ts-badge">Archived: '+new Date(w.closedAt).toLocaleString('en-IE')+'</div>';
+html+='<div class="detail-field"><div class="detail-label">Completion</div><div class="detail-value">'+w.completed+' of '+w.total+' forms ('+w.pct+'%)</div></div>';
+html+='<div class="divider"></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#666;margin-bottom:8px;">Forms Submitted</div>';
+w.records.forEach(function(r){
+var fm=ALL_FORMS.find(function(f){return f.id===r.formId;});
+html+='<div style="padding:8px 0;font-size:12px;border-bottom:1px solid #f0f0f0;">'+( fm?fm.name:r.formId)+'</div>';
 });
-})(items[ii]);
-}
-}).catch(function() {
-document.getElementById(‘past-weeks-list’).innerHTML = ‘<div class="empty-state"><div class="es-icon">\u26a0\ufe0f</div><p>Error loading weeks</p></div>’;
+document.getElementById('wm-body').innerHTML=html;
+document.getElementById('weekModal').classList.add('open');
+}).catch(function(e){
+showToast('Error loading week details');
 });
 }
 
-function openPastWeek(weekKey) {
-dbGetAll(‘weeks’).then(function(weeks) {
-var w = null;
-for (var i = 0; i < weeks.length; i++) { if (weeks[i].weekKey === weekKey) { w = weeks[i]; break; } }
-if (!w) { return; }
-activePastWeekId = weekKey;
-document.getElementById(‘wm-title’).textContent = w.label;
-var html = ‘<div class="ts-badge">Archived: ’ + new Date(w.closedAt).toLocaleString(‘en-IE’) + ‘</div>’;
-html += ‘<div class="detail-field"><div class="detail-label">Completion</div><div class="detail-value">’ + w.completed + ’ of ’ + w.total + ’ forms (’ + w.pct + ‘%)</div></div>’;
-html += ‘<div class="divider"></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#666;margin-bottom:8px;">Forms Submitted</div>’;
-for (var ri = 0; ri < w.records.length; ri++) {
-var r = w.records[ri];
-var fm = null;
-for (var fi = 0; fi < ALL_FORMS.length; fi++) { if (ALL_FORMS[fi].id === r.formId) { fm = ALL_FORMS[fi]; break; } }
-html += ‘<div style="padding:8px 0;font-size:12px;border-bottom:1px solid #f0f0f0;">’ + (fm ? fm.name : r.formId) + ‘</div>’;
-}
-document.getElementById(‘wm-body’).innerHTML = html;
-document.getElementById(‘weekModal’).className = ‘modal-overlay open’;
-}).catch(function() {
-showToast(‘Error loading week details’);
+function closeWeekModal(){document.getElementById('weekModal').classList.remove('open');activePastWeekId=null;}
+
+function deletePastWeek(){
+if(!confirm('Delete this archived week?'))return;
+dbDelete('weeks',activePastWeekId).then(function(){
+closeWeekModal();renderPastWeeks();
+showToast('Week deleted');
+}).catch(function(e){
+showToast('Error deleting week');
 });
 }
 
-function closeWeekModal() {
-document.getElementById(‘weekModal’).className = ‘modal-overlay’;
-activePastWeekId = null;
+function emailWeekPDF(){
+showToast('Email feature coming soon');
 }
 
-function deletePastWeek() {
-if (!confirm(‘Delete this archived week?’)) { return; }
-dbDelete(‘weeks’, activePastWeekId).then(function() {
-closeWeekModal();
-renderPastWeeks();
-showToast(‘Week deleted’);
-}).catch(function() {
-showToast(‘Error deleting week’);
-});
-}
-
-function emailWeekPDF() {
-showToast(‘Email feature coming soon’);
-}
-
-function exportBackup() {
-dbGetAll(‘records’).then(function(recs) {
-dbGetAll(‘weeks’).then(function(weeks) {
-var backup = {records: recs, weeks: weeks, exportedAt: new Date().toISOString()};
-var json = JSON.stringify(backup, null, 2);
-var blob = new Blob([json], {type: ‘application/json’});
-var url = URL.createObjectURL(blob);
-var a = document.createElement(‘a’);
-a.href = url;
-a.download = ‘haccp-backup-’ + new Date().toISOString().split(‘T’)[0] + ‘.json’;
+function exportBackup(){
+dbGetAll('records').then(function(recs){
+dbGetAll('weeks').then(function(weeks){
+var backup={records:recs,weeks:weeks,exportedAt:new Date().toISOString()};
+var json=JSON.stringify(backup,null,2);
+var blob=new Blob([json],{type:'application/json'});
+var url=URL.createObjectURL(blob);
+var a=document.createElement('a');
+a.href=url;
+a.download='haccp-backup-'+new Date().toISOString().split('T')[0]+'.json';
 a.click();
 URL.revokeObjectURL(url);
-showToast(‘Backup downloaded’);
-}).catch(function() { showToast(‘Error creating backup’); });
-}).catch(function() { showToast(‘Error creating backup’); });
+showToast('Backup downloaded');
+}).catch(function(e){showToast('Error creating backup');});
+}).catch(function(e){showToast('Error creating backup');});
 }
 
-function importBackup(input) {
-if (!input.files.length) { return; }
-var file = input.files[0];
-var reader = new FileReader();
-reader.onload = function(e) {
-try {
-var backup = JSON.parse(e.target.result);
-if (!backup.records || !Array.isArray(backup.records)) { throw new Error(‘Invalid backup format’); }
-var promises = [];
-for (var ri = 0; ri < backup.records.length; ri++) { promises.push(dbPut(‘records’, backup.records[ri])); }
-for (var wi = 0; wi < backup.weeks.length; wi++) { promises.push(dbPut(‘weeks’, backup.weeks[wi])); }
-Promise.all(promises).then(function() {
+function importBackup(input){
+if(!input.files.length)return;
+var file=input.files[0];
+var reader=new FileReader();
+reader.onload=function(e){
+try{
+var backup=JSON.parse(e.target.result);
+if(!backup.records||!Array.isArray(backup.records))throw new Error('Invalid backup format');
+var promises=[];
+backup.records.forEach(function(r){promises.push(dbPut('records',r));});
+backup.weeks.forEach(function(w){promises.push(dbPut('weeks',w));});
+Promise.all(promises).then(function(){
 renderTopSheet();
-showToast(’\u2705 Backup restored successfully’);
-input.value = ‘’;
-}).catch(function() { showToast(‘Error restoring backup’); });
-} catch(err) {
-showToast(‘Invalid backup file’);
+showToast('✅ Backup restored successfully');
+input.value='';
+}).catch(function(err){
+showToast('Error restoring backup');
+});
+}catch(err){
+showToast('Invalid backup file');
 }
 };
 reader.readAsText(file);
 }
 
-setInterval(function() {
-var wk = getWeekKey();
-var closes = getSatMidnight(wk);
-var diff = closes - new Date();
-if (diff > 0) {
-var d = Math.floor(diff / 86400000);
-var h = Math.floor((diff % 86400000) / 3600000);
-var m = Math.floor((diff % 3600000) / 60000);
-var timer = (d > 0 ? d + ‘d ’ : ‘’) + h + ‘h ’ + m + ‘m remaining’;
-var el = document.querySelector(’.wb-timer’);
-if (el) { el.textContent = timer; }
-}
-}, 60000);
+setInterval(function(){
+var wk=getWeekKey();var closes=getSatMidnight(wk);var diff=closes-new Date();
+if(diff>0){var d=Math.floor(diff/86400000);var h=Math.floor((diff%86400000)/3600000);var m=Math.floor((diff%3600000)/60000);var timer=(d>0?d+'d ':'')+h+'h '+m+'m remaining';var el=document.querySelector('.wb-timer');if(el)el.textContent=timer;}
+},60000);
 
-document.addEventListener(‘DOMContentLoaded’, function() {
-
-// Nav back button - close DB before navigating so Safari releases the connection
-document.getElementById(‘nav-back-btn’).addEventListener(‘click’, function() {
-try { if (db) { db.close(); } } catch(e) {}
-window.location.href = ‘index.html’;
+document.addEventListener('DOMContentLoaded',function(){
+openDB().then(function(){renderTopSheet();}).catch(function(e){
+var el=document.getElementById('db-status-el');
+el.textContent='Storage error: '+e.message;el.className='db-status err';
 });
-
-// Tab switching
-var tabs = document.querySelectorAll(’.tab’);
-for (var ti = 0; ti < tabs.length; ti++) {
-(function(tab) {
-tab.addEventListener(‘click’, function() {
-switchTab(tab.getAttribute(‘data-tab’));
-});
-})(tabs[ti]);
-}
-
-// Backup / Restore buttons
-document.getElementById(‘btn-export-backup’).addEventListener(‘click’, function() {
-exportBackup();
-});
-document.getElementById(‘btn-import-backup’).addEventListener(‘click’, function() {
-document.getElementById(‘import-inp’).click();
-});
-document.getElementById(‘import-inp’).addEventListener(‘change’, function() {
-importBackup(this);
-});
-
-// Close week button
-document.getElementById(‘btn-close-week’).addEventListener(‘click’, function() {
-closeWeekManually();
-});
-
-// Record modal buttons
-document.getElementById(‘btn-record-modal-close’).addEventListener(‘click’, function() { closeModal(); });
-document.getElementById(‘btn-record-modal-close2’).addEventListener(‘click’, function() { closeModal(); });
-document.getElementById(‘btn-delete-record’).addEventListener(‘click’, function() { deleteRecord(); });
-document.getElementById(‘btn-export-record-pdf’).addEventListener(‘click’, function() { exportRecordPDF(); });
-
-// Week modal buttons
-document.getElementById(‘btn-week-modal-close’).addEventListener(‘click’, function() { closeWeekModal(); });
-document.getElementById(‘btn-week-modal-close2’).addEventListener(‘click’, function() { closeWeekModal(); });
-document.getElementById(‘btn-delete-past-week’).addEventListener(‘click’, function() { deletePastWeek(); });
-document.getElementById(‘btn-email-week-pdf’).addEventListener(‘click’, function() { emailWeekPDF(); });
-
-// Init DB - retry once if it hangs (Safari iOS can block if previous page held the connection)
-var dbOpenAttempts = 0;
-function tryOpenDB() {
-dbOpenAttempts++;
-var timedOut = false;
-var timer = setTimeout(function() {
-timedOut = true;
-if (dbOpenAttempts < 3) {
-try { if (db) { db.close(); db = null; } } catch(e) {}
-tryOpenDB();
-} else {
-var el = document.getElementById(‘db-status-el’);
-el.textContent = ‘Storage timeout - try reloading the page’;
-el.className = ‘db-status err’;
-}
-}, 3000);
-openDB().then(function() {
-if (timedOut) { return; }
-clearTimeout(timer);
-renderTopSheet();
-}).catch(function(e) {
-if (timedOut) { return; }
-clearTimeout(timer);
-var el = document.getElementById(‘db-status-el’);
-el.textContent = ’Storage error: ’ + e.message;
-el.className = ‘db-status err’;
-});
-}
-tryOpenDB();
-
 });
 </script>
-
 </body>
 </html>

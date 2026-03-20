@@ -517,8 +517,9 @@ if (el) { el.textContent = timer; }
 
 document.addEventListener(‘DOMContentLoaded’, function() {
 
-// Nav back button
+// Nav back button - close DB before navigating so Safari releases the connection
 document.getElementById(‘nav-back-btn’).addEventListener(‘click’, function() {
+try { if (db) { db.close(); } } catch(e) {}
 window.location.href = ‘index.html’;
 });
 
@@ -560,14 +561,35 @@ document.getElementById(‘btn-week-modal-close2’).addEventListener(‘click�
 document.getElementById(‘btn-delete-past-week’).addEventListener(‘click’, function() { deletePastWeek(); });
 document.getElementById(‘btn-email-week-pdf’).addEventListener(‘click’, function() { emailWeekPDF(); });
 
-// Init DB
+// Init DB - retry once if it hangs (Safari iOS can block if previous page held the connection)
+var dbOpenAttempts = 0;
+function tryOpenDB() {
+dbOpenAttempts++;
+var timedOut = false;
+var timer = setTimeout(function() {
+timedOut = true;
+if (dbOpenAttempts < 3) {
+try { if (db) { db.close(); db = null; } } catch(e) {}
+tryOpenDB();
+} else {
+var el = document.getElementById(‘db-status-el’);
+el.textContent = ‘Storage timeout - try reloading the page’;
+el.className = ‘db-status err’;
+}
+}, 3000);
 openDB().then(function() {
+if (timedOut) { return; }
+clearTimeout(timer);
 renderTopSheet();
 }).catch(function(e) {
+if (timedOut) { return; }
+clearTimeout(timer);
 var el = document.getElementById(‘db-status-el’);
 el.textContent = ’Storage error: ’ + e.message;
 el.className = ‘db-status err’;
 });
+}
+tryOpenDB();
 
 });
 </script>

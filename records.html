@@ -488,14 +488,23 @@ document.getElementById(‘recordOverlay’).addEventListener(‘click’, funct
 if (e.target === this) { closeRecord(); }
 });
 
-/* open DB and render */
+/* open DB and render — retry once after 600ms in case index.html
+did not finish closing the DB before navigation completed */
 var sb = document.getElementById(‘statusBar’);
+function tryOpen(attempt) {
 openDB().then(function() {
 loadRecords();
 }).catch(function(e) {
-sb.textContent = ’Storage error: ’ + (e.message || ‘unknown’);
+if (attempt < 2) {
+sb.textContent = ‘Retrying database…’;
+setTimeout(function() { tryOpen(attempt + 1); }, 600);
+} else {
+sb.textContent = ‘Storage error: ’ + (e.message || ‘unknown’) + ’ — try refreshing’;
 sb.className = ‘status-bar err’;
+}
 });
+}
+tryOpen(1);
 
 });
 </script></body>

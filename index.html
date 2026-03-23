@@ -1247,6 +1247,14 @@ try { if (db) { db.close(); } } catch(e) {}
 document.getElementById('backBtn').addEventListener('click', goBack);
 document.getElementById('lightbox').addEventListener('click', closeLightbox);
 document.getElementById('lightbox-close-btn').addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
+/* Explicitly close DB before navigating to records.html so Safari iOS
+   does not block the other page from opening the same database */
+var recBanner = document.querySelector('.records-banner');
+if (recBanner) {
+  recBanner.addEventListener('click', function() {
+    try { if (db) { db.close(); db = null; } } catch(e) {}
+  });
+}
 var cards = document.querySelectorAll('.form-card');
 for (var ci = 0; ci < cards.length; ci++) {
 (function(card) {

@@ -1,6 +1,5 @@
-<!DOCTYPE html>
+<!DOCTYPE html><html lang="en">
 
-<html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
@@ -8,18 +7,14 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:100vh;}
-
-/* NAV */
+body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:100vh;}/* NAV */
 .top-nav{background:#00703c;color:white;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
 .nav-back{background:rgba(255,255,255,0.2);border:none;color:white;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit;}
 .nav-title{font-size:17px;font-weight:700;flex:1;}
 .nav-logo{font-size:11px;opacity:0.75;text-align:right;line-height:1.3;font-weight:600;}
-
 /* STATUS BAR */
-.status-bar{background:#005a30;color:white;text-align:center;padding:7px 16px;font-size:11px;font-family:‘Courier New’,monospace;letter-spacing:0.02em;}
+.status-bar{background:#005a30;color:white;text-align:center;padding:7px 16px;font-size:11px;font-family:'Courier New',monospace;letter-spacing:0.02em;}
 .status-bar.err{background:#b71c1c;}
-
 /* WEEK HEADER - audit card */
 .week-card{margin:14px 14px 0;background:#00703c;border-radius:12px;padding:14px 16px;color:white;}
 .wc-label{font-size:10px;font-weight:700;letter-spacing:0.1em;opacity:0.75;text-transform:uppercase;}
@@ -30,11 +25,9 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .wc-right{text-align:right;}
 .wc-count{font-size:13px;font-weight:600;}
 .wc-closes{font-size:11px;opacity:0.75;margin-top:2px;}
-
 /* PROGRESS BAR */
 .prog-wrap{margin:10px 14px 0;background:white;border-radius:8px;overflow:hidden;height:10px;}
 .prog-fill{height:100%;background:#00703c;border-radius:8px;transition:width 0.4s;}
-
 /* SECTION CARD */
 .section{margin:12px 14px 0;}
 .section-head{background:#1a1a1a;color:white;padding:9px 14px;border-radius:8px 8px 0 0;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;}
@@ -46,61 +39,48 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .fr-icon{font-size:18px;flex-shrink:0;width:24px;text-align:center;}
 .fr-info{flex:1;min-width:0;}
 .fr-name{font-size:13px;font-weight:600;color:#1a1a1a;}
-.fr-meta{font-size:11px;color:#666;margin-top:2px;font-family:‘Courier New’,monospace;}
+.fr-meta{font-size:11px;color:#666;margin-top:2px;font-family:'Courier New',monospace;}
 .fr-missing{font-size:11px;color:#e65100;font-weight:600;margin-top:2px;}
-
 /* BACKUP SECTION */
 .tools-section{margin:16px 14px 0;}
 .tools-title{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;margin-bottom:8px;padding:0 2px;}
 .tools-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.tool-btn{background:white;border:1.5px solid #c8d8c8;border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;font-family:‘Inter’,sans-serif;}
+.tool-btn{background:white;border:1.5px solid #c8d8c8;border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;font-family:'Inter',sans-serif;}
 .tool-btn:active{border-color:#00703c;background:#e8f5ee;}
 .tb-icon{font-size:24px;margin-bottom:5px;}
 .tb-label{font-size:12px;font-weight:700;color:#1a1a1a;}
 .tb-sub{font-size:10px;color:#888;margin-top:2px;}
-
 /* FOOTER SPACE */
 .footer-space{height:40px;}
-
 /* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);background:#1a1a1a;color:white;padding:13px 22px;border-radius:24px;font-size:13px;font-weight:600;z-index:9999;transition:transform 0.3s;white-space:nowrap;pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
-
 /* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:500;align-items:flex-end;}
 .overlay.open{display:flex;}
 .sheet{background:white;border-radius:20px 20px 0 0;padding:20px 18px 32px;width:100%;max-height:80vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 .sheet-handle{width:40px;height:4px;background:#d0d0d0;border-radius:2px;margin:0 auto 16px;}
 .sheet-title{font-size:16px;font-weight:700;margin-bottom:4px;}
-.sheet-sub{font-size:12px;color:#666;margin-bottom:16px;font-family:‘Courier New’,monospace;}
+.sheet-sub{font-size:12px;color:#666;margin-bottom:16px;font-family:'Courier New',monospace;}
 .sheet-field{margin-bottom:12px;}
 .sf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#888;margin-bottom:4px;}
 .sf-value{font-size:14px;color:#1a1a1a;}
 .sheet-divider{height:1px;background:#ececec;margin:14px 0;}
 .sheet-actions{display:flex;gap:10px;margin-top:18px;}
-.sa-btn{flex:1;padding:12px;border-radius:10px;font-family:‘Inter’,sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;text-align:center;}
+.sa-btn{flex:1;padding:12px;border-radius:10px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;text-align:center;}
 .sa-close{background:#f0f0f0;color:#1a1a1a;}
 .sa-delete{background:white;color:#d32f2f;border:1.5px solid #d32f2f;}
 .photo-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
 .photo-thumb{width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid #d0d0d0;}
 </style>
-
 </head>
-<body>
-
-<div class="top-nav">
+<body><div class="top-nav">
   <button class="nav-back" id="btnBack">&larr; Forms</button>
   <div class="nav-title">&#128202; Audit Top Sheet</div>
   <div class="nav-logo">MORIARTY<br>GROUP</div>
-</div>
-
-<div class="status-bar" id="statusBar">Connecting to database...</div>
-
-<div id="mainContent">
+</div><div class="status-bar" id="statusBar">Connecting to database...</div><div id="mainContent">
   <!-- rendered by JS -->
-</div>
-
-<div class="tools-section">
+</div><div class="tools-section">
   <div class="tools-title">Data Tools</div>
   <div class="tools-row">
     <div class="tool-btn" id="btnBackup">
@@ -115,15 +95,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
     </div>
   </div>
 </div>
-<input type="file" id="fileInput" accept=".json" style="display:none">
-
-<div class="footer-space"></div>
-
-<div class="toast" id="toast"></div>
-
-<!-- Record detail sheet -->
-
-<div class="overlay" id="recordOverlay">
+<input type="file" id="fileInput" accept=".json" style="display:none"><div class="footer-space"></div><div class="toast" id="toast"></div><!-- Record detail sheet --><div class="overlay" id="recordOverlay">
   <div class="sheet">
     <div class="sheet-handle"></div>
     <div class="sheet-title" id="sheetTitle"></div>
@@ -134,9 +106,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
       <button class="sa-btn sa-close" id="btnCloseRecord">Close</button>
     </div>
   </div>
-</div>
-
-<script>
+</div><script>
 var ALL_FORMS = [
   {id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},
   {id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},
@@ -181,348 +151,353 @@ var ALL_FORMS = [
   {id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}
 ];
 
-var DB_NAME = 'MoriartyHACCP', DB_VER = 1, db = null;
+var DB_NAME = ‘MoriartyHACCP’, DB_VER = 1, db = null;
 var allRecords = [];
 var activeRecordId = null;
 
-/* ---- IndexedDB ---- */
+/* –– IndexedDB –– */
 function openDB() {
-  return new Promise(function(res, rej) {
-    var req = indexedDB.open(DB_NAME, DB_VER);
-    req.onupgradeneeded = function(e) {
-      var d = e.target.result;
-      if (!d.objectStoreNames.contains('records')) {
-        var s = d.createObjectStore('records', {keyPath: 'id'});
-        s.createIndex('formId', 'formId', {unique: false});
-        s.createIndex('weekKey', 'weekKey', {unique: false});
-      }
-      if (!d.objectStoreNames.contains('weeks')) {
-        d.createObjectStore('weeks', {keyPath: 'weekKey'});
-      }
-    };
-    req.onsuccess = function(e) { db = e.target.result; res(db); };
-    req.onerror = function(e) { rej(e.target.error); };
-  });
+return new Promise(function(res, rej) {
+var req = indexedDB.open(DB_NAME, DB_VER);
+req.onupgradeneeded = function(e) {
+var d = e.target.result;
+if (!d.objectStoreNames.contains(‘records’)) {
+var s = d.createObjectStore(‘records’, {keyPath: ‘id’});
+s.createIndex(‘formId’, ‘formId’, {unique: false});
+s.createIndex(‘weekKey’, ‘weekKey’, {unique: false});
+}
+if (!d.objectStoreNames.contains(‘weeks’)) {
+d.createObjectStore(‘weeks’, {keyPath: ‘weekKey’});
+}
+};
+req.onsuccess = function(e) { db = e.target.result; res(db); };
+req.onerror = function(e) { rej(e.target.error); };
+});
 }
 function dbGetAll(store) {
-  return new Promise(function(res, rej) {
-    var tx = db.transaction(store, 'readonly');
-    var req = tx.objectStore(store).getAll();
-    req.onsuccess = function(e) { res(e.target.result); };
-    req.onerror = function(e) { rej(e.target.error); };
-  });
+return new Promise(function(res, rej) {
+var tx = db.transaction(store, ‘readonly’);
+var req = tx.objectStore(store).getAll();
+req.onsuccess = function(e) { res(e.target.result); };
+req.onerror = function(e) { rej(e.target.error); };
+});
 }
 function dbDelete(store, key) {
-  return new Promise(function(res, rej) {
-    var tx = db.transaction(store, 'readwrite');
-    tx.objectStore(store).delete(key);
-    tx.oncomplete = res;
-    tx.onerror = function(e) { rej(e.target.error); };
-  });
+return new Promise(function(res, rej) {
+var tx = db.transaction(store, ‘readwrite’);
+tx.objectStore(store).delete(key);
+tx.oncomplete = res;
+tx.onerror = function(e) { rej(e.target.error); };
+});
 }
 function dbPut(store, obj) {
-  return new Promise(function(res, rej) {
-    var tx = db.transaction(store, 'readwrite');
-    tx.objectStore(store).put(obj);
-    tx.oncomplete = res;
-    tx.onerror = function(e) { rej(e.target.error); };
-  });
+return new Promise(function(res, rej) {
+var tx = db.transaction(store, ‘readwrite’);
+tx.objectStore(store).put(obj);
+tx.oncomplete = res;
+tx.onerror = function(e) { rej(e.target.error); };
+});
 }
 
-/* ---- Week helpers ---- */
+/* –– Week helpers –– */
 function getWeekKey() {
-  var d = new Date();
-  var s = new Date(d);
-  s.setDate(d.getDate() - d.getDay());
-  s.setHours(0, 0, 0, 0);
-  return s.toISOString().split('T')[0];
+var d = new Date();
+var s = new Date(d);
+s.setDate(d.getDate() - d.getDay());
+s.setHours(0, 0, 0, 0);
+return s.toISOString().split(‘T’)[0];
 }
 function weekLabel(wk) {
-  var s = new Date(wk + 'T00:00:00');
-  var e = new Date(s);
-  e.setDate(s.getDate() + 6);
-  var opts = {day: 'numeric', month: 'short'};
-  return s.toLocaleDateString('en-IE', opts) + ' \u2013 ' + e.toLocaleDateString('en-IE', opts) + ' ' + e.getFullYear();
+var s = new Date(wk + ‘T00:00:00’);
+var e = new Date(s);
+e.setDate(s.getDate() + 6);
+var opts = {day: ‘numeric’, month: ‘short’};
+return s.toLocaleDateString(‘en-IE’, opts) + ’ \u2013 ’ + e.toLocaleDateString(‘en-IE’, opts) + ’ ’ + e.getFullYear();
 }
 function satMidnight(wk) {
-  var s = new Date(wk + 'T00:00:00');
-  s.setDate(s.getDate() + 6);
-  s.setHours(23, 59, 59, 0);
-  return s;
+var s = new Date(wk + ‘T00:00:00’);
+s.setDate(s.getDate() + 6);
+s.setHours(23, 59, 59, 0);
+return s;
 }
 function timeRemaining(wk) {
-  var diff = satMidnight(wk) - new Date();
-  if (diff <= 0) { return 'Week ended'; }
-  var d = Math.floor(diff / 86400000);
-  var h = Math.floor((diff % 86400000) / 3600000);
-  var m = Math.floor((diff % 3600000) / 60000);
-  return (d > 0 ? d + 'd ' : '') + h + 'h ' + m + 'm until close';
+var diff = satMidnight(wk) - new Date();
+if (diff <= 0) { return ‘Week ended’; }
+var d = Math.floor(diff / 86400000);
+var h = Math.floor((diff % 86400000) / 3600000);
+var m = Math.floor((diff % 3600000) / 60000);
+return (d > 0 ? d + ’d ’ : ‘’) + h + ’h ’ + m + ‘m until close’;
 }
 
-/* ---- Toast ---- */
+/* –– Toast –– */
 function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show';
-  setTimeout(function() { t.className = 'toast'; }, 3000);
+var t = document.getElementById(‘toast’);
+t.textContent = msg;
+t.className = ‘toast show’;
+setTimeout(function() { t.className = ‘toast’; }, 3000);
 }
 
-/* ---- Render top sheet ---- */
+/* –– Render top sheet –– */
 function render(recs) {
-  allRecords = recs;
-  var wk = getWeekKey();
+allRecords = recs;
+var wk = getWeekKey();
 
-  /* latest record per form for this week */
-  var byForm = {};
-  for (var i = 0; i < recs.length; i++) {
-    var r = recs[i];
-    if (r.weekKey !== wk) { continue; }
-    if (!byForm[r.formId] || r.savedAt > byForm[r.formId].savedAt) {
-      byForm[r.formId] = r;
-    }
+/* latest record per form for this week */
+var byForm = {};
+for (var i = 0; i < recs.length; i++) {
+var r = recs[i];
+if (r.weekKey !== wk) { continue; }
+if (!byForm[r.formId] || r.savedAt > byForm[r.formId].savedAt) {
+byForm[r.formId] = r;
+}
+}
+
+var done = Object.keys(byForm).length;
+var total = ALL_FORMS.length;
+var pct = total > 0 ? Math.round(done / total * 100) : 0;
+
+/* status bar */
+var sb = document.getElementById(‘statusBar’);
+sb.textContent = ‘\u25cf Live \u00b7 ’ + recs.length + ’ record’ + (recs.length !== 1 ? ‘s’ : ‘’) + ’ stored \u00b7 ’ + timeRemaining(wk);
+sb.className = ‘status-bar’;
+
+/* build HTML */
+var html = ‘’;
+
+/* week card */
+html += ‘<div class="week-card">’;
+html += ‘<div class="wc-label">Current Week</div>’;
+html += ‘<div class="wc-week">’ + weekLabel(wk) + ‘</div>’;
+html += ‘<div class="wc-row">’;
+html += ‘<div><div class="wc-pct">’ + pct + ‘%</div><div class="wc-pct-label">Complete</div></div>’;
+html += ‘<div class="wc-right"><div class="wc-count">’ + done + ’ / ’ + total + ’ forms</div><div class="wc-closes">Closes Saturday midnight</div></div>’;
+html += ‘</div></div>’;
+
+/* progress bar */
+html += ‘<div class="prog-wrap"><div class="prog-fill" style="width:' + pct + '%"></div></div>’;
+
+/* group forms by category */
+var cats = [];
+var catMap = {};
+for (var fi = 0; fi < ALL_FORMS.length; fi++) {
+var f = ALL_FORMS[fi];
+if (!catMap[f.cat]) { catMap[f.cat] = []; cats.push(f.cat); }
+catMap[f.cat].push(f);
+}
+
+for (var ci = 0; ci < cats.length; ci++) {
+var cat = cats[ci];
+var forms = catMap[cat];
+var catDone = 0;
+for (var cfi = 0; cfi < forms.length; cfi++) {
+if (byForm[forms[cfi].id]) { catDone++; }
+}
+var catPct = Math.round(catDone / forms.length * 100);
+
+```
+html += '<div class="section">';
+html += '<div class="section-head"><span>' + cat + '</span><span class="section-head-pct">' + catDone + '/' + forms.length + ' &nbsp;' + catPct + '%</span></div>';
+
+for (var ri = 0; ri < forms.length; ri++) {
+  var form = forms[ri];
+  var rec = byForm[form.id];
+  var rowClass = rec ? 'form-row done' : 'form-row missing';
+  var icon = rec ? '\u2705' : '\u26a0\ufe0f';
+  html += '<div class="' + rowClass + '" data-recordid="' + (rec ? rec.id : '') + '" data-formid="' + form.id + '">';
+  html += '<div class="fr-icon">' + icon + '</div>';
+  html += '<div class="fr-info"><div class="fr-name">' + form.name + '</div>';
+  if (rec) {
+    var dt = new Date(rec.savedAt);
+    var timeStr = dt.toLocaleString('en-IE', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', hour12:false});
+    var meta = timeStr + (rec.champion ? ' \u00b7 ' + rec.champion : '');
+    html += '<div class="fr-meta">' + meta + '</div>';
+  } else {
+    html += '<div class="fr-missing">Not yet submitted this week</div>';
   }
-
-  var done = Object.keys(byForm).length;
-  var total = ALL_FORMS.length;
-  var pct = total > 0 ? Math.round(done / total * 100) : 0;
-
-  /* status bar */
-  var sb = document.getElementById('statusBar');
-  sb.textContent = '\u25cf Live \u00b7 ' + recs.length + ' record' + (recs.length !== 1 ? 's' : '') + ' stored \u00b7 ' + timeRemaining(wk);
-  sb.className = 'status-bar';
-
-  /* build HTML */
-  var html = '';
-
-  /* week card */
-  html += '<div class="week-card">';
-  html += '<div class="wc-label">Current Week</div>';
-  html += '<div class="wc-week">' + weekLabel(wk) + '</div>';
-  html += '<div class="wc-row">';
-  html += '<div><div class="wc-pct">' + pct + '%</div><div class="wc-pct-label">Complete</div></div>';
-  html += '<div class="wc-right"><div class="wc-count">' + done + ' / ' + total + ' forms</div><div class="wc-closes">Closes Saturday midnight</div></div>';
   html += '</div></div>';
+}
+html += '</div>';
+```
 
-  /* progress bar */
-  html += '<div class="prog-wrap"><div class="prog-fill" style="width:' + pct + '%"></div></div>';
-
-  /* group forms by category */
-  var cats = [];
-  var catMap = {};
-  for (var fi = 0; fi < ALL_FORMS.length; fi++) {
-    var f = ALL_FORMS[fi];
-    if (!catMap[f.cat]) { catMap[f.cat] = []; cats.push(f.cat); }
-    catMap[f.cat].push(f);
-  }
-
-  for (var ci = 0; ci < cats.length; ci++) {
-    var cat = cats[ci];
-    var forms = catMap[cat];
-    var catDone = 0;
-    for (var cfi = 0; cfi < forms.length; cfi++) {
-      if (byForm[forms[cfi].id]) { catDone++; }
-    }
-    var catPct = Math.round(catDone / forms.length * 100);
-
-    html += '<div class="section">';
-    html += '<div class="section-head"><span>' + cat + '</span><span class="section-head-pct">' + catDone + '/' + forms.length + ' &nbsp;' + catPct + '%</span></div>';
-
-    for (var ri = 0; ri < forms.length; ri++) {
-      var form = forms[ri];
-      var rec = byForm[form.id];
-      var rowClass = rec ? 'form-row done' : 'form-row missing';
-      var icon = rec ? '\u2705' : '\u26a0\ufe0f';
-      html += '<div class="' + rowClass + '" data-recordid="' + (rec ? rec.id : '') + '" data-formid="' + form.id + '">';
-      html += '<div class="fr-icon">' + icon + '</div>';
-      html += '<div class="fr-info"><div class="fr-name">' + form.name + '</div>';
-      if (rec) {
-        var dt = new Date(rec.savedAt);
-        var timeStr = dt.toLocaleString('en-IE', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', hour12:false});
-        var meta = timeStr + (rec.champion ? ' \u00b7 ' + rec.champion : '');
-        html += '<div class="fr-meta">' + meta + '</div>';
-      } else {
-        html += '<div class="fr-missing">Not yet submitted this week</div>';
-      }
-      html += '</div></div>';
-    }
-    html += '</div>';
-  }
-
-  document.getElementById('mainContent').innerHTML = html;
-
-  /* attach row listeners */
-  var rows = document.getElementById('mainContent').querySelectorAll('.form-row');
-  for (var rl = 0; rl < rows.length; rl++) {
-    (function(row) {
-      row.addEventListener('click', function() {
-        var rid = row.getAttribute('data-recordid');
-        if (rid) {
-          openRecord(parseInt(rid, 10));
-        } else {
-          showToast('Not submitted yet \u2014 go to Forms to complete');
-        }
-      });
-    })(rows[rl]);
-  }
 }
 
-/* ---- Load ---- */
+document.getElementById(‘mainContent’).innerHTML = html;
+
+/* attach row listeners */
+var rows = document.getElementById(‘mainContent’).querySelectorAll(’.form-row’);
+for (var rl = 0; rl < rows.length; rl++) {
+(function(row) {
+row.addEventListener(‘click’, function() {
+var rid = row.getAttribute(‘data-recordid’);
+if (rid) {
+openRecord(parseInt(rid, 10));
+} else {
+showToast(‘Not submitted yet \u2014 go to Forms to complete’);
+}
+});
+})(rows[rl]);
+}
+}
+
+/* –– Load –– */
 function loadRecords() {
-  dbGetAll('records').then(function(recs) {
-    render(recs);
-  }).catch(function(e) {
-    var sb = document.getElementById('statusBar');
-    sb.textContent = 'Error reading records: ' + e.message;
-    sb.className = 'status-bar err';
-  });
+dbGetAll(‘records’).then(function(recs) {
+render(recs);
+}).catch(function(e) {
+var sb = document.getElementById(‘statusBar’);
+sb.textContent = ’Error reading records: ’ + e.message;
+sb.className = ‘status-bar err’;
+});
 }
 
-/* ---- Record detail ---- */
+/* –– Record detail –– */
 function openRecord(id) {
-  var rec = null;
-  for (var i = 0; i < allRecords.length; i++) {
-    if (allRecords[i].id === id) { rec = allRecords[i]; break; }
-  }
-  if (!rec) { return; }
-  activeRecordId = id;
+var rec = null;
+for (var i = 0; i < allRecords.length; i++) {
+if (allRecords[i].id === id) { rec = allRecords[i]; break; }
+}
+if (!rec) { return; }
+activeRecordId = id;
 
-  var form = null;
-  for (var fi = 0; fi < ALL_FORMS.length; fi++) {
-    if (ALL_FORMS[fi].id === rec.formId) { form = ALL_FORMS[fi]; break; }
-  }
+var form = null;
+for (var fi = 0; fi < ALL_FORMS.length; fi++) {
+if (ALL_FORMS[fi].id === rec.formId) { form = ALL_FORMS[fi]; break; }
+}
 
-  document.getElementById('sheetTitle').textContent = form ? form.name : rec.formId;
-  document.getElementById('sheetSub').textContent = 'Saved: ' + new Date(rec.savedAt).toLocaleString('en-IE');
+document.getElementById(‘sheetTitle’).textContent = form ? form.name : rec.formId;
+document.getElementById(‘sheetSub’).textContent = ’Saved: ’ + new Date(rec.savedAt).toLocaleString(‘en-IE’);
 
-  var html = '';
-  if (rec.weekEnding) {
-    html += '<div class="sheet-field"><div class="sf-label">Week Ending</div><div class="sf-value">' + rec.weekEnding + '</div></div>';
-  }
-  if (rec.champion) {
-    html += '<div class="sheet-field"><div class="sf-label">Food Safety Champion</div><div class="sf-value">' + rec.champion + '</div></div>';
-  }
-  if (rec.timestamp) {
-    html += '<div class="sheet-field"><div class="sf-label">Recorded At</div><div class="sf-value">' + rec.timestamp + '</div></div>';
-  }
-  if (rec.photoCount && rec.photoCount > 0) {
-    html += '<div class="sheet-divider"></div>';
-    html += '<div class="sheet-field"><div class="sf-label">Photos (' + rec.photoCount + ')</div>';
-    html += '<div class="photo-grid">';
-    for (var pi = 0; pi < rec.photos.length; pi++) {
-      html += '<img class="photo-thumb" src="' + rec.photos[pi].dataUrl + '">';
-    }
-    html += '</div></div>';
-  }
+var html = ‘’;
+if (rec.weekEnding) {
+html += ‘<div class="sheet-field"><div class="sf-label">Week Ending</div><div class="sf-value">’ + rec.weekEnding + ‘</div></div>’;
+}
+if (rec.champion) {
+html += ‘<div class="sheet-field"><div class="sf-label">Food Safety Champion</div><div class="sf-value">’ + rec.champion + ‘</div></div>’;
+}
+if (rec.timestamp) {
+html += ‘<div class="sheet-field"><div class="sf-label">Recorded At</div><div class="sf-value">’ + rec.timestamp + ‘</div></div>’;
+}
+if (rec.photoCount && rec.photoCount > 0) {
+html += ‘<div class="sheet-divider"></div>’;
+html += ‘<div class="sheet-field"><div class="sf-label">Photos (’ + rec.photoCount + ‘)</div>’;
+html += ‘<div class="photo-grid">’;
+for (var pi = 0; pi < rec.photos.length; pi++) {
+html += ‘<img class="photo-thumb" src="' + rec.photos[pi].dataUrl + '">’;
+}
+html += ‘</div></div>’;
+}
 
-  document.getElementById('sheetBody').innerHTML = html;
-  document.getElementById('recordOverlay').className = 'overlay open';
+document.getElementById(‘sheetBody’).innerHTML = html;
+document.getElementById(‘recordOverlay’).className = ‘overlay open’;
 }
 
 function closeRecord() {
-  document.getElementById('recordOverlay').className = 'overlay';
-  activeRecordId = null;
+document.getElementById(‘recordOverlay’).className = ‘overlay’;
+activeRecordId = null;
 }
 
 function deleteRecord() {
-  if (activeRecordId === null) { return; }
-  if (!confirm('Delete this record? This cannot be undone.')) { return; }
-  dbDelete('records', activeRecordId).then(function() {
-    closeRecord();
-    loadRecords();
-    showToast('Record deleted');
-  }).catch(function() {
-    showToast('Delete failed');
-  });
+if (activeRecordId === null) { return; }
+if (!confirm(‘Delete this record? This cannot be undone.’)) { return; }
+dbDelete(‘records’, activeRecordId).then(function() {
+closeRecord();
+loadRecords();
+showToast(‘Record deleted’);
+}).catch(function() {
+showToast(‘Delete failed’);
+});
 }
 
-/* ---- Backup / Restore ---- */
+/* –– Backup / Restore –– */
 function doBackup() {
-  dbGetAll('records').then(function(recs) {
-    dbGetAll('weeks').then(function(weeks) {
-      var data = {exportedAt: new Date().toISOString(), records: recs, weeks: weeks};
-      var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'haccp-backup-' + new Date().toISOString().split('T')[0] + '.json';
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('Backup downloaded');
-    }).catch(function() { showToast('Backup failed'); });
-  }).catch(function() { showToast('Backup failed'); });
+Promise.all([dbGetAll(‘records’), dbGetAll(‘weeks’)]).then(function(results) {
+var recs = results[0];
+var weeks = results[1];
+var data = {exportedAt: new Date().toISOString(), records: recs, weeks: weeks};
+var blob = new Blob([JSON.stringify(data, null, 2)], {type: ‘application/json’});
+var url = URL.createObjectURL(blob);
+var a = document.createElement(‘a’);
+a.href = url;
+a.download = ‘haccp-backup-’ + new Date().toISOString().split(‘T’)[0] + ‘.json’;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+showToast(‘Backup downloaded’);
+}).catch(function() { showToast(‘Backup failed’); });
 }
 
 function doRestore(file) {
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      var data = JSON.parse(e.target.result);
-      if (!data.records || !Array.isArray(data.records)) { throw new Error('bad format'); }
-      var puts = [];
-      for (var ri = 0; ri < data.records.length; ri++) { puts.push(dbPut('records', data.records[ri])); }
-      if (data.weeks) {
-        for (var wi = 0; wi < data.weeks.length; wi++) { puts.push(dbPut('weeks', data.weeks[wi])); }
-      }
-      Promise.all(puts).then(function() {
-        loadRecords();
-        showToast('\u2705 Backup restored');
-        document.getElementById('fileInput').value = '';
-      }).catch(function() { showToast('Restore failed'); });
-    } catch(err) {
-      showToast('Invalid backup file');
-    }
-  };
-  reader.readAsText(file);
+var reader = new FileReader();
+reader.onload = function(e) {
+try {
+var data = JSON.parse(e.target.result);
+if (!data.records || !Array.isArray(data.records)) { throw new Error(‘bad format’); }
+var puts = [];
+for (var ri = 0; ri < data.records.length; ri++) { puts.push(dbPut(‘records’, data.records[ri])); }
+if (data.weeks) {
+for (var wi = 0; wi < data.weeks.length; wi++) { puts.push(dbPut(‘weeks’, data.weeks[wi])); }
+}
+Promise.all(puts).then(function() {
+loadRecords();
+showToast(’\u2705 Backup restored’);
+document.getElementById(‘fileInput’).value = ‘’;
+}).catch(function() { showToast(‘Restore failed’); });
+} catch(err) {
+showToast(‘Invalid backup file’);
+}
+};
+reader.readAsText(file);
 }
 
-/* ---- Boot ---- */
-document.addEventListener('DOMContentLoaded', function() {
+/* –– Boot –– */
+document.addEventListener(‘DOMContentLoaded’, function() {
 
-  document.getElementById('btnBack').addEventListener('click', function() {
-    try { if (db) { db.close(); } } catch(e) {}
-    window.location.href = 'index.html';
-  });
+/* FIX: was ‘haccp.html’ — correct filename is ‘index.html’ */
+document.getElementById(‘btnBack’).addEventListener(‘click’, function() {
+try { if (db) { db.close(); } } catch(e) {}
+window.location.href = ‘index.html’;
+});
 
-  window.addEventListener('pagehide', function() {
-    try { if (db) { db.close(); } } catch(e) {}
-  });
+window.addEventListener(‘pagehide’, function() {
+try { if (db) { db.close(); } } catch(e) {}
+});
 
-  document.getElementById('btnBackup').addEventListener('click', function() {
-    doBackup();
-  });
+document.getElementById(‘btnBackup’).addEventListener(‘click’, function() {
+doBackup();
+});
 
-  document.getElementById('btnRestore').addEventListener('click', function() {
-    document.getElementById('fileInput').click();
-  });
+document.getElementById(‘btnRestore’).addEventListener(‘click’, function() {
+document.getElementById(‘fileInput’).click();
+});
 
-  document.getElementById('fileInput').addEventListener('change', function() {
-    if (this.files && this.files.length) { doRestore(this.files[0]); }
-  });
+document.getElementById(‘fileInput’).addEventListener(‘change’, function() {
+if (this.files && this.files.length) { doRestore(this.files[0]); }
+});
 
-  document.getElementById('btnDeleteRecord').addEventListener('click', function() {
-    deleteRecord();
-  });
+document.getElementById(‘btnDeleteRecord’).addEventListener(‘click’, function() {
+deleteRecord();
+});
 
-  document.getElementById('btnCloseRecord').addEventListener('click', function() {
-    closeRecord();
-  });
+document.getElementById(‘btnCloseRecord’).addEventListener(‘click’, function() {
+closeRecord();
+});
 
-  /* close sheet on overlay tap */
-  document.getElementById('recordOverlay').addEventListener('click', function(e) {
-    if (e.target === this) { closeRecord(); }
-  });
+/* close sheet on overlay tap */
+document.getElementById(‘recordOverlay’).addEventListener(‘click’, function(e) {
+if (e.target === this) { closeRecord(); }
+});
 
-  /* open DB and render */
-  var sb = document.getElementById('statusBar');
-  openDB().then(function() {
-    loadRecords();
-  }).catch(function(e) {
-    sb.textContent = 'Storage error: ' + (e.message || 'unknown');
-    sb.className = 'status-bar err';
-  });
+/* open DB and render */
+var sb = document.getElementById(‘statusBar’);
+openDB().then(function() {
+loadRecords();
+}).catch(function(e) {
+sb.textContent = ’Storage error: ’ + (e.message || ‘unknown’);
+sb.className = ‘status-bar err’;
+});
 
 });
-</script>
+</script></body>
 
-</body>
 </html>

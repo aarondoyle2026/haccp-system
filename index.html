@@ -752,6 +752,19 @@ var ta = scr.querySelector(‘textarea’);
 if (ta) correctiveAction = ta.value;
 }
 
+/* Form field data — serialize every input/select/textarea for audit reconstruction */
+var formData = [];
+if (scr) {
+var allFields = scr.querySelectorAll(‘input, select, textarea’);
+for (var fdi = 0; fdi < allFields.length; fdi++) {
+var fel = allFields[fdi];
+if (fel.type === ‘file’) continue;
+var fval = fel.type === ‘checkbox’ ? fel.checked : (fel.type === ‘radio’ ? (fel.checked ? fel.value : null) : fel.value);
+if (fval === null) continue;
+formData.push({tag:fel.tagName.toLowerCase(), type:fel.type||’’, id:fel.id||’’, name:fel.name||’’, cls:fel.className||’’, val:fval});
+}
+}
+
 /* Signatures — collect all canvases in this form screen as base64 */
 var signatures = [];
 if (scr) {
@@ -784,7 +797,8 @@ timestamp: formTimestamps[formId] || now.toLocaleString(‘en-IE’, {timeZone:�
 photos: photoData,
 photoCount: photoData.length,
 correctiveAction: correctiveAction,
-signatures: signatures
+signatures: signatures,
+formData: formData
 };
 
 var doSave = function() {

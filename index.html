@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
+
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
@@ -149,84 +149,1341 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 </style>
 </head>
 <body>
-<!-- ALL THE ORIGINAL HTML CONTENT (forms, tables, etc.) remains 100% unchanged -->
-<!-- ... (the entire body from your original first document is kept exactly as you pasted) ... -->
-
-<div id="home">
-  <!-- (your full home screen with all form-cards) -->
+<div class="top-nav">
+  <button class="back-btn" id="backBtn">&#8592; Back</button>
+  <div class="nav-title" id="navTitle">HACCP System</div>
+  <div class="nav-logo">MORIARTY<br>GROUP</div>
 </div>
-
-<!-- All form-screen divs (temp-meat, temp-prepack, ..., compliance, etc.) remain exactly as in your original file -->
-
+<div id="home">
+  <div class="home-header">
+    <div class="brand">MORIARTY GROUP</div>
+    <div class="sub">SUPERVALU &#183; ESTD 1987</div>
+    <div class="title">&#128203; HACCP Food Safety System</div>
+  </div>
+  <a class="records-banner" href="records.html">
+    <div class="rb-left">
+      <div class="rb-icon">&#128202;</div>
+      <div><div class="rb-text">Weekly Records &amp; Top Sheet</div><div class="rb-sub" id="home-banner-sub">Tap to view records</div></div>
+    </div>
+    <div class="rb-arrow">&#8250;</div>
+  </a>
+  <div class="category-section">
+    <div class="category-label">&#127777;&#65039; Temperature Checks</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="temp-meat"><div class="form-icon" style="background:#e8f5ee">&#129385;</div><div class="form-info"><div class="form-name">Meat Dept Temperature</div><div class="form-desc">Fish Display, Poultry, Pork, Raw Meat, Walk-in</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="temp-prepack"><div class="form-icon" style="background:#e8f5ee">&#129810;</div><div class="form-info"><div class="form-name">Pre-pack Dept Temperature</div><div class="form-desc">20 refrigerated units &#8211; AM &amp; PM checks</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="temp-dairy"><div class="form-icon" style="background:#fff8e1">&#129371;</div><div class="form-info"><div class="form-name">Dairy Dept Temperature</div><div class="form-desc">Milk, Cheese, Yoghurts, Fish Fridge, Coffee Machine</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="temp-frozen"><div class="form-icon" style="background:#e3f2fd">&#10052;&#65039;</div><div class="form-info"><div class="form-name">Frozen Temperature</div><div class="form-desc">Ice cream, freezer wells, back-up freezer</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="temp-fruitveg"><div class="form-icon" style="background:#e8f5e9">&#129382;</div><div class="form-info"><div class="form-name">Fruit &amp; Veg Temperature</div><div class="form-desc">Display fridges, Salad Fridge, Walk-in, Berry Fridges</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="temp-deli"><div class="form-icon" style="background:#fce4ec">&#127777;&#65039;</div><div class="form-info"><div class="form-name">Deli Temperature Checklist</div><div class="form-desc">Bakery &amp; Sandwich Bar &#8211; AM &amp; PM, 9 units, 0&#8211;5&#176;C</div></div><div class="form-arrow">&#8250;</div></div>
+    </div>
+  </div>
+  <div class="category-section">
+    <div class="category-label">&#128293; Hot Food &amp; Deli</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="hotfood-chicken-temp"><div class="form-icon" style="background:#fff3e0">&#127831;</div><div class="form-info"><div class="form-name">Chicken Unit Hourly Temps</div><div class="form-desc">S1 &amp; S2, 9am&#8211;6pm, Mon&#8211;Sun. Min 63&#176;C</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="hotfood-bar-temp"><div class="form-icon" style="background:#fff3e0">&#127777;&#65039;</div><div class="form-info"><div class="form-name">Hot Food Bar Hourly Temps</div><div class="form-desc">Up to 12 products per time slot, Mon&#8211;Sun</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="hotfood-soup-temp"><div class="form-icon" style="background:#fff8e1">&#127842;</div><div class="form-info"><div class="form-name">Soup Kettle Hourly Temps</div><div class="form-desc">S1 &amp; S2, 9am&#8211;6pm, Mon&#8211;Sun. Min 63&#176;C</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="hotfood-after-cook"><div class="form-icon" style="background:#fce4ec">&#9989;</div><div class="form-info"><div class="form-name">After Cook Check Sheet</div><div class="form-desc">Breakfast &amp; Lunch &#8211; Core temp min 75&#176;C</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="hotfood-greaseshield"><div class="form-icon" style="background:#e8f5ee">&#128167;</div><div class="form-info"><div class="form-name">GreaseShield Daily Maintenance</div><div class="form-desc">4-week cycle &#8211; FOG &amp; Solids containers, wiper blade</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="hotfood-daily-clean"><div class="form-icon" style="background:#e8f5ee">&#129532;</div><div class="form-info"><div class="form-name">Hot Food Daily Cleaning</div><div class="form-desc">18 items &#8211; daily schedule with chemicals</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="hotfood-weekly-clean"><div class="form-icon" style="background:#e8f5ee">&#129529;</div><div class="form-info"><div class="form-name">Hot Food Weekly Cleaning</div><div class="form-desc">13 items &#8211; deep clean schedule</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="cookedmeat-clean"><div class="form-icon" style="background:#fbe9e7">&#129532;</div><div class="form-info"><div class="form-name">Cooked Meats &amp; Bakery Daily Cleaning</div><div class="form-desc">14 items &#8211; daily schedule with chemicals</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="cookedmeat-weekly-clean"><div class="form-icon" style="background:#fbe9e7">&#129529;</div><div class="form-info"><div class="form-name">Cooked Meats &amp; Bakery Weekly Cleaning</div><div class="form-desc">8 items &#8211; deep clean schedule</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="thawing-check"><div class="form-icon" style="background:#e3f2fd">&#129938;</div><div class="form-info"><div class="form-name">Thawing Check Sheet</div><div class="form-desc">Frozen product, thaw times, core temp, use by dates</div></div><div class="form-arrow">&#8250;</div></div>
+    </div>
+  </div>
+  <div class="category-section">
+    <div class="category-label">&#129371; Deli Traceability</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="deli-trace-stuffing"><div class="form-icon" style="background:#fff3e0">&#129369;</div><div class="form-info"><div class="form-name">Sandwich Log &#8211; Stuffing &amp; Wraps</div><div class="form-desc">Stuffing, Beetroot, Wraps (Tomato/Brown/Plane)</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="deli-trace-butter"><div class="form-icon" style="background:#fff8e1">&#129472;</div><div class="form-info"><div class="form-name">Sandwich Log &#8211; Butter/Ham/Turkey</div><div class="form-desc">Butter, Ham, Turkey, Cheese, Mozzarella, Coleslaw</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="deli-trace-chicken"><div class="form-icon" style="background:#fff3e0">&#127831;</div><div class="form-info"><div class="form-name">Sandwich Log &#8211; Chicken Tikka</div><div class="form-desc">OUBD / DP / UBD &#8211; Mon to Sun</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="deli-trace-saladveg"><div class="form-icon" style="background:#e8f5e9">&#129367;</div><div class="form-info"><div class="form-name">Sandwich Log &#8211; Salad Veg</div><div class="form-desc">Chicken, Onion, Cucumber, Scallions, Peppers, Tomatoes</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="deli-trace-eggtuna"><div class="form-icon" style="background:#e3f2fd">&#128031;</div><div class="form-info"><div class="form-name">Sandwich Log &#8211; Egg &amp; Tuna</div><div class="form-desc">Eggs, Mayo, Egg Mayo, Tuna &amp; Sweetcorn, Sweetcorn</div></div><div class="form-arrow">&#8250;</div></div>
+    </div>
+  </div>
+  <div class="category-section">
+    <div class="category-label">&#128230; Traceability Logs</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="trace-sandwich"><div class="form-icon" style="background:#fff3e0">&#129370;</div><div class="form-info"><div class="form-name">Pre-Pack Sandwich Tracker</div><div class="form-desc">18 sandwich types &#8211; IUBD &amp; UBD daily log</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-wrap"><div class="form-icon" style="background:#fff3e0">&#127991;</div><div class="form-info"><div class="form-name">Pre-Pack Wrap Tracker</div><div class="form-desc">7 wrap types &#8211; IUBD &amp; UBD daily log</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-pizza"><div class="form-icon" style="background:#fce4ec">&#127829;</div><div class="form-info"><div class="form-name">Pre-Pack Pizza Tracker</div><div class="form-desc">7 pizza types &#8211; IUBD &amp; UBD daily log</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-salad-made"><div class="form-icon" style="background:#e8f5e9">&#129367;</div><div class="form-info"><div class="form-name">Salads Made in Store</div><div class="form-desc">IUBD, Date Made, Display Date</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-salad-prepack"><div class="form-icon" style="background:#e8f5e9">&#129369;</div><div class="form-info"><div class="form-name">Pre-Pack Salads</div><div class="form-desc">IUBD/OUBD, Date Made/Opened, Display Date</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-savouries"><div class="form-icon" style="background:#f3e5f5">&#129383;</div><div class="form-info"><div class="form-name">Savouries Traceability</div><div class="form-desc">Quiche, pate, baked potatoes, samosa, spring rolls</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-cooked-meats"><div class="form-icon" style="background:#fbe9e7">&#129358;</div><div class="form-info"><div class="form-name">Cooked Meat Traceability</div><div class="form-desc">OUBD, Bulk DU, Slice DU daily log</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-salami"><div class="form-icon" style="background:#fbe9e7">&#129388;</div><div class="form-info"><div class="form-name">Salami / Olives Traceability</div><div class="form-desc">OUBD, Date Opened, Use By Date</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-cheese"><div class="form-icon" style="background:#fff9c4">&#129472;</div><div class="form-info"><div class="form-name">Cheese Traceability</div><div class="form-desc">OUBD, Date Opened, Use By Date</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-fish"><div class="form-icon" style="background:#e3f2fd">&#128031;</div><div class="form-info"><div class="form-name">Fish Tracker (Serve-over)</div><div class="form-desc">Country of origin, Display Until, Traceability No.</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-pork"><div class="form-icon" style="background:#fce4ec">&#129361;</div><div class="form-info"><div class="form-name">Pork &amp; Bacon Traceability</div><div class="form-desc">OUBD, Date Cut/Displayed, Scales Use By, Batch No</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="trace-butcher"><div class="form-icon" style="background:#fce4ec">&#128298;</div><div class="form-info"><div class="form-name">Prep by Butcher / Fishmonger</div><div class="form-desc">Batch traceability &#8211; ingredients &amp; use by dates</div></div><div class="form-arrow">&#8250;</div></div>
+    </div>
+  </div>
+  <div class="category-section">
+    <div class="category-label">&#9881;&#65039; Production Logs</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="prod-mince"><div class="form-icon" style="background:#fbe9e7">&#129385;</div><div class="form-info"><div class="form-name">Mince Control Sheet</div><div class="form-desc">Temperature, batch code, scales use by, date removed</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="prod-burger"><div class="form-icon" style="background:#fff3e0">&#127828;</div><div class="form-info"><div class="form-name">Burger Control Sheet</div><div class="form-desc">Meat used, batch code, burger mix, scales use by</div></div><div class="form-arrow">&#8250;</div></div>
+    </div>
+  </div>
+  <div class="category-section">
+    <div class="category-label">&#129529; Cleaning Schedules</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="clean-redmeat"><div class="form-icon" style="background:#e8f5ee">&#129532;</div><div class="form-info"><div class="form-name">Red Meat Dept Cleaning</div><div class="form-desc">Daily &amp; weekly cleaning schedule with chemicals</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="clean-fruitveg"><div class="form-icon" style="background:#e8f5e9">&#129382;</div><div class="form-info"><div class="form-name">Fruit &amp; Veg Cleaning</div><div class="form-desc">Daily AM/PM and weekly deep clean</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="clean-stockroom"><div class="form-icon" style="background:#f3e5f5">&#128230;</div><div class="form-info"><div class="form-name">Grocery Stockroom Cleaning</div><div class="form-desc">Daily and weekly cleaning schedule</div></div><div class="form-arrow">&#8250;</div></div>
+    </div>
+  </div>
+  <div class="category-section">
+    <div class="category-label">&#128666; Goods Inwards</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="goods-chilled"><div class="form-icon" style="background:#e3f2fd">&#129810;</div><div class="form-info"><div class="form-name">Goods Inwards Chilled/Frozen</div><div class="form-desc">Temp check, supplier, accept/reject, dating</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="goods-ambient"><div class="form-icon" style="background:#fff8e1">&#128230;</div><div class="form-info"><div class="form-name">Goods Inwards Ambient</div><div class="form-desc">Food safety checks, delivery docket, dating</div></div><div class="form-arrow">&#8250;</div></div>
+    </div>
+  </div>
+  <div class="category-section">
+    <div class="category-label">&#9989; Compliance</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="compliance"><div class="form-icon" style="background:#e8eaf6">&#128202;</div><div class="form-info"><div class="form-name">HACCP Compliance Report</div><div class="form-desc">Weekly audit &#8211; all departments scored 0/3/5</div></div><div class="form-arrow">&#8250;</div></div>
+    </div>
+  </div>
+  <div style="height:20px"></div>
+</div>
+<div id="temp-meat" class="form-screen"><div class="form-header"><h2>&#129385; Meat Dept Temperature Checklist</h2><p>Check AM &amp; PM daily with hand-held probe.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-temp-meat"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-temp-meat"></div></div>
+<div class="week-table-wrap"><table class="week-table temp-table"><thead><tr><th class="product-col unit-col">Refrigerated Unit</th><th class="temp-col">Target</th><th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th><th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th><th style="min-width:80px">Comments</th></tr><tr><th class="product-col"></th><th></th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th></th></tr></thead><tbody id="temp-meat-body"></tbody></table></div>
+<div class="section-title">Corrective Action</div><textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>
+<div class="section-title">Signatures</div>
+<div class="field-row"><div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-temp-meat-am" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-meat-am">Clear</button></div></div><div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-temp-meat-pm" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-meat-pm">Clear</button></div></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-temp-meat-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-meat-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-temp-meat"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="temp-meat">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-temp-meat"></div><label class="photo-add-btn" for="photo-input-temp-meat">&#128247; Add Photo Evidence<input type="file" id="photo-input-temp-meat" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-meat"></label></div></div>
+<button class="btn-save" data-saveid="temp-meat">&#128190; Save to Records</button></div></div>
+<div id="temp-prepack" class="form-screen"><div class="form-header"><h2>&#129810; Pre-pack Dept Temperature Checklist</h2><p>Check product/air temp twice daily.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-temp-prepack"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-temp-prepack"></div></div>
+<div class="week-table-wrap"><table class="week-table temp-table"><thead><tr><th class="product-col unit-col">Refrigerated Unit</th><th class="temp-col">Target</th><th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th><th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th><th style="min-width:80px">Comments</th></tr><tr><th class="product-col"></th><th></th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th></th></tr></thead><tbody id="temp-prepack-body"></tbody></table></div>
+<div class="section-title">Corrective Action</div><textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>
+<div class="section-title">Signatures</div>
+<div class="field-row"><div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-temp-prepack-am" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-prepack-am">Clear</button></div></div><div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-temp-prepack-pm" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-prepack-pm">Clear</button></div></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-temp-prepack-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-prepack-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-temp-prepack"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="temp-prepack">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-temp-prepack"></div><label class="photo-add-btn" for="photo-input-temp-prepack">&#128247; Add Photo Evidence<input type="file" id="photo-input-temp-prepack" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-prepack"></label></div></div>
+<button class="btn-save" data-saveid="temp-prepack">&#128190; Save to Records</button></div></div>
+<div id="temp-dairy" class="form-screen"><div class="form-header"><h2>&#129371; Dairy Dept Temperature Checklist</h2><p>All units target 0&#8211;5&#176;C.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-temp-dairy"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-temp-dairy"></div></div>
+<div class="week-table-wrap"><table class="week-table temp-table"><thead><tr><th class="product-col unit-col">Refrigerated Unit</th><th class="temp-col">Target</th><th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th><th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th><th style="min-width:80px">Comments</th></tr><tr><th class="product-col"></th><th></th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th></th></tr></thead><tbody id="temp-dairy-body"></tbody></table></div>
+<div class="section-title">Corrective Action</div><textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>
+<div class="section-title">Signatures</div>
+<div class="field-row"><div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-temp-dairy-am" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-dairy-am">Clear</button></div></div><div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-temp-dairy-pm" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-dairy-pm">Clear</button></div></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-temp-dairy-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-dairy-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-temp-dairy"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="temp-dairy">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-temp-dairy"></div><label class="photo-add-btn" for="photo-input-temp-dairy">&#128247; Add Photo Evidence<input type="file" id="photo-input-temp-dairy" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-dairy"></label></div></div>
+<button class="btn-save" data-saveid="temp-dairy">&#128190; Save to Records</button></div></div>
+<div id="temp-frozen" class="form-screen"><div class="form-header"><h2>&#10052;&#65039; Frozen Temperature Checklist</h2><p>Ice cream: -23&#176;C, all others: -18&#176;C.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-temp-frozen"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-temp-frozen"></div></div>
+<div class="week-table-wrap"><table class="week-table temp-table"><thead><tr><th class="product-col unit-col">Refrigerated Unit</th><th class="temp-col">Target</th><th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th><th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th><th style="min-width:80px">Comments</th></tr><tr><th class="product-col"></th><th></th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th></th></tr></thead><tbody id="temp-frozen-body"></tbody></table></div>
+<div class="section-title">Corrective Action</div><textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>
+<div class="section-title">Signatures</div>
+<div class="field-row"><div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-temp-frozen-am" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-frozen-am">Clear</button></div></div><div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-temp-frozen-pm" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-frozen-pm">Clear</button></div></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-temp-frozen-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-frozen-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-temp-frozen"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="temp-frozen">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-temp-frozen"></div><label class="photo-add-btn" for="photo-input-temp-frozen">&#128247; Add Photo Evidence<input type="file" id="photo-input-temp-frozen" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-frozen"></label></div></div>
+<button class="btn-save" data-saveid="temp-frozen">&#128190; Save to Records</button></div></div>
+<div id="temp-fruitveg" class="form-screen"><div class="form-header"><h2>&#129382; Fruit &amp; Veg Temperature Checklist</h2><p>All units target 0&#8211;5&#176;C.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-temp-fruitveg"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-temp-fruitveg"></div></div>
+<div class="week-table-wrap"><table class="week-table temp-table"><thead><tr><th class="product-col unit-col">Refrigerated Unit</th><th class="temp-col">Target</th><th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th><th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th><th style="min-width:80px">Comments</th></tr><tr><th class="product-col"></th><th></th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th></th></tr></thead><tbody id="temp-fruitveg-body"></tbody></table></div>
+<div class="section-title">Corrective Action</div><textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>
+<div class="section-title">Signatures</div>
+<div class="field-row"><div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-temp-fruitveg-am" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-fruitveg-am">Clear</button></div></div><div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-temp-fruitveg-pm" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-fruitveg-pm">Clear</button></div></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-temp-fruitveg-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-fruitveg-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-temp-fruitveg"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="temp-fruitveg">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-temp-fruitveg"></div><label class="photo-add-btn" for="photo-input-temp-fruitveg">&#128247; Add Photo Evidence<input type="file" id="photo-input-temp-fruitveg" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-fruitveg"></label></div></div>
+<button class="btn-save" data-saveid="temp-fruitveg">&#128190; Save to Records</button></div></div>
+<div id="temp-deli" class="form-screen"><div class="form-header"><h2>&#127777;&#65039; Deli Temperature Checklist</h2><p>Bakery &amp; Sandwich Bar &#8211; 9 units, target 0&#8211;5&#176;C.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-temp-deli"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-temp-deli"></div></div>
+<div class="week-table-wrap"><table class="week-table temp-table"><thead><tr><th class="product-col unit-col">Refrigerated Unit</th><th class="temp-col">Target</th><th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th><th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th><th colspan="2">Sunday</th><th style="min-width:80px">Comments</th></tr><tr><th class="product-col"></th><th></th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th></th></tr></thead><tbody id="temp-deli-body"></tbody></table></div>
+<div class="section-title">Corrective Action</div><textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>
+<div class="section-title">Signatures</div>
+<div class="field-row"><div class="field-group"><label class="field-label">Signature AM</label><div class="sig-box"><canvas id="sig-temp-deli-am" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-deli-am">Clear</button></div></div><div class="field-group"><label class="field-label">Signature PM</label><div class="sig-box"><canvas id="sig-temp-deli-pm" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-deli-pm">Clear</button></div></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-temp-deli-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-temp-deli-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-temp-deli"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="temp-deli">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-temp-deli"></div><label class="photo-add-btn" for="photo-input-temp-deli">&#128247; Add Photo Evidence<input type="file" id="photo-input-temp-deli" accept="image/*" capture="environment" multiple style="display:none" data-photoid="temp-deli"></label></div></div>
+<button class="btn-save" data-saveid="temp-deli">&#128190; Save to Records</button></div></div>
+<div id="hotfood-chicken-temp" class="form-screen"><div class="form-header"><h2>&#127831; Chicken Unit Hourly Temp Checks</h2><p>Core temp must be &gt;63&#176;C. Check hourly 9am&#8211;6pm.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-hotfood-chicken-temp"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-hotfood-chicken-temp"></div></div>
+<div class="warn-box">*Sanitise probe. Core temp must be &gt;63&#176;C &#8212; if below, dispose of product and record. *Vary sampling (front, middle &amp; back). RQA 1019</div>
+<div class="week-table-wrap"><table class="hourly-table" id="chicken-hourly-table"></table></div>
+<div class="section-title">Action &amp; Sign-off</div>
+<div class="field-row"><div class="field-group"><label class="field-label">Action taken if temp &lt;63&#176;C</label><input class="field-input" type="text"></div><div class="field-group"><label class="field-label">Manager Signature</label><input class="field-input" type="text"></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-hotfood-chicken-temp"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="hotfood-chicken-temp">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-hotfood-chicken-temp"></div><label class="photo-add-btn" for="photo-input-hotfood-chicken-temp">&#128247; Add Photo Evidence<input type="file" id="photo-input-hotfood-chicken-temp" accept="image/*" capture="environment" multiple style="display:none" data-photoid="hotfood-chicken-temp"></label></div></div>
+<button class="btn-save" data-saveid="hotfood-chicken-temp">&#128190; Save to Records</button></div></div>
+<div id="hotfood-bar-temp" class="form-screen"><div class="form-header"><h2>&#127777;&#65039; Hot Food Bar Hourly Temp Checks</h2><p>Up to 12 products per slot. Core temp must be &gt;63&#176;C.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-hotfood-bar-temp"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-hotfood-bar-temp"></div></div>
+<div class="warn-box">*Vary sampling (front, middle &amp; back). *Keep door closed when not in use. RQA 1019 (B)</div>
+<div class="week-table-wrap"><table class="hourly-table" id="hotbar-hourly-table"></table></div>
+<div class="section-title">Action &amp; Sign-off</div>
+<div class="field-row"><div class="field-group"><label class="field-label">Action taken if temp &lt;63&#176;C</label><input class="field-input" type="text"></div><div class="field-group"><label class="field-label">Manager Signature</label><input class="field-input" type="text"></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-hotfood-bar-temp"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="hotfood-bar-temp">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-hotfood-bar-temp"></div><label class="photo-add-btn" for="photo-input-hotfood-bar-temp">&#128247; Add Photo Evidence<input type="file" id="photo-input-hotfood-bar-temp" accept="image/*" capture="environment" multiple style="display:none" data-photoid="hotfood-bar-temp"></label></div></div>
+<button class="btn-save" data-saveid="hotfood-bar-temp">&#128190; Save to Records</button></div></div>
+<div id="hotfood-soup-temp" class="form-screen"><div class="form-header"><h2>&#127842; Soup Kettle Hourly Temp Checks</h2><p>S1 &amp; S2, 9am&#8211;6pm daily. Min 63&#176;C.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-hotfood-soup-temp"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-hotfood-soup-temp"></div></div>
+<div class="warn-box">*Sanitise probe. Core temp must be &gt;63&#176;C &#8212; if below, dispose of product. RQA 1019</div>
+<div class="week-table-wrap"><table class="hourly-table" id="soup-hourly-table"></table></div>
+<div class="section-title">Action &amp; Sign-off</div>
+<div class="field-row"><div class="field-group"><label class="field-label">Action taken if temp &lt;63&#176;C</label><input class="field-input" type="text"></div><div class="field-group"><label class="field-label">Manager Signature</label><input class="field-input" type="text"></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-hotfood-soup-temp"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="hotfood-soup-temp">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-hotfood-soup-temp"></div><label class="photo-add-btn" for="photo-input-hotfood-soup-temp">&#128247; Add Photo Evidence<input type="file" id="photo-input-hotfood-soup-temp" accept="image/*" capture="environment" multiple style="display:none" data-photoid="hotfood-soup-temp"></label></div></div>
+<button class="btn-save" data-saveid="hotfood-soup-temp">&#128190; Save to Records</button></div></div>
+<div id="hotfood-after-cook" class="form-screen"><div class="form-header"><h2>&#9989; After Cook Check Sheet</h2><p>Minimum core temperature 75&#176;C instantaneous.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-hotfood-after-cook"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-hotfood-after-cook"></div></div>
+<div class="warn-box">*Sanitise probe, insert into core of product. *Accept core temp minimum <strong>75&#176;C</strong> instantaneous. *If &lt;75&#176;C cook further. RQA D dated 01:08</div>
+<div class="week-table-wrap"><table class="cook-table"><thead><tr><th style="width:10%">Time</th><th style="width:25%;text-align:left">Product</th><th style="width:18%">Use By / Batch No. / Plant No.</th><th style="width:13%">Core Temp (min 75&#176;C)</th><th style="width:16%">Supplier Use by Date</th><th style="width:18%">Signature</th></tr></thead><tbody id="after-cook-tbody"></tbody></table></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-after-cook" height="80"></canvas><button class="sig-clear" data-sigid="sig-after-cook">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-hotfood-after-cook"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="hotfood-after-cook">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-hotfood-after-cook"></div><label class="photo-add-btn" for="photo-input-hotfood-after-cook">&#128247; Add Photo Evidence<input type="file" id="photo-input-hotfood-after-cook" accept="image/*" capture="environment" multiple style="display:none" data-photoid="hotfood-after-cook"></label></div></div>
+<button class="btn-save" data-saveid="hotfood-after-cook">&#128190; Save to Records</button></div></div>
+<div id="hotfood-greaseshield" class="form-screen"><div class="form-header"><h2>&#128167; GreaseShield Daily Maintenance Record</h2><p>4-Week Cycle &#8211; FOG &amp; Solids containers and Wiper Blade.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Starting Monday</label><input class="field-input" type="date" id="we-hotfood-greaseshield"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-hotfood-greaseshield"></div></div>
+<div class="field-row"><div class="field-group"><label class="field-label">Premises Located At</label><input class="field-input" type="text" placeholder="Address"></div><div class="field-group"><label class="field-label">GreaseShield Location</label><input class="field-input" type="text" placeholder="Location"></div></div>
+<div class="info-box"><strong>INSTRUCTION:</strong> Ensure the FOG &amp; Solids Containers are washed every day in warm soapy water and the Wiper Blade is wiped clean and fitted correctly.</div>
+<div class="week-table-wrap"><table class="gs-table"><thead><tr><th class="day-col">Day</th><th>Date</th><th colspan="2">Wiper Blade Cleaned</th><th colspan="2">FOG &amp; Solids Containers Cleaned</th><th>FOG Litres</th><th>Solids Litres</th><th>Staff Initials</th><th>Time</th></tr><tr><th></th><th></th><th>YES</th><th>NO</th><th>YES</th><th>NO</th><th></th><th></th><th></th><th></th></tr></thead><tbody id="gs-tbody"></tbody></table></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-hotfood-greaseshield"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="hotfood-greaseshield">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-hotfood-greaseshield"></div><label class="photo-add-btn" for="photo-input-hotfood-greaseshield">&#128247; Add Photo Evidence<input type="file" id="photo-input-hotfood-greaseshield" accept="image/*" capture="environment" multiple style="display:none" data-photoid="hotfood-greaseshield"></label></div></div>
+<button class="btn-save" data-saveid="hotfood-greaseshield">&#128190; Save to Records</button></div></div>
+<div id="hotfood-daily-clean" class="form-screen"><div class="form-header"><h2>&#129532; Hot Food Dept Daily Cleaning Schedule</h2><p>Please initial relevant box when each item has been thoroughly cleaned.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-hotfood-daily-clean"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-hotfood-daily-clean"></div></div>
+<div class="week-table-wrap"><table class="clean-table"><thead><tr><th class="area-col">Area / Item to be Cleaned</th><th class="chem-col">Chemical Used</th><th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th><th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th></tr></thead><tbody id="hotfood-daily-clean-body"></tbody></table></div>
+<div class="info-box" style="margin-top:8px"><strong>REMEMBER ALWAYS CLEAN AS YOU GO</strong> | RQA 1032</div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-hotfood-daily-clean" height="80"></canvas><button class="sig-clear" data-sigid="sig-hotfood-daily-clean">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-hotfood-daily-clean-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-hotfood-daily-clean-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-hotfood-daily-clean"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="hotfood-daily-clean">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-hotfood-daily-clean"></div><label class="photo-add-btn" for="photo-input-hotfood-daily-clean">&#128247; Add Photo Evidence<input type="file" id="photo-input-hotfood-daily-clean" accept="image/*" capture="environment" multiple style="display:none" data-photoid="hotfood-daily-clean"></label></div></div>
+<button class="btn-save" data-saveid="hotfood-daily-clean">&#128190; Save to Records</button></div></div>
+<div id="hotfood-weekly-clean" class="form-screen"><div class="form-header"><h2>&#129529; Hot Food Dept Weekly Cleaning Schedule</h2><p>Please initial relevant box when each item has been thoroughly cleaned.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-hotfood-weekly-clean"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-hotfood-weekly-clean"></div></div>
+<div class="week-table-wrap"><table class="clean-table"><thead><tr><th class="area-col">Area / Item to be Cleaned</th><th class="chem-col">Chemical Used</th><th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th><th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th></tr></thead><tbody id="hotfood-weekly-clean-body"></tbody></table></div>
+<div class="info-box" style="margin-top:8px"><strong>REMEMBER ALWAYS CLEAN AS YOU GO</strong> | RQA 1032</div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-hotfood-weekly-clean" height="80"></canvas><button class="sig-clear" data-sigid="sig-hotfood-weekly-clean">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-hotfood-weekly-clean-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-hotfood-weekly-clean-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-hotfood-weekly-clean"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="hotfood-weekly-clean">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-hotfood-weekly-clean"></div><label class="photo-add-btn" for="photo-input-hotfood-weekly-clean">&#128247; Add Photo Evidence<input type="file" id="photo-input-hotfood-weekly-clean" accept="image/*" capture="environment" multiple style="display:none" data-photoid="hotfood-weekly-clean"></label></div></div>
+<button class="btn-save" data-saveid="hotfood-weekly-clean">&#128190; Save to Records</button></div></div>
+<div id="cookedmeat-clean" class="form-screen"><div class="form-header"><h2>&#129532; Cooked Meats &amp; Bakery Cleaning Schedule</h2><p>Please initial relevant box when each item has been thoroughly cleaned.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-cookedmeat-clean"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-cookedmeat-clean"></div></div>
+<div class="week-table-wrap"><table class="clean-table"><thead><tr><th class="area-col">Area / Item to be Cleaned</th><th class="chem-col">Chemical Used</th><th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th><th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th></tr></thead><tbody id="cookedmeat-clean-body"></tbody></table></div>
+<div class="info-box" style="margin-top:8px"><strong>REMEMBER ALWAYS CLEAN AS YOU GO</strong> | RQA 1032</div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-cookedmeat-clean" height="80"></canvas><button class="sig-clear" data-sigid="sig-cookedmeat-clean">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-cookedmeat-clean-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-cookedmeat-clean-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-cookedmeat-clean"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="cookedmeat-clean">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-cookedmeat-clean"></div><label class="photo-add-btn" for="photo-input-cookedmeat-clean">&#128247; Add Photo Evidence<input type="file" id="photo-input-cookedmeat-clean" accept="image/*" capture="environment" multiple style="display:none" data-photoid="cookedmeat-clean"></label></div></div>
+<button class="btn-save" data-saveid="cookedmeat-clean">&#128190; Save to Records</button></div></div>
+<div id="cookedmeat-weekly-clean" class="form-screen"><div class="form-header"><h2>&#129529; Cooked Meats &amp; Bakery Weekly Cleaning Schedule</h2><p>Please initial relevant box when each item has been thoroughly cleaned.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-cookedmeat-weekly-clean"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-cookedmeat-weekly-clean"></div></div>
+<div class="week-table-wrap"><table class="clean-table"><thead><tr><th class="area-col">Area / Item to be Cleaned</th><th class="chem-col">Chemical Used</th><th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th><th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th></tr></thead><tbody id="cookedmeat-weekly-clean-body"></tbody></table></div>
+<div class="info-box" style="margin-top:8px"><strong>REMEMBER ALWAYS CLEAN AS YOU GO</strong> | RQA 1032 Issue D dated 01:08</div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-cookedmeat-weekly-clean" height="80"></canvas><button class="sig-clear" data-sigid="sig-cookedmeat-weekly-clean">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-cookedmeat-weekly-clean-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-cookedmeat-weekly-clean-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-cookedmeat-weekly-clean"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="cookedmeat-weekly-clean">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-cookedmeat-weekly-clean"></div><label class="photo-add-btn" for="photo-input-cookedmeat-weekly-clean">&#128247; Add Photo Evidence<input type="file" id="photo-input-cookedmeat-weekly-clean" accept="image/*" capture="environment" multiple style="display:none" data-photoid="cookedmeat-weekly-clean"></label></div></div>
+<button class="btn-save" data-saveid="cookedmeat-weekly-clean">&#128190; Save to Records</button></div></div>
+<div id="thawing-check" class="form-screen"><div class="form-header"><h2>&#129938; Thawing Check Sheet</h2><p>Record all frozen products being thawed. Core temp target 0&#8211;5&#176;C after thawing.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Date</label><input class="field-input" type="date" id="we-thawing-check"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-thawing-check"></div></div>
+<div class="field-group"><label class="field-label">Department</label><input class="field-input" type="text" placeholder="e.g. Bakery / Deli"></div>
+<div class="warn-box">*Frozen food must be defrosted in a refrigerated area &lt;5&#176;C.<br>*Core temperature must be checked &#8212; target 0&#176;C to 5&#176;C.<br>*Thawed food must be processed within 24 hours.</div>
+<div class="week-table-wrap"><table class="log-table"><thead><tr><th>Date</th><th>Frozen Product</th><th>Time &amp; Date Thawing Commenced</th><th>Time &amp; Date Thawing Completed</th><th>Core Temp after Thawing</th><th>Date Product Cooked / Displayed</th><th>Original Use By Date</th><th>New Use By Date</th></tr></thead><tbody id="thawing-body"></tbody></table></div>
+<div class="field-group"><label class="field-label">Food Safety Champion Signature</label><div class="sig-box"><canvas id="sig-thawing" height="80"></canvas><button class="sig-clear" data-sigid="sig-thawing">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-thawing-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-thawing-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-thawing-check"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="thawing-check">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-thawing-check"></div><label class="photo-add-btn" for="photo-input-thawing-check">&#128247; Add Photo Evidence<input type="file" id="photo-input-thawing-check" accept="image/*" capture="environment" multiple style="display:none" data-photoid="thawing-check"></label></div></div>
+<button class="btn-save" data-saveid="thawing-check">&#128190; Save to Records</button></div></div>
+<div id="deli-trace-stuffing" class="form-screen"><div class="form-header"><h2>&#129369; Sandwich Log &#8211; Stuffing &amp; Wraps</h2><p>Complete on a daily basis when placing stock on the counter.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-deli-trace-stuffing"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-deli-trace-stuffing"></div></div>
+<div class="info-box"><strong>OUBD</strong> = Original Use by date | <strong>DP</strong> = Date Prep. | <strong>UBD</strong> = Use By Date | <strong>D</strong> = Display Until</div>
+<div class="week-table-wrap"><table class="deli-trace-table" id="deli-trace-stuffing-table"></table></div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-deli-trace-stuffing" height="80"></canvas><button class="sig-clear" data-sigid="sig-deli-trace-stuffing">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-deli-trace-stuffing-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-deli-trace-stuffing-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-deli-trace-stuffing"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="deli-trace-stuffing">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-deli-trace-stuffing"></div><label class="photo-add-btn" for="photo-input-deli-trace-stuffing">&#128247; Add Photo Evidence<input type="file" id="photo-input-deli-trace-stuffing" accept="image/*" capture="environment" multiple style="display:none" data-photoid="deli-trace-stuffing"></label></div></div>
+<button class="btn-save" data-saveid="deli-trace-stuffing">&#128190; Save to Records</button></div></div>
+<div id="deli-trace-butter" class="form-screen"><div class="form-header"><h2>&#129472; Sandwich Log &#8211; Butter, Ham &amp; Turkey</h2><p>Complete on a daily basis when placing stock on the counter.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-deli-trace-butter"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-deli-trace-butter"></div></div>
+<div class="info-box"><strong>OUBD</strong> = Original Use by date | <strong>DP</strong> = Date Prep. | <strong>UBD</strong> = Use By Date | <strong>D</strong> = Display Until</div>
+<div class="week-table-wrap"><table class="deli-trace-table" id="deli-trace-butter-table"></table></div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-deli-trace-butter" height="80"></canvas><button class="sig-clear" data-sigid="sig-deli-trace-butter">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-deli-trace-butter-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-deli-trace-butter-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-deli-trace-butter"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="deli-trace-butter">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-deli-trace-butter"></div><label class="photo-add-btn" for="photo-input-deli-trace-butter">&#128247; Add Photo Evidence<input type="file" id="photo-input-deli-trace-butter" accept="image/*" capture="environment" multiple style="display:none" data-photoid="deli-trace-butter"></label></div></div>
+<button class="btn-save" data-saveid="deli-trace-butter">&#128190; Save to Records</button></div></div>
+<div id="deli-trace-chicken" class="form-screen"><div class="form-header"><h2>&#127831; Sandwich Log &#8211; Chicken Tikka</h2><p>Complete on a daily basis when placing stock on the counter.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-deli-trace-chicken"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-deli-trace-chicken"></div></div>
+<div class="info-box"><strong>OUBD</strong> = Original Use by date | <strong>DP</strong> = Date Prep. | <strong>UBD</strong> = Use By Date | <strong>D</strong> = Display Until</div>
+<div class="week-table-wrap"><table class="deli-trace-table" id="deli-trace-chicken-table"></table></div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-deli-trace-chicken" height="80"></canvas><button class="sig-clear" data-sigid="sig-deli-trace-chicken">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-deli-trace-chicken-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-deli-trace-chicken-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-deli-trace-chicken"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="deli-trace-chicken">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-deli-trace-chicken"></div><label class="photo-add-btn" for="photo-input-deli-trace-chicken">&#128247; Add Photo Evidence<input type="file" id="photo-input-deli-trace-chicken" accept="image/*" capture="environment" multiple style="display:none" data-photoid="deli-trace-chicken"></label></div></div>
+<button class="btn-save" data-saveid="deli-trace-chicken">&#128190; Save to Records</button></div></div>
+<div id="deli-trace-saladveg" class="form-screen"><div class="form-header"><h2>&#129367; Sandwich Log &#8211; Salad Vegetables</h2><p>Complete on a daily basis when placing stock on the counter.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-deli-trace-saladveg"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-deli-trace-saladveg"></div></div>
+<div class="info-box"><strong>OUBD</strong> = Original Use by date | <strong>DP</strong> = Date Prep. | <strong>UBD</strong> = Use By Date | <strong>D</strong> = Display Until</div>
+<div class="week-table-wrap"><table class="deli-trace-table" id="deli-trace-saladveg-table"></table></div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-deli-trace-saladveg" height="80"></canvas><button class="sig-clear" data-sigid="sig-deli-trace-saladveg">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-deli-trace-saladveg-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-deli-trace-saladveg-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-deli-trace-saladveg"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="deli-trace-saladveg">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-deli-trace-saladveg"></div><label class="photo-add-btn" for="photo-input-deli-trace-saladveg">&#128247; Add Photo Evidence<input type="file" id="photo-input-deli-trace-saladveg" accept="image/*" capture="environment" multiple style="display:none" data-photoid="deli-trace-saladveg"></label></div></div>
+<button class="btn-save" data-saveid="deli-trace-saladveg">&#128190; Save to Records</button></div></div>
+<div id="deli-trace-eggtuna" class="form-screen"><div class="form-header"><h2>&#128031; Sandwich Log &#8211; Egg &amp; Tuna Fillings</h2><p>Complete on a daily basis when placing stock on the counter.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-deli-trace-eggtuna"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-deli-trace-eggtuna"></div></div>
+<div class="info-box"><strong>OUBD</strong> = Original Use by date | <strong>DP</strong> = Date Prep. | <strong>UBD</strong> = Use By Date | <strong>D</strong> = Display Until</div>
+<div class="week-table-wrap"><table class="deli-trace-table" id="deli-trace-eggtuna-table"></table></div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-deli-trace-eggtuna" height="80"></canvas><button class="sig-clear" data-sigid="sig-deli-trace-eggtuna">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-deli-trace-eggtuna-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-deli-trace-eggtuna-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-deli-trace-eggtuna"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="deli-trace-eggtuna">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-deli-trace-eggtuna"></div><label class="photo-add-btn" for="photo-input-deli-trace-eggtuna">&#128247; Add Photo Evidence<input type="file" id="photo-input-deli-trace-eggtuna" accept="image/*" capture="environment" multiple style="display:none" data-photoid="deli-trace-eggtuna"></label></div></div>
+<button class="btn-save" data-saveid="deli-trace-eggtuna">&#128190; Save to Records</button></div></div>
+<div id="trace-sandwich" class="form-screen"><div class="form-header"><h2>&#129370; Pre-Pack Sandwich Traceability Log</h2><p>Complete daily when placing stock on the counter.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-sandwich"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-sandwich"></div></div>
+<div class="info-box"><strong>IUBD</strong> = Ingredient Use By Date &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date</div>
+<div class="week-table-wrap" id="sandwich-tables"></div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-trace-sandwich" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-sandwich">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-trace-sandwich-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-sandwich-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-sandwich"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-sandwich">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-sandwich"></div><label class="photo-add-btn" for="photo-input-trace-sandwich">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-sandwich" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-sandwich"></label></div></div>
+<button class="btn-save" data-saveid="trace-sandwich">&#128190; Save to Records</button></div></div>
+<div id="trace-wrap" class="form-screen"><div class="form-header"><h2>&#127991; Pre-Pack Wrap Traceability Log</h2><p>Complete daily when placing stock on the counter.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-wrap"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-wrap"></div></div>
+<div class="info-box"><strong>IUBD</strong> = Ingredient Use By Date &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date</div>
+<div class="week-table-wrap" id="wrap-tables"></div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-trace-wrap" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-wrap">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-trace-wrap-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-wrap-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-wrap"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-wrap">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-wrap"></div><label class="photo-add-btn" for="photo-input-trace-wrap">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-wrap" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-wrap"></label></div></div>
+<button class="btn-save" data-saveid="trace-wrap">&#128190; Save to Records</button></div></div>
+<div id="trace-pizza" class="form-screen"><div class="form-header"><h2>&#127829; Pre-Pack Pizza Traceability Log</h2><p>Complete daily when placing stock on the counter.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-pizza"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-pizza"></div></div>
+<div class="info-box"><strong>IUBD</strong> = Ingredient Use By Date &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date</div>
+<div class="week-table-wrap" id="pizza-tables"></div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-trace-pizza" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-pizza">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-trace-pizza-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-pizza-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-pizza"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-pizza">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-pizza"></div><label class="photo-add-btn" for="photo-input-trace-pizza">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-pizza" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-pizza"></label></div></div>
+<button class="btn-save" data-saveid="trace-pizza">&#128190; Save to Records</button></div></div>
+<div id="trace-salad-made" class="form-screen"><div class="form-header"><h2>&#129367; Salads (Made in Store) Traceability Log</h2><p>Complete daily when placing stock on the counter.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-salad-made"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-salad-made"></div></div>
+<div class="info-box"><strong>IUBD</strong> = Ingr. Use By Date &nbsp;|&nbsp; <strong>DM</strong> = Date Made &nbsp;|&nbsp; <strong>DD</strong> = Display Date (DM +2 days)</div>
+<div class="week-table-wrap" id="salad-made-tables"></div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-trace-salad-made" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-salad-made">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-trace-salad-made-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-salad-made-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-salad-made"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-salad-made">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-salad-made"></div><label class="photo-add-btn" for="photo-input-trace-salad-made">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-salad-made" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-salad-made"></label></div></div>
+<button class="btn-save" data-saveid="trace-salad-made">&#128190; Save to Records</button></div></div>
+<div id="trace-salad-prepack" class="form-screen"><div class="form-header"><h2>&#129369; Salads (Pre-pack) Traceability Log</h2><p>Complete daily when placing stock on the counter.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-salad-prepack"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-salad-prepack"></div></div>
+<div class="info-box"><strong>IUBD/OUBD</strong> = Use By Date &nbsp;|&nbsp; <strong>DM/DO</strong> = Date Made/Opened &nbsp;|&nbsp; <strong>DD</strong> = Display Date</div>
+<div class="week-table-wrap" id="salad-prepack-tables"></div>
+<div class="section-title">Signatures</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-trace-salad-prepack" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-salad-prepack">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-trace-salad-prepack-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-salad-prepack-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-salad-prepack"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-salad-prepack">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-salad-prepack"></div><label class="photo-add-btn" for="photo-input-trace-salad-prepack">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-salad-prepack" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-salad-prepack"></label></div></div>
+<button class="btn-save" data-saveid="trace-salad-prepack">&#128190; Save to Records</button></div></div>
+<div id="trace-savouries" class="form-screen"><div class="form-header"><h2>&#129383; Savouries Traceability Log</h2></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-savouries"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-savouries"></div></div>
+<div class="info-box"><strong>OUBD</strong> = Original Use By Date &nbsp;|&nbsp; <strong>DO</strong> = Date Opened &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date</div>
+<div class="week-table-wrap" id="savouries-table"></div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-trace-savouries" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-savouries">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-trace-savouries-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-savouries-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-savouries"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-savouries">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-savouries"></div><label class="photo-add-btn" for="photo-input-trace-savouries">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-savouries" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-savouries"></label></div></div>
+<button class="btn-save" data-saveid="trace-savouries">&#128190; Save to Records</button></div></div>
+<div id="trace-cooked-meats" class="form-screen"><div class="form-header"><h2>&#129358; Cooked Meat Traceability Log</h2></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-cooked-meats"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-cooked-meats"></div></div>
+<div class="info-box"><strong>OUBD</strong> = Original Use By Date &nbsp;|&nbsp; <strong>Bulk DU</strong> = opening +3 days &nbsp;|&nbsp; <strong>Slice DU</strong> = sliced +1 day</div>
+<div class="week-table-wrap" id="cooked-meats-tables"></div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-trace-cooked-meats" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-cooked-meats">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-trace-cooked-meats-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-cooked-meats-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-cooked-meats"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-cooked-meats">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-cooked-meats"></div><label class="photo-add-btn" for="photo-input-trace-cooked-meats">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-cooked-meats" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-cooked-meats"></label></div></div>
+<button class="btn-save" data-saveid="trace-cooked-meats">&#128190; Save to Records</button></div></div>
+<div id="trace-salami" class="form-screen"><div class="form-header"><h2>&#129388; Salami / Olives Traceability Log</h2></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-salami"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-salami"></div></div>
+<div class="info-box"><strong>OUBD</strong> = Original Use By Date &nbsp;|&nbsp; <strong>DO</strong> = Date Opened &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date</div>
+<div class="week-table-wrap" id="salami-table"></div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-trace-salami" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-salami">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-trace-salami-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-salami-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-salami"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-salami">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-salami"></div><label class="photo-add-btn" for="photo-input-trace-salami">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-salami" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-salami"></label></div></div>
+<button class="btn-save" data-saveid="trace-salami">&#128190; Save to Records</button></div></div>
+<div id="trace-cheese" class="form-screen"><div class="form-header"><h2>&#129472; Cheese Traceability Log</h2></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-cheese"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-cheese"></div></div>
+<div class="info-box"><strong>OUBD</strong> = Original Use By Date &nbsp;|&nbsp; <strong>DO</strong> = Date Opened &nbsp;|&nbsp; <strong>UBD</strong> = Use By Date</div>
+<div class="week-table-wrap" id="cheese-table"></div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-trace-cheese" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-cheese">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-trace-cheese-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-trace-cheese-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-cheese"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-cheese">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-cheese"></div><label class="photo-add-btn" for="photo-input-trace-cheese">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-cheese" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-cheese"></label></div></div>
+<button class="btn-save" data-saveid="trace-cheese">&#128190; Save to Records</button></div></div>
+<div id="trace-fish" class="form-screen"><div class="form-header"><h2>&#128031; Serve-over Fish Tracker</h2><p>Note all dates. Remove from sale on evening of Display Until Date.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-fish"></div><div class="field-group"><label class="field-label">Supplier</label><input class="field-input" type="text" placeholder="Supplier name" id="fsc-trace-fish"></div></div>
+<div class="info-box"><strong>Fresh Fish:</strong> Display Until = Delivery +3 days | <strong>Frozen Fish:</strong> Defrost +4 days | <strong>Shellfish:</strong> Use By Date -1 day</div>
+<div class="week-table-wrap"><table class="week-table"><thead><tr><th class="product-col">Product Name</th><th colspan="3">Monday</th><th colspan="3">Tuesday</th><th colspan="3">Wednesday</th><th colspan="3">Thursday</th><th colspan="3">Friday</th><th colspan="3">Saturday</th></tr><tr><th class="product-col"></th><th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th><th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th><th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th><th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th><th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th><th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th></tr></thead><tbody id="fish-body"></tbody></table></div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-fish" height="80"></canvas><button class="sig-clear" data-sigid="sig-fish">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-fish"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-fish">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-fish"></div><label class="photo-add-btn" for="photo-input-trace-fish">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-fish" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-fish"></label></div></div>
+<button class="btn-save" data-saveid="trace-fish">&#128190; Save to Records</button></div></div>
+<div id="trace-pork" class="form-screen"><div class="form-header"><h2>&#129361; Pork &amp; Bacon Traceability Log</h2></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-trace-pork"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-pork"></div></div>
+<div class="week-table-wrap"><table class="log-table"><thead><tr><th>Product</th><th>Original Use By Date (Unopened)</th><th>Date Open / Cut / Displayed</th><th>Scales Use By</th><th>Batch No.</th><th>Signature</th></tr></thead><tbody id="pork-body"></tbody></table></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-pork" height="80"></canvas><button class="sig-clear" data-sigid="sig-pork">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-pork"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-pork">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-pork"></div><label class="photo-add-btn" for="photo-input-trace-pork">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-pork" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-pork"></label></div></div>
+<button class="btn-save" data-saveid="trace-pork">&#128190; Save to Records</button></div></div>
+<div id="trace-butcher" class="form-screen"><div class="form-header"><h2>&#128298; Prep by Butcher / Fishmonger Traceability</h2><p>Batch traceability &#8211; complete for each production batch.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Commencing</label><input class="field-input" type="date" id="we-trace-butcher"></div><div class="field-group"><label class="field-label">Product Name</label><input class="field-input" type="text" id="fsc-trace-butcher"></div></div>
+<div id="butcher-batches"></div>
+<button id="add-butcher-batch-btn" style="background:#e8f5ee;border:1px solid #00703c;color:#005a30;padding:10px 18px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;width:100%;margin-top:8px">+ Add Batch</button>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-butcher" height="80"></canvas><button class="sig-clear" data-sigid="sig-butcher">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-butcher"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-butcher">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-butcher"></div><label class="photo-add-btn" for="photo-input-trace-butcher">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-butcher" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-butcher"></label></div></div>
+<button class="btn-save" data-saveid="trace-butcher">&#128190; Save to Records</button></div></div>
+<div id="prod-mince" class="form-screen"><div class="form-header"><h2>&#129385; Mince Control Sheet</h2><p>Record details each time mince is produced.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-prod-mince"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-prod-mince"></div></div>
+<div class="week-table-wrap"><table class="log-table"><thead><tr><th>Date / Time of Production</th><th>Name of Person Who Made the Mince</th><th>Type of Meat Used &amp; Batch Code</th><th>Type of Cut</th><th>Temp After Chilling (before placing on display)</th><th>Scales Use By</th><th>Date Removed from Sale</th></tr></thead><tbody id="mince-body"></tbody></table></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-mince" height="80"></canvas><button class="sig-clear" data-sigid="sig-mince">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-prod-mince"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="prod-mince">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-prod-mince"></div><label class="photo-add-btn" for="photo-input-prod-mince">&#128247; Add Photo Evidence<input type="file" id="photo-input-prod-mince" accept="image/*" capture="environment" multiple style="display:none" data-photoid="prod-mince"></label></div></div>
+<button class="btn-save" data-saveid="prod-mince">&#128190; Save to Records</button></div></div>
+<div id="prod-burger" class="form-screen"><div class="form-header"><h2>&#127828; Burger Control Sheet</h2><p>Record details each time burgers are produced.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-prod-burger"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-prod-burger"></div></div>
+<div class="week-table-wrap"><table class="log-table"><thead><tr><th>Date / Time of Production</th><th>Name of Person Who Made Them</th><th>Type of Meat Used &amp; Batch Code</th><th>Burger Mix</th><th>Scales Use By</th><th>Date Removed from Sale</th></tr></thead><tbody id="burger-body"></tbody></table></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-burger" height="80"></canvas><button class="sig-clear" data-sigid="sig-burger">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-prod-burger"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="prod-burger">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-prod-burger"></div><label class="photo-add-btn" for="photo-input-prod-burger">&#128247; Add Photo Evidence<input type="file" id="photo-input-prod-burger" accept="image/*" capture="environment" multiple style="display:none" data-photoid="prod-burger"></label></div></div>
+<button class="btn-save" data-saveid="prod-burger">&#128190; Save to Records</button></div></div>
+<div id="clean-redmeat" class="form-screen"><div class="form-header"><h2>&#129532; Red Meat Dept Cleaning Schedule</h2><p>Please initial relevant box when each item has been thoroughly cleaned.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-clean-redmeat"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-clean-redmeat"></div></div>
+<div class="week-table-wrap"><table class="clean-table"><thead><tr><th class="area-col">Area / Item to be Cleaned</th><th class="chem-col">Chemical Used</th><th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th><th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th></tr></thead><tbody id="clean-redmeat-body"></tbody></table></div>
+<div class="info-box" style="margin-top:12px"><strong>REMEMBER: ALWAYS CLEAN AS YOU GO</strong></div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-clean" height="80"></canvas><button class="sig-clear" data-sigid="sig-clean">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-clean-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-clean-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-clean-redmeat"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="clean-redmeat">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-clean-redmeat"></div><label class="photo-add-btn" for="photo-input-clean-redmeat">&#128247; Add Photo Evidence<input type="file" id="photo-input-clean-redmeat" accept="image/*" capture="environment" multiple style="display:none" data-photoid="clean-redmeat"></label></div></div>
+<button class="btn-save" data-saveid="clean-redmeat">&#128190; Save to Records</button></div></div>
+<div id="clean-fruitveg" class="form-screen"><div class="form-header"><h2>&#129382; Fruit &amp; Veg Cleaning Record</h2><p>Please initial relevant box when each item has been thoroughly cleaned.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-clean-fruitveg"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-clean-fruitveg"></div></div>
+<div class="week-table-wrap"><table class="clean-table" style="min-width:600px"><thead><tr><th class="area-col">Area</th><th class="area-col">Areas to be Cleaned</th><th class="chem-col">Chemical</th><th>M AM</th><th>M PM</th><th>T AM</th><th>T PM</th><th>W AM</th><th>W PM</th><th>T AM</th><th>T PM</th><th>F AM</th><th>F PM</th><th>S AM</th><th>S PM</th><th>S AM</th><th>S PM</th></tr></thead><tbody id="clean-fruitveg-body"></tbody></table></div>
+<div class="info-box">REMEMBER ALWAYS CLEAN AS YOU GO</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-cfv" height="80"></canvas><button class="sig-clear" data-sigid="sig-cfv">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-cfv-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-cfv-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-clean-fruitveg"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="clean-fruitveg">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-clean-fruitveg"></div><label class="photo-add-btn" for="photo-input-clean-fruitveg">&#128247; Add Photo Evidence<input type="file" id="photo-input-clean-fruitveg" accept="image/*" capture="environment" multiple style="display:none" data-photoid="clean-fruitveg"></label></div></div>
+<button class="btn-save" data-saveid="clean-fruitveg">&#128190; Save to Records</button></div></div>
+<div id="clean-stockroom" class="form-screen"><div class="form-header"><h2>&#128230; Grocery Stockroom Cleaning Record</h2><p>Please initial relevant box when each item has been thoroughly cleaned.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-clean-stockroom"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-clean-stockroom"></div></div>
+<div class="week-table-wrap"><table class="clean-table" style="min-width:500px"><thead><tr><th class="area-col">Area</th><th class="chem-col">Chemical</th><th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th><th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th></tr></thead><tbody id="clean-stockroom-body"></tbody></table></div>
+<div class="info-box">REMEMBER ALWAYS CLEAN AS YOU GO</div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-csr" height="80"></canvas><button class="sig-clear" data-sigid="sig-csr">Clear</button></div></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-csr-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-csr-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-clean-stockroom"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="clean-stockroom">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-clean-stockroom"></div><label class="photo-add-btn" for="photo-input-clean-stockroom">&#128247; Add Photo Evidence<input type="file" id="photo-input-clean-stockroom" accept="image/*" capture="environment" multiple style="display:none" data-photoid="clean-stockroom"></label></div></div>
+<button class="btn-save" data-saveid="clean-stockroom">&#128190; Save to Records</button></div></div>
+<div id="goods-chilled" class="form-screen"><div class="form-header"><h2>&#129810; Goods Inwards Chilled/Frozen Check Sheet</h2><p>Target temp chilled: max 5&#176;C. Frozen: between -15&#176;C retail pack.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-goods-chilled"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-goods-chilled"></div></div>
+<div class="week-table-wrap"><table class="log-table"><thead><tr><th>Date</th><th>Supplier</th><th>Temp Check</th><th>Food Safety Checks</th><th>Docket No.</th><th>Product Dating</th><th>Product Name</th><th>Accept / Reject</th><th>Delivery Comments</th><th>Signature &amp; Comments</th></tr></thead><tbody id="goods-chilled-body"></tbody></table></div>
+<div class="info-box">Conduct Receiving Inspection as per Goods Inwards SOP. Record any rejections in non-conformance sheet.</div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-gc-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-gc-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-goods-chilled"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="goods-chilled">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-goods-chilled"></div><label class="photo-add-btn" for="photo-input-goods-chilled">&#128247; Add Photo Evidence<input type="file" id="photo-input-goods-chilled" accept="image/*" capture="environment" multiple style="display:none" data-photoid="goods-chilled"></label></div></div>
+<button class="btn-save" data-saveid="goods-chilled">&#128190; Save to Records</button></div></div>
+<div id="goods-ambient" class="form-screen"><div class="form-header"><h2>&#128230; Goods Inwards Ambient Check Sheet</h2><p>Conduct Receiving Inspection as per Goods Inwards SOP.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-goods-ambient"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-goods-ambient"></div></div>
+<div class="week-table-wrap"><table class="log-table"><thead><tr><th>Date</th><th>Supplier</th><th>Temp Check</th><th>Food Safety Checks</th><th>Docket No.</th><th>Product Dating</th><th>Product Name</th><th>Accept / Reject</th><th>Delivery Comments</th><th>Signature &amp; Comments</th></tr></thead><tbody id="goods-ambient-body"></tbody></table></div>
+<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-ga-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-ga-mgr">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-goods-ambient"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="goods-ambient">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-goods-ambient"></div><label class="photo-add-btn" for="photo-input-goods-ambient">&#128247; Add Photo Evidence<input type="file" id="photo-input-goods-ambient" accept="image/*" capture="environment" multiple style="display:none" data-photoid="goods-ambient"></label></div></div>
+<button class="btn-save" data-saveid="goods-ambient">&#128190; Save to Records</button></div></div>
+<div id="compliance" class="form-screen"><div class="form-header"><h2>&#128202; HACCP System Compliance Report</h2><p>Weekly audit of all departments.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-compliance"></div><div class="field-group"><label class="field-label">Completed By</label><input class="field-input" type="text" placeholder="Name" id="fsc-compliance"></div></div>
+<div class="section-title">Zone Key</div>
+<div class="compliance-zone"><div class="zone-badge zone-green">&#128994; Green = 80%+</div><div class="zone-badge zone-orange">&#128993; Orange = 70&#8211;79%</div><div class="zone-badge zone-red">&#128308; Red = 69% and below</div></div>
+<div class="info-box"><strong>0</strong> = Serious errors &nbsp;|&nbsp; <strong>3</strong> = Minor errors &nbsp;|&nbsp; <strong>5</strong> = Detail correct with corrective action</div>
+<div class="section-title">Department Scores</div><div id="compliance-tables"></div>
+<div class="section-title">Overall Result</div>
+<div class="field-row"><div class="field-group"><label class="field-label">Overall Result</label><input class="field-input" type="text" placeholder="e.g. Green / 85%"></div><div class="field-group"><label class="field-label">Previous Results</label><input class="field-input" type="text" placeholder="Previous %"></div></div>
+<div class="section-title">Department Zones</div><div id="dept-zones"></div>
+<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-compliance" height="80"></canvas><button class="sig-clear" data-sigid="sig-compliance">Clear</button></div></div>
+<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
+<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-compliance"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="compliance">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-compliance"></div><label class="photo-add-btn" for="photo-input-compliance">&#128247; Add Photo Evidence<input type="file" id="photo-input-compliance" accept="image/*" capture="environment" multiple style="display:none" data-photoid="compliance"></label></div></div>
+<button class="btn-save" data-saveid="compliance">&#128190; Save to Records</button></div></div>
+<div class="toast" id="toast">&#9989; Saved!</div>
+<div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightbox-close-btn">&#10005;</button><img id="lightbox-img" src="" alt=""><div class="lightbox-info" id="lightbox-info"></div></div>
 <script>
-// ALL YOUR ORIGINAL JAVASCRIPT VARIABLES AND FUNCTIONS REMAIN THE SAME
-// ONLY THE saveForm FUNCTION HAS BEEN REPLACED WITH THE FIXED VERSION BELOW
+var DAYS = ['Mon','Tue','Wed','Thur','Fri','Sat','Sun'];
+var meatTempUnits = [['Fish Display Unit','0-5\u00b0C'],['Poultry','0-5\u00b0C'],['Pork','0-5\u00b0C'],['Raw Meat','0-5\u00b0C'],['Walk in fridge','0-5\u00b0C'],['Pre-pack fish doors','0-5\u00b0C']];
+var prepackTempUnits = [['1. Stand up juice fridge at front door','0-5\u00b0C'],['2. Meat spider at food academy','0-5\u00b0C'],['3. Meat spider at food academy','0-5\u00b0C'],['4. Meat spider at food academy','0-5\u00b0C'],['5. Superquinn spider','0-5\u00b0C'],['6. Spider fishmonger','0-5\u00b0C'],['7. Dairy spider at fish pre pack','0-5\u00b0C'],['8. Ham spider fridge','0-5\u00b0C'],['9. Provisions promo bay',''],['10. Food Academy Fridge','0-5\u00b0C'],['11. Butchers Prepack','0-5\u00b0C'],['12. Prepared by the Butcher','0-5\u00b0C'],['13. Poultry','0-5\u00b0C'],['14. Cheese Prepack','0-5\u00b0C'],['15. Bacon/Special Offers','0-5\u00b0C'],['16. Sausages/Rashers','0-5\u00b0C'],['17. Pudding/Superquinn/Continental','0-5\u00b0C'],['18. Cooked Meats/Signature Range','0-5\u00b0C'],['19. Ready meals','0-5\u00b0C'],['20. Meal deck','0-5\u00b0C']];
+var dairyTempUnits = [['1. Milk','0-5\u00b0C'],['2. Cream/Deserts/Juice','0-5\u00b0C'],['3. Yoghurts','0-5\u00b0C'],['4. Cheese','0-5\u00b0C'],['5. Spreads','0-5\u00b0C'],['6. Dairy Special Offers','0-5\u00b0C'],['7. Fish Fridge','0-5\u00b0C'],['10. Dairy Back-up','0-5\u00b0C'],['11. Milk Fridge at Coffee Machine','0-5\u00b0C'],['12. Milk Dispenser at Coffee Machine','0-5\u00b0C']];
+var frozenTempUnits = [['1. Ice Cream Bay 1 Door','-23\u00b0C'],['2. Ice Cream Bay 1 Well','-23\u00b0C'],['3. Ice Cream Bay 2 Door','-23\u00b0C'],['4. Ice Cream Bay 2 Well','-23\u00b0C'],['5. Ice Cream Bay 3 Door','-23\u00b0C'],['6. Ice Cream Bay 3 Well','-23\u00b0C'],['7. Ice Cream Stick Fridge','-23\u00b0C'],['8. Special Offer Well no 1','-18\u00b0C'],['9. Potato Product Well','-18\u00b0C'],['10. Chip Well','-18\u00b0C'],['11. Chicken and Burger Well','-18\u00b0C'],['12. Veg Well','-18\u00b0C'],['13. Ready Meal Well','-18\u00b0C'],['14. Special Offer Well no 2','-18\u00b0C'],['15. Fish Product Well','-18\u00b0C'],['16. Fish Well','-18\u00b0C'],['17. Pizza Well 1','-18\u00b0C'],['18. Pizza Well 2','-18\u00b0C'],['19. Vegetarian Food Well','-18\u00b0C'],['20. Back-up Freezer','-18\u00b0C']];
+var fruitVegTempUnits = [['Display Fridge Veg 1','0-5\u00b0C'],['Display Fridge Veg 2','0-5\u00b0C'],['Display Fridge Fruit','0-5\u00b0C'],['Salad Fridge','0-5\u00b0C'],['Walk-in Back-up','0-5\u00b0C'],['Berry Fridge 1','0-5\u00b0C'],['Berry Fridge 2','0-5\u00b0C']];
+var deliTempUnits = [['Bakery Serveover Fridge 1','0-5\u00b0C'],['Bakery Serveover Fridge 2','0-5\u00b0C'],['Sandwich Bar Fridge','0-5\u00b0C'],['Sandwich Bar Serveover','0-5\u00b0C'],['Deli Counter Fridge 1','0-5\u00b0C'],['Deli Counter Fridge 2','0-5\u00b0C'],['Hot Food Serveover','0-5\u00b0C'],['Prep Fridge','0-5\u00b0C'],['Walk-in Chill','0-5\u00b0C']];
+var sandwiches = [{name:'B.L.T. on White',ingr:'Bread, Bacon, Lettuce, Tomatoes, Mayonnaise'},{name:'B.L.T. on Brown',ingr:'Bread, Bacon, Lettuce, Tomatoes, Mayonnaise'},{name:'Bacon & Boiled Egg White',ingr:'Bread, Bacon, Boiled Egg, Mayonnaise'},{name:'Bacon & Boiled Egg Brown',ingr:'Bread, Bacon, Boiled Egg, Mayonnaise'},{name:'Chicken & Bacon (White)',ingr:'White Bread, Chicken, Bacon, Mayonnaise'},{name:'Chicken & Bacon (Brown)',ingr:'Brown Bread, Chicken, Bacon, Mayonnaise'},{name:'Chicken & Stuffing (White)',ingr:'White Bread, Chicken, Stuffing, Mayonnaise'},{name:'Chicken & Stuffing (Brown)',ingr:'Brown Bread, Chicken, Stuffing, Mayonnaise'},{name:'Chicken Tikka',ingr:'White Bread, Chicken, Tikka sauce, Cheese, Red onion, Lettuce'},{name:'Egg Mayo',ingr:'White Bread, Egg, Cheese, Lettuce, Mayonnaise'},{name:'Tuna Salad',ingr:'Brown Bread, Tuna, Cheese, Mayonnaise'},{name:'Turkey & Egg Mayo',ingr:'White Bread, Turkey, Egg, Red onion, Mayonnaise'},{name:'Ham & Smoked Cheese (White)',ingr:'White Bread, Ham, Smoked cheese, Tomato relish, Mayonnaise'},{name:'Ham & Smoked Cheese (Brown)',ingr:'Brown Bread, Ham, Smoked cheese, Tomato relish, Mayonnaise'},{name:'BLTC on Brown',ingr:'Brown Bread, Bacon, Lettuce, Tomato, Cheese, Mayonnaise'},{name:'BLTC on White',ingr:'White Bread, Bacon, Lettuce, Tomato, Cheese, Mayonnaise'},{name:'Ham and Cheese',ingr:'White bread, Butter, Ham, Cheese'},{name:'Ham, Cheese & Coleslaw',ingr:'White bread, Butter, Ham, Cheese, Coleslaw'}];
+var wraps = [{name:'Chicken Tikka',ingr:'Wrap, Chicken, Tikka sauce, Cheese, Red onion, Lettuce'},{name:'Egg Mayo Salad',ingr:'Wrap, Egg, Cheese, Lettuce, Mayonnaise'},{name:'Chicken & Stuffing',ingr:'Wrap, Chicken, Stuffing, Mayonnaise'},{name:'Tuna Salad',ingr:'Wrap, Tuna, Cheese, Mayonnaise'},{name:'Turkey & Egg Mayo',ingr:'Wrap, Turkey, Egg, Red onion, Mayonnaise'},{name:'Sweet Chili Chicken',ingr:'Wrap, Chicken, Red onion, Spinach, Sweet Chili sauce, Mayonnaise'},{name:'Crunchy Tuna',ingr:'Wrap, Tuna, Lettuce, Onion, Mayonnaise'}];
+var pizzas = [{name:'Cheese Pizza',ingr:'Pizza base, Pizza sauce, Mozzarella cheese'},{name:'Ham & Mushroom',ingr:'Pizza base, Pizza sauce, Ham, Mushroom, Mozzarella cheese'},{name:'Ham & Sweetcorn',ingr:'Pizza base, Pizza sauce, Ham, Sweetcorn, Mozzarella cheese'},{name:'Meat Pizza',ingr:'Pizza base, Pizza sauce, Pepperoni, Chicken, Ham, Mozzarella cheese'},{name:'Pepperoni & Pepper',ingr:'Pizza base, Pizza sauce, Pepperoni, Peppers, Mozzarella cheese'},{name:'Vegetable Deluxe',ingr:'Pizza base, Pizza sauce, Tomato, Peppers, Red onion, Mushrooms, Sweet corn, Mozzarella'},{name:'Spicy Pepperoni',ingr:'Pizza base, Pizza sauce, Pepperoni, Onions, Jalapenos, Mozzarella cheese'}];
+var saladsMade = [{name:'Egg Mayo',ingr:'Egg, Mayo'},{name:'Carrot & Broccoli',ingr:'Carrot, Broccoli, Mayo'},{name:'Cheese Mix',ingr:'Cheese, Scallions, Mayo'},{name:'Mix Salad',ingr:'Loose Veg'},{name:'Summer Salad',ingr:'Loose veg, Egg, Mayo'},{name:'Chicken Noodle',ingr:'Noodles, Chicken, Veg, Chilli Sauce'}];
+var saladsPrepack = [{name:'Egg Mayo',ingr:'Egg, Mayo'},{name:'Beetroot',ingr:''},{name:'Asian Noodles',ingr:''},{name:'Pasta Spinach Pinenut',ingr:''},{name:'Coleslaw',ingr:'Veg, Mayo'},{name:'Tuna Mix',ingr:''},{name:'Chunky Potato',ingr:''},{name:'Mash Potato Salad',ingr:''},{name:'Green Lentil Multigrain',ingr:''},{name:'Carrot, Broccoli & Cranberry',ingr:''},{name:'Chipotle Coleslaw',ingr:''},{name:'Basil & Pesto',ingr:''},{name:'Lemon Cous Cous',ingr:''},{name:'Creamy Tomato Pasta',ingr:''},{name:'Carrot, Ginger, Chia Seeds',ingr:''},{name:'Cheese Mix',ingr:'Cheese, Scallions, Mayonnaise'},{name:'Cheese Coleslaw',ingr:'Veg, Cheese, Mayonnaise'},{name:'Mix Salad',ingr:'Veg'},{name:'Summer Salad',ingr:'Veg, Egg, Mayonnaise'}];
+var savouries = ['Beef Lasagne','Chicken & Mushroom Vol au Vent','Red Pepper Goats Cheese Quiche','Black pudding s. rolls','Honey & mustard s. rolls'];
+var cookedMeats = ["Ryan's Low Salt","Honey Glazed","Moriarty's Turkey","Carroll's Crumbed","Turkey OTB","Oak Smoked Ham","Corned Beef","Brady's Crumbed","Brady's Baked","Hazlett","Wiltshire Ham OTB"];
+var salamiOlives = ['Mixed Olives','Sundried Tomatoes','Cheese Filled Peppers','Chorizo Extra','Pre pack Mixed olives','Pre pack Sundried tomatoes','Pre pack Cheese filled peppers','Pre Pack Stuffing'];
+var hotfoodTimes = ['9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm'];
+var hotfoodDailyClean = [['Hot bar glass front and back, sides and counter top, trays','Glass cleaner, degreaser'],['Scales and shelf','Sanitizer'],['Sandwich bar glass front and back, sides and bar counter top, trays','Sanitizer, Glass cleaner'],['Fresh Cream bakery serveover glass','Glass cleaner'],['Bakery serveover fridge x2, glass doors and handles','Glass cleaner'],['Counter tops / Stainless steel','Sanitiser'],['Equipment sink top and bottom','Sanitiser'],['Handsink / requisites','Sanitizer'],['Utensils / equipment / trays','Sanitizer'],['Bin','Sanitiser'],['Temperature probe','Sanitizer'],['Hot food oven, surfaces in direct contact with food, trays, racks','Sanitiser'],['Bakery oven and stand x2, surfaces in direct contact with food, trays, racks','Sanitiser'],['Grease trap, empty and wash out holder','Degreaser, Sanitiser'],['Floor swept and mopped (under tables inc. back up)','Floor cleaner'],['Chicken Unit','Degreaser, Sanitiser'],['Turbo chef machine, direct contact with food, trays','Sanitiser'],['Soup kettle','Sanitiser']];
+var hotfoodWeeklyClean = [['Hot food bar, full deep clean','Degreaser, Oven cleaner'],['Sandwich bar, full deep clean','Sanitiser'],['Fresh cream bakery serveover, full deep clean','Sanitiser'],['Bakery serveover fridge x2, full deep clean','Sanitiser'],['Presses inside out, inc. door handles','Sanitiser'],['Stainless steel prep area (wheels, casters, legs, walls)','Sanitizer'],['Bakery display table x3','Sanitizer'],['Bread display','Sanitizer'],['Canopy filter','Degreaser'],['Chicken oven, full deep clean, inside walls, fans, filters, vents, seals','Degreaser, Oven cleaner'],['Bakery oven x2, full deep clean, inside walls, fans, filters, vents, seals','Oven cleaner'],['Hot food oven, full deep clean, inside walls, fans, filters, vents, seals','Degreaser, Oven cleaner'],['Chicken prep trolley','Sanitizer']];
+var cookedmeatClean = [['Serveover front glass, counter top, sides','Glass cleaner'],['Serveover inside, along sides and front','Sanitiser'],['Scales and shelve','Sanitizer'],['Equipment / trays / chopping boards','Sanitiser'],['Counter tops','Sanitiser'],['Tables (tops & legs)','Sanitizer'],['Meat slicer','Sanitiser'],['Cling film unit','Sanitizer'],['Temperature probe x2','Sanitiser'],['Bins x3','Sanitiser'],['Bread slicer','Sanitiser'],['Floor sweep and mop inc. under tables and coldrooms','Floor cleaner'],['Cheese cutter Pasteurised','Detergent Sanitizer'],['Bread Crumber','Sanitizer']];
+var cookedmeatWeeklyClean = [['Serveover - Cooked meats deep clean','Sanitizer Degreaser'],['Presses inside & out','Sanitizer'],['Prep area stainless steel (walls, wheels and casters)','Sanitizer, Degreaser'],['Coldroom (walls, door & floor + shelving)','Sanitizer Degreaser'],['All counter display shelving','Sanitizer Degreaser'],['Cheese display fridge deep clean','Sanitizer Degreaser'],['Ready meal display fridge deep clean','Sanitizer Degreaser'],['Salad spider','Sanitizer Degreaser']];
+var deliTraceStuffing = ['Stuffing (Crumbs / Herbs / Veg - Loose)','Beetroot','Wraps Tomato','Wraps Brown','Wraps Plane'];
+var deliTraceButter = ['Butter','Ham','Turkey','Cheese','Mozzarella Cheese','Coleslaw','Potato Salad'];
+var deliTraceChicken = ['Chicken Tikka'];
+var deliTraceSaladVeg = ['Chicken','Onion','Cucumber','Scallions','Mixed Peppers','Tomatoes','Lettuce'];
+var deliTraceEggTuna = ['Eggs','Mayo','Egg Mayo','Tuna & Sweetcorn','Sweetcorn'];
+var breakfastItems = ['Sausages','Bacon','Pudding Black','Pudding White','Hash Browns','Eggs','Sm Sausage Roll','Lrg Sausage Roll','Pies C&M','Pies S&K','Fillet Plane','Fillet S/Fried','Fillets Hot Spicy','Wedges','Soup 1','Jambons','Chickens'];
+var lunchItems = ['Sm Sausage Roll','Wedges','Pop Chicken','Wings BBQ','Goujons','Fillets Plane','Fillets S/Fried','Fillets Hot Spicy','Veg Spring Rolls','Vol Au Vants','Bacon and cheese Bakers','Cottage pie','Honey and Mustard','Sausage Rolls','Sausage Rolls with Black Pudding'];
+var cleaningItemsDaily = [['Scales, bags, shelves','Sanitiser'],['Raw Servovers','Sanitiser, glass cleaner'],['Bins','Degreaser'],['Equipment/trays/chopping boards - raw & fish','Wash up liq'],['Fish equipment sink & shelf below','Wash up liq, Degreaser'],['Hot seal wrap unit','Sanitiser'],['SELs/Garnishing','Sanitiser'],['Stainless steel serveover','Stainless Steel spray'],['Hands sink/Requisites','Degreaser/sanitiser'],['Wooden block/Table legs','Block brush'],['Table tops','Sanitiser'],['Doors/handles','Sanitiser'],['Telephone','Sanitiser'],['Equipment sink & hand sink requisites - top and bottom','Wash up liq'],['Knife rack','Sanitiser'],['Scales','Sanitiser'],['Burger press','Wash up liq, degreaser'],['Mincer head','Wash up liq, degreaser'],['Mincer','Wash up liq, degreaser'],['Ice Machine','Stainless steel cleaner'],['Coldroom - floor, door handle, floor swept','Degreaser, Floorbrush'],['Rubber around fridge door','']];
+var cleaningItemsWeekly = [['Prep room racking','Degreaser'],['Serveover - Raw','Degreaser'],['Serveover - Fish','Degreaser'],['Prep area - walls & tables','Degreaser'],['Returns trolleys','Degreaser'],['Stainless steel - Raw','Stainless steel cleaner'],['Raw coldroom - floor, shelving','Degreaser'],['Display shelving - fish & raw','Degreaser'],['Stainless steel - Fish','Stainless steel'],['Ice Machine - presses inside and out including door handles','Defrosted/clean, Sanitiser']];
+var complianceDepts = [{name:'1. Serveover Raw/Fish',items:['Mince control','Fish Tracker','Temperature Checks','Daily cleaning schedule','Weekly cleaning schedule','Burger control sheet','PBOB Trace','Pork and Bacon Trace','Breaded chicken trace','Beef Trace']},{name:'2. Cold Deli',items:['Cooked meat tracker','Sandwich tracker','Salami & olive tracker','Savoury tracker','Salad tracker','Temp checks','Daily cleaning schedule','Weekly cleaning schedule']},{name:'3. Hot Food Bar/Bakery',items:['After cook sheet','Hot holding sheet','Temp checks bakery','Daily cleaning schedule','Weekly cleaning schedule']},{name:'4. Prepack Deli Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'5. Fruit & Veg Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'6. Dairy Food Safety',items:['Temperature Checks','Deep Clean']},{name:'7. Frozen Food Safety',items:['Load Levels','Temperature Checks','Deep clean UTD']},{name:'8. Goods Inwards Food Safety',items:['FSR1 - Fresh Van checks','FSR2 - Dry Grocery Van checks','Cleaning schedule - Daily','Cleaning schedule - Deep clean']}];
+var ALL_FORMS = [{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},{id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},{id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},{id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},{id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},{id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},{id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},{id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},{id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},{id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},{id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},{id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},{id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},{id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},{id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},{id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},{id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},{id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},{id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},{id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},{id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},{id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},{id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},{id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},{id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},{id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},{id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},{id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},{id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},{id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},{id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}];
+var DB_NAME = 'MoriartyHACCP', DB_VER = 1, db = null;
+function openDB() {
+return new Promise(function(res, rej) {
+var r = indexedDB.open(DB_NAME, DB_VER);
+r.onupgradeneeded = function(e) {
+var d = e.target.result;
+if (!d.objectStoreNames.contains('records')) {
+var s = d.createObjectStore('records', {keyPath:'id'});
+s.createIndex('formId','formId',{unique:false});
+s.createIndex('weekKey','weekKey',{unique:false});
+}
+if (!d.objectStoreNames.contains('weeks')) {
+d.createObjectStore('weeks', {keyPath:'weekKey'});
+}
+};
+r.onsuccess = function(e) { db = e.target.result; res(db); };
+r.onerror = function(e) { rej(e.target.error); };
+});
+}
+function dbPut(store, obj) {
+return new Promise(function(res, rej) {
+var tx = db.transaction(store, 'readwrite');
+tx.objectStore(store).put(obj);
+tx.oncomplete = res;
+tx.onerror = function(e) { rej(e.target.error); };
+});
+}
+function dbGetAll(store) {
+return new Promise(function(res, rej) {
+var tx = db.transaction(store, 'readonly');
+var r = tx.objectStore(store).getAll();
+r.onsuccess = function(e) { res(e.target.result); };
+r.onerror = function(e) { rej(e.target.error); };
+});
+}
+function getWeekKey() {
+var d = new Date();
+var s = new Date(d);
+s.setDate(d.getDate() - d.getDay());
+s.setHours(0,0,0,0);
+return s.toISOString().split('T')[0];
+}
+var currentForm = null, formTimestamps = {}, formPhotos = {}, sigPads = {};
 
-var sandwiches = [ /* ... all your original arrays ... */ ];
-// ... (all the other var declarations you had) ...
-
-function saveForm(formId) {
-  var we = document.getElementById('we-' + formId);
-  var fsc = document.getElementById('fsc-' + formId);
-  var now = new Date();
-  var photos = formPhotos[formId] || [];
-  var photoData = [];
-  for (var pi = 0; pi < photos.length; pi++) {
-    photoData.push({dataUrl: photos[pi].dataUrl, name: photos[pi].name, timestamp: photos[pi].timestamp});
+function scrapeFormData(formId) {
+  var scr = document.getElementById(formId);
+  if (!scr) return {};
+  var data = { inputs: [], checkboxes: [], selects: [], textareas: [], radios: {} };
+  var inputs = scr.querySelectorAll('input');
+  for (var i = 0; i < inputs.length; i++) {
+    var inp = inputs[i];
+    if (inp.type === 'file') continue;
+    if (inp.type === 'text' || inp.type === 'date' || inp.type === 'number') {
+      data.inputs.push(inp.value);
+    } else if (inp.type === 'checkbox') {
+      data.checkboxes.push(inp.checked);
+    } else if (inp.type === 'radio') {
+      if (inp.checked) data.radios[inp.name] = inp.value;
+    }
   }
-
-  // === FULL SHEET CAPTURE (this is the fix) ===
-  var fullSheetHTML = '';
-  var formScreen = document.getElementById(formId);
-  if (formScreen) {
-    var clone = formScreen.cloneNode(true);
-
-    // Turn every signature canvas into a permanent image
-    var canvases = clone.querySelectorAll('canvas');
-    canvases.forEach(function(canvas) {
-      if (canvas.width > 0 && canvas.height > 0) {
-        var dataUrl = canvas.toDataURL('image/png');
-        var img = document.createElement('img');
-        img.src = dataUrl;
-        img.style.cssText = 'width:100%;height:auto;border:2px dashed #d0d0d0;border-radius:8px;background:white;';
-        canvas.parentNode.replaceChild(img, canvas);
-      }
-    });
-
-    // Remove all buttons and interactive elements so the record looks clean
-    clone.querySelectorAll('.btn-save, .sig-clear, .photo-delete, input[type="file"], .ts-btn').forEach(function(el) {
-      el.remove();
-    });
-
-    fullSheetHTML = clone.outerHTML;
+  var selects = scr.querySelectorAll('select');
+  for (var i = 0; i < selects.length; i++) {
+    data.selects.push(selects[i].value);
   }
-  // === END OF FULL SHEET CAPTURE ===
-
-  var record = {
-    id: now.getTime(),
-    formId: formId,
-    weekKey: getWeekKey(),
-    savedAt: now.toISOString(),
-    weekEnding: we ? we.value : '',
-    champion: fsc ? fsc.value : '',
-    timestamp: formTimestamps[formId] || now.toLocaleString('en-IE', {timeZone:'Europe/Dublin', hour12:false}),
-    photos: photoData,
-    photoCount: photoData.length,
-    fullSheetHTML: fullSheetHTML   // ← This saves the entire populated form
-  };
-
-  var doSave = function() {
-    dbPut('records', record).then(function() {
-      showToast('✅ Saved to Records – full sheet preserved!');
-      updateBannerCount();
-    }).catch(function(e) { showToast('Save failed: ' + e.message); });
-  };
-
-  if (!db) { openDB().then(function() { doSave(); }); } else { doSave(); }
+  var textareas = scr.querySelectorAll('textarea');
+  for (var i = 0; i < textareas.length; i++) {
+    data.textareas.push(textareas[i].value);
+  }
+  return data;
 }
 
-// The rest of your original script (initSig, recordTimestamp, handlePhotos, makeTempRows, etc.) stays exactly the same
-// ... (everything after saveForm in your original file)
+function populateFormData(formId, data) {
+  var scr = document.getElementById(formId);
+  if (!scr || !data) return;
+  var inputs = scr.querySelectorAll('input');
+  var txtIdx = 0, chkIdx = 0;
+  for (var i = 0; i < inputs.length; i++) {
+    var inp = inputs[i];
+    if (inp.type === 'file') continue;
+    if ((inp.type === 'text' || inp.type === 'date' || inp.type === 'number') && data.inputs && data.inputs[txtIdx] !== undefined) {
+      inp.value = data.inputs[txtIdx++];
+    } else if (inp.type === 'checkbox' && data.checkboxes && data.checkboxes[chkIdx] !== undefined) {
+      inp.checked = data.checkboxes[chkIdx++];
+    } else if (inp.type === 'radio' && data.radios && data.radios[inp.name] !== undefined) {
+      if (inp.value === data.radios[inp.name]) inp.checked = true;
+    }
+  }
+  var selects = scr.querySelectorAll('select');
+  if (data.selects) {
+    for (var i = 0; i < selects.length; i++) {
+      if (data.selects[i] !== undefined) selects[i].value = data.selects[i];
+    }
+  }
+  var textareas = scr.querySelectorAll('textarea');
+  if (data.textareas) {
+    for (var i = 0; i < textareas.length; i++) {
+      if (data.textareas[i] !== undefined) textareas[i].value = data.textareas[i];
+    }
+  }
+}
+
+function showForm(id) {
+document.getElementById('home').style.display = 'none';
+if (currentForm) document.getElementById(currentForm).style.display = 'none';
+var scr = document.getElementById(id);
+if (!scr) return;
+scr.style.display = 'block';
+currentForm = id;
+document.getElementById('backBtn').style.display = 'block';
+var h2 = scr.querySelector('h2');
+document.getElementById('navTitle').textContent = h2 ? h2.textContent : id;
+window.scrollTo(0,0);
+
+  var wk = getWeekKey();
+  dbGetAll('records').then(function(recs) {
+    var latest = null;
+    for (var i = 0; i < recs.length; i++) {
+      if (recs[i].formId === id && recs[i].weekKey === wk) {
+        if (!latest || recs[i].savedAt > latest.savedAt) latest = recs[i];
+      }
+    }
+    if (latest && latest.formData) {
+      populateFormData(id, latest.formData);
+      if (latest.timestamp) {
+        var tsBox = document.getElementById('ts-' + id);
+        if (tsBox) {
+          tsBox.querySelector('.ts-text').textContent = 'Recorded: ' + latest.timestamp;
+          tsBox.querySelector('.ts-text').className = 'ts-text recorded';
+          tsBox.querySelector('.ts-btn').textContent = 'Update Time';
+          formTimestamps[id] = latest.timestamp;
+        }
+      }
+    }
+  });
+
+setTimeout(function() {
+var canvases = scr.querySelectorAll('canvas');
+for (var ci = 0; ci < canvases.length; ci++) { initSig(canvases[ci].id); }
+}, 100);
+}
+function goBack() {
+if (currentForm) document.getElementById(currentForm).style.display = 'none';
+document.getElementById('home').style.display = 'block';
+document.getElementById('backBtn').style.display = 'none';
+document.getElementById('navTitle').textContent = 'HACCP System';
+currentForm = null;
+window.scrollTo(0,0);
+
+  var wk = getWeekKey();
+  dbGetAll('records').then(function(recs) {
+    var latest = null;
+    for (var i = 0; i < recs.length; i++) {
+      if (recs[i].formId === id && recs[i].weekKey === wk) {
+        if (!latest || recs[i].savedAt > latest.savedAt) latest = recs[i];
+      }
+    }
+    if (latest && latest.formData) {
+      populateFormData(id, latest.formData);
+      if (latest.timestamp) {
+        var tsBox = document.getElementById('ts-' + id);
+        if (tsBox) {
+          tsBox.querySelector('.ts-text').textContent = 'Recorded: ' + latest.timestamp;
+          tsBox.querySelector('.ts-text').className = 'ts-text recorded';
+          tsBox.querySelector('.ts-btn').textContent = 'Update Time';
+          formTimestamps[id] = latest.timestamp;
+        }
+      }
+    }
+  });
+
+}
+function saveForm(formId) {
+var we = document.getElementById('we-' + formId);
+var fsc = document.getElementById('fsc-' + formId);
+var now = new Date();
+
+/* Photos */
+var photos = formPhotos[formId] || [];
+var photoData = [];
+for (var pi = 0; pi < photos.length; pi++) {
+photoData.push({dataUrl: photos[pi].dataUrl, name: photos[pi].name, timestamp: photos[pi].timestamp});
+}
+
+/* Corrective action — first textarea in this form screen */
+var scr = document.getElementById(formId);
+var correctiveAction = '';
+if (scr) {
+var ta = scr.querySelector('textarea');
+if (ta) correctiveAction = ta.value;
+}
+
+/* Signatures — canvases with actual content only */
+var signatures = [];
+if (scr) {
+var canvases = scr.querySelectorAll('canvas');
+for (var si = 0; si < canvases.length; si++) {
+var cv = canvases[si];
+var hasContent = false;
+var dataUrl = null;
+try {
+if (cv.width > 0 && cv.height > 0) {
+var ctx = cv.getContext('2d');
+var imgData = ctx.getImageData(0, 0, cv.width, cv.height);
+for (var px = 3; px < imgData.data.length; px += 4) {
+if (imgData.data[px] > 0) { hasContent = true; break; }
+}
+if (hasContent) dataUrl = cv.toDataURL('image/png');
+}
+} catch(sigErr) { hasContent = false; dataUrl = null; }
+signatures.push({id: cv.id, dataUrl: dataUrl, hasSignature: hasContent});
+}
+}
+
+var record = {
+id: now.getTime(),
+formId: formId,
+weekKey: getWeekKey(),
+savedAt: now.toISOString(),
+weekEnding: we ? we.value : '',
+champion: fsc ? fsc.value : '',
+timestamp: formTimestamps[formId] || now.toLocaleString('en-IE', {timeZone:'Europe/Dublin', hour12:false}),
+photos: photoData,
+photoCount: photoData.length,
+correctiveAction: correctiveAction,
+signatures: signatures,
+    formData: scrapeFormData(formId)
+};
+
+var doSave = function() {
+dbPut('records', record).then(function() {
+showToast('Saved to Records!');
+updateBannerCount();
+}).catch(function(e) { showToast('Save failed: ' + e.message); });
+};
+if (!db) { openDB().then(function() { doSave(); }); } else { doSave(); }
+}
+function updateBannerCount() {
+if (!db) return;
+dbGetAll('records').then(function(recs) {
+var wk = getWeekKey();
+var ids = {};
+for (var i = 0; i < recs.length; i++) {
+if (recs[i].weekKey === wk) ids[recs[i].formId] = 1;
+}
+var done = Object.keys(ids).length;
+document.getElementById('home-banner-sub').textContent = done + ' of ' + ALL_FORMS.length + ' forms completed this week';
+});
+}
+function showToast(msg, dur) {
+var t = document.getElementById('toast');
+t.textContent = msg;
+t.className = 'toast show';
+setTimeout(function() { t.className = 'toast'; }, dur || 3000);
+}
+function initSig(canvasId) {
+var canvas = document.getElementById(canvasId);
+if (!canvas || sigPads[canvasId]) return;
+canvas.width = canvas.parentElement.offsetWidth || 320;
+canvas.height = parseInt(canvas.getAttribute('height')) || 80;
+var ctx = canvas.getContext('2d');
+ctx.strokeStyle = '#1a1a1a';
+ctx.lineWidth = 2;
+ctx.lineCap = 'round';
+ctx.lineJoin = 'round';
+var drawing = false, lx = 0, ly = 0;
+function pos(e) {
+var r = canvas.getBoundingClientRect();
+var sx = canvas.width / r.width, sy = canvas.height / r.height;
+/* FIX 1: was (e.clientY-r.top)sy — missing * operator */
+if (e.touches) return {x:(e.touches[0].clientX-r.left)*sx, y:(e.touches[0].clientY-r.top)*sy};
+return {x:(e.clientX-r.left)*sx, y:(e.clientY-r.top)*sy};
+}
+/* FIX 2: was Math.PI2 — undefined; correct is Math.PI*2 */
+function start(e) { e.preventDefault(); drawing=true; var p=pos(e); lx=p.x; ly=p.y; ctx.beginPath(); ctx.arc(p.x,p.y,1,0,Math.PI*2); ctx.fill(); }
+function move(e) { if(!drawing)return; e.preventDefault(); var p=pos(e); ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y); ctx.stroke(); lx=p.x; ly=p.y; }
+function stop() { drawing=false; }
+canvas.addEventListener('mousedown', start);
+canvas.addEventListener('mousemove', move);
+canvas.addEventListener('mouseup', stop);
+canvas.addEventListener('mouseleave', stop);
+canvas.addEventListener('touchstart', start, {passive:false});
+canvas.addEventListener('touchmove', move, {passive:false});
+canvas.addEventListener('touchend', stop);
+sigPads[canvasId] = {clear: function() { ctx.clearRect(0,0,canvas.width,canvas.height); }};
+}
+function clearSig(id) { if (sigPads[id]) sigPads[id].clear(); }
+function recordTimestamp(formId) {
+var now = new Date();
+var ts = now.toLocaleString('en-IE', {weekday:'short',year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'Europe/Dublin',hour12:false});
+formTimestamps[formId] = ts;
+var el = document.querySelector('#ts-' + formId + ' .ts-text');
+var btn = document.querySelector('#ts-' + formId + ' .ts-btn');
+if (el) { el.textContent = ts; el.className = 'ts-text recorded'; }
+if (btn) { btn.textContent = 'Update'; btn.className = 'ts-btn recorded-btn'; }
+showToast('Timestamp recorded');
+}
+function handlePhotos(input, formId) {
+if (!formPhotos[formId]) formPhotos[formId] = [];
+var files = input.files;
+for (var fi = 0; fi < files.length; fi++) {
+(function(file) {
+var reader = new FileReader();
+reader.onload = function(e) {
+var ts = formTimestamps[formId] || new Date().toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});
+var obj = {dataUrl:e.target.result, name:file.name, timestamp:ts};
+var idx = formPhotos[formId].push(obj) - 1;
+renderPhotoThumb(document.getElementById('photo-grid-' + formId), obj, formId, idx);
+};
+reader.readAsDataURL(file);
+})(files[fi]);
+}
+}
+function renderPhotoThumb(grid, photo, formId, idx) {
+var div = document.createElement('div');
+div.className = 'photo-thumb';
+var img = document.createElement('img');
+img.src = photo.dataUrl;
+(function(i) { img.addEventListener('click', function() { openLightbox(formId, i); }); })(idx);
+var lbl = document.createElement('div');
+lbl.className = 'photo-label';
+lbl.textContent = photo.timestamp;
+var del = document.createElement('button');
+del.className = 'photo-delete';
+del.textContent = 'x';
+(function(i) { del.addEventListener('click', function() { deletePhoto(formId, i); }); })(idx);
+div.appendChild(img); div.appendChild(lbl); div.appendChild(del);
+grid.appendChild(div);
+}
+function deletePhoto(formId, idx) {
+formPhotos[formId].splice(idx, 1);
+var g = document.getElementById('photo-grid-' + formId);
+g.innerHTML = '';
+for (var i = 0; i < formPhotos[formId].length; i++) {
+renderPhotoThumb(g, formPhotos[formId][i], formId, i);
+}
+}
+function openLightbox(formId, idx) {
+var p = formPhotos[formId] && formPhotos[formId][idx];
+if (!p) return;
+document.getElementById('lightbox-img').src = p.dataUrl;
+document.getElementById('lightbox-info').textContent = p.name + ' - ' + p.timestamp;
+document.getElementById('lightbox').className = 'lightbox open';
+}
+function closeLightbox() {
+document.getElementById('lightbox').className = 'lightbox';
+document.getElementById('lightbox-img').src = '';
+}
+function makeTempRows(units, bodyId) {
+var tbody = document.getElementById(bodyId);
+if (!tbody) return;
+for (var i = 0; i < units.length; i++) {
+var tr = document.createElement('tr');
+var c = '<td class="unit-name">' + units[i][0] + '</td><td class="target">' + units[i][1] + '</td>';
+for (var d = 0; d < 14; d++) c += '<td><input type="text" maxlength="6"></td>';
+c += '<td><input type="text"></td>';
+tr.innerHTML = c;
+tbody.appendChild(tr);
+}
+}
+function makeHourlyTable(tableId, mode) {
+var table = document.getElementById(tableId);
+if (!table) return;
+var thead = document.createElement('thead');
+var tbody = document.createElement('tbody');
+var r1 = '<tr><th class="time-col">Time</th>';
+var r2 = '<tr><th class="time-col"></th>';
+for (var d = 0; d < 7; d++) {
+r1 += '<th colspan="2">' + DAYS[d] + '</th>';
+r2 += mode === 's1s2' ? '<th>S1 \u00b0C</th><th>S2 \u00b0C</th>' : '<th>Product</th><th>Temp \u00b0C</th>';
+}
+thead.innerHTML = r1 + '</tr>' + r2 + '</tr>';
+table.appendChild(thead);
+for (var ti = 0; ti < hotfoodTimes.length; ti++) {
+var tr = document.createElement('tr');
+var c = '<td class="time-cell">' + hotfoodTimes[ti] + '</td>';
+for (var d2 = 0; d2 < 7; d2++) c += '<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="6"></td>';
+tr.innerHTML = c;
+tbody.appendChild(tr);
+}
+var signCells = '';
+for (var sc = 0; sc < 14; sc++) signCells += '<td><input type="text" maxlength="15"></td>';
+var sr = document.createElement('tr');
+sr.innerHTML = '<td class="time-cell" style="font-size:10px">Sign</td>' + signCells;
+tbody.appendChild(sr);
+table.appendChild(tbody);
+}
+function makeGSTable() {
+var tbody = document.getElementById('gs-tbody');
+if (!tbody) return;
+var weeks = ['Week 1','Week 2','Week 3','Week 4'];
+var days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+for (var wi = 0; wi < weeks.length; wi++) {
+var wr = document.createElement('tr');
+wr.innerHTML = '<td class="week-header" colspan="10">' + weeks[wi] + '</td>';
+tbody.appendChild(wr);
+for (var di = 0; di < days.length; di++) {
+var tr = document.createElement('tr');
+tr.innerHTML = '<td class="day-name">' + days[di] + '</td>' +
+'<td><input type="text" maxlength="12"></td>' +
+'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
+'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
+'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
+'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
+'<td><input type="text" maxlength="8"></td>' +
+'<td><input type="text" maxlength="8"></td>' +
+'<td><input type="text" maxlength="8"></td>' +
+'<td><input type="text" maxlength="6"></td>';
+tbody.appendChild(tr);
+}
+}
+}
+function makeAfterCookTable() {
+var tbody = document.getElementById('after-cook-tbody');
+if (!tbody) return;
+function addSection(label) {
+var tr = document.createElement('tr');
+tr.innerHTML = '<td colspan="6" class="section-hdr">' + label + '</td>';
+tbody.appendChild(tr);
+}
+function addRow(name) {
+var tr = document.createElement('tr');
+tr.innerHTML = '<td><input type="text" maxlength="8"></td>' +
+'<td class="prod-name">' + name + '</td>' +
+'<td><input type="text" maxlength="15"></td>' +
+'<td><input type="text" maxlength="6" style="color:#c00;font-weight:700"></td>' +
+'<td><input type="text" maxlength="12"></td>' +
+'<td><input type="text" maxlength="20"></td>';
+tbody.appendChild(tr);
+}
+addSection('Breakfast:');
+for (var i = 0; i < breakfastItems.length; i++) addRow(breakfastItems[i]);
+addSection('Lunch:');
+for (var j = 0; j < lunchItems.length; j++) addRow(lunchItems[j]);
+}
+function makeCleanRows(bodyId, items) {
+var tbody = document.getElementById(bodyId);
+if (!tbody) return;
+for (var i = 0; i < items.length; i++) {
+var tr = document.createElement('tr');
+var c = '<td class="area-name">' + items[i][0] + '</td><td class="chem-name">' + items[i][1] + '</td>';
+for (var d = 0; d < 7; d++) c += '<td><input type="text" maxlength="3" style="width:100%;border:none;text-align:center;font-size:12px;font-family:inherit;padding:2px;background:transparent"></td>';
+tr.innerHTML = c;
+tbody.appendChild(tr);
+}
+}
+function makeDeliTraceTable(tableId, products, cols) {
+var table = document.getElementById(tableId);
+if (!table) return;
+var cl = cols.length;
+var r1 = '<tr><th class="prod-col" rowspan="2">Product</th>';
+var r2 = '<tr>';
+for (var d = 0; d < 7; d++) {
+r1 += '<th colspan="' + cl + '">' + DAYS[d] + '</th>';
+for (var ci = 0; ci < cl; ci++) r2 += '<th style="font-size:9px">' + cols[ci] + '</th>';
+}
+var thead = document.createElement('thead');
+thead.innerHTML = r1 + '</tr>' + r2 + '</tr>';
+table.appendChild(thead);
+var tbody = document.createElement('tbody');
+for (var i = 0; i < products.length; i++) {
+var tr = document.createElement('tr');
+var c = '<td class="prod-name">' + products[i] + '</td>';
+for (var d2 = 0; d2 < 7; d2++) {
+for (var ci2 = 0; ci2 < cl; ci2++) c += '<td><input type="text" maxlength="12"></td>';
+}
+tr.innerHTML = c;
+tbody.appendChild(tr);
+}
+table.appendChild(tbody);
+}
+function makeIUBDTable(containerId, products, cols) {
+var container = document.getElementById(containerId);
+if (!container) return;
+var cl = cols.length;
+var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
+for (var d = 0; d < 7; d++) {
+for (var ci = 0; ci < cl; ci++) html += '<th>' + (ci === 0 ? DAYS[d] : '') + '</th>';
+}
+html += '</tr><tr><th class="product-col"></th>';
+for (var d2 = 0; d2 < 7; d2++) {
+for (var ci2 = 0; ci2 < cl; ci2++) html += '<th style="font-size:10px">' + cols[ci2] + '</th>';
+}
+html += '</tr></thead><tbody>';
+for (var i = 0; i < products.length; i++) {
+html += '<tr><td class="product-name">' + products[i].name + (products[i].ingr ? '<small>' + products[i].ingr + '</small>' : '') + '</td>';
+for (var j = 0; j < 7 * cl; j++) html += '<td><input type="text" maxlength="12"></td>';
+html += '</tr>';
+}
+html += '</tbody></table>';
+container.innerHTML = html;
+}
+function makeOUBDTable(containerId, products, col2, col3) {
+var c2 = col2 || 'DO', c3 = col3 || 'UBD';
+var container = document.getElementById(containerId);
+if (!container) return;
+var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
+for (var d = 0; d < 7; d++) html += '<th></th><th>' + DAYS[d] + '</th><th></th>';
+html += '</tr><tr><th class="product-col"></th>';
+for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">' + c2 + '</th><th style="font-size:10px">' + c3 + '</th>';
+html += '</tr></thead><tbody>';
+for (var i = 0; i < products.length; i++) {
+var name = typeof products[i] === 'string' ? products[i] : products[i].name;
+html += '<tr><td class="product-name">' + name + '</td>';
+for (var j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
+html += '</tr>';
+}
+html += '</tbody></table>';
+container.innerHTML = html;
+}
+function makeCookedMeatsTable() {
+var container = document.getElementById('cooked-meats-tables');
+if (!container) return;
+var html = '<table class="week-table"><thead><tr><th class="product-col" style="min-width:130px">Name of Product</th>';
+for (var d = 0; d < 7; d++) html += '<th></th><th>' + DAYS[d] + '</th><th></th>';
+html += '</tr><tr><th class="product-col"></th>';
+for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>';
+html += '</tr></thead><tbody>';
+for (var i = 0; i < cookedMeats.length; i++) {
+html += '<tr><td class="product-name">' + cookedMeats[i] + '</td>';
+for (var j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
+html += '</tr>';
+}
+html += '</tbody></table>';
+container.innerHTML = html;
+}
+function makeCheeseTable() {
+var container = document.getElementById('cheese-table');
+if (!container) return;
+var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
+for (var d = 0; d < 7; d++) html += '<th></th><th>' + DAYS[d] + '</th><th></th>';
+html += '</tr><tr><th class="product-col"></th>';
+for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>';
+html += '</tr></thead><tbody>';
+for (var i = 0; i < 10; i++) {
+html += '<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name"></td>';
+for (var j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
+html += '</tr>';
+}
+html += '</tbody></table>';
+container.innerHTML = html;
+}
+function makeFishRows() {
+var tbody = document.getElementById('fish-body');
+if (!tbody) return;
+for (var i = 0; i < 12; i++) {
+var tr = document.createElement('tr');
+var c = '<td><input type="text" placeholder="Product name"></td>';
+for (var d = 0; d < 6; d++) c += '<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="12"></td><td><input type="text" maxlength="15"></td>';
+tr.innerHTML = c;
+tbody.appendChild(tr);
+}
+}
+function makePorkRows() {
+var tbody = document.getElementById('pork-body');
+if (!tbody) return;
+for (var i = 0; i < 25; i++) {
+var tr = document.createElement('tr');
+tr.innerHTML = '<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>';
+tbody.appendChild(tr);
+}
+}
+function makeLogRows(bodyId, cols, rows) {
+var tbody = document.getElementById(bodyId);
+if (!tbody) return;
+rows = rows || 20;
+for (var i = 0; i < rows; i++) {
+var tr = document.createElement('tr');
+var c = '';
+for (var j = 0; j < cols; j++) c += '<td><input type="text"></td>';
+tr.innerHTML = c;
+tbody.appendChild(tr);
+}
+}
+function makeRedMeatClean() {
+var tbody = document.getElementById('clean-redmeat-body');
+if (!tbody) return;
+var skeys = ['DAILY CLEANING SCHEDULE','WEEKLY CLEANING SCHEDULE'];
+var sdata = [cleaningItemsDaily, cleaningItemsWeekly];
+for (var si = 0; si < skeys.length; si++) {
+var hr = document.createElement('tr');
+hr.innerHTML = '<td colspan="9" class="clean-section-header">' + skeys[si] + '</td>';
+tbody.appendChild(hr);
+var items = sdata[si];
+for (var ii = 0; ii < items.length; ii++) {
+var tr = document.createElement('tr');
+var c = '<td class="area-name">' + items[ii][0] + '</td><td class="chem-name">' + items[ii][1] + '</td>';
+for (var d = 0; d < 7; d++) c += '<td><input type="checkbox"></td>';
+tr.innerHTML = c;
+tbody.appendChild(tr);
+}
+}
+}
+function makeFruitVegClean() {
+var tbody = document.getElementById('clean-fruitveg-body');
+if (!tbody) return;
+var daily = [['Floor','Floors','Mop & bucket/degreaser'],['Scales','Scales','Sanitiser'],['Juicer','Juicer','Wash up liq/Sanitiser'],['Salad display','Salad display area','Sanitiser'],['Potato stands','Potato stands','Sanitiser']];
+for (var i = 0; i < daily.length; i++) {
+var tr = document.createElement('tr');
+var c = '<td class="area-name">' + daily[i][0] + '</td><td class="area-name">' + daily[i][1] + '</td><td class="chem-name">' + daily[i][2] + '</td>';
+for (var d = 0; d < 14; d++) c += '<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';
+tr.innerHTML = c;
+tbody.appendChild(tr);
+}
+var wh = document.createElement('tr');
+wh.innerHTML = '<td colspan="17" class="clean-section-header">WEEKLY DEEP CLEAN</td>';
+tbody.appendChild(wh);
+var weekly = [['All shelving','Shelving units','Degreaser'],['Cold rooms','Cold room walls/floors','Degreaser/Sanitiser'],['Display fridges','Interior walls','Degreaser/Sanitiser'],['Potato hoppers','Hoppers & surrounds','Degreaser']];
+for (var j = 0; j < weekly.length; j++) {
+var tr2 = document.createElement('tr');
+var c2 = '<td class="area-name">' + weekly[j][0] + '</td><td class="area-name">' + weekly[j][1] + '</td><td class="chem-name">' + weekly[j][2] + '</td>';
+for (var d2 = 0; d2 < 14; d2++) c2 += '<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';
+tr2.innerHTML = c2;
+tbody.appendChild(tr2);
+}
+}
+function makeStockroomClean() {
+var tbody = document.getElementById('clean-stockroom-body');
+if (!tbody) return;
+var dh = document.createElement('tr');
+dh.innerHTML = '<td colspan="9" class="clean-section-header">DAILY CLEANING SCHEDULE</td>';
+tbody.appendChild(dh);
+var dailyItems = [['Yard','Degreaser/Mop'],['Back-up cold room','Degreaser/Sanitiser'],['Ground floor stockroom','Degreaser/Mop'],['First floor stockroom','Degreaser/Mop'],['Sluice room','Degreaser/Sanitiser'],['Bailer area','Degreaser/Mop'],['Returns area','Degreaser/Mop'],['Frozen back-up','Degreaser/Sanitiser'],['Dairy back-up','Degreaser/Sanitiser'],['Office','Sanitiser']];
+for (var i = 0; i < dailyItems.length; i++) {
+var tr = document.createElement('tr');
+var c = '<td class="area-name">' + dailyItems[i][0] + '</td><td class="chem-name">' + dailyItems[i][1] + '</td>';
+for (var d = 0; d < 7; d++) c += '<td><input type="checkbox"></td>';
+tr.innerHTML = c;
+tbody.appendChild(tr);
+}
+var wh = document.createElement('tr');
+wh.innerHTML = '<td colspan="9" class="clean-section-header">WEEKLY DEEP CLEAN</td>';
+tbody.appendChild(wh);
+var weeklyItems = [['Full deep clean - all areas','Degreaser/Sanitiser'],['Racking & shelving','Degreaser'],['Light fittings & vents','Damp cloth']];
+for (var j = 0; j < weeklyItems.length; j++) {
+var tr2 = document.createElement('tr');
+var c2 = '<td class="area-name">' + weeklyItems[j][0] + '</td><td class="chem-name">' + weeklyItems[j][1] + '</td>';
+for (var d2 = 0; d2 < 7; d2++) c2 += '<td><input type="checkbox"></td>';
+tr2.innerHTML = c2;
+tbody.appendChild(tr2);
+}
+}
+function makeGoodsRows(bodyId) {
+var tbody = document.getElementById(bodyId);
+if (!tbody) return;
+for (var i = 0; i < 20; i++) {
+var tr = document.createElement('tr');
+var c = '';
+for (var j = 0; j < 10; j++) c += '<td><input type="text" style="width:100%;border:none;padding:3px;font-size:11px;font-family:inherit"></td>';
+tr.innerHTML = c;
+tbody.appendChild(tr);
+}
+}
+function makeComplianceTables() {
+var container = document.getElementById('compliance-tables');
+if (!container) return;
+for (var di = 0; di < complianceDepts.length; di++) {
+var dept = complianceDepts[di];
+var deptKey = 'dept' + di;
+var html = '<div style="margin-bottom:16px"><table class="compliance-table"><thead>';
+html += '<tr><th style="min-width:120px">Dept</th><th>System</th>';
+html += '<th colspan="3" style="text-align:center">Result (0/3/5)</th>';
+html += '<th>Issues</th><th>Action Taken</th></tr></thead><tbody>';
+for (var ii = 0; ii < dept.items.length; ii++) {
+var radioName = deptKey + 'item' + ii;
+html += '<tr>';
+if (ii === 0) html += '<td class="dept" rowspan="' + dept.items.length + '">' + dept.name + '</td>';
+html += '<td>' + dept.items[ii] + '</td>';
+html += '<td style="text-align:center;width:90px"><div class="score-radio">';
+html += '<label><input type="radio" name="' + radioName + '" value="0">0</label>';
+html += '<label><input type="radio" name="' + radioName + '" value="3">3</label>';
+html += '<label><input type="radio" name="' + radioName + '" value="5">5</label>';
+html += '</div></td>';
+html += '<td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';
+html += '<td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';
+html += '</tr>';
+}
+var mx = dept.items.length * 5;
+html += '<tr class="max-row"><td colspan="2">Max=' + mx + ' Actual=</td>';
+html += '<td colspan="2"><input type="text" placeholder="Actual" style="border:1px solid #ddd;padding:4px;width:80px;border-radius:4px;font-family:inherit"></td>';
+html += '<td colspan="2" style="font-size:11px;color:#666">(Actual/max)x100=%</td></tr>';
+html += '</tbody></table></div>';
+container.innerHTML += html;
+}
+var zones = document.getElementById('dept-zones');
+var dz = ['1. Serve over deli - Raw Meat/Fish','2. Serve over deli - Ready to eat foods','3. Hot Food bar, salad bar, bakery','4. Deli Pre Pack','5. Fruit & vegetable','6. Dairy','7. Frozen','8. Goods Inwards & Yard'];
+var zh = '<table class="compliance-table"><thead><tr><th>Department</th><th>Red</th><th>Orange</th><th>Green</th></tr></thead><tbody>';
+for (var zi = 0; zi < dz.length; zi++) {
+zh += '<tr><td>' + dz[zi] + '</td>';
+zh += '<td style="text-align:center"><input type="checkbox" style="accent-color:#d32f2f"></td>';
+zh += '<td style="text-align:center"><input type="checkbox" style="accent-color:#e65100"></td>';
+zh += '<td style="text-align:center"><input type="checkbox" style="accent-color:#00703c"></td>';
+zh += '</tr>';
+}
+zh += '</tbody></table>';
+zones.innerHTML = zh;
+}
+var butcherBatchCount = 0;
+function addButcherBatch() {
+butcherBatchCount++;
+var container = document.getElementById('butcher-batches');
+var div = document.createElement('div');
+div.style.cssText = 'background:white;border:1px solid #ddd;border-radius:8px;padding:14px;margin-bottom:12px;';
+var rows = '';
+for (var i = 0; i < 5; i++) {
+rows += '<tr><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td>';
+rows += '<td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td></tr>';
+}
+div.innerHTML = '<div style="font-weight:600;color:#005a30;margin-bottom:10px;font-size:13px">Batch ' + butcherBatchCount + '</div>' +
+'<div class="field-row"><div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date"></div>' +
+'<div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text"></div></div>' +
+'<div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date"></div>' +
+'<div class="section-title" style="font-size:12px;margin:10px 0 8px">Ingredients</div>' +
+'<table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead><tbody>' + rows + '</tbody></table>';
+container.appendChild(div);
+}
+document.addEventListener('DOMContentLoaded', function() {
+openDB().then(function() { updateBannerCount(); }).catch(function() {});
+window.addEventListener('pagehide', function() {
+try { if (db) { db.close(); } } catch(e) {}
+});
+document.getElementById('backBtn').addEventListener('click', goBack);
+document.getElementById('lightbox').addEventListener('click', closeLightbox);
+document.getElementById('lightbox-close-btn').addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
+/* Explicitly close DB before navigating to records.html so Safari iOS
+does not block the other page from opening the same database */
+var recBanner = document.querySelector('.records-banner');
+if (recBanner) {
+recBanner.addEventListener('click', function() {
+try { if (db) { db.close(); db = null; } } catch(e) {}
+});
+}
+var cards = document.querySelectorAll('.form-card');
+for (var ci = 0; ci < cards.length; ci++) {
+(function(card) {
+card.addEventListener('click', function() {
+var fid = card.getAttribute('data-form');
+if (fid) showForm(fid);
+});
+})(cards[ci]);
+}
+var saveBtns = document.querySelectorAll('.btn-save');
+for (var si = 0; si < saveBtns.length; si++) {
+(function(btn) {
+btn.addEventListener('click', function() {
+var fid = btn.getAttribute('data-saveid');
+if (fid) saveForm(fid);
+});
+})(saveBtns[si]);
+}
+/* FIX 3: loop counter fix — now consistently uses sgi */
+var sigBtns = document.querySelectorAll('.sig-clear');
+for (var sgi = 0; sgi < sigBtns.length; sgi++) {
+(function(btn) {
+btn.addEventListener('click', function() {
+var sid = btn.getAttribute('data-sigid');
+if (sid) clearSig(sid);
+});
+})(sigBtns[sgi]);
+}
+var tsBtns = document.querySelectorAll('.ts-btn');
+for (var ti = 0; ti < tsBtns.length; ti++) {
+(function(btn) {
+btn.addEventListener('click', function() {
+var tsid = btn.getAttribute('data-tsid');
+if (tsid) recordTimestamp(tsid);
+});
+})(tsBtns[ti]);
+}
+var photoInputs = document.querySelectorAll('input[data-photoid]');
+for (var pi = 0; pi < photoInputs.length; pi++) {
+(function(inp) {
+inp.addEventListener('change', function() { handlePhotos(inp, inp.getAttribute('data-photoid')); });
+})(photoInputs[pi]);
+}
+var addBatchBtn = document.getElementById('add-butcher-batch-btn');
+if (addBatchBtn) { addBatchBtn.addEventListener('click', addButcherBatch); }
+makeTempRows(meatTempUnits, 'temp-meat-body');
+makeTempRows(prepackTempUnits, 'temp-prepack-body');
+makeTempRows(dairyTempUnits, 'temp-dairy-body');
+makeTempRows(frozenTempUnits, 'temp-frozen-body');
+makeTempRows(fruitVegTempUnits, 'temp-fruitveg-body');
+makeTempRows(deliTempUnits, 'temp-deli-body');
+makeHourlyTable('chicken-hourly-table', 's1s2');
+makeHourlyTable('hotbar-hourly-table', 'prodtemp');
+makeHourlyTable('soup-hourly-table', 's1s2');
+makeGSTable();
+makeAfterCookTable();
+makeCleanRows('hotfood-daily-clean-body', hotfoodDailyClean);
+makeCleanRows('hotfood-weekly-clean-body', hotfoodWeeklyClean);
+makeCleanRows('cookedmeat-clean-body', cookedmeatClean);
+makeCleanRows('cookedmeat-weekly-clean-body', cookedmeatWeeklyClean);
+makeLogRows('thawing-body', 8, 25);
+makeDeliTraceTable('deli-trace-stuffing-table', deliTraceStuffing, ['OUBD','DP','UBD','D']);
+makeDeliTraceTable('deli-trace-butter-table', deliTraceButter, ['OUBD','DP','UBD','D']);
+makeDeliTraceTable('deli-trace-chicken-table', deliTraceChicken, ['OUBD','DP','UBD']);
+makeDeliTraceTable('deli-trace-saladveg-table', deliTraceSaladVeg, ['OUBD','DP','UBD','D']);
+makeDeliTraceTable('deli-trace-eggtuna-table', deliTraceEggTuna, ['OUBD','DP','UBD']);
+makeIUBDTable('sandwich-tables', sandwiches, ['IUBD','UBD']);
+makeIUBDTable('wrap-tables', wraps, ['IUBD','UBD']);
+makeIUBDTable('pizza-tables', pizzas, ['IUBD','UBD']);
+makeIUBDTable('salad-made-tables', saladsMade, ['IUBD','DM','DD']);
+makeIUBDTable('salad-prepack-tables', saladsPrepack, ['IUBD/OUBD','DM/DO','DD']);
+makeOUBDTable('savouries-table', savouries);
+makeCookedMeatsTable();
+makeOUBDTable('salami-table', salamiOlives);
+makeCheeseTable();
+makeFishRows();
+makePorkRows();
+makeLogRows('mince-body', 7, 20);
+makeLogRows('burger-body', 6, 20);
+makeRedMeatClean();
+makeFruitVegClean();
+makeStockroomClean();
+makeGoodsRows('goods-chilled-body');
+makeGoodsRows('goods-ambient-body');
+makeComplianceTables();
+addButcherBatch();
+});
 </script>
+
 </body>
 </html>

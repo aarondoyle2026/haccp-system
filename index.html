@@ -758,17 +758,19 @@ if (scr) {
 var canvases = scr.querySelectorAll(‘canvas’);
 for (var si = 0; si < canvases.length; si++) {
 var cv = canvases[si];
+var hasContent = false;
+var dataUrl = null;
+try {
+if (cv.width > 0 && cv.height > 0) {
 var ctx = cv.getContext(‘2d’);
 var imgData = ctx.getImageData(0, 0, cv.width, cv.height);
-var hasContent = false;
 for (var px = 3; px < imgData.data.length; px += 4) {
 if (imgData.data[px] > 0) { hasContent = true; break; }
 }
-signatures.push({
-id: cv.id,
-dataUrl: hasContent ? cv.toDataURL(‘image/png’) : null,
-hasSignature: hasContent
-});
+if (hasContent) dataUrl = cv.toDataURL(‘image/png’);
+}
+} catch(sigErr) { hasContent = false; dataUrl = null; }
+signatures.push({id: cv.id, dataUrl: dataUrl, hasSignature: hasContent});
 }
 }
 

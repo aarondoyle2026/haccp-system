@@ -295,32 +295,27 @@ function buildByForm(recs, wk) {
   return byForm;
 }
 
-/* ---- Render expanded record detail ---- */
-
 function buildSavedDataView(rec) {
   if (!rec.formData) return '';
   var html = '<div style="margin-top:10px; background:#f9f9f9; padding:10px; border-radius:8px; border:1px solid #eee;">';
   html += '<div style="font-size:10px; font-weight:700; text-transform:uppercase; color:#999; margin-bottom:8px;">Form Data Snapshot</div>';
   
-  // Show inputs
   if (rec.formData.inputs && rec.formData.inputs.length) {
-    html += '<div style="font-size:11px; margin-bottom:4px;"><strong>Inputs:</strong> ' + rec.formData.inputs.join(', ') + '</div>';
+    var sample = rec.formData.inputs.filter(v => v.trim() !== '').slice(0, 15).join(', ');
+    if (rec.formData.inputs.length > 15) sample += '...';
+    html += '<div style="font-size:11px; margin-bottom:4px;"><strong>Recorded Values:</strong> ' + escapeHtml(sample || 'No text data') + '</div>';
   }
   
-  // Show checkboxes (as icons)
   if (rec.formData.checkboxes && rec.formData.checkboxes.length) {
-    var checks = rec.formData.checkboxes.map(c => c ? '✅' : '❌').join(' ');
-    html += '<div style="font-size:11px; margin-bottom:4px;"><strong>Checkboxes:</strong> ' + checks + '</div>';
+    var done = rec.formData.checkboxes.filter(c => c).length;
+    html += '<div style="font-size:11px; margin-bottom:4px;"><strong>Tasks Completed:</strong> ' + done + ' of ' + rec.formData.checkboxes.length + '</div>';
   }
 
-  // Note: For a truly "full" view, we would need to replicate the table structure here.
-  // But since we have 41 different table structures, a simpler approach is to show 
-  // that the data IS being captured and saved.
-  html += '<div style="font-size:10px; color:#666; font-style:italic;">Note: Full table structure is preserved in the database.</div>';
   html += '</div>';
   return html;
 }
 
+/* ---- Render expanded record detail ---- */
 function buildRecordDetail(rec) {
   var html = '';
 
@@ -339,8 +334,11 @@ function buildRecordDetail(rec) {
     html += '<div class="rec-ca"><div class="rec-ca-label">&#9888;&#65039; Corrective Action Notes</div><div class="rec-ca-value">' + escapeHtml(rec.correctiveAction) + '</div></div>';
   }
 
+  /* Form Data Summary */
+  html += buildSavedDataView(rec);
+
   /* Signatures */
-  html += '<div class="rec-sigs"><div class="rec-sigs-label">&#9999;&#65039; Signatures</div>';
+  html += '<div class="rec-sigs"><div class="rec-sigs-label">&#9999;&#65039; Captured Signatures</div>';
   if (rec.signatures && rec.signatures.length) {
     var signed = [];
     for (var si = 0; si < rec.signatures.length; si++) {
@@ -362,7 +360,7 @@ function buildRecordDetail(rec) {
       html += '<div class="rec-sig-none">No signatures captured</div>';
     }
   } else {
-    html += '<div class="rec-sig-none">Not captured \u2014 re-save form to include</div>';
+    html += '<div class="rec-sig-none">No signature data found</div>';
   }
   html += '</div>';
 
@@ -380,7 +378,6 @@ function buildRecordDetail(rec) {
   html += '</div>';
 
   /* Delete */
-  html += buildSavedDataView(rec);
   html += '<button class="rec-delete-btn" data-delid="' + rec.id + '">&#128465; Delete this record</button>';
   return html;
 }

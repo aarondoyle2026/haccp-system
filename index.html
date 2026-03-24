@@ -818,11 +818,9 @@ var drawing = false, lx = 0, ly = 0;
 function pos(e) {
 var r = canvas.getBoundingClientRect();
 var sx = canvas.width / r.width, sy = canvas.height / r.height;
-/* FIX 1: was (e.clientY-r.top)sy — missing * operator */
 if (e.touches) return {x:(e.touches[0].clientX-r.left)*sx, y:(e.touches[0].clientY-r.top)*sy};
 return {x:(e.clientX-r.left)*sx, y:(e.clientY-r.top)*sy};
 }
-/* FIX 2: was Math.PI2 — undefined; correct is Math.PI*2 */
 function start(e) { e.preventDefault(); drawing=true; var p=pos(e); lx=p.x; ly=p.y; ctx.beginPath(); ctx.arc(p.x,p.y,1,0,Math.PI*2); ctx.fill(); }
 function move(e) { if(!drawing)return; e.preventDefault(); var p=pos(e); ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y); ctx.stroke(); lx=p.x; ly=p.y; }
 function stop() { drawing=false; }
@@ -1273,8 +1271,6 @@ try { if (db) { db.close(); } } catch(e) {}
 document.getElementById('backBtn').addEventListener('click', goBack);
 document.getElementById('lightbox').addEventListener('click', closeLightbox);
 document.getElementById('lightbox-close-btn').addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
-/* Explicitly close DB before navigating to records.html so Safari iOS
-   does not block the other page from opening the same database */
 var recBanner = document.querySelector('.records-banner');
 if (recBanner) {
   recBanner.addEventListener('click', function() {
@@ -1299,7 +1295,6 @@ if (fid) saveForm(fid);
 });
 })(saveBtns[si]);
 }
-/* FIX 3: loop counter was sgi but closure referenced sigBtns[si] — now consistently uses sgi */
 var sigBtns = document.querySelectorAll('.sig-clear');
 for (var sgi = 0; sgi < sigBtns.length; sgi++) {
 (function(btn) {
@@ -1368,176 +1363,6 @@ makeGoodsRows('goods-ambient-body');
 makeComplianceTables();
 addButcherBatch();
 });
-/* ==========================================================
-PATCH: localStorage auto-save/restore + field data on save
-Add this block just before the closing </script> tag
-in index.html
-========================================================== */
-
-/* — Week key (Sun-Sat) — */
-function lsWeekKey() {
-var d = new Date(), s = new Date(d);
-s.setDate(d.getDate() - d.getDay());
-s.setHours(0,0,0,0);
-return ‘haccp_wk_’ + s.toISOString().split(‘T’)[0];
-}
-
-/* — Clear previous week data from localStorage — */
-function clearOldWeekData() {
-var currentWk = lsWeekKey();
-var keys = [];
-try {
-for (var i = 0; i < localStorage.length; i++) {
-keys.push(localStorage.key(i));
-}
-for (var j = 0; j < keys.length; j++) {
-var k = keys[j];
-if (k && k.indexOf(‘haccp_’) === 0 && k.indexOf(currentWk) === -1) {
-localStorage.removeItem(k);
-}
-}
-} catch(e) {}
-}
-
-/* — Save a single field to localStorage — */
-function lsSaveField(formId, fieldKey, value) {
-try {
-localStorage.setItem(lsWeekKey() + ‘*’ + formId + ’*’ + fieldKey, value);
-} catch(e) {}
-}
-
-/* — Restore all fields for a form from localStorage — */
-function lsRestoreForm(formId) {
-var prefix = lsWeekKey() + ‘*’ + formId + ’*’;
-var scr = document.getElementById(formId);
-if (!scr) return;
-try {
-/* text inputs and textareas */
-var inputs = scr.querySelectorAll(‘input[type=text], input[type=date], textarea’);
-for (var i = 0; i < inputs.length; i++) {
-var key = prefix + ‘txt_’ + i;
-var val = localStorage.getItem(key);
-if (val !== null) inputs[i].value = val;
-}
-/* checkboxes */
-var checks = scr.querySelectorAll(‘input[type=checkbox]’);
-for (var ci = 0; ci < checks.length; ci++) {
-var ckey = prefix + ‘chk_’ + ci;
-var cval = localStorage.getItem(ckey);
-if (cval !== null) checks[ci].checked = cval === ‘1’;
-}
-/* selects */
-var sels = scr.querySelectorAll(‘select’);
-for (var si = 0; si < sels.length; si++) {
-var skey = prefix + ‘sel_’ + si;
-var sval = localStorage.getItem(skey);
-if (sval !== null) sels[si].value = sval;
-}
-/* radio buttons */
-var radios = scr.querySelectorAll(‘input[type=radio]’);
-for (var ri = 0; ri < radios.length; ri++) {
-var rkey = prefix + ‘rad_’ + radios[ri].name + ‘_’ + radios[ri].value;
-if (localStorage.getItem(rkey) === ‘1’) radios[ri].checked = true;
-}
-} catch(e) {}
-}
-
-/* — Attach live-save listeners to all fields in a form — */
-function lsAttachForm(formId) {
-var prefix = lsWeekKey() + ‘*’ + formId + ’*’;
-var scr = document.getElementById(formId);
-if (!scr) return;
-var inputs = scr.querySelectorAll(‘input[type=text], input[type=date], textarea’);
-for (var i = 0; i < inputs.length; i++) {
-(function(inp, key) {
-inp.addEventListener(‘input’, function() { lsSaveField(formId, key, inp.value); });
-inp.addEventListener(‘change’, function() { lsSaveField(formId, key, inp.value); });
-})(inputs[i], ‘txt_’ + i);
-}
-var checks = scr.querySelectorAll(‘input[type=checkbox]’);
-for (var ci = 0; ci < checks.length; ci++) {
-(function(chk, key) {
-chk.addEventListener(‘change’, function() { lsSaveField(formId, key, chk.checked ? ‘1’ : ‘0’); });
-})(checks[ci], ‘chk_’ + ci);
-}
-var sels = scr.querySelectorAll(‘select’);
-for (var si = 0; si < sels.length; si++) {
-(function(sel, key) {
-sel.addEventListener(‘change’, function() { lsSaveField(formId, key, sel.value); });
-})(sels[si], ‘sel_’ + si);
-}
-var radios = scr.querySelectorAll(‘input[type=radio]’);
-for (var ri = 0; ri < radios.length; ri++) {
-(function(rad) {
-rad.addEventListener(‘change’, function() {
-if (rad.checked) lsSaveField(formId, ‘rad_’ + rad.name + ‘_’ + rad.value, ‘1’);
-});
-})(radios[ri]);
-}
-}
-
-/* — Collect all field data from a form for the record snapshot — */
-function collectFieldData(formId) {
-var scr = document.getElementById(formId);
-if (!scr) return [];
-var data = [];
-var inputs = scr.querySelectorAll(‘input[type=text], input[type=date], textarea’);
-for (var i = 0; i < inputs.length; i++) {
-if (inputs[i].value && inputs[i].value.trim()) {
-var lbl = ‘’;
-var ph = inputs[i].getAttribute(‘placeholder’) || ‘’;
-var id2 = inputs[i].id || ‘’;
-lbl = id2 || ph || (‘field_’ + i);
-data.push({k: lbl, v: inputs[i].value, idx: i, type: ‘text’});
-}
-}
-var checks = scr.querySelectorAll(‘input[type=checkbox]’);
-for (var ci = 0; ci < checks.length; ci++) {
-if (checks[ci].checked) data.push({k: ‘chk_’ + ci, v: ‘1’, idx: ci, type: ‘checkbox’});
-}
-var sels = scr.querySelectorAll(‘select’);
-for (var si = 0; si < sels.length; si++) {
-if (sels[si].value) data.push({k: ‘sel_’ + si, v: sels[si].value, idx: si, type: ‘select’});
-}
-var radios = scr.querySelectorAll(‘input[type=radio]:checked’);
-for (var ri = 0; ri < radios.length; ri++) {
-data.push({k: ‘rad_’ + radios[ri].name, v: radios[ri].value, idx: ri, type: ‘radio’});
-}
-return data;
-}
-
-/* — Patch showForm to restore + attach after tables are built —
-We wrap the original showForm function */
-var _origShowForm = showForm;
-showForm = function(id) {
-_origShowForm(id);
-/* Tables are built synchronously in DOMContentLoaded so they exist now,
-but signatures init uses setTimeout(100) — use same delay */
-setTimeout(function() {
-lsRestoreForm(id);
-lsAttachForm(id);
-}, 150);
-};
-
-/* — Patch saveForm to include field data in the record — */
-var _origSaveForm = saveForm;
-saveForm = function(formId) {
-/* Inject fieldData into record by temporarily monkey-patching dbPut */
-var _fieldData = collectFieldData(formId);
-var _origDbPut = dbPut;
-dbPut = function(store, obj) {
-if (store === ‘records’ && obj && !obj.fieldData) {
-obj.fieldData = _fieldData;
-}
-return _origDbPut(store, obj);
-};
-_origSaveForm(formId);
-/* Restore dbPut after a tick */
-setTimeout(function() { dbPut = _origDbPut; }, 500);
-};
-
-/* — On load: clear old week data — */
-clearOldWeekData();
 </script>
 </body>
 </html>

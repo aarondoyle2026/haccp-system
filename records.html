@@ -14,7 +14,6 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .nav-logo{font-size:11px;opacity:0.75;text-align:right;line-height:1.3;font-weight:600;}
 .status-bar{background:#005a30;color:white;text-align:center;padding:7px 16px;font-size:11px;font-family:'Courier New',monospace;letter-spacing:0.02em;}
 .status-bar.err{background:#b71c1c;}
-/* Week card */
 .week-card{margin:14px 14px 0;background:#00703c;border-radius:12px;padding:14px 16px;color:white;}
 .wc-label{font-size:10px;font-weight:700;letter-spacing:0.1em;opacity:0.75;text-transform:uppercase;}
 .wc-week{font-size:18px;font-weight:700;margin-top:3px;}
@@ -26,11 +25,9 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .wc-closes{font-size:11px;opacity:0.75;margin-top:2px;}
 .prog-wrap{margin:10px 14px 0;background:white;border-radius:8px;overflow:hidden;height:10px;}
 .prog-fill{height:100%;background:#00703c;border-radius:8px;transition:width 0.4s;}
-/* Category sections */
 .section{margin:12px 14px 0;}
 .section-head{background:#1a1a1a;color:white;padding:9px 14px;border-radius:8px 8px 0 0;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;}
 .section-head-pct{font-size:12px;font-weight:700;opacity:0.8;}
-/* Form rows */
 .form-row{background:white;border-left:1px solid #d8e8d8;border-right:1px solid #d8e8d8;border-bottom:1px solid #ececec;padding:12px 14px;}
 .form-row:last-child{border-bottom:1px solid #d8e8d8;border-radius:0 0 8px 8px;}
 .form-row.done{border-left:3px solid #00703c;}
@@ -44,38 +41,115 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .fr-missing{font-size:11px;color:#e65100;font-weight:600;margin-top:2px;}
 .fr-chevron{font-size:18px;color:#aaa;transition:transform 0.2s;flex-shrink:0;line-height:1;}
 .fr-chevron.open{transform:rotate(90deg);}
-/* Expanded detail */
 .rec-detail{display:none;margin-top:12px;border-top:2px solid #e8f5ee;padding-top:12px;}
 .rec-detail.open{display:block;}
-/* Detail metadata grid */
-.rec-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+/* Meta grid */
+.rec-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
 .rmc{background:#f8faf8;border-radius:8px;padding:9px 11px;}
 .rmc-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:4px;}
 .rmc-value{font-size:12px;color:#1a1a1a;line-height:1.4;}
 .rmc-value.ok{color:#00703c;font-weight:700;font-family:'Courier New',monospace;}
 .rmc-value.na{color:#bbb;font-style:italic;}
-/* Corrective action box */
-.rec-ca{background:#fff8e1;border-left:3px solid #e65100;border-radius:6px;padding:9px 12px;margin-bottom:10px;}
+/* Corrective action */
+.rec-ca{background:#fff8e1;border-left:3px solid #e65100;border-radius:6px;padding:9px 12px;margin-bottom:12px;}
 .rec-ca-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#e65100;margin-bottom:4px;}
 .rec-ca-value{font-size:12px;color:#1a1a1a;white-space:pre-wrap;line-height:1.5;}
-.rec-ca-none{font-size:12px;color:#bbb;font-style:italic;}
-/* Signatures */
-.rec-sigs{margin-bottom:10px;}
+/* Inline form styles */
+.inline-form-section{margin-bottom:14px;}
+.inline-section-title{font-size:12px;font-weight:700;color:#005a30;margin:14px 0 8px;padding-bottom:5px;border-bottom:2px solid #e8f5ee;}
+.field-label{font-size:11px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;display:block;}
+.field-input{width:100%;padding:9px 11px;border:1.5px solid #d0d0d0;border-radius:8px;font-size:13px;font-family:inherit;background:white;color:#1a1a1a;-webkit-appearance:none;}
+.field-input:focus{outline:none;border-color:#00703c;}
+.field-row{display:flex;gap:10px;}
+.field-row .field-group{flex:1;}
+.field-group{margin-bottom:12px;}
+.week-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -14px;padding:0 14px 8px;}
+.week-table{border-collapse:collapse;width:100%;min-width:600px;font-size:12px;}
+.week-table th{background:#00703c;color:white;padding:7px 5px;text-align:center;font-weight:600;font-size:11px;border:1px solid #005a30;white-space:nowrap;}
+.week-table th.product-col{background:#005a30;text-align:left;padding-left:8px;min-width:130px;}
+.week-table td{border:1px solid #d0d0d0;padding:4px 3px;text-align:center;vertical-align:middle;}
+.week-table td.product-name{font-size:11px;font-weight:600;text-align:left;padding:6px 8px;background:#e8f5ee;line-height:1.3;}
+.week-table td.product-name small{font-weight:400;color:#666;display:block;}
+.week-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;color:#1a1a1a;}
+.week-table input[type=text]:focus{outline:1px solid #00703c;border-radius:3px;background:#fffde7;}
+.temp-table th.unit-col{min-width:160px;text-align:left;padding-left:8px;}
+.temp-table th.temp-col{min-width:55px;}
+.temp-table td.unit-name{text-align:left;padding:6px 8px;font-size:11px;background:#fafafa;}
+.temp-table td.target{font-weight:600;color:#005a30;font-size:11px;background:#e8f5ee;}
+.log-table{border-collapse:collapse;width:100%;font-size:12px;}
+.log-table th{background:#00703c;color:white;padding:8px 6px;text-align:left;font-weight:600;font-size:11px;border:1px solid #005a30;}
+.log-table td{border:1px solid #d0d0d0;padding:4px;vertical-align:middle;}
+.log-table input[type=text]{width:100%;border:none;background:transparent;font-size:12px;font-family:inherit;padding:4px 2px;color:#1a1a1a;}
+.log-table tr:nth-child(even) td{background:#fafafa;}
+.clean-table{border-collapse:collapse;width:100%;min-width:420px;font-size:12px;}
+.clean-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:center;}
+.clean-table th.area-col{text-align:left;padding-left:8px;min-width:150px;}
+.clean-table th.chem-col{min-width:100px;text-align:left;padding-left:8px;}
+.clean-table th.day-col{min-width:32px;}
+.clean-table td{border:1px solid #d0d0d0;padding:5px 4px;text-align:center;vertical-align:middle;}
+.clean-table td.area-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;}
+.clean-table td.chem-name{text-align:left;padding:5px 8px;font-size:11px;color:#666;}
+.clean-section-header{background:#005a30!important;color:white!important;font-weight:700!important;font-size:11px!important;text-align:left!important;padding:5px 8px!important;}
+.clean-table input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:#00703c;}
+.clean-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;}
+.hourly-table{border-collapse:collapse;width:100%;font-size:11px;min-width:700px;}
+.hourly-table th{background:#00703c;color:white;padding:6px 4px;text-align:center;font-weight:600;font-size:10px;border:1px solid #005a30;white-space:nowrap;}
+.hourly-table th.time-col{min-width:45px;background:#005a30;}
+.hourly-table td{border:1px solid #d0d0d0;padding:3px 2px;text-align:center;vertical-align:middle;}
+.hourly-table td.time-cell{background:#e8f5ee!important;font-weight:600;font-size:11px;}
+.hourly-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:1px;}
+.gs-table{border-collapse:collapse;width:100%;font-size:12px;min-width:600px;}
+.gs-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:center;}
+.gs-table th.day-col{text-align:left;padding-left:8px;min-width:90px;}
+.gs-table td{border:1px solid #d0d0d0;padding:4px;text-align:center;vertical-align:middle;}
+.gs-table td.day-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;font-weight:600;}
+.gs-table td.week-header{background:#005a30!important;color:white!important;font-weight:700;font-size:11px;text-align:left;padding:5px 8px;}
+.gs-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;}
+.gs-table select{border:none;background:transparent;font-size:11px;font-family:inherit;width:100%;}
+.cook-table{border-collapse:collapse;width:100%;font-size:12px;min-width:550px;}
+.cook-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:left;padding-left:6px;}
+.cook-table td{border:1px solid #d0d0d0;padding:4px;vertical-align:middle;}
+.cook-table td.prod-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;}
+.cook-table td.section-hdr{background:#005a30!important;color:white!important;font-weight:700;font-size:11px;text-align:left;padding:5px 8px;}
+.cook-table input[type=text]{width:100%;border:none;background:transparent;font-size:11px;font-family:inherit;padding:2px;text-align:center;}
+.deli-trace-table{border-collapse:collapse;width:100%;font-size:11px;min-width:640px;}
+.deli-trace-table th{background:#00703c;color:white;padding:6px 4px;text-align:center;font-size:10px;font-weight:600;border:1px solid #005a30;white-space:nowrap;}
+.deli-trace-table th.prod-col{background:#005a30;text-align:left;padding-left:8px;min-width:120px;}
+.deli-trace-table td{border:1px solid #d0d0d0;padding:3px 2px;text-align:center;vertical-align:middle;}
+.deli-trace-table td.prod-name{text-align:left;padding:5px 8px;font-size:11px;font-weight:600;background:#e8f5ee;}
+.deli-trace-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:10px;font-family:inherit;padding:1px;}
+.compliance-table{border-collapse:collapse;width:100%;font-size:12px;}
+.compliance-table th{background:#00703c;color:white;padding:7px 6px;text-align:left;font-size:11px;font-weight:600;border:1px solid #005a30;}
+.compliance-table td{border:1px solid #d0d0d0;padding:6px;font-size:12px;vertical-align:middle;}
+.compliance-table td.dept{font-weight:700;color:#005a30;background:#e8f5ee;}
+.score-radio{display:flex;gap:6px;justify-content:center;}
+.score-radio label{cursor:pointer;display:flex;flex-direction:column;align-items:center;font-size:10px;gap:2px;}
+.score-radio input[type=radio]{accent-color:#00703c;}
+.max-row td{background:#f5f5f5;font-weight:600;font-size:11px;}
+.info-box{background:#e8f5ee;border-left:3px solid #00703c;border-radius:6px;padding:10px 12px;font-size:11px;color:#666;margin-bottom:14px;line-height:1.5;}
+.info-box strong{color:#1a1a1a;}
+.warn-box{background:#fff8e1;border-left:3px solid #e65100;border-radius:6px;padding:10px 12px;font-size:11px;color:#555;margin-bottom:14px;line-height:1.5;}
+/* Photo & Timestamp & Signature section */
+.photo-timestamp-box{background:white;border:1.5px solid #d0d0d0;border-radius:10px;overflow:hidden;margin-bottom:14px;}
+.timestamp-display{background:#1e1e2e;color:#cdd6f4;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.ts-icon{font-size:18px;}
+.ts-text{font-family:'Courier New',monospace;font-size:13px;flex:1;min-width:160px;color:#a6e3a1;}
+.ts-text.recorded{color:#a6e3a1;font-weight:600;}
+.photo-upload-area{padding:12px;}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
+.photo-thumb{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;border:1px solid #d0d0d0;background:#f0f0f0;}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.photo-thumb .photo-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);color:white;font-size:9px;padding:3px 5px;text-align:center;}
+.sig-box{border:2px dashed #d0d0d0;border-radius:8px;background:white;position:relative;overflow:hidden;margin-bottom:8px;}
+.sig-box canvas{display:block;width:100%;touch-action:none;}
+.sig-clear{position:absolute;top:6px;right:8px;background:rgba(255,255,255,0.9);border:1px solid #d0d0d0;border-radius:5px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit;color:#d32f2f;}
 .rec-sigs-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:6px;}
-.rec-sigs-row{display:flex;flex-wrap:wrap;gap:8px;}
-.rec-sig-item{text-align:center;}
-.rec-sig-img{display:block;width:90px;height:45px;object-fit:contain;background:white;border:1px solid #ddd;border-radius:6px;cursor:pointer;}
-.rec-sig-name{font-size:9px;color:#999;margin-top:3px;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.rec-sig-none{font-size:11px;color:#bbb;font-style:italic;}
-/* Photos */
-.rec-photos{margin-bottom:10px;}
-.rec-photos-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:6px;}
-.rec-photo-row{display:flex;flex-wrap:wrap;gap:8px;}
-.rec-photo-thumb{width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid #d0d0d0;cursor:pointer;}
-.rec-photo-none{font-size:11px;color:#bbb;font-style:italic;}
-/* Delete */
-.rec-delete-btn{width:100%;padding:9px;background:white;border:1.5px solid #d32f2f;color:#d32f2f;border-radius:8px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:4px;}
-/* Previous weeks accordion */
+.rec-sig-img{display:block;width:90px;height:45px;object-fit:contain;background:white;border:1px solid #ddd;border-radius:6px;cursor:pointer;margin-right:8px;margin-bottom:4px;}
+.rec-sig-name{font-size:9px;color:#999;margin-top:2px;max-width:90px;}
+/* Save button */
+.btn-save{background:#005a30;color:white;width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-bottom:10px;margin-top:14px;display:block;}
+.btn-save:active{background:#003d20;}
+/* Previous weeks */
 .prev-header{margin:20px 14px 6px;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;}
 .acc-item{margin:6px 14px 0;border-radius:10px;overflow:hidden;border:1.5px solid #d0ddd0;}
 .acc-trigger{background:white;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;}
@@ -101,10 +175,8 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .tb-label{font-size:12px;font-weight:700;color:#1a1a1a;}
 .tb-sub{font-size:10px;color:#888;margin-top:2px;}
 .footer-space{height:40px;}
-/* Toast */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);background:#1a1a1a;color:white;padding:13px 22px;border-radius:24px;font-size:13px;font-weight:600;z-index:9999;transition:transform 0.3s;white-space:nowrap;pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
-/* Lightbox */
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;align-items:center;justify-content:center;flex-direction:column;}
 .lightbox.open{display:flex;}
 .lightbox img{max-width:95vw;max-height:80vh;border-radius:8px;object-fit:contain;}
@@ -112,17 +184,14 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 </style>
 </head>
 <body>
-
 <div class="top-nav">
   <button class="nav-back" id="btnBack">&#8592; Forms</button>
   <div class="nav-title">&#128202; Audit Top Sheet</div>
   <div class="nav-logo">MORIARTY<br>GROUP</div>
 </div>
-
 <div class="status-bar" id="statusBar">Connecting to database...</div>
 <div id="mainContent"></div>
 <div id="prevWeeksSection"></div>
-
 <div class="tools-section">
   <div class="tools-title">Data Tools</div>
   <div class="tools-row">
@@ -130,7 +199,6 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
     <div class="tool-btn" id="btnRestore"><div class="tb-icon">&#128194;</div><div class="tb-label">Restore</div><div class="tb-sub">Import backup</div></div>
   </div>
 </div>
-
 <input type="file" id="fileInput" accept=".json" style="display:none">
 <div class="footer-space"></div>
 <div class="toast" id="toast"></div>
@@ -138,486 +206,1152 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
   <button class="lb-close" id="lbClose">&#10005;</button>
   <img id="lbImg" src="" alt="">
 </div>
-
 <script>
+/* =========================================================
+   FORM DATA (mirrors index.html)
+   ========================================================= */
+var DAYS = ['Mon','Tue','Wed','Thur','Fri','Sat','Sun'];
+var meatTempUnits = [['Fish Display Unit','0-5\u00b0C'],['Poultry','0-5\u00b0C'],['Pork','0-5\u00b0C'],['Raw Meat','0-5\u00b0C'],['Walk in fridge','0-5\u00b0C'],['Pre-pack fish doors','0-5\u00b0C']];
+var prepackTempUnits = [['1. Stand up juice fridge at front door','0-5\u00b0C'],['2. Meat spider at food academy','0-5\u00b0C'],['3. Meat spider at food academy','0-5\u00b0C'],['4. Meat spider at food academy','0-5\u00b0C'],['5. Superquinn spider','0-5\u00b0C'],['6. Spider fishmonger','0-5\u00b0C'],['7. Dairy spider at fish pre pack','0-5\u00b0C'],['8. Ham spider fridge','0-5\u00b0C'],['9. Provisions promo bay',''],['10. Food Academy Fridge','0-5\u00b0C'],['11. Butchers Prepack','0-5\u00b0C'],['12. Prepared by the Butcher','0-5\u00b0C'],['13. Poultry','0-5\u00b0C'],['14. Cheese Prepack','0-5\u00b0C'],['15. Bacon/Special Offers','0-5\u00b0C'],['16. Sausages/Rashers','0-5\u00b0C'],['17. Pudding/Superquinn/Continental','0-5\u00b0C'],['18. Cooked Meats/Signature Range','0-5\u00b0C'],['19. Ready meals','0-5\u00b0C'],['20. Meal deck','0-5\u00b0C']];
+var dairyTempUnits = [['1. Milk','0-5\u00b0C'],['2. Cream/Deserts/Juice','0-5\u00b0C'],['3. Yoghurts','0-5\u00b0C'],['4. Cheese','0-5\u00b0C'],['5. Spreads','0-5\u00b0C'],['6. Dairy Special Offers','0-5\u00b0C'],['7. Fish Fridge','0-5\u00b0C'],['10. Dairy Back-up','0-5\u00b0C'],['11. Milk Fridge at Coffee Machine','0-5\u00b0C'],['12. Milk Dispenser at Coffee Machine','0-5\u00b0C']];
+var frozenTempUnits = [['1. Ice Cream Bay 1 Door','-23\u00b0C'],['2. Ice Cream Bay 1 Well','-23\u00b0C'],['3. Ice Cream Bay 2 Door','-23\u00b0C'],['4. Ice Cream Bay 2 Well','-23\u00b0C'],['5. Ice Cream Bay 3 Door','-23\u00b0C'],['6. Ice Cream Bay 3 Well','-23\u00b0C'],['7. Ice Cream Stick Fridge','-23\u00b0C'],['8. Special Offer Well no 1','-18\u00b0C'],['9. Potato Product Well','-18\u00b0C'],['10. Chip Well','-18\u00b0C'],['11. Chicken and Burger Well','-18\u00b0C'],['12. Veg Well','-18\u00b0C'],['13. Ready Meal Well','-18\u00b0C'],['14. Special Offer Well no 2','-18\u00b0C'],['15. Fish Product Well','-18\u00b0C'],['16. Fish Well','-18\u00b0C'],['17. Pizza Well 1','-18\u00b0C'],['18. Pizza Well 2','-18\u00b0C'],['19. Vegetarian Food Well','-18\u00b0C'],['20. Back-up Freezer','-18\u00b0C']];
+var fruitVegTempUnits = [['Display Fridge Veg 1','0-5\u00b0C'],['Display Fridge Veg 2','0-5\u00b0C'],['Display Fridge Fruit','0-5\u00b0C'],['Salad Fridge','0-5\u00b0C'],['Walk-in Back-up','0-5\u00b0C'],['Berry Fridge 1','0-5\u00b0C'],['Berry Fridge 2','0-5\u00b0C']];
+var deliTempUnits = [['Bakery Serveover Fridge 1','0-5\u00b0C'],['Bakery Serveover Fridge 2','0-5\u00b0C'],['Sandwich Bar Fridge','0-5\u00b0C'],['Sandwich Bar Serveover','0-5\u00b0C'],['Deli Counter Fridge 1','0-5\u00b0C'],['Deli Counter Fridge 2','0-5\u00b0C'],['Hot Food Serveover','0-5\u00b0C'],['Prep Fridge','0-5\u00b0C'],['Walk-in Chill','0-5\u00b0C']];
+var sandwiches = [{name:'B.L.T. on White',ingr:'Bread, Bacon, Lettuce, Tomatoes, Mayonnaise'},{name:'B.L.T. on Brown',ingr:'Bread, Bacon, Lettuce, Tomatoes, Mayonnaise'},{name:'Bacon & Boiled Egg White',ingr:'Bread, Bacon, Boiled Egg, Mayonnaise'},{name:'Bacon & Boiled Egg Brown',ingr:'Bread, Bacon, Boiled Egg, Mayonnaise'},{name:'Chicken & Bacon (White)',ingr:'White Bread, Chicken, Bacon, Mayonnaise'},{name:'Chicken & Bacon (Brown)',ingr:'Brown Bread, Chicken, Bacon, Mayonnaise'},{name:'Chicken & Stuffing (White)',ingr:'White Bread, Chicken, Stuffing, Mayonnaise'},{name:'Chicken & Stuffing (Brown)',ingr:'Brown Bread, Chicken, Stuffing, Mayonnaise'},{name:'Chicken Tikka',ingr:'White Bread, Chicken, Tikka sauce, Cheese, Red onion, Lettuce'},{name:'Egg Mayo',ingr:'White Bread, Egg, Cheese, Lettuce, Mayonnaise'},{name:'Tuna Salad',ingr:'Brown Bread, Tuna, Cheese, Mayonnaise'},{name:'Turkey & Egg Mayo',ingr:'White Bread, Turkey, Egg, Red onion, Mayonnaise'},{name:'Ham & Smoked Cheese (White)',ingr:'White Bread, Ham, Smoked cheese, Tomato relish, Mayonnaise'},{name:'Ham & Smoked Cheese (Brown)',ingr:'Brown Bread, Ham, Smoked cheese, Tomato relish, Mayonnaise'},{name:'BLTC on Brown',ingr:'Brown Bread, Bacon, Lettuce, Tomato, Cheese, Mayonnaise'},{name:'BLTC on White',ingr:'White Bread, Bacon, Lettuce, Tomato, Cheese, Mayonnaise'},{name:'Ham and Cheese',ingr:'White bread, Butter, Ham, Cheese'},{name:'Ham, Cheese & Coleslaw',ingr:'White bread, Butter, Ham, Cheese, Coleslaw'}];
+var wraps = [{name:'Chicken Tikka',ingr:'Wrap, Chicken, Tikka sauce, Cheese, Red onion, Lettuce'},{name:'Egg Mayo Salad',ingr:'Wrap, Egg, Cheese, Lettuce, Mayonnaise'},{name:'Chicken & Stuffing',ingr:'Wrap, Chicken, Stuffing, Mayonnaise'},{name:'Tuna Salad',ingr:'Wrap, Tuna, Cheese, Mayonnaise'},{name:'Turkey & Egg Mayo',ingr:'Wrap, Turkey, Egg, Red onion, Mayonnaise'},{name:'Sweet Chili Chicken',ingr:'Wrap, Chicken, Red onion, Spinach, Sweet Chili sauce, Mayonnaise'},{name:'Crunchy Tuna',ingr:'Wrap, Tuna, Lettuce, Onion, Mayonnaise'}];
+var pizzas = [{name:'Cheese Pizza',ingr:'Pizza base, Pizza sauce, Mozzarella cheese'},{name:'Ham & Mushroom',ingr:'Pizza base, Pizza sauce, Ham, Mushroom, Mozzarella cheese'},{name:'Ham & Sweetcorn',ingr:'Pizza base, Pizza sauce, Ham, Sweetcorn, Mozzarella cheese'},{name:'Meat Pizza',ingr:'Pizza base, Pizza sauce, Pepperoni, Chicken, Ham, Mozzarella cheese'},{name:'Pepperoni & Pepper',ingr:'Pizza base, Pizza sauce, Pepperoni, Peppers, Mozzarella cheese'},{name:'Vegetable Deluxe',ingr:'Pizza base, Pizza sauce, Tomato, Peppers, Red onion, Mushrooms, Sweet corn, Mozzarella'},{name:'Spicy Pepperoni',ingr:'Pizza base, Pizza sauce, Pepperoni, Onions, Jalapenos, Mozzarella cheese'}];
+var saladsMade = [{name:'Egg Mayo',ingr:'Egg, Mayo'},{name:'Carrot & Broccoli',ingr:'Carrot, Broccoli, Mayo'},{name:'Cheese Mix',ingr:'Cheese, Scallions, Mayo'},{name:'Mix Salad',ingr:'Loose Veg'},{name:'Summer Salad',ingr:'Loose veg, Egg, Mayo'},{name:'Chicken Noodle',ingr:'Noodles, Chicken, Veg, Chilli Sauce'}];
+var saladsPrepack = [{name:'Egg Mayo',ingr:'Egg, Mayo'},{name:'Beetroot',ingr:''},{name:'Asian Noodles',ingr:''},{name:'Pasta Spinach Pinenut',ingr:''},{name:'Coleslaw',ingr:'Veg, Mayo'},{name:'Tuna Mix',ingr:''},{name:'Chunky Potato',ingr:''},{name:'Mash Potato Salad',ingr:''},{name:'Green Lentil Multigrain',ingr:''},{name:'Carrot, Broccoli & Cranberry',ingr:''},{name:'Chipotle Coleslaw',ingr:''},{name:'Basil & Pesto',ingr:''},{name:'Lemon Cous Cous',ingr:''},{name:'Creamy Tomato Pasta',ingr:''},{name:'Carrot, Ginger, Chia Seeds',ingr:''},{name:'Cheese Mix',ingr:'Cheese, Scallions, Mayonnaise'},{name:'Cheese Coleslaw',ingr:'Veg, Cheese, Mayonnaise'},{name:'Mix Salad',ingr:'Veg'},{name:'Summer Salad',ingr:'Veg, Egg, Mayonnaise'}];
+var savouries = ['Beef Lasagne','Chicken & Mushroom Vol au Vent','Red Pepper Goats Cheese Quiche','Black pudding s. rolls','Honey & mustard s. rolls'];
+var cookedMeats = ["Ryan's Low Salt","Honey Glazed","Moriarty's Turkey","Carroll's Crumbed","Turkey OTB","Oak Smoked Ham","Corned Beef","Brady's Crumbed","Brady's Baked","Hazlett","Wiltshire Ham OTB"];
+var salamiOlives = ['Mixed Olives','Sundried Tomatoes','Cheese Filled Peppers','Chorizo Extra','Pre pack Mixed olives','Pre pack Sundried tomatoes','Pre pack Cheese filled peppers','Pre Pack Stuffing'];
+var hotfoodTimes = ['9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm'];
+var hotfoodDailyClean = [['Hot bar glass front and back, sides and counter top, trays','Glass cleaner, degreaser'],['Scales and shelf','Sanitizer'],['Sandwich bar glass front and back, sides and bar counter top, trays','Sanitizer, Glass cleaner'],['Fresh Cream bakery serveover glass','Glass cleaner'],['Bakery serveover fridge x2, glass doors and handles','Glass cleaner'],['Counter tops / Stainless steel','Sanitiser'],['Equipment sink top and bottom','Sanitiser'],['Handsink / requisites','Sanitizer'],['Utensils / equipment / trays','Sanitizer'],['Bin','Sanitiser'],['Temperature probe','Sanitizer'],['Hot food oven, surfaces in direct contact with food, trays, racks','Sanitiser'],['Bakery oven and stand x2, surfaces in direct contact with food, trays, racks','Sanitiser'],['Grease trap, empty and wash out holder','Degreaser, Sanitiser'],['Floor swept and mopped (under tables inc. back up)','Floor cleaner'],['Chicken Unit','Degreaser, Sanitiser'],['Turbo chef machine, direct contact with food, trays','Sanitiser'],['Soup kettle','Sanitiser']];
+var hotfoodWeeklyClean = [['Hot food bar, full deep clean','Degreaser, Oven cleaner'],['Sandwich bar, full deep clean','Sanitiser'],['Fresh cream bakery serveover, full deep clean','Sanitiser'],['Bakery serveover fridge x2, full deep clean','Sanitiser'],['Presses inside out, inc. door handles','Sanitiser'],['Stainless steel prep area (wheels, casters, legs, walls)','Sanitizer'],['Bakery display table x3','Sanitizer'],['Bread display','Sanitizer'],['Canopy filter','Degreaser'],['Chicken oven, full deep clean, inside walls, fans, filters, vents, seals','Degreaser, Oven cleaner'],['Bakery oven x2, full deep clean, inside walls, fans, filters, vents, seals','Oven cleaner'],['Hot food oven, full deep clean, inside walls, fans, filters, vents, seals','Degreaser, Oven cleaner'],['Chicken prep trolley','Sanitizer']];
+var cookedmeatClean = [['Serveover front glass, counter top, sides','Glass cleaner'],['Serveover inside, along sides and front','Sanitiser'],['Scales and shelve','Sanitizer'],['Equipment / trays / chopping boards','Sanitiser'],['Counter tops','Sanitiser'],['Tables (tops & legs)','Sanitizer'],['Meat slicer','Sanitiser'],['Cling film unit','Sanitizer'],['Temperature probe x2','Sanitiser'],['Bins x3','Sanitiser'],['Bread slicer','Sanitiser'],['Floor sweep and mop inc. under tables and coldrooms','Floor cleaner'],['Cheese cutter Pasteurised','Detergent Sanitizer'],['Bread Crumber','Sanitizer']];
+var cookedmeatWeeklyClean = [['Serveover - Cooked meats deep clean','Sanitizer Degreaser'],['Presses inside & out','Sanitizer'],['Prep area stainless steel (walls, wheels and casters)','Sanitizer, Degreaser'],['Coldroom (walls, door & floor + shelving)','Sanitizer Degreaser'],['All counter display shelving','Sanitizer Degreaser'],['Cheese display fridge deep clean','Sanitizer Degreaser'],['Ready meal display fridge deep clean','Sanitizer Degreaser'],['Salad spider','Sanitizer Degreaser']];
+var deliTraceStuffing = ['Stuffing (Crumbs / Herbs / Veg - Loose)','Beetroot','Wraps Tomato','Wraps Brown','Wraps Plane'];
+var deliTraceButter = ['Butter','Ham','Turkey','Cheese','Mozzarella Cheese','Coleslaw','Potato Salad'];
+var deliTraceChicken = ['Chicken Tikka'];
+var deliTraceSaladVeg = ['Chicken','Onion','Cucumber','Scallions','Mixed Peppers','Tomatoes','Lettuce'];
+var deliTraceEggTuna = ['Eggs','Mayo','Egg Mayo','Tuna & Sweetcorn','Sweetcorn'];
+var breakfastItems = ['Sausages','Bacon','Pudding Black','Pudding White','Hash Browns','Eggs','Sm Sausage Roll','Lrg Sausage Roll','Pies C&M','Pies S&K','Fillet Plane','Fillet S/Fried','Fillets Hot Spicy','Wedges','Soup 1','Jambons','Chickens'];
+var lunchItems = ['Sm Sausage Roll','Wedges','Pop Chicken','Wings BBQ','Goujons','Fillets Plane','Fillets S/Fried','Fillets Hot Spicy','Veg Spring Rolls','Vol Au Vants','Bacon and cheese Bakers','Cottage pie','Honey and Mustard','Sausage Rolls','Sausage Rolls with Black Pudding'];
+var cleaningItemsDaily = [['Scales, bags, shelves','Sanitiser'],['Raw Servovers','Sanitiser, glass cleaner'],['Bins','Degreaser'],['Equipment/trays/chopping boards - raw & fish','Wash up liq'],['Fish equipment sink & shelf below','Wash up liq, Degreaser'],['Hot seal wrap unit','Sanitiser'],['SELs/Garnishing','Sanitiser'],['Stainless steel serveover','Stainless Steel spray'],['Hands sink/Requisites','Degreaser/sanitiser'],['Wooden block/Table legs','Block brush'],['Table tops','Sanitiser'],['Doors/handles','Sanitiser'],['Telephone','Sanitiser'],['Equipment sink & hand sink requisites - top and bottom','Wash up liq'],['Knife rack','Sanitiser'],['Scales','Sanitiser'],['Burger press','Wash up liq, degreaser'],['Mincer head','Wash up liq, degreaser'],['Mincer','Wash up liq, degreaser'],['Ice Machine','Stainless steel cleaner'],['Coldroom - floor, door handle, floor swept','Degreaser, Floorbrush'],['Rubber around fridge door','']];
+var cleaningItemsWeekly = [['Prep room racking','Degreaser'],['Serveover - Raw','Degreaser'],['Serveover - Fish','Degreaser'],['Prep area - walls & tables','Degreaser'],['Returns trolleys','Degreaser'],['Stainless steel - Raw','Stainless steel cleaner'],['Raw coldroom - floor, shelving','Degreaser'],['Display shelving - fish & raw','Degreaser'],['Stainless steel - Fish','Stainless steel'],['Ice Machine - presses inside and out including door handles','Defrosted/clean, Sanitiser']];
+var complianceDepts = [{name:'1. Serveover Raw/Fish',items:['Mince control','Fish Tracker','Temperature Checks','Daily cleaning schedule','Weekly cleaning schedule','Burger control sheet','PBOB Trace','Pork and Bacon Trace','Breaded chicken trace','Beef Trace']},{name:'2. Cold Deli',items:['Cooked meat tracker','Sandwich tracker','Salami & olive tracker','Savoury tracker','Salad tracker','Temp checks','Daily cleaning schedule','Weekly cleaning schedule']},{name:'3. Hot Food Bar/Bakery',items:['After cook sheet','Hot holding sheet','Temp checks bakery','Daily cleaning schedule','Weekly cleaning schedule']},{name:'4. Prepack Deli Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'5. Fruit & Veg Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'6. Dairy Food Safety',items:['Temperature Checks','Deep Clean']},{name:'7. Frozen Food Safety',items:['Load Levels','Temperature Checks','Deep clean UTD']},{name:'8. Goods Inwards Food Safety',items:['FSR1 - Fresh Van checks','FSR2 - Dry Grocery Van checks','Cleaning schedule - Daily','Cleaning schedule - Deep clean']}];
+
 var ALL_FORMS = [
-  {id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},
-  {id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},
-  {id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},
-  {id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},
-  {id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},
-  {id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},
-  {id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},
-  {id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},
-  {id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},
-  {id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},
-  {id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},
-  {id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},
-  {id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},
-  {id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},
-  {id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},
-  {id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},
-  {id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},
-  {id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},
-  {id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},
-  {id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},
-  {id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},
-  {id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},
-  {id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},
-  {id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},
-  {id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},
-  {id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},
-  {id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},
-  {id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},
-  {id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},
-  {id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},
-  {id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},
-  {id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},
-  {id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},
-  {id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},
-  {id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},
-  {id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},
-  {id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},
-  {id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},
-  {id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},
-  {id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},
-  {id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}
+{id:‘temp-meat’,name:‘Meat Dept Temperature’,cat:‘Temperature Checks’},
+{id:‘temp-prepack’,name:‘Pre-pack Temperature’,cat:‘Temperature Checks’},
+{id:‘temp-dairy’,name:‘Dairy Temperature’,cat:‘Temperature Checks’},
+{id:‘temp-frozen’,name:‘Frozen Temperature’,cat:‘Temperature Checks’},
+{id:‘temp-fruitveg’,name:‘Fruit & Veg Temperature’,cat:‘Temperature Checks’},
+{id:‘temp-deli’,name:‘Deli Temperature’,cat:‘Temperature Checks’},
+{id:‘hotfood-chicken-temp’,name:‘Chicken Unit Hourly Temps’,cat:‘Hot Food & Deli’},
+{id:‘hotfood-bar-temp’,name:‘Hot Food Bar Hourly Temps’,cat:‘Hot Food & Deli’},
+{id:‘hotfood-soup-temp’,name:‘Soup Kettle Hourly Temps’,cat:‘Hot Food & Deli’},
+{id:‘hotfood-after-cook’,name:‘After Cook Check Sheet’,cat:‘Hot Food & Deli’},
+{id:‘hotfood-greaseshield’,name:‘GreaseShield Maintenance’,cat:‘Hot Food & Deli’},
+{id:‘hotfood-daily-clean’,name:‘Hot Food Daily Cleaning’,cat:‘Hot Food & Deli’},
+{id:‘hotfood-weekly-clean’,name:‘Hot Food Weekly Cleaning’,cat:‘Hot Food & Deli’},
+{id:‘cookedmeat-clean’,name:‘Cooked Meats Daily Cleaning’,cat:‘Hot Food & Deli’},
+{id:‘cookedmeat-weekly-clean’,name:‘Cooked Meats Weekly Cleaning’,cat:‘Hot Food & Deli’},
+{id:‘thawing-check’,name:‘Thawing Check Sheet’,cat:‘Hot Food & Deli’},
+{id:‘deli-trace-stuffing’,name:‘Sandwich Log - Stuffing & Wraps’,cat:‘Deli Traceability’},
+{id:‘deli-trace-butter’,name:‘Sandwich Log - Butter/Ham/Turkey’,cat:‘Deli Traceability’},
+{id:‘deli-trace-chicken’,name:‘Sandwich Log - Chicken Tikka’,cat:‘Deli Traceability’},
+{id:‘deli-trace-saladveg’,name:‘Sandwich Log - Salad Veg’,cat:‘Deli Traceability’},
+{id:‘deli-trace-eggtuna’,name:‘Sandwich Log - Egg & Tuna’,cat:‘Deli Traceability’},
+{id:‘trace-sandwich’,name:‘Pre-Pack Sandwich Tracker’,cat:‘Traceability Logs’},
+{id:‘trace-wrap’,name:‘Pre-Pack Wrap Tracker’,cat:‘Traceability Logs’},
+{id:‘trace-pizza’,name:‘Pre-Pack Pizza Tracker’,cat:‘Traceability Logs’},
+{id:‘trace-salad-made’,name:‘Salads Made in Store’,cat:‘Traceability Logs’},
+{id:‘trace-salad-prepack’,name:‘Pre-Pack Salads’,cat:‘Traceability Logs’},
+{id:‘trace-savouries’,name:‘Savouries Traceability’,cat:‘Traceability Logs’},
+{id:‘trace-cooked-meats’,name:‘Cooked Meat Traceability’,cat:‘Traceability Logs’},
+{id:‘trace-salami’,name:‘Salami / Olives Traceability’,cat:‘Traceability Logs’},
+{id:‘trace-cheese’,name:‘Cheese Traceability’,cat:‘Traceability Logs’},
+{id:‘trace-fish’,name:‘Fish Tracker’,cat:‘Traceability Logs’},
+{id:‘trace-pork’,name:‘Pork & Bacon Traceability’,cat:‘Traceability Logs’},
+{id:‘trace-butcher’,name:‘Prep by Butcher/Fishmonger’,cat:‘Traceability Logs’},
+{id:‘prod-mince’,name:‘Mince Control Sheet’,cat:‘Production Logs’},
+{id:‘prod-burger’,name:‘Burger Control Sheet’,cat:‘Production Logs’},
+{id:‘clean-redmeat’,name:‘Red Meat Cleaning’,cat:‘Cleaning Schedules’},
+{id:‘clean-fruitveg’,name:‘Fruit & Veg Cleaning’,cat:‘Cleaning Schedules’},
+{id:‘clean-stockroom’,name:‘Stockroom Cleaning’,cat:‘Cleaning Schedules’},
+{id:‘goods-chilled’,name:‘Goods Inwards Chilled/Frozen’,cat:‘Goods Inwards’},
+{id:‘goods-ambient’,name:‘Goods Inwards Ambient’,cat:‘Goods Inwards’},
+{id:‘compliance’,name:‘HACCP Compliance Report’,cat:‘Compliance’}
 ];
 
-var DB_NAME = 'MoriartyHACCP', DB_VER = 1, db = null, allRecords = [];
+/* =========================================================
+DB
+========================================================= */
+var DB_NAME = ‘MoriartyHACCP’, DB_VER = 1, db = null, allRecords = [];
 
 function escapeHtml(str) {
-  return String(str == null ? '' : str)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+return String(str == null ? ‘’ : str)
+.replace(/&/g,’&’).replace(/</g,’<’).replace(/>/g,’>’)
+.replace(/”/g,’"’).replace(/’/g,’'’);
 }
-
 function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show';
-  setTimeout(function() { t.className = 'toast'; }, 3000);
+var t = document.getElementById(‘toast’);
+t.textContent = msg;
+t.className = ‘toast show’;
+setTimeout(function() { t.className = ‘toast’; }, 3000);
 }
-
 function getWeekKey() {
-  var d = new Date();
-  var s = new Date(d);
-  s.setDate(d.getDate() - d.getDay());
-  s.setHours(0, 0, 0, 0);
-  return s.toISOString().split('T')[0];
+var d = new Date();
+var s = new Date(d);
+s.setDate(d.getDate() - d.getDay());
+s.setHours(0,0,0,0);
+return s.toISOString().split(‘T’)[0];
 }
-
 function weekLabel(wk) {
-  var s = new Date(wk + 'T00:00:00');
-  var e = new Date(s);
-  e.setDate(s.getDate() + 6);
-  var opts = {day:'numeric', month:'short'};
-  return s.toLocaleDateString('en-IE', opts) + ' \u2013 ' + e.toLocaleDateString('en-IE', opts) + ' ' + e.getFullYear();
+var s = new Date(wk + ‘T00:00:00’);
+var e = new Date(s);
+e.setDate(s.getDate() + 6);
+var opts = {day:‘numeric’,month:‘short’};
+return s.toLocaleDateString(‘en-IE’,opts) + ’ \u2013 ’ + e.toLocaleDateString(‘en-IE’,opts) + ’ ’ + e.getFullYear();
 }
-
 function satMidnight(wk) {
-  var s = new Date(wk + 'T00:00:00');
-  s.setDate(s.getDate() + 6);
-  s.setHours(23, 59, 59, 0);
-  return s;
+var s = new Date(wk + ‘T00:00:00’);
+s.setDate(s.getDate() + 6);
+s.setHours(23,59,59,0);
+return s;
 }
-
 function timeRemaining(wk) {
-  var diff = satMidnight(wk) - new Date();
-  if (diff <= 0) return 'Week ended';
-  var d = Math.floor(diff / 86400000);
-  var h = Math.floor((diff % 86400000) / 3600000);
-  var m = Math.floor((diff % 3600000) / 60000);
-  return (d > 0 ? d + 'd ' : '') + h + 'h ' + m + 'm until close';
+var diff = satMidnight(wk) - new Date();
+if (diff <= 0) return ‘Week ended’;
+var d = Math.floor(diff / 86400000);
+var h = Math.floor((diff % 86400000) / 3600000);
+var m = Math.floor((diff % 3600000) / 60000);
+return (d > 0 ? d + ’d ’ : ‘’) + h + ’h ’ + m + ‘m until close’;
 }
-
-/* ---- IndexedDB ---- */
 function openDB() {
-  return new Promise(function(res, rej) {
-    var done = false;
-    var timer = setTimeout(function() {
-      if (done) return; done = true;
-      rej(new Error('Database timed out. Safari: Settings > Safari > uncheck Block All Cookies, then refresh.'));
-    }, 5000);
-    var req;
-    try { req = indexedDB.open(DB_NAME, DB_VER); }
-    catch(e) { clearTimeout(timer); rej(e); return; }
-    req.onupgradeneeded = function(e) {
-      var d = e.target.result;
-      if (!d.objectStoreNames.contains('records')) {
-        var s = d.createObjectStore('records', {keyPath:'id'});
-        s.createIndex('formId','formId',{unique:false});
-        s.createIndex('weekKey','weekKey',{unique:false});
-      }
-      if (!d.objectStoreNames.contains('weeks')) d.createObjectStore('weeks', {keyPath:'weekKey'});
-    };
-    req.onsuccess = function(e) { if (done) return; done=true; clearTimeout(timer); db=e.target.result; res(db); };
-    req.onerror = function(e) { if (done) return; done=true; clearTimeout(timer); rej(e.target.error); };
-    req.onblocked = function() { if (done) return; done=true; clearTimeout(timer); rej(new Error('Database blocked. Close other tabs and refresh.')); };
-  });
+return new Promise(function(res, rej) {
+var done = false;
+var timer = setTimeout(function() {
+if (done) return; done = true;
+rej(new Error(‘Database timed out. Safari: Settings > Safari > uncheck Block All Cookies, then refresh.’));
+}, 5000);
+var req;
+try { req = indexedDB.open(DB_NAME, DB_VER); }
+catch(e) { clearTimeout(timer); rej(e); return; }
+req.onupgradeneeded = function(e) {
+var d2 = e.target.result;
+if (!d2.objectStoreNames.contains(‘records’)) {
+var st = d2.createObjectStore(‘records’,{keyPath:‘id’});
+st.createIndex(‘formId’,‘formId’,{unique:false});
+st.createIndex(‘weekKey’,‘weekKey’,{unique:false});
 }
-
+if (!d2.objectStoreNames.contains(‘weeks’)) d2.createObjectStore(‘weeks’,{keyPath:‘weekKey’});
+};
+req.onsuccess = function(e) { if (done) return; done=true; clearTimeout(timer); db=e.target.result; res(db); };
+req.onerror = function(e) { if (done) return; done=true; clearTimeout(timer); rej(e.target.error); };
+req.onblocked = function() { if (done) return; done=true; clearTimeout(timer); rej(new Error(‘Database blocked. Close other tabs and refresh.’)); };
+});
+}
 function dbGetAll(store) {
-  return new Promise(function(res, rej) {
-    var tx = db.transaction(store, 'readonly');
-    var req = tx.objectStore(store).getAll();
-    req.onsuccess = function(e) { res(e.target.result); };
-    req.onerror = function(e) { rej(e.target.error); };
-  });
+return new Promise(function(res, rej) {
+var tx = db.transaction(store,‘readonly’);
+var req = tx.objectStore(store).getAll();
+req.onsuccess = function(e) { res(e.target.result); };
+req.onerror = function(e) { rej(e.target.error); };
+});
 }
-
 function dbDelete(store, key) {
-  return new Promise(function(res, rej) {
-    var tx = db.transaction(store, 'readwrite');
-    tx.objectStore(store).delete(key);
-    tx.oncomplete = res;
-    tx.onerror = function(e) { rej(e.target.error); };
-  });
+return new Promise(function(res, rej) {
+var tx = db.transaction(store,‘readwrite’);
+tx.objectStore(store).delete(key);
+tx.oncomplete = res;
+tx.onerror = function(e) { rej(e.target.error); };
+});
 }
-
 function dbPut(store, obj) {
-  return new Promise(function(res, rej) {
-    var tx = db.transaction(store, 'readwrite');
-    tx.objectStore(store).put(obj);
-    tx.oncomplete = res;
-    tx.onerror = function(e) { rej(e.target.error); };
-  });
+return new Promise(function(res, rej) {
+var tx = db.transaction(store,‘readwrite’);
+tx.objectStore(store).put(obj);
+tx.oncomplete = res;
+tx.onerror = function(e) { rej(e.target.error); };
+});
 }
-
-/* ---- Build latest-per-form map for a week ---- */
 function buildByForm(recs, wk) {
-  var byForm = {};
-  for (var i = 0; i < recs.length; i++) {
-    var r = recs[i];
-    if (r.weekKey !== wk) continue;
-    if (!byForm[r.formId] || r.savedAt > byForm[r.formId].savedAt) byForm[r.formId] = r;
-  }
-  return byForm;
+var byForm = {};
+for (var i = 0; i < recs.length; i++) {
+var r = recs[i];
+if (r.weekKey !== wk) continue;
+if (!byForm[r.formId] || r.savedAt > byForm[r.formId].savedAt) byForm[r.formId] = r;
+}
+return byForm;
 }
 
-/* ---- Render expanded record detail ---- */
-function buildRecordDetail(rec) {
-  var html = '';
-
-  /* Metadata grid */
-  var dt = new Date(rec.savedAt);
-  var dtStr = dt.toLocaleString('en-IE', {day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', hour12:false});
-  html += '<div class="rec-meta-grid">';
-  html += '<div class="rmc"><div class="rmc-label">Submitted</div><div class="rmc-value">' + escapeHtml(dtStr) + '</div></div>';
-  html += '<div class="rmc"><div class="rmc-label">Food Safety Champion</div><div class="rmc-value ' + (rec.champion ? 'ok' : 'na') + '">' + escapeHtml(rec.champion || 'Not recorded') + '</div></div>';
-  html += '<div class="rmc"><div class="rmc-label">Recorded Timestamp</div><div class="rmc-value ' + (rec.timestamp ? 'ok' : 'na') + '">' + escapeHtml(rec.timestamp || 'Not recorded') + '</div></div>';
-  html += '<div class="rmc"><div class="rmc-label">Week Ending</div><div class="rmc-value">' + escapeHtml(rec.weekEnding || '\u2014') + '</div></div>';
-  html += '</div>';
-
-  /* Corrective action */
-  if (rec.correctiveAction && rec.correctiveAction.trim()) {
-    html += '<div class="rec-ca"><div class="rec-ca-label">&#9888;&#65039; Corrective Action Notes</div><div class="rec-ca-value">' + escapeHtml(rec.correctiveAction) + '</div></div>';
-  }
-
-  /* Signatures */
-  html += '<div class="rec-sigs"><div class="rec-sigs-label">&#9999;&#65039; Signatures</div>';
-  if (rec.signatures && rec.signatures.length) {
-    var signed = [];
-    for (var si = 0; si < rec.signatures.length; si++) {
-      if (rec.signatures[si].hasSignature && rec.signatures[si].dataUrl) signed.push(rec.signatures[si]);
-    }
-    if (signed.length) {
-      html += '<div class="rec-sigs-row">';
-      for (var sgi = 0; sgi < signed.length; sgi++) {
-        var lbl = signed[sgi].id.replace(/^sig-/, '').replace(/-/g, ' ');
-        html += '<div class="rec-sig-item">';
-        html += '<img class="rec-sig-img" src="' + signed[sgi].dataUrl + '" alt="Sig" data-lb="' + signed[sgi].dataUrl + '">';
-        html += '<div class="rec-sig-name">' + escapeHtml(lbl) + '</div>';
-        html += '</div>';
-      }
-      html += '</div>';
-      var unsigned = rec.signatures.length - signed.length;
-      if (unsigned > 0) html += '<div class="rec-sig-none" style="margin-top:4px">' + unsigned + ' signature field' + (unsigned > 1 ? 's' : '') + ' left blank</div>';
-    } else {
-      html += '<div class="rec-sig-none">No signatures captured</div>';
-    }
-  } else {
-    html += '<div class="rec-sig-none">Not captured \u2014 re-save form to include</div>';
-  }
-  html += '</div>';
-
-  /* Photos */
-  html += '<div class="rec-photos"><div class="rec-photos-label">&#128247; Photo Evidence</div>';
-  if (rec.photos && rec.photos.length) {
-    html += '<div class="rec-photo-row">';
-    for (var pi = 0; pi < rec.photos.length; pi++) {
-      html += '<img class="rec-photo-thumb" src="' + rec.photos[pi].dataUrl + '" alt="Photo" data-lb="' + rec.photos[pi].dataUrl + '">';
-    }
-    html += '</div>';
-  } else {
-    html += '<div class="rec-photo-none">No photos attached</div>';
-  }
-  html += '</div>';
-
-  /* Delete */
-  html += '<button class="rec-delete-btn" data-delid="' + rec.id + '">&#128465; Delete this record</button>';
-  return html;
+/* =========================================================
+INLINE FORM BUILDERS
+These build the same tables as index.html but as strings
+========================================================= */
+function makeTempRowsHtml(units) {
+var h = ‘’;
+for (var i = 0; i < units.length; i++) {
+h += ‘<tr><td class="unit-name">’ + escapeHtml(units[i][0]) + ‘</td><td class="target">’ + escapeHtml(units[i][1]) + ‘</td>’;
+for (var d = 0; d < 14; d++) h += ‘<td><input type="text" maxlength="6"></td>’;
+h += ‘<td><input type="text"></td></tr>’;
+}
+return h;
+}
+function makeTempTableHtml(units) {
+return ‘<div class="week-table-wrap"><table class="week-table temp-table"><thead>’ +
+‘<tr><th class="product-col unit-col">Refrigerated Unit</th><th class="temp-col">Target</th>’ +
+‘<th colspan="2">Monday</th><th colspan="2">Tuesday</th><th colspan="2">Wednesday</th>’ +
+‘<th colspan="2">Thursday</th><th colspan="2">Friday</th><th colspan="2">Saturday</th>’ +
+‘<th colspan="2">Sunday</th><th style="min-width:80px">Comments</th></tr>’ +
+‘<tr><th class="product-col"></th><th></th>’ +
+‘<th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>’ +
+‘<th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th></th></tr>’ +
+‘</thead><tbody>’ + makeTempRowsHtml(units) + ‘</tbody></table></div>’;
+}
+function makeHourlyTableHtml(mode) {
+var r1 = ‘<tr><th class="time-col">Time</th>’;
+var r2 = ‘<tr><th class="time-col"></th>’;
+for (var d = 0; d < 7; d++) {
+r1 += ‘<th colspan="2">’ + DAYS[d] + ‘</th>’;
+r2 += mode === ‘s1s2’ ? ‘<th>S1 \u00b0C</th><th>S2 \u00b0C</th>’ : ‘<th>Product</th><th>Temp \u00b0C</th>’;
+}
+var rows = ‘’;
+for (var ti = 0; ti < hotfoodTimes.length; ti++) {
+rows += ‘<tr><td class="time-cell">’ + hotfoodTimes[ti] + ‘</td>’;
+for (var d2 = 0; d2 < 7; d2++) rows += ‘<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="6"></td>’;
+rows += ‘</tr>’;
+}
+var signCells = ‘’;
+for (var sc = 0; sc < 14; sc++) signCells += ‘<td><input type="text" maxlength="15"></td>’;
+rows += ‘<tr><td class="time-cell" style="font-size:10px">Sign</td>’ + signCells + ‘</tr>’;
+return ‘<div class="week-table-wrap"><table class="hourly-table"><thead>’ + r1 + ‘</tr>’ + r2 + ‘</tr></thead><tbody>’ + rows + ‘</tbody></table></div>’;
+}
+function makeGSTableHtml() {
+var weeks = [‘Week 1’,‘Week 2’,‘Week 3’,‘Week 4’];
+var days = [‘Monday’,‘Tuesday’,‘Wednesday’,‘Thursday’,‘Friday’,‘Saturday’,‘Sunday’];
+var rows = ‘’;
+for (var wi = 0; wi < weeks.length; wi++) {
+rows += ‘<tr><td class="week-header" colspan="10">’ + weeks[wi] + ‘</td></tr>’;
+for (var di = 0; di < days.length; di++) {
+rows += ‘<tr><td class="day-name">’ + days[di] + ‘</td>’ +
+‘<td><input type="text" maxlength="12"></td>’ +
+‘<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>’ +
+‘<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>’ +
+‘<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>’ +
+‘<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>’ +
+‘<td><input type="text" maxlength="8"></td>’ +
+‘<td><input type="text" maxlength="8"></td>’ +
+‘<td><input type="text" maxlength="8"></td>’ +
+‘<td><input type="text" maxlength="6"></td></tr>’;
+}
+}
+return ‘<div class="week-table-wrap"><table class="gs-table"><thead>’ +
+‘<tr><th class="day-col">Day</th><th>Date</th><th colspan="2">Wiper Blade Cleaned</th>’ +
+‘<th colspan="2">FOG & Solids Containers Cleaned</th><th>FOG Litres</th><th>Solids Litres</th><th>Staff Initials</th><th>Time</th></tr>’ +
+‘<tr><th></th><th></th><th>YES</th><th>NO</th><th>YES</th><th>NO</th><th></th><th></th><th></th><th></th></tr>’ +
+‘</thead><tbody>’ + rows + ‘</tbody></table></div>’;
+}
+function makeAfterCookHtml() {
+var rows = ‘’;
+function addSection(label) { rows += ‘<tr><td colspan="6" class="section-hdr">’ + label + ‘</td></tr>’; }
+function addRow(name) {
+rows += ‘<tr><td><input type="text" maxlength="8"></td><td class="prod-name">’ + escapeHtml(name) + ‘</td>’ +
+‘<td><input type="text" maxlength="15"></td><td><input type="text" maxlength="6" style="color:#c00;font-weight:700"></td>’ +
+‘<td><input type="text" maxlength="12"></td><td><input type="text" maxlength="20"></td></tr>’;
+}
+addSection(‘Breakfast:’);
+for (var i = 0; i < breakfastItems.length; i++) addRow(breakfastItems[i]);
+addSection(‘Lunch:’);
+for (var j = 0; j < lunchItems.length; j++) addRow(lunchItems[j]);
+return ‘<div class="week-table-wrap"><table class="cook-table"><thead><tr>’ +
+‘<th style="width:10%">Time</th><th style="width:25%;text-align:left">Product</th>’ +
+‘<th style="width:18%">Use By / Batch No. / Plant No.</th><th style="width:13%">Core Temp (min 75\u00b0C)</th>’ +
+‘<th style="width:16%">Supplier Use by Date</th><th style="width:18%">Signature</th>’ +
+‘</tr></thead><tbody>’ + rows + ‘</tbody></table></div>’;
+}
+function makeCleanRowsHtml(items) {
+var rows = ‘’;
+for (var i = 0; i < items.length; i++) {
+rows += ‘<tr><td class="area-name">’ + escapeHtml(items[i][0]) + ‘</td><td class="chem-name">’ + escapeHtml(items[i][1]) + ‘</td>’;
+for (var d = 0; d < 7; d++) rows += ‘<td><input type="text" maxlength="3" style="width:100%;border:none;text-align:center;font-size:12px;font-family:inherit;padding:2px;background:transparent"></td>’;
+rows += ‘</tr>’;
+}
+return rows;
+}
+function makeCleanTableHtml(items) {
+return ‘<div class="week-table-wrap"><table class="clean-table"><thead><tr>’ +
+‘<th class="area-col">Area / Item to be Cleaned</th><th class="chem-col">Chemical Used</th>’ +
+‘<th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th>’ +
+‘<th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th>’ +
+‘</tr></thead><tbody>’ + makeCleanRowsHtml(items) + ‘</tbody></table></div>’;
+}
+function makeDeliTraceHtml(products, cols) {
+var cl = cols.length;
+var r1 = ‘<tr><th class="prod-col" rowspan="2">Product</th>’;
+var r2 = ‘<tr>’;
+for (var d = 0; d < 7; d++) {
+r1 += ‘<th colspan="' + cl + '">’ + DAYS[d] + ‘</th>’;
+for (var ci = 0; ci < cl; ci++) r2 += ‘<th style="font-size:9px">’ + cols[ci] + ‘</th>’;
+}
+var rows = ‘’;
+for (var i = 0; i < products.length; i++) {
+rows += ‘<tr><td class="prod-name">’ + escapeHtml(products[i]) + ‘</td>’;
+for (var d2 = 0; d2 < 7; d2++) {
+for (var ci2 = 0; ci2 < cl; ci2++) rows += ‘<td><input type="text" maxlength="12"></td>’;
+}
+rows += ‘</tr>’;
+}
+return ‘<div class="week-table-wrap"><table class="deli-trace-table"><thead>’ + r1 + ‘</tr>’ + r2 + ‘</tr></thead><tbody>’ + rows + ‘</tbody></table></div>’;
+}
+function makeIUBDHtml(products, cols) {
+var cl = cols.length;
+var h = ‘<div class="week-table-wrap"><table class="week-table"><thead><tr><th class="product-col">Name of Product</th>’;
+for (var d = 0; d < 7; d++) {
+for (var ci = 0; ci < cl; ci++) h += ‘<th>’ + (ci === 0 ? DAYS[d] : ‘’) + ‘</th>’;
+}
+h += ‘</tr><tr><th class="product-col"></th>’;
+for (var d2 = 0; d2 < 7; d2++) {
+for (var ci2 = 0; ci2 < cl; ci2++) h += ‘<th style="font-size:10px">’ + cols[ci2] + ‘</th>’;
+}
+h += ‘</tr></thead><tbody>’;
+for (var i = 0; i < products.length; i++) {
+h += ‘<tr><td class="product-name">’ + escapeHtml(products[i].name) + (products[i].ingr ? ‘<small>’ + escapeHtml(products[i].ingr) + ‘</small>’ : ‘’) + ‘</td>’;
+for (var j = 0; j < 7 * cl; j++) h += ‘<td><input type="text" maxlength="12"></td>’;
+h += ‘</tr>’;
+}
+h += ‘</tbody></table></div>’;
+return h;
+}
+function makeOUBDHtml(products, col2, col3) {
+var c2 = col2 || ‘DO’, c3 = col3 || ‘UBD’;
+var h = ‘<div class="week-table-wrap"><table class="week-table"><thead><tr><th class="product-col">Name of Product</th>’;
+for (var d = 0; d < 7; d++) h += ‘<th></th><th>’ + DAYS[d] + ‘</th><th></th>’;
+h += ‘</tr><tr><th class="product-col"></th>’;
+for (var d2 = 0; d2 < 7; d2++) h += ‘<th style="font-size:10px">OUBD</th><th style="font-size:10px">’ + c2 + ‘</th><th style="font-size:10px">’ + c3 + ‘</th>’;
+h += ‘</tr></thead><tbody>’;
+for (var i = 0; i < products.length; i++) {
+var name = typeof products[i] === ‘string’ ? products[i] : products[i].name;
+h += ‘<tr><td class="product-name">’ + escapeHtml(name) + ‘</td>’;
+for (var j = 0; j < 21; j++) h += ‘<td><input type="text" maxlength="12"></td>’;
+h += ‘</tr>’;
+}
+h += ‘</tbody></table></div>’;
+return h;
+}
+function makeCookedMeatsHtml() {
+var h = ‘<div class="week-table-wrap"><table class="week-table"><thead><tr><th class="product-col" style="min-width:130px">Name of Product</th>’;
+for (var d = 0; d < 7; d++) h += ‘<th></th><th>’ + DAYS[d] + ‘</th><th></th>’;
+h += ‘</tr><tr><th class="product-col"></th>’;
+for (var d2 = 0; d2 < 7; d2++) h += ‘<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>’;
+h += ‘</tr></thead><tbody>’;
+for (var i = 0; i < cookedMeats.length; i++) {
+h += ‘<tr><td class="product-name">’ + escapeHtml(cookedMeats[i]) + ‘</td>’;
+for (var j = 0; j < 21; j++) h += ‘<td><input type="text" maxlength="12"></td>’;
+h += ‘</tr>’;
+}
+h += ‘</tbody></table></div>’;
+return h;
+}
+function makeCheeseHtml() {
+var h = ‘<div class="week-table-wrap"><table class="week-table"><thead><tr><th class="product-col">Name of Product</th>’;
+for (var d = 0; d < 7; d++) h += ‘<th></th><th>’ + DAYS[d] + ‘</th><th></th>’;
+h += ‘</tr><tr><th class="product-col"></th>’;
+for (var d2 = 0; d2 < 7; d2++) h += ‘<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>’;
+h += ‘</tr></thead><tbody>’;
+for (var i = 0; i < 10; i++) {
+h += ‘<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name"></td>’;
+for (var j = 0; j < 21; j++) h += ‘<td><input type="text" maxlength="12"></td>’;
+h += ‘</tr>’;
+}
+h += ‘</tbody></table></div>’;
+return h;
+}
+function makeFishHtml() {
+var h = ‘<div class="week-table-wrap"><table class="week-table"><thead><tr><th class="product-col">Product Name</th>’;
+for (var d = 0; d < 6; d++) h += ‘<th colspan="3">’ + DAYS[d] + ‘</th>’;
+h += ‘</tr><tr><th class="product-col"></th>’;
+for (var d2 = 0; d2 < 6; d2++) h += ‘<th style="font-size:10px">Country</th><th style="font-size:10px">Display Until</th><th style="font-size:10px">Trace No.</th>’;
+h += ‘</tr></thead><tbody>’;
+for (var i = 0; i < 12; i++) {
+h += ‘<tr><td><input type="text" placeholder="Product name"></td>’;
+for (var j = 0; j < 18; j++) h += ‘<td><input type="text" maxlength="15"></td>’;
+h += ‘</tr>’;
+}
+h += ‘</tbody></table></div>’;
+return h;
+}
+function makePorkHtml() {
+var h = ‘<div class="week-table-wrap"><table class="log-table"><thead><tr>’ +
+‘<th>Product</th><th>Original Use By Date (Unopened)</th><th>Date Open / Cut / Displayed</th>’ +
+‘<th>Scales Use By</th><th>Batch No.</th><th>Signature</th>’ +
+‘</tr></thead><tbody>’;
+for (var i = 0; i < 25; i++) {
+h += ‘<tr>’;
+for (var j = 0; j < 6; j++) h += ‘<td><input type="text"></td>’;
+h += ‘</tr>’;
+}
+h += ‘</tbody></table></div>’;
+return h;
+}
+function makeLogRowsHtml(cols, rows) {
+rows = rows || 20;
+var h = ‘<tbody>’;
+for (var i = 0; i < rows; i++) {
+h += ‘<tr>’;
+for (var j = 0; j < cols; j++) h += ‘<td><input type="text"></td>’;
+h += ‘</tr>’;
+}
+h += ‘</tbody>’;
+return h;
+}
+function makeRedMeatCleanHtml() {
+var rows = ‘’;
+var skeys = [‘DAILY CLEANING SCHEDULE’,‘WEEKLY CLEANING SCHEDULE’];
+var sdata = [cleaningItemsDaily, cleaningItemsWeekly];
+for (var si = 0; si < skeys.length; si++) {
+rows += ‘<tr><td colspan="9" class="clean-section-header">’ + skeys[si] + ‘</td></tr>’;
+var items = sdata[si];
+for (var ii = 0; ii < items.length; ii++) {
+rows += ‘<tr><td class="area-name">’ + escapeHtml(items[ii][0]) + ‘</td><td class="chem-name">’ + escapeHtml(items[ii][1]) + ‘</td>’;
+for (var d = 0; d < 7; d++) rows += ‘<td><input type="checkbox"></td>’;
+rows += ‘</tr>’;
+}
+}
+return ‘<div class="week-table-wrap"><table class="clean-table"><thead><tr>’ +
+‘<th class="area-col">Area / Item to be Cleaned</th><th class="chem-col">Chemical Used</th>’ +
+‘<th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th>’ +
+‘<th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th>’ +
+‘</tr></thead><tbody>’ + rows + ‘</tbody></table></div>’;
+}
+function makeFruitVegCleanHtml() {
+var rows = ‘’;
+var daily = [[‘Floor’,‘Floors’,‘Mop & bucket/degreaser’],[‘Scales’,‘Scales’,‘Sanitiser’],[‘Juicer’,‘Juicer’,‘Wash up liq/Sanitiser’],[‘Salad display’,‘Salad display area’,‘Sanitiser’],[‘Potato stands’,‘Potato stands’,‘Sanitiser’]];
+for (var i = 0; i < daily.length; i++) {
+rows += ‘<tr><td class="area-name">’ + daily[i][0] + ‘</td><td class="area-name">’ + daily[i][1] + ‘</td><td class="chem-name">’ + daily[i][2] + ‘</td>’;
+for (var d = 0; d < 14; d++) rows += ‘<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>’;
+rows += ‘</tr>’;
+}
+rows += ‘<tr><td colspan="17" class="clean-section-header">WEEKLY DEEP CLEAN</td></tr>’;
+var weekly = [[‘All shelving’,‘Shelving units’,‘Degreaser’],[‘Cold rooms’,‘Cold room walls/floors’,‘Degreaser/Sanitiser’],[‘Display fridges’,‘Interior walls’,‘Degreaser/Sanitiser’],[‘Potato hoppers’,‘Hoppers & surrounds’,‘Degreaser’]];
+for (var j = 0; j < weekly.length; j++) {
+rows += ‘<tr><td class="area-name">’ + weekly[j][0] + ‘</td><td class="area-name">’ + weekly[j][1] + ‘</td><td class="chem-name">’ + weekly[j][2] + ‘</td>’;
+for (var d2 = 0; d2 < 14; d2++) rows += ‘<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>’;
+rows += ‘</tr>’;
+}
+return ‘<div class="week-table-wrap"><table class="clean-table" style="min-width:600px"><thead><tr>’ +
+‘<th class="area-col">Area</th><th class="area-col">Areas to be Cleaned</th><th class="chem-col">Chemical</th>’ +
+‘<th>M AM</th><th>M PM</th><th>T AM</th><th>T PM</th><th>W AM</th><th>W PM</th>’ +
+‘<th>T AM</th><th>T PM</th><th>F AM</th><th>F PM</th><th>S AM</th><th>S PM</th><th>S AM</th><th>S PM</th>’ +
+‘</tr></thead><tbody>’ + rows + ‘</tbody></table></div>’;
+}
+function makeStockroomCleanHtml() {
+var rows = ‘<tr><td colspan="9" class="clean-section-header">DAILY CLEANING SCHEDULE</td></tr>’;
+var dailyItems = [[‘Yard’,‘Degreaser/Mop’],[‘Back-up cold room’,‘Degreaser/Sanitiser’],[‘Ground floor stockroom’,‘Degreaser/Mop’],[‘First floor stockroom’,‘Degreaser/Mop’],[‘Sluice room’,‘Degreaser/Sanitiser’],[‘Bailer area’,‘Degreaser/Mop’],[‘Returns area’,‘Degreaser/Mop’],[‘Frozen back-up’,‘Degreaser/Sanitiser’],[‘Dairy back-up’,‘Degreaser/Sanitiser’],[‘Office’,‘Sanitiser’]];
+for (var i = 0; i < dailyItems.length; i++) {
+rows += ‘<tr><td class="area-name">’ + dailyItems[i][0] + ‘</td><td class="chem-name">’ + dailyItems[i][1] + ‘</td>’;
+for (var d = 0; d < 7; d++) rows += ‘<td><input type="checkbox"></td>’;
+rows += ‘</tr>’;
+}
+rows += ‘<tr><td colspan="9" class="clean-section-header">WEEKLY DEEP CLEAN</td></tr>’;
+var weeklyItems = [[‘Full deep clean - all areas’,‘Degreaser/Sanitiser’],[‘Racking & shelving’,‘Degreaser’],[‘Light fittings & vents’,‘Damp cloth’]];
+for (var j = 0; j < weeklyItems.length; j++) {
+rows += ‘<tr><td class="area-name">’ + weeklyItems[j][0] + ‘</td><td class="chem-name">’ + weeklyItems[j][1] + ‘</td>’;
+for (var d2 = 0; d2 < 7; d2++) rows += ‘<td><input type="checkbox"></td>’;
+rows += ‘</tr>’;
+}
+return ‘<div class="week-table-wrap"><table class="clean-table" style="min-width:500px"><thead><tr>’ +
+‘<th class="area-col">Area</th><th class="chem-col">Chemical</th>’ +
+‘<th class="day-col">M</th><th class="day-col">T</th><th class="day-col">W</th>’ +
+‘<th class="day-col">T</th><th class="day-col">F</th><th class="day-col">S</th><th class="day-col">S</th>’ +
+‘</tr></thead><tbody>’ + rows + ‘</tbody></table></div>’;
+}
+function makeGoodsHtml() {
+var rows = ‘’;
+for (var i = 0; i < 20; i++) {
+rows += ‘<tr>’;
+for (var j = 0; j < 10; j++) rows += ‘<td><input type="text" style="width:100%;border:none;padding:3px;font-size:11px;font-family:inherit"></td>’;
+rows += ‘</tr>’;
+}
+return ‘<div class="week-table-wrap"><table class="log-table"><thead><tr>’ +
+‘<th>Date</th><th>Supplier</th><th>Temp Check</th><th>Food Safety Checks</th>’ +
+‘<th>Docket No.</th><th>Product Dating</th><th>Product Name</th>’ +
+‘<th>Accept / Reject</th><th>Delivery Comments</th><th>Signature & Comments</th>’ +
+‘</tr></thead><tbody>’ + rows + ‘</tbody></table></div>’;
+}
+function makeComplianceHtml() {
+var h = ‘’;
+for (var di = 0; di < complianceDepts.length; di++) {
+var dept = complianceDepts[di];
+var deptKey = ‘rc-dept’ + di;
+h += ‘<div style="margin-bottom:16px"><table class="compliance-table"><thead><tr>’ +
+‘<th style="min-width:120px">Dept</th><th>System</th>’ +
+‘<th colspan="3" style="text-align:center">Result (0/3/5)</th>’ +
+‘<th>Issues</th><th>Action Taken</th></tr></thead><tbody>’;
+for (var ii = 0; ii < dept.items.length; ii++) {
+var radioName = deptKey + ‘item’ + ii;
+h += ‘<tr>’;
+if (ii === 0) h += ‘<td class="dept" rowspan="' + dept.items.length + '">’ + escapeHtml(dept.name) + ‘</td>’;
+h += ‘<td>’ + escapeHtml(dept.items[ii]) + ‘</td>’;
+h += ‘<td style="text-align:center;width:90px"><div class="score-radio">’;
+h += ‘<label><input type="radio" name="' + radioName + '" value="0">0</label>’;
+h += ‘<label><input type="radio" name="' + radioName + '" value="3">3</label>’;
+h += ‘<label><input type="radio" name="' + radioName + '" value="5">5</label>’;
+h += ‘</div></td>’;
+h += ‘<td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>’;
+h += ‘<td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>’;
+h += ‘</tr>’;
+}
+var mx = dept.items.length * 5;
+h += ‘<tr class="max-row"><td colspan="2">Max=’ + mx + ’ Actual=</td>’;
+h += ‘<td colspan="2"><input type="text" placeholder="Actual" style="border:1px solid #ddd;padding:4px;width:80px;border-radius:4px;font-family:inherit"></td>’;
+h += ‘<td colspan="2" style="font-size:11px;color:#666">(Actual/max)x100=%</td></tr>’;
+h += ‘</tbody></table></div>’;
+}
+var dz = [‘1. Serve over deli - Raw Meat/Fish’,‘2. Serve over deli - Ready to eat foods’,‘3. Hot Food bar, salad bar, bakery’,‘4. Deli Pre Pack’,‘5. Fruit & vegetable’,‘6. Dairy’,‘7. Frozen’,‘8. Goods Inwards & Yard’];
+h += ‘<div class="inline-section-title">Department Zones</div>’;
+h += ‘<table class="compliance-table"><thead><tr><th>Department</th><th>Red</th><th>Orange</th><th>Green</th></tr></thead><tbody>’;
+for (var zi = 0; zi < dz.length; zi++) {
+h += ‘<tr><td>’ + escapeHtml(dz[zi]) + ‘</td>’;
+h += ‘<td style="text-align:center"><input type="checkbox" style="accent-color:#d32f2f"></td>’;
+h += ‘<td style="text-align:center"><input type="checkbox" style="accent-color:#e65100"></td>’;
+h += ‘<td style="text-align:center"><input type="checkbox" style="accent-color:#00703c"></td>’;
+h += ‘</tr>’;
+}
+h += ‘</tbody></table>’;
+return h;
 }
 
-/* ---- Attach listeners to a rendered container ---- */
+/* =========================================================
+BUILD FORM BODY HTML per form ID
+========================================================= */
+function buildFormBody(formId) {
+switch(formId) {
+case ‘temp-meat’:
+return makeTempTableHtml(meatTempUnits) +
+‘<div class="inline-section-title">Corrective Action</div>’ +
+‘<textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>’;
+case ‘temp-prepack’:
+return makeTempTableHtml(prepackTempUnits) +
+‘<div class="inline-section-title">Corrective Action</div>’ +
+‘<textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>’;
+case ‘temp-dairy’:
+return makeTempTableHtml(dairyTempUnits) +
+‘<div class="inline-section-title">Corrective Action</div>’ +
+‘<textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>’;
+case ‘temp-frozen’:
+return makeTempTableHtml(frozenTempUnits) +
+‘<div class="inline-section-title">Corrective Action</div>’ +
+‘<textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>’;
+case ‘temp-fruitveg’:
+return makeTempTableHtml(fruitVegTempUnits) +
+‘<div class="inline-section-title">Corrective Action</div>’ +
+‘<textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>’;
+case ‘temp-deli’:
+return makeTempTableHtml(deliTempUnits) +
+‘<div class="inline-section-title">Corrective Action</div>’ +
+‘<textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>’;
+case ‘hotfood-chicken-temp’:
+return ‘<div class="warn-box">*Sanitise probe. Core temp must be >63°C — if below, dispose of product and record. RQA 1019</div>’ +
+makeHourlyTableHtml(‘s1s2’);
+case ‘hotfood-bar-temp’:
+return ‘<div class="warn-box">*Vary sampling (front, middle & back). *Keep door closed when not in use. RQA 1019 (B)</div>’ +
+makeHourlyTableHtml(‘prodtemp’);
+case ‘hotfood-soup-temp’:
+return ‘<div class="warn-box">*Sanitise probe. Core temp must be >63°C — if below, dispose of product. RQA 1019</div>’ +
+makeHourlyTableHtml(‘s1s2’);
+case ‘hotfood-after-cook’:
+return ‘<div class="warn-box">*Sanitise probe, insert into core of product. *Accept core temp minimum <strong>75°C</strong> instantaneous. RQA D dated 01:08</div>’ +
+makeAfterCookHtml();
+case ‘hotfood-greaseshield’:
+return ‘<div class="info-box"><strong>INSTRUCTION:</strong> Ensure the FOG & Solids Containers are washed every day in warm soapy water and the Wiper Blade is wiped clean and fitted correctly.</div>’ +
+makeGSTableHtml();
+case ‘hotfood-daily-clean’:
+return makeCleanTableHtml(hotfoodDailyClean) +
+‘<div class="info-box" style="margin-top:8px"><strong>REMEMBER ALWAYS CLEAN AS YOU GO</strong> | RQA 1032</div>’;
+case ‘hotfood-weekly-clean’:
+return makeCleanTableHtml(hotfoodWeeklyClean) +
+‘<div class="info-box" style="margin-top:8px"><strong>REMEMBER ALWAYS CLEAN AS YOU GO</strong> | RQA 1032</div>’;
+case ‘cookedmeat-clean’:
+return makeCleanTableHtml(cookedmeatClean) +
+‘<div class="info-box" style="margin-top:8px"><strong>REMEMBER ALWAYS CLEAN AS YOU GO</strong> | RQA 1032</div>’;
+case ‘cookedmeat-weekly-clean’:
+return makeCleanTableHtml(cookedmeatWeeklyClean) +
+‘<div class="info-box" style="margin-top:8px"><strong>REMEMBER ALWAYS CLEAN AS YOU GO</strong> | RQA 1032 Issue D dated 01:08</div>’;
+case ‘thawing-check’:
+return ‘<div class="warn-box">*Frozen food must be defrosted in a refrigerated area <5°C.<br>*Core temperature must be checked — target 0°C to 5°C.<br>*Thawed food must be processed within 24 hours.</div>’ +
+‘<div class="week-table-wrap"><table class="log-table"><thead><tr>’ +
+‘<th>Date</th><th>Frozen Product</th><th>Time & Date Thawing Commenced</th>’ +
+‘<th>Time & Date Thawing Completed</th><th>Core Temp after Thawing</th>’ +
+‘<th>Date Product Cooked / Displayed</th><th>Original Use By Date</th><th>New Use By Date</th>’ +
+‘</tr></thead>’ + makeLogRowsHtml(8, 25) + ‘</table></div>’;
+case ‘deli-trace-stuffing’:
+return ‘<div class="info-box"><strong>OUBD</strong> = Original Use by date | <strong>DP</strong> = Date Prep. | <strong>UBD</strong> = Use By Date | <strong>D</strong> = Display Until</div>’ +
+makeDeliTraceHtml(deliTraceStuffing, [‘OUBD’,‘DP’,‘UBD’,‘D’]);
+case ‘deli-trace-butter’:
+return ‘<div class="info-box"><strong>OUBD</strong> = Original Use by date | <strong>DP</strong> = Date Prep. | <strong>UBD</strong> = Use By Date | <strong>D</strong> = Display Until</div>’ +
+makeDeliTraceHtml(deliTraceButter, [‘OUBD’,‘DP’,‘UBD’,‘D’]);
+case ‘deli-trace-chicken’:
+return ‘<div class="info-box"><strong>OUBD</strong> = Original Use by date | <strong>DP</strong> = Date Prep. | <strong>UBD</strong> = Use By Date | <strong>D</strong> = Display Until</div>’ +
+makeDeliTraceHtml(deliTraceChicken, [‘OUBD’,‘DP’,‘UBD’]);
+case ‘deli-trace-saladveg’:
+return ‘<div class="info-box"><strong>OUBD</strong> = Original Use by date | <strong>DP</strong> = Date Prep. | <strong>UBD</strong> = Use By Date | <strong>D</strong> = Display Until</div>’ +
+makeDeliTraceHtml(deliTraceSaladVeg, [‘OUBD’,‘DP’,‘UBD’,‘D’]);
+case ‘deli-trace-eggtuna’:
+return ‘<div class="info-box"><strong>OUBD</strong> = Original Use by date | <strong>DP</strong> = Date Prep. | <strong>UBD</strong> = Use By Date | <strong>D</strong> = Display Until</div>’ +
+makeDeliTraceHtml(deliTraceEggTuna, [‘OUBD’,‘DP’,‘UBD’]);
+case ‘trace-sandwich’:
+return ‘<div class="info-box"><strong>IUBD</strong> = Ingredient Use By Date  |  <strong>UBD</strong> = Use By Date</div>’ +
+makeIUBDHtml(sandwiches, [‘IUBD’,‘UBD’]);
+case ‘trace-wrap’:
+return ‘<div class="info-box"><strong>IUBD</strong> = Ingredient Use By Date  |  <strong>UBD</strong> = Use By Date</div>’ +
+makeIUBDHtml(wraps, [‘IUBD’,‘UBD’]);
+case ‘trace-pizza’:
+return ‘<div class="info-box"><strong>IUBD</strong> = Ingredient Use By Date  |  <strong>UBD</strong> = Use By Date</div>’ +
+makeIUBDHtml(pizzas, [‘IUBD’,‘UBD’]);
+case ‘trace-salad-made’:
+return ‘<div class="info-box"><strong>IUBD</strong> = Ingr. Use By Date  |  <strong>DM</strong> = Date Made  |  <strong>DD</strong> = Display Date (DM +2 days)</div>’ +
+makeIUBDHtml(saladsMade, [‘IUBD’,‘DM’,‘DD’]);
+case ‘trace-salad-prepack’:
+return ‘<div class="info-box"><strong>IUBD/OUBD</strong> = Use By Date  |  <strong>DM/DO</strong> = Date Made/Opened  |  <strong>DD</strong> = Display Date</div>’ +
+makeIUBDHtml(saladsPrepack, [‘IUBD/OUBD’,‘DM/DO’,‘DD’]);
+case ‘trace-savouries’:
+return ‘<div class="info-box"><strong>OUBD</strong> = Original Use By Date  |  <strong>DO</strong> = Date Opened  |  <strong>UBD</strong> = Use By Date</div>’ +
+makeOUBDHtml(savouries);
+case ‘trace-cooked-meats’:
+return ‘<div class="info-box"><strong>OUBD</strong> = Original Use By Date  |  <strong>Bulk DU</strong> = opening +3 days  |  <strong>Slice DU</strong> = sliced +1 day</div>’ +
+makeCookedMeatsHtml();
+case ‘trace-salami’:
+return ‘<div class="info-box"><strong>OUBD</strong> = Original Use By Date  |  <strong>DO</strong> = Date Opened  |  <strong>UBD</strong> = Use By Date</div>’ +
+makeOUBDHtml(salamiOlives);
+case ‘trace-cheese’:
+return makeCheeseHtml();
+case ‘trace-fish’:
+return ‘<div class="info-box"><strong>Fresh Fish:</strong> Display Until = Delivery +3 days | <strong>Frozen Fish:</strong> Defrost +4 days | <strong>Shellfish:</strong> Use By Date -1 day</div>’ +
+makeFishHtml();
+case ‘trace-pork’:
+return makePorkHtml();
+case ‘trace-butcher’:
+return ‘<div class="info-box">Batch traceability – record ingredients & use by dates for each production batch.</div>’ +
+‘<div class="field-row">’ +
+‘<div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date"></div>’ +
+‘<div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text"></div></div>’ +
+‘<div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date"></div>’ +
+‘<div class="inline-section-title">Ingredients</div>’ +
+‘<div class="week-table-wrap"><table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead><tbody>’ +
+‘<tr><td><input type="text"></td><td><input type="text"></td></tr>’ +
+‘<tr><td><input type="text"></td><td><input type="text"></td></tr>’ +
+‘<tr><td><input type="text"></td><td><input type="text"></td></tr>’ +
+‘<tr><td><input type="text"></td><td><input type="text"></td></tr>’ +
+‘<tr><td><input type="text"></td><td><input type="text"></td></tr>’ +
+‘</tbody></table></div>’;
+case ‘prod-mince’:
+return ‘<div class="week-table-wrap"><table class="log-table"><thead><tr>’ +
+‘<th>Date / Time of Production</th><th>Name of Person Who Made the Mince</th>’ +
+‘<th>Type of Meat Used & Batch Code</th><th>Type of Cut</th>’ +
+‘<th>Temp After Chilling</th><th>Scales Use By</th><th>Date Removed from Sale</th>’ +
+‘</tr></thead>’ + makeLogRowsHtml(7, 20) + ‘</table></div>’;
+case ‘prod-burger’:
+return ‘<div class="week-table-wrap"><table class="log-table"><thead><tr>’ +
+‘<th>Date / Time of Production</th><th>Name of Person Who Made Them</th>’ +
+‘<th>Type of Meat Used & Batch Code</th><th>Burger Mix</th>’ +
+‘<th>Scales Use By</th><th>Date Removed from Sale</th>’ +
+‘</tr></thead>’ + makeLogRowsHtml(6, 20) + ‘</table></div>’;
+case ‘clean-redmeat’:
+return makeRedMeatCleanHtml();
+case ‘clean-fruitveg’:
+return makeFruitVegCleanHtml();
+case ‘clean-stockroom’:
+return makeStockroomCleanHtml();
+case ‘goods-chilled’:
+return ‘<div class="info-box">Conduct Receiving Inspection as per Goods Inwards SOP. Record any rejections in non-conformance sheet.</div>’ +
+makeGoodsHtml();
+case ‘goods-ambient’:
+return ‘<div class="info-box">Conduct Receiving Inspection as per Goods Inwards SOP.</div>’ +
+makeGoodsHtml();
+case ‘compliance’:
+return ‘<div class="info-box"><strong>0</strong> = Serious errors  |  <strong>3</strong> = Minor errors  |  <strong>5</strong> = Detail correct with corrective action</div>’ +
+makeComplianceHtml();
+default:
+return ‘<p style="color:#999;font-size:12px;padding:8px 0">No inline form available for this record.</p>’;
+}
+}
+
+/* =========================================================
+SIGNATURE PADS (per-record instance tracking)
+========================================================= */
+var sigPads = {};
+function initSig(canvasId) {
+var canvas = document.getElementById(canvasId);
+if (!canvas || sigPads[canvasId]) return;
+canvas.width = canvas.parentElement.offsetWidth || 300;
+canvas.height = parseInt(canvas.getAttribute(‘height’)) || 80;
+var ctx = canvas.getContext(‘2d’);
+ctx.strokeStyle = ‘#1a1a1a’;
+ctx.lineWidth = 2;
+ctx.lineCap = ‘round’;
+ctx.lineJoin = ‘round’;
+var drawing = false, lx = 0, ly = 0;
+function getPos(e) {
+var r = canvas.getBoundingClientRect();
+var sx = canvas.width / r.width, sy = canvas.height / r.height;
+if (e.touches) return {x:(e.touches[0].clientX-r.left)*sx, y:(e.touches[0].clientY-r.top)*sy};
+return {x:(e.clientX-r.left)*sx, y:(e.clientY-r.top)*sy};
+}
+function start(e) { e.preventDefault(); drawing=true; var p=getPos(e); lx=p.x; ly=p.y; ctx.beginPath(); ctx.arc(p.x,p.y,1,0,Math.PI*2); ctx.fill(); }
+function move(e) { if(!drawing)return; e.preventDefault(); var p=getPos(e); ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y); ctx.stroke(); lx=p.x; ly=p.y; }
+function stop() { drawing=false; }
+canvas.addEventListener(‘mousedown’, start);
+canvas.addEventListener(‘mousemove’, move);
+canvas.addEventListener(‘mouseup’, stop);
+canvas.addEventListener(‘mouseleave’, stop);
+canvas.addEventListener(‘touchstart’, start, {passive:false});
+canvas.addEventListener(‘touchmove’, move, {passive:false});
+canvas.addEventListener(‘touchend’, stop);
+sigPads[canvasId] = {clear: function() { ctx.clearRect(0,0,canvas.width,canvas.height); }};
+}
+
+/* =========================================================
+PHOTO HANDLING (per-record)
+========================================================= */
+var recPhotos = {};
+function handleRecPhotos(input, recKey) {
+if (!recPhotos[recKey]) recPhotos[recKey] = [];
+var files = input.files;
+for (var fi = 0; fi < files.length; fi++) {
+(function(file) {
+var reader = new FileReader();
+reader.onload = function(e) {
+var ts = new Date().toLocaleString(‘en-IE’,{timeZone:‘Europe/Dublin’,hour12:false});
+var obj = {dataUrl:e.target.result, name:file.name, timestamp:ts};
+var idx = recPhotos[recKey].push(obj) - 1;
+renderRecPhotoThumb(document.getElementById(‘rec-photo-grid-’ + recKey), obj, recKey, idx);
+};
+reader.readAsDataURL(file);
+})(files[fi]);
+}
+}
+function renderRecPhotoThumb(grid, photo, recKey, idx) {
+if (!grid) return;
+var div = document.createElement(‘div’);
+div.className = ‘photo-thumb’;
+var img = document.createElement(‘img’);
+img.src = photo.dataUrl;
+img.style.cssText = ‘width:100%;height:100%;object-fit:cover;display:block;’;
+(function(i) {
+img.addEventListener(‘click’, function() { openLightbox(photo.dataUrl); });
+})(idx);
+var lbl = document.createElement(‘div’);
+lbl.className = ‘photo-label’;
+lbl.textContent = photo.timestamp;
+div.appendChild(img); div.appendChild(lbl);
+grid.appendChild(div);
+}
+
+/* =========================================================
+RENDER: RECORD DETAIL with inline form + photos/sigs/ts
+========================================================= */
+var recTimestamps = {};
+
+function buildRecordDetail(rec, prefix) {
+var p = prefix || (‘rec-’ + rec.id);
+var dt = new Date(rec.savedAt);
+var dtStr = dt.toLocaleString(‘en-IE’,{day:‘2-digit’,month:‘short’,year:‘numeric’,hour:‘2-digit’,minute:‘2-digit’,hour12:false});
+
+var html = ‘’;
+
+/* Meta */
+html += ‘<div class="rec-meta-grid">’;
+html += ‘<div class="rmc"><div class="rmc-label">Submitted</div><div class="rmc-value">’ + escapeHtml(dtStr) + ‘</div></div>’;
+html += ‘<div class="rmc"><div class="rmc-label">Food Safety Champion</div><div class="rmc-value ' + (rec.champion ? 'ok' : 'na') + '">’ + escapeHtml(rec.champion || ‘Not recorded’) + ‘</div></div>’;
+html += ‘<div class="rmc"><div class="rmc-label">Recorded Timestamp</div><div class="rmc-value ' + (rec.timestamp ? 'ok' : 'na') + '">’ + escapeHtml(rec.timestamp || ‘Not recorded’) + ‘</div></div>’;
+html += ‘<div class="rmc"><div class="rmc-label">Week Ending</div><div class="rmc-value">’ + escapeHtml(rec.weekEnding || ‘\u2014’) + ‘</div></div>’;
+html += ‘</div>’;
+
+/* Corrective action if present */
+if (rec.correctiveAction && rec.correctiveAction.trim()) {
+html += ‘<div class="rec-ca"><div class="rec-ca-label">⚠️ Corrective Action Notes</div><div class="rec-ca-value">’ + escapeHtml(rec.correctiveAction) + ‘</div></div>’;
+}
+
+/* Inline form */
+html += ‘<div class="inline-section-title">📋 Form Data</div>’;
+html += ‘<div class="inline-form-section">’;
+html += buildFormBody(rec.formId);
+html += ‘</div>’;
+
+/* Signatures from saved record */
+if (rec.signatures && rec.signatures.length) {
+var signed = [];
+for (var si = 0; si < rec.signatures.length; si++) {
+if (rec.signatures[si].hasSignature && rec.signatures[si].dataUrl) signed.push(rec.signatures[si]);
+}
+if (signed.length) {
+html += ‘<div class="inline-section-title">✏️ Saved Signatures</div>’;
+html += ‘<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">’;
+for (var sgi = 0; sgi < signed.length; sgi++) {
+var lbl = signed[sgi].id.replace(/^sig-/,’’).replace(/-/g,’ ’);
+html += ‘<div style="text-align:center;">’;
+html += ‘<img class="rec-sig-img" src="' + signed[sgi].dataUrl + '" alt="Sig" data-lb="' + signed[sgi].dataUrl + '">’;
+html += ‘<div class="rec-sig-name">’ + escapeHtml(lbl) + ‘</div>’;
+html += ‘</div>’;
+}
+html += ‘</div>’;
+}
+}
+
+/* Photos from saved record */
+if (rec.photos && rec.photos.length) {
+html += ‘<div class="inline-section-title">📷 Saved Photo Evidence</div>’;
+html += ‘<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">’;
+for (var pi = 0; pi < rec.photos.length; pi++) {
+html += ‘<img class="rec-photo-thumb" src="' + rec.photos[pi].dataUrl + '" alt="Photo" data-lb="' + rec.photos[pi].dataUrl + '">’;
+}
+html += ‘</div>’;
+}
+
+/* New photo/timestamp/signature section */
+html += ‘<div class="inline-section-title">📷 Add Photo Evidence & Timestamp</div>’;
+html += ‘<div class="photo-timestamp-box">’;
+html += ‘<div class="timestamp-display" id="ts-rec-' + p + '">’;
+html += ‘<span class="ts-icon">🕐</span>’;
+html += ‘<span class="ts-text" id="ts-text-' + p + '">Tap to record timestamp</span>’;
+html += ‘<button class="nav-back" style="font-size:12px;padding:6px 12px;" data-tsrec="' + p + '">Record Time</button>’;
+html += ‘</div>’;
+html += ‘<div class="photo-upload-area">’;
+html += ‘<div class="photo-grid" id="rec-photo-grid-' + p + '"></div>’;
+html += ‘<label class="photo-add-btn" for="rec-photo-input-' + p + '" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;background:#e8f5ee;border:2px dashed #00703c;border-radius:8px;color:#005a30;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;">📷 Add Photo Evidence’;
+html += ‘<input type="file" id="rec-photo-input-' + p + '" accept="image/*" capture="environment" multiple style="display:none" data-recphoto="' + p + '"></label>’;
+html += ‘</div></div>’;
+
+/* New signature fields */
+html += ‘<div class="inline-section-title">✏️ New Signature</div>’;
+html += ‘<div class="field-row">’;
+html += ‘<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-rec-' + p + '-main" height="80"></canvas><button class="sig-clear" data-sigid="sig-rec-' + p + '-main">Clear</button></div></div>’;
+html += ‘<div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-rec-' + p + '-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-rec-' + p + '-mgr">Clear</button></div></div>’;
+html += ‘</div>’;
+
+/* Delete */
+html += ‘<button class="rec-delete-btn" data-delid="' + rec.id + '" style="width:100%;padding:9px;background:white;border:1.5px solid #d32f2f;color:#d32f2f;border-radius:8px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:8px;">🗑 Delete this record</button>’;
+return html;
+}
+
+/* =========================================================
+ATTACH LISTENERS
+========================================================= */
 function attachListeners(container) {
-  /* Expand/collapse */
-  var rows = container.querySelectorAll('.form-row.done');
-  for (var i = 0; i < rows.length; i++) {
-    (function(row) {
-      var top = row.querySelector('.form-row-top');
-      var detail = row.querySelector('.rec-detail');
-      var chev = row.querySelector('.fr-chevron');
-      if (!top || !detail) return;
-      top.addEventListener('click', function() {
-        var open = detail.className.indexOf('open') !== -1;
-        detail.className = open ? 'rec-detail' : 'rec-detail open';
-        chev.className = open ? 'fr-chevron' : 'fr-chevron open';
-      });
-    })(rows[i]);
-  }
-
-  /* Lightbox for photos and signatures */
-  var lbItems = container.querySelectorAll('[data-lb]');
-  for (var li = 0; li < lbItems.length; li++) {
-    (function(el) {
-      el.addEventListener('click', function() {
-        document.getElementById('lbImg').src = el.getAttribute('data-lb');
-        document.getElementById('lightbox').className = 'lightbox open';
-      });
-    })(lbItems[li]);
-  }
-
-  /* Delete buttons */
-  var delBtns = container.querySelectorAll('.rec-delete-btn');
-  for (var di = 0; di < delBtns.length; di++) {
-    (function(btn) {
-      btn.addEventListener('click', function() {
-        var id = parseInt(btn.getAttribute('data-delid'), 10);
-        if (!confirm('Delete this record? This cannot be undone.')) return;
-        dbDelete('records', id).then(function() {
-          showToast('Record deleted');
-          loadRecords();
-        }).catch(function() { showToast('Delete failed'); });
-      });
-    })(delBtns[di]);
-  }
+/* Expand/collapse done rows */
+var rows = container.querySelectorAll(’.form-row.done’);
+for (var i = 0; i < rows.length; i++) {
+(function(row) {
+var top = row.querySelector(’.form-row-top’);
+var detail = row.querySelector(’.rec-detail’);
+var chev = row.querySelector(’.fr-chevron’);
+if (!top || !detail) return;
+top.addEventListener(‘click’, function() {
+var open = detail.className.indexOf(‘open’) !== -1;
+if (!open) {
+detail.className = ‘rec-detail open’;
+chev.className = ‘fr-chevron open’;
+/* Init signature pads after expanding */
+setTimeout(function() {
+var canvases = detail.querySelectorAll(‘canvas’);
+for (var ci = 0; ci < canvases.length; ci++) {
+initSig(canvases[ci].id);
+}
+}, 80);
+} else {
+detail.className = ‘rec-detail’;
+chev.className = ‘fr-chevron’;
+}
+});
+})(rows[i]);
 }
 
-/* ---- Render category sections into a container ---- */
+/* Lightbox for saved photos and signatures */
+var lbItems = container.querySelectorAll(’[data-lb]’);
+for (var li = 0; li < lbItems.length; li++) {
+(function(el) {
+el.addEventListener(‘click’, function() { openLightbox(el.getAttribute(‘data-lb’)); });
+})(lbItems[li]);
+}
+
+/* Timestamp buttons */
+var tsBtns = container.querySelectorAll(’[data-tsrec]’);
+for (var ti = 0; ti < tsBtns.length; ti++) {
+(function(btn) {
+btn.addEventListener(‘click’, function() {
+var key = btn.getAttribute(‘data-tsrec’);
+var now = new Date();
+var ts = now.toLocaleString(‘en-IE’,{weekday:‘short’,year:‘numeric’,month:‘short’,day:‘numeric’,hour:‘2-digit’,minute:‘2-digit’,second:‘2-digit’,timeZone:‘Europe/Dublin’,hour12:false});
+recTimestamps[key] = ts;
+var el = document.getElementById(‘ts-text-’ + key);
+if (el) { el.textContent = ts; el.className = ‘ts-text recorded’; }
+showToast(‘Timestamp recorded’);
+});
+})(tsBtns[ti]);
+}
+
+/* Photo inputs */
+var photoInputs = container.querySelectorAll(’[data-recphoto]’);
+for (var phi = 0; phi < photoInputs.length; phi++) {
+(function(inp) {
+inp.addEventListener(‘change’, function() {
+handleRecPhotos(inp, inp.getAttribute(‘data-recphoto’));
+});
+})(photoInputs[phi]);
+}
+
+/* Sig clear buttons */
+var sigBtns = container.querySelectorAll(’.sig-clear’);
+for (var sgi = 0; sgi < sigBtns.length; sgi++) {
+(function(btn) {
+btn.addEventListener(‘click’, function() {
+var sid = btn.getAttribute(‘data-sigid’);
+if (sid && sigPads[sid]) sigPads[sid].clear();
+});
+})(sigBtns[sgi]);
+}
+
+/* Delete buttons */
+var delBtns = container.querySelectorAll(’.rec-delete-btn’);
+for (var di = 0; di < delBtns.length; di++) {
+(function(btn) {
+btn.addEventListener(‘click’, function() {
+var id = parseInt(btn.getAttribute(‘data-delid’), 10);
+if (!confirm(‘Delete this record? This cannot be undone.’)) return;
+dbDelete(‘records’, id).then(function() {
+showToast(‘Record deleted’);
+loadRecords();
+}).catch(function() { showToast(‘Delete failed’); });
+});
+})(delBtns[di]);
+}
+}
+
+/* =========================================================
+RENDER CATEGORY SECTIONS
+========================================================= */
 function renderSections(container, byForm) {
-  var cats = [], catMap = {};
-  for (var fi = 0; fi < ALL_FORMS.length; fi++) {
-    var f = ALL_FORMS[fi];
-    if (!catMap[f.cat]) { catMap[f.cat] = []; cats.push(f.cat); }
-    catMap[f.cat].push(f);
-  }
-  var html = '';
-  for (var ci = 0; ci < cats.length; ci++) {
-    var cat = cats[ci];
-    var forms = catMap[cat];
-    var catDone = 0;
-    for (var cfi = 0; cfi < forms.length; cfi++) { if (byForm[forms[cfi].id]) catDone++; }
-    var catPct = Math.round(catDone / forms.length * 100);
-    html += '<div class="section">';
-    html += '<div class="section-head"><span>' + escapeHtml(cat) + '</span><span class="section-head-pct">' + catDone + '/' + forms.length + ' &nbsp;' + catPct + '%</span></div>';
-    for (var ri = 0; ri < forms.length; ri++) {
-      var form = forms[ri];
-      var rec = byForm[form.id];
-      if (rec) {
-        var dt2 = new Date(rec.savedAt);
-        var ts2 = dt2.toLocaleString('en-IE', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', hour12:false});
-        var meta = ts2 + (rec.champion ? ' \u00b7 ' + escapeHtml(rec.champion) : '');
-        html += '<div class="form-row done">';
-        html += '<div class="form-row-top">';
-        html += '<div class="fr-icon">\u2705</div>';
-        html += '<div class="fr-info"><div class="fr-name">' + escapeHtml(form.name) + '</div><div class="fr-meta">' + meta + '</div></div>';
-        html += '<div class="fr-chevron">&#8250;</div>';
-        html += '</div>';
-        html += '<div class="rec-detail">' + buildRecordDetail(rec) + '</div>';
-        html += '</div>';
-      } else {
-        html += '<div class="form-row missing">';
-        html += '<div class="form-row-top">';
-        html += '<div class="fr-icon">\u26a0\ufe0f</div>';
-        html += '<div class="fr-info"><div class="fr-name">' + escapeHtml(form.name) + '</div><div class="fr-missing">Not yet submitted this week</div></div>';
-        html += '</div></div>';
-      }
-    }
-    html += '</div>';
-  }
-  container.innerHTML = html;
-  attachListeners(container);
+var cats = [], catMap = {};
+for (var fi = 0; fi < ALL_FORMS.length; fi++) {
+var f = ALL_FORMS[fi];
+if (!catMap[f.cat]) { catMap[f.cat] = []; cats.push(f.cat); }
+catMap[f.cat].push(f);
+}
+var html = ‘’;
+for (var ci = 0; ci < cats.length; ci++) {
+var cat = cats[ci];
+var forms = catMap[cat];
+var catDone = 0;
+for (var cfi = 0; cfi < forms.length; cfi++) { if (byForm[forms[cfi].id]) catDone++; }
+var catPct = Math.round(catDone / forms.length * 100);
+html += ‘<div class="section">’;
+html += ‘<div class="section-head"><span>’ + escapeHtml(cat) + ‘</span><span class="section-head-pct">’ + catDone + ‘/’ + forms.length + ’  ’ + catPct + ‘%</span></div>’;
+for (var ri = 0; ri < forms.length; ri++) {
+var form = forms[ri];
+var rec = byForm[form.id];
+if (rec) {
+var dt2 = new Date(rec.savedAt);
+var ts2 = dt2.toLocaleString(‘en-IE’,{day:‘2-digit’,month:‘short’,hour:‘2-digit’,minute:‘2-digit’,hour12:false});
+var meta = ts2 + (rec.champion ? ’ \u00b7 ’ + escapeHtml(rec.champion) : ‘’);
+var pkey = ‘rec-’ + rec.id;
+html += ‘<div class="form-row done">’;
+html += ‘<div class="form-row-top">’;
+html += ‘<div class="fr-icon">\u2705</div>’;
+html += ‘<div class="fr-info"><div class="fr-name">’ + escapeHtml(form.name) + ‘</div><div class="fr-meta">’ + meta + ‘</div></div>’;
+html += ‘<div class="fr-chevron">›</div>’;
+html += ‘</div>’;
+html += ‘<div class="rec-detail">’ + buildRecordDetail(rec, pkey) + ‘</div>’;
+html += ‘</div>’;
+} else {
+html += ‘<div class="form-row missing">’;
+html += ‘<div class="form-row-top">’;
+html += ‘<div class="fr-icon">\u26a0\ufe0f</div>’;
+html += ‘<div class="fr-info"><div class="fr-name">’ + escapeHtml(form.name) + ‘</div><div class="fr-missing">Not yet submitted this week</div></div>’;
+html += ‘</div></div>’;
+}
+}
+html += ‘</div>’;
+}
+container.innerHTML = html;
+attachListeners(container);
 }
 
-/* ---- Main render ---- */
+/* =========================================================
+LIGHTBOX
+========================================================= */
+function openLightbox(src) {
+document.getElementById(‘lbImg’).src = src;
+document.getElementById(‘lightbox’).className = ‘lightbox open’;
+}
+function closeLightbox() {
+document.getElementById(‘lightbox’).className = ‘lightbox’;
+document.getElementById(‘lbImg’).src = ‘’;
+}
+
+/* =========================================================
+MAIN RENDER
+========================================================= */
 function render(recs) {
-  allRecords = recs;
-  var wk = getWeekKey();
-  var byForm = buildByForm(recs, wk);
-  var done = Object.keys(byForm).length;
-  var total = ALL_FORMS.length;
-  var pct = total > 0 ? Math.round(done / total * 100) : 0;
+allRecords = recs;
+var wk = getWeekKey();
+var byForm = buildByForm(recs, wk);
+var done = Object.keys(byForm).length;
+var total = ALL_FORMS.length;
+var pct = total > 0 ? Math.round(done / total * 100) : 0;
 
-  var sb = document.getElementById('statusBar');
-  sb.textContent = '\u25cf Live \u00b7 ' + recs.length + ' record' + (recs.length !== 1 ? 's' : '') + ' stored \u00b7 ' + timeRemaining(wk);
-  sb.className = 'status-bar';
-  sb.style.cursor = '';
+var sb = document.getElementById(‘statusBar’);
+sb.textContent = ‘\u25cf Live \u00b7 ’ + recs.length + ’ record’ + (recs.length !== 1 ? ‘s’ : ‘’) + ’ stored \u00b7 ’ + timeRemaining(wk);
+sb.className = ‘status-bar’;
+sb.style.cursor = ‘’;
 
-  var mc = document.getElementById('mainContent');
-  mc.innerHTML =
-    '<div class="week-card">' +
-      '<div class="wc-label">Current Week</div>' +
-      '<div class="wc-week">' + escapeHtml(weekLabel(wk)) + '</div>' +
-      '<div class="wc-row">' +
-        '<div><div class="wc-pct">' + pct + '%</div><div class="wc-pct-label">Complete</div></div>' +
-        '<div class="wc-right"><div class="wc-count">' + done + ' / ' + total + ' forms</div><div class="wc-closes">Closes Saturday midnight</div></div>' +
-      '</div>' +
-    '</div>' +
-    '<div class="prog-wrap"><div class="prog-fill" style="width:' + pct + '%"></div></div>';
+var mc = document.getElementById(‘mainContent’);
+mc.innerHTML =
+‘<div class="week-card">’ +
+‘<div class="wc-label">Current Week</div>’ +
+‘<div class="wc-week">’ + escapeHtml(weekLabel(wk)) + ‘</div>’ +
+‘<div class="wc-row">’ +
+‘<div><div class="wc-pct">’ + pct + ‘%</div><div class="wc-pct-label">Complete</div></div>’ +
+‘<div class="wc-right"><div class="wc-count">’ + done + ’ / ’ + total + ’ forms</div><div class="wc-closes">Closes Saturday midnight</div></div>’ +
+‘</div>’ +
+‘</div>’ +
+‘<div class="prog-wrap"><div class="prog-fill" style="width:' + pct + '%"></div></div>’;
 
-  var curDiv = document.createElement('div');
-  mc.appendChild(curDiv);
-  renderSections(curDiv, byForm);
+var curDiv = document.createElement(‘div’);
+mc.appendChild(curDiv);
+renderSections(curDiv, byForm);
 
-  /* Previous weeks */
-  var allWks = {};
-  for (var i = 0; i < recs.length; i++) {
-    if (recs[i].weekKey !== wk) allWks[recs[i].weekKey] = 1;
-  }
-  var prevKeys = Object.keys(allWks).sort().reverse();
-  var pws = document.getElementById('prevWeeksSection');
-  pws.innerHTML = '';
-  if (!prevKeys.length) return;
+/* Previous weeks */
+var allWks = {};
+for (var i = 0; i < recs.length; i++) {
+if (recs[i].weekKey !== wk) allWks[recs[i].weekKey] = 1;
+}
+var prevKeys = Object.keys(allWks).sort().reverse();
+var pws = document.getElementById(‘prevWeeksSection’);
+pws.innerHTML = ‘’;
+if (!prevKeys.length) return;
 
-  var hdr = document.createElement('div');
-  hdr.className = 'prev-header';
-  hdr.textContent = 'Previous Weeks (' + prevKeys.length + ')';
-  pws.appendChild(hdr);
+var hdr = document.createElement(‘div’);
+hdr.className = ‘prev-header’;
+hdr.textContent = ‘Previous Weeks (’ + prevKeys.length + ‘)’;
+pws.appendChild(hdr);
 
-  for (var pi = 0; pi < prevKeys.length; pi++) {
-    (function(pwk) {
-      var pwByForm = buildByForm(recs, pwk);
-      var pwDone = Object.keys(pwByForm).length;
-      var pwPct = Math.round(pwDone / total * 100);
-      var badgeClass = pwPct === 100 ? 'acc-badge full' : pwPct > 0 ? 'acc-badge partial' : 'acc-badge empty';
-
-      var item = document.createElement('div');
-      item.className = 'acc-item';
-
-      var trigger = document.createElement('div');
-      trigger.className = 'acc-trigger';
-      trigger.innerHTML =
-        '<div class="acc-left"><div class="acc-week">' + escapeHtml(weekLabel(pwk)) + '</div><div class="acc-sub">' + pwDone + ' / ' + total + ' forms completed</div></div>' +
-        '<span class="' + badgeClass + '">' + pwPct + '%</span>' +
-        '<span class="acc-chevron">&#8250;</span>';
-
-      var body = document.createElement('div');
-      body.className = 'acc-body';
-      var inner = document.createElement('div');
-      body.appendChild(inner);
-      var built = false;
-
-      trigger.addEventListener('click', function() {
-        var isOpen = body.className.indexOf('open') !== -1;
-        body.className = isOpen ? 'acc-body' : 'acc-body open';
-        trigger.querySelector('.acc-chevron').className = isOpen ? 'acc-chevron' : 'acc-chevron open';
-        if (!isOpen && !built) { renderSections(inner, pwByForm); built = true; }
-      });
-
-      item.appendChild(trigger);
-      item.appendChild(body);
-      pws.appendChild(item);
-    })(prevKeys[pi]);
-  }
+for (var pi = 0; pi < prevKeys.length; pi++) {
+(function(pwk) {
+var pwByForm = buildByForm(recs, pwk);
+var pwDone = Object.keys(pwByForm).length;
+var pwPct = Math.round(pwDone / total * 100);
+var badgeClass = pwPct === 100 ? ‘acc-badge full’ : pwPct > 0 ? ‘acc-badge partial’ : ‘acc-badge empty’;
+var item = document.createElement(‘div’);
+item.className = ‘acc-item’;
+var trigger = document.createElement(‘div’);
+trigger.className = ‘acc-trigger’;
+trigger.innerHTML =
+‘<div class="acc-left"><div class="acc-week">’ + escapeHtml(weekLabel(pwk)) + ‘</div><div class="acc-sub">’ + pwDone + ’ / ’ + total + ’ forms completed</div></div>’ +
+‘<span class="' + badgeClass + '">’ + pwPct + ‘%</span>’ +
+‘<span class="acc-chevron">›</span>’;
+var body = document.createElement(‘div’);
+body.className = ‘acc-body’;
+var inner = document.createElement(‘div’);
+body.appendChild(inner);
+var built = false;
+trigger.addEventListener(‘click’, function() {
+var isOpen = body.className.indexOf(‘open’) !== -1;
+body.className = isOpen ? ‘acc-body’ : ‘acc-body open’;
+trigger.querySelector(’.acc-chevron’).className = isOpen ? ‘acc-chevron’ : ‘acc-chevron open’;
+if (!isOpen && !built) { renderSections(inner, pwByForm); built = true; }
+});
+item.appendChild(trigger);
+item.appendChild(body);
+pws.appendChild(item);
+})(prevKeys[pi]);
+}
 }
 
 function loadRecords() {
-  dbGetAll('records').then(function(recs) { render(recs); }).catch(function(e) {
-    var sb = document.getElementById('statusBar');
-    sb.textContent = 'Error loading: ' + (e.message || 'unknown');
-    sb.className = 'status-bar err';
-  });
+dbGetAll(‘records’).then(function(recs) { render(recs); }).catch(function(e) {
+var sb = document.getElementById(‘statusBar’);
+sb.textContent = ’Error loading: ’ + (e.message || ‘unknown’);
+sb.className = ‘status-bar err’;
+});
 }
 
-/* ---- Backup / Restore ---- */
+/* =========================================================
+BACKUP / RESTORE
+========================================================= */
 function doBackup() {
-  Promise.all([dbGetAll('records'), dbGetAll('weeks')]).then(function(results) {
-    var data = {exportedAt: new Date().toISOString(), records: results[0], weeks: results[1]};
-    var blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'haccp-backup-' + new Date().toISOString().split('T')[0] + '.json';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    showToast('Backup downloaded');
-  }).catch(function() { showToast('Backup failed'); });
+Promise.all([dbGetAll(‘records’), dbGetAll(‘weeks’)]).then(function(results) {
+var data = {exportedAt: new Date().toISOString(), records: results[0], weeks: results[1]};
+var blob = new Blob([JSON.stringify(data, null, 2)], {type:‘application/json’});
+var url = URL.createObjectURL(blob);
+var a = document.createElement(‘a’);
+a.href = url;
+a.download = ‘haccp-backup-’ + new Date().toISOString().split(‘T’)[0] + ‘.json’;
+document.body.appendChild(a); a.click(); document.body.removeChild(a);
+URL.revokeObjectURL(url);
+showToast(‘Backup downloaded’);
+}).catch(function() { showToast(‘Backup failed’); });
 }
-
 function doRestore(file) {
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      var data = JSON.parse(e.target.result);
-      if (!data.records || !Array.isArray(data.records)) throw new Error('bad format');
-      var puts = [];
-      for (var ri = 0; ri < data.records.length; ri++) puts.push(dbPut('records', data.records[ri]));
-      if (data.weeks && Array.isArray(data.weeks)) {
-        for (var wi = 0; wi < data.weeks.length; wi++) puts.push(dbPut('weeks', data.weeks[wi]));
-      }
-      Promise.all(puts).then(function() {
-        loadRecords();
-        showToast('\u2705 Backup restored');
-        document.getElementById('fileInput').value = '';
-      }).catch(function() { showToast('Restore failed'); });
-    } catch(err) { showToast('Invalid backup file'); }
-  };
-  reader.readAsText(file);
+var reader = new FileReader();
+reader.onload = function(e) {
+try {
+var data = JSON.parse(e.target.result);
+if (!data.records || !Array.isArray(data.records)) throw new Error(‘bad format’);
+var puts = [];
+for (var ri = 0; ri < data.records.length; ri++) puts.push(dbPut(‘records’, data.records[ri]));
+if (data.weeks && Array.isArray(data.weeks)) {
+for (var wi = 0; wi < data.weeks.length; wi++) puts.push(dbPut(‘weeks’, data.weeks[wi]));
+}
+Promise.all(puts).then(function() {
+loadRecords();
+showToast(’\u2705 Backup restored’);
+document.getElementById(‘fileInput’).value = ‘’;
+}).catch(function() { showToast(‘Restore failed’); });
+} catch(err) { showToast(‘Invalid backup file’); }
+};
+reader.readAsText(file);
 }
 
-/* ---- Boot ---- */
-document.addEventListener('DOMContentLoaded', function() {
+/* =========================================================
+BOOT
+========================================================= */
+document.addEventListener(‘DOMContentLoaded’, function() {
+document.getElementById(‘btnBack’).addEventListener(‘click’, function() {
+try { if (db) { db.close(); db = null; } } catch(e) {}
+window.location.href = ‘index.html’;
+});
+window.addEventListener(‘pagehide’, function() {
+try { if (db) { db.close(); db = null; } } catch(e) {}
+});
+document.getElementById(‘btnBackup’).addEventListener(‘click’, doBackup);
+document.getElementById(‘btnRestore’).addEventListener(‘click’, function() { document.getElementById(‘fileInput’).click(); });
+document.getElementById(‘fileInput’).addEventListener(‘change’, function() {
+if (this.files && this.files.length) doRestore(this.files[0]);
+});
+document.getElementById(‘lbClose’).addEventListener(‘click’, closeLightbox);
+document.getElementById(‘lightbox’).addEventListener(‘click’, function(e) {
+if (e.target === this) closeLightbox();
+});
 
-  document.getElementById('btnBack').addEventListener('click', function() {
-    try { if (db) { db.close(); db = null; } } catch(e) {}
-    window.location.href = 'index.html';
-  });
-
-  window.addEventListener('pagehide', function() {
-    try { if (db) { db.close(); db = null; } } catch(e) {}
-  });
-
-  document.getElementById('btnBackup').addEventListener('click', doBackup);
-  document.getElementById('btnRestore').addEventListener('click', function() { document.getElementById('fileInput').click(); });
-  document.getElementById('fileInput').addEventListener('change', function() {
-    if (this.files && this.files.length) doRestore(this.files[0]);
-  });
-
-  document.getElementById('lbClose').addEventListener('click', function() {
-    document.getElementById('lightbox').className = 'lightbox';
-    document.getElementById('lbImg').src = '';
-  });
-  document.getElementById('lightbox').addEventListener('click', function(e) {
-    if (e.target === this) { this.className = 'lightbox'; document.getElementById('lbImg').src = ''; }
-  });
-
-  var sb = document.getElementById('statusBar');
-  function bootDB() {
-    sb.textContent = 'Connecting to database...';
-    sb.className = 'status-bar';
-    sb.style.cursor = '';
-    openDB().then(function() { loadRecords(); }).catch(function(e) {
-      sb.textContent = (e.message || 'Storage error') + ' \u2014 Tap to retry';
-      sb.className = 'status-bar err';
-      sb.style.cursor = 'pointer';
-      sb.addEventListener('click', function handler() {
-        sb.removeEventListener('click', handler);
-        bootDB();
-      });
-    });
-  }
-  bootDB();
+var sb = document.getElementById(‘statusBar’);
+function bootDB() {
+sb.textContent = ‘Connecting to database…’;
+sb.className = ‘status-bar’;
+sb.style.cursor = ‘’;
+openDB().then(function() { loadRecords(); }).catch(function(e) {
+sb.textContent = (e.message || ‘Storage error’) + ’ \u2014 Tap to retry’;
+sb.className = ‘status-bar err’;
+sb.style.cursor = ‘pointer’;
+sb.addEventListener(‘click’, function handler() {
+sb.removeEventListener(‘click’, handler);
+bootDB();
+});
+});
+}
+bootDB();
 });
 </script>
 

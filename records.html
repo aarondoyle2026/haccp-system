@@ -288,26 +288,20 @@ function buildByForm(recs, wk) {
 
 /* ---- Render a single record detail block (inline expanded) ---- */
 function renderRecordDetail(rec) {
-  var html = '<div class="rec-detail-grid">';
+  var html = '';
 
-  /* Submitted */
+  /* ---- Header metadata grid ---- */
+  html += '<div class="rec-detail-grid">';
   var dt = new Date(rec.savedAt);
   var dtStr = dt.toLocaleString('en-IE', {day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', hour12:false});
   html += '<div class="rdg-item"><div class="rdg-label">Submitted</div><div class="rdg-value">' + escapeHtml(dtStr) + '</div></div>';
-
-  /* Champion */
   html += '<div class="rdg-item"><div class="rdg-label">Food Safety Champion</div><div class="rdg-value ' + (rec.champion ? 'ok' : 'na') + '">' + escapeHtml(rec.champion || 'Not recorded') + '</div></div>';
-
-  /* Timestamp */
   html += '<div class="rdg-item"><div class="rdg-label">Recorded Timestamp</div><div class="rdg-value ' + (rec.timestamp ? 'ok' : 'na') + '">' + escapeHtml(rec.timestamp || 'Not recorded') + '</div></div>';
-
-  /* Week ending */
   html += '<div class="rdg-item"><div class="rdg-label">Week Ending</div><div class="rdg-value">' + escapeHtml(rec.weekEnding || '\u2014') + '</div></div>';
-
   html += '</div>';
 
-  /* Corrective action */
-  html += '<div class="rdg-item" style="margin-bottom:8px"><div class="rdg-label">Corrective Action Notes</div>';
+  /* ---- Corrective action ---- */
+  html += '<div class="rdg-item" style="margin:8px 0"><div class="rdg-label">Corrective Action Notes</div>';
   if (rec.correctiveAction && rec.correctiveAction.trim()) {
     html += '<div class="rdg-value" style="white-space:pre-wrap;font-family:inherit;font-size:12px">' + escapeHtml(rec.correctiveAction) + '</div>';
   } else {
@@ -315,13 +309,86 @@ function renderRecordDetail(rec) {
   }
   html += '</div>';
 
-  /* Signatures */
+  /* ---- Form field data reconstruction ---- */
+  if (rec.formData && rec.formData.length) {
+    /* Build a field lookup by id for quick access */
+    var fdMap = {};
+    var fdList = rec.formData;
+    for (var fdi = 0; fdi < fdList.length; fdi++) {
+      if (fdList[fdi].id) fdMap[fdList[fdi].id] = fdList[fdi].val;
+    }
+
+    /* Collect all text/date/select/checkbox inputs (exclude sig-clear buttons, file inputs) */
+    /* Group into: named fields with IDs, and positional table cells (no id) */
+    var namedFields = [];
+    var tableCells = [];
+    for (var i = 0; i < fdList.length; i++) {
+      var f = fdList[i];
+      /* Skip empty values, photo inputs */
+      if (f.type === 'file') continue;
+      if (f.type === 'radio' && !f.val) continue;
+      var isEmpty = (f.type === 'checkbox') ? (!f.val) : (f.val === '' || f.val === false);
+      if (f.id && f.id.indexOf('we-') === 0) continue; /* week ending already shown */
+      if (f.id && (f.id.indexOf('fsc-') === 0)) continue; /* champion already shown */
+      if (f.id && f.id.indexOf('photo-input') !== -1) continue;
+      if (f.id) {
+        namedFields.push(f);
+      } else {
+        tableCells.push(f);
+      }
+    }
+
+    /* Render named fields as a simple list */
+    if (namedFields.length) {
+      html += '<div style="margin:10px 0 6px"><div class="rdg-label" style="margin-bottom:6px">Form Fields</div>';
+      html += '<table style="width:100%;border-collapse:collapse;font-size:11px">';
+      for (var ni = 0; ni < namedFields.length; ni++) {
+        var nf = namedFields[ni];
+        var label = nf.id.replace(/-/g, ' ').replace(/^(sig |we |fsc )/, '').trim();
+        var displayVal = nf.type === 'checkbox' ? (nf.val ? '\u2705 Yes' : '\u25a1 No') : escapeHtml(String(nf.val));
+        if (!displayVal || displayVal === 'false' || displayVal === '') displayVal = '<span style="color:#ccc">\u2014</span>';
+        html += '<tr style="border-bottom:1px solid #f0f0f0">';
+        html += '<td style="padding:4px 6px;color:#888;text-transform:uppercase;font-size:10px;width:45%;vertical-align:top">' + escapeHtml(label) + '</td>';
+        html += '<td style="padding:4px 6px;font-family:\'Courier New\',monospace;color:#1a1a1a">' + displayVal + '</td>';
+        html += '</tr>';
+      }
+      html += '</table></div>';
+    }
+
+    /* Render table cells as a scrollable grid — each cell in order */
+    if (tableCells.length) {
+      var filledCells = [];
+      for (var ti = 0; ti < tableCells.length; ti++) {
+        var tc = tableCells[ti];
+        var tcVal = tc.type === 'checkbox' ? (tc.val ? '\u2713' : '') : String(tc.val || '');
+        if (tcVal) filledCells.push(tcVal);
+      }
+      if (filledCells.length) {
+        html += '<div style="margin:8px 0 4px"><div class="rdg-label" style="margin-bottom:6px">Recorded Data (' + filledCells.length + ' entries)</div>';
+        html += '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch">';
+        html += '<table style="border-collapse:collapse;font-size:11px;width:100%">';
+        /* Render in rows of 7 (one per day) */
+        var cols = 7;
+        for (var row = 0; row < filledCells.length; row += cols) {
+          html += '<tr>';
+          for (var col = 0; col < cols; col++) {
+            var cellVal = filledCells[row + col] || '';
+            html += '<td style="border:1px solid #e0e0e0;padding:3px 5px;text-align:center;min-width:36px;font-family:\'Courier New\',monospace;color:' + (cellVal ? '#1a1a1a' : '#ddd') + '">' + escapeHtml(cellVal || '\u2014') + '</td>';
+          }
+          html += '</tr>';
+        }
+        html += '</table></div></div>';
+      }
+    }
+  } else {
+    html += '<div class="rec-photos" style="margin-top:8px"><div class="rec-photos-label" style="color:#aaa">Form data not captured in this record \u2014 re-save the form to include full field data</div></div>';
+  }
+
+  /* ---- Signatures ---- */
   if (rec.signatures && rec.signatures.length) {
     var sigsSigned = [];
     for (var si = 0; si < rec.signatures.length; si++) {
-      if (rec.signatures[si].hasSignature && rec.signatures[si].dataUrl) {
-        sigsSigned.push(rec.signatures[si]);
-      }
+      if (rec.signatures[si].hasSignature && rec.signatures[si].dataUrl) sigsSigned.push(rec.signatures[si]);
     }
     html += '<div class="rec-photos"><div class="rec-photos-label">&#9999;&#65039; Signatures (' + sigsSigned.length + ' of ' + rec.signatures.length + ' captured)</div>';
     if (sigsSigned.length) {
@@ -339,10 +406,10 @@ function renderRecordDetail(rec) {
     }
     html += '</div>';
   } else {
-    html += '<div class="rec-photos"><div class="rec-photos-label" style="color:#aaa">&#9999;&#65039; Signatures — not captured in this record (save again to include)</div></div>';
+    html += '<div class="rec-photos"><div class="rec-photos-label" style="color:#aaa">&#9999;&#65039; Signatures \u2014 re-save form to capture</div></div>';
   }
 
-  /* Photos */
+  /* ---- Photos ---- */
   if (rec.photos && rec.photos.length) {
     html += '<div class="rec-photos"><div class="rec-photos-label">&#128247; Photo Evidence (' + rec.photos.length + ')</div><div class="rec-photo-row">';
     for (var pi = 0; pi < rec.photos.length; pi++) {
@@ -353,9 +420,8 @@ function renderRecordDetail(rec) {
     html += '<div class="rec-photos"><div class="rec-photos-label" style="color:#aaa">No photo evidence attached</div></div>';
   }
 
-  /* Delete */
+  /* ---- Delete ---- */
   html += '<button class="rec-delete-btn" data-delid="' + rec.id + '">&#128465; Delete this record</button>';
-
   return html;
 }
 

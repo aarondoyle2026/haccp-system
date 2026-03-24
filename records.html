@@ -14,7 +14,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .nav-logo{font-size:11px;opacity:0.75;text-align:right;line-height:1.3;font-weight:600;}
 .status-bar{background:#005a30;color:white;text-align:center;padding:7px 16px;font-size:11px;font-family:'Courier New',monospace;letter-spacing:0.02em;}
 .status-bar.err{background:#b71c1c;}
-/* Week audit card */
+/* Week card */
 .week-card{margin:14px 14px 0;background:#00703c;border-radius:12px;padding:14px 16px;color:white;}
 .wc-label{font-size:10px;font-weight:700;letter-spacing:0.1em;opacity:0.75;text-transform:uppercase;}
 .wc-week{font-size:18px;font-weight:700;margin-top:3px;}
@@ -31,50 +31,69 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .section-head{background:#1a1a1a;color:white;padding:9px 14px;border-radius:8px 8px 0 0;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;}
 .section-head-pct{font-size:12px;font-weight:700;opacity:0.8;}
 /* Form rows */
-.form-row{background:white;border-left:1px solid #d8e8d8;border-right:1px solid #d8e8d8;border-bottom:1px solid #ececec;padding:11px 14px;cursor:pointer;}
+.form-row{background:white;border-left:1px solid #d8e8d8;border-right:1px solid #d8e8d8;border-bottom:1px solid #ececec;padding:12px 14px;}
 .form-row:last-child{border-bottom:1px solid #d8e8d8;border-radius:0 0 8px 8px;}
 .form-row.done{border-left:3px solid #00703c;}
-.form-row.missing{border-left:3px solid #e65100;cursor:default;}
-.form-row-top{display:flex;align-items:center;gap:10px;}
+.form-row.missing{border-left:3px solid #e65100;}
+.form-row-top{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.form-row.missing .form-row-top{cursor:default;}
 .fr-icon{font-size:18px;flex-shrink:0;width:24px;text-align:center;}
 .fr-info{flex:1;min-width:0;}
 .fr-name{font-size:13px;font-weight:600;color:#1a1a1a;}
 .fr-meta{font-size:11px;color:#666;margin-top:2px;font-family:'Courier New',monospace;}
 .fr-missing{font-size:11px;color:#e65100;font-weight:600;margin-top:2px;}
-.fr-chevron{font-size:14px;color:#aaa;transition:transform 0.2s;flex-shrink:0;}
+.fr-chevron{font-size:18px;color:#aaa;transition:transform 0.2s;flex-shrink:0;line-height:1;}
 .fr-chevron.open{transform:rotate(90deg);}
-/* Expanded record detail */
-.rec-detail{display:none;border-top:1px solid #e8f5ee;margin-top:10px;padding-top:10px;}
+/* Expanded detail */
+.rec-detail{display:none;margin-top:12px;border-top:2px solid #e8f5ee;padding-top:12px;}
 .rec-detail.open{display:block;}
-.rec-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
-.rdg-item{background:#f8faf8;border-radius:6px;padding:8px 10px;}
-.rdg-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#888;margin-bottom:3px;}
-.rdg-value{font-size:12px;color:#1a1a1a;font-family:'Courier New',monospace;}
-.rdg-value.ok{color:#00703c;font-weight:700;}
-.rdg-value.na{color:#aaa;}
-.rec-photos{margin-top:8px;}
-.rec-photos-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#888;margin-bottom:6px;}
-.rec-photo-row{display:flex;flex-wrap:wrap;gap:6px;}
-.rec-photo-thumb{width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #d0d0d0;cursor:pointer;}
-.rec-delete-btn{margin-top:10px;background:white;border:1px solid #d32f2f;color:#d32f2f;border-radius:6px;padding:6px 14px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;width:100%;}
+/* Detail metadata grid */
+.rec-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.rmc{background:#f8faf8;border-radius:8px;padding:9px 11px;}
+.rmc-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:4px;}
+.rmc-value{font-size:12px;color:#1a1a1a;line-height:1.4;}
+.rmc-value.ok{color:#00703c;font-weight:700;font-family:'Courier New',monospace;}
+.rmc-value.na{color:#bbb;font-style:italic;}
+/* Corrective action box */
+.rec-ca{background:#fff8e1;border-left:3px solid #e65100;border-radius:6px;padding:9px 12px;margin-bottom:10px;}
+.rec-ca-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#e65100;margin-bottom:4px;}
+.rec-ca-value{font-size:12px;color:#1a1a1a;white-space:pre-wrap;line-height:1.5;}
+.rec-ca-none{font-size:12px;color:#bbb;font-style:italic;}
+/* Signatures */
+.rec-sigs{margin-bottom:10px;}
+.rec-sigs-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:6px;}
+.rec-sigs-row{display:flex;flex-wrap:wrap;gap:8px;}
+.rec-sig-item{text-align:center;}
+.rec-sig-img{display:block;width:90px;height:45px;object-fit:contain;background:white;border:1px solid #ddd;border-radius:6px;cursor:pointer;}
+.rec-sig-name{font-size:9px;color:#999;margin-top:3px;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rec-sig-none{font-size:11px;color:#bbb;font-style:italic;}
+/* Photos */
+.rec-photos{margin-bottom:10px;}
+.rec-photos-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:6px;}
+.rec-photo-row{display:flex;flex-wrap:wrap;gap:8px;}
+.rec-photo-thumb{width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid #d0d0d0;cursor:pointer;}
+.rec-photo-none{font-size:11px;color:#bbb;font-style:italic;}
+/* Delete */
+.rec-delete-btn{width:100%;padding:9px;background:white;border:1.5px solid #d32f2f;color:#d32f2f;border-radius:8px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:4px;}
 /* Previous weeks accordion */
-.prev-header{margin:20px 14px 0;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;padding:0 2px;}
-.acc-item{margin:8px 14px 0;border-radius:10px;overflow:hidden;border:1px solid #d0ddd0;}
-.acc-trigger{background:white;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+.prev-header{margin:20px 14px 6px;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;}
+.acc-item{margin:6px 14px 0;border-radius:10px;overflow:hidden;border:1.5px solid #d0ddd0;}
+.acc-trigger{background:white;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;}
 .acc-trigger:active{background:#f0f7f0;}
 .acc-left{flex:1;}
 .acc-week{font-size:13px;font-weight:700;color:#1a1a1a;}
 .acc-sub{font-size:11px;color:#666;margin-top:2px;}
-.acc-badge{background:#00703c;color:white;border-radius:12px;padding:3px 10px;font-size:11px;font-weight:700;flex-shrink:0;margin-right:8px;}
-.acc-badge.partial{background:#e65100;}
-.acc-badge.empty{background:#aaa;}
-.acc-chevron{font-size:14px;color:#aaa;transition:transform 0.2s;}
+.acc-badge{border-radius:12px;padding:3px 10px;font-size:11px;font-weight:700;flex-shrink:0;}
+.acc-badge.full{background:#e8f5ee;color:#00703c;}
+.acc-badge.partial{background:#fff3e0;color:#e65100;}
+.acc-badge.empty{background:#f5f5f5;color:#aaa;}
+.acc-chevron{font-size:18px;color:#aaa;transition:transform 0.2s;line-height:1;flex-shrink:0;}
 .acc-chevron.open{transform:rotate(90deg);}
-.acc-body{display:none;border-top:1px solid #e8e8e8;background:#fafafa;}
+.acc-body{display:none;border-top:1px solid #e8e8e8;background:#fafafa;padding-bottom:8px;}
 .acc-body.open{display:block;}
 /* Tools */
 .tools-section{margin:20px 14px 0;}
-.tools-title{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;margin-bottom:8px;padding:0 2px;}
+.tools-title{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;margin-bottom:8px;}
 .tools-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .tool-btn{background:white;border:1.5px solid #c8d8c8;border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;font-family:'Inter',sans-serif;}
 .tool-btn:active{border-color:#00703c;background:#e8f5ee;}
@@ -89,7 +108,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;align-items:center;justify-content:center;flex-direction:column;}
 .lightbox.open{display:flex;}
 .lightbox img{max-width:95vw;max-height:80vh;border-radius:8px;object-fit:contain;}
-.lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;font-family:inherit;}
+.lb-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;font-family:inherit;}
 </style>
 </head>
 <body>
@@ -115,9 +134,8 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 <input type="file" id="fileInput" accept=".json" style="display:none">
 <div class="footer-space"></div>
 <div class="toast" id="toast"></div>
-
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lbClose">&#10005;</button>
+  <button class="lb-close" id="lbClose">&#10005;</button>
   <img id="lbImg" src="" alt="">
 </div>
 
@@ -166,19 +184,12 @@ var ALL_FORMS = [
   {id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}
 ];
 
-var DB_NAME = 'MoriartyHACCP';
-var DB_VER = 1;
-var db = null;
-var allRecords = [];
+var DB_NAME = 'MoriartyHACCP', DB_VER = 1, db = null, allRecords = [];
 
-/* ---- Utility ---- */
 function escapeHtml(str) {
   return String(str == null ? '' : str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function showToast(msg) {
@@ -188,7 +199,6 @@ function showToast(msg) {
   setTimeout(function() { t.className = 'toast'; }, 3000);
 }
 
-/* ---- Week helpers — Sunday start ---- */
 function getWeekKey() {
   var d = new Date();
   var s = new Date(d);
@@ -201,7 +211,7 @@ function weekLabel(wk) {
   var s = new Date(wk + 'T00:00:00');
   var e = new Date(s);
   e.setDate(s.getDate() + 6);
-  var opts = {day: 'numeric', month: 'short'};
+  var opts = {day:'numeric', month:'short'};
   return s.toLocaleDateString('en-IE', opts) + ' \u2013 ' + e.toLocaleDateString('en-IE', opts) + ' ' + e.getFullYear();
 }
 
@@ -221,13 +231,12 @@ function timeRemaining(wk) {
   return (d > 0 ? d + 'd ' : '') + h + 'h ' + m + 'm until close';
 }
 
-/* ---- IndexedDB — 5s timeout ---- */
+/* ---- IndexedDB ---- */
 function openDB() {
   return new Promise(function(res, rej) {
     var done = false;
     var timer = setTimeout(function() {
-      if (done) return;
-      done = true;
+      if (done) return; done = true;
       rej(new Error('Database timed out. Safari: Settings > Safari > uncheck Block All Cookies, then refresh.'));
     }, 5000);
     var req;
@@ -236,15 +245,15 @@ function openDB() {
     req.onupgradeneeded = function(e) {
       var d = e.target.result;
       if (!d.objectStoreNames.contains('records')) {
-        var s = d.createObjectStore('records', {keyPath: 'id'});
-        s.createIndex('formId', 'formId', {unique: false});
-        s.createIndex('weekKey', 'weekKey', {unique: false});
+        var s = d.createObjectStore('records', {keyPath:'id'});
+        s.createIndex('formId','formId',{unique:false});
+        s.createIndex('weekKey','weekKey',{unique:false});
       }
-      if (!d.objectStoreNames.contains('weeks')) d.createObjectStore('weeks', {keyPath: 'weekKey'});
+      if (!d.objectStoreNames.contains('weeks')) d.createObjectStore('weeks', {keyPath:'weekKey'});
     };
-    req.onsuccess = function(e) { if (done) return; done = true; clearTimeout(timer); db = e.target.result; res(db); };
-    req.onerror = function(e) { if (done) return; done = true; clearTimeout(timer); rej(e.target.error); };
-    req.onblocked = function() { if (done) return; done = true; clearTimeout(timer); rej(new Error('Database blocked. Close other tabs with this site open and refresh.')); };
+    req.onsuccess = function(e) { if (done) return; done=true; clearTimeout(timer); db=e.target.result; res(db); };
+    req.onerror = function(e) { if (done) return; done=true; clearTimeout(timer); rej(e.target.error); };
+    req.onblocked = function() { if (done) return; done=true; clearTimeout(timer); rej(new Error('Database blocked. Close other tabs and refresh.')); };
   });
 }
 
@@ -275,7 +284,7 @@ function dbPut(store, obj) {
   });
 }
 
-/* ---- Build byForm map for a given weekKey ---- */
+/* ---- Build latest-per-form map for a week ---- */
 function buildByForm(recs, wk) {
   var byForm = {};
   for (var i = 0; i < recs.length; i++) {
@@ -286,228 +295,97 @@ function buildByForm(recs, wk) {
   return byForm;
 }
 
-/* ---- Render a single record detail block (inline expanded) ---- */
-function renderRecordDetail(rec) {
+/* ---- Render expanded record detail ---- */
+function buildRecordDetail(rec) {
   var html = '';
 
-  /* ---- Header metadata grid ---- */
-  html += '<div class="rec-detail-grid">';
+  /* Metadata grid */
   var dt = new Date(rec.savedAt);
   var dtStr = dt.toLocaleString('en-IE', {day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', hour12:false});
-  html += '<div class="rdg-item"><div class="rdg-label">Submitted</div><div class="rdg-value">' + escapeHtml(dtStr) + '</div></div>';
-  html += '<div class="rdg-item"><div class="rdg-label">Food Safety Champion</div><div class="rdg-value ' + (rec.champion ? 'ok' : 'na') + '">' + escapeHtml(rec.champion || 'Not recorded') + '</div></div>';
-  html += '<div class="rdg-item"><div class="rdg-label">Recorded Timestamp</div><div class="rdg-value ' + (rec.timestamp ? 'ok' : 'na') + '">' + escapeHtml(rec.timestamp || 'Not recorded') + '</div></div>';
-  html += '<div class="rdg-item"><div class="rdg-label">Week Ending</div><div class="rdg-value">' + escapeHtml(rec.weekEnding || '\u2014') + '</div></div>';
+  html += '<div class="rec-meta-grid">';
+  html += '<div class="rmc"><div class="rmc-label">Submitted</div><div class="rmc-value">' + escapeHtml(dtStr) + '</div></div>';
+  html += '<div class="rmc"><div class="rmc-label">Food Safety Champion</div><div class="rmc-value ' + (rec.champion ? 'ok' : 'na') + '">' + escapeHtml(rec.champion || 'Not recorded') + '</div></div>';
+  html += '<div class="rmc"><div class="rmc-label">Recorded Timestamp</div><div class="rmc-value ' + (rec.timestamp ? 'ok' : 'na') + '">' + escapeHtml(rec.timestamp || 'Not recorded') + '</div></div>';
+  html += '<div class="rmc"><div class="rmc-label">Week Ending</div><div class="rmc-value">' + escapeHtml(rec.weekEnding || '\u2014') + '</div></div>';
   html += '</div>';
 
-  /* ---- Corrective action ---- */
-  html += '<div class="rdg-item" style="margin:8px 0"><div class="rdg-label">Corrective Action Notes</div>';
+  /* Corrective action */
   if (rec.correctiveAction && rec.correctiveAction.trim()) {
-    html += '<div class="rdg-value" style="white-space:pre-wrap;font-family:inherit;font-size:12px">' + escapeHtml(rec.correctiveAction) + '</div>';
-  } else {
-    html += '<div class="rdg-value na">None recorded</div>';
-  }
-  html += '</div>';
-
-  /* ---- Form field data reconstruction ---- */
-  if (rec.formData && rec.formData.length) {
-    /* Build a field lookup by id for quick access */
-    var fdMap = {};
-    var fdList = rec.formData;
-    for (var fdi = 0; fdi < fdList.length; fdi++) {
-      if (fdList[fdi].id) fdMap[fdList[fdi].id] = fdList[fdi].val;
-    }
-
-    /* Collect all text/date/select/checkbox inputs (exclude sig-clear buttons, file inputs) */
-    /* Group into: named fields with IDs, and positional table cells (no id) */
-    var namedFields = [];
-    var tableCells = [];
-    for (var i = 0; i < fdList.length; i++) {
-      var f = fdList[i];
-      /* Skip empty values, photo inputs */
-      if (f.type === 'file') continue;
-      if (f.type === 'radio' && !f.val) continue;
-      var isEmpty = (f.type === 'checkbox') ? (!f.val) : (f.val === '' || f.val === false);
-      if (f.id && f.id.indexOf('we-') === 0) continue; /* week ending already shown */
-      if (f.id && (f.id.indexOf('fsc-') === 0)) continue; /* champion already shown */
-      if (f.id && f.id.indexOf('photo-input') !== -1) continue;
-      if (f.id) {
-        namedFields.push(f);
-      } else {
-        tableCells.push(f);
-      }
-    }
-
-    /* Render named fields as a simple list */
-    if (namedFields.length) {
-      html += '<div style="margin:10px 0 6px"><div class="rdg-label" style="margin-bottom:6px">Form Fields</div>';
-      html += '<table style="width:100%;border-collapse:collapse;font-size:11px">';
-      for (var ni = 0; ni < namedFields.length; ni++) {
-        var nf = namedFields[ni];
-        var label = nf.id.replace(/-/g, ' ').replace(/^(sig |we |fsc )/, '').trim();
-        var displayVal = nf.type === 'checkbox' ? (nf.val ? '\u2705 Yes' : '\u25a1 No') : escapeHtml(String(nf.val));
-        if (!displayVal || displayVal === 'false' || displayVal === '') displayVal = '<span style="color:#ccc">\u2014</span>';
-        html += '<tr style="border-bottom:1px solid #f0f0f0">';
-        html += '<td style="padding:4px 6px;color:#888;text-transform:uppercase;font-size:10px;width:45%;vertical-align:top">' + escapeHtml(label) + '</td>';
-        html += '<td style="padding:4px 6px;font-family:\'Courier New\',monospace;color:#1a1a1a">' + displayVal + '</td>';
-        html += '</tr>';
-      }
-      html += '</table></div>';
-    }
-
-    /* Render table cells as a scrollable grid — each cell in order */
-    if (tableCells.length) {
-      var filledCells = [];
-      for (var ti = 0; ti < tableCells.length; ti++) {
-        var tc = tableCells[ti];
-        var tcVal = tc.type === 'checkbox' ? (tc.val ? '\u2713' : '') : String(tc.val || '');
-        if (tcVal) filledCells.push(tcVal);
-      }
-      if (filledCells.length) {
-        html += '<div style="margin:8px 0 4px"><div class="rdg-label" style="margin-bottom:6px">Recorded Data (' + filledCells.length + ' entries)</div>';
-        html += '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch">';
-        html += '<table style="border-collapse:collapse;font-size:11px;width:100%">';
-        /* Render in rows of 7 (one per day) */
-        var cols = 7;
-        for (var row = 0; row < filledCells.length; row += cols) {
-          html += '<tr>';
-          for (var col = 0; col < cols; col++) {
-            var cellVal = filledCells[row + col] || '';
-            html += '<td style="border:1px solid #e0e0e0;padding:3px 5px;text-align:center;min-width:36px;font-family:\'Courier New\',monospace;color:' + (cellVal ? '#1a1a1a' : '#ddd') + '">' + escapeHtml(cellVal || '\u2014') + '</td>';
-          }
-          html += '</tr>';
-        }
-        html += '</table></div></div>';
-      }
-    }
-  } else {
-    html += '<div class="rec-photos" style="margin-top:8px"><div class="rec-photos-label" style="color:#aaa">Form data not captured in this record \u2014 re-save the form to include full field data</div></div>';
+    html += '<div class="rec-ca"><div class="rec-ca-label">&#9888;&#65039; Corrective Action Notes</div><div class="rec-ca-value">' + escapeHtml(rec.correctiveAction) + '</div></div>';
   }
 
-  /* ---- Signatures ---- */
+  /* Signatures */
+  html += '<div class="rec-sigs"><div class="rec-sigs-label">&#9999;&#65039; Signatures</div>';
   if (rec.signatures && rec.signatures.length) {
-    var sigsSigned = [];
+    var signed = [];
     for (var si = 0; si < rec.signatures.length; si++) {
-      if (rec.signatures[si].hasSignature && rec.signatures[si].dataUrl) sigsSigned.push(rec.signatures[si]);
+      if (rec.signatures[si].hasSignature && rec.signatures[si].dataUrl) signed.push(rec.signatures[si]);
     }
-    html += '<div class="rec-photos"><div class="rec-photos-label">&#9999;&#65039; Signatures (' + sigsSigned.length + ' of ' + rec.signatures.length + ' captured)</div>';
-    if (sigsSigned.length) {
-      html += '<div class="rec-photo-row">';
-      for (var sgi = 0; sgi < sigsSigned.length; sgi++) {
-        var sigLabel = sigsSigned[sgi].id.replace(/^sig-/, '').replace(/-/g, ' ');
-        html += '<div style="text-align:center">';
-        html += '<img class="rec-photo-thumb" src="' + sigsSigned[sgi].dataUrl + '" alt="Signature" data-src="' + sigsSigned[sgi].dataUrl + '" style="background:white;border:1px solid #ddd;width:80px;height:40px;object-fit:contain;">';
-        html += '<div style="font-size:9px;color:#888;margin-top:2px;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(sigLabel) + '</div>';
+    if (signed.length) {
+      html += '<div class="rec-sigs-row">';
+      for (var sgi = 0; sgi < signed.length; sgi++) {
+        var lbl = signed[sgi].id.replace(/^sig-/, '').replace(/-/g, ' ');
+        html += '<div class="rec-sig-item">';
+        html += '<img class="rec-sig-img" src="' + signed[sgi].dataUrl + '" alt="Sig" data-lb="' + signed[sgi].dataUrl + '">';
+        html += '<div class="rec-sig-name">' + escapeHtml(lbl) + '</div>';
         html += '</div>';
       }
       html += '</div>';
+      var unsigned = rec.signatures.length - signed.length;
+      if (unsigned > 0) html += '<div class="rec-sig-none" style="margin-top:4px">' + unsigned + ' signature field' + (unsigned > 1 ? 's' : '') + ' left blank</div>';
     } else {
-      html += '<div class="rdg-value na" style="font-size:11px">No signatures captured</div>';
+      html += '<div class="rec-sig-none">No signatures captured</div>';
+    }
+  } else {
+    html += '<div class="rec-sig-none">Not captured \u2014 re-save form to include</div>';
+  }
+  html += '</div>';
+
+  /* Photos */
+  html += '<div class="rec-photos"><div class="rec-photos-label">&#128247; Photo Evidence</div>';
+  if (rec.photos && rec.photos.length) {
+    html += '<div class="rec-photo-row">';
+    for (var pi = 0; pi < rec.photos.length; pi++) {
+      html += '<img class="rec-photo-thumb" src="' + rec.photos[pi].dataUrl + '" alt="Photo" data-lb="' + rec.photos[pi].dataUrl + '">';
     }
     html += '</div>';
   } else {
-    html += '<div class="rec-photos"><div class="rec-photos-label" style="color:#aaa">&#9999;&#65039; Signatures \u2014 re-save form to capture</div></div>';
+    html += '<div class="rec-photo-none">No photos attached</div>';
   }
+  html += '</div>';
 
-  /* ---- Photos ---- */
-  if (rec.photos && rec.photos.length) {
-    html += '<div class="rec-photos"><div class="rec-photos-label">&#128247; Photo Evidence (' + rec.photos.length + ')</div><div class="rec-photo-row">';
-    for (var pi = 0; pi < rec.photos.length; pi++) {
-      html += '<img class="rec-photo-thumb" src="' + rec.photos[pi].dataUrl + '" alt="Photo" data-src="' + rec.photos[pi].dataUrl + '">';
-    }
-    html += '</div></div>';
-  } else {
-    html += '<div class="rec-photos"><div class="rec-photos-label" style="color:#aaa">No photo evidence attached</div></div>';
-  }
-
-  /* ---- Delete ---- */
+  /* Delete */
   html += '<button class="rec-delete-btn" data-delid="' + rec.id + '">&#128465; Delete this record</button>';
   return html;
 }
 
-/* ---- Render a full week's category sections into a container element ---- */
-function renderWeekSections(container, byForm) {
-  var cats = [];
-  var catMap = {};
-  for (var fi = 0; fi < ALL_FORMS.length; fi++) {
-    var f = ALL_FORMS[fi];
-    if (!catMap[f.cat]) { catMap[f.cat] = []; cats.push(f.cat); }
-    catMap[f.cat].push(f);
-  }
-
-  var html = '';
-  for (var ci = 0; ci < cats.length; ci++) {
-    var cat = cats[ci];
-    var forms = catMap[cat];
-    var catDone = 0;
-    for (var cfi = 0; cfi < forms.length; cfi++) {
-      if (byForm[forms[cfi].id]) catDone++;
-    }
-    var catPct = Math.round(catDone / forms.length * 100);
-
-    html += '<div class="section">';
-    html += '<div class="section-head"><span>' + escapeHtml(cat) + '</span><span class="section-head-pct">' + catDone + '/' + forms.length + ' &nbsp;' + catPct + '%</span></div>';
-
-    for (var ri = 0; ri < forms.length; ri++) {
-      var form = forms[ri];
-      var rec = byForm[form.id];
-      var rowClass = rec ? 'form-row done' : 'form-row missing';
-      var icon = rec ? '\u2705' : '\u26a0\ufe0f';
-      html += '<div class="' + rowClass + '" data-formrow="1">';
-      html += '<div class="form-row-top">';
-      html += '<div class="fr-icon">' + icon + '</div>';
-      html += '<div class="fr-info"><div class="fr-name">' + escapeHtml(form.name) + '</div>';
-      if (rec) {
-        var dt2 = new Date(rec.savedAt);
-        var ts2 = dt2.toLocaleString('en-IE', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', hour12:false});
-        var meta = ts2 + (rec.champion ? ' \u00b7 ' + escapeHtml(rec.champion) : '');
-        html += '<div class="fr-meta">' + meta + '</div>';
-      } else {
-        html += '<div class="fr-missing">Not yet submitted this week</div>';
-      }
-      html += '</div>';
-      if (rec) html += '<div class="fr-chevron">&#8250;</div>';
-      html += '</div>';
-      if (rec) html += '<div class="rec-detail" data-recid="' + rec.id + '">' + renderRecordDetail(rec) + '</div>';
-      html += '</div>';
-    }
-    html += '</div>';
-  }
-  container.innerHTML = html;
-  attachRowListeners(container);
-}
-
-/* ---- Attach expand/collapse and photo/delete listeners to a container ---- */
-function attachRowListeners(container) {
-  /* Expand/collapse form rows */
-  var rows = container.querySelectorAll('.form-row[data-formrow]');
+/* ---- Attach listeners to a rendered container ---- */
+function attachListeners(container) {
+  /* Expand/collapse */
+  var rows = container.querySelectorAll('.form-row.done');
   for (var i = 0; i < rows.length; i++) {
     (function(row) {
+      var top = row.querySelector('.form-row-top');
       var detail = row.querySelector('.rec-detail');
-      var chevron = row.querySelector('.fr-chevron');
-      if (!detail) return;
-      row.querySelector('.form-row-top').addEventListener('click', function() {
-        var isOpen = detail.className.indexOf('open') !== -1;
-        if (isOpen) {
-          detail.className = 'rec-detail';
-          chevron.className = 'fr-chevron';
-        } else {
-          detail.className = 'rec-detail open';
-          chevron.className = 'fr-chevron open';
-        }
+      var chev = row.querySelector('.fr-chevron');
+      if (!top || !detail) return;
+      top.addEventListener('click', function() {
+        var open = detail.className.indexOf('open') !== -1;
+        detail.className = open ? 'rec-detail' : 'rec-detail open';
+        chev.className = open ? 'fr-chevron' : 'fr-chevron open';
       });
     })(rows[i]);
   }
 
-  /* Photo lightbox */
-  var thumbs = container.querySelectorAll('.rec-photo-thumb');
-  for (var ti = 0; ti < thumbs.length; ti++) {
-    (function(thumb) {
-      thumb.addEventListener('click', function() {
-        document.getElementById('lbImg').src = thumb.getAttribute('data-src');
+  /* Lightbox for photos and signatures */
+  var lbItems = container.querySelectorAll('[data-lb]');
+  for (var li = 0; li < lbItems.length; li++) {
+    (function(el) {
+      el.addEventListener('click', function() {
+        document.getElementById('lbImg').src = el.getAttribute('data-lb');
         document.getElementById('lightbox').className = 'lightbox open';
       });
-    })(thumbs[ti]);
+    })(lbItems[li]);
   }
 
   /* Delete buttons */
@@ -526,51 +404,91 @@ function attachRowListeners(container) {
   }
 }
 
+/* ---- Render category sections into a container ---- */
+function renderSections(container, byForm) {
+  var cats = [], catMap = {};
+  for (var fi = 0; fi < ALL_FORMS.length; fi++) {
+    var f = ALL_FORMS[fi];
+    if (!catMap[f.cat]) { catMap[f.cat] = []; cats.push(f.cat); }
+    catMap[f.cat].push(f);
+  }
+  var html = '';
+  for (var ci = 0; ci < cats.length; ci++) {
+    var cat = cats[ci];
+    var forms = catMap[cat];
+    var catDone = 0;
+    for (var cfi = 0; cfi < forms.length; cfi++) { if (byForm[forms[cfi].id]) catDone++; }
+    var catPct = Math.round(catDone / forms.length * 100);
+    html += '<div class="section">';
+    html += '<div class="section-head"><span>' + escapeHtml(cat) + '</span><span class="section-head-pct">' + catDone + '/' + forms.length + ' &nbsp;' + catPct + '%</span></div>';
+    for (var ri = 0; ri < forms.length; ri++) {
+      var form = forms[ri];
+      var rec = byForm[form.id];
+      if (rec) {
+        var dt2 = new Date(rec.savedAt);
+        var ts2 = dt2.toLocaleString('en-IE', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', hour12:false});
+        var meta = ts2 + (rec.champion ? ' \u00b7 ' + escapeHtml(rec.champion) : '');
+        html += '<div class="form-row done">';
+        html += '<div class="form-row-top">';
+        html += '<div class="fr-icon">\u2705</div>';
+        html += '<div class="fr-info"><div class="fr-name">' + escapeHtml(form.name) + '</div><div class="fr-meta">' + meta + '</div></div>';
+        html += '<div class="fr-chevron">&#8250;</div>';
+        html += '</div>';
+        html += '<div class="rec-detail">' + buildRecordDetail(rec) + '</div>';
+        html += '</div>';
+      } else {
+        html += '<div class="form-row missing">';
+        html += '<div class="form-row-top">';
+        html += '<div class="fr-icon">\u26a0\ufe0f</div>';
+        html += '<div class="fr-info"><div class="fr-name">' + escapeHtml(form.name) + '</div><div class="fr-missing">Not yet submitted this week</div></div>';
+        html += '</div></div>';
+      }
+    }
+    html += '</div>';
+  }
+  container.innerHTML = html;
+  attachListeners(container);
+}
+
 /* ---- Main render ---- */
 function render(recs) {
   allRecords = recs;
   var wk = getWeekKey();
   var byForm = buildByForm(recs, wk);
-
   var done = Object.keys(byForm).length;
   var total = ALL_FORMS.length;
   var pct = total > 0 ? Math.round(done / total * 100) : 0;
 
-  /* Status bar */
   var sb = document.getElementById('statusBar');
   sb.textContent = '\u25cf Live \u00b7 ' + recs.length + ' record' + (recs.length !== 1 ? 's' : '') + ' stored \u00b7 ' + timeRemaining(wk);
   sb.className = 'status-bar';
   sb.style.cursor = '';
 
-  /* Week card */
   var mc = document.getElementById('mainContent');
-  var cardHtml = '';
-  cardHtml += '<div class="week-card">';
-  cardHtml += '<div class="wc-label">Current Week</div>';
-  cardHtml += '<div class="wc-week">' + escapeHtml(weekLabel(wk)) + '</div>';
-  cardHtml += '<div class="wc-row">';
-  cardHtml += '<div><div class="wc-pct">' + pct + '%</div><div class="wc-pct-label">Complete</div></div>';
-  cardHtml += '<div class="wc-right"><div class="wc-count">' + done + ' / ' + total + ' forms</div><div class="wc-closes">Closes Saturday midnight</div></div>';
-  cardHtml += '</div></div>';
-  cardHtml += '<div class="prog-wrap"><div class="prog-fill" style="width:' + pct + '%"></div></div>';
-  mc.innerHTML = cardHtml;
+  mc.innerHTML =
+    '<div class="week-card">' +
+      '<div class="wc-label">Current Week</div>' +
+      '<div class="wc-week">' + escapeHtml(weekLabel(wk)) + '</div>' +
+      '<div class="wc-row">' +
+        '<div><div class="wc-pct">' + pct + '%</div><div class="wc-pct-label">Complete</div></div>' +
+        '<div class="wc-right"><div class="wc-count">' + done + ' / ' + total + ' forms</div><div class="wc-closes">Closes Saturday midnight</div></div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="prog-wrap"><div class="prog-fill" style="width:' + pct + '%"></div></div>';
 
-  /* Current week sections */
-  var curContainer = document.createElement('div');
-  mc.appendChild(curContainer);
-  renderWeekSections(curContainer, byForm);
+  var curDiv = document.createElement('div');
+  mc.appendChild(curDiv);
+  renderSections(curDiv, byForm);
 
   /* Previous weeks */
-  var allWeekKeys = {};
+  var allWks = {};
   for (var i = 0; i < recs.length; i++) {
-    if (recs[i].weekKey !== wk) allWeekKeys[recs[i].weekKey] = 1;
+    if (recs[i].weekKey !== wk) allWks[recs[i].weekKey] = 1;
   }
-  var prevKeys = Object.keys(allWeekKeys).sort().reverse();
-
+  var prevKeys = Object.keys(allWks).sort().reverse();
   var pws = document.getElementById('prevWeeksSection');
   pws.innerHTML = '';
-
-  if (prevKeys.length === 0) return;
+  if (!prevKeys.length) return;
 
   var hdr = document.createElement('div');
   hdr.className = 'prev-header';
@@ -582,9 +500,7 @@ function render(recs) {
       var pwByForm = buildByForm(recs, pwk);
       var pwDone = Object.keys(pwByForm).length;
       var pwPct = Math.round(pwDone / total * 100);
-
-      var badgeClass = pwPct === 100 ? 'acc-badge' : pwPct > 0 ? 'acc-badge partial' : 'acc-badge empty';
-      var badgeText = pwPct + '%';
+      var badgeClass = pwPct === 100 ? 'acc-badge full' : pwPct > 0 ? 'acc-badge partial' : 'acc-badge empty';
 
       var item = document.createElement('div');
       item.className = 'acc-item';
@@ -592,32 +508,21 @@ function render(recs) {
       var trigger = document.createElement('div');
       trigger.className = 'acc-trigger';
       trigger.innerHTML =
-        '<div class="acc-left">' +
-          '<div class="acc-week">' + escapeHtml(weekLabel(pwk)) + '</div>' +
-          '<div class="acc-sub">' + pwDone + ' / ' + total + ' forms completed</div>' +
-        '</div>' +
-        '<span class="' + badgeClass + '">' + badgeText + '</span>' +
+        '<div class="acc-left"><div class="acc-week">' + escapeHtml(weekLabel(pwk)) + '</div><div class="acc-sub">' + pwDone + ' / ' + total + ' forms completed</div></div>' +
+        '<span class="' + badgeClass + '">' + pwPct + '%</span>' +
         '<span class="acc-chevron">&#8250;</span>';
 
       var body = document.createElement('div');
       body.className = 'acc-body';
-      var bodyInner = document.createElement('div');
-      body.appendChild(bodyInner);
-
+      var inner = document.createElement('div');
+      body.appendChild(inner);
       var built = false;
+
       trigger.addEventListener('click', function() {
         var isOpen = body.className.indexOf('open') !== -1;
-        if (isOpen) {
-          body.className = 'acc-body';
-          trigger.querySelector('.acc-chevron').className = 'acc-chevron';
-        } else {
-          body.className = 'acc-body open';
-          trigger.querySelector('.acc-chevron').className = 'acc-chevron open';
-          if (!built) {
-            renderWeekSections(bodyInner, pwByForm);
-            built = true;
-          }
-        }
+        body.className = isOpen ? 'acc-body' : 'acc-body open';
+        trigger.querySelector('.acc-chevron').className = isOpen ? 'acc-chevron' : 'acc-chevron open';
+        if (!isOpen && !built) { renderSections(inner, pwByForm); built = true; }
       });
 
       item.appendChild(trigger);
@@ -628,9 +533,7 @@ function render(recs) {
 }
 
 function loadRecords() {
-  dbGetAll('records').then(function(recs) {
-    render(recs);
-  }).catch(function(e) {
+  dbGetAll('records').then(function(recs) { render(recs); }).catch(function(e) {
     var sb = document.getElementById('statusBar');
     sb.textContent = 'Error loading: ' + (e.message || 'unknown');
     sb.className = 'status-bar err';
@@ -641,14 +544,12 @@ function loadRecords() {
 function doBackup() {
   Promise.all([dbGetAll('records'), dbGetAll('weeks')]).then(function(results) {
     var data = {exportedAt: new Date().toISOString(), records: results[0], weeks: results[1]};
-    var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+    var blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
     a.download = 'haccp-backup-' + new Date().toISOString().split('T')[0] + '.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
     showToast('Backup downloaded');
   }).catch(function() { showToast('Backup failed'); });
@@ -698,10 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('lbImg').src = '';
   });
   document.getElementById('lightbox').addEventListener('click', function(e) {
-    if (e.target === this) {
-      this.className = 'lightbox';
-      document.getElementById('lbImg').src = '';
-    }
+    if (e.target === this) { this.className = 'lightbox'; document.getElementById('lbImg').src = ''; }
   });
 
   var sb = document.getElementById('statusBar');
@@ -709,9 +607,7 @@ document.addEventListener('DOMContentLoaded', function() {
     sb.textContent = 'Connecting to database...';
     sb.className = 'status-bar';
     sb.style.cursor = '';
-    openDB().then(function() {
-      loadRecords();
-    }).catch(function(e) {
+    openDB().then(function() { loadRecords(); }).catch(function(e) {
       sb.textContent = (e.message || 'Storage error') + ' \u2014 Tap to retry';
       sb.className = 'status-bar err';
       sb.style.cursor = 'pointer';

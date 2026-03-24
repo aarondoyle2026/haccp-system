@@ -736,58 +736,93 @@ function saveForm(formId) {
 var we = document.getElementById('we-' + formId);
 var fsc = document.getElementById('fsc-' + formId);
 var now = new Date();
+
+/* Photos */
 var photos = formPhotos[formId] || [];
 var photoData = [];
 for (var pi = 0; pi < photos.length; pi++) {
 photoData.push({dataUrl: photos[pi].dataUrl, name: photos[pi].name, timestamp: photos[pi].timestamp});
 }
+
+/* Corrective action — grab the first textarea inside this form screen */
+var scr = document.getElementById(formId);
+var correctiveAction = ‘’;
+if (scr) {
+var ta = scr.querySelector(‘textarea’);
+if (ta) correctiveAction = ta.value;
+}
+
+/* Signatures — collect all canvases in this form screen as base64 */
+var signatures = [];
+if (scr) {
+var canvases = scr.querySelectorAll(‘canvas’);
+for (var si = 0; si < canvases.length; si++) {
+var cv = canvases[si];
+/* Only save if the canvas has been drawn on (not blank) */
+var ctx = cv.getContext(‘2d’);
+var imgData = ctx.getImageData(0, 0, cv.width, cv.height);
+var hasContent = false;
+for (var px = 3; px < imgData.data.length; px += 4) {
+if (imgData.data[px] > 0) { hasContent = true; break; }
+}
+signatures.push({
+id: cv.id,
+dataUrl: hasContent ? cv.toDataURL(‘image/png’) : null,
+hasSignature: hasContent
+});
+}
+}
+
 var record = {
 id: now.getTime(),
 formId: formId,
 weekKey: getWeekKey(),
 savedAt: now.toISOString(),
-weekEnding: we ? we.value : '',
-champion: fsc ? fsc.value : '',
-timestamp: formTimestamps[formId] || now.toLocaleString('en-IE', {timeZone:'Europe/Dublin', hour12:false}),
+weekEnding: we ? we.value : ‘’,
+champion: fsc ? fsc.value : ‘’,
+timestamp: formTimestamps[formId] || now.toLocaleString(‘en-IE’, {timeZone:‘Europe/Dublin’, hour12:false}),
 photos: photoData,
-photoCount: photoData.length
+photoCount: photoData.length,
+correctiveAction: correctiveAction,
+signatures: signatures
 };
+
 var doSave = function() {
-dbPut('records', record).then(function() {
-showToast('Saved to Records!');
+dbPut(‘records’, record).then(function() {
+showToast(‘Saved to Records!’);
 updateBannerCount();
-}).catch(function(e) { showToast('Save failed: ' + e.message); });
+}).catch(function(e) { showToast(‘Save failed: ’ + e.message); });
 };
 if (!db) { openDB().then(function() { doSave(); }); } else { doSave(); }
 }
 function updateBannerCount() {
 if (!db) return;
-dbGetAll('records').then(function(recs) {
+dbGetAll(‘records’).then(function(recs) {
 var wk = getWeekKey();
 var ids = {};
 for (var i = 0; i < recs.length; i++) {
 if (recs[i].weekKey === wk) ids[recs[i].formId] = 1;
 }
 var done = Object.keys(ids).length;
-document.getElementById('home-banner-sub').textContent = done + ' of ' + ALL_FORMS.length + ' forms completed this week';
+document.getElementById(‘home-banner-sub’).textContent = done + ’ of ’ + ALL_FORMS.length + ’ forms completed this week’;
 });
 }
 function showToast(msg, dur) {
-var t = document.getElementById('toast');
+var t = document.getElementById(‘toast’);
 t.textContent = msg;
-t.className = 'toast show';
-setTimeout(function() { t.className = 'toast'; }, dur || 3000);
+t.className = ‘toast show’;
+setTimeout(function() { t.className = ‘toast’; }, dur || 3000);
 }
 function initSig(canvasId) {
 var canvas = document.getElementById(canvasId);
 if (!canvas || sigPads[canvasId]) return;
 canvas.width = canvas.parentElement.offsetWidth || 320;
-canvas.height = parseInt(canvas.getAttribute('height')) || 80;
-var ctx = canvas.getContext('2d');
-ctx.strokeStyle = '#1a1a1a';
+canvas.height = parseInt(canvas.getAttribute(‘height’)) || 80;
+var ctx = canvas.getContext(‘2d’);
+ctx.strokeStyle = ‘#1a1a1a’;
 ctx.lineWidth = 2;
-ctx.lineCap = 'round';
-ctx.lineJoin = 'round';
+ctx.lineCap = ‘round’;
+ctx.lineJoin = ‘round’;
 var drawing = false, lx = 0, ly = 0;
 function pos(e) {
 var r = canvas.getBoundingClientRect();
@@ -800,25 +835,25 @@ return {x:(e.clientX-r.left)*sx, y:(e.clientY-r.top)*sy};
 function start(e) { e.preventDefault(); drawing=true; var p=pos(e); lx=p.x; ly=p.y; ctx.beginPath(); ctx.arc(p.x,p.y,1,0,Math.PI*2); ctx.fill(); }
 function move(e) { if(!drawing)return; e.preventDefault(); var p=pos(e); ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y); ctx.stroke(); lx=p.x; ly=p.y; }
 function stop() { drawing=false; }
-canvas.addEventListener('mousedown', start);
-canvas.addEventListener('mousemove', move);
-canvas.addEventListener('mouseup', stop);
-canvas.addEventListener('mouseleave', stop);
-canvas.addEventListener('touchstart', start, {passive:false});
-canvas.addEventListener('touchmove', move, {passive:false});
-canvas.addEventListener('touchend', stop);
+canvas.addEventListener(‘mousedown’, start);
+canvas.addEventListener(‘mousemove’, move);
+canvas.addEventListener(‘mouseup’, stop);
+canvas.addEventListener(‘mouseleave’, stop);
+canvas.addEventListener(‘touchstart’, start, {passive:false});
+canvas.addEventListener(‘touchmove’, move, {passive:false});
+canvas.addEventListener(‘touchend’, stop);
 sigPads[canvasId] = {clear: function() { ctx.clearRect(0,0,canvas.width,canvas.height); }};
 }
 function clearSig(id) { if (sigPads[id]) sigPads[id].clear(); }
 function recordTimestamp(formId) {
 var now = new Date();
-var ts = now.toLocaleString('en-IE', {weekday:'short',year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'Europe/Dublin',hour12:false});
+var ts = now.toLocaleString(‘en-IE’, {weekday:‘short’,year:‘numeric’,month:‘short’,day:‘numeric’,hour:‘2-digit’,minute:‘2-digit’,second:‘2-digit’,timeZone:‘Europe/Dublin’,hour12:false});
 formTimestamps[formId] = ts;
-var el = document.querySelector('#ts-' + formId + ' .ts-text');
-var btn = document.querySelector('#ts-' + formId + ' .ts-btn');
-if (el) { el.textContent = ts; el.className = 'ts-text recorded'; }
-if (btn) { btn.textContent = 'Update'; btn.className = 'ts-btn recorded-btn'; }
-showToast('Timestamp recorded');
+var el = document.querySelector(’#ts-’ + formId + ’ .ts-text’);
+var btn = document.querySelector(’#ts-’ + formId + ’ .ts-btn’);
+if (el) { el.textContent = ts; el.className = ‘ts-text recorded’; }
+if (btn) { btn.textContent = ‘Update’; btn.className = ‘ts-btn recorded-btn’; }
+showToast(‘Timestamp recorded’);
 }
 function handlePhotos(input, formId) {
 if (!formPhotos[formId]) formPhotos[formId] = [];
@@ -827,35 +862,35 @@ for (var fi = 0; fi < files.length; fi++) {
 (function(file) {
 var reader = new FileReader();
 reader.onload = function(e) {
-var ts = formTimestamps[formId] || new Date().toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});
+var ts = formTimestamps[formId] || new Date().toLocaleString(‘en-IE’,{timeZone:‘Europe/Dublin’,hour12:false});
 var obj = {dataUrl:e.target.result, name:file.name, timestamp:ts};
 var idx = formPhotos[formId].push(obj) - 1;
-renderPhotoThumb(document.getElementById('photo-grid-' + formId), obj, formId, idx);
+renderPhotoThumb(document.getElementById(‘photo-grid-’ + formId), obj, formId, idx);
 };
 reader.readAsDataURL(file);
 })(files[fi]);
 }
 }
 function renderPhotoThumb(grid, photo, formId, idx) {
-var div = document.createElement('div');
-div.className = 'photo-thumb';
-var img = document.createElement('img');
+var div = document.createElement(‘div’);
+div.className = ‘photo-thumb’;
+var img = document.createElement(‘img’);
 img.src = photo.dataUrl;
-(function(i) { img.addEventListener('click', function() { openLightbox(formId, i); }); })(idx);
-var lbl = document.createElement('div');
-lbl.className = 'photo-label';
+(function(i) { img.addEventListener(‘click’, function() { openLightbox(formId, i); }); })(idx);
+var lbl = document.createElement(‘div’);
+lbl.className = ‘photo-label’;
 lbl.textContent = photo.timestamp;
-var del = document.createElement('button');
-del.className = 'photo-delete';
-del.textContent = 'x';
-(function(i) { del.addEventListener('click', function() { deletePhoto(formId, i); }); })(idx);
+var del = document.createElement(‘button’);
+del.className = ‘photo-delete’;
+del.textContent = ‘x’;
+(function(i) { del.addEventListener(‘click’, function() { deletePhoto(formId, i); }); })(idx);
 div.appendChild(img); div.appendChild(lbl); div.appendChild(del);
 grid.appendChild(div);
 }
 function deletePhoto(formId, idx) {
 formPhotos[formId].splice(idx, 1);
-var g = document.getElementById('photo-grid-' + formId);
-g.innerHTML = '';
+var g = document.getElementById(‘photo-grid-’ + formId);
+g.innerHTML = ‘’;
 for (var i = 0; i < formPhotos[formId].length; i++) {
 renderPhotoThumb(g, formPhotos[formId][i], formId, i);
 }
@@ -863,22 +898,22 @@ renderPhotoThumb(g, formPhotos[formId][i], formId, i);
 function openLightbox(formId, idx) {
 var p = formPhotos[formId] && formPhotos[formId][idx];
 if (!p) return;
-document.getElementById('lightbox-img').src = p.dataUrl;
-document.getElementById('lightbox-info').textContent = p.name + ' - ' + p.timestamp;
-document.getElementById('lightbox').className = 'lightbox open';
+document.getElementById(‘lightbox-img’).src = p.dataUrl;
+document.getElementById(‘lightbox-info’).textContent = p.name + ’ - ’ + p.timestamp;
+document.getElementById(‘lightbox’).className = ‘lightbox open’;
 }
 function closeLightbox() {
-document.getElementById('lightbox').className = 'lightbox';
-document.getElementById('lightbox-img').src = '';
+document.getElementById(‘lightbox’).className = ‘lightbox’;
+document.getElementById(‘lightbox-img’).src = ‘’;
 }
 function makeTempRows(units, bodyId) {
 var tbody = document.getElementById(bodyId);
 if (!tbody) return;
 for (var i = 0; i < units.length; i++) {
-var tr = document.createElement('tr');
-var c = '<td class="unit-name">' + units[i][0] + '</td><td class="target">' + units[i][1] + '</td>';
-for (var d = 0; d < 14; d++) c += '<td><input type="text" maxlength="6"></td>';
-c += '<td><input type="text"></td>';
+var tr = document.createElement(‘tr’);
+var c = ‘<td class="unit-name">’ + units[i][0] + ‘</td><td class="target">’ + units[i][1] + ‘</td>’;
+for (var d = 0; d < 14; d++) c += ‘<td><input type="text" maxlength="6"></td>’;
+c += ‘<td><input type="text"></td>’;
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
@@ -886,85 +921,85 @@ tbody.appendChild(tr);
 function makeHourlyTable(tableId, mode) {
 var table = document.getElementById(tableId);
 if (!table) return;
-var thead = document.createElement('thead');
-var tbody = document.createElement('tbody');
-var r1 = '<tr><th class="time-col">Time</th>';
-var r2 = '<tr><th class="time-col"></th>';
+var thead = document.createElement(‘thead’);
+var tbody = document.createElement(‘tbody’);
+var r1 = ‘<tr><th class="time-col">Time</th>’;
+var r2 = ‘<tr><th class="time-col"></th>’;
 for (var d = 0; d < 7; d++) {
-r1 += '<th colspan="2">' + DAYS[d] + '</th>';
-r2 += mode === 's1s2' ? '<th>S1 \u00b0C</th><th>S2 \u00b0C</th>' : '<th>Product</th><th>Temp \u00b0C</th>';
+r1 += ‘<th colspan="2">’ + DAYS[d] + ‘</th>’;
+r2 += mode === ‘s1s2’ ? ‘<th>S1 \u00b0C</th><th>S2 \u00b0C</th>’ : ‘<th>Product</th><th>Temp \u00b0C</th>’;
 }
-thead.innerHTML = r1 + '</tr>' + r2 + '</tr>';
+thead.innerHTML = r1 + ‘</tr>’ + r2 + ‘</tr>’;
 table.appendChild(thead);
 for (var ti = 0; ti < hotfoodTimes.length; ti++) {
-var tr = document.createElement('tr');
-var c = '<td class="time-cell">' + hotfoodTimes[ti] + '</td>';
-for (var d2 = 0; d2 < 7; d2++) c += '<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="6"></td>';
+var tr = document.createElement(‘tr’);
+var c = ‘<td class="time-cell">’ + hotfoodTimes[ti] + ‘</td>’;
+for (var d2 = 0; d2 < 7; d2++) c += ‘<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="6"></td>’;
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
-var signCells = '';
-for (var sc = 0; sc < 14; sc++) signCells += '<td><input type="text" maxlength="15"></td>';
-var sr = document.createElement('tr');
-sr.innerHTML = '<td class="time-cell" style="font-size:10px">Sign</td>' + signCells;
+var signCells = ‘’;
+for (var sc = 0; sc < 14; sc++) signCells += ‘<td><input type="text" maxlength="15"></td>’;
+var sr = document.createElement(‘tr’);
+sr.innerHTML = ‘<td class="time-cell" style="font-size:10px">Sign</td>’ + signCells;
 tbody.appendChild(sr);
 table.appendChild(tbody);
 }
 function makeGSTable() {
-var tbody = document.getElementById('gs-tbody');
+var tbody = document.getElementById(‘gs-tbody’);
 if (!tbody) return;
-var weeks = ['Week 1','Week 2','Week 3','Week 4'];
-var days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+var weeks = [‘Week 1’,‘Week 2’,‘Week 3’,‘Week 4’];
+var days = [‘Monday’,‘Tuesday’,‘Wednesday’,‘Thursday’,‘Friday’,‘Saturday’,‘Sunday’];
 for (var wi = 0; wi < weeks.length; wi++) {
-var wr = document.createElement('tr');
-wr.innerHTML = '<td class="week-header" colspan="10">' + weeks[wi] + '</td>';
+var wr = document.createElement(‘tr’);
+wr.innerHTML = ‘<td class="week-header" colspan="10">’ + weeks[wi] + ‘</td>’;
 tbody.appendChild(wr);
 for (var di = 0; di < days.length; di++) {
-var tr = document.createElement('tr');
-tr.innerHTML = '<td class="day-name">' + days[di] + '</td>' +
-'<td><input type="text" maxlength="12"></td>' +
-'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><input type="text" maxlength="8"></td>' +
-'<td><input type="text" maxlength="8"></td>' +
-'<td><input type="text" maxlength="8"></td>' +
-'<td><input type="text" maxlength="6"></td>';
+var tr = document.createElement(‘tr’);
+tr.innerHTML = ‘<td class="day-name">’ + days[di] + ‘</td>’ +
+‘<td><input type="text" maxlength="12"></td>’ +
+‘<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>’ +
+‘<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>’ +
+‘<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>’ +
+‘<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>’ +
+‘<td><input type="text" maxlength="8"></td>’ +
+‘<td><input type="text" maxlength="8"></td>’ +
+‘<td><input type="text" maxlength="8"></td>’ +
+‘<td><input type="text" maxlength="6"></td>’;
 tbody.appendChild(tr);
 }
 }
 }
 function makeAfterCookTable() {
-var tbody = document.getElementById('after-cook-tbody');
+var tbody = document.getElementById(‘after-cook-tbody’);
 if (!tbody) return;
 function addSection(label) {
-var tr = document.createElement('tr');
-tr.innerHTML = '<td colspan="6" class="section-hdr">' + label + '</td>';
+var tr = document.createElement(‘tr’);
+tr.innerHTML = ‘<td colspan="6" class="section-hdr">’ + label + ‘</td>’;
 tbody.appendChild(tr);
 }
 function addRow(name) {
-var tr = document.createElement('tr');
-tr.innerHTML = '<td><input type="text" maxlength="8"></td>' +
-'<td class="prod-name">' + name + '</td>' +
-'<td><input type="text" maxlength="15"></td>' +
-'<td><input type="text" maxlength="6" style="color:#c00;font-weight:700"></td>' +
-'<td><input type="text" maxlength="12"></td>' +
-'<td><input type="text" maxlength="20"></td>';
+var tr = document.createElement(‘tr’);
+tr.innerHTML = ‘<td><input type="text" maxlength="8"></td>’ +
+‘<td class="prod-name">’ + name + ‘</td>’ +
+‘<td><input type="text" maxlength="15"></td>’ +
+‘<td><input type="text" maxlength="6" style="color:#c00;font-weight:700"></td>’ +
+‘<td><input type="text" maxlength="12"></td>’ +
+‘<td><input type="text" maxlength="20"></td>’;
 tbody.appendChild(tr);
 }
-addSection('Breakfast:');
+addSection(‘Breakfast:’);
 for (var i = 0; i < breakfastItems.length; i++) addRow(breakfastItems[i]);
-addSection('Lunch:');
+addSection(‘Lunch:’);
 for (var j = 0; j < lunchItems.length; j++) addRow(lunchItems[j]);
 }
 function makeCleanRows(bodyId, items) {
 var tbody = document.getElementById(bodyId);
 if (!tbody) return;
 for (var i = 0; i < items.length; i++) {
-var tr = document.createElement('tr');
-var c = '<td class="area-name">' + items[i][0] + '</td><td class="chem-name">' + items[i][1] + '</td>';
-for (var d = 0; d < 7; d++) c += '<td><input type="text" maxlength="3" style="width:100%;border:none;text-align:center;font-size:12px;font-family:inherit;padding:2px;background:transparent"></td>';
+var tr = document.createElement(‘tr’);
+var c = ‘<td class="area-name">’ + items[i][0] + ‘</td><td class="chem-name">’ + items[i][1] + ‘</td>’;
+for (var d = 0; d < 7; d++) c += ‘<td><input type="text" maxlength="3" style="width:100%;border:none;text-align:center;font-size:12px;font-family:inherit;padding:2px;background:transparent"></td>’;
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
@@ -973,21 +1008,21 @@ function makeDeliTraceTable(tableId, products, cols) {
 var table = document.getElementById(tableId);
 if (!table) return;
 var cl = cols.length;
-var r1 = '<tr><th class="prod-col" rowspan="2">Product</th>';
-var r2 = '<tr>';
+var r1 = ‘<tr><th class="prod-col" rowspan="2">Product</th>’;
+var r2 = ‘<tr>’;
 for (var d = 0; d < 7; d++) {
-r1 += '<th colspan="' + cl + '">' + DAYS[d] + '</th>';
-for (var ci = 0; ci < cl; ci++) r2 += '<th style="font-size:9px">' + cols[ci] + '</th>';
+r1 += ‘<th colspan="' + cl + '">’ + DAYS[d] + ‘</th>’;
+for (var ci = 0; ci < cl; ci++) r2 += ‘<th style="font-size:9px">’ + cols[ci] + ‘</th>’;
 }
-var thead = document.createElement('thead');
-thead.innerHTML = r1 + '</tr>' + r2 + '</tr>';
+var thead = document.createElement(‘thead’);
+thead.innerHTML = r1 + ‘</tr>’ + r2 + ‘</tr>’;
 table.appendChild(thead);
-var tbody = document.createElement('tbody');
+var tbody = document.createElement(‘tbody’);
 for (var i = 0; i < products.length; i++) {
-var tr = document.createElement('tr');
-var c = '<td class="prod-name">' + products[i] + '</td>';
+var tr = document.createElement(‘tr’);
+var c = ‘<td class="prod-name">’ + products[i] + ‘</td>’;
 for (var d2 = 0; d2 < 7; d2++) {
-for (var ci2 = 0; ci2 < cl; ci2++) c += '<td><input type="text" maxlength="12"></td>';
+for (var ci2 = 0; ci2 < cl; ci2++) c += ‘<td><input type="text" maxlength="12"></td>’;
 }
 tr.innerHTML = c;
 tbody.appendChild(tr);
@@ -998,90 +1033,90 @@ function makeIUBDTable(containerId, products, cols) {
 var container = document.getElementById(containerId);
 if (!container) return;
 var cl = cols.length;
-var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
+var html = ‘<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>’;
 for (var d = 0; d < 7; d++) {
-for (var ci = 0; ci < cl; ci++) html += '<th>' + (ci === 0 ? DAYS[d] : '') + '</th>';
+for (var ci = 0; ci < cl; ci++) html += ‘<th>’ + (ci === 0 ? DAYS[d] : ‘’) + ‘</th>’;
 }
-html += '</tr><tr><th class="product-col"></th>';
+html += ‘</tr><tr><th class="product-col"></th>’;
 for (var d2 = 0; d2 < 7; d2++) {
-for (var ci2 = 0; ci2 < cl; ci2++) html += '<th style="font-size:10px">' + cols[ci2] + '</th>';
+for (var ci2 = 0; ci2 < cl; ci2++) html += ‘<th style="font-size:10px">’ + cols[ci2] + ‘</th>’;
 }
-html += '</tr></thead><tbody>';
+html += ‘</tr></thead><tbody>’;
 for (var i = 0; i < products.length; i++) {
-html += '<tr><td class="product-name">' + products[i].name + (products[i].ingr ? '<small>' + products[i].ingr + '</small>' : '') + '</td>';
-for (var j = 0; j < 7 * cl; j++) html += '<td><input type="text" maxlength="12"></td>';
-html += '</tr>';
+html += ‘<tr><td class="product-name">’ + products[i].name + (products[i].ingr ? ‘<small>’ + products[i].ingr + ‘</small>’ : ‘’) + ‘</td>’;
+for (var j = 0; j < 7 * cl; j++) html += ‘<td><input type="text" maxlength="12"></td>’;
+html += ‘</tr>’;
 }
-html += '</tbody></table>';
+html += ‘</tbody></table>’;
 container.innerHTML = html;
 }
 function makeOUBDTable(containerId, products, col2, col3) {
-var c2 = col2 || 'DO', c3 = col3 || 'UBD';
+var c2 = col2 || ‘DO’, c3 = col3 || ‘UBD’;
 var container = document.getElementById(containerId);
 if (!container) return;
-var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
-for (var d = 0; d < 7; d++) html += '<th></th><th>' + DAYS[d] + '</th><th></th>';
-html += '</tr><tr><th class="product-col"></th>';
-for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">' + c2 + '</th><th style="font-size:10px">' + c3 + '</th>';
-html += '</tr></thead><tbody>';
+var html = ‘<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>’;
+for (var d = 0; d < 7; d++) html += ‘<th></th><th>’ + DAYS[d] + ‘</th><th></th>’;
+html += ‘</tr><tr><th class="product-col"></th>’;
+for (var d2 = 0; d2 < 7; d2++) html += ‘<th style="font-size:10px">OUBD</th><th style="font-size:10px">’ + c2 + ‘</th><th style="font-size:10px">’ + c3 + ‘</th>’;
+html += ‘</tr></thead><tbody>’;
 for (var i = 0; i < products.length; i++) {
-var name = typeof products[i] === 'string' ? products[i] : products[i].name;
-html += '<tr><td class="product-name">' + name + '</td>';
-for (var j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
-html += '</tr>';
+var name = typeof products[i] === ‘string’ ? products[i] : products[i].name;
+html += ‘<tr><td class="product-name">’ + name + ‘</td>’;
+for (var j = 0; j < 21; j++) html += ‘<td><input type="text" maxlength="12"></td>’;
+html += ‘</tr>’;
 }
-html += '</tbody></table>';
+html += ‘</tbody></table>’;
 container.innerHTML = html;
 }
 function makeCookedMeatsTable() {
-var container = document.getElementById('cooked-meats-tables');
+var container = document.getElementById(‘cooked-meats-tables’);
 if (!container) return;
-var html = '<table class="week-table"><thead><tr><th class="product-col" style="min-width:130px">Name of Product</th>';
-for (var d = 0; d < 7; d++) html += '<th></th><th>' + DAYS[d] + '</th><th></th>';
-html += '</tr><tr><th class="product-col"></th>';
-for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>';
-html += '</tr></thead><tbody>';
+var html = ‘<table class="week-table"><thead><tr><th class="product-col" style="min-width:130px">Name of Product</th>’;
+for (var d = 0; d < 7; d++) html += ‘<th></th><th>’ + DAYS[d] + ‘</th><th></th>’;
+html += ‘</tr><tr><th class="product-col"></th>’;
+for (var d2 = 0; d2 < 7; d2++) html += ‘<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>’;
+html += ‘</tr></thead><tbody>’;
 for (var i = 0; i < cookedMeats.length; i++) {
-html += '<tr><td class="product-name">' + cookedMeats[i] + '</td>';
-for (var j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
-html += '</tr>';
+html += ‘<tr><td class="product-name">’ + cookedMeats[i] + ‘</td>’;
+for (var j = 0; j < 21; j++) html += ‘<td><input type="text" maxlength="12"></td>’;
+html += ‘</tr>’;
 }
-html += '</tbody></table>';
+html += ‘</tbody></table>’;
 container.innerHTML = html;
 }
 function makeCheeseTable() {
-var container = document.getElementById('cheese-table');
+var container = document.getElementById(‘cheese-table’);
 if (!container) return;
-var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
-for (var d = 0; d < 7; d++) html += '<th></th><th>' + DAYS[d] + '</th><th></th>';
-html += '</tr><tr><th class="product-col"></th>';
-for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>';
-html += '</tr></thead><tbody>';
+var html = ‘<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>’;
+for (var d = 0; d < 7; d++) html += ‘<th></th><th>’ + DAYS[d] + ‘</th><th></th>’;
+html += ‘</tr><tr><th class="product-col"></th>’;
+for (var d2 = 0; d2 < 7; d2++) html += ‘<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>’;
+html += ‘</tr></thead><tbody>’;
 for (var i = 0; i < 10; i++) {
-html += '<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name"></td>';
-for (var j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
-html += '</tr>';
+html += ‘<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name"></td>’;
+for (var j = 0; j < 21; j++) html += ‘<td><input type="text" maxlength="12"></td>’;
+html += ‘</tr>’;
 }
-html += '</tbody></table>';
+html += ‘</tbody></table>’;
 container.innerHTML = html;
 }
 function makeFishRows() {
-var tbody = document.getElementById('fish-body');
+var tbody = document.getElementById(‘fish-body’);
 if (!tbody) return;
 for (var i = 0; i < 12; i++) {
-var tr = document.createElement('tr');
-var c = '<td><input type="text" placeholder="Product name"></td>';
-for (var d = 0; d < 6; d++) c += '<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="12"></td><td><input type="text" maxlength="15"></td>';
+var tr = document.createElement(‘tr’);
+var c = ‘<td><input type="text" placeholder="Product name"></td>’;
+for (var d = 0; d < 6; d++) c += ‘<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="12"></td><td><input type="text" maxlength="15"></td>’;
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
 }
 function makePorkRows() {
-var tbody = document.getElementById('pork-body');
+var tbody = document.getElementById(‘pork-body’);
 if (!tbody) return;
 for (var i = 0; i < 25; i++) {
-var tr = document.createElement('tr');
-tr.innerHTML = '<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>';
+var tr = document.createElement(‘tr’);
+tr.innerHTML = ‘<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>’;
 tbody.appendChild(tr);
 }
 }
@@ -1090,77 +1125,77 @@ var tbody = document.getElementById(bodyId);
 if (!tbody) return;
 rows = rows || 20;
 for (var i = 0; i < rows; i++) {
-var tr = document.createElement('tr');
-var c = '';
-for (var j = 0; j < cols; j++) c += '<td><input type="text"></td>';
+var tr = document.createElement(‘tr’);
+var c = ‘’;
+for (var j = 0; j < cols; j++) c += ‘<td><input type="text"></td>’;
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
 }
 function makeRedMeatClean() {
-var tbody = document.getElementById('clean-redmeat-body');
+var tbody = document.getElementById(‘clean-redmeat-body’);
 if (!tbody) return;
-var skeys = ['DAILY CLEANING SCHEDULE','WEEKLY CLEANING SCHEDULE'];
+var skeys = [‘DAILY CLEANING SCHEDULE’,‘WEEKLY CLEANING SCHEDULE’];
 var sdata = [cleaningItemsDaily, cleaningItemsWeekly];
 for (var si = 0; si < skeys.length; si++) {
-var hr = document.createElement('tr');
-hr.innerHTML = '<td colspan="9" class="clean-section-header">' + skeys[si] + '</td>';
+var hr = document.createElement(‘tr’);
+hr.innerHTML = ‘<td colspan="9" class="clean-section-header">’ + skeys[si] + ‘</td>’;
 tbody.appendChild(hr);
 var items = sdata[si];
 for (var ii = 0; ii < items.length; ii++) {
-var tr = document.createElement('tr');
-var c = '<td class="area-name">' + items[ii][0] + '</td><td class="chem-name">' + items[ii][1] + '</td>';
-for (var d = 0; d < 7; d++) c += '<td><input type="checkbox"></td>';
+var tr = document.createElement(‘tr’);
+var c = ‘<td class="area-name">’ + items[ii][0] + ‘</td><td class="chem-name">’ + items[ii][1] + ‘</td>’;
+for (var d = 0; d < 7; d++) c += ‘<td><input type="checkbox"></td>’;
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
 }
 }
 function makeFruitVegClean() {
-var tbody = document.getElementById('clean-fruitveg-body');
+var tbody = document.getElementById(‘clean-fruitveg-body’);
 if (!tbody) return;
-var daily = [['Floor','Floors','Mop & bucket/degreaser'],['Scales','Scales','Sanitiser'],['Juicer','Juicer','Wash up liq/Sanitiser'],['Salad display','Salad display area','Sanitiser'],['Potato stands','Potato stands','Sanitiser']];
+var daily = [[‘Floor’,‘Floors’,‘Mop & bucket/degreaser’],[‘Scales’,‘Scales’,‘Sanitiser’],[‘Juicer’,‘Juicer’,‘Wash up liq/Sanitiser’],[‘Salad display’,‘Salad display area’,‘Sanitiser’],[‘Potato stands’,‘Potato stands’,‘Sanitiser’]];
 for (var i = 0; i < daily.length; i++) {
-var tr = document.createElement('tr');
-var c = '<td class="area-name">' + daily[i][0] + '</td><td class="area-name">' + daily[i][1] + '</td><td class="chem-name">' + daily[i][2] + '</td>';
-for (var d = 0; d < 14; d++) c += '<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';
+var tr = document.createElement(‘tr’);
+var c = ‘<td class="area-name">’ + daily[i][0] + ‘</td><td class="area-name">’ + daily[i][1] + ‘</td><td class="chem-name">’ + daily[i][2] + ‘</td>’;
+for (var d = 0; d < 14; d++) c += ‘<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>’;
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
-var wh = document.createElement('tr');
-wh.innerHTML = '<td colspan="17" class="clean-section-header">WEEKLY DEEP CLEAN</td>';
+var wh = document.createElement(‘tr’);
+wh.innerHTML = ‘<td colspan="17" class="clean-section-header">WEEKLY DEEP CLEAN</td>’;
 tbody.appendChild(wh);
-var weekly = [['All shelving','Shelving units','Degreaser'],['Cold rooms','Cold room walls/floors','Degreaser/Sanitiser'],['Display fridges','Interior walls','Degreaser/Sanitiser'],['Potato hoppers','Hoppers & surrounds','Degreaser']];
+var weekly = [[‘All shelving’,‘Shelving units’,‘Degreaser’],[‘Cold rooms’,‘Cold room walls/floors’,‘Degreaser/Sanitiser’],[‘Display fridges’,‘Interior walls’,‘Degreaser/Sanitiser’],[‘Potato hoppers’,‘Hoppers & surrounds’,‘Degreaser’]];
 for (var j = 0; j < weekly.length; j++) {
-var tr2 = document.createElement('tr');
-var c2 = '<td class="area-name">' + weekly[j][0] + '</td><td class="area-name">' + weekly[j][1] + '</td><td class="chem-name">' + weekly[j][2] + '</td>';
-for (var d2 = 0; d2 < 14; d2++) c2 += '<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';
+var tr2 = document.createElement(‘tr’);
+var c2 = ‘<td class="area-name">’ + weekly[j][0] + ‘</td><td class="area-name">’ + weekly[j][1] + ‘</td><td class="chem-name">’ + weekly[j][2] + ‘</td>’;
+for (var d2 = 0; d2 < 14; d2++) c2 += ‘<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>’;
 tr2.innerHTML = c2;
 tbody.appendChild(tr2);
 }
 }
 function makeStockroomClean() {
-var tbody = document.getElementById('clean-stockroom-body');
+var tbody = document.getElementById(‘clean-stockroom-body’);
 if (!tbody) return;
-var dh = document.createElement('tr');
-dh.innerHTML = '<td colspan="9" class="clean-section-header">DAILY CLEANING SCHEDULE</td>';
+var dh = document.createElement(‘tr’);
+dh.innerHTML = ‘<td colspan="9" class="clean-section-header">DAILY CLEANING SCHEDULE</td>’;
 tbody.appendChild(dh);
-var dailyItems = [['Yard','Degreaser/Mop'],['Back-up cold room','Degreaser/Sanitiser'],['Ground floor stockroom','Degreaser/Mop'],['First floor stockroom','Degreaser/Mop'],['Sluice room','Degreaser/Sanitiser'],['Bailer area','Degreaser/Mop'],['Returns area','Degreaser/Mop'],['Frozen back-up','Degreaser/Sanitiser'],['Dairy back-up','Degreaser/Sanitiser'],['Office','Sanitiser']];
+var dailyItems = [[‘Yard’,‘Degreaser/Mop’],[‘Back-up cold room’,‘Degreaser/Sanitiser’],[‘Ground floor stockroom’,‘Degreaser/Mop’],[‘First floor stockroom’,‘Degreaser/Mop’],[‘Sluice room’,‘Degreaser/Sanitiser’],[‘Bailer area’,‘Degreaser/Mop’],[‘Returns area’,‘Degreaser/Mop’],[‘Frozen back-up’,‘Degreaser/Sanitiser’],[‘Dairy back-up’,‘Degreaser/Sanitiser’],[‘Office’,‘Sanitiser’]];
 for (var i = 0; i < dailyItems.length; i++) {
-var tr = document.createElement('tr');
-var c = '<td class="area-name">' + dailyItems[i][0] + '</td><td class="chem-name">' + dailyItems[i][1] + '</td>';
-for (var d = 0; d < 7; d++) c += '<td><input type="checkbox"></td>';
+var tr = document.createElement(‘tr’);
+var c = ‘<td class="area-name">’ + dailyItems[i][0] + ‘</td><td class="chem-name">’ + dailyItems[i][1] + ‘</td>’;
+for (var d = 0; d < 7; d++) c += ‘<td><input type="checkbox"></td>’;
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
-var wh = document.createElement('tr');
-wh.innerHTML = '<td colspan="9" class="clean-section-header">WEEKLY DEEP CLEAN</td>';
+var wh = document.createElement(‘tr’);
+wh.innerHTML = ‘<td colspan="9" class="clean-section-header">WEEKLY DEEP CLEAN</td>’;
 tbody.appendChild(wh);
-var weeklyItems = [['Full deep clean - all areas','Degreaser/Sanitiser'],['Racking & shelving','Degreaser'],['Light fittings & vents','Damp cloth']];
+var weeklyItems = [[‘Full deep clean - all areas’,‘Degreaser/Sanitiser’],[‘Racking & shelving’,‘Degreaser’],[‘Light fittings & vents’,‘Damp cloth’]];
 for (var j = 0; j < weeklyItems.length; j++) {
-var tr2 = document.createElement('tr');
-var c2 = '<td class="area-name">' + weeklyItems[j][0] + '</td><td class="chem-name">' + weeklyItems[j][1] + '</td>';
-for (var d2 = 0; d2 < 7; d2++) c2 += '<td><input type="checkbox"></td>';
+var tr2 = document.createElement(‘tr’);
+var c2 = ‘<td class="area-name">’ + weeklyItems[j][0] + ‘</td><td class="chem-name">’ + weeklyItems[j][1] + ‘</td>’;
+for (var d2 = 0; d2 < 7; d2++) c2 += ‘<td><input type="checkbox"></td>’;
 tr2.innerHTML = c2;
 tbody.appendChild(tr2);
 }
@@ -1169,179 +1204,180 @@ function makeGoodsRows(bodyId) {
 var tbody = document.getElementById(bodyId);
 if (!tbody) return;
 for (var i = 0; i < 20; i++) {
-var tr = document.createElement('tr');
-var c = '';
-for (var j = 0; j < 10; j++) c += '<td><input type="text" style="width:100%;border:none;padding:3px;font-size:11px;font-family:inherit"></td>';
+var tr = document.createElement(‘tr’);
+var c = ‘’;
+for (var j = 0; j < 10; j++) c += ‘<td><input type="text" style="width:100%;border:none;padding:3px;font-size:11px;font-family:inherit"></td>’;
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
 }
 function makeComplianceTables() {
-var container = document.getElementById('compliance-tables');
+var container = document.getElementById(‘compliance-tables’);
 if (!container) return;
 for (var di = 0; di < complianceDepts.length; di++) {
 var dept = complianceDepts[di];
-var deptKey = 'dept' + di;
-var html = '<div style="margin-bottom:16px"><table class="compliance-table"><thead>';
-html += '<tr><th style="min-width:120px">Dept</th><th>System</th>';
-html += '<th colspan="3" style="text-align:center">Result (0/3/5)</th>';
-html += '<th>Issues</th><th>Action Taken</th></tr></thead><tbody>';
+var deptKey = ‘dept’ + di;
+var html = ‘<div style="margin-bottom:16px"><table class="compliance-table"><thead>’;
+html += ‘<tr><th style="min-width:120px">Dept</th><th>System</th>’;
+html += ‘<th colspan="3" style="text-align:center">Result (0/3/5)</th>’;
+html += ‘<th>Issues</th><th>Action Taken</th></tr></thead><tbody>’;
 for (var ii = 0; ii < dept.items.length; ii++) {
-var radioName = deptKey + 'item' + ii;
-html += '<tr>';
-if (ii === 0) html += '<td class="dept" rowspan="' + dept.items.length + '">' + dept.name + '</td>';
-html += '<td>' + dept.items[ii] + '</td>';
-html += '<td style="text-align:center;width:90px"><div class="score-radio">';
-html += '<label><input type="radio" name="' + radioName + '" value="0">0</label>';
-html += '<label><input type="radio" name="' + radioName + '" value="3">3</label>';
-html += '<label><input type="radio" name="' + radioName + '" value="5">5</label>';
-html += '</div></td>';
-html += '<td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';
-html += '<td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';
-html += '</tr>';
+var radioName = deptKey + ‘item’ + ii;
+html += ‘<tr>’;
+if (ii === 0) html += ‘<td class="dept" rowspan="' + dept.items.length + '">’ + dept.name + ‘</td>’;
+html += ‘<td>’ + dept.items[ii] + ‘</td>’;
+html += ‘<td style="text-align:center;width:90px"><div class="score-radio">’;
+html += ‘<label><input type="radio" name="' + radioName + '" value="0">0</label>’;
+html += ‘<label><input type="radio" name="' + radioName + '" value="3">3</label>’;
+html += ‘<label><input type="radio" name="' + radioName + '" value="5">5</label>’;
+html += ‘</div></td>’;
+html += ‘<td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>’;
+html += ‘<td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>’;
+html += ‘</tr>’;
 }
 var mx = dept.items.length * 5;
-html += '<tr class="max-row"><td colspan="2">Max=' + mx + ' Actual=</td>';
-html += '<td colspan="2"><input type="text" placeholder="Actual" style="border:1px solid #ddd;padding:4px;width:80px;border-radius:4px;font-family:inherit"></td>';
-html += '<td colspan="2" style="font-size:11px;color:#666">(Actual/max)x100=%</td></tr>';
-html += '</tbody></table></div>';
+html += ‘<tr class="max-row"><td colspan="2">Max=’ + mx + ’ Actual=</td>’;
+html += ‘<td colspan="2"><input type="text" placeholder="Actual" style="border:1px solid #ddd;padding:4px;width:80px;border-radius:4px;font-family:inherit"></td>’;
+html += ‘<td colspan="2" style="font-size:11px;color:#666">(Actual/max)x100=%</td></tr>’;
+html += ‘</tbody></table></div>’;
 container.innerHTML += html;
 }
-var zones = document.getElementById('dept-zones');
-var dz = ['1. Serve over deli - Raw Meat/Fish','2. Serve over deli - Ready to eat foods','3. Hot Food bar, salad bar, bakery','4. Deli Pre Pack','5. Fruit & vegetable','6. Dairy','7. Frozen','8. Goods Inwards & Yard'];
-var zh = '<table class="compliance-table"><thead><tr><th>Department</th><th>Red</th><th>Orange</th><th>Green</th></tr></thead><tbody>';
+var zones = document.getElementById(‘dept-zones’);
+var dz = [‘1. Serve over deli - Raw Meat/Fish’,‘2. Serve over deli - Ready to eat foods’,‘3. Hot Food bar, salad bar, bakery’,‘4. Deli Pre Pack’,‘5. Fruit & vegetable’,‘6. Dairy’,‘7. Frozen’,‘8. Goods Inwards & Yard’];
+var zh = ‘<table class="compliance-table"><thead><tr><th>Department</th><th>Red</th><th>Orange</th><th>Green</th></tr></thead><tbody>’;
 for (var zi = 0; zi < dz.length; zi++) {
-zh += '<tr><td>' + dz[zi] + '</td>';
-zh += '<td style="text-align:center"><input type="checkbox" style="accent-color:#d32f2f"></td>';
-zh += '<td style="text-align:center"><input type="checkbox" style="accent-color:#e65100"></td>';
-zh += '<td style="text-align:center"><input type="checkbox" style="accent-color:#00703c"></td>';
-zh += '</tr>';
+zh += ‘<tr><td>’ + dz[zi] + ‘</td>’;
+zh += ‘<td style="text-align:center"><input type="checkbox" style="accent-color:#d32f2f"></td>’;
+zh += ‘<td style="text-align:center"><input type="checkbox" style="accent-color:#e65100"></td>’;
+zh += ‘<td style="text-align:center"><input type="checkbox" style="accent-color:#00703c"></td>’;
+zh += ‘</tr>’;
 }
-zh += '</tbody></table>';
+zh += ‘</tbody></table>’;
 zones.innerHTML = zh;
 }
 var butcherBatchCount = 0;
 function addButcherBatch() {
 butcherBatchCount++;
-var container = document.getElementById('butcher-batches');
-var div = document.createElement('div');
-div.style.cssText = 'background:white;border:1px solid #ddd;border-radius:8px;padding:14px;margin-bottom:12px;';
-var rows = '';
+var container = document.getElementById(‘butcher-batches’);
+var div = document.createElement(‘div’);
+div.style.cssText = ‘background:white;border:1px solid #ddd;border-radius:8px;padding:14px;margin-bottom:12px;’;
+var rows = ‘’;
 for (var i = 0; i < 5; i++) {
-rows += '<tr><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td>';
-rows += '<td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td></tr>';
+rows += ‘<tr><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td>’;
+rows += ‘<td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td></tr>’;
 }
-div.innerHTML = '<div style="font-weight:600;color:#005a30;margin-bottom:10px;font-size:13px">Batch ' + butcherBatchCount + '</div>' +
-'<div class="field-row"><div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date"></div>' +
-'<div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text"></div></div>' +
-'<div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date"></div>' +
-'<div class="section-title" style="font-size:12px;margin:10px 0 8px">Ingredients</div>' +
-'<table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead><tbody>' + rows + '</tbody></table>';
+div.innerHTML = ’<div style="font-weight:600;color:#005a30;margin-bottom:10px;font-size:13px">Batch ’ + butcherBatchCount + ‘</div>’ +
+‘<div class="field-row"><div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date"></div>’ +
+‘<div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text"></div></div>’ +
+‘<div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date"></div>’ +
+‘<div class="section-title" style="font-size:12px;margin:10px 0 8px">Ingredients</div>’ +
+‘<table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead><tbody>’ + rows + ‘</tbody></table>’;
 container.appendChild(div);
 }
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener(‘DOMContentLoaded’, function() {
 openDB().then(function() { updateBannerCount(); }).catch(function() {});
-window.addEventListener('pagehide', function() {
+window.addEventListener(‘pagehide’, function() {
 try { if (db) { db.close(); } } catch(e) {}
 });
-document.getElementById('backBtn').addEventListener('click', goBack);
-document.getElementById('lightbox').addEventListener('click', closeLightbox);
-document.getElementById('lightbox-close-btn').addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
+document.getElementById(‘backBtn’).addEventListener(‘click’, goBack);
+document.getElementById(‘lightbox’).addEventListener(‘click’, closeLightbox);
+document.getElementById(‘lightbox-close-btn’).addEventListener(‘click’, function(e) { e.stopPropagation(); closeLightbox(); });
 /* Explicitly close DB before navigating to records.html so Safari iOS
-   does not block the other page from opening the same database */
-var recBanner = document.querySelector('.records-banner');
+does not block the other page from opening the same database */
+var recBanner = document.querySelector(’.records-banner’);
 if (recBanner) {
-  recBanner.addEventListener('click', function() {
-    try { if (db) { db.close(); db = null; } } catch(e) {}
-  });
+recBanner.addEventListener(‘click’, function() {
+try { if (db) { db.close(); db = null; } } catch(e) {}
+});
 }
-var cards = document.querySelectorAll('.form-card');
+var cards = document.querySelectorAll(’.form-card’);
 for (var ci = 0; ci < cards.length; ci++) {
 (function(card) {
-card.addEventListener('click', function() {
-var fid = card.getAttribute('data-form');
+card.addEventListener(‘click’, function() {
+var fid = card.getAttribute(‘data-form’);
 if (fid) showForm(fid);
 });
 })(cards[ci]);
 }
-var saveBtns = document.querySelectorAll('.btn-save');
+var saveBtns = document.querySelectorAll(’.btn-save’);
 for (var si = 0; si < saveBtns.length; si++) {
 (function(btn) {
-btn.addEventListener('click', function() {
-var fid = btn.getAttribute('data-saveid');
+btn.addEventListener(‘click’, function() {
+var fid = btn.getAttribute(‘data-saveid’);
 if (fid) saveForm(fid);
 });
 })(saveBtns[si]);
 }
 /* FIX 3: loop counter was sgi but closure referenced sigBtns[si] — now consistently uses sgi */
-var sigBtns = document.querySelectorAll('.sig-clear');
+var sigBtns = document.querySelectorAll(’.sig-clear’);
 for (var sgi = 0; sgi < sigBtns.length; sgi++) {
 (function(btn) {
-btn.addEventListener('click', function() {
-var sid = btn.getAttribute('data-sigid');
+btn.addEventListener(‘click’, function() {
+var sid = btn.getAttribute(‘data-sigid’);
 if (sid) clearSig(sid);
 });
 })(sigBtns[sgi]);
 }
-var tsBtns = document.querySelectorAll('.ts-btn');
+var tsBtns = document.querySelectorAll(’.ts-btn’);
 for (var ti = 0; ti < tsBtns.length; ti++) {
 (function(btn) {
-btn.addEventListener('click', function() {
-var tsid = btn.getAttribute('data-tsid');
+btn.addEventListener(‘click’, function() {
+var tsid = btn.getAttribute(‘data-tsid’);
 if (tsid) recordTimestamp(tsid);
 });
 })(tsBtns[ti]);
 }
-var photoInputs = document.querySelectorAll('input[data-photoid]');
+var photoInputs = document.querySelectorAll(‘input[data-photoid]’);
 for (var pi = 0; pi < photoInputs.length; pi++) {
 (function(inp) {
-inp.addEventListener('change', function() { handlePhotos(inp, inp.getAttribute('data-photoid')); });
+inp.addEventListener(‘change’, function() { handlePhotos(inp, inp.getAttribute(‘data-photoid’)); });
 })(photoInputs[pi]);
 }
-var addBatchBtn = document.getElementById('add-butcher-batch-btn');
-if (addBatchBtn) { addBatchBtn.addEventListener('click', addButcherBatch); }
-makeTempRows(meatTempUnits, 'temp-meat-body');
-makeTempRows(prepackTempUnits, 'temp-prepack-body');
-makeTempRows(dairyTempUnits, 'temp-dairy-body');
-makeTempRows(frozenTempUnits, 'temp-frozen-body');
-makeTempRows(fruitVegTempUnits, 'temp-fruitveg-body');
-makeTempRows(deliTempUnits, 'temp-deli-body');
-makeHourlyTable('chicken-hourly-table', 's1s2');
-makeHourlyTable('hotbar-hourly-table', 'prodtemp');
-makeHourlyTable('soup-hourly-table', 's1s2');
+var addBatchBtn = document.getElementById(‘add-butcher-batch-btn’);
+if (addBatchBtn) { addBatchBtn.addEventListener(‘click’, addButcherBatch); }
+makeTempRows(meatTempUnits, ‘temp-meat-body’);
+makeTempRows(prepackTempUnits, ‘temp-prepack-body’);
+makeTempRows(dairyTempUnits, ‘temp-dairy-body’);
+makeTempRows(frozenTempUnits, ‘temp-frozen-body’);
+makeTempRows(fruitVegTempUnits, ‘temp-fruitveg-body’);
+makeTempRows(deliTempUnits, ‘temp-deli-body’);
+makeHourlyTable(‘chicken-hourly-table’, ‘s1s2’);
+makeHourlyTable(‘hotbar-hourly-table’, ‘prodtemp’);
+makeHourlyTable(‘soup-hourly-table’, ‘s1s2’);
 makeGSTable();
 makeAfterCookTable();
-makeCleanRows('hotfood-daily-clean-body', hotfoodDailyClean);
-makeCleanRows('hotfood-weekly-clean-body', hotfoodWeeklyClean);
-makeCleanRows('cookedmeat-clean-body', cookedmeatClean);
-makeCleanRows('cookedmeat-weekly-clean-body', cookedmeatWeeklyClean);
-makeLogRows('thawing-body', 8, 25);
-makeDeliTraceTable('deli-trace-stuffing-table', deliTraceStuffing, ['OUBD','DP','UBD','D']);
-makeDeliTraceTable('deli-trace-butter-table', deliTraceButter, ['OUBD','DP','UBD','D']);
-makeDeliTraceTable('deli-trace-chicken-table', deliTraceChicken, ['OUBD','DP','UBD']);
-makeDeliTraceTable('deli-trace-saladveg-table', deliTraceSaladVeg, ['OUBD','DP','UBD','D']);
-makeDeliTraceTable('deli-trace-eggtuna-table', deliTraceEggTuna, ['OUBD','DP','UBD']);
-makeIUBDTable('sandwich-tables', sandwiches, ['IUBD','UBD']);
-makeIUBDTable('wrap-tables', wraps, ['IUBD','UBD']);
-makeIUBDTable('pizza-tables', pizzas, ['IUBD','UBD']);
-makeIUBDTable('salad-made-tables', saladsMade, ['IUBD','DM','DD']);
-makeIUBDTable('salad-prepack-tables', saladsPrepack, ['IUBD/OUBD','DM/DO','DD']);
-makeOUBDTable('savouries-table', savouries);
+makeCleanRows(‘hotfood-daily-clean-body’, hotfoodDailyClean);
+makeCleanRows(‘hotfood-weekly-clean-body’, hotfoodWeeklyClean);
+makeCleanRows(‘cookedmeat-clean-body’, cookedmeatClean);
+makeCleanRows(‘cookedmeat-weekly-clean-body’, cookedmeatWeeklyClean);
+makeLogRows(‘thawing-body’, 8, 25);
+makeDeliTraceTable(‘deli-trace-stuffing-table’, deliTraceStuffing, [‘OUBD’,‘DP’,‘UBD’,‘D’]);
+makeDeliTraceTable(‘deli-trace-butter-table’, deliTraceButter, [‘OUBD’,‘DP’,‘UBD’,‘D’]);
+makeDeliTraceTable(‘deli-trace-chicken-table’, deliTraceChicken, [‘OUBD’,‘DP’,‘UBD’]);
+makeDeliTraceTable(‘deli-trace-saladveg-table’, deliTraceSaladVeg, [‘OUBD’,‘DP’,‘UBD’,‘D’]);
+makeDeliTraceTable(‘deli-trace-eggtuna-table’, deliTraceEggTuna, [‘OUBD’,‘DP’,‘UBD’]);
+makeIUBDTable(‘sandwich-tables’, sandwiches, [‘IUBD’,‘UBD’]);
+makeIUBDTable(‘wrap-tables’, wraps, [‘IUBD’,‘UBD’]);
+makeIUBDTable(‘pizza-tables’, pizzas, [‘IUBD’,‘UBD’]);
+makeIUBDTable(‘salad-made-tables’, saladsMade, [‘IUBD’,‘DM’,‘DD’]);
+makeIUBDTable(‘salad-prepack-tables’, saladsPrepack, [‘IUBD/OUBD’,‘DM/DO’,‘DD’]);
+makeOUBDTable(‘savouries-table’, savouries);
 makeCookedMeatsTable();
-makeOUBDTable('salami-table', salamiOlives);
+makeOUBDTable(‘salami-table’, salamiOlives);
 makeCheeseTable();
 makeFishRows();
 makePorkRows();
-makeLogRows('mince-body', 7, 20);
-makeLogRows('burger-body', 6, 20);
+makeLogRows(‘mince-body’, 7, 20);
+makeLogRows(‘burger-body’, 6, 20);
 makeRedMeatClean();
 makeFruitVegClean();
 makeStockroomClean();
-makeGoodsRows('goods-chilled-body');
-makeGoodsRows('goods-ambient-body');
+makeGoodsRows(‘goods-chilled-body’);
+makeGoodsRows(‘goods-ambient-body’);
 makeComplianceTables();
 addButcherBatch();
 });
 </script>
+
 </body>
 </html>

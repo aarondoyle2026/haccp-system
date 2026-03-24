@@ -744,7 +744,7 @@ for (var pi = 0; pi < photos.length; pi++) {
 photoData.push({dataUrl: photos[pi].dataUrl, name: photos[pi].name, timestamp: photos[pi].timestamp});
 }
 
-/* Corrective action — grab the first textarea inside this form screen */
+/* Corrective action — first textarea in this form screen */
 var scr = document.getElementById(formId);
 var correctiveAction = ‘’;
 if (scr) {
@@ -752,26 +752,12 @@ var ta = scr.querySelector(‘textarea’);
 if (ta) correctiveAction = ta.value;
 }
 
-/* Form field data — serialize every input/select/textarea for audit reconstruction */
-var formData = [];
-if (scr) {
-var allFields = scr.querySelectorAll(‘input, select, textarea’);
-for (var fdi = 0; fdi < allFields.length; fdi++) {
-var fel = allFields[fdi];
-if (fel.type === ‘file’) continue;
-var fval = fel.type === ‘checkbox’ ? fel.checked : (fel.type === ‘radio’ ? (fel.checked ? fel.value : null) : fel.value);
-if (fval === null) continue;
-formData.push({tag:fel.tagName.toLowerCase(), type:fel.type||’’, id:fel.id||’’, name:fel.name||’’, cls:fel.className||’’, val:fval});
-}
-}
-
-/* Signatures — collect all canvases in this form screen as base64 */
+/* Signatures — canvases with actual content only */
 var signatures = [];
 if (scr) {
 var canvases = scr.querySelectorAll(‘canvas’);
 for (var si = 0; si < canvases.length; si++) {
 var cv = canvases[si];
-/* Only save if the canvas has been drawn on (not blank) */
 var ctx = cv.getContext(‘2d’);
 var imgData = ctx.getImageData(0, 0, cv.width, cv.height);
 var hasContent = false;
@@ -797,8 +783,7 @@ timestamp: formTimestamps[formId] || now.toLocaleString(‘en-IE’, {timeZone:�
 photos: photoData,
 photoCount: photoData.length,
 correctiveAction: correctiveAction,
-signatures: signatures,
-formData: formData
+signatures: signatures
 };
 
 var doSave = function() {

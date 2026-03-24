@@ -327,13 +327,18 @@ if (diff <= 0) return ‘Week ended’;
 var d = Math.floor(diff / 86400000);
 var h = Math.floor((diff % 86400000) / 3600000);
 var m = Math.floor((diff % 3600000) / 60000);
-return (d > 0 ? d + ’d ’ : ‘’) + h + ‘h ’ + m + ‘m until close’;
+return (d > 0 ? d + ’d ’ : ‘’) + h + ’h ’ + m + ‘m until close’;
 }
 function openDB() {
 return new Promise(function(res, rej) {
+var done = false;
+var timer = setTimeout(function() {
+if (done) return; done = true;
+rej(new Error(‘Database timed out. Safari: Settings > Safari > uncheck Block All Cookies, then refresh.’));
+}, 5000);
 var req;
 try { req = indexedDB.open(DB_NAME, DB_VER); }
-catch(e) { rej(e); return; }
+catch(e) { clearTimeout(timer); rej(e); return; }
 req.onupgradeneeded = function(e) {
 var d2 = e.target.result;
 if (!d2.objectStoreNames.contains(‘records’)) {
@@ -343,13 +348,9 @@ st.createIndex(‘weekKey’,‘weekKey’,{unique:false});
 }
 if (!d2.objectStoreNames.contains(‘weeks’)) d2.createObjectStore(‘weeks’,{keyPath:‘weekKey’});
 };
-req.onsuccess = function(e) { db = e.target.result; res(db); };
-req.onerror = function(e) { rej(e.target.error || new Error(‘DB open error’)); };
-/* onblocked means another tab has the DB open - wait, don’t reject */
-req.onblocked = function() {
-var sb = document.getElementById(‘statusBar’);
-if (sb) sb.textContent = ‘Waiting for other tab to close DB… refresh if stuck.’;
-};
+req.onsuccess = function(e) { if (done) return; done=true; clearTimeout(timer); db=e.target.result; res(db); };
+req.onerror = function(e) { if (done) return; done=true; clearTimeout(timer); rej(e.target.error); };
+req.onblocked = function() { if (done) return; done=true; clearTimeout(timer); rej(new Error(‘Database blocked. Close other tabs and refresh.’)); };
 });
 }
 function dbGetAll(store) {
@@ -1340,25 +1341,17 @@ function bootDB() {
 sb.textContent = ‘Connecting to database…’;
 sb.className = ‘status-bar’;
 sb.style.cursor = ‘’;
-openDB().then(function() {
-loadRecords();
-}).catch(function(e) {
-var msg = e && e.message ? e.message : ‘Storage error’;
-if (msg.toLowerCase().indexOf(‘private’) !== -1 || msg.toLowerCase().indexOf(‘quota’) !== -1) {
-msg = ‘Private browsing detected \u2014 disable Private mode in Safari’;
-}
-sb.textContent = msg + ’ \u2014 Tap to retry’;
+openDB().then(function() { loadRecords(); }).catch(function(e) {
+sb.textContent = (e.message || ‘Storage error’) + ’ \u2014 Tap to retry’;
 sb.className = ‘status-bar err’;
 sb.style.cursor = ‘pointer’;
 sb.addEventListener(‘click’, function handler() {
 sb.removeEventListener(‘click’, handler);
-setTimeout(bootDB, 300);
+bootDB();
 });
 });
 }
-/* 200ms delay gives Safari time to finish closing the DB
-connection from index.html before we try to open it here */
-setTimeout(bootDB, 200);
+bootDB();
 });
 </script>
 

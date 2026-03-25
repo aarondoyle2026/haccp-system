@@ -762,20 +762,22 @@ var data = {};
 var inputs = scr.querySelectorAll('input[type=text],input[type=date],input[type=number],input[type=time],textarea');
 for (var i = 0; i < inputs.length; i++) {
 var inp = inputs[i];
-var key = inp.id || ('inp_' + i);
-data[key] = inp.value;
+var key = inp.getAttribute('data-label') || inp.id || ('inp_' + i);
+if (inp.value && inp.value.trim()) data[key] = inp.value;
 }
 var sels = scr.querySelectorAll('select');
 for (var si = 0; si < sels.length; si++) {
 var sel = sels[si];
-var sk = sel.id || ('sel_' + si);
-data[sk] = sel.value;
+var sk = sel.getAttribute('data-label') || sel.id || ('sel_' + si);
+if (sel.value) data[sk] = sel.value;
 }
 var cbs = scr.querySelectorAll('input[type=checkbox]');
 for (var ci = 0; ci < cbs.length; ci++) {
 var cb = cbs[ci];
-var ck = cb.id || ('cb_' + ci);
-data[ck] = cb.checked ? '1' : '0';
+if (cb.checked) {
+var ck = cb.getAttribute('data-label') || cb.id || ('cb_' + ci);
+data[ck] = 'checked';
+}
 }
 var radios = scr.querySelectorAll('input[type=radio]:checked');
 for (var ri = 0; ri < radios.length; ri++) {
@@ -792,20 +794,20 @@ if (!scr) return;
 var inputs = scr.querySelectorAll('input[type=text],input[type=date],input[type=number],input[type=time],textarea');
 for (var i = 0; i < inputs.length; i++) {
 var inp = inputs[i];
-var key = inp.id || ('inp_' + i);
+var key = inp.getAttribute('data-label') || inp.id || ('inp_' + i);
 if (data[key] !== undefined) inp.value = data[key];
 }
 var sels = scr.querySelectorAll('select');
 for (var si = 0; si < sels.length; si++) {
 var sel = sels[si];
-var sk = sel.id || ('sel_' + si);
+var sk = sel.getAttribute('data-label') || sel.id || ('sel_' + si);
 if (data[sk] !== undefined) sel.value = data[sk];
 }
 var cbs = scr.querySelectorAll('input[type=checkbox]');
 for (var ci = 0; ci < cbs.length; ci++) {
 var cb = cbs[ci];
-var ck = cb.id || ('cb_' + ci);
-if (data[ck] !== undefined) cb.checked = (data[ck] === '1');
+var ck = cb.getAttribute('data-label') || cb.id || ('cb_' + ci);
+if (data[ck] === 'checked') cb.checked = true;
 }
 var allRadios = scr.querySelectorAll('input[type=radio]');
 for (var ri = 0; ri < allRadios.length; ri++) {
@@ -1140,11 +1142,17 @@ document.getElementById('lightbox-img').src = '';
 function makeTempRows(units, bodyId) {
 var tbody = document.getElementById(bodyId);
 if (!tbody) return;
+var ampm = ['AM','PM'];
 for (var i = 0; i < units.length; i++) {
 var tr = document.createElement('tr');
-var c = '<td class="unit-name">' + units[i][0] + '</td><td class="target">' + units[i][1] + '</td>';
-for (var d = 0; d < 14; d++) c += '<td><input type="text" maxlength="6"></td>';
-c += '<td><input type="text"></td>';
+var unitName = units[i][0];
+var c = '<td class="unit-name">' + unitName + '</td><td class="target">' + units[i][1] + '</td>';
+for (var d = 0; d < 7; d++) {
+for (var ap = 0; ap < 2; ap++) {
+c += '<td><input type="text" maxlength="6" data-label="' + unitName + ' ' + DAYS[d] + ' ' + ampm[ap] + '"></td>';
+}
+}
+c += '<td><input type="text" data-label="' + unitName + ' Comments"></td>';
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
@@ -1165,12 +1173,20 @@ table.appendChild(thead);
 for (var ti = 0; ti < hotfoodTimes.length; ti++) {
 var tr = document.createElement('tr');
 var c = '<td class="time-cell">' + hotfoodTimes[ti] + '</td>';
-for (var d2 = 0; d2 < 7; d2++) c += '<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="6"></td>';
+for (var d2 = 0; d2 < 7; d2++) {
+if (mode === 's1s2') {
+c += '<td><input type="text" maxlength="10" data-label="' + DAYS[d2] + ' ' + hotfoodTimes[ti] + ' S1"></td>';
+c += '<td><input type="text" maxlength="6" data-label="' + DAYS[d2] + ' ' + hotfoodTimes[ti] + ' S2"></td>';
+} else {
+c += '<td><input type="text" maxlength="10" data-label="' + DAYS[d2] + ' ' + hotfoodTimes[ti] + ' Product"></td>';
+c += '<td><input type="text" maxlength="6" data-label="' + DAYS[d2] + ' ' + hotfoodTimes[ti] + ' Temp"></td>';
+}
+}
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
 var signCells = '';
-for (var sc = 0; sc < 14; sc++) signCells += '<td><input type="text" maxlength="15"></td>';
+for (var sc = 0; sc < 14; sc++) signCells += '<td><input type="text" maxlength="15" data-label="Sign ' + DAYS[Math.floor(sc/2)] + ' ' + (sc%2===0?'S1':'S2') + '"></td>';
 var sr = document.createElement('tr');
 sr.innerHTML = '<td class="time-cell" style="font-size:10px">Sign</td>' + signCells;
 tbody.appendChild(sr);
@@ -1229,8 +1245,9 @@ var tbody = document.getElementById(bodyId);
 if (!tbody) return;
 for (var i = 0; i < items.length; i++) {
 var tr = document.createElement('tr');
-var c = '<td class="area-name">' + items[i][0] + '</td><td class="chem-name">' + items[i][1] + '</td>';
-for (var d = 0; d < 7; d++) c += '<td><input type="text" maxlength="3" style="width:100%;border:none;text-align:center;font-size:12px;font-family:inherit;padding:2px;background:transparent"></td>';
+var areaName = items[i][0];
+var c = '<td class="area-name">' + areaName + '</td><td class="chem-name">' + items[i][1] + '</td>';
+for (var d = 0; d < 7; d++) c += '<td><input type="text" maxlength="3" data-label="' + areaName + ' ' + DAYS[d] + '" style="width:100%;border:none;text-align:center;font-size:12px;font-family:inherit;padding:2px;background:transparent"></td>';
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
@@ -1251,9 +1268,12 @@ table.appendChild(thead);
 var tbody = document.createElement('tbody');
 for (var i = 0; i < products.length; i++) {
 var tr = document.createElement('tr');
-var c = '<td class="prod-name">' + products[i] + '</td>';
+var prodName = products[i];
+var c = '<td class="prod-name">' + prodName + '</td>';
 for (var d2 = 0; d2 < 7; d2++) {
-for (var ci2 = 0; ci2 < cl; ci2++) c += '<td><input type="text" maxlength="12"></td>';
+for (var ci2 = 0; ci2 < cl; ci2++) {
+c += '<td><input type="text" maxlength="12" data-label="' + prodName + ' ' + DAYS[d2] + ' ' + cols[ci2] + '"></td>';
+}
 }
 tr.innerHTML = c;
 tbody.appendChild(tr);
@@ -1274,8 +1294,13 @@ for (var ci2 = 0; ci2 < cl; ci2++) html += '<th style="font-size:10px">' + cols[
 }
 html += '</tr></thead><tbody>';
 for (var i = 0; i < products.length; i++) {
-html += '<tr><td class="product-name">' + products[i].name + (products[i].ingr ? '<small>' + products[i].ingr + '</small>' : '') + '</td>';
-for (var j = 0; j < 7 * cl; j++) html += '<td><input type="text" maxlength="12"></td>';
+var pname = products[i].name;
+html += '<tr><td class="product-name">' + pname + (products[i].ingr ? '<small>' + products[i].ingr + '</small>' : '') + '</td>';
+for (var dj = 0; dj < 7; dj++) {
+for (var cj = 0; cj < cl; cj++) {
+html += '<td><input type="text" maxlength="12" data-label="' + pname + ' ' + DAYS[dj] + ' ' + cols[cj] + '"></td>';
+}
+}
 html += '</tr>';
 }
 html += '</tbody></table>';
@@ -1293,7 +1318,11 @@ html += '</tr></thead><tbody>';
 for (var i = 0; i < products.length; i++) {
 var name = typeof products[i] === 'string' ? products[i] : products[i].name;
 html += '<tr><td class="product-name">' + name + '</td>';
-for (var j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
+for (var dj = 0; dj < 7; dj++) {
+html += '<td><input type="text" maxlength="12" data-label="' + name + ' ' + DAYS[dj] + ' OUBD"></td>';
+html += '<td><input type="text" maxlength="12" data-label="' + name + ' ' + DAYS[dj] + ' ' + c2 + '"></td>';
+html += '<td><input type="text" maxlength="12" data-label="' + name + ' ' + DAYS[dj] + ' ' + c3 + '"></td>';
+}
 html += '</tr>';
 }
 html += '</tbody></table>';
@@ -1308,8 +1337,13 @@ html += '</tr><tr><th class="product-col"></th>';
 for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>';
 html += '</tr></thead><tbody>';
 for (var i = 0; i < cookedMeats.length; i++) {
-html += '<tr><td class="product-name">' + cookedMeats[i] + '</td>';
-for (var j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
+var cm = cookedMeats[i];
+html += '<tr><td class="product-name">' + cm + '</td>';
+for (var dj = 0; dj < 7; dj++) {
+html += '<td><input type="text" maxlength="12" data-label="' + cm + ' ' + DAYS[dj] + ' OUBD"></td>';
+html += '<td><input type="text" maxlength="12" data-label="' + cm + ' ' + DAYS[dj] + ' Bulk DU"></td>';
+html += '<td><input type="text" maxlength="12" data-label="' + cm + ' ' + DAYS[dj] + ' Slice DU"></td>';
+}
 html += '</tr>';
 }
 html += '</tbody></table>';

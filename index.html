@@ -125,18 +125,6 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 .info-box strong{color:#1a1a1a;}
 .warn-box{background:#fff8e1;border-left:3px solid #e65100;border-radius:6px;padding:10px 12px;font-size:11px;color:#555;margin-bottom:14px;line-height:1.5;}
 .section-title{font-size:13px;font-weight:700;color:#005a30;margin:18px 0 10px;padding-bottom:6px;border-bottom:2px solid #00703c;}
-.photo-zone{margin-bottom:20px;}
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(75px, 1fr));gap:8px;margin-top:10px;}
-.photo-item{aspect-ratio:1;border-radius:8px;overflow:hidden;border:1px solid #d0d0d0;position:relative;}
-.photo-item img{width:100%;height:100%;object-fit:cover;}
-.photo-del{position:absolute;top:2px;right:2px;background:rgba(0,0,0,0.5);color:white;border:none;width:18px;height:18px;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;}
-.photo-add{aspect-ratio:1;border:2px dashed #d0d0d0;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#888;cursor:pointer;background:white;}
-.photo-add span{font-size:22px;margin-bottom:2px;}
-.photo-add label{font-size:9px;font-weight:700;text-transform:uppercase;}
-.ts-box{background:#f8faf8;border-radius:10px;padding:12px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;border:1px solid #e0eee0;}
-.ts-text{font-size:12px;color:#666;}
-.ts-text.recorded{color:#00703c;font-weight:700;}
-.ts-btn{background:white;border:1px solid #00703c;color:#00703c;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;}
 .toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(100px);background:#1a1a1a;color:white;padding:12px 20px;border-radius:25px;font-size:13px;font-weight:600;z-index:9999;transition:transform 0.3s;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 </style>
@@ -154,8 +142,8 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 <div id="home">
   <div class="home-header">
     <div class="brand">MORIARTY GROUP</div>
-    <div class="sub">EST. 1978</div>
-    <div class="title">Food Safety Management System</div>
+    <div class="sub">SUPERVALU &#183; ESTD 1987</div>
+    <div class="title">&#128203; HACCP Food Safety System</div>
   </div>
   
   <a href="records.html" class="records-banner">
@@ -179,59 +167,28 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 
 <script>
 /* DATA DEFINITIONS */
-var deliTraceEggTuna = ['Eggs','Mayo','Egg Mayo','Tuna & Sweetcorn','Sweetcorn'];
-var breakfastItems = ['Sausages','Bacon','Pudding Black','Pudding White','Hash Browns','Eggs','Sm Sausage Roll','Lrg Sausage Roll','Pies C&M','Pies S&K','Fillet Plane','Fillet S/Fried','Fillets Hot Spicy','Wedges','Soup 1','Jambons','Chickens'];
-var lunchItems = ['Sm Sausage Roll','Wedges','Pop Chicken','Wings BBQ','Goujons','Fillets Plane','Fillets S/Fried','Fillets Hot Spicy','Veg Spring Rolls','Vol Au Vants','Bacon and cheese Bakers','Cottage pie','Honey and Mustard','Sausage Rolls','Sausage Rolls with Black Pudding'];
+var DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 var cleaningItemsDaily = [['Scales, bags, shelves','Sanitiser'],['Raw Servovers','Sanitiser, glass cleaner'],['Bins','Degreaser'],['Equipment/trays/chopping boards - raw & fish','Wash up liq'],['Fish equipment sink & shelf below','Wash up liq, Degreaser'],['Hot seal wrap unit','Sanitiser'],['SELs/Garnishing','Sanitiser'],['Stainless steel serveover','Stainless Steel spray'],['Hands sink/Requisites','Degreaser/sanitiser'],['Wooden block/Table legs','Block brush'],['Table tops','Sanitiser'],['Doors/handles','Sanitiser'],['Telephone','Sanitiser'],['Equipment sink & hand sink requisites - top and bottom','Wash up liq'],['Knife rack','Sanitiser'],['Scales','Sanitiser'],['Burger press','Wash up liq, degreaser'],['Mincer head','Wash up liq, degreaser'],['Mincer','Wash up liq, degreaser'],['Ice Machine','Stainless steel cleaner'],['Coldroom - floor, door handle, floor swept','Degreaser, Floorbrush'],['Rubber around fridge door','']];
 var cleaningItemsWeekly = [['Prep room racking','Degreaser'],['Serveover - Raw','Degreaser'],['Serveover - Fish','Degreaser'],['Prep area - walls & tables','Degreaser'],['Returns trolleys','Degreaser'],['Stainless steel - Raw','Stainless steel cleaner'],['Raw coldroom - floor, shelving','Degreaser'],['Display shelving - fish & raw','Degreaser'],['Stainless steel - Fish','Stainless steel'],['Ice Machine - presses inside and out including door handles','Defrosted/clean, Sanitiser']];
 var complianceDepts = [{name:'1. Serveover Raw/Fish',items:['Mince control','Fish Tracker','Temperature Checks','Daily cleaning schedule','Weekly cleaning schedule','Burger control sheet','PBOB Trace','Pork and Bacon Trace','Breaded chicken trace','Beef Trace']},{name:'2. Cold Deli',items:['Cooked meat tracker','Sandwich tracker','Salami & olive tracker','Savoury tracker','Salad tracker','Temp checks','Daily cleaning schedule','Weekly cleaning schedule']},{name:'3. Hot Food Bar/Bakery',items:['After cook sheet','Hot holding sheet','Temp checks bakery','Daily cleaning schedule','Weekly cleaning schedule']},{name:'4. Prepack Deli Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'5. Fruit & Veg Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'6. Dairy Food Safety',items:['Temperature Checks','Deep Clean']},{name:'7. Frozen Food Safety',items:['Load Levels','Temperature Checks','Deep clean UTD']},{name:'8. Goods Inwards Food Safety',items:['FSR1 - Fresh Van checks','FSR2 - Dry Grocery Van checks','Cleaning schedule - Daily','Cleaning schedule - Deep clean']}];
 
 var ALL_FORMS = [
-  {id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},
-  {id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},
-  {id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},
-  {id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},
-  {id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},
-  {id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},
-  {id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},
-  {id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},
-  {id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},
-  {id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},
-  {id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},
-  {id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},
-  {id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},
-  {id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},
-  {id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},
-  {id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},
-  {id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},
-  {id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},
-  {id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},
-  {id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},
-  {id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},
-  {id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},
-  {id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},
-  {id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},
-  {id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},
-  {id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},
-  {id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},
-  {id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},
-  {id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},
-  {id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},
-  {id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},
-  {id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},
-  {id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},
-  {id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},
-  {id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},
-  {id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},
-  {id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},
-  {id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},
-  {id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},
-  {id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},
-  {id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}
+  {id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks',units:[['Fish Display Unit','0-5\u00b0C'],['Poultry','0-5\u00b0C'],['Pork','0-5\u00b0C'],['Raw Meat','0-5\u00b0C'],['Walk in fridge','0-5\u00b0C'],['Pre-pack fish doors','0-5\u00b0C']]},
+  {id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks',units:[['Unit 1','0-5\u00b0C'],['Unit 2','0-5\u00b0C'],['Unit 3','0-5\u00b0C'],['Unit 4','0-5\u00b0C'],['Unit 5','0-5\u00b0C'],['Unit 6','0-5\u00b0C'],['Unit 7','0-5\u00b0C'],['Unit 8','0-5\u00b0C'],['Unit 9','0-5\u00b0C'],['Unit 10','0-5\u00b0C'],['Unit 11','0-5\u00b0C'],['Unit 12','0-5\u00b0C'],['Unit 13','0-5\u00b0C'],['Unit 14','0-5\u00b0C'],['Unit 15','0-5\u00b0C'],['Unit 16','0-5\u00b0C'],['Unit 17','0-5\u00b0C'],['Unit 18','0-5\u00b0C'],['Unit 19','0-5\u00b0C'],['Unit 20','0-5\u00b0C']]},
+  {id:'temp-dairy',name:'Dairy Dept Temperature',cat:'Temperature Checks',units:[['Milk 1','0-5\u00b0C'],['Milk 2','0-5\u00b0C'],['Cheese 1','0-5\u00b0C'],['Cheese 2','0-5\u00b0C'],['Yoghurts','0-5\u00b0C'],['Fish Fridge','0-5\u00b0C'],['Coffee Machine','0-5\u00b0C']]},
+  {id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks',units:[['Ice Cream','-18\u00b0C'],['Freezer Well 1','-18\u00b0C'],['Freezer Well 2','-18\u00b0C'],['Back-up Freezer','-18\u00b0C']]},
+  {id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks',units:[['Display 1','0-5\u00b0C'],['Display 2','0-5\u00b0C'],['Salad Fridge','0-5\u00b0C'],['Walk-in','0-5\u00b0C'],['Berry Fridge','0-5\u00b0C']]},
+  {id:'temp-deli',name:'Deli Temperature Checklist',cat:'Temperature Checks',units:[['Unit 1','0-5\u00b0C'],['Unit 2','0-5\u00b0C'],['Unit 3','0-5\u00b0C'],['Unit 4','0-5\u00b0C'],['Unit 5','0-5\u00b0C'],['Unit 6','0-5\u00b0C'],['Unit 7','0-5\u00b0C'],['Unit 8','0-5\u00b0C'],['Unit 9','0-5\u00b0C']]},
+  {id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli',type:'clean'},
+  {id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli',type:'clean'},
+  {id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules',type:'clean-rm'},
+  {id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules',type:'clean-fv'},
+  {id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules',type:'clean-sr'},
+  {id:'compliance',name:'HACCP Compliance Report',cat:'Compliance',type:'compliance'}
 ];
 
 var DB_NAME = 'MoriartyHACCP', DB_VER = 1, db = null;
-var currentForm = null, formPhotos = {}, formTimestamps = {};
+var currentFormId = null;
 
 function openDB() {
   return new Promise(function(res, rej) {
@@ -275,7 +232,6 @@ function getWeekKey() {
   return s.toISOString().split('T')[0];
 }
 
-/* ENHANCED SCRAPING LOGIC */
 function scrapeFormData(formId) {
   var scr = document.getElementById(formId);
   if (!scr) return [];
@@ -315,6 +271,7 @@ function populateFormData(formId, entries) {
     if (entryIdx < entries.length) {
       var entry = entries[entryIdx++];
       if (el.type === 'checkbox') el.checked = entry.value;
+      else if (el.type === 'radio') { if (el.value == entry.value) el.checked = true; else entryIdx--; }
       else el.value = entry.value;
     }
   }
@@ -322,11 +279,11 @@ function populateFormData(formId, entries) {
 
 function showForm(id) {
   document.getElementById('home').style.display = 'none';
-  if (currentForm) document.getElementById(currentForm).style.display = 'none';
+  if (currentFormId) document.getElementById(currentFormId).style.display = 'none';
   var scr = document.getElementById(id);
   if (!scr) return;
   scr.style.display = 'block';
-  currentForm = id;
+  currentFormId = id;
   document.getElementById('backBtn').style.display = 'block';
   var h2 = scr.querySelector('h2');
   document.getElementById('navTitle').textContent = h2 ? h2.textContent : id;
@@ -360,15 +317,12 @@ function showForm(id) {
 }
 
 function goBack() {
-  if (window.location.search.includes('viewRec')) {
-    window.location.href = 'records.html';
-    return;
-  }
-  if (currentForm) document.getElementById(currentForm).style.display = 'none';
+  if (window.location.search.includes('viewRec')) { window.location.href = 'records.html'; return; }
+  if (currentFormId) document.getElementById(currentFormId).style.display = 'none';
   document.getElementById('home').style.display = 'block';
   document.getElementById('backBtn').style.display = 'none';
   document.getElementById('navTitle').textContent = 'HACCP System';
-  currentForm = null;
+  currentFormId = null;
   window.scrollTo(0,0);
 }
 
@@ -392,7 +346,7 @@ function saveForm(formId) {
     timestamp: new Date().toLocaleString('en-IE'),
     formData: scrapeFormData(formId),
     signatures: signatures,
-    photos: formPhotos[formId] || []
+    photos: []
   };
 
   dbPut('records', record).then(function() {
@@ -430,57 +384,72 @@ function showToast(m) {
   setTimeout(function() { t.className = 'toast'; }, 2500);
 }
 
-/* UI BOOTSTRAP */
+/* TABLE GENERATORS */
+function buildTempTable(units) {
+  var html = '<div class="week-table-wrap"><table class="week-table temp-table"><thead><tr><th class="unit-col">Refrigerated Unit</th><th class="temp-col">Target</th>';
+  for (var d = 0; d < 7; d++) html += '<th colspan="2">' + DAYS[d] + '</th>';
+  html += '</tr><tr><th></th><th></th>';
+  for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:9px">AM</th><th style="font-size:9px">PM</th>';
+  html += '</tr></thead><tbody>';
+  units.forEach(u => {
+    html += '<tr><td class="unit-name">' + u[0] + '</td><td class="target">' + u[1] + '</td>';
+    for (var j = 0; j < 14; j++) html += '<td><input type="text" maxlength="4"></td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function buildCleanTable(type) {
+  var items = type === 'rm' ? cleaningItemsDaily : (type === 'sr' ? [[['Yard','Degreaser/Mop'],['Back-up cold room','Degreaser/Sanitiser']]] : []);
+  var html = '<div class="week-table-wrap"><table class="week-table clean-table"><thead><tr><th class="area-col">Area</th><th class="chem-col">Chemical</th>';
+  for (var d = 0; d < 7; d++) html += '<th>' + DAYS[d].substring(0,3) + '</th>';
+  html += '</tr></thead><tbody>';
+  if (type === 'rm') {
+    html += '<tr><td colspan="9" class="clean-section-header">DAILY CLEANING</td></tr>';
+    cleaningItemsDaily.forEach(i => html += '<tr><td class="area-name">' + i[0] + '</td><td class="chem-name">' + i[1] + '</td>' + '<td><input type="checkbox"></td>'.repeat(7) + '</tr>');
+    html += '<tr><td colspan="9" class="clean-section-header">WEEKLY CLEANING</td></tr>';
+    cleaningItemsWeekly.forEach(i => html += '<tr><td class="area-name">' + i[0] + '</td><td class="chem-name">' + i[1] + '</td>' + '<td><input type="checkbox"></td>'.repeat(7) + '</tr>');
+  }
+  html += '</tbody></table></div>';
+  return html;
+}
+
 function boot() {
   var menu = document.getElementById('menuContainer');
   var cats = {};
   ALL_FORMS.forEach(f => { if (!cats[f.cat]) cats[f.cat] = []; cats[f.cat].push(f); });
   
   for (var c in cats) {
-    var sec = document.createElement('div');
-    sec.className = 'category-section';
+    var sec = document.createElement('div'); sec.className = 'category-section';
     sec.innerHTML = '<div class="category-label">' + c + '</div>';
-    var grid = document.createElement('div');
-    grid.className = 'form-grid';
+    var grid = document.createElement('div'); grid.className = 'form-grid';
     cats[c].forEach(f => {
-      var card = document.createElement('div');
-      card.className = 'form-card';
+      var card = document.createElement('div'); card.className = 'form-card';
       card.onclick = () => showForm(f.id);
       card.innerHTML = '<div class="form-icon" style="background:#e8f5ee;color:#00703c;">\ud83d\udcc4</div><div class="form-info"><div class="form-name">' + f.name + '</div><div class="form-desc">Moriarty Group HACCP</div></div><div class="form-arrow">&#8250;</div>';
       grid.appendChild(card);
       
-      // CREATE FORM SCREEN
-      var screen = document.createElement('div');
-      screen.id = f.id; screen.className = 'form-screen';
-      var tableHtml = '<div class="week-table-wrap"><table class="week-table"><thead><tr><th class="product-col">Item</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>';
-      for(var i=1; i<=6; i++) tableHtml += '<tr><td class="product-name">Check Item ' + i + '</td>' + '<td><input type="text"></td>'.repeat(7) + '</tr>';
-      tableHtml += '</tbody></table></div>';
+      var screen = document.createElement('div'); screen.id = f.id; screen.className = 'form-screen';
+      var content = f.units ? buildTempTable(f.units) : (f.type ? buildCleanTable(f.type) : '<p>Table placeholder</p>');
       
       screen.innerHTML = 
         '<div class="form-header"><h2>' + f.name + '</h2><p>Moriarty Group Food Safety Management</p></div>' +
         '<div class="form-body">' +
-          '<div class="field-row">' +
-            '<div class="field-group"><label class="field-label">Week Ending</label><input type="date" class="field-input we-input"></div>' +
-            '<div class="field-group"><label class="field-label">Champion</label><input type="text" class="field-input fsc-input" placeholder="Name"></div>' +
-          '</div>' +
-          tableHtml +
+          '<div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input type="date" class="field-input we-input"></div>' +
+          '<div class="field-group"><label class="field-label">Champion</label><input type="text" class="field-input fsc-input" placeholder="Name"></div></div>' +
+          content +
+          '<div class="section-title">Corrective Action</div><textarea class="field-input" rows="3" placeholder="Record any corrective actions taken..."></textarea>' +
           '<div class="section-title">Signatures</div>' +
           '<div class="sig-box"><canvas id="sig-' + f.id + '"></canvas><div class="sig-clear" onclick="document.getElementById(\'sig-' + f.id + '\').getContext(\'2d\').clearRect(0,0,1000,1000)">Clear</div></div>' +
           '<button class="btn-save" onclick="saveForm(\'' + f.id + '\')">Save to Records</button>' +
         '</div>';
       document.getElementById('formContainer').appendChild(screen);
     });
-    sec.appendChild(grid);
-    menu.appendChild(sec);
+    sec.appendChild(grid); menu.appendChild(sec);
   }
-  
-  openDB().then(() => {
-    document.getElementById('statusBar').textContent = '\u25cf System Online';
-    var urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('viewRec')) showForm(ALL_FORMS.find(f => f.id === urlParams.get('formId'))?.id || ALL_FORMS[0].id);
-  });
+  openDB().then(() => { document.getElementById('statusBar').textContent = '\u25cf System Online'; });
 }
-
 boot();
 </script>
 </body>

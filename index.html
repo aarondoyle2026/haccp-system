@@ -1,88 +1,191 @@
 <!DOCTYPE html><html lang="en">
+
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
-<title>HACCP System - Moriarty Group</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Moriarty Group – HACCP System v2</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:100vh;}
-.top-nav{background:#00703c;color:white;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
-.nav-back{background:rgba(255,255,255,0.2);border:none;color:white;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit;display:none;}
-.nav-title{font-size:17px;font-weight:700;flex:1;}
-.nav-logo{font-size:11px;opacity:0.75;text-align:right;line-height:1.3;font-weight:600;}
-.status-bar{background:#005a30;color:white;text-align:center;padding:7px 16px;font-size:11px;font-family:'Courier New',monospace;letter-spacing:0.02em;}
-.status-bar.err{background:#b71c1c;}
-.main-content{padding:14px;}
-.cat-card{background:white;border-radius:12px;margin-bottom:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.05);border:1px solid #d8e8d8;}
-.cat-head{background:#1a1a1a;color:white;padding:12px 16px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;}
-.cat-body{padding:6px 0;}
-.form-link{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;border-bottom:1px solid #f0f0f0;}
-.form-link:last-child{border-bottom:none;}
-.form-link:active{background:#f8faf8;}
-.fl-icon{font-size:20px;flex-shrink:0;width:28px;text-align:center;}
-.fl-name{font-size:14px;font-weight:600;flex:1;}
-.fl-chevron{font-size:18px;color:#ccc;}
-.footer-links{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.footer-btn{background:white;border:1.5px solid #00703c;color:#00703c;border-radius:10px;padding:14px;text-align:center;font-weight:700;font-size:13px;cursor:pointer;text-decoration:none;}
-.footer-btn.primary{background:#00703c;color:white;}
-/* Form styles */
-.form-page{display:none;padding:14px;background:white;min-height:calc(100vh - 100px);}
-.form-header{margin-bottom:20px;border-bottom:2px solid #00703c;padding-bottom:12px;}
-.form-header h2{font-size:20px;font-weight:700;color:#00703c;margin-bottom:6px;}
-.form-header p{font-size:13px;color:#666;}
-.meta-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
-.field-box{display:flex;flex-direction:column;gap:5px;}
-.field-label{font-size:11px;font-weight:700;text-transform:uppercase;color:#888;}
-.field-input{border:1.5px solid #ddd;border-radius:8px;padding:11px;font-size:14px;font-family:inherit;width:100%;}
-.field-input:focus{border-color:#00703c;outline:none;}
-.table-wrap{overflow-x:auto;margin:0 -14px 20px;padding:0 14px;}
-table{width:100%;border-collapse:collapse;font-size:13px;}
-th{background:#00703c;color:white;padding:10px;text-align:left;font-weight:600;}
-td{border-bottom:1px solid #eee;padding:10px;}
-.cell-input{width:100%;border:none;background:#f8f8f8;padding:8px;border-radius:4px;font-size:13px;text-align:center;}
-.cell-input:focus{background:#fff;box-shadow:inset 0 0 0 1.5px #00703c;outline:none;}
-.sig-box{margin-bottom:20px;}
-.sig-canvas{border:1.5px dashed #ccc;border-radius:10px;background:#fafafa;width:100%;height:140px;touch-action:none;}
-.sig-controls{display:flex;justify-content:space-between;margin-top:6px;}
-.sig-clear{font-size:12px;color:#d32f2f;font-weight:600;cursor:pointer;padding:4px;}
-.photo-box{margin-bottom:25px;}
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(80px, 1fr));gap:10px;margin-top:10px;}
-.photo-item{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;border:1px solid #ddd;}
+body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:100vh;}
+.top-nav{background:#00703c;color:white;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.back-btn{background:rgba(255,255,255,0.2);border:none;color:white;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-family:inherit;display:none;}
+.nav-title{font-size:16px;font-weight:600;flex:1;}
+.nav-logo{font-size:12px;opacity:0.8;text-align:right;line-height:1.2;}
+#home{display:block;}
+.home-header{background:linear-gradient(135deg,#005a30,#00703c);color:white;padding:28px 20px 24px;text-align:center;}
+.home-header .brand{font-size:22px;font-weight:700;letter-spacing:1.5px;}
+.home-header .sub{font-size:12px;opacity:0.75;margin-top:2px;letter-spacing:2px;}
+.home-header .title{font-size:15px;font-weight:500;margin-top:10px;opacity:0.9;}
+.records-banner{background:#005a30;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-decoration:none;}
+.records-banner:active{background:#003d20;}
+.rb-left{display:flex;align-items:center;gap:10px;}
+.rb-icon{font-size:20px;}
+.rb-text{color:white;font-size:14px;font-weight:600;}
+.rb-sub{color:rgba(255,255,255,0.7);font-size:11px;margin-top:1px;}
+.rb-arrow{color:rgba(255,255,255,0.6);font-size:20px;}
+.category-section{padding:16px 16px 8px;}
+.category-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#666;padding:0 4px;margin-bottom:10px;}
+.form-grid{display:flex;flex-direction:column;gap:8px;}
+.form-card{background:white;border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;border:1px solid #d0d0d0;}
+.form-card:active{transform:scale(0.98);background:#e8f5ee;}
+.form-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.form-info{flex:1;}
+.form-name{font-size:14px;font-weight:600;color:#1a1a1a;}
+.form-desc{font-size:12px;color:#666;margin-top:2px;}
+.form-arrow{color:#666;font-size:16px;}
+.form-screen{display:none;padding-bottom:40px;}
+.form-header{background:white;border-bottom:3px solid #00703c;padding:16px;}
+.form-header h2{font-size:17px;font-weight:700;color:#005a30;}
+.form-header p{font-size:12px;color:#666;margin-top:4px;}
+.form-body{padding:16px;}
+.field-group{margin-bottom:16px;}
+.field-label{font-size:12px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block;}
+.field-input{width:100%;padding:10px 12px;border:1.5px solid #d0d0d0;border-radius:8px;font-size:14px;font-family:inherit;background:white;color:#1a1a1a;-webkit-appearance:none;}
+.field-input:focus{outline:none;border-color:#00703c;}
+.field-row{display:flex;gap:10px;}
+.field-row .field-group{flex:1;}
+.week-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;}
+.week-table{border-collapse:collapse;width:100%;min-width:600px;font-size:12px;}
+.week-table th{background:#00703c;color:white;padding:7px 5px;text-align:center;font-weight:600;font-size:11px;border:1px solid #005a30;white-space:nowrap;}
+.week-table th.product-col{background:#005a30;text-align:left;padding-left:8px;min-width:130px;}
+.week-table td{border:1px solid #d0d0d0;padding:4px 3px;text-align:center;vertical-align:middle;}
+.week-table td.product-name{font-size:11px;font-weight:600;text-align:left;padding:6px 8px;background:#e8f5ee;line-height:1.3;}
+.week-table td.product-name small{font-weight:400;color:#666;display:block;}
+.week-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;color:#1a1a1a;}
+.week-table input[type=text]:focus{outline:1px solid #00703c;border-radius:3px;background:#fffde7;}
+.temp-table th.unit-col{min-width:160px;text-align:left;padding-left:8px;}
+.temp-table th.temp-col{min-width:55px;}
+.temp-table td.unit-name{text-align:left;padding:6px 8px;font-size:11px;background:#fafafa;}
+.temp-table td.target{font-weight:600;color:#005a30;font-size:11px;background:#e8f5ee;}
+.log-table{border-collapse:collapse;width:100%;font-size:12px;}
+.log-table th{background:#00703c;color:white;padding:8px 6px;text-align:left;font-weight:600;font-size:11px;border:1px solid #005a30;}
+.log-table td{border:1px solid #d0d0d0;padding:4px;vertical-align:middle;}
+.log-table input[type=text]{width:100%;border:none;background:transparent;font-size:12px;font-family:inherit;padding:4px 2px;color:#1a1a1a;}
+.log-table tr:nth-child(even) td{background:#fafafa;}
+.clean-table{border-collapse:collapse;width:100%;min-width:420px;font-size:12px;}
+.clean-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:center;}
+.clean-table th.area-col{text-align:left;padding-left:8px;min-width:150px;}
+.clean-table th.chem-col{min-width:100px;text-align:left;padding-left:8px;}
+.clean-table th.day-col{min-width:32px;}
+.clean-table td{border:1px solid #d0d0d0;padding:5px 4px;text-align:center;vertical-align:middle;}
+.clean-table td.area-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;}
+.clean-table td.chem-name{text-align:left;padding:5px 8px;font-size:11px;color:#666;}
+.clean-section-header{background:#005a30!important;color:white!important;font-weight:700!important;font-size:11px!important;text-align:left!important;padding:5px 8px!important;}
+.clean-table input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:#00703c;}
+.clean-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;}
+.hourly-table{border-collapse:collapse;width:100%;font-size:11px;min-width:700px;}
+.hourly-table th{background:#00703c;color:white;padding:6px 4px;text-align:center;font-weight:600;font-size:10px;border:1px solid #005a30;white-space:nowrap;}
+.hourly-table th.time-col{min-width:45px;background:#005a30;}
+.hourly-table td{border:1px solid #d0d0d0;padding:3px 2px;text-align:center;vertical-align:middle;}
+.hourly-table td.time-cell{background:#e8f5ee!important;font-weight:600;font-size:11px;}
+.hourly-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:1px;}
+.gs-table{border-collapse:collapse;width:100%;font-size:12px;min-width:600px;}
+.gs-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:center;}
+.gs-table th.day-col{text-align:left;padding-left:8px;min-width:90px;}
+.gs-table td{border:1px solid #d0d0d0;padding:4px;text-align:center;vertical-align:middle;}
+.gs-table td.day-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;font-weight:600;}
+.gs-table td.week-header{background:#005a30!important;color:white!important;font-weight:700;font-size:11px;text-align:left;padding:5px 8px;}
+.gs-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;}
+.gs-table select{border:none;background:transparent;font-size:11px;font-family:inherit;width:100%;}
+.cook-table{border-collapse:collapse;width:100%;font-size:12px;min-width:550px;}
+.cook-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:left;padding-left:6px;}
+.cook-table td{border:1px solid #d0d0d0;padding:4px;vertical-align:middle;}
+.cook-table td.prod-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;}
+.cook-table td.section-hdr{background:#005a30!important;color:white!important;font-weight:700;font-size:11px;text-align:left;padding:5px 8px;}
+.cook-table input[type=text]{width:100%;border:none;background:transparent;font-size:11px;font-family:inherit;padding:2px;text-align:center;}
+.deli-trace-table{border-collapse:collapse;width:100%;font-size:11px;min-width:640px;}
+.deli-trace-table th{background:#00703c;color:white;padding:6px 4px;text-align:center;font-size:10px;font-weight:600;border:1px solid #005a30;white-space:nowrap;}
+.deli-trace-table th.prod-col{background:#005a30;text-align:left;padding-left:8px;min-width:120px;}
+.deli-trace-table td{border:1px solid #d0d0d0;padding:3px 2px;text-align:center;vertical-align:middle;}
+.deli-trace-table td.prod-name{text-align:left;padding:5px 8px;font-size:11px;font-weight:600;background:#e8f5ee;}
+.deli-trace-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:10px;font-family:inherit;padding:1px;}
+.compliance-zone{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.zone-badge{padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;}
+.zone-green{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;}
+.zone-orange{background:#fff3e0;color:#e65100;border:1px solid #ffcc80;}
+.zone-red{background:#ffebee;color:#c62828;border:1px solid #ef9a9a;}
+.compliance-table{border-collapse:collapse;width:100%;font-size:12px;}
+.compliance-table th{background:#00703c;color:white;padding:7px 6px;text-align:left;font-size:11px;font-weight:600;border:1px solid #005a30;}
+.compliance-table td{border:1px solid #d0d0d0;padding:6px;font-size:12px;vertical-align:middle;}
+.compliance-table td.dept{font-weight:700;color:#005a30;background:#e8f5ee;}
+.score-radio{display:flex;gap:6px;justify-content:center;}
+.score-radio label{cursor:pointer;display:flex;flex-direction:column;align-items:center;font-size:10px;gap:2px;}
+.score-radio input[type=radio]{accent-color:#00703c;}
+.max-row td{background:#f5f5f5;font-weight:600;font-size:11px;}
+.sig-box{border:2px dashed #d0d0d0;border-radius:8px;background:white;position:relative;overflow:hidden;}
+.sig-box canvas{display:block;width:100%;touch-action:none;}
+.sig-clear{position:absolute;top:6px;right:8px;background:rgba(255,255,255,0.9);border:1px solid #d0d0d0;border-radius:5px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit;color:#d32f2f;}
+.btn-save{background:#005a30;color:white;width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-bottom:10px;margin-top:14px;display:block;}
+.btn-save:active{background:#003d20;}
+.info-box{background:#e8f5ee;border-left:3px solid #00703c;border-radius:6px;padding:10px 12px;font-size:11px;color:#666;margin-bottom:14px;line-height:1.5;}
+.info-box strong{color:#1a1a1a;}
+.warn-box{background:#fff8e1;border-left:3px solid #e65100;border-radius:6px;padding:10px 12px;font-size:11px;color:#555;margin-bottom:14px;line-height:1.5;}
+.section-title{font-size:13px;font-weight:700;color:#005a30;margin:18px 0 10px;padding-bottom:6px;border-bottom:2px solid #00703c;}
+.photo-zone{margin-bottom:20px;}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(75px, 1fr));gap:8px;margin-top:10px;}
+.photo-item{aspect-ratio:1;border-radius:8px;overflow:hidden;border:1px solid #d0d0d0;position:relative;}
 .photo-item img{width:100%;height:100%;object-fit:cover;}
-.photo-del{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.5);color:white;border:none;width:20px;height:20px;border-radius:50%;font-size:12px;cursor:pointer;}
-.photo-add{aspect-ratio:1;border:2.5px dashed #ddd;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#888;cursor:pointer;}
-.photo-add span{font-size:24px;margin-bottom:2px;}
-.photo-add label{font-size:10px;font-weight:700;}
-.save-btn{width:100%;background:#00703c;color:white;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;margin-top:10px;box-shadow:0 4px 12px rgba(0,112,60,0.3);}
-.save-btn:active{transform:scale(0.98);opacity:0.9;}
+.photo-del{position:absolute;top:2px;right:2px;background:rgba(0,0,0,0.5);color:white;border:none;width:18px;height:18px;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;}
+.photo-add{aspect-ratio:1;border:2px dashed #d0d0d0;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#888;cursor:pointer;background:white;}
+.photo-add span{font-size:22px;margin-bottom:2px;}
+.photo-add label{font-size:9px;font-weight:700;text-transform:uppercase;}
 .ts-box{background:#f8faf8;border-radius:10px;padding:12px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;border:1px solid #e0eee0;}
 .ts-text{font-size:12px;color:#666;}
 .ts-text.recorded{color:#00703c;font-weight:700;}
 .ts-btn{background:white;border:1px solid #00703c;color:#00703c;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;}
+.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(100px);background:#1a1a1a;color:white;padding:12px 20px;border-radius:25px;font-size:13px;font-weight:600;z-index:9999;transition:transform 0.3s;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
 
 <div class="top-nav">
-  <button class="nav-back" id="backBtn" onclick="goBack()">&#8592; Back</button>
+  <button class="back-btn" id="backBtn" onclick="goBack()">&#8592; Back</button>
   <div class="nav-title" id="navTitle">HACCP System</div>
   <div class="nav-logo">MORIARTY<br>GROUP</div>
 </div>
 
 <div class="status-bar" id="statusBar">Connecting to database...</div>
 
-<div id="home" class="main-content">
-  <div id="formMenu"></div>
-  <div class="footer-links">
-    <a href="records.html" class="footer-btn primary">Audit Top Sheet</a>
-    <div class="footer-btn" onclick="location.reload()">Refresh App</div>
+<div id="home">
+  <div class="home-header">
+    <div class="brand">MORIARTY GROUP</div>
+    <div class="sub">EST. 1978</div>
+    <div class="title">Food Safety Management System</div>
   </div>
+  
+  <a href="records.html" class="records-banner">
+    <div class="rb-left">
+      <div class="rb-icon">&#128202;</div>
+      <div>
+        <div class="rb-text">Audit Top Sheet</div>
+        <div class="rb-sub">View weekly compliance records</div>
+      </div>
+    </div>
+    <div class="rb-arrow">&#8250;</div>
+  </a>
+
+  <div id="menuContainer"></div>
+  <div style="height:40px;"></div>
 </div>
 
 <div id="formContainer"></div>
 
+<div class="toast" id="toast"></div>
+
 <script>
+/* DATA DEFINITIONS */
+var deliTraceEggTuna = ['Eggs','Mayo','Egg Mayo','Tuna & Sweetcorn','Sweetcorn'];
+var breakfastItems = ['Sausages','Bacon','Pudding Black','Pudding White','Hash Browns','Eggs','Sm Sausage Roll','Lrg Sausage Roll','Pies C&M','Pies S&K','Fillet Plane','Fillet S/Fried','Fillets Hot Spicy','Wedges','Soup 1','Jambons','Chickens'];
+var lunchItems = ['Sm Sausage Roll','Wedges','Pop Chicken','Wings BBQ','Goujons','Fillets Plane','Fillets S/Fried','Fillets Hot Spicy','Veg Spring Rolls','Vol Au Vants','Bacon and cheese Bakers','Cottage pie','Honey and Mustard','Sausage Rolls','Sausage Rolls with Black Pudding'];
+var cleaningItemsDaily = [['Scales, bags, shelves','Sanitiser'],['Raw Servovers','Sanitiser, glass cleaner'],['Bins','Degreaser'],['Equipment/trays/chopping boards - raw & fish','Wash up liq'],['Fish equipment sink & shelf below','Wash up liq, Degreaser'],['Hot seal wrap unit','Sanitiser'],['SELs/Garnishing','Sanitiser'],['Stainless steel serveover','Stainless Steel spray'],['Hands sink/Requisites','Degreaser/sanitiser'],['Wooden block/Table legs','Block brush'],['Table tops','Sanitiser'],['Doors/handles','Sanitiser'],['Telephone','Sanitiser'],['Equipment sink & hand sink requisites - top and bottom','Wash up liq'],['Knife rack','Sanitiser'],['Scales','Sanitiser'],['Burger press','Wash up liq, degreaser'],['Mincer head','Wash up liq, degreaser'],['Mincer','Wash up liq, degreaser'],['Ice Machine','Stainless steel cleaner'],['Coldroom - floor, door handle, floor swept','Degreaser, Floorbrush'],['Rubber around fridge door','']];
+var cleaningItemsWeekly = [['Prep room racking','Degreaser'],['Serveover - Raw','Degreaser'],['Serveover - Fish','Degreaser'],['Prep area - walls & tables','Degreaser'],['Returns trolleys','Degreaser'],['Stainless steel - Raw','Stainless steel cleaner'],['Raw coldroom - floor, shelving','Degreaser'],['Display shelving - fish & raw','Degreaser'],['Stainless steel - Fish','Stainless steel'],['Ice Machine - presses inside and out including door handles','Defrosted/clean, Sanitiser']];
+var complianceDepts = [{name:'1. Serveover Raw/Fish',items:['Mince control','Fish Tracker','Temperature Checks','Daily cleaning schedule','Weekly cleaning schedule','Burger control sheet','PBOB Trace','Pork and Bacon Trace','Breaded chicken trace','Beef Trace']},{name:'2. Cold Deli',items:['Cooked meat tracker','Sandwich tracker','Salami & olive tracker','Savoury tracker','Salad tracker','Temp checks','Daily cleaning schedule','Weekly cleaning schedule']},{name:'3. Hot Food Bar/Bakery',items:['After cook sheet','Hot holding sheet','Temp checks bakery','Daily cleaning schedule','Weekly cleaning schedule']},{name:'4. Prepack Deli Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'5. Fruit & Veg Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'6. Dairy Food Safety',items:['Temperature Checks','Deep Clean']},{name:'7. Frozen Food Safety',items:['Load Levels','Temperature Checks','Deep clean UTD']},{name:'8. Goods Inwards Food Safety',items:['FSR1 - Fresh Van checks','FSR2 - Dry Grocery Van checks','Cleaning schedule - Daily','Cleaning schedule - Deep clean']}];
+
 var ALL_FORMS = [
   {id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},
   {id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},
@@ -127,11 +230,8 @@ var ALL_FORMS = [
   {id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}
 ];
 
-var cleaningItemsDaily = [['Scales, bags, shelves','Sanitiser'],['Raw Servovers','Sanitiser, glass cleaner'],['Bins','Degreaser'],['Equipment/trays/chopping boards - raw & fish','Wash up liq'],['Fish equipment sink & shelf below','Wash up liq, Degreaser'],['Hot seal wrap unit','Sanitiser'],['SELs/Garnishing','Sanitiser'],['Stainless steel serveover','Stainless Steel spray'],['Hands sink/Requisites','Degreaser/sanitiser'],['Wooden block/Table legs','Block brush'],['Table tops','Sanitiser'],['Doors/handles','Sanitiser'],['Telephone','Sanitiser'],['Equipment sink & hand sink requisites - top and bottom','Wash up liq'],['Knife rack','Sanitiser'],['Scales','Sanitiser'],['Burger press','Wash up liq, degreaser'],['Mincer head','Wash up liq, degreaser'],['Mincer','Wash up liq, degreaser'],['Ice Machine','Stainless steel cleaner'],['Coldroom - floor, door handle, floor swept','Degreaser, Floorbrush'],['Rubber around fridge door','']];
-var cleaningItemsWeekly = [['Prep room racking','Degreaser'],['Serveover - Raw','Degreaser'],['Serveover - Fish','Degreaser'],['Prep area - walls & tables','Degreaser'],['Returns trolleys','Degreaser'],['Stainless steel - Raw','Stainless steel cleaner'],['Raw coldroom - floor, shelving','Degreaser'],['Display shelving - fish & raw','Degreaser'],['Stainless steel - Fish','Stainless steel'],['Ice Machine - presses inside and out including door handles','Defrosted/clean, Sanitiser']];
-
 var DB_NAME = 'MoriartyHACCP', DB_VER = 1, db = null;
-var currentForm = null, formPhotos = {}, formTimestamps = {}, sigPads = {};
+var currentForm = null, formPhotos = {}, formTimestamps = {};
 
 function openDB() {
   return new Promise(function(res, rej) {
@@ -175,39 +275,31 @@ function getWeekKey() {
   return s.toISOString().split('T')[0];
 }
 
-/* Enhanced Scraping: Captures Label + Value */
+/* ENHANCED SCRAPING LOGIC */
 function scrapeFormData(formId) {
   var scr = document.getElementById(formId);
-  if (!scr) return {};
+  if (!scr) return [];
   var entries = [];
-  
-  // Scrape all relevant elements in order
   var elements = scr.querySelectorAll('input, select, textarea');
   for (var i = 0; i < elements.length; i++) {
     var el = elements[i];
-    if (el.type === 'file' || el.classList.contains('meta-field')) continue;
+    if (el.type === 'file' || el.classList.contains('fsc-input') || el.classList.contains('we-input')) continue;
     
-    // Try to find a label
     var label = '';
-    // 1. Check if it's in a table (find row header or previous cell)
     var td = el.closest('td');
     if (td) {
       var tr = td.closest('tr');
-      var th = tr.querySelector('th') || tr.querySelector('td:first-child');
+      var th = tr.querySelector('th') || tr.querySelector('td.unit-name') || tr.querySelector('td.product-name') || tr.querySelector('td.area-name') || tr.querySelector('td.prod-name') || tr.querySelector('td:first-child');
       if (th) label = th.textContent.trim();
-      // Add column context if possible
-      var cellIndex = td.cellIndex;
+      var cellIdx = td.cellIndex;
       var table = td.closest('table');
-      var headerRow = table.querySelector('thead tr') || table.querySelector('tr:first-child');
-      if (headerRow && headerRow.cells[cellIndex]) {
-        label += ' (' + headerRow.cells[cellIndex].textContent.trim() + ')';
-      }
+      var head = table.querySelector('thead tr') || table.querySelector('tr:first-child');
+      if (head && head.cells[cellIdx]) label += ' (' + head.cells[cellIdx].textContent.trim() + ')';
     }
-    // 2. Check for explicit label or placeholder
-    if (!label) label = el.placeholder || el.getAttribute('aria-label') || el.name || '';
+    if (!label) label = el.placeholder || el.name || 'Entry ' + (i+1);
     
     var val = (el.type === 'checkbox') ? el.checked : el.value;
-    entries.push({ label: label, value: val, type: el.type, id: el.id || i });
+    entries.push({ label: label, value: val, type: el.type });
   }
   return entries;
 }
@@ -219,44 +311,13 @@ function populateFormData(formId, entries) {
   var entryIdx = 0;
   for (var i = 0; i < elements.length; i++) {
     var el = elements[i];
-    if (el.type === 'file' || el.classList.contains('meta-field')) continue;
+    if (el.type === 'file' || el.classList.contains('fsc-input') || el.classList.contains('we-input')) continue;
     if (entryIdx < entries.length) {
       var entry = entries[entryIdx++];
       if (el.type === 'checkbox') el.checked = entry.value;
       else el.value = entry.value;
     }
   }
-}
-
-function initSig(id) {
-  var canvas = document.getElementById(id);
-  if (!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var drawing = false;
-  
-  function getPos(e) {
-    var rect = canvas.getBoundingClientRect();
-    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    return { x: clientX - rect.left, y: clientY - rect.top };
-  }
-  
-  function start(e) { drawing = true; var p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); }
-  function move(e) { if (!drawing) return; var p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); }
-  function stop() { drawing = false; }
-  
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-  ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#000';
-  
-  canvas.addEventListener('mousedown', start);
-  canvas.addEventListener('mousemove', move);
-  window.addEventListener('mouseup', stop);
-  canvas.addEventListener('touchstart', start);
-  canvas.addEventListener('touchmove', move);
-  canvas.addEventListener('touchend', stop);
-  
-  sigPads[id] = { canvas: canvas, ctx: ctx, clear: function() { ctx.clearRect(0,0,canvas.width,canvas.height); } };
 }
 
 function showForm(id) {
@@ -271,17 +332,15 @@ function showForm(id) {
   document.getElementById('navTitle').textContent = h2 ? h2.textContent : id;
   window.scrollTo(0,0);
   
-  // Check for "View Mode" (from URL)
   var urlParams = new URLSearchParams(window.location.search);
-  var viewRecId = urlParams.get('viewRec');
+  var viewId = urlParams.get('viewRec');
   
-  if (viewRecId) {
+  if (viewId) {
     dbGetAll('records').then(function(recs) {
-      var rec = recs.find(r => r.id == viewRecId);
+      var rec = recs.find(r => r.id == viewId);
       if (rec && rec.formData) populateFormData(id, rec.formData);
     });
   } else {
-    // Standard Load: Latest for current week
     var wk = getWeekKey();
     dbGetAll('records').then(function(recs) {
       var latest = null;
@@ -330,77 +389,95 @@ function saveForm(formId) {
     savedAt: Date.now(),
     champion: champion,
     weekEnding: weekEnding,
-    timestamp: new Date().toLocaleString(),
+    timestamp: new Date().toLocaleString('en-IE'),
     formData: scrapeFormData(formId),
     signatures: signatures,
     photos: formPhotos[formId] || []
   };
 
   dbPut('records', record).then(function() {
-    alert('Record Saved Successfully');
-    goBack();
+    showToast('\u2705 Record Saved');
+    setTimeout(goBack, 800);
   });
 }
 
-/* Generate all forms */
-function boot() {
-  var menu = document.getElementById('formMenu');
-  var cats = {};
-  ALL_FORMS.forEach(function(f) {
-    if (!cats[f.cat]) cats[f.cat] = [];
-    cats[f.cat].push(f);
-  });
+function initSig(id) {
+  var canvas = document.getElementById(id);
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var drawing = false;
+  canvas.width = canvas.offsetWidth;
+  canvas.height = 140;
+  ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#000';
+  
+  function getPos(e) {
+    var rect = canvas.getBoundingClientRect();
+    var cx = e.touches ? e.touches[0].clientX : e.clientX;
+    var cy = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: cx - rect.left, y: cy - rect.top };
+  }
+  canvas.addEventListener('mousedown', function(e) { drawing = true; var p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+  canvas.addEventListener('mousemove', function(e) { if (!drawing) return; var p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+  window.addEventListener('mouseup', function() { drawing = false; });
+  canvas.addEventListener('touchstart', function(e) { drawing = true; var p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); });
+  canvas.addEventListener('touchmove', function(e) { if (!drawing) return; var p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); });
+  canvas.addEventListener('touchend', function() { drawing = false; });
+}
 
-  for (var cat in cats) {
-    var card = document.createElement('div');
-    card.className = 'cat-card';
-    card.innerHTML = '<div class="cat-head">' + cat + '</div>';
-    var body = document.createElement('div');
-    body.className = 'cat-body';
-    cats[cat].forEach(function(f) {
-      var link = document.createElement('div');
-      link.className = 'form-link';
-      link.onclick = function() { showForm(f.id); };
-      link.innerHTML = '<div class="fl-icon">\ud83d\udcc4</div><div class="fl-name">' + f.name + '</div><div class="fl-chevron">\u203a</div>';
-      body.appendChild(link);
+function showToast(m) {
+  var t = document.getElementById('toast');
+  t.textContent = m; t.className = 'toast show';
+  setTimeout(function() { t.className = 'toast'; }, 2500);
+}
+
+/* UI BOOTSTRAP */
+function boot() {
+  var menu = document.getElementById('menuContainer');
+  var cats = {};
+  ALL_FORMS.forEach(f => { if (!cats[f.cat]) cats[f.cat] = []; cats[f.cat].push(f); });
+  
+  for (var c in cats) {
+    var sec = document.createElement('div');
+    sec.className = 'category-section';
+    sec.innerHTML = '<div class="category-label">' + c + '</div>';
+    var grid = document.createElement('div');
+    grid.className = 'form-grid';
+    cats[c].forEach(f => {
+      var card = document.createElement('div');
+      card.className = 'form-card';
+      card.onclick = () => showForm(f.id);
+      card.innerHTML = '<div class="form-icon" style="background:#e8f5ee;color:#00703c;">\ud83d\udcc4</div><div class="form-info"><div class="form-name">' + f.name + '</div><div class="form-desc">Moriarty Group HACCP</div></div><div class="form-arrow">&#8250;</div>';
+      grid.appendChild(card);
       
-      // Create Form Page
-      var page = document.createElement('div');
-      page.id = f.id;
-      page.className = 'form-page';
-      page.innerHTML = 
-        '<div class="form-header"><h2>' + f.name + '</h2><p>Moriarty Group HACCP Record</p></div>' +
-        '<div class="meta-row">' +
-          '<div class="field-box"><label class="field-label">Week Ending</label><input type="date" class="field-input we-input"></div>' +
-          '<div class="field-box"><label class="field-label">Champion</label><input type="text" class="field-input fsc-input" placeholder="Name"></div>' +
-        '</div>' +
-        '<div id="table-' + f.id + '"></div>' +
-        '<div class="sig-box"><label class="field-label">Signature</label><canvas id="sig-' + f.id + '" class="sig-canvas"></canvas></div>' +
-        '<button class="save-btn" onclick="saveForm(\'' + f.id + '\')">Save to Records</button>';
-      document.getElementById('formContainer').appendChild(page);
+      // CREATE FORM SCREEN
+      var screen = document.createElement('div');
+      screen.id = f.id; screen.className = 'form-screen';
+      var tableHtml = '<div class="week-table-wrap"><table class="week-table"><thead><tr><th class="product-col">Item</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>';
+      for(var i=1; i<=6; i++) tableHtml += '<tr><td class="product-name">Check Item ' + i + '</td>' + '<td><input type="text"></td>'.repeat(7) + '</tr>';
+      tableHtml += '</tbody></table></div>';
       
-      // Dummy table for demonstration
-      var table = '<div class="table-wrap"><table><thead><tr><th>Item</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>';
-      for(var i=0; i<5; i++) {
-        table += '<tr><td>Item '+(i+1)+'</td>' + '<td><input class="cell-input"></td>'.repeat(7) + '</tr>';
-      }
-      table += '</tbody></table></div>';
-      document.getElementById('table-' + f.id).innerHTML = table;
+      screen.innerHTML = 
+        '<div class="form-header"><h2>' + f.name + '</h2><p>Moriarty Group Food Safety Management</p></div>' +
+        '<div class="form-body">' +
+          '<div class="field-row">' +
+            '<div class="field-group"><label class="field-label">Week Ending</label><input type="date" class="field-input we-input"></div>' +
+            '<div class="field-group"><label class="field-label">Champion</label><input type="text" class="field-input fsc-input" placeholder="Name"></div>' +
+          '</div>' +
+          tableHtml +
+          '<div class="section-title">Signatures</div>' +
+          '<div class="sig-box"><canvas id="sig-' + f.id + '"></canvas><div class="sig-clear" onclick="document.getElementById(\'sig-' + f.id + '\').getContext(\'2d\').clearRect(0,0,1000,1000)">Clear</div></div>' +
+          '<button class="btn-save" onclick="saveForm(\'' + f.id + '\')">Save to Records</button>' +
+        '</div>';
+      document.getElementById('formContainer').appendChild(screen);
     });
-    card.appendChild(body);
-    menu.appendChild(card);
+    sec.appendChild(grid);
+    menu.appendChild(sec);
   }
   
-  openDB().then(function() {
+  openDB().then(() => {
     document.getElementById('statusBar').textContent = '\u25cf System Online';
     var urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('viewRec')) {
-      var recId = urlParams.get('viewRec');
-      dbGetAll('records').then(function(recs) {
-        var rec = recs.find(r => r.id == recId);
-        if (rec) showForm(rec.formId);
-      });
-    }
+    if (urlParams.has('viewRec')) showForm(ALL_FORMS.find(f => f.id === urlParams.get('formId'))?.id || ALL_FORMS[0].id);
   });
 }
 

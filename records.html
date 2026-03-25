@@ -1,5 +1,4 @@
 <!DOCTYPE html><html lang="en">
-
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
@@ -14,130 +13,51 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .nav-logo{font-size:11px;opacity:0.75;text-align:right;line-height:1.3;font-weight:600;}
 .status-bar{background:#005a30;color:white;text-align:center;padding:7px 16px;font-size:11px;font-family:'Courier New',monospace;letter-spacing:0.02em;}
 .status-bar.err{background:#b71c1c;}
-/* Week card */
-.week-card{margin:14px 14px 0;background:#00703c;border-radius:12px;padding:14px 16px;color:white;}
-.wc-label{font-size:10px;font-weight:700;letter-spacing:0.1em;opacity:0.75;text-transform:uppercase;}
-.wc-week{font-size:18px;font-weight:700;margin-top:3px;}
-.wc-row{display:flex;justify-content:space-between;align-items:flex-end;margin-top:6px;}
-.wc-pct{font-size:32px;font-weight:700;line-height:1;}
-.wc-pct-label{font-size:11px;opacity:0.75;margin-top:2px;}
-.wc-right{text-align:right;}
-.wc-count{font-size:13px;font-weight:600;}
-.wc-closes{font-size:11px;opacity:0.75;margin-top:2px;}
-.prog-wrap{margin:10px 14px 0;background:white;border-radius:8px;overflow:hidden;height:10px;}
-.prog-fill{height:100%;background:#00703c;border-radius:8px;transition:width 0.4s;}
-/* Category sections */
-.section{margin:12px 14px 0;}
-.section-head{background:#1a1a1a;color:white;padding:9px 14px;border-radius:8px 8px 0 0;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;}
-.section-head-pct{font-size:12px;font-weight:700;opacity:0.8;}
-/* Form rows */
-.form-row{background:white;border-left:1px solid #d8e8d8;border-right:1px solid #d8e8d8;border-bottom:1px solid #ececec;padding:12px 14px;}
-.form-row:last-child{border-bottom:1px solid #d8e8d8;border-radius:0 0 8px 8px;}
-.form-row.done{border-left:3px solid #00703c;}
-.form-row.missing{border-left:3px solid #e65100;}
-.form-row-top{display:flex;align-items:center;gap:10px;cursor:pointer;}
-.form-row.missing .form-row-top{cursor:default;}
-.fr-icon{font-size:18px;flex-shrink:0;width:24px;text-align:center;}
-.fr-info{flex:1;min-width:0;}
-.fr-name{font-size:13px;font-weight:600;color:#1a1a1a;}
-.fr-meta{font-size:11px;color:#666;margin-top:2px;font-family:'Courier New',monospace;}
-.fr-missing{font-size:11px;color:#e65100;font-weight:600;margin-top:2px;}
-.fr-chevron{font-size:18px;color:#aaa;transition:transform 0.2s;flex-shrink:0;line-height:1;}
+.main-content{padding:14px;}
+.section{margin-bottom:14px;}
+.section-head{background:#1a1a1a;color:white;padding:10px 16px;border-radius:10px 10px 0 0;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;display:flex;justify-content:space-between;}
+.form-row{background:white;border-bottom:1px solid #eee;padding:14px 16px;border-left:1px solid #d8e8d8;border-right:1px solid #d8e8d8;}
+.form-row:last-child{border-bottom:1px solid #d8e8d8;border-radius:0 0 10px 10px;}
+.form-row.done{border-left:4px solid #00703c;}
+.fr-top{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.fr-icon{font-size:18px;color:#00703c;}
+.fr-info{flex:1;}
+.fr-name{font-size:14px;font-weight:600;}
+.fr-meta{font-size:11px;color:#666;margin-top:2px;}
+.fr-chevron{font-size:18px;color:#ccc;transition:transform 0.2s;}
 .fr-chevron.open{transform:rotate(90deg);}
-/* Expanded detail */
-.rec-detail{display:none;margin-top:12px;border-top:2px solid #e8f5ee;padding-top:12px;}
+.rec-detail{display:none;padding-top:14px;margin-top:14px;border-top:1px solid #eee;}
 .rec-detail.open{display:block;}
-/* Detail metadata grid */
-.rec-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
-.rmc{background:#f8faf8;border-radius:8px;padding:9px 11px;}
-.rmc-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:4px;}
-.rmc-value{font-size:12px;color:#1a1a1a;line-height:1.4;}
-.rmc-value.ok{color:#00703c;font-weight:700;font-family:'Courier New',monospace;}
-.rmc-value.na{color:#bbb;font-style:italic;}
-/* Corrective action box */
-.rec-ca{background:#fff8e1;border-left:3px solid #e65100;border-radius:6px;padding:9px 12px;margin-bottom:10px;}
-.rec-ca-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#e65100;margin-bottom:4px;}
-.rec-ca-value{font-size:12px;color:#1a1a1a;white-space:pre-wrap;line-height:1.5;}
-.rec-ca-none{font-size:12px;color:#bbb;font-style:italic;}
-/* Signatures */
-.rec-sigs{margin-bottom:10px;}
-.rec-sigs-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:6px;}
-.rec-sigs-row{display:flex;flex-wrap:wrap;gap:8px;}
-.rec-sig-item{text-align:center;}
-.rec-sig-img{display:block;width:90px;height:45px;object-fit:contain;background:white;border:1px solid #ddd;border-radius:6px;cursor:pointer;}
-.rec-sig-name{font-size:9px;color:#999;margin-top:3px;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.rec-sig-none{font-size:11px;color:#bbb;font-style:italic;}
-/* Photos */
-.rec-photos{margin-bottom:10px;}
-.rec-photos-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:6px;}
-.rec-photo-row{display:flex;flex-wrap:wrap;gap:8px;}
-.rec-photo-thumb{width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid #d0d0d0;cursor:pointer;}
-.rec-photo-none{font-size:11px;color:#bbb;font-style:italic;}
-/* Delete */
-.rec-delete-btn{width:100%;padding:9px;background:white;border:1.5px solid #d32f2f;color:#d32f2f;border-radius:8px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:4px;}
-/* Previous weeks accordion */
-.prev-header{margin:20px 14px 6px;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;}
-.acc-item{margin:6px 14px 0;border-radius:10px;overflow:hidden;border:1.5px solid #d0ddd0;}
-.acc-trigger{background:white;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;}
-.acc-trigger:active{background:#f0f7f0;}
-.acc-left{flex:1;}
-.acc-week{font-size:13px;font-weight:700;color:#1a1a1a;}
-.acc-sub{font-size:11px;color:#666;margin-top:2px;}
-.acc-badge{border-radius:12px;padding:3px 10px;font-size:11px;font-weight:700;flex-shrink:0;}
-.acc-badge.full{background:#e8f5ee;color:#00703c;}
-.acc-badge.partial{background:#fff3e0;color:#e65100;}
-.acc-badge.empty{background:#f5f5f5;color:#aaa;}
-.acc-chevron{font-size:18px;color:#aaa;transition:transform 0.2s;line-height:1;flex-shrink:0;}
-.acc-chevron.open{transform:rotate(90deg);}
-.acc-body{display:none;border-top:1px solid #e8e8e8;background:#fafafa;padding-bottom:8px;}
-.acc-body.open{display:block;}
-/* Tools */
-.tools-section{margin:20px 14px 0;}
-.tools-title{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;margin-bottom:8px;}
-.tools-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.tool-btn{background:white;border:1.5px solid #c8d8c8;border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;font-family:'Inter',sans-serif;}
-.tool-btn:active{border-color:#00703c;background:#e8f5ee;}
-.tb-icon{font-size:24px;margin-bottom:5px;}
-.tb-label{font-size:12px;font-weight:700;color:#1a1a1a;}
-.tb-sub{font-size:10px;color:#888;margin-top:2px;}
-.footer-space{height:40px;}
-/* Toast */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);background:#1a1a1a;color:white;padding:13px 22px;border-radius:24px;font-size:13px;font-weight:600;z-index:9999;transition:transform 0.3s;white-space:nowrap;pointer-events:none;}
-.toast.show{transform:translateX(-50%) translateY(0);}
-/* Lightbox */
-.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;align-items:center;justify-content:center;flex-direction:column;}
-.lightbox.open{display:flex;}
-.lightbox img{max-width:95vw;max-height:80vh;border-radius:8px;object-fit:contain;}
-.lb-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;font-family:inherit;}
+.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.rg-item{background:#f8faf8;padding:10px;border-radius:8px;}
+.rg-label{font-size:9px;font-weight:700;color:#999;text-transform:uppercase;margin-bottom:4px;}
+.rg-value{font-size:12px;font-weight:600;}
+.data-snapshot{background:#f9f9f9;border:1px solid #eee;border-radius:10px;padding:12px;margin-bottom:14px;}
+.ds-label{font-size:10px;font-weight:700;color:#00703c;text-transform:uppercase;margin-bottom:10px;border-bottom:1px solid #e0eee0;padding-bottom:6px;}
+.ds-list{display:grid;grid-template-columns:1fr;gap:6px;}
+.ds-entry{display:flex;justify-content:space-between;font-size:12px;border-bottom:1px dashed #eee;padding-bottom:4px;}
+.ds-entry:last-child{border-bottom:none;}
+.ds-key{color:#666;font-weight:500;max-width:70%;}
+.ds-val{font-weight:700;color:#1a1a1a;}
+.sig-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.sig-item{text-align:center;background:white;border:1px solid #ddd;border-radius:8px;padding:6px;}
+.sig-img{height:50px;display:block;margin:0 auto;}
+.sig-label{font-size:9px;color:#999;margin-top:4px;}
+.view-btn{width:100%;background:#00703c;color:white;border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:8px;text-decoration:none;display:block;text-align:center;}
+.del-btn{width:100%;background:white;color:#d32f2f;border:1.5px solid #d32f2f;border-radius:8px;padding:10px;font-size:12px;font-weight:700;cursor:pointer;}
 </style>
 </head>
 <body>
 
 <div class="top-nav">
-  <button class="nav-back" id="btnBack">&#8592; Forms</button>
-  <div class="nav-title">&#128202; Audit Top Sheet</div>
+  <button class="nav-back" onclick="location.href='index.html'">&#8592; Forms</button>
+  <div class="nav-title">Audit Top Sheet</div>
   <div class="nav-logo">MORIARTY<br>GROUP</div>
 </div>
 
-<div class="status-bar" id="statusBar">Connecting to database...</div>
-<div id="mainContent"></div>
-<div id="prevWeeksSection"></div>
+<div class="status-bar" id="statusBar">Loading records...</div>
 
-<div class="tools-section">
-  <div class="tools-title">Data Tools</div>
-  <div class="tools-row">
-    <div class="tool-btn" id="btnBackup"><div class="tb-icon">&#128190;</div><div class="tb-label">Backup</div><div class="tb-sub">Download JSON</div></div>
-    <div class="tool-btn" id="btnRestore"><div class="tb-icon">&#128194;</div><div class="tb-label">Restore</div><div class="tb-sub">Import backup</div></div>
-  </div>
-</div>
-
-<input type="file" id="fileInput" accept=".json" style="display:none">
-<div class="footer-space"></div>
-<div class="toast" id="toast"></div>
-<div class="lightbox" id="lightbox">
-  <button class="lb-close" id="lbClose">&#10005;</button>
-  <img id="lbImg" src="" alt="">
-</div>
+<div id="mainContent" class="main-content"></div>
 
 <script>
 var ALL_FORMS = [
@@ -184,76 +104,13 @@ var ALL_FORMS = [
   {id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}
 ];
 
-var DB_NAME = 'MoriartyHACCP', DB_VER = 1, db = null, allRecords = [];
+var DB_NAME = 'MoriartyHACCP', DB_VER = 1, db = null;
 
-function escapeHtml(str) {
-  return String(str == null ? '' : str)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
-
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show';
-  setTimeout(function() { t.className = 'toast'; }, 3000);
-}
-
-function getWeekKey() {
-  var d = new Date();
-  var s = new Date(d);
-  s.setDate(d.getDate() - d.getDay());
-  s.setHours(0, 0, 0, 0);
-  return s.toISOString().split('T')[0];
-}
-
-function weekLabel(wk) {
-  var s = new Date(wk + 'T00:00:00');
-  var e = new Date(s);
-  e.setDate(s.getDate() + 6);
-  var opts = {day:'numeric', month:'short'};
-  return s.toLocaleDateString('en-IE', opts) + ' \u2013 ' + e.toLocaleDateString('en-IE', opts) + ' ' + e.getFullYear();
-}
-
-function satMidnight(wk) {
-  var s = new Date(wk + 'T00:00:00');
-  s.setDate(s.getDate() + 6);
-  s.setHours(23, 59, 59, 0);
-  return s;
-}
-
-function timeRemaining(wk) {
-  var diff = satMidnight(wk) - new Date();
-  if (diff <= 0) return 'Week ended';
-  var d = Math.floor(diff / 86400000);
-  var h = Math.floor((diff % 86400000) / 3600000);
-  var m = Math.floor((diff % 3600000) / 60000);
-  return (d > 0 ? d + 'd ' : '') + h + 'h ' + m + 'm until close';
-}
-
-/* ---- IndexedDB ---- */
 function openDB() {
   return new Promise(function(res, rej) {
-    var done = false;
-    var timer = setTimeout(function() {
-      if (done) return; done = true;
-      rej(new Error('Database timed out. Safari: Settings > Safari > uncheck Block All Cookies, then refresh.'));
-    }, 5000);
-    var req;
-    try { req = indexedDB.open(DB_NAME, DB_VER); }
-    catch(e) { clearTimeout(timer); rej(e); return; }
-    req.onupgradeneeded = function(e) {
-      var d = e.target.result;
-      if (!d.objectStoreNames.contains('records')) {
-        var s = d.createObjectStore('records', {keyPath:'id'});
-        s.createIndex('formId','formId',{unique:false});
-        s.createIndex('weekKey','weekKey',{unique:false});
-      }
-      if (!d.objectStoreNames.contains('weeks')) d.createObjectStore('weeks', {keyPath:'weekKey'});
-    };
-    req.onsuccess = function(e) { if (done) return; done=true; clearTimeout(timer); db=e.target.result; res(db); };
-    req.onerror = function(e) { if (done) return; done=true; clearTimeout(timer); rej(e.target.error); };
-    req.onblocked = function() { if (done) return; done=true; clearTimeout(timer); rej(new Error('Database blocked. Close other tabs and refresh.')); };
+    var req = indexedDB.open(DB_NAME, DB_VER);
+    req.onsuccess = function(e) { db = e.target.result; res(db); };
+    req.onerror = function(e) { rej(e.target.error); };
   });
 }
 
@@ -266,383 +123,106 @@ function dbGetAll(store) {
   });
 }
 
-function dbDelete(store, key) {
+function dbDelete(store, id) {
   return new Promise(function(res, rej) {
     var tx = db.transaction(store, 'readwrite');
-    tx.objectStore(store).delete(key);
+    tx.objectStore(store).delete(id);
     tx.oncomplete = res;
-    tx.onerror = function(e) { rej(e.target.error); };
   });
 }
 
-function dbPut(store, obj) {
-  return new Promise(function(res, rej) {
-    var tx = db.transaction(store, 'readwrite');
-    tx.objectStore(store).put(obj);
-    tx.oncomplete = res;
-    tx.onerror = function(e) { rej(e.target.error); };
-  });
-}
-
-/* ---- Build latest-per-form map for a week ---- */
-function buildByForm(recs, wk) {
-  var byForm = {};
-  for (var i = 0; i < recs.length; i++) {
-    var r = recs[i];
-    if (r.weekKey !== wk) continue;
-    if (!byForm[r.formId] || r.savedAt > byForm[r.formId].savedAt) byForm[r.formId] = r;
-  }
-  return byForm;
-}
-
-function buildSavedDataView(rec) {
-  if (!rec.formData) return '';
-  var html = '<div style="margin-top:10px; background:#f9f9f9; padding:10px; border-radius:8px; border:1px solid #eee;">';
-  html += '<div style="font-size:10px; font-weight:700; text-transform:uppercase; color:#999; margin-bottom:8px;">Form Data Snapshot</div>';
-  
-  if (rec.formData.inputs && rec.formData.inputs.length) {
-    var sample = rec.formData.inputs.filter(v => v.trim() !== '').slice(0, 15).join(', ');
-    if (rec.formData.inputs.length > 15) sample += '...';
-    html += '<div style="font-size:11px; margin-bottom:4px;"><strong>Recorded Values:</strong> ' + escapeHtml(sample || 'No text data') + '</div>';
-  }
-  
-  if (rec.formData.checkboxes && rec.formData.checkboxes.length) {
-    var done = rec.formData.checkboxes.filter(c => c).length;
-    html += '<div style="font-size:11px; margin-bottom:4px;"><strong>Tasks Completed:</strong> ' + done + ' of ' + rec.formData.checkboxes.length + '</div>';
-  }
-
-  html += '</div>';
-  return html;
-}
-
-/* ---- Render expanded record detail ---- */
 function buildRecordDetail(rec) {
-  var html = '';
-
-  /* Metadata grid */
-  var dt = new Date(rec.savedAt);
-  var dtStr = dt.toLocaleString('en-IE', {day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', hour12:false});
-  html += '<div class="rec-meta-grid">';
-  html += '<div class="rmc"><div class="rmc-label">Submitted</div><div class="rmc-value">' + escapeHtml(dtStr) + '</div></div>';
-  html += '<div class="rmc"><div class="rmc-label">Food Safety Champion</div><div class="rmc-value ' + (rec.champion ? 'ok' : 'na') + '">' + escapeHtml(rec.champion || 'Not recorded') + '</div></div>';
-  html += '<div class="rmc"><div class="rmc-label">Recorded Timestamp</div><div class="rmc-value ' + (rec.timestamp ? 'ok' : 'na') + '">' + escapeHtml(rec.timestamp || 'Not recorded') + '</div></div>';
-  html += '<div class="rmc"><div class="rmc-label">Week Ending</div><div class="rmc-value">' + escapeHtml(rec.weekEnding || '\u2014') + '</div></div>';
+  var html = '<div class="rec-detail" id="detail-' + rec.id + '">';
+  
+  // Metadata Grid
+  html += '<div class="rec-grid">';
+  html += '<div class="rg-item"><div class="rg-label">Food Safety Champion</div><div class="rg-value">' + (rec.champion || 'Not set') + '</div></div>';
+  html += '<div class="rg-item"><div class="rg-label">Recorded At</div><div class="rg-value">' + rec.timestamp + '</div></div>';
   html += '</div>';
-
-  /* Corrective action */
-  if (rec.correctiveAction && rec.correctiveAction.trim()) {
-    html += '<div class="rec-ca"><div class="rec-ca-label">&#9888;&#65039; Corrective Action Notes</div><div class="rec-ca-value">' + escapeHtml(rec.correctiveAction) + '</div></div>';
+  
+  // Data Snapshot with Labels
+  if (rec.formData && rec.formData.length) {
+    html += '<div class="data-snapshot"><div class="ds-label">Recorded Entries</div><div class="ds-list">';
+    rec.formData.forEach(function(entry) {
+      if (entry.value === "" || entry.value === false) return;
+      var valDisplay = entry.value === true ? '✅' : entry.value;
+      html += '<div class="ds-entry"><span class="ds-key">' + (entry.label || 'Field') + '</span><span class="ds-val">' + valDisplay + '</span></div>';
+    });
+    html += '</div></div>';
   }
-
-  /* Form Data Summary */
-  html += buildSavedDataView(rec);
-
-  /* Signatures */
-  html += '<div class="rec-sigs"><div class="rec-sigs-label">&#9999;&#65039; Captured Signatures</div>';
+  
+  // Signatures
   if (rec.signatures && rec.signatures.length) {
-    var signed = [];
-    for (var si = 0; si < rec.signatures.length; si++) {
-      if (rec.signatures[si].hasSignature && rec.signatures[si].dataUrl) signed.push(rec.signatures[si]);
-    }
-    if (signed.length) {
-      html += '<div class="rec-sigs-row">';
-      for (var sgi = 0; sgi < signed.length; sgi++) {
-        var lbl = signed[sgi].id.replace(/^sig-/, '').replace(/-/g, ' ');
-        html += '<div class="rec-sig-item">';
-        html += '<img class="rec-sig-img" src="' + signed[sgi].dataUrl + '" alt="Sig" data-lb="' + signed[sgi].dataUrl + '">';
-        html += '<div class="rec-sig-name">' + escapeHtml(lbl) + '</div>';
-        html += '</div>';
-      }
-      html += '</div>';
-      var unsigned = rec.signatures.length - signed.length;
-      if (unsigned > 0) html += '<div class="rec-sig-none" style="margin-top:4px">' + unsigned + ' signature field' + (unsigned > 1 ? 's' : '') + ' left blank</div>';
-    } else {
-      html += '<div class="rec-sig-none">No signatures captured</div>';
-    }
-  } else {
-    html += '<div class="rec-sig-none">No signature data found</div>';
-  }
-  html += '</div>';
-
-  /* Photos */
-  html += '<div class="rec-photos"><div class="rec-photos-label">&#128247; Photo Evidence</div>';
-  if (rec.photos && rec.photos.length) {
-    html += '<div class="rec-photo-row">';
-    for (var pi = 0; pi < rec.photos.length; pi++) {
-      html += '<img class="rec-photo-thumb" src="' + rec.photos[pi].dataUrl + '" alt="Photo" data-lb="' + rec.photos[pi].dataUrl + '">';
-    }
+    html += '<div class="sig-row">';
+    rec.signatures.forEach(function(sig) {
+      if (!sig.dataUrl) return;
+      html += '<div class="sig-item"><img class="sig-img" src="' + sig.dataUrl + '"><div class="sig-label">Signature</div></div>';
+    });
     html += '</div>';
-  } else {
-    html += '<div class="rec-photo-none">No photos attached</div>';
   }
+  
+  // Links & Actions
+  html += '<a href="index.html?viewRec=' + rec.id + '" class="view-btn">View Full Sheet</a>';
+  html += '<button class="del-btn" onclick="deleteRecord(' + rec.id + ')">Delete Record</button>';
+  
   html += '</div>';
-
-  /* Delete */
-  html += '<button class="rec-delete-btn" data-delid="' + rec.id + '">&#128465; Delete this record</button>';
   return html;
 }
 
-/* ---- Attach listeners to a rendered container ---- */
-function attachListeners(container) {
-  /* Expand/collapse */
-  var rows = container.querySelectorAll('.form-row.done');
-  for (var i = 0; i < rows.length; i++) {
-    (function(row) {
-      var top = row.querySelector('.form-row-top');
-      var detail = row.querySelector('.rec-detail');
-      var chev = row.querySelector('.fr-chevron');
-      if (!top || !detail) return;
-      top.addEventListener('click', function() {
-        var open = detail.className.indexOf('open') !== -1;
-        detail.className = open ? 'rec-detail' : 'rec-detail open';
-        chev.className = open ? 'fr-chevron' : 'fr-chevron open';
-      });
-    })(rows[i]);
-  }
-
-  /* Lightbox for photos and signatures */
-  var lbItems = container.querySelectorAll('[data-lb]');
-  for (var li = 0; li < lbItems.length; li++) {
-    (function(el) {
-      el.addEventListener('click', function() {
-        document.getElementById('lbImg').src = el.getAttribute('data-lb');
-        document.getElementById('lightbox').className = 'lightbox open';
-      });
-    })(lbItems[li]);
-  }
-
-  /* Delete buttons */
-  var delBtns = container.querySelectorAll('.rec-delete-btn');
-  for (var di = 0; di < delBtns.length; di++) {
-    (function(btn) {
-      btn.addEventListener('click', function() {
-        var id = parseInt(btn.getAttribute('data-delid'), 10);
-        if (!confirm('Delete this record? This cannot be undone.')) return;
-        dbDelete('records', id).then(function() {
-          showToast('Record deleted');
-          loadRecords();
-        }).catch(function() { showToast('Delete failed'); });
-      });
-    })(delBtns[di]);
-  }
-}
-
-/* ---- Render category sections into a container ---- */
-function renderSections(container, byForm) {
-  var cats = [], catMap = {};
-  for (var fi = 0; fi < ALL_FORMS.length; fi++) {
-    var f = ALL_FORMS[fi];
-    if (!catMap[f.cat]) { catMap[f.cat] = []; cats.push(f.cat); }
-    catMap[f.cat].push(f);
-  }
-  var html = '';
-  for (var ci = 0; ci < cats.length; ci++) {
-    var cat = cats[ci];
-    var forms = catMap[cat];
-    var catDone = 0;
-    for (var cfi = 0; cfi < forms.length; cfi++) { if (byForm[forms[cfi].id]) catDone++; }
-    var catPct = Math.round(catDone / forms.length * 100);
-    html += '<div class="section">';
-    html += '<div class="section-head"><span>' + escapeHtml(cat) + '</span><span class="section-head-pct">' + catDone + '/' + forms.length + ' &nbsp;' + catPct + '%</span></div>';
-    for (var ri = 0; ri < forms.length; ri++) {
-      var form = forms[ri];
-      var rec = byForm[form.id];
-      if (rec) {
-        var dt2 = new Date(rec.savedAt);
-        var ts2 = dt2.toLocaleString('en-IE', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', hour12:false});
-        var meta = ts2 + (rec.champion ? ' \u00b7 ' + escapeHtml(rec.champion) : '');
-        html += '<div class="form-row done">';
-        html += '<div class="form-row-top">';
-        html += '<div class="fr-icon">\u2705</div>';
-        html += '<div class="fr-info"><div class="fr-name">' + escapeHtml(form.name) + '</div><div class="fr-meta">' + meta + '</div></div>';
-        html += '<div class="fr-chevron">&#8250;</div>';
-        html += '</div>';
-        html += '<div class="rec-detail">' + buildRecordDetail(rec) + '</div>';
-        html += '</div>';
-      } else {
-        html += '<div class="form-row missing">';
-        html += '<div class="form-row-top">';
-        html += '<div class="fr-icon">\u26a0\ufe0f</div>';
-        html += '<div class="fr-info"><div class="fr-name">' + escapeHtml(form.name) + '</div><div class="fr-missing">Not yet submitted this week</div></div>';
-        html += '</div></div>';
-      }
-    }
-    html += '</div>';
-  }
-  container.innerHTML = html;
-  attachListeners(container);
-}
-
-/* ---- Main render ---- */
-function render(recs) {
-  allRecords = recs;
-  var wk = getWeekKey();
-  var byForm = buildByForm(recs, wk);
-  var done = Object.keys(byForm).length;
-  var total = ALL_FORMS.length;
-  var pct = total > 0 ? Math.round(done / total * 100) : 0;
-
-  var sb = document.getElementById('statusBar');
-  sb.textContent = '\u25cf Live \u00b7 ' + recs.length + ' record' + (recs.length !== 1 ? 's' : '') + ' stored \u00b7 ' + timeRemaining(wk);
-  sb.className = 'status-bar';
-  sb.style.cursor = '';
-
-  var mc = document.getElementById('mainContent');
-  mc.innerHTML =
-    '<div class="week-card">' +
-      '<div class="wc-label">Current Week</div>' +
-      '<div class="wc-week">' + escapeHtml(weekLabel(wk)) + '</div>' +
-      '<div class="wc-row">' +
-        '<div><div class="wc-pct">' + pct + '%</div><div class="wc-pct-label">Complete</div></div>' +
-        '<div class="wc-right"><div class="wc-count">' + done + ' / ' + total + ' forms</div><div class="wc-closes">Closes Saturday midnight</div></div>' +
-      '</div>' +
-    '</div>' +
-    '<div class="prog-wrap"><div class="prog-fill" style="width:' + pct + '%"></div></div>';
-
-  var curDiv = document.createElement('div');
-  mc.appendChild(curDiv);
-  renderSections(curDiv, byForm);
-
-  /* Previous weeks */
-  var allWks = {};
-  for (var i = 0; i < recs.length; i++) {
-    if (recs[i].weekKey !== wk) allWks[recs[i].weekKey] = 1;
-  }
-  var prevKeys = Object.keys(allWks).sort().reverse();
-  var pws = document.getElementById('prevWeeksSection');
-  pws.innerHTML = '';
-  if (!prevKeys.length) return;
-
-  var hdr = document.createElement('div');
-  hdr.className = 'prev-header';
-  hdr.textContent = 'Previous Weeks (' + prevKeys.length + ')';
-  pws.appendChild(hdr);
-
-  for (var pi = 0; pi < prevKeys.length; pi++) {
-    (function(pwk) {
-      var pwByForm = buildByForm(recs, pwk);
-      var pwDone = Object.keys(pwByForm).length;
-      var pwPct = Math.round(pwDone / total * 100);
-      var badgeClass = pwPct === 100 ? 'acc-badge full' : pwPct > 0 ? 'acc-badge partial' : 'acc-badge empty';
-
-      var item = document.createElement('div');
-      item.className = 'acc-item';
-
-      var trigger = document.createElement('div');
-      trigger.className = 'acc-trigger';
-      trigger.innerHTML =
-        '<div class="acc-left"><div class="acc-week">' + escapeHtml(weekLabel(pwk)) + '</div><div class="acc-sub">' + pwDone + ' / ' + total + ' forms completed</div></div>' +
-        '<span class="' + badgeClass + '">' + pwPct + '%</span>' +
-        '<span class="acc-chevron">&#8250;</span>';
-
-      var body = document.createElement('div');
-      body.className = 'acc-body';
-      var inner = document.createElement('div');
-      body.appendChild(inner);
-      var built = false;
-
-      trigger.addEventListener('click', function() {
-        var isOpen = body.className.indexOf('open') !== -1;
-        body.className = isOpen ? 'acc-body' : 'acc-body open';
-        trigger.querySelector('.acc-chevron').className = isOpen ? 'acc-chevron' : 'acc-chevron open';
-        if (!isOpen && !built) { renderSections(inner, pwByForm); built = true; }
-      });
-
-      item.appendChild(trigger);
-      item.appendChild(body);
-      pws.appendChild(item);
-    })(prevKeys[pi]);
-  }
-}
-
-function loadRecords() {
-  dbGetAll('records').then(function(recs) { render(recs); }).catch(function(e) {
-    var sb = document.getElementById('statusBar');
-    sb.textContent = 'Error loading: ' + (e.message || 'unknown');
-    sb.className = 'status-bar err';
-  });
-}
-
-/* ---- Backup / Restore ---- */
-function doBackup() {
-  Promise.all([dbGetAll('records'), dbGetAll('weeks')]).then(function(results) {
-    var data = {exportedAt: new Date().toISOString(), records: results[0], weeks: results[1]};
-    var blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'haccp-backup-' + new Date().toISOString().split('T')[0] + '.json';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    showToast('Backup downloaded');
-  }).catch(function() { showToast('Backup failed'); });
-}
-
-function doRestore(file) {
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      var data = JSON.parse(e.target.result);
-      if (!data.records || !Array.isArray(data.records)) throw new Error('bad format');
-      var puts = [];
-      for (var ri = 0; ri < data.records.length; ri++) puts.push(dbPut('records', data.records[ri]));
-      if (data.weeks && Array.isArray(data.weeks)) {
-        for (var wi = 0; wi < data.weeks.length; wi++) puts.push(dbPut('weeks', data.weeks[wi]));
-      }
-      Promise.all(puts).then(function() {
-        loadRecords();
-        showToast('\u2705 Backup restored');
-        document.getElementById('fileInput').value = '';
-      }).catch(function() { showToast('Restore failed'); });
-    } catch(err) { showToast('Invalid backup file'); }
-  };
-  reader.readAsText(file);
-}
-
-/* ---- Boot ---- */
-document.addEventListener('DOMContentLoaded', function() {
-
-  document.getElementById('btnBack').addEventListener('click', function() {
-    try { if (db) { db.close(); db = null; } } catch(e) {}
-    window.location.href = 'index.html';
-  });
-
-  window.addEventListener('pagehide', function() {
-    try { if (db) { db.close(); db = null; } } catch(e) {}
-  });
-
-  document.getElementById('btnBackup').addEventListener('click', doBackup);
-  document.getElementById('btnRestore').addEventListener('click', function() { document.getElementById('fileInput').click(); });
-  document.getElementById('fileInput').addEventListener('change', function() {
-    if (this.files && this.files.length) doRestore(this.files[0]);
-  });
-
-  document.getElementById('lbClose').addEventListener('click', function() {
-    document.getElementById('lightbox').className = 'lightbox';
-    document.getElementById('lbImg').src = '';
-  });
-  document.getElementById('lightbox').addEventListener('click', function(e) {
-    if (e.target === this) { this.className = 'lightbox'; document.getElementById('lbImg').src = ''; }
-  });
-
-  var sb = document.getElementById('statusBar');
-  function bootDB() {
-    sb.textContent = 'Connecting to database...';
-    sb.className = 'status-bar';
-    sb.style.cursor = '';
-    openDB().then(function() { loadRecords(); }).catch(function(e) {
-      sb.textContent = (e.message || 'Storage error') + ' \u2014 Tap to retry';
-      sb.className = 'status-bar err';
-      sb.style.cursor = 'pointer';
-      sb.addEventListener('click', function handler() {
-        sb.removeEventListener('click', handler);
-        bootDB();
-      });
+function deleteRecord(id) {
+  if (confirm('Are you sure you want to delete this record?')) {
+    dbDelete('records', id).then(function() {
+      location.reload();
     });
   }
-  bootDB();
-});
-</script>
+}
 
+function toggleDetail(id) {
+  var el = document.getElementById('detail-' + id);
+  var chev = document.getElementById('chev-' + id);
+  var isOpen = el.style.display === 'block';
+  el.style.display = isOpen ? 'none' : 'block';
+  chev.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+}
+
+function render() {
+  dbGetAll('records').then(function(recs) {
+    var menu = document.getElementById('mainContent');
+    var cats = {};
+    ALL_FORMS.forEach(function(f) {
+      if (!cats[f.cat]) cats[f.cat] = [];
+      cats[f.cat].push(f);
+    });
+    
+    document.getElementById('statusBar').textContent = '\u25cf Audit Online \u00b7 ' + recs.length + ' Total Records';
+
+    for (var cat in cats) {
+      var section = document.createElement('div');
+      section.className = 'section';
+      var recsInCat = recs.filter(r => cats[cat].some(f => f.id === r.formId));
+      section.innerHTML = '<div class="section-head"><span>' + cat + '</span><span>' + recsInCat.length + ' RECS</span></div>';
+      
+      cats[cat].forEach(function(f) {
+        var formRecs = recs.filter(r => r.formId === f.id).sort((a,b) => b.savedAt - a.savedAt);
+        formRecs.forEach(function(rec) {
+          var row = document.createElement('div');
+          row.className = 'form-row done';
+          row.innerHTML = 
+            '<div class="fr-top" onclick="toggleDetail(' + rec.id + ')">' +
+              '<div class="fr-icon">\u2705</div>' +
+              '<div class="fr-info"><div class="fr-name">' + f.name + '</div><div class="fr-meta">' + rec.timestamp + '</div></div>' +
+              '<div class="fr-chevron" id="chev-' + rec.id + '">\u203a</div>' +
+            '</div>' +
+            buildRecordDetail(rec);
+          section.appendChild(row);
+        });
+      });
+      menu.appendChild(section);
+    }
+  });
+}
+
+openDB().then(render);
+</script>
 </body>
 </html>

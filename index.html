@@ -555,14 +555,11 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 <div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
 <div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-pork"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-pork">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-pork"></div><label class="photo-add-btn" for="photo-input-trace-pork">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-pork" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-pork"></label></div></div>
 <button class="btn-save" data-saveid="trace-pork">&#128190; Save to Records</button></div></div>
-<div id="trace-butcher" class="form-screen"><div class="form-header"><h2>&#128298; Prep by Butcher / Fishmonger Traceability</h2><p>Batch traceability &#8211; complete for each production batch.</p></div><div class="form-body">
-<div class="field-row"><div class="field-group"><label class="field-label">Week Commencing</label><input class="field-input" type="date" id="we-trace-butcher"></div><div class="field-group"><label class="field-label">Product Name</label><input class="field-input" type="text" id="fsc-trace-butcher"></div></div>
+<div id="trace-butcher" class="form-screen"><div class="form-header"><h2>&#128298; Prep by Butcher / Fishmonger Traceability</h2><p>Each batch saves separately with its own signature and photo.</p></div><div class="form-body">
+<div class="field-row"><div class="field-group"><label class="field-label">Week Commencing</label><input class="field-input" type="date" id="we-trace-butcher"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-butcher"></div></div>
 <div id="butcher-batches"></div>
 <button id="add-butcher-batch-btn" style="background:#e8f5ee;border:1px solid #00703c;color:#005a30;padding:10px 18px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;width:100%;margin-top:8px">+ Add Batch</button>
-<div class="field-group"><label class="field-label">Signature</label><div class="sig-box"><canvas id="sig-butcher" height="80"></canvas><button class="sig-clear" data-sigid="sig-butcher">Clear</button></div></div>
-<div class="section-title">&#128247; Photo Evidence &amp; Timestamp</div>
-<div class="photo-timestamp-box"><div class="timestamp-display" id="ts-trace-butcher"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="trace-butcher">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-trace-butcher"></div><label class="photo-add-btn" for="photo-input-trace-butcher">&#128247; Add Photo Evidence<input type="file" id="photo-input-trace-butcher" accept="image/*" capture="environment" multiple style="display:none" data-photoid="trace-butcher"></label></div></div>
-<button class="btn-save" data-saveid="trace-butcher">&#128190; Save to Records</button></div></div>
+</div></div>
 <div id="prod-mince" class="form-screen"><div class="form-header"><h2>&#129385; Mince Control Sheet</h2><p>Record details each time mince is produced.</p></div><div class="form-body">
 <div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-prod-mince"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-prod-mince"></div></div>
 <div class="week-table-wrap"><table class="log-table"><thead><tr><th>Date / Time of Production</th><th>Name of Person Who Made the Mince</th><th>Type of Meat Used &amp; Batch Code</th><th>Type of Cut</th><th>Temp After Chilling (before placing on display)</th><th>Scales Use By</th><th>Date Removed from Sale</th></tr></thead><tbody id="mince-body"></tbody></table></div>
@@ -1204,15 +1201,15 @@ tbody.appendChild(wr);
 for (var di = 0; di < days.length; di++) {
 var tr = document.createElement('tr');
 tr.innerHTML = '<td class="day-name">' + days[di] + '</td>' +
-'<td><input type="text" maxlength="12"></td>' +
-'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><select><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><input type="text" maxlength="8"></td>' +
-'<td><input type="text" maxlength="8"></td>' +
-'<td><input type="text" maxlength="8"></td>' +
-'<td><input type="text" maxlength="6"></td>';
+'<td><input type="text" maxlength="12" data-label="' + weeks[wi] + ' ' + days[di] + ' Date"></td>' +
+'<td><select data-label="' + weeks[wi] + ' ' + days[di] + ' Wiper Blade Cleaned"><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
+'<td><select data-label="' + weeks[wi] + ' ' + days[di] + ' Wiper Blade No"><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
+'<td><select data-label="' + weeks[wi] + ' ' + days[di] + ' FOG Containers Cleaned"><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
+'<td><select data-label="' + weeks[wi] + ' ' + days[di] + ' FOG Containers No"><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
+'<td><input type="text" maxlength="8" data-label="' + weeks[wi] + ' ' + days[di] + ' FOG Litres"></td>' +
+'<td><input type="text" maxlength="8" data-label="' + weeks[wi] + ' ' + days[di] + ' Solids Litres"></td>' +
+'<td><input type="text" maxlength="8" data-label="' + weeks[wi] + ' ' + days[di] + ' Staff Initials"></td>' +
+'<td><input type="text" maxlength="6" data-label="' + weeks[wi] + ' ' + days[di] + ' Time"></td>';
 tbody.appendChild(tr);
 }
 }
@@ -1227,12 +1224,12 @@ tbody.appendChild(tr);
 }
 function addRow(name) {
 var tr = document.createElement('tr');
-tr.innerHTML = '<td><input type="text" maxlength="8"></td>' +
+tr.innerHTML = '<td><input type="text" maxlength="8" data-label="' + name + ' Time"></td>' +
 '<td class="prod-name">' + name + '</td>' +
-'<td><input type="text" maxlength="15"></td>' +
-'<td><input type="text" maxlength="6" style="color:#c00;font-weight:700"></td>' +
-'<td><input type="text" maxlength="12"></td>' +
-'<td><input type="text" maxlength="20"></td>';
+'<td><input type="text" maxlength="15" data-label="' + name + ' Batch/Use By"></td>' +
+'<td><input type="text" maxlength="6" style="color:#c00;font-weight:700" data-label="' + name + ' Core Temp"></td>' +
+'<td><input type="text" maxlength="12" data-label="' + name + ' Supplier Use By"></td>' +
+'<td><input type="text" maxlength="20" data-label="' + name + ' Signature"></td>';
 tbody.appendChild(tr);
 }
 addSection('Breakfast:');
@@ -1358,8 +1355,9 @@ html += '</tr><tr><th class="product-col"></th>';
 for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>';
 html += '</tr></thead><tbody>';
 for (var i = 0; i < 10; i++) {
-html += '<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name"></td>';
-for (var j = 0; j < 21; j++) html += '<td><input type="text" maxlength="12"></td>';
+html += '<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name" data-label="Cheese Product ' + (i+1) + ' Name"></td>';
+var cheeseCols2=['OUBD','DO','UBD'];
+for (var dj2=0;dj2<7;dj2++){for(var cj2=0;cj2<3;cj2++) html+='<td><input type="text" maxlength="12" data-label="Cheese ' + (i+1) + ' ' + DAYS[dj2] + ' ' + cheeseCols2[cj2] + '"></td>';}
 html += '</tr>';
 }
 html += '</tbody></table>';
@@ -1368,10 +1366,15 @@ container.innerHTML = html;
 function makeFishRows() {
 var tbody = document.getElementById('fish-body');
 if (!tbody) return;
+var fishDays = ['Mon','Tue','Wed','Thu','Fri','Sat'];
 for (var i = 0; i < 12; i++) {
 var tr = document.createElement('tr');
-var c = '<td><input type="text" placeholder="Product name"></td>';
-for (var d = 0; d < 6; d++) c += '<td><input type="text" maxlength="10"></td><td><input type="text" maxlength="12"></td><td><input type="text" maxlength="15"></td>';
+var c = '<td><input type="text" placeholder="Product name" data-label="Fish Product row' + (i+1) + '"></td>';
+for (var d = 0; d < 6; d++) {
+c += '<td><input type="text" maxlength="10" data-label="Fish ' + fishDays[d] + ' Country row' + (i+1) + '"></td>';
+c += '<td><input type="text" maxlength="12" data-label="Fish ' + fishDays[d] + ' Display Until row' + (i+1) + '"></td>';
+c += '<td><input type="text" maxlength="15" data-label="Fish ' + fishDays[d] + ' Trace No row' + (i+1) + '"></td>';
+}
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
@@ -1379,20 +1382,32 @@ tbody.appendChild(tr);
 function makePorkRows() {
 var tbody = document.getElementById('pork-body');
 if (!tbody) return;
+var porkCols = ['Product','OUBD','Date Opened/Cut/Displayed','Scales Use By','Batch No','Signature'];
 for (var i = 0; i < 25; i++) {
 var tr = document.createElement('tr');
-tr.innerHTML = '<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>';
+var c = '';
+for (var pc = 0; pc < porkCols.length; pc++) c += '<td><input type="text" data-label="' + porkCols[pc] + ' row' + (i+1) + '"></td>';
+tr.innerHTML = c;
 tbody.appendChild(tr);
 }
 }
+var LOG_HEADERS = {
+'thawing-body': ['Date','Frozen Product','Time Commenced','Time Completed','Core Temp','Date Cooked/Displayed','Original Use By','New Use By'],
+'mince-body': ['Date/Time','Person','Meat/Batch Code','Cut Type','Temp After Chilling','Scales Use By','Date Removed'],
+'burger-body': ['Date/Time','Person','Meat/Batch Code','Burger Mix','Scales Use By','Date Removed']
+};
 function makeLogRows(bodyId, cols, rows) {
 var tbody = document.getElementById(bodyId);
 if (!tbody) return;
 rows = rows || 20;
+var headers = LOG_HEADERS[bodyId] || [];
 for (var i = 0; i < rows; i++) {
 var tr = document.createElement('tr');
 var c = '';
-for (var j = 0; j < cols; j++) c += '<td><input type="text"></td>';
+for (var j = 0; j < cols; j++) {
+var lbl = headers[j] ? (headers[j] + ' row' + (i+1)) : ('row' + (i+1) + ' col' + (j+1));
+c += '<td><input type="text" data-label="' + lbl + '"></td>';
+}
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
@@ -1410,7 +1425,7 @@ var items = sdata[si];
 for (var ii = 0; ii < items.length; ii++) {
 var tr = document.createElement('tr');
 var c = '<td class="area-name">' + items[ii][0] + '</td><td class="chem-name">' + items[ii][1] + '</td>';
-for (var d = 0; d < 7; d++) c += '<td><input type="checkbox"></td>';
+for (var d = 0; d < 7; d++) c += '<td><input type="checkbox" data-label="' + items[ii][0] + ' ' + DAYS[d] + '"></td>';
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
@@ -1423,7 +1438,8 @@ var daily = [['Floor','Floors','Mop & bucket/degreaser'],['Scales','Scales','San
 for (var i = 0; i < daily.length; i++) {
 var tr = document.createElement('tr');
 var c = '<td class="area-name">' + daily[i][0] + '</td><td class="area-name">' + daily[i][1] + '</td><td class="chem-name">' + daily[i][2] + '</td>';
-for (var d = 0; d < 14; d++) c += '<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';
+var ampm2=['M AM','M PM','T AM','T PM','W AM','W PM','T AM','T PM','F AM','F PM','S AM','S PM','S AM','S PM'];
+for (var d = 0; d < 14; d++) c += '<td><input type="text" maxlength="4" data-label="' + daily[i][0] + ' ' + ampm2[d] + '" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
@@ -1434,7 +1450,8 @@ var weekly = [['All shelving','Shelving units','Degreaser'],['Cold rooms','Cold 
 for (var j = 0; j < weekly.length; j++) {
 var tr2 = document.createElement('tr');
 var c2 = '<td class="area-name">' + weekly[j][0] + '</td><td class="area-name">' + weekly[j][1] + '</td><td class="chem-name">' + weekly[j][2] + '</td>';
-for (var d2 = 0; d2 < 14; d2++) c2 += '<td><input type="text" maxlength="4" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';
+var ampm3=['M AM','M PM','T AM','T PM','W AM','W PM','T AM','T PM','F AM','F PM','S AM','S PM','S AM','S PM'];
+for (var d2 = 0; d2 < 14; d2++) c2 += '<td><input type="text" maxlength="4" data-label="' + weekly[j][0] + ' ' + ampm3[d2] + '" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';
 tr2.innerHTML = c2;
 tbody.appendChild(tr2);
 }
@@ -1449,7 +1466,7 @@ var dailyItems = [['Yard','Degreaser/Mop'],['Back-up cold room','Degreaser/Sanit
 for (var i = 0; i < dailyItems.length; i++) {
 var tr = document.createElement('tr');
 var c = '<td class="area-name">' + dailyItems[i][0] + '</td><td class="chem-name">' + dailyItems[i][1] + '</td>';
-for (var d = 0; d < 7; d++) c += '<td><input type="checkbox"></td>';
+for (var d = 0; d < 7; d++) c += '<td><input type="checkbox" data-label="' + dailyItems[i][0] + ' ' + DAYS[d] + '"></td>';
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
@@ -1460,18 +1477,22 @@ var weeklyItems = [['Full deep clean - all areas','Degreaser/Sanitiser'],['Racki
 for (var j = 0; j < weeklyItems.length; j++) {
 var tr2 = document.createElement('tr');
 var c2 = '<td class="area-name">' + weeklyItems[j][0] + '</td><td class="chem-name">' + weeklyItems[j][1] + '</td>';
-for (var d2 = 0; d2 < 7; d2++) c2 += '<td><input type="checkbox"></td>';
+for (var d2 = 0; d2 < 7; d2++) c2 += '<td><input type="checkbox" data-label="' + weeklyItems[j][0] + ' ' + DAYS[d2] + '"></td>';
 tr2.innerHTML = c2;
 tbody.appendChild(tr2);
 }
 }
+var GOODS_COLS = ['Date','Supplier','Temp Check','Food Safety Checks','Docket No','Product Dating','Product Name','Accept/Reject','Delivery Comments','Signature'];
 function makeGoodsRows(bodyId) {
 var tbody = document.getElementById(bodyId);
 if (!tbody) return;
 for (var i = 0; i < 20; i++) {
 var tr = document.createElement('tr');
 var c = '';
-for (var j = 0; j < 10; j++) c += '<td><input type="text" style="width:100%;border:none;padding:3px;font-size:11px;font-family:inherit"></td>';
+for (var j = 0; j < 10; j++) {
+var lbl = (GOODS_COLS[j] || ('col'+j)) + ' row' + (i+1);
+c += '<td><input type="text" data-label="' + lbl + '" style="width:100%;border:none;padding:3px;font-size:11px;font-family:inherit"></td>';
+}
 tr.innerHTML = c;
 tbody.appendChild(tr);
 }
@@ -1496,8 +1517,8 @@ html += '<label><input type="radio" name="' + radioName + '" value="0">0</label>
 html += '<label><input type="radio" name="' + radioName + '" value="3">3</label>';
 html += '<label><input type="radio" name="' + radioName + '" value="5">5</label>';
 html += '</div></td>';
-html += '<td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';
-html += '<td><input type="text" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';
+html += '<td><input type="text" data-label="' + dept.name + ' ' + dept.items[ii] + ' Issues" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';
+html += '<td><input type="text" data-label="' + dept.name + ' ' + dept.items[ii] + ' Action" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';
 html += '</tr>';
 }
 var mx = dept.items.length * 5;
@@ -1523,21 +1544,124 @@ zones.innerHTML = zh;
 var butcherBatchCount = 0;
 function addButcherBatch() {
 butcherBatchCount++;
+var bn = butcherBatchCount;
 var container = document.getElementById('butcher-batches');
 var div = document.createElement('div');
-div.style.cssText = 'background:white;border:1px solid #ddd;border-radius:8px;padding:14px;margin-bottom:12px;';
+div.style.cssText = 'background:white;border:2px solid #00703c;border-radius:10px;padding:14px;margin-bottom:16px;';
+var photoId = 'butcher-batch-' + bn;
+var sigId = 'sig-butcher-batch-' + bn;
 var rows = '';
 for (var i = 0; i < 5; i++) {
-rows += '<tr><td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td>';
-rows += '<td><input type="text" style="width:100%;border:none;padding:4px;font-family:inherit"></td></tr>';
+rows += '<tr><td><input type="text" data-label="Batch ' + bn + ' Ingredient ' + (i+1) + '" style="width:100%;border:none;padding:4px;font-family:inherit" placeholder="Ingredient"></td>';
+rows += '<td><input type="text" data-label="Batch ' + bn + ' Ingredient ' + (i+1) + ' Code" style="width:100%;border:none;padding:4px;font-family:inherit" placeholder="Code/Date"></td></tr>';
 }
-div.innerHTML = '<div style="font-weight:600;color:#005a30;margin-bottom:10px;font-size:13px">Batch ' + butcherBatchCount + '</div>' +
-'<div class="field-row"><div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date"></div>' +
-'<div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text"></div></div>' +
-'<div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date"></div>' +
+div.innerHTML =
+'<div style="font-weight:700;color:#005a30;margin-bottom:12px;font-size:14px;">Batch ' + bn + '</div>' +
+'<div class="field-group"><label class="field-label">Product Name</label><input class="field-input" type="text" data-label="Batch ' + bn + ' Product Name" placeholder="e.g. Chicken Tikka"></div>' +
+'<div class="field-row">' +
+'<div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date" data-label="Batch ' + bn + ' Production Date"></div>' +
+'<div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text" data-label="Batch ' + bn + ' Produced By" placeholder="Name"></div>' +
+'</div>' +
+'<div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date" data-label="Batch ' + bn + ' Use By Date"></div>' +
 '<div class="section-title" style="font-size:12px;margin:10px 0 8px">Ingredients</div>' +
-'<table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead><tbody>' + rows + '</tbody></table>';
+'<table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+'<div class="section-title" style="margin-top:14px;">Signature</div>' +
+'<div class="sig-box"><canvas id="' + sigId + '" height="80"></canvas><button class="sig-clear" data-sigid="' + sigId + '">Clear</button></div>' +
+'<div style="margin-top:10px;">' +
+'<div class="photo-timestamp-box">' +
+'<div class="timestamp-display" id="ts-' + photoId + '"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="' + photoId + '">Record Time</button></div>' +
+'<div class="photo-upload-area"><div class="photo-grid" id="photo-grid-' + photoId + '"></div>' +
+'<label class="photo-add-btn" for="photo-input-' + photoId + '">&#128247; Add Photo<input type="file" id="photo-input-' + photoId + '" accept="image/*" capture="environment" multiple style="display:none" data-photoid="' + photoId + '"></label>' +
+'</div></div>' +
+'</div>' +
+'<button style="background:#005a30;color:white;width:100%;padding:12px;border:none;border-radius:8px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:12px;" data-batchsave="' + bn + '">&#128190; Save Batch ' + bn + ' to Records</button>';
 container.appendChild(div);
+/* init sig pad for this batch */
+setTimeout(function() { initSig(sigId); }, 100);
+/* wire up photo input */
+var pInp = document.getElementById('photo-input-' + photoId);
+if (pInp) {
+(function(pid){ pInp.addEventListener('change', function() { handlePhotos(pInp, pid); }); })(photoId);
+}
+/* wire up timestamp btn */
+var tsBtn = div.querySelector('[data-tsid="' + photoId + '"]');
+if (tsBtn) {
+(function(tid){ tsBtn.addEventListener('click', function() { recordTimestamp(tid); }); })(photoId);
+}
+/* wire up save btn */
+var saveBtn = div.querySelector('[data-batchsave="' + bn + '"]');
+if (saveBtn) {
+(function(batchNum, batchDiv, bSigId, bPhotoId){ 
+saveBtn.addEventListener('click', function() { saveBatchRecord(batchNum, batchDiv, bSigId, bPhotoId); });
+})(bn, div, sigId, photoId);
+}
+}
+function saveBatchRecord(bn, batchDiv, sigId, photoId) {
+var we = document.getElementById('we-trace-butcher');
+var fsc = document.getElementById('fsc-trace-butcher');
+var now = new Date();
+var wk = getWeekKey();
+/* collect field data from this batch div only */
+var fieldData = {};
+var inputs = batchDiv.querySelectorAll('input[type=text],input[type=date]');
+for (var i = 0; i < inputs.length; i++) {
+var inp = inputs[i];
+var key = inp.getAttribute('data-label') || ('inp_' + i);
+if (inp.value && inp.value.trim()) fieldData[key] = inp.value;
+}
+/* get product name for champion display */
+var productNameEl = batchDiv.querySelector('[data-label="Batch ' + bn + ' Product Name"]');
+var productName = productNameEl ? productNameEl.value : ('Batch ' + bn);
+/* signature */
+var signatures = [];
+var cv = document.getElementById(sigId);
+if (cv) {
+var sigData = null, hasSig = false;
+try {
+var ctx = cv.getContext('2d');
+var imgData = ctx.getImageData(0,0,cv.width,cv.height);
+for (var px = 3; px < imgData.data.length; px += 4) { if (imgData.data[px] > 0) { hasSig = true; break; } }
+if (hasSig) sigData = cv.toDataURL('image/png');
+} catch(e) {}
+signatures.push({id: sigId, dataUrl: sigData, hasSignature: hasSig});
+}
+/* photos */
+var photos = formPhotos[photoId] || [];
+var photoData = [];
+for (var pi = 0; pi < photos.length; pi++) photoData.push({dataUrl:photos[pi].dataUrl, name:photos[pi].name, timestamp:photos[pi].timestamp});
+var ts = formTimestamps[photoId] || now.toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});
+var record = {
+id: now.getTime(),
+formId: 'trace-butcher',
+weekKey: wk,
+savedAt: now.toISOString(),
+weekEnding: we ? we.value : '',
+champion: (fsc && fsc.value ? fsc.value + ' – ' : '') + productName,
+timestamp: ts,
+photos: photoData,
+photoCount: photoData.length,
+correctiveAction: '',
+signatures: signatures,
+fieldData: fieldData
+};
+var liveRec = {
+id: 'trace-butcher::' + wk,
+formId: 'trace-butcher',
+weekKey: wk,
+savedAt: now.toISOString(),
+champion: record.champion,
+weekEnding: record.weekEnding
+};
+var doSave = function() {
+dbPut('live', liveRec).then(function() {
+return dbPut('records', record);
+}).then(function() {
+showToast('Batch ' + bn + ' saved!');
+updateBannerCount();
+updateFormBadge('trace-butcher', true);
+}).catch(function(e) { showToast('Save failed: ' + e.message); });
+};
+if (!db) { openDB().then(function() { doSave(); }); } else { doSave(); }
 }
 document.addEventListener('DOMContentLoaded', function() {
 openDB().then(function() { updateBannerCount(); checkAutoWeekClose(); setInterval(checkAutoWeekClose, 60000); }).catch(function() {});

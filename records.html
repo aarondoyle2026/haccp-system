@@ -155,13 +155,18 @@ function renderFieldData(fieldData){
   var filled=[];
   for(var i=0;i<keys.length;i++){
     var v=fieldData[keys[i]];
-    if(v!==''&&v!=='0'&&v!==undefined&&v!==null) filled.push({k:keys[i],v:v});
+    if(v!==undefined&&v!==null&&String(v).trim()!=='') filled.push({k:keys[i],v:v});
   }
   if(!filled.length) return '<div class="no-data">Form saved \u2013 no values entered yet.</div>';
   var html='<div class="section-lbl">&#128203; Form Data</div><table class="field-data-table">';
   for(var j=0;j<filled.length;j++){
-    var keyLabel=String(filled[j].k).replace(/^(we-|fsc-|inp_|sel_|cb_|radio_)/,'').replace(/-/g,' ');
-    html+='<tr><td>'+esc(keyLabel)+'</td><td>'+esc(filled[j].v)+'</td></tr>';
+    /* Clean up key: remove common prefixes, dashes to spaces */
+    var keyLabel=String(filled[j].k)
+      .replace(/^(we-|fsc-|inp_|sel_|cb_|radio_)/,'')
+      .replace(/-/g,' ');
+    var val=String(filled[j].v);
+    if(val==='checked') val='\u2713';
+    html+='<tr><td>'+esc(keyLabel)+'</td><td>'+esc(val)+'</td></tr>';
   }
   html+='</table>';
   return html;

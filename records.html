@@ -64,28 +64,9 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .rec-sig-item{text-align:center;}
 .rec-sig-img{display:block;width:90px;height:45px;object-fit:contain;background:white;border:1px solid #ddd;border-radius:6px;}
 .rec-sig-name{font-size:9px;color:#999;margin-top:3px;}
-/* Photos */
-.rec-photos{margin-bottom:10px;}
-.rec-photos-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:6px;}
-.rec-photo-row{display:flex;flex-wrap:wrap;gap:8px;}
-.rec-photo-thumb{width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid #d0d0d0;}
-/* Buttons */
+/* Action buttons */
 .view-btn{width:100%;background:#00703c;color:white;border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:8px;text-decoration:none;display:block;text-align:center;}
 .rec-delete-btn{width:100%;padding:9px;background:white;border:1.5px solid #d32f2f;color:#d32f2f;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;margin-top:4px;}
-/* Previous weeks accordion */
-.prev-header{margin:20px 14px 6px;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;}
-.acc-item{margin:6px 14px 0;border-radius:10px;overflow:hidden;border:1.5px solid #d0ddd0;}
-.acc-trigger{background:white;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;}
-.acc-left{flex:1;}
-.acc-week{font-size:13px;font-weight:700;color:#1a1a1a;}
-.acc-sub{font-size:11px;color:#666;margin-top:2px;}
-.acc-badge{border-radius:12px;padding:3px 10px;font-size:11px;font-weight:700;flex-shrink:0;}
-.acc-badge.full{background:#e8f5ee;color:#00703c;}
-.acc-badge.partial{background:#fff3e0;color:#e65100;}
-.acc-chevron{font-size:18px;color:#aaa;transition:transform 0.2s;line-height:1;flex-shrink:0;}
-.acc-chevron.open{transform:rotate(90deg);}
-.acc-body{display:none;border-top:1px solid #e8e8e8;background:#fafafa;padding-bottom:8px;}
-.acc-body.open{display:block;}
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);background:#1a1a1a;color:white;padding:13px 22px;border-radius:24px;font-size:13px;font-weight:600;z-index:9999;transition:transform 0.3s;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 </style>
@@ -100,7 +81,6 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 
 <div class="status-bar" id="statusBar">Connecting to database...</div>
 <div id="mainContent"></div>
-<div id="prevWeeksSection"></div>
 
 <div class="toast" id="toast"></div>
 
@@ -111,41 +91,12 @@ var ALL_FORMS = [
   {id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},
   {id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},
   {id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},
-  {id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},
-  {id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},
-  {id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},
-  {id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},
-  {id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},
-  {id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},
+  {id:'temp-deli',name:'Deli Temperature Checklist',cat:'Temperature Checks'},
   {id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},
   {id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},
-  {id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},
-  {id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},
-  {id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},
-  {id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},
-  {id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},
-  {id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},
-  {id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},
-  {id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},
-  {id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},
-  {id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},
-  {id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},
-  {id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},
-  {id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},
-  {id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},
-  {id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},
-  {id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},
-  {id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},
-  {id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},
-  {id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},
-  {id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},
-  {id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},
-  {id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},
   {id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},
   {id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},
   {id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},
-  {id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},
-  {id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},
   {id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}
 ];
 
@@ -192,14 +143,11 @@ function weekLabel(wk) {
 
 function buildRecordDetail(rec) {
   var html = '';
-  
-  // Metadata Grid
   html += '<div class="rec-meta-grid">';
   html += '<div class="rmc"><div class="rmc-label">Food Safety Champion</div><div class="rmc-value">' + (rec.champion || 'Not recorded') + '</div></div>';
   html += '<div class="rmc"><div class="rmc-label">Recorded At</div><div class="rmc-value">' + rec.timestamp + '</div></div>';
   html += '</div>';
 
-  // Labeled Data Snapshot
   if (rec.formData && rec.formData.length) {
     html += '<div class="data-snapshot"><div class="ds-label">Form Entry Details</div><div class="ds-list">';
     rec.formData.forEach(function(entry) {
@@ -210,21 +158,16 @@ function buildRecordDetail(rec) {
     html += '</div></div>';
   }
 
-  // Signatures
   if (rec.signatures && rec.signatures.length) {
     html += '<div class="rec-sigs"><div class="rec-sigs-label">Captured Signatures</div><div class="rec-sigs-row">';
     rec.signatures.forEach(function(sig) {
-      if (sig.dataUrl) {
-        html += '<div class="rec-sig-item"><img class="rec-sig-img" src="' + sig.dataUrl + '"><div class="rec-sig-name">Signature</div></div>';
-      }
+      if (sig.dataUrl) html += '<div class="rec-sig-item"><img class="rec-sig-img" src="' + sig.dataUrl + '"><div class="rec-sig-name">Signature</div></div>';
     });
     html += '</div></div>';
   }
 
-  // Action Buttons
   html += '<a href="index.html?viewRec=' + rec.id + '&formId=' + rec.formId + '" class="view-btn">View Full Sheet</a>';
   html += '<button class="rec-delete-btn" onclick="deleteRec(' + rec.id + ')">\ud83d\uddd1 Delete Record</button>';
-  
   return html;
 }
 
@@ -241,7 +184,7 @@ function render(recs) {
   
   var done = Object.keys(byForm).length;
   var total = ALL_FORMS.length;
-  var pct = Math.round(done / total * 100);
+  var pct = total > 0 ? Math.round(done / total * 100) : 0;
 
   var mc = document.getElementById('mainContent');
   mc.innerHTML = 

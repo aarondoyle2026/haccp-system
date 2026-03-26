@@ -861,23 +861,6 @@ window.scrollTo(0,0);
 setTimeout(function() {
 var canvases = scr.querySelectorAll('canvas');
 for (var ci = 0; ci < canvases.length; ci++) { initSig(canvases[ci].id); }
-/* load persisted live data */
-var liveKey = id + '::' + getWeekKey();
-if (db) {
-dbGet('live', liveKey).then(function(rec) {
-if (!rec) return;
-restoreFieldData(id, rec.fieldData);
-if (rec.timestamp) {
-formTimestamps[id] = rec.timestamp;
-var el = document.querySelector('#ts-' + id + ' .ts-text');
-var btn = document.querySelector('#ts-' + id + ' .ts-btn');
-if (el) { el.textContent = rec.timestamp; el.className = 'ts-text recorded'; }
-if (btn) { btn.textContent = 'Update'; btn.className = 'ts-btn recorded-btn'; }
-}
-setTimeout(function() { restoreSignatures(id, rec.signatures); }, 50);
-restorePhotos(id, rec.photos);
-}).catch(function() {});
-}
 }, 120);
 }
 function goBack() {
@@ -960,9 +943,10 @@ var doSave = function() {
 dbPut('live', liveRec).then(function() {
 return dbPut('records', archRec);
 }).then(function() {
-showToast('Saved!');
+showToast('Saved! Form cleared for next entry.');
 updateBannerCount();
 updateFormBadge(formId, true);
+clearFormAfterSave(formId);
 }).catch(function(e) { showToast('Save failed: ' + e.message); });
 };
 if (!db) { openDB().then(function() { doSave(); }); } else { doSave(); }
@@ -982,6 +966,37 @@ cards[i].querySelector('.form-info').appendChild(badge);
 break;
 }
 }
+}
+function clearFormAfterSave(formId) {
+var scr = document.getElementById(formId);
+if (!scr) return;
+/* clear all text/date inputs */
+var inputs = scr.querySelectorAll('input[type=text],input[type=date],input[type=number],input[type=time],textarea');
+for (var i = 0; i < inputs.length; i++) inputs[i].value = '';
+/* clear selects */
+var sels = scr.querySelectorAll('select');
+for (var si = 0; si < sels.length; si++) sels[si].selectedIndex = 0;
+/* clear checkboxes */
+var cbs = scr.querySelectorAll('input[type=checkbox]');
+for (var ci = 0; ci < cbs.length; ci++) cbs[ci].checked = false;
+/* clear radios */
+var radios = scr.querySelectorAll('input[type=radio]');
+for (var ri = 0; ri < radios.length; ri++) radios[ri].checked = false;
+/* clear signatures */
+var canvases = scr.querySelectorAll('canvas');
+for (var ki = 0; ki < canvases.length; ki++) {
+if (sigPads[canvases[ki].id]) sigPads[canvases[ki].id].clear();
+}
+/* clear photos */
+formPhotos[formId] = [];
+var grid = document.getElementById('photo-grid-' + formId);
+if (grid) grid.innerHTML = '';
+/* reset timestamp */
+formTimestamps[formId] = null;
+var tsEl = document.querySelector('#ts-' + formId + ' .ts-text');
+var tsBtn = document.querySelector('#ts-' + formId + ' .ts-btn');
+if (tsEl) { tsEl.textContent = 'Tap to record timestamp'; tsEl.className = 'ts-text'; }
+if (tsBtn) { tsBtn.textContent = 'Record Time'; tsBtn.className = 'ts-btn'; }
 }
 function updateBannerCount() {
 if (!db) return;

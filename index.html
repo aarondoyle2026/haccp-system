@@ -861,7 +861,70 @@ window.scrollTo(0,0);
 setTimeout(function() {
 var canvases = scr.querySelectorAll('canvas');
 for (var ci = 0; ci < canvases.length; ci++) { initSig(canvases[ci].id); }
+/* load and display previous saves for this week as read-only panel */
+loadPreviousSavesPanel(id);
 }, 120);
+}
+function loadPreviousSavesPanel(formId) {
+if (!db) return;
+var wk = getWeekKey();
+dbGetAll('records').then(function(recs) {
+var prev = [];
+for (var i = 0; i < recs.length; i++) {
+if (recs[i].formId === formId && recs[i].weekKey === wk) prev.push(recs[i]);
+}
+prev.sort(function(a,b) { return a.savedAt < b.savedAt ? -1 : 1; });
+/* find or create the previous saves panel */
+var scr = document.getElementById(formId);
+if (!scr) return;
+var panel = scr.querySelector('.prev-saves-panel');
+if (!panel) {
+panel = document.createElement('div');
+panel.className = 'prev-saves-panel';
+/* insert after form-header, before form-body */
+var body = scr.querySelector('.form-body');
+if (body) scr.insertBefore(panel, body);
+else scr.insertBefore(panel, scr.firstChild);
+}
+if (!prev.length) { panel.innerHTML = ''; panel.style.display = 'none'; return; }
+panel.style.display = 'block';
+var html = '<div style="background:#1a1a1a;color:white;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">&#128203; This Week\'s Previous Saves (' + prev.length + ')</div>';
+for (var pi = 0; pi < prev.length; pi++) {
+var sv = prev[pi];
+var dt = new Date(sv.savedAt);
+var ts = dt.toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
+html += '<div style="background:white;border-bottom:1px solid #e0e0e0;padding:10px 16px;">';
+html += '<div style="font-size:12px;font-weight:700;color:#005a30;">&#128336; ' + ts + (sv.champion ? ' &nbsp;&#183;&nbsp; ' + sv.champion : '') + '</div>';
+if (sv.fieldData) {
+var keys = Object.keys(sv.fieldData);
+var filled = [];
+for (var ki = 0; ki < keys.length; ki++) {
+if (sv.fieldData[keys[ki]]) filled.push({k:keys[ki], v:sv.fieldData[keys[ki]]});
+}
+if (filled.length) {
+html += '<table style="width:100%;border-collapse:collapse;margin-top:6px;font-size:11px;">';
+for (var fi = 0; fi < filled.length; fi++) {
+var lbl = filled[fi].k.replace(/-/g,' ');
+html += '<tr><td style="padding:2px 6px 2px 0;color:#666;width:55%;vertical-align:top;">' + lbl + '</td><td style="padding:2px 0;font-weight:600;color:#1a1a1a;">' + filled[fi].v + '</td></tr>';
+}
+html += '</table>';
+}
+}
+/* show sigs inline */
+if (sv.signatures && sv.signatures.length) {
+var sigHtml = '';
+for (var si2 = 0; si2 < sv.signatures.length; si2++) {
+if (sv.signatures[si2].hasSignature && sv.signatures[si2].dataUrl) {
+sigHtml += '<img src="' + sv.signatures[si2].dataUrl + '" style="height:36px;border:1px solid #ddd;border-radius:4px;margin-right:6px;background:white;">';
+}
+}
+if (sigHtml) html += '<div style="margin-top:6px;">' + sigHtml + '</div>';
+}
+html += '</div>';
+}
+html += '<div style="background:#e8f5ee;padding:8px 16px;font-size:11px;color:#005a30;font-weight:600;">&#128071; Fill in new entry below and save</div>';
+panel.innerHTML = html;
+}).catch(function() {});
 }
 function goBack() {
 if (currentForm) document.getElementById(currentForm).style.display = 'none';
@@ -947,6 +1010,7 @@ showToast('Saved! Form cleared for next entry.');
 updateBannerCount();
 updateFormBadge(formId, true);
 clearFormAfterSave(formId);
+loadPreviousSavesPanel(formId);
 }).catch(function(e) { showToast('Save failed: ' + e.message); });
 };
 if (!db) { openDB().then(function() { doSave(); }); } else { doSave(); }

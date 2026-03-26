@@ -218,7 +218,7 @@ function attachListeners(container){
   var dels=container.querySelectorAll('[data-delid]');
   for(var di=0;di<dels.length;di++){(function(btn){btn.addEventListener('click',function(){var id=parseInt(btn.getAttribute('data-delid'),10);if(!confirm('Delete this record?'))return;dbDelete('records',id).then(function(){showToast('Deleted');loadRecords();}).catch(function(){showToast('Delete failed');});});})(dels[di]);}
 }
-/* Render category sections for one week - shows ALL saves per form */
+/* Render category sections for one week - ALL saves per form shown separately */
 function renderWeekSections(container,byForm){
   var cats=[],catMap={};
   for(var fi=0;fi<ALL_FORMS.length;fi++){var f=ALL_FORMS[fi];if(!catMap[f.cat]){catMap[f.cat]=[];cats.push(f.cat);}catMap[f.cat].push(f);}
@@ -231,23 +231,23 @@ function renderWeekSections(container,byForm){
     for(var ri=0;ri<forms.length;ri++){
       var form=forms[ri],saves=byForm[form.id];
       if(saves&&saves.length){
-        /* Latest save summary shown in header */
         var latest=saves[saves.length-1];
         var dt2=new Date(latest.savedAt),ts2=dt2.toLocaleString('en-IE',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
-        var saveCount=saves.length>1?' ('+saves.length+' saves)':'';
+        var saveCount=saves.length>1?' \u00b7 '+saves.length+' saves':'';
         var champStr=latest.champion?' \u00b7 '+esc(latest.champion):'';
         html+='<div class="form-row done">';
         html+='<div class="fr-top"><div class="fr-icon">\u2705</div><div class="fr-info"><div class="fr-name">'+esc(form.name)+esc(saveCount)+'</div><div class="fr-meta">'+ts2+champStr+'</div></div><div class="fr-chev">&#8250;</div></div>';
-        /* All saves stacked inside detail */
         html+='<div class="rec-detail">';
         for(var si=0;si<saves.length;si++){
           var sv=saves[si];
-          var svDt=new Date(sv.savedAt),svTs=svDt.toLocaleString('en-IE',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false});
-          if(saves.length>1){
-            html+='<div style="background:#005a30;color:white;border-radius:6px;padding:6px 10px;margin-bottom:8px;font-size:11px;font-weight:700;">Save '+(si+1)+' of '+saves.length+' \u00b7 '+svTs+(sv.champion?' \u00b7 '+esc(sv.champion):'')+'</div>';
-          }
+          var svDt=new Date(sv.savedAt);
+          var svTs=svDt.toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false});
+          html+='<div style="background:#005a30;color:white;border-radius:6px;padding:8px 12px;margin-bottom:10px;">';
+          html+='<div style="font-size:12px;font-weight:700;">&#128336; '+svTs+'</div>';
+          if(sv.champion) html+='<div style="font-size:11px;margin-top:3px;opacity:0.85;">&#128100; Food Safety Champion: '+esc(sv.champion)+'</div>';
+          html+='</div>';
           html+=renderRecDetail(sv);
-          if(si<saves.length-1)html+='<div style="height:1px;background:#e0e0e0;margin:12px 0;"></div>';
+          if(si<saves.length-1) html+='<div style="height:2px;background:#e8f5ee;margin:14px 0;border-radius:2px;"></div>';
         }
         html+='</div>';
         html+='</div>';
@@ -274,7 +274,7 @@ function render(liveDone,curByForm,pastRecs,wk){
   if(curDone>0){
     var totalSaves=0;
     var fkeys=Object.keys(curByForm);
-    for(var fi2=0;fi2<fkeys.length;fi2++)totalSaves+=curByForm[fkeys[fi2]].length;
+    for(var fi2=0;fi2<fkeys.length;fi2++) totalSaves+=curByForm[fkeys[fi2]].length;
     mc.innerHTML+='<div class="prev-header">This Week \u2013 '+curDone+' form'+(curDone!==1?'s':'')+', '+totalSaves+' save'+(totalSaves!==1?'s':'')+'</div>';
     var curContainer=document.createElement('div');
     curContainer.style.cssText='margin:0 14px;';

@@ -1039,24 +1039,48 @@ break;
 function clearFormAfterSave(formId) {
 var scr = document.getElementById(formId);
 if (!scr) return;
-/* clear all text/date inputs */
+/* get the previously merged data so we know what to keep */
+var wk = getWeekKey();
+dbGetAll('records').then(function(recs) {
+var prevMerged = {};
+for (var i = 0; i < recs.length; i++) {
+if (recs[i].formId === formId && recs[i].weekKey === wk && recs[i].fieldData) {
+var pk = Object.keys(recs[i].fieldData);
+for (var j = 0; j < pk.length; j++) {
+if (recs[i].fieldData[pk[j]]) prevMerged[pk[j]] = recs[i].fieldData[pk[j]];
+}
+}
+}
+/* only clear inputs whose value is NOT in the merged previous data */
 var inputs = scr.querySelectorAll('input[type=text],input[type=date],input[type=number],input[type=time],textarea');
-for (var i = 0; i < inputs.length; i++) inputs[i].value = '';
-/* clear selects */
+for (var ii = 0; ii < inputs.length; ii++) {
+var inp = inputs[ii];
+var key = inp.getAttribute('data-label') || inp.id || ('inp_' + ii);
+if (!prevMerged[key]) inp.value = '';
+}
+/* always clear selects not in previous data */
 var sels = scr.querySelectorAll('select');
-for (var si = 0; si < sels.length; si++) sels[si].selectedIndex = 0;
-/* clear checkboxes */
+for (var si = 0; si < sels.length; si++) {
+var sel = sels[si];
+var sk = sel.getAttribute('data-label') || sel.id || ('sel_' + si);
+if (!prevMerged[sk]) sel.selectedIndex = 0;
+}
+/* always clear checkboxes not in previous data */
 var cbs = scr.querySelectorAll('input[type=checkbox]');
-for (var ci = 0; ci < cbs.length; ci++) cbs[ci].checked = false;
-/* clear radios */
+for (var ci = 0; ci < cbs.length; ci++) {
+var cb = cbs[ci];
+var ck = cb.getAttribute('data-label') || cb.id || ('cb_' + ci);
+if (!prevMerged[ck]) cb.checked = false;
+}
+/* always clear radios */
 var radios = scr.querySelectorAll('input[type=radio]');
 for (var ri = 0; ri < radios.length; ri++) radios[ri].checked = false;
-/* clear signatures */
+/* always clear signatures - these are per-save */
 var canvases = scr.querySelectorAll('canvas');
 for (var ki = 0; ki < canvases.length; ki++) {
 if (sigPads[canvases[ki].id]) sigPads[canvases[ki].id].clear();
 }
-/* clear photos */
+/* always clear photos - these are per-save */
 formPhotos[formId] = [];
 var grid = document.getElementById('photo-grid-' + formId);
 if (grid) grid.innerHTML = '';
@@ -1066,6 +1090,7 @@ var tsEl = document.querySelector('#ts-' + formId + ' .ts-text');
 var tsBtn = document.querySelector('#ts-' + formId + ' .ts-btn');
 if (tsEl) { tsEl.textContent = 'Tap to record timestamp'; tsEl.className = 'ts-text'; }
 if (tsBtn) { tsBtn.textContent = 'Record Time'; tsBtn.className = 'ts-btn'; }
+}).catch(function() {});
 }
 function updateBannerCount() {
 if (!db) return;

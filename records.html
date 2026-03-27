@@ -129,6 +129,9 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 <script>
 var ALL_FORMS=[{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},{id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},{id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},{id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},{id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},{id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},{id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},{id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},{id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},{id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},{id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},{id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},{id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},{id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},{id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},{id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},{id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},{id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},{id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},{id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},{id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},{id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},{id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},{id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},{id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},{id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},{id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},{id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},{id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},{id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},{id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}];
 var DB_NAME='MoriartyHACCP',DB_VER=2,db=null;
+var SB_URL='https://mnebkteiwjxbbmnfotse.supabase.co';
+var SB_KEY='sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
+function sbFetch(path,method,body){return fetch(SB_URL+'/rest/v1/'+path,{method:method||'GET',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show';setTimeout(function(){t.className='toast';},3000);}
 function getWeekKey(){var d=new Date(),s=new Date(d);s.setDate(d.getDate()-d.getDay());s.setHours(0,0,0,0);return s.toISOString().split('T')[0];}
@@ -197,9 +200,9 @@ function renderRecDetail(rec){
   /* Corrective action */
   if(rec.correctiveAction&&rec.correctiveAction.trim())html+='<div class="ca-box"><div class="ca-lbl">&#9888;&#65039; Corrective Action</div><div class="ca-val">'+esc(rec.correctiveAction)+'</div></div>';
   /* Signatures */
-  if(rec.signatures&&rec.signatures.length){var signed=[];for(var si=0;si<rec.signatures.length;si++){if(rec.signatures[si].hasSignature&&rec.signatures[si].dataUrl)signed.push(rec.signatures[si]);}if(signed.length){html+='<div class="section-lbl">&#9999;&#65039; Signatures</div><div class="sigs-row">';for(var sgi=0;sgi<signed.length;sgi++){var lbl=signed[sgi].id.replace(/^sig-/,'').replace(/-/g,' ');html+='<div class="sig-item"><img class="sig-img" src="'+signed[sgi].dataUrl+'" data-lb="'+signed[sgi].dataUrl+'" alt="sig"><div class="sig-name">'+esc(lbl)+'</div></div>';}html+='</div>';}}
+  if(rec.signatures&&rec.signatures.length){var signed=[];for(var si=0;si<rec.signatures.length;si++){var ss=rec.signatures[si];var ssrc=ss.url||ss.dataUrl||null;if(ss.hasSignature&&ssrc)signed.push({id:ss.id,src:ssrc});}if(signed.length){html+='<div class="section-lbl">&#9999;&#65039; Signatures</div><div class="sigs-row">';for(var sgi=0;sgi<signed.length;sgi++){var lbl=signed[sgi].id.replace(/^sig-/,'').replace(/-/g,' ');html+='<div class="sig-item"><img class="sig-img" src="'+signed[sgi].src+'" data-lb="'+signed[sgi].src+'" alt="sig"><div class="sig-name">'+esc(lbl)+'</div></div>';}html+='</div>';}}
   /* Photos */
-  if(rec.photos&&rec.photos.length){html+='<div class="section-lbl">&#128247; Photo Evidence</div><div class="photos-row">';for(var pi=0;pi<rec.photos.length;pi++)html+='<img class="photo-thumb" src="'+rec.photos[pi].dataUrl+'" data-lb="'+rec.photos[pi].dataUrl+'" alt="photo">';html+='</div>';}
+  if(rec.photos&&rec.photos.length){html+='<div class="section-lbl">&#128247; Photo Evidence</div><div class="photos-row">';for(var pi=0;pi<rec.photos.length;pi++){var ph=rec.photos[pi];var psrc=ph.url||ph.src||ph.dataUrl||null;if(psrc)html+='<img class="photo-thumb" src="'+psrc+'" data-lb="'+psrc+'" alt="photo">';}html+='</div>';}
   /* Field data */
   html+=renderFieldData(rec.fieldData);
   /* Delete */
@@ -314,20 +317,69 @@ function render(liveDone,curByForm,pastRecs,wk){
 function dbGetAll(store){return new Promise(function(res,rej){var tx=db.transaction(store,'readonly');var r=tx.objectStore(store).getAll();r.onsuccess=function(e){res(e.target.result);};r.onerror=function(e){rej(e.target.error);};});}
 function dbPut(store,obj){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).put(obj);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);};});}
 function dbDelete(store,id){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).delete(id);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);};});}
+function normaliseRow(r){
+  /* Supabase rows have data nested under .data, local rows are flat */
+  if(r.data&&typeof r.data==='object'){
+    /* build signatures array - use url if available, fall back to dataUrl */
+    var sigs=[];
+    if(r.data.signatures&&r.data.signatures.length){
+      for(var si=0;si<r.data.signatures.length;si++){
+        var s=r.data.signatures[si];
+        sigs.push({
+          id:s.id,
+          hasSignature:s.hasSignature,
+          dataUrl:s.url||s.dataUrl||null,
+          url:s.url||null
+        });
+      }
+    }
+    /* build photos array */
+    var photos=[];
+    if(r.data.photos&&r.data.photos.length){
+      for(var pi=0;pi<r.data.photos.length;pi++){
+        var p=r.data.photos[pi];
+        photos.push({
+          name:p.name||'',
+          timestamp:p.timestamp||'',
+          src:p.url||p.dataUrl||null
+        });
+      }
+    }
+    return {
+      id: r.id, formId: r.form_id||r.formId, weekKey: r.week_key||r.weekKey,
+      savedAt: r.saved_at||r.savedAt, champion: r.data.champion||'',
+      weekEnding: r.data.weekEnding||'', timestamp: r.data.timestamp||'',
+      correctiveAction: r.data.correctiveAction||'',
+      fieldData: r.data.fieldData||{}, photoCount: r.data.photoCount||0,
+      signatures: sigs, photos: photos
+    };
+  }
+  return r;
+}
 function loadRecords(){
   var wk=getWeekKey();
-  Promise.all([dbGetAll('live'),dbGetAll('records')]).then(function(results){
+  var sbPromise=sbFetch('haccp_records?week_key=eq.'+wk+'&order=saved_at.asc','GET').then(function(r){return r.json();}).catch(function(){return[];});
+  Promise.all([dbGetAll('live'),dbGetAll('records'),sbPromise]).then(function(results){
     var liveRecs=results[0];
     var archRecs=results[1];
-    /* Progress count: use live store (one entry per form = how many forms touched) */
+    var sbRecs=results[2]||[];
+    /* Progress count from live store */
     var liveDone=0;
     for(var li=0;li<liveRecs.length;li++){if(liveRecs[li].weekKey===wk)liveDone++;}
-    /* Current week saves: use records store so we get EVERY individual save */
+    /* Current week: merge Supabase + local, deduplicate by id */
+    var seen={};
     var curRecs=[];
+    /* Supabase rows first */
+    for(var si=0;si<sbRecs.length;si++){
+      var nr=normaliseRow(sbRecs[si]);
+      if(!seen[nr.id]){seen[nr.id]=1;curRecs.push(nr);}
+    }
+    /* Add any local-only records not yet in Supabase */
     var pastRecs=[];
     for(var ai=0;ai<archRecs.length;ai++){
-      if(archRecs[ai].weekKey===wk) curRecs.push(archRecs[ai]);
-      else pastRecs.push(archRecs[ai]);
+      var ar=archRecs[ai];
+      if(ar.weekKey===wk){if(!seen[String(ar.id)]){seen[String(ar.id)]=1;curRecs.push(ar);}}
+      else pastRecs.push(ar);
     }
     var curByForm=buildByForm(curRecs,wk);
     render(liveDone,curByForm,pastRecs,wk);

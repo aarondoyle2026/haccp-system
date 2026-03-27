@@ -77,21 +77,60 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;}
 .lightbox.open{display:flex;}
 .lightbox img{max-width:95vw;max-height:90vh;border-radius:8px;object-fit:contain;}
 .lb-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;}
+
+/* ===== FORM LAYOUT STYLES ===== */
+.section-divider{background:#00703c;color:white;padding:12px 20px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:30px 0 0;border-radius:8px 8px 0 0;}
+.form-sheet{background:white;border:1px solid #d0d0d0;border-top:none;margin-bottom:4px;page-break-inside:avoid;}
+.form-sheet:last-child{border-radius:0 0 8px 8px;margin-bottom:24px;}
+.form-sheet-header{background:#e8f5ee;border-bottom:3px solid #00703c;padding:12px 16px;}
+.form-sheet-header h3{font-size:15px;font-weight:700;color:#005a30;}
+.form-sheet-body{padding:16px;overflow-x:auto;}
+.week-table{border-collapse:collapse;width:100%;font-size:11px;}
+.week-table th{background:#00703c;color:white;padding:5px 4px;text-align:center;font-weight:600;border:1px solid #005a30;white-space:nowrap;font-size:10px;}
+.week-table th.prod-col{background:#005a30;text-align:left;padding-left:8px;min-width:130px;}
+.week-table th.target-col{background:#005a30;min-width:55px;}
+.week-table td{border:1px solid #d0d0d0;padding:5px 4px;text-align:center;vertical-align:middle;font-size:11px;}
+.week-table td.unit-name{text-align:left;padding:5px 8px;background:#fafafa;font-weight:500;}
+.week-table td.target{color:#005a30;font-weight:700;background:#e8f5ee;}
+.week-table td.filled{background:#e8f5ee;font-weight:700;color:#1a1a1a;}
+.week-table td.section-hdr{background:#005a30;color:white;font-weight:700;text-align:left;padding:4px 8px;}
+.clean-table{border-collapse:collapse;width:100%;font-size:11px;}
+.clean-table th{background:#00703c;color:white;padding:5px 4px;font-size:10px;font-weight:600;border:1px solid #005a30;text-align:center;}
+.clean-table th.area-col{text-align:left;padding-left:8px;min-width:180px;}
+.clean-table th.chem-col{text-align:left;padding-left:8px;min-width:120px;}
+.clean-table td{border:1px solid #d0d0d0;padding:4px;text-align:center;vertical-align:middle;font-size:11px;}
+.clean-table td.area-name{text-align:left;padding:4px 8px;background:#fafafa;}
+.clean-table td.chem-name{text-align:left;padding:4px 8px;color:#666;font-size:10px;}
+.clean-table td.filled{background:#e8f5ee;font-weight:700;}
+.log-table{border-collapse:collapse;width:100%;font-size:11px;}
+.log-table th{background:#00703c;color:white;padding:5px 6px;text-align:left;font-size:10px;font-weight:600;border:1px solid #005a30;}
+.log-table td{border:1px solid #d0d0d0;padding:5px;font-size:11px;vertical-align:middle;}
+.log-table td.filled{background:#e8f5ee;font-weight:600;}
+.log-table tr:nth-child(even) td{background:#fafafa;}
+.log-table tr:nth-child(even) td.filled{background:#d4edda;}
+.no-data-form{padding:12px 16px;font-size:12px;color:#999;font-style:italic;}
+@media print {
+.section-divider{page-break-before:always;}
+.form-sheet{page-break-inside:avoid;}
+.save-block{page-break-inside:avoid;}
+}
+
 /* Print styles */
 @media print {
-  body{background:white;}
-  .screen-header{display:none!important;}
-  .report{padding:0;max-width:100%;}
-  .report-header{box-shadow:none;border-radius:0;margin-bottom:12px;}
-  .form-saves{display:block!important;}
-  .form-title-bar .toggle{display:none;}
-  .cat-block{page-break-inside:avoid;}
-  .save-block{page-break-inside:avoid;}
-  .lightbox{display:none!important;}
-  .photos-row img{width:80px;height:80px;}
-  .sig-item img{width:100px;height:50px;}
+body{background:white;}
+.screen-header{display:none!important;}
+.report{padding:0;max-width:100%;}
+.report-header{box-shadow:none;border-radius:0;margin-bottom:12px;}
+.form-saves{display:block!important;}
+.form-title-bar .toggle{display:none;}
+.cat-block{page-break-inside:avoid;}
+.save-block{page-break-inside:avoid;}
+.lightbox{display:none!important;}
+.photos-row img{width:80px;height:80px;}
+.sig-item img{width:100px;height:50px;}
 }
 </style>
+
 </head>
 <body>
 <div class="screen-header" id="screenHeader">
@@ -299,6 +338,7 @@ function renderReport(wk, rows){
   document.getElementById('content').innerHTML=html;
   document.getElementById('headerTitle').textContent='Report: '+weekLabel(wk);
   document.title='HACCP Report '+wk+' – Moriarty Group';
+  appendFormSheets(wk, byForm);
 }
 function toggleForm(bar){
   var saves=bar.nextElementSibling;
@@ -306,25 +346,327 @@ function toggleForm(bar){
   saves.className=isOpen?'form-saves':'form-saves open';
   bar.className=isOpen?'form-title-bar':'form-title-bar open';
 }
+
+var DAYS = [‘Mon’,‘Tue’,‘Wed’,‘Thu’,‘Fri’,‘Sat’,‘Sun’];
+
+/* ===== DATA VARS (same as index.html) ===== */
+var meatTempUnits=[[‘Fish Display Unit’,‘0-5°C’],[‘Poultry’,‘0-5°C’],[‘Pork’,‘0-5°C’],[‘Raw Meat’,‘0-5°C’],[‘Walk in fridge’,‘0-5°C’],[‘Pre-pack fish doors’,‘0-5°C’]];
+var prepackTempUnits=[[‘1. Stand up juice fridge at front door’,‘0-5°C’],[‘2. Meat spider at food academy’,‘0-5°C’],[‘3. Meat spider at food academy’,‘0-5°C’],[‘4. Meat spider at food academy’,‘0-5°C’],[‘5. Superquinn spider’,‘0-5°C’],[‘6. Spider fishmonger’,‘0-5°C’],[‘7. Dairy spider at fish pre pack’,‘0-5°C’],[‘8. Ham spider fridge’,‘0-5°C’],[‘9. Provisions promo bay’,’’],[‘10. Food Academy Fridge’,‘0-5°C’],[‘11. Butchers Prepack’,‘0-5°C’],[‘12. Prepared by the Butcher’,‘0-5°C’],[‘13. Poultry’,‘0-5°C’],[‘14. Cheese Prepack’,‘0-5°C’],[‘15. Bacon/Special Offers’,‘0-5°C’],[‘16. Sausages/Rashers’,‘0-5°C’],[‘17. Pudding/Superquinn/Continental’,‘0-5°C’],[‘18. Cooked Meats/Signature Range’,‘0-5°C’],[‘19. Ready meals’,‘0-5°C’],[‘20. Meal deck’,‘0-5°C’]];
+var dairyTempUnits=[[‘1. Milk’,‘0-5°C’],[‘2. Cream/Deserts/Juice’,‘0-5°C’],[‘3. Yoghurts’,‘0-5°C’],[‘4. Cheese’,‘0-5°C’],[‘5. Spreads’,‘0-5°C’],[‘6. Dairy Special Offers’,‘0-5°C’],[‘7. Fish Fridge’,‘0-5°C’],[‘10. Dairy Back-up’,‘0-5°C’],[‘11. Milk Fridge at Coffee Machine’,‘0-5°C’],[‘12. Milk Dispenser at Coffee Machine’,‘0-5°C’]];
+var frozenTempUnits=[[‘1. Ice Cream Bay 1 Door’,’-23°C’],[‘2. Ice Cream Bay 1 Well’,’-23°C’],[‘3. Ice Cream Bay 2 Door’,’-23°C’],[‘4. Ice Cream Bay 2 Well’,’-23°C’],[‘5. Ice Cream Bay 3 Door’,’-23°C’],[‘6. Ice Cream Bay 3 Well’,’-23°C’],[‘7. Ice Cream Stick Fridge’,’-23°C’],[‘8. Special Offer Well no 1’,’-18°C’],[‘9. Potato Product Well’,’-18°C’],[‘10. Chip Well’,’-18°C’],[‘11. Chicken and Burger Well’,’-18°C’],[‘12. Veg Well’,’-18°C’],[‘13. Ready Meal Well’,’-18°C’],[‘14. Special Offer Well no 2’,’-18°C’],[‘15. Fish Product Well’,’-18°C’],[‘16. Fish Well’,’-18°C’],[‘17. Pizza Well 1’,’-18°C’],[‘18. Pizza Well 2’,’-18°C’],[‘19. Vegetarian Food Well’,’-18°C’],[‘20. Back-up Freezer’,’-18°C’]];
+var fruitVegTempUnits=[[‘Display Fridge Veg 1’,‘0-5°C’],[‘Display Fridge Veg 2’,‘0-5°C’],[‘Display Fridge Fruit’,‘0-5°C’],[‘Salad Fridge’,‘0-5°C’],[‘Walk-in Back-up’,‘0-5°C’],[‘Berry Fridge 1’,‘0-5°C’],[‘Berry Fridge 2’,‘0-5°C’]];
+var deliTempUnits=[[‘Bakery Serveover Fridge 1’,‘0-5°C’],[‘Bakery Serveover Fridge 2’,‘0-5°C’],[‘Sandwich Bar Fridge’,‘0-5°C’],[‘Sandwich Bar Serveover’,‘0-5°C’],[‘Deli Counter Fridge 1’,‘0-5°C’],[‘Deli Counter Fridge 2’,‘0-5°C’],[‘Hot Food Serveover’,‘0-5°C’],[‘Prep Fridge’,‘0-5°C’],[‘Walk-in Chill’,‘0-5°C’]];
+var hotfoodTimes=[‘9am’,‘10am’,‘11am’,‘12pm’,‘1pm’,‘2pm’,‘3pm’,‘4pm’,‘5pm’,‘6pm’];
+var hotfoodDailyClean=[[‘Hot bar glass front and back, sides and counter top, trays’,‘Glass cleaner, degreaser’],[‘Scales and shelf’,‘Sanitizer’],[‘Sandwich bar glass front and back, sides and bar counter top, trays’,‘Sanitizer, Glass cleaner’],[‘Fresh Cream bakery serveover glass’,‘Glass cleaner’],[‘Bakery serveover fridge x2, glass doors and handles’,‘Glass cleaner’],[‘Counter tops / Stainless steel’,‘Sanitiser’],[‘Equipment sink top and bottom’,‘Sanitiser’],[‘Handsink / requisites’,‘Sanitizer’],[‘Utensils / equipment / trays’,‘Sanitizer’],[‘Bin’,‘Sanitiser’],[‘Temperature probe’,‘Sanitizer’],[‘Hot food oven, surfaces in direct contact with food, trays, racks’,‘Sanitiser’],[‘Bakery oven and stand x2, surfaces in direct contact with food, trays, racks’,‘Sanitiser’],[‘Grease trap, empty and wash out holder’,‘Degreaser, Sanitiser’],[‘Floor swept and mopped (under tables inc. back up)’,‘Floor cleaner’],[‘Chicken Unit’,‘Degreaser, Sanitiser’],[‘Turbo chef machine, direct contact with food, trays’,‘Sanitiser’],[‘Soup kettle’,‘Sanitiser’]];
+var hotfoodWeeklyClean=[[‘Hot food bar, full deep clean’,‘Degreaser, Oven cleaner’],[‘Sandwich bar, full deep clean’,‘Sanitiser’],[‘Fresh cream bakery serveover, full deep clean’,‘Sanitiser’],[‘Bakery serveover fridge x2, full deep clean’,‘Sanitiser’],[‘Presses inside out, inc. door handles’,‘Sanitiser’],[‘Stainless steel prep area (wheels, casters, legs, walls)’,‘Sanitizer’],[‘Bakery display table x3’,‘Sanitizer’],[‘Bread display’,‘Sanitizer’],[‘Canopy filter’,‘Degreaser’],[‘Chicken oven, full deep clean, inside walls, fans, filters, vents, seals’,‘Degreaser, Oven cleaner’],[‘Bakery oven x2, full deep clean, inside walls, fans, filters, vents, seals’,‘Oven cleaner’],[‘Hot food oven, full deep clean, inside walls, fans, filters, vents, seals’,‘Degreaser, Oven cleaner’],[‘Chicken prep trolley’,‘Sanitizer’]];
+var cookedmeatClean=[[‘Serveover front glass, counter top, sides’,‘Glass cleaner’],[‘Serveover inside, along sides and front’,‘Sanitiser’],[‘Scales and shelve’,‘Sanitizer’],[‘Equipment / trays / chopping boards’,‘Sanitiser’],[‘Counter tops’,‘Sanitiser’],[‘Tables (tops & legs)’,‘Sanitizer’],[‘Meat slicer’,‘Sanitiser’],[‘Cling film unit’,‘Sanitizer’],[‘Temperature probe x2’,‘Sanitiser’],[‘Bins x3’,‘Sanitiser’],[‘Bread slicer’,‘Sanitiser’],[‘Floor sweep and mop inc. under tables and coldrooms’,‘Floor cleaner’],[‘Cheese cutter Pasteurised’,‘Detergent Sanitizer’],[‘Bread Crumber’,‘Sanitizer’]];
+var cookedmeatWeeklyClean=[[‘Serveover - Cooked meats deep clean’,‘Sanitizer Degreaser’],[‘Presses inside & out’,‘Sanitizer’],[‘Prep area stainless steel (walls, wheels and casters)’,‘Sanitizer, Degreaser’],[‘Coldroom (walls, door & floor + shelving)’,‘Sanitizer Degreaser’],[‘All counter display shelving’,‘Sanitizer Degreaser’],[‘Cheese display fridge deep clean’,‘Sanitizer Degreaser’],[‘Ready meal display fridge deep clean’,‘Sanitizer Degreaser’],[‘Salad spider’,‘Sanitizer Degreaser’]];
+var cleaningItemsDaily=[[‘Scales, bags, shelves’,‘Sanitiser’],[‘Raw Servovers’,‘Sanitiser, glass cleaner’],[‘Bins’,‘Degreaser’],[‘Equipment/trays/chopping boards - raw & fish’,‘Wash up liq’],[‘Fish equipment sink & shelf below’,‘Wash up liq, Degreaser’],[‘Hot seal wrap unit’,‘Sanitiser’],[‘SELs/Garnishing’,‘Sanitiser’],[‘Stainless steel serveover’,‘Stainless Steel spray’],[‘Hands sink/Requisites’,‘Degreaser/sanitiser’],[‘Wooden block/Table legs’,‘Block brush’],[‘Table tops’,‘Sanitiser’],[‘Doors/handles’,‘Sanitiser’],[‘Telephone’,‘Sanitiser’],[‘Equipment sink & hand sink requisites - top and bottom’,‘Wash up liq’],[‘Knife rack’,‘Sanitiser’],[‘Scales’,‘Sanitiser’],[‘Burger press’,‘Wash up liq, degreaser’],[‘Mincer head’,‘Wash up liq, degreaser’],[‘Mincer’,‘Wash up liq, degreaser’],[‘Ice Machine’,‘Stainless steel cleaner’],[‘Coldroom - floor, door handle, floor swept’,‘Degreaser, Floorbrush’],[‘Rubber around fridge door’,’’]];
+var cleaningItemsWeekly=[[‘Prep room racking’,‘Degreaser’],[‘Serveover - Raw’,‘Degreaser’],[‘Serveover - Fish’,‘Degreaser’],[‘Prep area - walls & tables’,‘Degreaser’],[‘Returns trolleys’,‘Degreaser’],[‘Stainless steel - Raw’,‘Stainless steel cleaner’],[‘Raw coldroom - floor, shelving’,‘Degreaser’],[‘Display shelving - fish & raw’,‘Degreaser’],[‘Stainless steel - Fish’,‘Stainless steel’],[‘Ice Machine - presses inside and out including door handles’,‘Defrosted/clean, Sanitiser’]];
+var deliTraceStuffing=[‘Stuffing (Crumbs / Herbs / Veg - Loose)’,‘Beetroot’,‘Wraps Tomato’,‘Wraps Brown’,‘Wraps Plane’];
+var deliTraceButter=[‘Butter’,‘Ham’,‘Turkey’,‘Cheese’,‘Mozzarella Cheese’,‘Coleslaw’,‘Potato Salad’];
+var deliTraceChicken=[‘Chicken Tikka’];
+var deliTraceSaladVeg=[‘Chicken’,‘Onion’,‘Cucumber’,‘Scallions’,‘Mixed Peppers’,‘Tomatoes’,‘Lettuce’];
+var deliTraceEggTuna=[‘Eggs’,‘Mayo’,‘Egg Mayo’,‘Tuna & Sweetcorn’,‘Sweetcorn’];
+var sandwiches=[{name:‘B.L.T. on White’,ingr:‘Bread, Bacon, Lettuce, Tomatoes, Mayonnaise’},{name:‘B.L.T. on Brown’,ingr:‘Bread, Bacon, Lettuce, Tomatoes, Mayonnaise’},{name:‘Bacon & Boiled Egg White’,ingr:‘Bread, Bacon, Boiled Egg, Mayonnaise’},{name:‘Bacon & Boiled Egg Brown’,ingr:‘Bread, Bacon, Boiled Egg, Mayonnaise’},{name:‘Chicken & Bacon (White)’,ingr:‘White Bread, Chicken, Bacon, Mayonnaise’},{name:‘Chicken & Bacon (Brown)’,ingr:‘Brown Bread, Chicken, Bacon, Mayonnaise’},{name:‘Chicken & Stuffing (White)’,ingr:‘White Bread, Chicken, Stuffing, Mayonnaise’},{name:‘Chicken & Stuffing (Brown)’,ingr:‘Brown Bread, Chicken, Stuffing, Mayonnaise’},{name:‘Chicken Tikka’,ingr:‘White Bread, Chicken, Tikka sauce, Cheese, Red onion, Lettuce’},{name:‘Egg Mayo’,ingr:‘White Bread, Egg, Cheese, Lettuce, Mayonnaise’},{name:‘Tuna Salad’,ingr:‘Brown Bread, Tuna, Cheese, Mayonnaise’},{name:‘Turkey & Egg Mayo’,ingr:‘White Bread, Turkey, Egg, Red onion, Mayonnaise’},{name:‘Ham & Smoked Cheese (White)’,ingr:‘White Bread, Ham, Smoked cheese, Tomato relish, Mayonnaise’},{name:‘Ham & Smoked Cheese (Brown)’,ingr:‘Brown Bread, Ham, Smoked cheese, Tomato relish, Mayonnaise’},{name:‘BLTC on Brown’,ingr:‘Brown Bread, Bacon, Lettuce, Tomato, Cheese, Mayonnaise’},{name:‘BLTC on White’,ingr:‘White Bread, Bacon, Lettuce, Tomato, Cheese, Mayonnaise’},{name:‘Ham and Cheese’,ingr:‘White bread, Butter, Ham, Cheese’},{name:‘Ham, Cheese & Coleslaw’,ingr:‘White bread, Butter, Ham, Cheese, Coleslaw’}];
+var wraps=[{name:‘Chicken Tikka’,ingr:‘Wrap, Chicken, Tikka sauce, Cheese, Red onion, Lettuce’},{name:‘Egg Mayo Salad’,ingr:‘Wrap, Egg, Cheese, Lettuce, Mayonnaise’},{name:‘Chicken & Stuffing’,ingr:‘Wrap, Chicken, Stuffing, Mayonnaise’},{name:‘Tuna Salad’,ingr:‘Wrap, Tuna, Cheese, Mayonnaise’},{name:‘Turkey & Egg Mayo’,ingr:‘Wrap, Turkey, Egg, Red onion, Mayonnaise’},{name:‘Sweet Chili Chicken’,ingr:‘Wrap, Chicken, Red onion, Spinach, Sweet Chili sauce, Mayonnaise’},{name:‘Crunchy Tuna’,ingr:‘Wrap, Tuna, Lettuce, Onion, Mayonnaise’}];
+var pizzas=[{name:‘Cheese Pizza’,ingr:‘Pizza base, Pizza sauce, Mozzarella cheese’},{name:‘Ham & Mushroom’,ingr:‘Pizza base, Pizza sauce, Ham, Mushroom, Mozzarella cheese’},{name:‘Ham & Sweetcorn’,ingr:‘Pizza base, Pizza sauce, Ham, Sweetcorn, Mozzarella cheese’},{name:‘Meat Pizza’,ingr:‘Pizza base, Pizza sauce, Pepperoni, Chicken, Ham, Mozzarella cheese’},{name:‘Pepperoni & Pepper’,ingr:‘Pizza base, Pizza sauce, Pepperoni, Peppers, Mozzarella cheese’},{name:‘Vegetable Deluxe’,ingr:‘Pizza base, Pizza sauce, Tomato, Peppers, Red onion, Mushrooms, Sweet corn, Mozzarella’},{name:‘Spicy Pepperoni’,ingr:‘Pizza base, Pizza sauce, Pepperoni, Onions, Jalapenos, Mozzarella cheese’}];
+var saladsMade=[{name:‘Egg Mayo’,ingr:‘Egg, Mayo’},{name:‘Carrot & Broccoli’,ingr:‘Carrot, Broccoli, Mayo’},{name:‘Cheese Mix’,ingr:‘Cheese, Scallions, Mayo’},{name:‘Mix Salad’,ingr:‘Loose Veg’},{name:‘Summer Salad’,ingr:‘Loose veg, Egg, Mayo’},{name:‘Chicken Noodle’,ingr:‘Noodles, Chicken, Veg, Chilli Sauce’}];
+var saladsPrepack=[{name:‘Egg Mayo’},{name:‘Beetroot’},{name:‘Asian Noodles’},{name:‘Pasta Spinach Pinenut’},{name:‘Coleslaw’},{name:‘Tuna Mix’},{name:‘Chunky Potato’},{name:‘Mash Potato Salad’},{name:‘Green Lentil Multigrain’},{name:‘Carrot, Broccoli & Cranberry’},{name:‘Chipotle Coleslaw’},{name:‘Basil & Pesto’},{name:‘Lemon Cous Cous’},{name:‘Creamy Tomato Pasta’},{name:‘Carrot, Ginger, Chia Seeds’},{name:‘Cheese Mix’},{name:‘Cheese Coleslaw’},{name:‘Mix Salad’},{name:‘Summer Salad’}];
+var savouries=[‘Beef Lasagne’,‘Chicken & Mushroom Vol au Vent’,‘Red Pepper Goats Cheese Quiche’,‘Black pudding s. rolls’,‘Honey & mustard s. rolls’];
+var cookedMeats=[“Ryan’s Low Salt”,“Honey Glazed”,“Moriarty’s Turkey”,“Carroll’s Crumbed”,“Turkey OTB”,“Oak Smoked Ham”,“Corned Beef”,“Brady’s Crumbed”,“Brady’s Baked”,“Hazlett”,“Wiltshire Ham OTB”];
+var salamiOlives=[‘Mixed Olives’,‘Sundried Tomatoes’,‘Cheese Filled Peppers’,‘Chorizo Extra’,‘Pre pack Mixed olives’,‘Pre pack Sundried tomatoes’,‘Pre pack Cheese filled peppers’,‘Pre Pack Stuffing’];
+var breakfastItems=[‘Sausages’,‘Bacon’,‘Pudding Black’,‘Pudding White’,‘Hash Browns’,‘Eggs’,‘Sm Sausage Roll’,‘Lrg Sausage Roll’,‘Pies C&M’,‘Pies S&K’,‘Fillet Plane’,‘Fillet S/Fried’,‘Fillets Hot Spicy’,‘Wedges’,‘Soup 1’,‘Jambons’,‘Chickens’];
+var lunchItems=[‘Sm Sausage Roll’,‘Wedges’,‘Pop Chicken’,‘Wings BBQ’,‘Goujons’,‘Fillets Plane’,‘Fillets S/Fried’,‘Fillets Hot Spicy’,‘Veg Spring Rolls’,‘Vol Au Vants’,‘Bacon and cheese Bakers’,‘Cottage pie’,‘Honey and Mustard’,‘Sausage Rolls’,‘Sausage Rolls with Black Pudding’];
+
+function gv(fd, key) { return (fd && fd[key]) ? esc(fd[key]) : ‘’; }
+function fc(fd, key) { var v=gv(fd,key); return v ? ‘<td class="filled">’+v+’</td>’ : ‘<td></td>’; }
+
+function renderTempTable(units, formId, fd) {
+var ampm=[‘AM’,‘PM’];
+var html=’<div style="overflow-x:auto"><table class="week-table"><thead><tr>’;
+html+=’<th class="prod-col" style="min-width:160px">Refrigerated Unit</th><th class="target-col">Target</th>’;
+for(var d=0;d<7;d++) html+=’<th colspan="2">’+DAYS[d]+’</th>’;
+html+=’<th style="min-width:80px">Comments</th></tr><tr><th></th><th></th>’;
+for(var d2=0;d2<7;d2++) html+=’<th>AM</th><th>PM</th>’;
+html+=’<th></th></tr></thead><tbody>’;
+for(var i=0;i<units.length;i++){
+html+=’<tr><td class="unit-name">’+esc(units[i][0])+’</td><td class="target">’+esc(units[i][1])+’</td>’;
+for(var d3=0;d3<7;d3++){
+for(var ap=0;ap<2;ap++){
+var key=units[i][0]+’ ‘+DAYS[d3]+’ ‘+ampm[ap];
+html+=fc(fd,key);
+}
+}
+html+=fc(fd, units[i][0]+’ Comments’)+’</tr>’;
+}
+html+=’</tbody></table></div>’;
+return html;
+}
+
+function renderHourlyTable(formId, fd, mode) {
+var html=’<div style="overflow-x:auto"><table class="week-table" style="font-size:10px"><thead><tr>’;
+html+=’<th style="min-width:40px">Time</th>’;
+for(var d=0;d<7;d++) html+=’<th colspan="2">’+DAYS[d]+’</th>’;
+html+=’</tr><tr><th></th>’;
+for(var d2=0;d2<7;d2++){
+if(mode===‘s1s2’) html+=’<th>S1</th><th>S2</th>’;
+else html+=’<th>Product</th><th>Temp</th>’;
+}
+html+=’</tr></thead><tbody>’;
+for(var ti=0;ti<hotfoodTimes.length;ti++){
+html+=’<tr><td style="background:#e8f5ee;font-weight:600;text-align:center">’+hotfoodTimes[ti]+’</td>’;
+for(var d3=0;d3<7;d3++){
+if(mode===‘s1s2’){
+html+=fc(fd,DAYS[d3]+’ ‘+hotfoodTimes[ti]+’ S1’)+fc(fd,DAYS[d3]+’ ‘+hotfoodTimes[ti]+’ S2’);
+} else {
+html+=fc(fd,DAYS[d3]+’ ‘+hotfoodTimes[ti]+’ Product’)+fc(fd,DAYS[d3]+’ ‘+hotfoodTimes[ti]+’ Temp’);
+}
+}
+html+=’</tr>’;
+}
+html+=’</tbody></table></div>’;
+return html;
+}
+
+function renderCleanTable(items, fd) {
+var html=’<div style="overflow-x:auto"><table class="clean-table"><thead><tr>’;
+html+=’<th class="area-col">Area / Item</th><th class="chem-col">Chemical</th>’;
+for(var d=0;d<7;d++) html+=’<th style="min-width:28px">’+DAYS[d][0]+’</th>’;
+html+=’</tr></thead><tbody>’;
+for(var i=0;i<items.length;i++){
+html+=’<tr><td class="area-name">’+esc(items[i][0])+’</td><td class="chem-name">’+esc(items[i][1])+’</td>’;
+for(var d2=0;d2<7;d2++) html+=fc(fd,items[i][0]+’ ‘+DAYS[d2]);
+html+=’</tr>’;
+}
+html+=’</tbody></table></div>’;
+return html;
+}
+
+function renderDeliTrace(products, cols, fd) {
+var html=’<div style="overflow-x:auto"><table class="week-table" style="font-size:10px"><thead><tr>’;
+html+=’<th class="prod-col" style="min-width:130px">Product</th>’;
+for(var d=0;d<7;d++) html+=’<th colspan="'+cols.length+'">’+DAYS[d]+’</th>’;
+html+=’</tr><tr><th></th>’;
+for(var d2=0;d2<7;d2++) for(var ci=0;ci<cols.length;ci++) html+=’<th style="font-size:9px">’+esc(cols[ci])+’</th>’;
+html+=’</tr></thead><tbody>’;
+for(var i=0;i<products.length;i++){
+html+=’<tr><td class="unit-name">’+esc(products[i])+’</td>’;
+for(var d3=0;d3<7;d3++) for(var ci2=0;ci2<cols.length;ci2++) html+=fc(fd,products[i]+’ ‘+DAYS[d3]+’ ‘+cols[ci2]);
+html+=’</tr>’;
+}
+html+=’</tbody></table></div>’;
+return html;
+}
+
+function renderIUBD(products, cols, fd) {
+var html=’<div style="overflow-x:auto"><table class="week-table" style="font-size:10px"><thead><tr>’;
+html+=’<th class="prod-col" style="min-width:140px">Product</th>’;
+for(var d=0;d<7;d++) html+=’<th colspan="'+cols.length+'">’+DAYS[d]+’</th>’;
+html+=’</tr><tr><th></th>’;
+for(var d2=0;d2<7;d2++) for(var ci=0;ci<cols.length;ci++) html+=’<th style="font-size:9px">’+esc(cols[ci])+’</th>’;
+html+=’</tr></thead><tbody>’;
+for(var i=0;i<products.length;i++){
+var pname=products[i].name||products[i];
+html+=’<tr><td class="unit-name">’+esc(pname)+(products[i].ingr?’<br><small style="color:#999;font-size:9px">’+esc(products[i].ingr)+’</small>’:’’)+’</td>’;
+for(var d3=0;d3<7;d3++) for(var ci2=0;ci2<cols.length;ci2++) html+=fc(fd,pname+’ ‘+DAYS[d3]+’ ‘+cols[ci2]);
+html+=’</tr>’;
+}
+html+=’</tbody></table></div>’;
+return html;
+}
+
+function renderOUBD(products, c2, c3, fd) {
+c2=c2||‘DO’; c3=c3||‘UBD’;
+var html=’<div style="overflow-x:auto"><table class="week-table" style="font-size:10px"><thead><tr>’;
+html+=’<th class="prod-col" style="min-width:140px">Product</th>’;
+for(var d=0;d<7;d++) html+=’<th colspan="3">’+DAYS[d]+’</th>’;
+html+=’</tr><tr><th></th>’;
+for(var d2=0;d2<7;d2++) html+=’<th style="font-size:9px">OUBD</th><th style="font-size:9px">’+esc(c2)+’</th><th style="font-size:9px">’+esc(c3)+’</th>’;
+html+=’</tr></thead><tbody>’;
+for(var i=0;i<products.length;i++){
+var name=typeof products[i]===‘string’?products[i]:products[i].name;
+html+=’<tr><td class="unit-name">’+esc(name)+’</td>’;
+for(var d3=0;d3<7;d3++){
+html+=fc(fd,name+’ ‘+DAYS[d3]+’ OUBD’)+fc(fd,name+’ ‘+DAYS[d3]+’ ‘+c2)+fc(fd,name+’ ‘+DAYS[d3]+’ ‘+c3);
+}
+html+=’</tr>’;
+}
+html+=’</tbody></table></div>’;
+return html;
+}
+
+function renderCookedMeats(fd) {
+var html=’<div style="overflow-x:auto"><table class="week-table" style="font-size:10px"><thead><tr>’;
+html+=’<th class="prod-col" style="min-width:140px">Product</th>’;
+for(var d=0;d<7;d++) html+=’<th colspan="3">’+DAYS[d]+’</th>’;
+html+=’</tr><tr><th></th>’;
+for(var d2=0;d2<7;d2++) html+=’<th style="font-size:9px">OUBD</th><th style="font-size:9px">Bulk DU</th><th style="font-size:9px">Slice DU</th>’;
+html+=’</tr></thead><tbody>’;
+for(var i=0;i<cookedMeats.length;i++){
+html+=’<tr><td class="unit-name">’+esc(cookedMeats[i])+’</td>’;
+for(var d3=0;d3<7;d3++){
+html+=fc(fd,cookedMeats[i]+’ ‘+DAYS[d3]+’ OUBD’)+fc(fd,cookedMeats[i]+’ ‘+DAYS[d3]+’ Bulk DU’)+fc(fd,cookedMeats[i]+’ ‘+DAYS[d3]+’ Slice DU’);
+}
+html+=’</tr>’;
+}
+html+=’</tbody></table></div>’;
+return html;
+}
+
+function renderLogTable(headers, rowCount, prefix, fd) {
+var html=’<table class="log-table"><thead><tr>’;
+for(var h=0;h<headers.length;h++) html+=’<th>’+esc(headers[h])+’</th>’;
+html+=’</tr></thead><tbody>’;
+for(var i=1;i<=rowCount;i++){
+html+=’<tr>’;
+for(var h2=0;h2<headers.length;h2++){
+var key=headers[h2]+’ row’+i;
+html+=fc(fd,key);
+}
+html+=’</tr>’;
+}
+html+=’</tbody></table>’;
+return html;
+}
+
+function renderRedMeatClean(fd) {
+var sections=[{label:‘DAILY’,items:cleaningItemsDaily},{label:‘WEEKLY’,items:cleaningItemsWeekly}];
+var html=’<div style="overflow-x:auto"><table class="clean-table"><thead><tr><th class="area-col">Area</th><th class="chem-col">Chemical</th>’;
+for(var d=0;d<7;d++) html+=’<th style="min-width:28px">’+DAYS[d][0]+’</th>’;
+html+=’</tr></thead><tbody>’;
+for(var si=0;si<sections.length;si++){
+html+=’<tr><td class="section-hdr" colspan="9">’+sections[si].label+’</td></tr>’;
+for(var ii=0;ii<sections[si].items.length;ii++){
+var item=sections[si].items[ii];
+html+=’<tr><td class="area-name">’+esc(item[0])+’</td><td class="chem-name">’+esc(item[1])+’</td>’;
+for(var d2=0;d2<7;d2++) html+=fc(fd,item[0]+’ ‘+DAYS[d2]);
+html+=’</tr>’;
+}
+}
+html+=’</tbody></table></div>’;
+return html;
+}
+
+/* Render the form sheet for a given formId with merged field data */
+function renderFormSheet(formId, formName, fd) {
+var body=’’;
+var ampm=[‘AM’,‘PM’];
+if(formId===‘temp-meat’) body=renderTempTable(meatTempUnits,formId,fd);
+else if(formId===‘temp-prepack’) body=renderTempTable(prepackTempUnits,formId,fd);
+else if(formId===‘temp-dairy’) body=renderTempTable(dairyTempUnits,formId,fd);
+else if(formId===‘temp-frozen’) body=renderTempTable(frozenTempUnits,formId,fd);
+else if(formId===‘temp-fruitveg’) body=renderTempTable(fruitVegTempUnits,formId,fd);
+else if(formId===‘temp-deli’) body=renderTempTable(deliTempUnits,formId,fd);
+else if(formId===‘hotfood-chicken-temp’) body=renderHourlyTable(formId,fd,‘s1s2’);
+else if(formId===‘hotfood-bar-temp’) body=renderHourlyTable(formId,fd,‘prodtemp’);
+else if(formId===‘hotfood-soup-temp’) body=renderHourlyTable(formId,fd,‘s1s2’);
+else if(formId===‘hotfood-daily-clean’) body=renderCleanTable(hotfoodDailyClean,fd);
+else if(formId===‘hotfood-weekly-clean’) body=renderCleanTable(hotfoodWeeklyClean,fd);
+else if(formId===‘cookedmeat-clean’) body=renderCleanTable(cookedmeatClean,fd);
+else if(formId===‘cookedmeat-weekly-clean’) body=renderCleanTable(cookedmeatWeeklyClean,fd);
+else if(formId===‘deli-trace-stuffing’) body=renderDeliTrace(deliTraceStuffing,[‘OUBD’,‘DP’,‘UBD’,‘D’],fd);
+else if(formId===‘deli-trace-butter’) body=renderDeliTrace(deliTraceButter,[‘OUBD’,‘DP’,‘UBD’,‘D’],fd);
+else if(formId===‘deli-trace-chicken’) body=renderDeliTrace(deliTraceChicken,[‘OUBD’,‘DP’,‘UBD’],fd);
+else if(formId===‘deli-trace-saladveg’) body=renderDeliTrace(deliTraceSaladVeg,[‘OUBD’,‘DP’,‘UBD’,‘D’],fd);
+else if(formId===‘deli-trace-eggtuna’) body=renderDeliTrace(deliTraceEggTuna,[‘OUBD’,‘DP’,‘UBD’],fd);
+else if(formId===‘trace-sandwich’) body=renderIUBD(sandwiches,[‘IUBD’,‘UBD’],fd);
+else if(formId===‘trace-wrap’) body=renderIUBD(wraps,[‘IUBD’,‘UBD’],fd);
+else if(formId===‘trace-pizza’) body=renderIUBD(pizzas,[‘IUBD’,‘UBD’],fd);
+else if(formId===‘trace-salad-made’) body=renderIUBD(saladsMade,[‘IUBD’,‘DM’,‘DD’],fd);
+else if(formId===‘trace-salad-prepack’) body=renderIUBD(saladsPrepack,[‘IUBD/OUBD’,‘DM/DO’,‘DD’],fd);
+else if(formId===‘trace-savouries’) body=renderOUBD(savouries,‘DO’,‘UBD’,fd);
+else if(formId===‘trace-cooked-meats’) body=renderCookedMeats(fd);
+else if(formId===‘trace-salami’) body=renderOUBD(salamiOlives,‘DO’,‘UBD’,fd);
+else if(formId===‘trace-cheese’) body=’<p style="color:#999;font-style:italic;padding:8px;">Cheese traceability - see field data in audit section</p>’;
+else if(formId===‘trace-pork’) body=renderLogTable([‘Product’,‘OUBD’,‘Date Opened/Cut/Displayed’,‘Scales Use By’,‘Batch No’,‘Signature’],25,‘pork’,fd);
+else if(formId===‘trace-fish’) body=’<p style="color:#999;font-style:italic;padding:8px;">Fish tracker - see field data in audit section</p>’;
+else if(formId===‘trace-butcher’) body=’<p style="color:#999;font-style:italic;padding:8px;">Batch traceability - see field data in audit section</p>’;
+else if(formId===‘prod-mince’) body=renderLogTable([‘Date/Time’,‘Person’,‘Meat/Batch Code’,‘Cut Type’,‘Temp After Chilling’,‘Scales Use By’,‘Date Removed’],20,‘mince’,fd);
+else if(formId===‘prod-burger’) body=renderLogTable([‘Date/Time’,‘Person’,‘Meat/Batch Code’,‘Burger Mix’,‘Scales Use By’,‘Date Removed’],20,‘burger’,fd);
+else if(formId===‘clean-redmeat’) body=renderRedMeatClean(fd);
+else if(formId===‘clean-fruitveg’) body=renderCleanTable([[‘Floor’,‘Mop & bucket/degreaser’],[‘Scales’,‘Sanitiser’],[‘Juicer’,‘Wash up liq/Sanitiser’],[‘Salad display’,‘Sanitiser’],[‘Potato stands’,‘Sanitiser’]],fd);
+else if(formId===‘clean-stockroom’) body=renderCleanTable([[‘Yard’,‘Degreaser/Mop’],[‘Back-up cold room’,‘Degreaser/Sanitiser’],[‘Ground floor stockroom’,‘Degreaser/Mop’],[‘First floor stockroom’,‘Degreaser/Mop’],[‘Sluice room’,‘Degreaser/Sanitiser’],[‘Bailer area’,‘Degreaser/Mop’],[‘Returns area’,‘Degreaser/Mop’],[‘Frozen back-up’,‘Degreaser/Sanitiser’],[‘Dairy back-up’,‘Degreaser/Sanitiser’],[‘Office’,‘Sanitiser’]],fd);
+else if(formId===‘goods-chilled’||formId===‘goods-ambient’) body=renderLogTable([‘Date’,‘Supplier’,‘Temp Check’,‘Food Safety Checks’,‘Docket No’,‘Product Dating’,‘Product Name’,‘Accept/Reject’,‘Delivery Comments’,‘Signature’],20,‘goods’,fd);
+else if(formId===‘hotfood-after-cook’||formId===‘hotfood-greaseshield’||formId===‘thawing-check’||formId===‘compliance’) body=’<p style="color:#999;font-style:italic;padding:8px;">See field data in audit section above</p>’;
+else body=’<p style="color:#999;font-style:italic;padding:8px;">Form data in audit section</p>’;
+return ‘<div class="form-sheet-body">’+body+’</div>’;
+}
+
+/* Build merged field data from all saves */
+function buildMergedFd(saves) {
+var fd={};
+for(var i=0;i<saves.length;i++){
+if(saves[i].fieldData){
+var keys=Object.keys(saves[i].fieldData);
+for(var ki=0;ki<keys.length;ki++){
+if(saves[i].fieldData[keys[ki]]) fd[keys[ki]]=saves[i].fieldData[keys[ki]];
+}
+}
+}
+return fd;
+}
+
+/* Append form sheets section to report */
+function appendFormSheets(wk, byForm) {
+var cats=[],catMap={};
+for(var fi=0;fi<ALL_FORMS.length;fi++){
+var f=ALL_FORMS[fi];
+if(!catMap[f.cat]){catMap[f.cat]=[];cats.push(f.cat);}
+catMap[f.cat].push(f);
+}
+var html=’<div class="report">’;
+html+=’<div style="background:#1a1a1a;color:white;border-radius:12px;padding:20px;margin-bottom:24px;">’;
+html+=’<div style="font-size:11px;opacity:0.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Moriarty Group SuperValu</div>’;
+html+=’<div style="font-size:20px;font-weight:700;">📋 Form Sheets – ‘+esc(weekLabel(wk))+’</div>’;
+html+=’<div style="font-size:12px;opacity:0.6;margin-top:4px;">Pre-filled with all data recorded this week</div>’;
+html+=’</div>’;
+for(var ci=0;ci<cats.length;ci++){
+var cat=cats[ci],forms=catMap[cat];
+html+=’<div class="section-divider">’+esc(cat)+’</div>’;
+html+=’<div class="form-block">’;
+for(var ri=0;ri<forms.length;ri++){
+var form=forms[ri];
+var saves=byForm[form.id]||[];
+var fd=buildMergedFd(saves);
+var hasSaves=saves.length>0;
+html+=’<div class="form-sheet">’;
+html+=’<div class="form-sheet-header" style="'+(hasSaves?'':'background:#fff8f0;border-color:#e65100;')+'">’;
+html+=’<h3>’+(hasSaves?‘✅’:‘⚠️’)+’ ‘+esc(form.name);
+if(hasSaves) html+=’ <span style="font-size:12px;font-weight:400;color:#666;">· ‘+saves.length+’ save’+(saves.length!==1?‘s’:’’)+’</span>’;
+else html+=’ <span style="font-size:12px;font-weight:400;color:#e65100;">· Not submitted this week</span>’;
+html+=’</h3></div>’;
+html+=renderFormSheet(form.id, form.name, fd);
+html+=’</div>’;
+}
+html+=’</div>’;
+}
+html+=’</div>’;
+var container=document.createElement(‘div’);
+container.innerHTML=html;
+document.body.appendChild(container);
+}
+
 /* Load data */
 var params=new URLSearchParams(window.location.search);
-var weekKey=params.get('week')||getWeekKey();
+var weekKey=params.get(‘week’)||getWeekKey();
 /* fetch from Supabase */
-fetch(SB_URL+'/rest/v1/haccp_records?week_key=eq.'+weekKey+'&order=saved_at.asc',{
-  headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+fetch(SB_URL+’/rest/v1/haccp_records?week_key=eq.’+weekKey+’&order=saved_at.asc’,{
+headers:{‘apikey’:SB_KEY,‘Authorization’:’Bearer ’+SB_KEY}
 }).then(function(r){return r.json();}).then(function(rows){
-  if(!rows||!rows.length){
-    /* try loading from local IndexedDB as fallback */
-    document.getElementById('content').innerHTML='<div class="loading">&#128203; No cloud data found for this week. Try opening from the Records page.</div>';
-    return;
-  }
-  renderReport(weekKey,rows);
+if(!rows||!rows.length){
+/* try loading from local IndexedDB as fallback */
+document.getElementById(‘content’).innerHTML=’<div class="loading">📋 No cloud data found for this week. Try opening from the Records page.</div>’;
+return;
+}
+renderReport(weekKey,rows);
 }).catch(function(e){
-  document.getElementById('content').innerHTML='<div class="error">&#9888;&#65039; Could not load report: '+esc(e.message||'Network error')+'<br><br>Check your internet connection and try again.</div>';
+document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Could not load report: ‘+esc(e.message||‘Network error’)+’<br><br>Check your internet connection and try again.</div>’;
 });
-document.getElementById('lightbox').addEventListener('click',function(e){
-  if(e.target===this){this.className='lightbox';document.getElementById('lbImg').src='';}
+document.getElementById(‘lightbox’).addEventListener(‘click’,function(e){
+if(e.target===this){this.className=‘lightbox’;document.getElementById(‘lbImg’).src=’’;}
 });
 </script>
+
 </body>
 </html>

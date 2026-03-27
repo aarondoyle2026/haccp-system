@@ -664,6 +664,112 @@ var cleaningItemsWeekly = [['Prep room racking','Degreaser'],['Serveover - Raw',
 var complianceDepts = [{name:'1. Serveover Raw/Fish',items:['Mince control','Fish Tracker','Temperature Checks','Daily cleaning schedule','Weekly cleaning schedule','Burger control sheet','PBOB Trace','Pork and Bacon Trace','Breaded chicken trace','Beef Trace']},{name:'2. Cold Deli',items:['Cooked meat tracker','Sandwich tracker','Salami & olive tracker','Savoury tracker','Salad tracker','Temp checks','Daily cleaning schedule','Weekly cleaning schedule']},{name:'3. Hot Food Bar/Bakery',items:['After cook sheet','Hot holding sheet','Temp checks bakery','Daily cleaning schedule','Weekly cleaning schedule']},{name:'4. Prepack Deli Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'5. Fruit & Veg Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'6. Dairy Food Safety',items:['Temperature Checks','Deep Clean']},{name:'7. Frozen Food Safety',items:['Load Levels','Temperature Checks','Deep clean UTD']},{name:'8. Goods Inwards Food Safety',items:['FSR1 - Fresh Van checks','FSR2 - Dry Grocery Van checks','Cleaning schedule - Daily','Cleaning schedule - Deep clean']}];
 var ALL_FORMS = [{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},{id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},{id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},{id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},{id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},{id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},{id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},{id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},{id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},{id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},{id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},{id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},{id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},{id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},{id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},{id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},{id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},{id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},{id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},{id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},{id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},{id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},{id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},{id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},{id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},{id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},{id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},{id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},{id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},{id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},{id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}];
 var DB_NAME = 'MoriartyHACCP', DB_VER = 2, db = null;
+/* ===== SUPABASE CONFIG ===== */
+var SB_URL = 'https://mnebkteiwjxbbmnfotse.supabase.co';
+var SB_KEY = 'sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
+function sbFetch(path, method, body) {
+return fetch(SB_URL + '/rest/v1/' + path, {
+method: method || 'GET',
+headers: {
+'apikey': SB_KEY,
+'Authorization': 'Bearer ' + SB_KEY,
+'Content-Type': 'application/json',
+'Prefer': method === 'POST' ? 'resolution=merge-duplicates' : ''
+},
+body: body ? JSON.stringify(body) : undefined
+});
+}
+function sbUpsert(record) {
+/* strip photos/signatures from Supabase to keep payload small - stored locally only */
+var row = {
+id: String(record.id),
+form_id: record.formId,
+week_key: record.weekKey,
+saved_at: record.savedAt,
+store_id: '424',
+data: {
+weekEnding: record.weekEnding,
+champion: record.champion,
+timestamp: record.timestamp,
+correctiveAction: record.correctiveAction,
+fieldData: record.fieldData,
+photoCount: record.photoCount
+}
+};
+return sbFetch('haccp_records', 'POST', [row]).then(function(r) {
+if (!r.ok) return r.text().then(function(t) { console.warn('Supabase upsert failed:', t); });
+});
+}
+function sbGetWeek(weekKey) {
+return sbFetch('haccp_records?week_key=eq.' + weekKey + '&order=saved_at.asc', 'GET')
+.then(function(r) { return r.json(); })
+.catch(function() { return []; });
+}
+/* Upload a base64 dataURL to Supabase Storage, return public URL */
+function sbUploadMedia(path, dataUrl) {
+return new Promise(function(resolve) {
+if (!dataUrl) { resolve(null); return; }
+/* convert base64 to blob */
+var parts = dataUrl.split(',');
+var mime = parts[0].match(/:(.*?);/)[1];
+var bstr = atob(parts[1]);
+var n = bstr.length;
+var u8arr = new Uint8Array(n);
+for (var i = 0; i < n; i++) u8arr[i] = bstr.charCodeAt(i);
+var blob = new Blob([u8arr], {type: mime});
+fetch(SB_URL + '/storage/v1/object/haccp-media/' + path, {
+method: 'POST',
+headers: {
+'apikey': SB_KEY,
+'Authorization': 'Bearer ' + SB_KEY,
+'Content-Type': mime,
+'x-upsert': 'true'
+},
+body: blob
+}).then(function(r) {
+if (r.ok) {
+resolve(SB_URL + '/storage/v1/object/public/haccp-media/' + path);
+} else {
+resolve(null);
+}
+}).catch(function() { resolve(null); });
+});
+}
+/* Upload all photos and signatures for a record, return updated arrays with URLs */
+function sbUploadRecordMedia(recordId, photos, signatures) {
+var promises = [];
+var photoUrls = [];
+var sigUrls = [];
+/* photos */
+for (var pi = 0; pi < photos.length; pi++) {
+(function(idx, photo) {
+var path = 'photos/' + recordId + '_' + idx + '.jpg';
+promises.push(
+sbUploadMedia(path, photo.dataUrl).then(function(url) {
+photoUrls[idx] = {name: photo.name, timestamp: photo.timestamp, url: url, dataUrl: photo.dataUrl};
+})
+);
+})(pi, photos[pi]);
+}
+/* signatures */
+for (var si = 0; si < signatures.length; si++) {
+(function(idx, sig) {
+if (!sig.hasSignature || !sig.dataUrl) {
+sigUrls[idx] = sig;
+return;
+}
+var path = 'signatures/' + recordId + '_' + sig.id + '.png';
+promises.push(
+sbUploadMedia(path, sig.dataUrl).then(function(url) {
+sigUrls[idx] = {id: sig.id, hasSignature: sig.hasSignature, dataUrl: sig.dataUrl, url: url};
+})
+);
+})(si, signatures[si]);
+}
+return Promise.all(promises).then(function() {
+return {photos: photoUrls, signatures: sigUrls};
+});
+}
 function openDB() {
 return new Promise(function(res, rej) {
 var done = false;
@@ -866,29 +972,20 @@ restoreMergedWeekData(id);
 }, 120);
 }
 /* Merge all saves for this form this week into the table fields */
-function restoreMergedWeekData(formId) {
-if (!db) return;
-var wk = getWeekKey();
-dbGetAll('records').then(function(recs) {
-var saves = [];
-for (var i = 0; i < recs.length; i++) {
-if (recs[i].formId === formId && recs[i].weekKey === wk) saves.push(recs[i]);
-}
+function mergeAndDisplay(formId, saves) {
 if (!saves.length) return;
-/* merge all fieldData objects — later saves overwrite earlier for same key */
 saves.sort(function(a,b){ return a.savedAt < b.savedAt ? -1 : 1; });
 var merged = {};
 for (var si = 0; si < saves.length; si++) {
-if (saves[si].fieldData) {
-var keys = Object.keys(saves[si].fieldData);
+var fd = saves[si].fieldData || (saves[si].data && saves[si].data.fieldData);
+if (fd) {
+var keys = Object.keys(fd);
 for (var ki = 0; ki < keys.length; ki++) {
-if (saves[si].fieldData[keys[ki]]) merged[keys[ki]] = saves[si].fieldData[keys[ki]];
+if (fd[keys[ki]]) merged[keys[ki]] = fd[keys[ki]];
 }
 }
 }
-/* restore merged data into the form inputs */
 restoreFieldData(formId, merged);
-/* show save count banner inside form */
 var scr = document.getElementById(formId);
 if (!scr) return;
 var banner = scr.querySelector('.week-save-banner');
@@ -899,9 +996,43 @@ banner.style.cssText = 'background:#e8f5ee;border-left:3px solid #00703c;padding
 var body = scr.querySelector('.form-body');
 if (body) body.insertBefore(banner, body.firstChild);
 }
-var latestTs = new Date(saves[saves.length-1].savedAt).toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
-banner.textContent = '\u2705 ' + saves.length + ' save' + (saves.length!==1?'s':'') + ' this week \u00b7 Last: ' + latestTs + ' \u00b7 Fill in today\u2019s data and save';
+var latest = saves[saves.length-1];
+var latestSavedAt = latest.savedAt || (latest.data && latest.data.timestamp) || '';
+var latestTs = latestSavedAt ? new Date(latestSavedAt).toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false}) : '';
+var champion = latest.champion || (latest.data && latest.data.champion) || '';
+banner.textContent = '\u2705 ' + saves.length + ' save' + (saves.length!==1?'s':'') + ' this week' + (latestTs?' \u00b7 Last: '+latestTs:'') + (champion?' \u00b7 '+champion:'') + ' \u00b7 Fill in today\u2019s data and save';
+}
+function restoreMergedWeekData(formId) {
+var wk = getWeekKey();
+/* try Supabase first for multi-device data, fall back to local */
+sbFetch('haccp_records?form_id=eq.' + formId + '&week_key=eq.' + wk + '&order=saved_at.asc', 'GET')
+.then(function(r) { return r.json(); })
+.then(function(sbRows) {
+if (sbRows && sbRows.length) {
+mergeAndDisplay(formId, sbRows);
+return;
+}
+/* fall back to local IndexedDB */
+if (!db) return;
+dbGetAll('records').then(function(recs) {
+var saves = [];
+for (var i = 0; i < recs.length; i++) {
+if (recs[i].formId === formId && recs[i].weekKey === wk) saves.push(recs[i]);
+}
+mergeAndDisplay(formId, saves);
 }).catch(function() {});
+})
+.catch(function() {
+/* offline - use local only */
+if (!db) return;
+dbGetAll('records').then(function(recs) {
+var saves = [];
+for (var i = 0; i < recs.length; i++) {
+if (recs[i].formId === formId && recs[i].weekKey === wk) saves.push(recs[i]);
+}
+mergeAndDisplay(formId, saves);
+}).catch(function() {});
+});
 }
 function goBack() {
 if (currentForm) document.getElementById(currentForm).style.display = 'none';
@@ -993,8 +1124,45 @@ correctiveAction: correctiveAction,
 signatures: signatures,
 fieldData: deltaFieldData
 };
-dbPut('live', liveRec).then(function() {
+/* upload photos and signatures to Supabase Storage first */
+sbUploadRecordMedia(archRec.id, photoData, signatures).then(function(media) {
+/* update records with storage URLs */
+liveRec.photos = media.photos;
+liveRec.signatures = media.signatures;
+archRec.photos = media.photos;
+archRec.signatures = media.signatures;
+return dbPut('live', liveRec);
+}).then(function() {
 return dbPut('records', archRec);
+}).then(function() {
+/* push to Supabase with media URLs */
+var sbRec = {
+id: String(archRec.id),
+form_id: archRec.formId,
+week_key: archRec.weekKey,
+saved_at: archRec.savedAt,
+store_id: '424',
+data: {
+weekEnding: archRec.weekEnding,
+champion: archRec.champion,
+timestamp: archRec.timestamp,
+correctiveAction: archRec.correctiveAction,
+fieldData: archRec.fieldData,
+photoCount: archRec.photoCount,
+photos: archRec.photos,
+signatures: archRec.signatures
+}
+};
+return fetch(SB_URL + '/rest/v1/haccp_records', {
+method: 'POST',
+headers: {
+'apikey': SB_KEY,
+'Authorization': 'Bearer ' + SB_KEY,
+'Content-Type': 'application/json',
+'Prefer': 'resolution=merge-duplicates'
+},
+body: JSON.stringify([sbRec])
+});
 }).then(function() {
 showToast('Saved!');
 updateBannerCount();
@@ -1003,8 +1171,39 @@ clearFormAfterSave(formId);
 restoreMergedWeekData(formId);
 }).catch(function(e) { showToast('Save failed: ' + e.message); });
 };
-/* load existing records to compute previous merged state */
+/* load existing records (Supabase first, then local) to compute previous merged state */
 var runSave = function() {
+sbFetch('haccp_records?form_id=eq.' + formId + '&week_key=eq.' + wk + '&order=saved_at.asc', 'GET')
+.then(function(r) { return r.json(); })
+.then(function(sbRows) {
+var prevMerged = {};
+var rows = (sbRows && sbRows.length) ? sbRows : [];
+for (var i = 0; i < rows.length; i++) {
+var fd = rows[i].fieldData || (rows[i].data && rows[i].data.fieldData);
+if (fd) {
+var pk = Object.keys(fd);
+for (var j = 0; j < pk.length; j++) {
+if (fd[pk[j]]) prevMerged[pk[j]] = fd[pk[j]];
+}
+}
+}
+if (Object.keys(prevMerged).length) { doSaveWithDelta(prevMerged); return; }
+/* fall back to local */
+if (!db) { doSaveWithDelta({}); return; }
+dbGetAll('records').then(function(recs) {
+for (var i = 0; i < recs.length; i++) {
+if (recs[i].formId === formId && recs[i].weekKey === wk && recs[i].fieldData) {
+var pk2 = Object.keys(recs[i].fieldData);
+for (var j2 = 0; j2 < pk2.length; j2++) {
+if (recs[i].fieldData[pk2[j2]]) prevMerged[pk2[j2]] = recs[i].fieldData[pk2[j2]];
+}
+}
+}
+doSaveWithDelta(prevMerged);
+}).catch(function() { doSaveWithDelta({}); });
+})
+.catch(function() {
+if (!db) { doSaveWithDelta({}); return; }
 dbGetAll('records').then(function(recs) {
 var prevMerged = {};
 for (var i = 0; i < recs.length; i++) {
@@ -1017,6 +1216,7 @@ if (recs[i].fieldData[pk[j]]) prevMerged[pk[j]] = recs[i].fieldData[pk[j]];
 }
 doSaveWithDelta(prevMerged);
 }).catch(function() { doSaveWithDelta({}); });
+});
 };
 if (!db) { openDB().then(function() { runSave(); }); } else { runSave(); }
 }

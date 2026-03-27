@@ -947,9 +947,23 @@ var correctiveAction = '';
 var scr = document.getElementById(formId);
 if (scr) { var ta = scr.querySelector('textarea'); if (ta) correctiveAction = ta.value || ''; }
 var signatures = collectSignatures(formId);
-var fieldData = collectFieldData(formId);
+var fullFieldData = collectFieldData(formId);
 var ts = formTimestamps[formId] || now.toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});
-/* live record - persists all week for form restore, keyed formId::weekKey */
+/* build merged previous data so we can diff against it */
+var doSaveWithDelta = function(prevMerged) {
+/* delta = only keys that are NEW or CHANGED compared to previous merged data */
+var deltaFieldData = {};
+var keys = Object.keys(fullFieldData);
+for (var ki = 0; ki < keys.length; ki++) {
+var k = keys[ki];
+var newVal = fullFieldData[k];
+var oldVal = prevMerged[k] || '';
+/* include if value exists and differs from what was already saved */
+if (newVal && newVal !== oldVal) {
+deltaFieldData[k] = newVal;
+}
+}
+/* live record stores FULL data for form display */
 var liveRec = {
 id: formId + '::' + wk,
 formId: formId,
@@ -962,9 +976,9 @@ photos: photoData,
 photoCount: photoData.length,
 correctiveAction: correctiveAction,
 signatures: signatures,
-fieldData: fieldData
+fieldData: fullFieldData
 };
-/* archive record - unique timestamp ID, every save kept for full audit trail */
+/* archive record stores only DELTA - what this person newly entered */
 var archRec = {
 id: now.getTime(),
 formId: formId,
@@ -977,9 +991,8 @@ photos: photoData,
 photoCount: photoData.length,
 correctiveAction: correctiveAction,
 signatures: signatures,
-fieldData: fieldData
+fieldData: deltaFieldData
 };
-var doSave = function() {
 dbPut('live', liveRec).then(function() {
 return dbPut('records', archRec);
 }).then(function() {
@@ -990,7 +1003,22 @@ clearFormAfterSave(formId);
 restoreMergedWeekData(formId);
 }).catch(function(e) { showToast('Save failed: ' + e.message); });
 };
-if (!db) { openDB().then(function() { doSave(); }); } else { doSave(); }
+/* load existing records to compute previous merged state */
+var runSave = function() {
+dbGetAll('records').then(function(recs) {
+var prevMerged = {};
+for (var i = 0; i < recs.length; i++) {
+if (recs[i].formId === formId && recs[i].weekKey === wk && recs[i].fieldData) {
+var pk = Object.keys(recs[i].fieldData);
+for (var j = 0; j < pk.length; j++) {
+if (recs[i].fieldData[pk[j]]) prevMerged[pk[j]] = recs[i].fieldData[pk[j]];
+}
+}
+}
+doSaveWithDelta(prevMerged);
+}).catch(function() { doSaveWithDelta({}); });
+};
+if (!db) { openDB().then(function() { runSave(); }); } else { runSave(); }
 }
 function updateFormBadge(formId, saved) {
 var cards = document.querySelectorAll('.form-card');

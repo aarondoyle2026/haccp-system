@@ -265,16 +265,20 @@ function renderWeekSections(container,byForm){
   attachListeners(container);
 }
 /* Main render */
-function render(liveDone,curByForm,pastRecs,wk){
+function render(liveDone,curByForm,pastRecs,wk,weekClosed){
   var total=ALL_FORMS.length;
   var curDone=Object.keys(curByForm).length,curPct=Math.round(liveDone/total*100);
   var sb=document.getElementById('statusBar');
-  sb.textContent='\u25cf '+liveDone+' form'+(liveDone!==1?'s':'')+' saved this week \u00b7 '+timeRemaining(wk);
+  if(weekClosed){
+    sb.textContent='\u2705 Week closed \u00b7 New week started';
+  } else {
+    sb.textContent='\u25cf '+liveDone+' form'+(liveDone!==1?'s':'')+' saved this week \u00b7 '+timeRemaining(wk);
+  }
   sb.className='status-bar';
   var mc=document.getElementById('mainContent');
-  mc.innerHTML='<div class="cur-card"><div class="cur-label">This Week (forms app)</div><div class="cur-week">'+esc(weekLabel(wk))+'</div><div class="cur-row"><div><div class="cur-pct">'+curPct+'%</div><div class="cur-sub">Complete</div></div><div class="cur-right">'+liveDone+' / '+total+' forms saved<br><span style="font-size:11px;opacity:0.75">Closes Saturday midnight</span></div></div></div><div class="prog-wrap"><div class="prog-fill" style="width:'+curPct+'%"></div></div>';
-  /* Current week form list */
-  if(curDone>0){
+  mc.innerHTML='<div class="cur-card"><div class="cur-label">This Week (forms app)</div><div class="cur-week">'+esc(weekLabel(wk))+'</div><div class="cur-row"><div><div class="cur-pct">'+(weekClosed?'Closed':curPct+'%')+'</div><div class="cur-sub">'+(weekClosed?'Week archived':'Complete')+'</div></div><div class="cur-right">'+(weekClosed?'Week closed \u2013 see below':''+liveDone+' / '+total+' forms saved<br><span style="font-size:11px;opacity:0.75">Closes Saturday midnight</span>')+'</div></div></div><div class="prog-wrap"><div class="prog-fill" style="width:'+(weekClosed?100:curPct)+'%;'+(weekClosed?'background:#666;':'')+'"></div></div>';
+  /* Current week form list - only if not closed */
+  if(!weekClosed&&curDone>0){
     var totalSaves=0;
     var fkeys=Object.keys(curByForm);
     for(var fi2=0;fi2<fkeys.length;fi2++) totalSaves+=curByForm[fkeys[fi2]].length;
@@ -300,6 +304,11 @@ function render(liveDone,curByForm,pastRecs,wk){
       var item=document.createElement('div');item.className='acc-item';
       var trigger=document.createElement('div');trigger.className='acc-trigger';
       trigger.innerHTML='<div class="acc-left"><div class="acc-week">'+esc(weekLabel(pwk))+'</div><div class="acc-sub">'+pwDone+' / '+total+' forms completed</div></div><span class="'+badgeClass+'">'+pwPct+'%</span><span class="acc-chevron">&#8250;</span>';
+      var reportBtn=document.createElement('a');
+      reportBtn.href='report.html?week='+pwk;
+      reportBtn.style.cssText='background:#005a30;color:white;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;margin-left:8px;';
+      reportBtn.textContent='Full Report';
+      trigger.appendChild(reportBtn);
       var body=document.createElement('div');body.className='acc-body';
       var inner=document.createElement('div');body.appendChild(inner);
       var built=false;
@@ -358,31 +367,53 @@ function normaliseRow(r){
 }
 function loadRecords(){
   var wk=getWeekKey();
-  var sbPromise=sbFetch('haccp_records?week_key=eq.'+wk+'&order=saved_at.asc','GET').then(function(r){return r.json();}).catch(function(){return[];});
-  Promise.all([dbGetAll('live'),dbGetAll('records'),sbPromise]).then(function(results){
+  /* fetch current week AND all past weeks from Supabase */
+  var sbCurPromise=sbFetch('haccp_records?week_key=eq.'+wk+'&order=saved_at.asc','GET').then(function(r){return r.json();}).catch(function(){return[];});
+  var sbPastPromise=sbFetch('haccp_records?week_key=neq.'+wk+'&order=saved_at.asc','GET').then(function(r){return r.json();}).catch(function(){return[];});
+  Promise.all([dbGetAll('live'),dbGetAll('records'),dbGetAll('weeks'),sbCurPromise,sbPastPromise]).then(function(results){
     var liveRecs=results[0];
     var archRecs=results[1];
-    var sbRecs=results[2]||[];
-    /* Progress count from live store */
-    var liveDone=0;
-    for(var li=0;li<liveRecs.length;li++){if(liveRecs[li].weekKey===wk)liveDone++;}
-    /* Current week: merge Supabase + local, deduplicate by id */
+    var closedWeeks=results[2]||[];
+    var sbCurRecs=results[3]||[];
+    var sbPastRecs=results[4]||[];
+    /* check if current week has been closed */
+    var weekClosed=false;
+    for(var wi=0;wi<closedWeeks.length;wi++){if(closedWeeks[wi].weekKey===wk){weekClosed=true;break;}}
+    /* Progress count from live store - 0 if week closed */
+    var liveDone=weekClosed?0:0;
+    if(!weekClosed){
+      for(var li=0;li<liveRecs.length;li++){if(liveRecs[li].weekKey===wk)liveDone++;}
+    }
+    /* Current week records: only show if week not closed */
     var seen={};
     var curRecs=[];
-    /* Supabase rows first */
-    for(var si=0;si<sbRecs.length;si++){
-      var nr=normaliseRow(sbRecs[si]);
-      if(!seen[nr.id]){seen[nr.id]=1;curRecs.push(nr);}
+    if(!weekClosed){
+      for(var si=0;si<sbCurRecs.length;si++){var nr=normaliseRow(sbCurRecs[si]);if(!seen[nr.id]){seen[nr.id]=1;curRecs.push(nr);}}
+      for(var ai=0;ai<archRecs.length;ai++){var ar=archRecs[ai];if(ar.weekKey===wk&&!seen[String(ar.id)]){seen[String(ar.id)]=1;curRecs.push(ar);}}
     }
-    /* Add any local-only records not yet in Supabase */
+    /* Past weeks: combine Supabase past records + local past records */
+    var pastSeen={};
     var pastRecs=[];
-    for(var ai=0;ai<archRecs.length;ai++){
-      var ar=archRecs[ai];
-      if(ar.weekKey===wk){if(!seen[String(ar.id)]){seen[String(ar.id)]=1;curRecs.push(ar);}}
-      else pastRecs.push(ar);
+    for(var pi=0;pi<sbPastRecs.length;pi++){var pr=normaliseRow(sbPastRecs[pi]);if(!pastSeen[pr.id]){pastSeen[pr.id]=1;pastRecs.push(pr);}}
+    for(var pai=0;pai<archRecs.length;pai++){var par=archRecs[pai];if(par.weekKey!==wk&&!pastSeen[String(par.id)]){pastSeen[String(par.id)]=1;pastRecs.push(par);}}
+    /* also include records from closed weeks store if not already in pastRecs */
+    for(var cwi=0;cwi<closedWeeks.length;cwi++){
+      var cw=closedWeeks[cwi];
+      if(cw.weekKey===wk) continue; /* skip current week if somehow closed */
+      /* check if we have records for this week already */
+      var hasWeek=false;
+      for(var pri=0;pri<pastRecs.length;pri++){if(pastRecs[pri].weekKey===cw.weekKey){hasWeek=true;break;}}
+      if(!hasWeek&&cw.forms&&cw.forms.length){
+        for(var cfi=0;cfi<cw.forms.length;cfi++) pastRecs.push(cw.forms[cfi]);
+      }
+    }
+    /* if week was closed, add its records to pastRecs */
+    if(weekClosed){
+      for(var si2=0;si2<sbCurRecs.length;si2++){var nr2=normaliseRow(sbCurRecs[si2]);if(!pastSeen[nr2.id]){pastSeen[nr2.id]=1;pastRecs.push(nr2);}}
+      for(var ai2=0;ai2<archRecs.length;ai2++){var ar2=archRecs[ai2];if(ar2.weekKey===wk&&!pastSeen[String(ar2.id)]){pastSeen[String(ar2.id)]=1;pastRecs.push(ar2);}}
     }
     var curByForm=buildByForm(curRecs,wk);
-    render(liveDone,curByForm,pastRecs,wk);
+    render(liveDone,curByForm,pastRecs,wk,weekClosed);
   }).catch(function(e){var sb=document.getElementById('statusBar');sb.textContent='Error: '+(e.message||'unknown');sb.className='status-bar err';});
 }
 function doBackup(){Promise.all([dbGetAll('records'),dbGetAll('weeks')]).then(function(r){var data={exportedAt:new Date().toISOString(),records:r[0],weeks:r[1]};var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='haccp-backup-'+new Date().toISOString().split('T')[0]+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('Backup downloaded');}).catch(function(){showToast('Backup failed');});}

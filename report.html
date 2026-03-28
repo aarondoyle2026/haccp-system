@@ -3,726 +3,160 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACCP Weekly Report – Moriarty Group</title>
+<title>HACCP Report</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;}
-.screen-header{background:#00703c;color:white;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
-.screen-header h1{font-size:16px;font-weight:700;}
-.screen-header .btn-print{background:white;color:#00703c;border:none;padding:8px 16px;border-radius:6px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;}
-.screen-header .btn-back{background:rgba(255,255,255,0.2);color:white;border:none;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;}
-.loading{text-align:center;padding:60px 20px;font-size:16px;color:#666;}
-.error{text-align:center;padding:60px 20px;font-size:16px;color:#c00;}
-/* Report layout */
-.report{max-width:900px;margin:0 auto;padding:20px;}
-.report-header{background:white;border-radius:12px;padding:24px;margin-bottom:20px;border-top:6px solid #00703c;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
-.report-header .store{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00703c;margin-bottom:6px;}
-.report-header h2{font-size:24px;font-weight:700;color:#1a1a1a;margin-bottom:4px;}
-.report-header .meta{font-size:13px;color:#666;margin-top:8px;}
-.report-header .stats{display:flex;gap:20px;margin-top:16px;flex-wrap:wrap;}
-.stat-box{background:#f4f6f4;border-radius:8px;padding:12px 16px;flex:1;min-width:120px;}
-.stat-box .val{font-size:24px;font-weight:700;color:#00703c;}
-.stat-box .lbl{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;}
-/* Category sections */
-.cat-block{margin-bottom:24px;}
-.cat-header{background:#1a1a1a;color:white;padding:10px 16px;border-radius:8px 8px 0 0;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;display:flex;justify-content:space-between;}
-.cat-pct{opacity:0.7;}
-/* Form blocks */
-.form-block{background:white;border:1px solid #d0d0d0;border-top:none;padding:0;}
-.form-block:last-child{border-radius:0 0 8px 8px;}
-.form-title-bar{background:#e8f5ee;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #d0d0d0;cursor:pointer;}
-.form-title-bar .icon{font-size:16px;}
-.form-title-bar .name{font-size:14px;font-weight:700;color:#005a30;flex:1;}
-.form-title-bar .save-count{font-size:11px;color:#666;font-weight:400;}
-.form-title-bar .toggle{color:#666;font-size:18px;transition:transform 0.2s;}
-.form-title-bar.open .toggle{transform:rotate(90deg);}
-.form-missing .form-title-bar{background:#fff8f0;}
-.form-missing .name{color:#e65100;}
-.form-saves{display:none;padding:0;}
-.form-saves.open{display:block;}
-/* Individual save */
-.save-block{border-bottom:1px solid #eee;padding:16px;}
-.save-block:last-child{border-bottom:none;}
-.save-header{background:#005a30;color:white;border-radius:6px;padding:8px 14px;margin-bottom:12px;}
-.save-header .time{font-size:13px;font-weight:700;}
-.save-header .who{font-size:11px;opacity:0.85;margin-top:3px;}
-.meta-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.meta-cell{background:#f8faf8;border-radius:6px;padding:8px 10px;}
-.meta-cell .lbl{font-size:9px;font-weight:700;text-transform:uppercase;color:#999;letter-spacing:0.06em;margin-bottom:3px;}
-.meta-cell .val{font-size:12px;color:#1a1a1a;}
-.meta-cell .val.ts{color:#00703c;font-weight:600;font-family:'Courier New',monospace;}
-.ca-box{background:#fff8e1;border-left:3px solid #e65100;border-radius:5px;padding:8px 12px;margin-bottom:12px;font-size:12px;}
-.ca-lbl{font-size:9px;font-weight:700;text-transform:uppercase;color:#e65100;margin-bottom:3px;}
-/* Signatures */
-.sigs-section{margin-bottom:12px;}
-.sigs-label{font-size:10px;font-weight:700;text-transform:uppercase;color:#999;margin-bottom:8px;letter-spacing:0.06em;}
-.sigs-row{display:flex;flex-wrap:wrap;gap:12px;}
-.sig-item{text-align:center;}
-.sig-item img{display:block;width:120px;height:60px;object-fit:contain;background:white;border:1px solid #ddd;border-radius:5px;}
-.sig-item .sig-name{font-size:10px;color:#999;margin-top:4px;}
-/* Photos */
-.photos-section{margin-bottom:12px;}
-.photos-label{font-size:10px;font-weight:700;text-transform:uppercase;color:#999;margin-bottom:8px;letter-spacing:0.06em;}
-.photos-row{display:flex;flex-wrap:wrap;gap:10px;}
-.photos-row img{width:100px;height:100px;object-fit:cover;border-radius:8px;border:1px solid #ddd;cursor:pointer;}
-/* Field data */
-.field-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px;}
-.field-table td{border:1px solid #e0e0e0;padding:5px 8px;vertical-align:top;}
-.field-table td:first-child{background:#f5f5f5;color:#666;width:45%;font-size:10px;}
-.field-table td:last-child{color:#1a1a1a;font-weight:600;}
-.no-saves{padding:16px;font-size:13px;color:#e65100;font-weight:600;}
-/* Lightbox */
-.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;align-items:center;justify-content:center;}
-.lightbox.open{display:flex;}
-.lightbox img{max-width:95vw;max-height:90vh;border-radius:8px;object-fit:contain;}
-.lb-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;}
-
-/* ===== FORM LAYOUT STYLES ===== */
-.section-divider{background:#00703c;color:white;padding:12px 20px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:30px 0 0;border-radius:8px 8px 0 0;}
-.form-sheet{background:white;border:1px solid #d0d0d0;border-top:none;margin-bottom:4px;page-break-inside:avoid;}
-.form-sheet:last-child{border-radius:0 0 8px 8px;margin-bottom:24px;}
-.form-sheet-header{background:#e8f5ee;border-bottom:3px solid #00703c;padding:12px 16px;}
-.form-sheet-header h3{font-size:15px;font-weight:700;color:#005a30;}
-.form-sheet-body{padding:16px;overflow-x:auto;}
-.week-table{border-collapse:collapse;width:100%;font-size:11px;}
-.week-table th{background:#00703c;color:white;padding:5px 4px;text-align:center;font-weight:600;border:1px solid #005a30;white-space:nowrap;font-size:10px;}
-.week-table th.prod-col{background:#005a30;text-align:left;padding-left:8px;min-width:130px;}
-.week-table th.target-col{background:#005a30;min-width:55px;}
-.week-table td{border:1px solid #d0d0d0;padding:5px 4px;text-align:center;vertical-align:middle;font-size:11px;}
-.week-table td.unit-name{text-align:left;padding:5px 8px;background:#fafafa;font-weight:500;}
-.week-table td.target{color:#005a30;font-weight:700;background:#e8f5ee;}
-.week-table td.filled{background:#e8f5ee;font-weight:700;color:#1a1a1a;}
-.week-table td.section-hdr{background:#005a30;color:white;font-weight:700;text-align:left;padding:4px 8px;}
-.clean-table{border-collapse:collapse;width:100%;font-size:11px;}
-.clean-table th{background:#00703c;color:white;padding:5px 4px;font-size:10px;font-weight:600;border:1px solid #005a30;text-align:center;}
-.clean-table th.area-col{text-align:left;padding-left:8px;min-width:180px;}
-.clean-table th.chem-col{text-align:left;padding-left:8px;min-width:120px;}
-.clean-table td{border:1px solid #d0d0d0;padding:4px;text-align:center;vertical-align:middle;font-size:11px;}
-.clean-table td.area-name{text-align:left;padding:4px 8px;background:#fafafa;}
-.clean-table td.chem-name{text-align:left;padding:4px 8px;color:#666;font-size:10px;}
-.clean-table td.filled{background:#e8f5ee;font-weight:700;}
-.log-table{border-collapse:collapse;width:100%;font-size:11px;}
-.log-table th{background:#00703c;color:white;padding:5px 6px;text-align:left;font-size:10px;font-weight:600;border:1px solid #005a30;}
-.log-table td{border:1px solid #d0d0d0;padding:5px;font-size:11px;vertical-align:middle;}
-.log-table td.filled{background:#e8f5ee;font-weight:600;}
-.log-table tr:nth-child(even) td{background:#fafafa;}
-.log-table tr:nth-child(even) td.filled{background:#d4edda;}
-.no-data-form{padding:12px 16px;font-size:12px;color:#999;font-style:italic;}
-@media print {
-.section-divider{page-break-before:always;}
-.form-sheet{page-break-inside:avoid;}
-.save-block{page-break-inside:avoid;}
-}
-
-/* Print styles */
-@media print {
-body{background:white;}
-.screen-header{display:none!important;}
-.report{padding:0;max-width:100%;}
-.report-header{box-shadow:none;border-radius:0;margin-bottom:12px;}
-.form-saves{display:block!important;}
-.form-title-bar .toggle{display:none;}
-.cat-block{page-break-inside:avoid;}
-.save-block{page-break-inside:avoid;}
-.lightbox{display:none!important;}
-.photos-row img{width:80px;height:80px;}
-.sig-item img{width:100px;height:50px;}
-}
+body{font-family:sans-serif;background:#f4f6f4;color:#1a1a1a;font-size:14px;}
+.hdr{background:#00703c;color:white;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.hdr h1{font-size:15px;font-weight:700;flex:1;text-align:center;}
+.btn{background:white;color:#00703c;border:none;padding:7px 14px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;}
+.btn-back{background:rgba(255,255,255,0.2);color:white;}
+#content{padding:14px;}
+.card{background:white;border-radius:10px;padding:14px;margin-bottom:12px;border:1px solid #d0d0d0;}
+.card-hdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#666;margin-bottom:10px;}
+.stat-row{display:flex;gap:10px;margin-bottom:12px;}
+.stat{background:#e8f5ee;border-radius:8px;padding:10px 14px;flex:1;text-align:center;}
+.stat .v{font-size:22px;font-weight:700;color:#00703c;}
+.stat .l{font-size:10px;color:#666;text-transform:uppercase;}
+.form-item{border-bottom:1px solid #eee;padding:10px 0;}
+.form-item:last-child{border:none;}
+.form-name{font-size:13px;font-weight:700;color:#005a30;}
+.form-saves{font-size:11px;color:#666;margin-top:3px;}
+.save-block{background:#f8faf8;border-radius:8px;padding:10px;margin:8px 0;}
+.save-hdr{background:#005a30;color:white;border-radius:5px;padding:6px 10px;font-size:12px;font-weight:700;margin-bottom:8px;}
+.kv{display:flex;border-bottom:1px solid #eee;padding:3px 0;font-size:11px;}
+.kv:last-child{border:none;}
+.kv .k{color:#888;width:45%;flex-shrink:0;}
+.kv .v{font-weight:600;}
+.sig-img{height:40px;border:1px solid #ddd;border-radius:4px;margin:3px 3px 0 0;}
+.photo-img{width:70px;height:70px;object-fit:cover;border-radius:6px;border:1px solid #ddd;margin:3px 3px 0 0;cursor:pointer;}
+.missing{color:#e65100;font-size:12px;}
+.cat-hdr{background:#1a1a1a;color:white;padding:8px 12px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:0.05em;margin:14px 0 6px;}
+@media print{.hdr{display:none;}.save-block{page-break-inside:avoid;}}
 </style>
-
 </head>
 <body>
-<div class="screen-header" id="screenHeader">
-  <a class="btn-back" href="records.html">&#8592; Records</a>
-  <h1 id="headerTitle">Weekly Report</h1>
-  <button class="btn-print" onclick="window.print()">&#128438; Print / PDF</button>
+<div class="hdr">
+  <a class="btn btn-back" href="records.html">&#8592; Records</a>
+  <h1 id="hTitle">Weekly Report</h1>
+  <button class="btn" onclick="window.print()">Print</button>
 </div>
-<div id="content"><div class="loading">&#128203; Loading report...</div></div>
-<div class="lightbox" id="lightbox">
-  <button class="lb-close" onclick="document.getElementById('lightbox').className='lightbox'">&#10005;</button>
-  <img id="lbImg" src="" alt="">
-</div>
+<div id="content"><p style="padding:40px;text-align:center;color:#666;">Loading...</p></div>
 <script>
-var SB_URL='https://mnebkteiwjxbbmnfotse.supabase.co';
-var SB_KEY='sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
 var ALL_FORMS=[{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},{id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},{id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},{id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},{id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},{id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},{id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},{id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},{id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},{id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},{id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},{id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},{id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},{id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},{id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},{id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},{id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},{id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},{id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},{id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},{id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},{id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},{id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},{id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},{id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},{id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},{id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},{id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},{id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},{id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},{id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}];
-function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function getWeekKey(){var d=new Date(),s=new Date(d);s.setDate(d.getDate()-d.getDay());s.setHours(0,0,0,0);return s.toISOString().split('T')[0];}
-function weekLabel(wk){var s=new Date(wk+'T00:00:00'),e=new Date(s);e.setDate(s.getDate()+6);var o={day:'numeric',month:'long'};return s.toLocaleDateString('en-IE',o)+' \u2013 '+e.toLocaleDateString('en-IE',o)+' '+e.getFullYear();}
-function normaliseRow(r){
-  if(r.data&&typeof r.data==='object'){
-    var sigs=[];
-    if(r.data.signatures&&r.data.signatures.length){
-      for(var si=0;si<r.data.signatures.length;si++){
-        var s=r.data.signatures[si];
-        sigs.push({id:s.id,hasSignature:s.hasSignature,src:s.url||s.dataUrl||null});
-      }
-    }
-    var photos=[];
-    if(r.data.photos&&r.data.photos.length){
-      for(var pi=0;pi<r.data.photos.length;pi++){
-        var p=r.data.photos[pi];
-        photos.push({name:p.name||'',timestamp:p.timestamp||'',src:p.url||p.dataUrl||null});
-      }
-    }
-    return {
-      id:r.id,formId:r.form_id||r.formId,weekKey:r.week_key||r.weekKey,
-      savedAt:r.saved_at||r.savedAt,champion:r.data.champion||'',
-      weekEnding:r.data.weekEnding||'',timestamp:r.data.timestamp||'',
-      correctiveAction:r.data.correctiveAction||'',
-      fieldData:r.data.fieldData||{},photoCount:r.data.photoCount||0,
-      signatures:sigs,photos:photos
-    };
-  }
-  /* local record */
-  var lsigs=[];
-  if(r.signatures&&r.signatures.length){
-    for(var ls=0;ls<r.signatures.length;ls++){
-      var lsig=r.signatures[ls];
-      lsigs.push({id:lsig.id,hasSignature:lsig.hasSignature,src:lsig.url||lsig.dataUrl||null});
-    }
-  }
-  var lphotos=[];
-  if(r.photos&&r.photos.length){
-    for(var lp=0;lp<r.photos.length;lp++){
-      var lphoto=r.photos[lp];
-      lphotos.push({name:lphoto.name||'',timestamp:lphoto.timestamp||'',src:lphoto.url||lphoto.src||lphoto.dataUrl||null});
-    }
-  }
-  return {
-    id:r.id,formId:r.formId,weekKey:r.weekKey,savedAt:r.savedAt,
-    champion:r.champion||'',weekEnding:r.weekEnding||'',timestamp:r.timestamp||'',
-    correctiveAction:r.correctiveAction||'',fieldData:r.fieldData||{},
-    photoCount:r.photoCount||0,signatures:lsigs,photos:lphotos
-  };
-}
-function renderSave(sv){
-  var dt=new Date(sv.savedAt);
-  var ts=dt.toLocaleString('en-IE',{weekday:'long',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
-  var html='<div class="save-block">';
-  html+='<div class="save-header"><div class="time">&#128336; '+esc(ts)+'</div>';
-  if(sv.champion) html+='<div class="who">&#128100; Food Safety Champion: '+esc(sv.champion)+'</div>';
-  html+='</div>';
-  /* meta */
-  html+='<div class="meta-row">';
-  html+='<div class="meta-cell"><div class="lbl">Submitted</div><div class="val">'+esc(new Date(sv.savedAt).toLocaleString('en-IE',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}))+'</div></div>';
-  html+='<div class="meta-cell"><div class="lbl">Week Ending</div><div class="val">'+(sv.weekEnding?esc(sv.weekEnding):'&mdash;')+'</div></div>';
-  if(sv.timestamp) html+='<div class="meta-cell"><div class="lbl">Timestamp</div><div class="val ts">'+esc(sv.timestamp)+'</div></div>';
-  html+='</div>';
-  /* corrective action */
-  if(sv.correctiveAction&&sv.correctiveAction.trim()&&sv.correctiveAction!=='None'){
-    html+='<div class="ca-box"><div class="ca-lbl">&#9888;&#65039; Corrective Action</div>'+esc(sv.correctiveAction)+'</div>';
-  }
-  /* signatures */
-  if(sv.signatures&&sv.signatures.length){
-    var hasSigs=false;
-    for(var si=0;si<sv.signatures.length;si++){if(sv.signatures[si].hasSignature&&sv.signatures[si].src)hasSigs=true;}
-    if(hasSigs){
-      html+='<div class="sigs-section"><div class="sigs-label">&#9999;&#65039; Signatures</div><div class="sigs-row">';
-      for(var si2=0;si2<sv.signatures.length;si2++){
-        var sig=sv.signatures[si2];
-        if(sig.hasSignature&&sig.src){
-          var sname=sig.id.replace(/^sig-/,'').replace(/-/g,' ');
-          html+='<div class="sig-item"><img src="'+esc(sig.src)+'" alt="'+esc(sname)+'" onclick="openLb(this.src)"><div class="sig-name">'+esc(sname)+'</div></div>';
-        }
-      }
-      html+='</div></div>';
-    }
-  }
-  /* photos */
-  if(sv.photos&&sv.photos.length){
-    var hasPhotos=false;
-    for(var pi=0;pi<sv.photos.length;pi++){if(sv.photos[pi].src)hasPhotos=true;}
-    if(hasPhotos){
-      html+='<div class="photos-section"><div class="photos-label">&#128247; Photo Evidence ('+sv.photos.length+')</div><div class="photos-row">';
-      for(var pi2=0;pi2<sv.photos.length;pi2++){
-        if(sv.photos[pi2].src) html+='<img src="'+esc(sv.photos[pi2].src)+'" alt="photo" onclick="openLb(this.src)" title="'+esc(sv.photos[pi2].timestamp)+'">';
-      }
-      html+='</div></div>';
-    }
-  }
-  /* field data */
-  if(sv.fieldData&&Object.keys(sv.fieldData).length){
-    var keys=Object.keys(sv.fieldData);
-    var filled=[];
-    for(var ki=0;ki<keys.length;ki++){
-      var v=sv.fieldData[keys[ki]];
-      if(v&&String(v).trim()) filled.push({k:keys[ki],v:v});
-    }
-    if(filled.length){
-      html+='<table class="field-table">';
-      for(var fi=0;fi<filled.length;fi++){
-        var lbl=filled[fi].k.replace(/^(we-|fsc-|inp_|sel_|cb_|radio_)/,'').replace(/-/g,' ');
-        var val=String(filled[fi].v)==='checked'?'\u2713':esc(filled[fi].v);
-        html+='<tr><td>'+esc(lbl)+'</td><td>'+val+'</td></tr>';
-      }
-      html+='</table>';
-    }
-  }
-  html+='</div>';
-  return html;
-}
-function openLb(src){
-  document.getElementById('lbImg').src=src;
-  document.getElementById('lightbox').className='lightbox open';
-}
-function renderReport(wk, rows){
-  /* group by form */
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function wkLabel(wk){var s=new Date(wk+'T00:00:00'),e=new Date(s);e.setDate(s.getDate()+6);return s.toLocaleDateString('en-IE',{day:'numeric',month:'short'})+' \u2013 '+e.toLocaleDateString('en-IE',{day:'numeric',month:'short',year:'numeric'});}
+function render(wk,rows){
+  rows.sort(function(a,b){return a.savedAt<b.savedAt?-1:1;});
   var byForm={};
   for(var i=0;i<rows.length;i++){
-    var r=normaliseRow(rows[i]);
-    if(!byForm[r.formId]) byForm[r.formId]=[];
-    byForm[r.formId].push(r);
+    var r=rows[i];
+    var fid=r.formId||r.form_id;
+    if(!byForm[fid])byForm[fid]=[];
+    byForm[fid].push(r);
   }
-  /* sort each form's saves oldest first */
-  var fkeys=Object.keys(byForm);
-  for(var fi=0;fi<fkeys.length;fi++){
-    byForm[fkeys[fi]].sort(function(a,b){return a.savedAt<b.savedAt?-1:1;});
-  }
-  var totalForms=ALL_FORMS.length;
-  var completedForms=Object.keys(byForm).length;
-  var totalSaves=rows.length;
-  var pct=Math.round(completedForms/totalForms*100);
-  /* report header */
-  var html='<div class="report">';
-  html+='<div class="report-header">';
-  html+='<div class="store">Moriarty Group SuperValu &middot; Store 424</div>';
-  html+='<h2>&#128203; HACCP Weekly Report</h2>';
-  html+='<div class="meta">Week of '+esc(weekLabel(wk))+'</div>';
-  html+='<div class="stats">';
-  html+='<div class="stat-box"><div class="val">'+completedForms+'<span style="font-size:14px;color:#666;">/'+totalForms+'</span></div><div class="lbl">Forms Completed</div></div>';
-  html+='<div class="stat-box"><div class="val">'+pct+'%</div><div class="lbl">Compliance</div></div>';
-  html+='<div class="stat-box"><div class="val">'+totalSaves+'</div><div class="lbl">Total Saves</div></div>';
+  var done=Object.keys(byForm).length;
+  document.getElementById('hTitle').textContent=wkLabel(wk);
+  var html='<div class="card"><div class="stat-row">';
+  html+='<div class="stat"><div class="v">'+done+'/41</div><div class="l">Forms</div></div>';
+  html+='<div class="stat"><div class="v">'+rows.length+'</div><div class="l">Saves</div></div>';
+  html+='<div class="stat"><div class="v">'+Math.round(done/41*100)+'%</div><div class="l">Complete</div></div>';
   html+='</div></div>';
-  /* categories */
   var cats=[],catMap={};
-  for(var cf=0;cf<ALL_FORMS.length;cf++){
-    var f=ALL_FORMS[cf];
-    if(!catMap[f.cat]){catMap[f.cat]=[];cats.push(f.cat);}
-    catMap[f.cat].push(f);
-  }
+  for(var fi=0;fi<ALL_FORMS.length;fi++){var f=ALL_FORMS[fi];if(!catMap[f.cat]){catMap[f.cat]=[];cats.push(f.cat);}catMap[f.cat].push(f);}
   for(var ci=0;ci<cats.length;ci++){
-    var cat=cats[ci],forms=catMap[cat];
-    var catDone=0;
-    for(var cfi=0;cfi<forms.length;cfi++){if(byForm[forms[cfi].id])catDone++;}
-    var catPct=Math.round(catDone/forms.length*100);
-    html+='<div class="cat-block">';
-    html+='<div class="cat-header"><span>'+esc(cat)+'</span><span class="cat-pct">'+catDone+'/'+forms.length+' &middot; '+catPct+'%</span></div>';
-    html+='<div class="form-block">';
+    var forms=catMap[cats[ci]];
+    html+='<div class="cat-hdr">'+esc(cats[ci])+'</div>';
     for(var ri=0;ri<forms.length;ri++){
       var form=forms[ri];
       var saves=byForm[form.id]||[];
+      html+='<div class="card">';
       if(saves.length){
-        html+='<div class="form-entry">';
-        html+='<div class="form-title-bar" onclick="toggleForm(this)">';
-        html+='<span class="icon">&#9989;</span>';
-        html+='<span class="name">'+esc(form.name)+'</span>';
-        html+='<span class="save-count">'+saves.length+' save'+(saves.length!==1?'s':'')+'</span>';
-        html+='<span class="toggle">&#8250;</span></div>';
-        html+='<div class="form-saves">';
-        for(var sv=0;sv<saves.length;sv++) html+=renderSave(saves[sv]);
-        html+='</div></div>';
+        html+='<div class="form-name">\u2705 '+esc(form.name)+'</div>';
+        html+='<div class="form-saves">'+saves.length+' save'+(saves.length!==1?'s':'')+'</div>';
+        for(var si=0;si<saves.length;si++){
+          var sv=saves[si];
+          var fd=sv.fieldData||(sv.data&&sv.data.fieldData)||{};
+          var champ=sv.champion||(sv.data&&sv.data.champion)||'';
+          var ts=sv.timestamp||(sv.data&&sv.data.timestamp)||'';
+          var ca=sv.correctiveAction||(sv.data&&sv.data.correctiveAction)||'';
+          var sigs=sv.signatures||(sv.data&&sv.data.signatures)||[];
+          var photos=sv.photos||(sv.data&&sv.data.photos)||[];
+          var dt=new Date(sv.savedAt||sv.saved_at||'');
+          var dtStr=dt.toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
+          html+='<div class="save-block">';
+          html+='<div class="save-hdr">'+dtStr+(champ?' \u00b7 '+esc(champ):'')+'</div>';
+          if(ts)html+='<div class="kv"><span class="k">Timestamp</span><span class="v" style="color:#00703c">'+esc(ts)+'</span></div>';
+          if(ca&&ca!=='None')html+='<div class="kv"><span class="k">Corrective Action</span><span class="v" style="color:#e65100">'+esc(ca)+'</span></div>';
+          var keys=Object.keys(fd);
+          for(var ki=0;ki<keys.length;ki++){
+            var v=fd[keys[ki]];
+            if(v&&String(v).trim()){
+              var lbl=keys[ki].replace(/^(we-|fsc-|inp_|sel_|cb_|radio_)/,'').replace(/-/g,' ');
+              html+='<div class="kv"><span class="k">'+esc(lbl)+'</span><span class="v">'+esc(String(v)==='checked'?'\u2713':v)+'</span></div>';
+            }
+          }
+          if(sigs&&sigs.length){
+            html+='<div style="margin-top:6px;">';
+            for(var sgi=0;sgi<sigs.length;sgi++){
+              var src=sigs[sgi].url||sigs[sgi].dataUrl||null;
+              if(src&&sigs[sgi].hasSignature) html+='<img src="'+esc(src)+'" class="sig-img" title="'+esc((sigs[sgi].id||'').replace(/^sig-/,'').replace(/-/g,' '))+'"><br><small style="font-size:9px;color:#999;">'+esc((sigs[sgi].id||'').replace(/^sig-/,'').replace(/-/g,' '))+'</small> ';
+            }
+            html+='</div>';
+          }
+          if(photos&&photos.length){
+            html+='<div style="margin-top:6px;">';
+            for(var phi=0;phi<photos.length;phi++){
+              var psrc=photos[phi].url||photos[phi].src||photos[phi].dataUrl||null;
+              if(psrc) html+='<img src="'+esc(psrc)+'" class="photo-img" onclick="this.style.width=this.style.width?\'\':\' 100%\'">';
+            }
+            html+='</div>';
+          }
+          html+='</div>';
+        }
       } else {
-        html+='<div class="form-entry form-missing">';
-        html+='<div class="form-title-bar">';
-        html+='<span class="icon">&#9888;&#65039;</span>';
-        html+='<span class="name">'+esc(form.name)+'</span>';
-        html+='<span class="save-count" style="color:#e65100;">Not submitted</span>';
-        html+='</div></div>';
+        html+='<div class="form-name" style="color:#999;">\u26a0\ufe0f '+esc(form.name)+'</div>';
+        html+='<div class="missing">Not submitted this week</div>';
       }
+      html+='</div>';
     }
-    html+='</div></div>';
   }
-  html+='</div>';
   document.getElementById('content').innerHTML=html;
-  document.getElementById('headerTitle').textContent='Report: '+weekLabel(wk);
-  document.title='HACCP Report '+wk+' \u2013 Moriarty Group';
-  appendFormSheets(wk, byForm);
 }
-function toggleForm(bar){
-  var saves=bar.nextElementSibling;
-  var isOpen=saves.className.indexOf('open')!==-1;
-  saves.className=isOpen?'form-saves':'form-saves open';
-  bar.className=isOpen?'form-title-bar':'form-title-bar open';
-}
-
-var DAYS = [‘Mon’,‘Tue’,‘Wed’,‘Thu’,‘Fri’,‘Sat’,‘Sun’];
-
-/* ===== DATA VARS (same as index.html) ===== */
-var meatTempUnits=[[‘Fish Display Unit’,‘0-5°C’],[‘Poultry’,‘0-5°C’],[‘Pork’,‘0-5°C’],[‘Raw Meat’,‘0-5°C’],[‘Walk in fridge’,‘0-5°C’],[‘Pre-pack fish doors’,‘0-5°C’]];
-var prepackTempUnits=[[‘1. Stand up juice fridge at front door’,‘0-5°C’],[‘2. Meat spider at food academy’,‘0-5°C’],[‘3. Meat spider at food academy’,‘0-5°C’],[‘4. Meat spider at food academy’,‘0-5°C’],[‘5. Superquinn spider’,‘0-5°C’],[‘6. Spider fishmonger’,‘0-5°C’],[‘7. Dairy spider at fish pre pack’,‘0-5°C’],[‘8. Ham spider fridge’,‘0-5°C’],[‘9. Provisions promo bay’,’’],[‘10. Food Academy Fridge’,‘0-5°C’],[‘11. Butchers Prepack’,‘0-5°C’],[‘12. Prepared by the Butcher’,‘0-5°C’],[‘13. Poultry’,‘0-5°C’],[‘14. Cheese Prepack’,‘0-5°C’],[‘15. Bacon/Special Offers’,‘0-5°C’],[‘16. Sausages/Rashers’,‘0-5°C’],[‘17. Pudding/Superquinn/Continental’,‘0-5°C’],[‘18. Cooked Meats/Signature Range’,‘0-5°C’],[‘19. Ready meals’,‘0-5°C’],[‘20. Meal deck’,‘0-5°C’]];
-var dairyTempUnits=[[‘1. Milk’,‘0-5°C’],[‘2. Cream/Deserts/Juice’,‘0-5°C’],[‘3. Yoghurts’,‘0-5°C’],[‘4. Cheese’,‘0-5°C’],[‘5. Spreads’,‘0-5°C’],[‘6. Dairy Special Offers’,‘0-5°C’],[‘7. Fish Fridge’,‘0-5°C’],[‘10. Dairy Back-up’,‘0-5°C’],[‘11. Milk Fridge at Coffee Machine’,‘0-5°C’],[‘12. Milk Dispenser at Coffee Machine’,‘0-5°C’]];
-var frozenTempUnits=[[‘1. Ice Cream Bay 1 Door’,’-23°C’],[‘2. Ice Cream Bay 1 Well’,’-23°C’],[‘3. Ice Cream Bay 2 Door’,’-23°C’],[‘4. Ice Cream Bay 2 Well’,’-23°C’],[‘5. Ice Cream Bay 3 Door’,’-23°C’],[‘6. Ice Cream Bay 3 Well’,’-23°C’],[‘7. Ice Cream Stick Fridge’,’-23°C’],[‘8. Special Offer Well no 1’,’-18°C’],[‘9. Potato Product Well’,’-18°C’],[‘10. Chip Well’,’-18°C’],[‘11. Chicken and Burger Well’,’-18°C’],[‘12. Veg Well’,’-18°C’],[‘13. Ready Meal Well’,’-18°C’],[‘14. Special Offer Well no 2’,’-18°C’],[‘15. Fish Product Well’,’-18°C’],[‘16. Fish Well’,’-18°C’],[‘17. Pizza Well 1’,’-18°C’],[‘18. Pizza Well 2’,’-18°C’],[‘19. Vegetarian Food Well’,’-18°C’],[‘20. Back-up Freezer’,’-18°C’]];
-var fruitVegTempUnits=[[‘Display Fridge Veg 1’,‘0-5°C’],[‘Display Fridge Veg 2’,‘0-5°C’],[‘Display Fridge Fruit’,‘0-5°C’],[‘Salad Fridge’,‘0-5°C’],[‘Walk-in Back-up’,‘0-5°C’],[‘Berry Fridge 1’,‘0-5°C’],[‘Berry Fridge 2’,‘0-5°C’]];
-var deliTempUnits=[[‘Bakery Serveover Fridge 1’,‘0-5°C’],[‘Bakery Serveover Fridge 2’,‘0-5°C’],[‘Sandwich Bar Fridge’,‘0-5°C’],[‘Sandwich Bar Serveover’,‘0-5°C’],[‘Deli Counter Fridge 1’,‘0-5°C’],[‘Deli Counter Fridge 2’,‘0-5°C’],[‘Hot Food Serveover’,‘0-5°C’],[‘Prep Fridge’,‘0-5°C’],[‘Walk-in Chill’,‘0-5°C’]];
-var hotfoodTimes=[‘9am’,‘10am’,‘11am’,‘12pm’,‘1pm’,‘2pm’,‘3pm’,‘4pm’,‘5pm’,‘6pm’];
-var hotfoodDailyClean=[[‘Hot bar glass front and back, sides and counter top, trays’,‘Glass cleaner, degreaser’],[‘Scales and shelf’,‘Sanitizer’],[‘Sandwich bar glass front and back, sides and bar counter top, trays’,‘Sanitizer, Glass cleaner’],[‘Fresh Cream bakery serveover glass’,‘Glass cleaner’],[‘Bakery serveover fridge x2, glass doors and handles’,‘Glass cleaner’],[‘Counter tops / Stainless steel’,‘Sanitiser’],[‘Equipment sink top and bottom’,‘Sanitiser’],[‘Handsink / requisites’,‘Sanitizer’],[‘Utensils / equipment / trays’,‘Sanitizer’],[‘Bin’,‘Sanitiser’],[‘Temperature probe’,‘Sanitizer’],[‘Hot food oven, surfaces in direct contact with food, trays, racks’,‘Sanitiser’],[‘Bakery oven and stand x2, surfaces in direct contact with food, trays, racks’,‘Sanitiser’],[‘Grease trap, empty and wash out holder’,‘Degreaser, Sanitiser’],[‘Floor swept and mopped (under tables inc. back up)’,‘Floor cleaner’],[‘Chicken Unit’,‘Degreaser, Sanitiser’],[‘Turbo chef machine, direct contact with food, trays’,‘Sanitiser’],[‘Soup kettle’,‘Sanitiser’]];
-var hotfoodWeeklyClean=[[‘Hot food bar, full deep clean’,‘Degreaser, Oven cleaner’],[‘Sandwich bar, full deep clean’,‘Sanitiser’],[‘Fresh cream bakery serveover, full deep clean’,‘Sanitiser’],[‘Bakery serveover fridge x2, full deep clean’,‘Sanitiser’],[‘Presses inside out, inc. door handles’,‘Sanitiser’],[‘Stainless steel prep area (wheels, casters, legs, walls)’,‘Sanitizer’],[‘Bakery display table x3’,‘Sanitizer’],[‘Bread display’,‘Sanitizer’],[‘Canopy filter’,‘Degreaser’],[‘Chicken oven, full deep clean, inside walls, fans, filters, vents, seals’,‘Degreaser, Oven cleaner’],[‘Bakery oven x2, full deep clean, inside walls, fans, filters, vents, seals’,‘Oven cleaner’],[‘Hot food oven, full deep clean, inside walls, fans, filters, vents, seals’,‘Degreaser, Oven cleaner’],[‘Chicken prep trolley’,‘Sanitizer’]];
-var cookedmeatClean=[[‘Serveover front glass, counter top, sides’,‘Glass cleaner’],[‘Serveover inside, along sides and front’,‘Sanitiser’],[‘Scales and shelve’,‘Sanitizer’],[‘Equipment / trays / chopping boards’,‘Sanitiser’],[‘Counter tops’,‘Sanitiser’],[‘Tables (tops & legs)’,‘Sanitizer’],[‘Meat slicer’,‘Sanitiser’],[‘Cling film unit’,‘Sanitizer’],[‘Temperature probe x2’,‘Sanitiser’],[‘Bins x3’,‘Sanitiser’],[‘Bread slicer’,‘Sanitiser’],[‘Floor sweep and mop inc. under tables and coldrooms’,‘Floor cleaner’],[‘Cheese cutter Pasteurised’,‘Detergent Sanitizer’],[‘Bread Crumber’,‘Sanitizer’]];
-var cookedmeatWeeklyClean=[[‘Serveover - Cooked meats deep clean’,‘Sanitizer Degreaser’],[‘Presses inside & out’,‘Sanitizer’],[‘Prep area stainless steel (walls, wheels and casters)’,‘Sanitizer, Degreaser’],[‘Coldroom (walls, door & floor + shelving)’,‘Sanitizer Degreaser’],[‘All counter display shelving’,‘Sanitizer Degreaser’],[‘Cheese display fridge deep clean’,‘Sanitizer Degreaser’],[‘Ready meal display fridge deep clean’,‘Sanitizer Degreaser’],[‘Salad spider’,‘Sanitizer Degreaser’]];
-var cleaningItemsDaily=[[‘Scales, bags, shelves’,‘Sanitiser’],[‘Raw Servovers’,‘Sanitiser, glass cleaner’],[‘Bins’,‘Degreaser’],[‘Equipment/trays/chopping boards - raw & fish’,‘Wash up liq’],[‘Fish equipment sink & shelf below’,‘Wash up liq, Degreaser’],[‘Hot seal wrap unit’,‘Sanitiser’],[‘SELs/Garnishing’,‘Sanitiser’],[‘Stainless steel serveover’,‘Stainless Steel spray’],[‘Hands sink/Requisites’,‘Degreaser/sanitiser’],[‘Wooden block/Table legs’,‘Block brush’],[‘Table tops’,‘Sanitiser’],[‘Doors/handles’,‘Sanitiser’],[‘Telephone’,‘Sanitiser’],[‘Equipment sink & hand sink requisites - top and bottom’,‘Wash up liq’],[‘Knife rack’,‘Sanitiser’],[‘Scales’,‘Sanitiser’],[‘Burger press’,‘Wash up liq, degreaser’],[‘Mincer head’,‘Wash up liq, degreaser’],[‘Mincer’,‘Wash up liq, degreaser’],[‘Ice Machine’,‘Stainless steel cleaner’],[‘Coldroom - floor, door handle, floor swept’,‘Degreaser, Floorbrush’],[‘Rubber around fridge door’,’’]];
-var cleaningItemsWeekly=[[‘Prep room racking’,‘Degreaser’],[‘Serveover - Raw’,‘Degreaser’],[‘Serveover - Fish’,‘Degreaser’],[‘Prep area - walls & tables’,‘Degreaser’],[‘Returns trolleys’,‘Degreaser’],[‘Stainless steel - Raw’,‘Stainless steel cleaner’],[‘Raw coldroom - floor, shelving’,‘Degreaser’],[‘Display shelving - fish & raw’,‘Degreaser’],[‘Stainless steel - Fish’,‘Stainless steel’],[‘Ice Machine - presses inside and out including door handles’,‘Defrosted/clean, Sanitiser’]];
-var deliTraceStuffing=[‘Stuffing (Crumbs / Herbs / Veg - Loose)’,‘Beetroot’,‘Wraps Tomato’,‘Wraps Brown’,‘Wraps Plane’];
-var deliTraceButter=[‘Butter’,‘Ham’,‘Turkey’,‘Cheese’,‘Mozzarella Cheese’,‘Coleslaw’,‘Potato Salad’];
-var deliTraceChicken=[‘Chicken Tikka’];
-var deliTraceSaladVeg=[‘Chicken’,‘Onion’,‘Cucumber’,‘Scallions’,‘Mixed Peppers’,‘Tomatoes’,‘Lettuce’];
-var deliTraceEggTuna=[‘Eggs’,‘Mayo’,‘Egg Mayo’,‘Tuna & Sweetcorn’,‘Sweetcorn’];
-var sandwiches=[{name:‘B.L.T. on White’,ingr:‘Bread, Bacon, Lettuce, Tomatoes, Mayonnaise’},{name:‘B.L.T. on Brown’,ingr:‘Bread, Bacon, Lettuce, Tomatoes, Mayonnaise’},{name:‘Bacon & Boiled Egg White’,ingr:‘Bread, Bacon, Boiled Egg, Mayonnaise’},{name:‘Bacon & Boiled Egg Brown’,ingr:‘Bread, Bacon, Boiled Egg, Mayonnaise’},{name:‘Chicken & Bacon (White)’,ingr:‘White Bread, Chicken, Bacon, Mayonnaise’},{name:‘Chicken & Bacon (Brown)’,ingr:‘Brown Bread, Chicken, Bacon, Mayonnaise’},{name:‘Chicken & Stuffing (White)’,ingr:‘White Bread, Chicken, Stuffing, Mayonnaise’},{name:‘Chicken & Stuffing (Brown)’,ingr:‘Brown Bread, Chicken, Stuffing, Mayonnaise’},{name:‘Chicken Tikka’,ingr:‘White Bread, Chicken, Tikka sauce, Cheese, Red onion, Lettuce’},{name:‘Egg Mayo’,ingr:‘White Bread, Egg, Cheese, Lettuce, Mayonnaise’},{name:‘Tuna Salad’,ingr:‘Brown Bread, Tuna, Cheese, Mayonnaise’},{name:‘Turkey & Egg Mayo’,ingr:‘White Bread, Turkey, Egg, Red onion, Mayonnaise’},{name:‘Ham & Smoked Cheese (White)’,ingr:‘White Bread, Ham, Smoked cheese, Tomato relish, Mayonnaise’},{name:‘Ham & Smoked Cheese (Brown)’,ingr:‘Brown Bread, Ham, Smoked cheese, Tomato relish, Mayonnaise’},{name:‘BLTC on Brown’,ingr:‘Brown Bread, Bacon, Lettuce, Tomato, Cheese, Mayonnaise’},{name:‘BLTC on White’,ingr:‘White Bread, Bacon, Lettuce, Tomato, Cheese, Mayonnaise’},{name:‘Ham and Cheese’,ingr:‘White bread, Butter, Ham, Cheese’},{name:‘Ham, Cheese & Coleslaw’,ingr:‘White bread, Butter, Ham, Cheese, Coleslaw’}];
-var wraps=[{name:‘Chicken Tikka’,ingr:‘Wrap, Chicken, Tikka sauce, Cheese, Red onion, Lettuce’},{name:‘Egg Mayo Salad’,ingr:‘Wrap, Egg, Cheese, Lettuce, Mayonnaise’},{name:‘Chicken & Stuffing’,ingr:‘Wrap, Chicken, Stuffing, Mayonnaise’},{name:‘Tuna Salad’,ingr:‘Wrap, Tuna, Cheese, Mayonnaise’},{name:‘Turkey & Egg Mayo’,ingr:‘Wrap, Turkey, Egg, Red onion, Mayonnaise’},{name:‘Sweet Chili Chicken’,ingr:‘Wrap, Chicken, Red onion, Spinach, Sweet Chili sauce, Mayonnaise’},{name:‘Crunchy Tuna’,ingr:‘Wrap, Tuna, Lettuce, Onion, Mayonnaise’}];
-var pizzas=[{name:‘Cheese Pizza’,ingr:‘Pizza base, Pizza sauce, Mozzarella cheese’},{name:‘Ham & Mushroom’,ingr:‘Pizza base, Pizza sauce, Ham, Mushroom, Mozzarella cheese’},{name:‘Ham & Sweetcorn’,ingr:‘Pizza base, Pizza sauce, Ham, Sweetcorn, Mozzarella cheese’},{name:‘Meat Pizza’,ingr:‘Pizza base, Pizza sauce, Pepperoni, Chicken, Ham, Mozzarella cheese’},{name:‘Pepperoni & Pepper’,ingr:‘Pizza base, Pizza sauce, Pepperoni, Peppers, Mozzarella cheese’},{name:‘Vegetable Deluxe’,ingr:‘Pizza base, Pizza sauce, Tomato, Peppers, Red onion, Mushrooms, Sweet corn, Mozzarella’},{name:‘Spicy Pepperoni’,ingr:‘Pizza base, Pizza sauce, Pepperoni, Onions, Jalapenos, Mozzarella cheese’}];
-var saladsMade=[{name:‘Egg Mayo’,ingr:‘Egg, Mayo’},{name:‘Carrot & Broccoli’,ingr:‘Carrot, Broccoli, Mayo’},{name:‘Cheese Mix’,ingr:‘Cheese, Scallions, Mayo’},{name:‘Mix Salad’,ingr:‘Loose Veg’},{name:‘Summer Salad’,ingr:‘Loose veg, Egg, Mayo’},{name:‘Chicken Noodle’,ingr:‘Noodles, Chicken, Veg, Chilli Sauce’}];
-var saladsPrepack=[{name:‘Egg Mayo’},{name:‘Beetroot’},{name:‘Asian Noodles’},{name:‘Pasta Spinach Pinenut’},{name:‘Coleslaw’},{name:‘Tuna Mix’},{name:‘Chunky Potato’},{name:‘Mash Potato Salad’},{name:‘Green Lentil Multigrain’},{name:‘Carrot, Broccoli & Cranberry’},{name:‘Chipotle Coleslaw’},{name:‘Basil & Pesto’},{name:‘Lemon Cous Cous’},{name:‘Creamy Tomato Pasta’},{name:‘Carrot, Ginger, Chia Seeds’},{name:‘Cheese Mix’},{name:‘Cheese Coleslaw’},{name:‘Mix Salad’},{name:‘Summer Salad’}];
-var savouries=[‘Beef Lasagne’,‘Chicken & Mushroom Vol au Vent’,‘Red Pepper Goats Cheese Quiche’,‘Black pudding s. rolls’,‘Honey & mustard s. rolls’];
-var cookedMeats=[“Ryan’s Low Salt”,“Honey Glazed”,“Moriarty’s Turkey”,“Carroll’s Crumbed”,“Turkey OTB”,“Oak Smoked Ham”,“Corned Beef”,“Brady’s Crumbed”,“Brady’s Baked”,“Hazlett”,“Wiltshire Ham OTB”];
-var salamiOlives=[‘Mixed Olives’,‘Sundried Tomatoes’,‘Cheese Filled Peppers’,‘Chorizo Extra’,‘Pre pack Mixed olives’,‘Pre pack Sundried tomatoes’,‘Pre pack Cheese filled peppers’,‘Pre Pack Stuffing’];
-var breakfastItems=[‘Sausages’,‘Bacon’,‘Pudding Black’,‘Pudding White’,‘Hash Browns’,‘Eggs’,‘Sm Sausage Roll’,‘Lrg Sausage Roll’,‘Pies C&M’,‘Pies S&K’,‘Fillet Plane’,‘Fillet S/Fried’,‘Fillets Hot Spicy’,‘Wedges’,‘Soup 1’,‘Jambons’,‘Chickens’];
-var lunchItems=[‘Sm Sausage Roll’,‘Wedges’,‘Pop Chicken’,‘Wings BBQ’,‘Goujons’,‘Fillets Plane’,‘Fillets S/Fried’,‘Fillets Hot Spicy’,‘Veg Spring Rolls’,‘Vol Au Vants’,‘Bacon and cheese Bakers’,‘Cottage pie’,‘Honey and Mustard’,‘Sausage Rolls’,‘Sausage Rolls with Black Pudding’];
-
-function gv(fd, key) { return (fd && fd[key]) ? esc(fd[key]) : ‘’; }
-function fc(fd, key) { var v=gv(fd,key); return v ? ‘<td class="filled">’+v+’</td>’ : ‘<td></td>’; }
-
-function renderTempTable(units, formId, fd) {
-var ampm=[‘AM’,‘PM’];
-var html=’<div style="overflow-x:auto"><table class="week-table"><thead><tr>’;
-html+=’<th class="prod-col" style="min-width:160px">Refrigerated Unit</th><th class="target-col">Target</th>’;
-for(var d=0;d<7;d++) html+=’<th colspan="2">’+DAYS[d]+’</th>’;
-html+=’<th style="min-width:80px">Comments</th></tr><tr><th></th><th></th>’;
-for(var d2=0;d2<7;d2++) html+=’<th>AM</th><th>PM</th>’;
-html+=’<th></th></tr></thead><tbody>’;
-for(var i=0;i<units.length;i++){
-html+=’<tr><td class="unit-name">’+esc(units[i][0])+’</td><td class="target">’+esc(units[i][1])+’</td>’;
-for(var d3=0;d3<7;d3++){
-for(var ap=0;ap<2;ap++){
-var key=units[i][0]+’ ‘+DAYS[d3]+’ ‘+ampm[ap];
-html+=fc(fd,key);
-}
-}
-html+=fc(fd, units[i][0]+’ Comments’)+’</tr>’;
-}
-html+=’</tbody></table></div>’;
-return html;
-}
-
-function renderHourlyTable(formId, fd, mode) {
-var html=’<div style="overflow-x:auto"><table class="week-table" style="font-size:10px"><thead><tr>’;
-html+=’<th style="min-width:40px">Time</th>’;
-for(var d=0;d<7;d++) html+=’<th colspan="2">’+DAYS[d]+’</th>’;
-html+=’</tr><tr><th></th>’;
-for(var d2=0;d2<7;d2++){
-if(mode===‘s1s2’) html+=’<th>S1</th><th>S2</th>’;
-else html+=’<th>Product</th><th>Temp</th>’;
-}
-html+=’</tr></thead><tbody>’;
-for(var ti=0;ti<hotfoodTimes.length;ti++){
-html+=’<tr><td style="background:#e8f5ee;font-weight:600;text-align:center">’+hotfoodTimes[ti]+’</td>’;
-for(var d3=0;d3<7;d3++){
-if(mode===‘s1s2’){
-html+=fc(fd,DAYS[d3]+’ ‘+hotfoodTimes[ti]+’ S1’)+fc(fd,DAYS[d3]+’ ‘+hotfoodTimes[ti]+’ S2’);
-} else {
-html+=fc(fd,DAYS[d3]+’ ‘+hotfoodTimes[ti]+’ Product’)+fc(fd,DAYS[d3]+’ ‘+hotfoodTimes[ti]+’ Temp’);
-}
-}
-html+=’</tr>’;
-}
-html+=’</tbody></table></div>’;
-return html;
-}
-
-function renderCleanTable(items, fd) {
-var html=’<div style="overflow-x:auto"><table class="clean-table"><thead><tr>’;
-html+=’<th class="area-col">Area / Item</th><th class="chem-col">Chemical</th>’;
-for(var d=0;d<7;d++) html+=’<th style="min-width:28px">’+DAYS[d][0]+’</th>’;
-html+=’</tr></thead><tbody>’;
-for(var i=0;i<items.length;i++){
-html+=’<tr><td class="area-name">’+esc(items[i][0])+’</td><td class="chem-name">’+esc(items[i][1])+’</td>’;
-for(var d2=0;d2<7;d2++) html+=fc(fd,items[i][0]+’ ‘+DAYS[d2]);
-html+=’</tr>’;
-}
-html+=’</tbody></table></div>’;
-return html;
-}
-
-function renderDeliTrace(products, cols, fd) {
-var html=’<div style="overflow-x:auto"><table class="week-table" style="font-size:10px"><thead><tr>’;
-html+=’<th class="prod-col" style="min-width:130px">Product</th>’;
-for(var d=0;d<7;d++) html+=’<th colspan="'+cols.length+'">’+DAYS[d]+’</th>’;
-html+=’</tr><tr><th></th>’;
-for(var d2=0;d2<7;d2++) for(var ci=0;ci<cols.length;ci++) html+=’<th style="font-size:9px">’+esc(cols[ci])+’</th>’;
-html+=’</tr></thead><tbody>’;
-for(var i=0;i<products.length;i++){
-html+=’<tr><td class="unit-name">’+esc(products[i])+’</td>’;
-for(var d3=0;d3<7;d3++) for(var ci2=0;ci2<cols.length;ci2++) html+=fc(fd,products[i]+’ ‘+DAYS[d3]+’ ‘+cols[ci2]);
-html+=’</tr>’;
-}
-html+=’</tbody></table></div>’;
-return html;
-}
-
-function renderIUBD(products, cols, fd) {
-var html=’<div style="overflow-x:auto"><table class="week-table" style="font-size:10px"><thead><tr>’;
-html+=’<th class="prod-col" style="min-width:140px">Product</th>’;
-for(var d=0;d<7;d++) html+=’<th colspan="'+cols.length+'">’+DAYS[d]+’</th>’;
-html+=’</tr><tr><th></th>’;
-for(var d2=0;d2<7;d2++) for(var ci=0;ci<cols.length;ci++) html+=’<th style="font-size:9px">’+esc(cols[ci])+’</th>’;
-html+=’</tr></thead><tbody>’;
-for(var i=0;i<products.length;i++){
-var pname=products[i].name||products[i];
-html+=’<tr><td class="unit-name">’+esc(pname)+(products[i].ingr?’<br><small style="color:#999;font-size:9px">’+esc(products[i].ingr)+’</small>’:’’)+’</td>’;
-for(var d3=0;d3<7;d3++) for(var ci2=0;ci2<cols.length;ci2++) html+=fc(fd,pname+’ ‘+DAYS[d3]+’ ‘+cols[ci2]);
-html+=’</tr>’;
-}
-html+=’</tbody></table></div>’;
-return html;
-}
-
-function renderOUBD(products, c2, c3, fd) {
-c2=c2||‘DO’; c3=c3||‘UBD’;
-var html=’<div style="overflow-x:auto"><table class="week-table" style="font-size:10px"><thead><tr>’;
-html+=’<th class="prod-col" style="min-width:140px">Product</th>’;
-for(var d=0;d<7;d++) html+=’<th colspan="3">’+DAYS[d]+’</th>’;
-html+=’</tr><tr><th></th>’;
-for(var d2=0;d2<7;d2++) html+=’<th style="font-size:9px">OUBD</th><th style="font-size:9px">’+esc(c2)+’</th><th style="font-size:9px">’+esc(c3)+’</th>’;
-html+=’</tr></thead><tbody>’;
-for(var i=0;i<products.length;i++){
-var name=typeof products[i]===‘string’?products[i]:products[i].name;
-html+=’<tr><td class="unit-name">’+esc(name)+’</td>’;
-for(var d3=0;d3<7;d3++){
-html+=fc(fd,name+’ ‘+DAYS[d3]+’ OUBD’)+fc(fd,name+’ ‘+DAYS[d3]+’ ‘+c2)+fc(fd,name+’ ‘+DAYS[d3]+’ ‘+c3);
-}
-html+=’</tr>’;
-}
-html+=’</tbody></table></div>’;
-return html;
-}
-
-function renderCookedMeats(fd) {
-var html=’<div style="overflow-x:auto"><table class="week-table" style="font-size:10px"><thead><tr>’;
-html+=’<th class="prod-col" style="min-width:140px">Product</th>’;
-for(var d=0;d<7;d++) html+=’<th colspan="3">’+DAYS[d]+’</th>’;
-html+=’</tr><tr><th></th>’;
-for(var d2=0;d2<7;d2++) html+=’<th style="font-size:9px">OUBD</th><th style="font-size:9px">Bulk DU</th><th style="font-size:9px">Slice DU</th>’;
-html+=’</tr></thead><tbody>’;
-for(var i=0;i<cookedMeats.length;i++){
-html+=’<tr><td class="unit-name">’+esc(cookedMeats[i])+’</td>’;
-for(var d3=0;d3<7;d3++){
-html+=fc(fd,cookedMeats[i]+’ ‘+DAYS[d3]+’ OUBD’)+fc(fd,cookedMeats[i]+’ ‘+DAYS[d3]+’ Bulk DU’)+fc(fd,cookedMeats[i]+’ ‘+DAYS[d3]+’ Slice DU’);
-}
-html+=’</tr>’;
-}
-html+=’</tbody></table></div>’;
-return html;
-}
-
-function renderLogTable(headers, rowCount, prefix, fd) {
-var html=’<table class="log-table"><thead><tr>’;
-for(var h=0;h<headers.length;h++) html+=’<th>’+esc(headers[h])+’</th>’;
-html+=’</tr></thead><tbody>’;
-for(var i=1;i<=rowCount;i++){
-html+=’<tr>’;
-for(var h2=0;h2<headers.length;h2++){
-var key=headers[h2]+’ row’+i;
-html+=fc(fd,key);
-}
-html+=’</tr>’;
-}
-html+=’</tbody></table>’;
-return html;
-}
-
-function renderRedMeatClean(fd) {
-var sections=[{label:‘DAILY’,items:cleaningItemsDaily},{label:‘WEEKLY’,items:cleaningItemsWeekly}];
-var html=’<div style="overflow-x:auto"><table class="clean-table"><thead><tr><th class="area-col">Area</th><th class="chem-col">Chemical</th>’;
-for(var d=0;d<7;d++) html+=’<th style="min-width:28px">’+DAYS[d][0]+’</th>’;
-html+=’</tr></thead><tbody>’;
-for(var si=0;si<sections.length;si++){
-html+=’<tr><td class="section-hdr" colspan="9">’+sections[si].label+’</td></tr>’;
-for(var ii=0;ii<sections[si].items.length;ii++){
-var item=sections[si].items[ii];
-html+=’<tr><td class="area-name">’+esc(item[0])+’</td><td class="chem-name">’+esc(item[1])+’</td>’;
-for(var d2=0;d2<7;d2++) html+=fc(fd,item[0]+’ ‘+DAYS[d2]);
-html+=’</tr>’;
-}
-}
-html+=’</tbody></table></div>’;
-return html;
-}
-
-/* Render the form sheet for a given formId with merged field data */
-function renderFormSheet(formId, formName, fd) {
-var body=’’;
-var ampm=[‘AM’,‘PM’];
-if(formId===‘temp-meat’) body=renderTempTable(meatTempUnits,formId,fd);
-else if(formId===‘temp-prepack’) body=renderTempTable(prepackTempUnits,formId,fd);
-else if(formId===‘temp-dairy’) body=renderTempTable(dairyTempUnits,formId,fd);
-else if(formId===‘temp-frozen’) body=renderTempTable(frozenTempUnits,formId,fd);
-else if(formId===‘temp-fruitveg’) body=renderTempTable(fruitVegTempUnits,formId,fd);
-else if(formId===‘temp-deli’) body=renderTempTable(deliTempUnits,formId,fd);
-else if(formId===‘hotfood-chicken-temp’) body=renderHourlyTable(formId,fd,‘s1s2’);
-else if(formId===‘hotfood-bar-temp’) body=renderHourlyTable(formId,fd,‘prodtemp’);
-else if(formId===‘hotfood-soup-temp’) body=renderHourlyTable(formId,fd,‘s1s2’);
-else if(formId===‘hotfood-daily-clean’) body=renderCleanTable(hotfoodDailyClean,fd);
-else if(formId===‘hotfood-weekly-clean’) body=renderCleanTable(hotfoodWeeklyClean,fd);
-else if(formId===‘cookedmeat-clean’) body=renderCleanTable(cookedmeatClean,fd);
-else if(formId===‘cookedmeat-weekly-clean’) body=renderCleanTable(cookedmeatWeeklyClean,fd);
-else if(formId===‘deli-trace-stuffing’) body=renderDeliTrace(deliTraceStuffing,[‘OUBD’,‘DP’,‘UBD’,‘D’],fd);
-else if(formId===‘deli-trace-butter’) body=renderDeliTrace(deliTraceButter,[‘OUBD’,‘DP’,‘UBD’,‘D’],fd);
-else if(formId===‘deli-trace-chicken’) body=renderDeliTrace(deliTraceChicken,[‘OUBD’,‘DP’,‘UBD’],fd);
-else if(formId===‘deli-trace-saladveg’) body=renderDeliTrace(deliTraceSaladVeg,[‘OUBD’,‘DP’,‘UBD’,‘D’],fd);
-else if(formId===‘deli-trace-eggtuna’) body=renderDeliTrace(deliTraceEggTuna,[‘OUBD’,‘DP’,‘UBD’],fd);
-else if(formId===‘trace-sandwich’) body=renderIUBD(sandwiches,[‘IUBD’,‘UBD’],fd);
-else if(formId===‘trace-wrap’) body=renderIUBD(wraps,[‘IUBD’,‘UBD’],fd);
-else if(formId===‘trace-pizza’) body=renderIUBD(pizzas,[‘IUBD’,‘UBD’],fd);
-else if(formId===‘trace-salad-made’) body=renderIUBD(saladsMade,[‘IUBD’,‘DM’,‘DD’],fd);
-else if(formId===‘trace-salad-prepack’) body=renderIUBD(saladsPrepack,[‘IUBD/OUBD’,‘DM/DO’,‘DD’],fd);
-else if(formId===‘trace-savouries’) body=renderOUBD(savouries,‘DO’,‘UBD’,fd);
-else if(formId===‘trace-cooked-meats’) body=renderCookedMeats(fd);
-else if(formId===‘trace-salami’) body=renderOUBD(salamiOlives,‘DO’,‘UBD’,fd);
-else if(formId===‘trace-cheese’) body=’<p style="color:#999;font-style:italic;padding:8px;">Cheese traceability - see field data in audit section</p>’;
-else if(formId===‘trace-pork’) body=renderLogTable([‘Product’,‘OUBD’,‘Date Opened/Cut/Displayed’,‘Scales Use By’,‘Batch No’,‘Signature’],25,‘pork’,fd);
-else if(formId===‘trace-fish’) body=’<p style="color:#999;font-style:italic;padding:8px;">Fish tracker - see field data in audit section</p>’;
-else if(formId===‘trace-butcher’) body=’<p style="color:#999;font-style:italic;padding:8px;">Batch traceability - see field data in audit section</p>’;
-else if(formId===‘prod-mince’) body=renderLogTable([‘Date/Time’,‘Person’,‘Meat/Batch Code’,‘Cut Type’,‘Temp After Chilling’,‘Scales Use By’,‘Date Removed’],20,‘mince’,fd);
-else if(formId===‘prod-burger’) body=renderLogTable([‘Date/Time’,‘Person’,‘Meat/Batch Code’,‘Burger Mix’,‘Scales Use By’,‘Date Removed’],20,‘burger’,fd);
-else if(formId===‘clean-redmeat’) body=renderRedMeatClean(fd);
-else if(formId===‘clean-fruitveg’) body=renderCleanTable([[‘Floor’,‘Mop & bucket/degreaser’],[‘Scales’,‘Sanitiser’],[‘Juicer’,‘Wash up liq/Sanitiser’],[‘Salad display’,‘Sanitiser’],[‘Potato stands’,‘Sanitiser’]],fd);
-else if(formId===‘clean-stockroom’) body=renderCleanTable([[‘Yard’,‘Degreaser/Mop’],[‘Back-up cold room’,‘Degreaser/Sanitiser’],[‘Ground floor stockroom’,‘Degreaser/Mop’],[‘First floor stockroom’,‘Degreaser/Mop’],[‘Sluice room’,‘Degreaser/Sanitiser’],[‘Bailer area’,‘Degreaser/Mop’],[‘Returns area’,‘Degreaser/Mop’],[‘Frozen back-up’,‘Degreaser/Sanitiser’],[‘Dairy back-up’,‘Degreaser/Sanitiser’],[‘Office’,‘Sanitiser’]],fd);
-else if(formId===‘goods-chilled’||formId===‘goods-ambient’) body=renderLogTable([‘Date’,‘Supplier’,‘Temp Check’,‘Food Safety Checks’,‘Docket No’,‘Product Dating’,‘Product Name’,‘Accept/Reject’,‘Delivery Comments’,‘Signature’],20,‘goods’,fd);
-else if(formId===‘hotfood-after-cook’||formId===‘hotfood-greaseshield’||formId===‘thawing-check’||formId===‘compliance’) body=’<p style="color:#999;font-style:italic;padding:8px;">See field data in audit section above</p>’;
-else body=’<p style="color:#999;font-style:italic;padding:8px;">Form data in audit section</p>’;
-return ‘<div class="form-sheet-body">’+body+’</div>’;
-}
-
-/* Build merged field data from all saves */
-function buildMergedFd(saves) {
-var fd={};
-for(var i=0;i<saves.length;i++){
-if(saves[i].fieldData){
-var keys=Object.keys(saves[i].fieldData);
-for(var ki=0;ki<keys.length;ki++){
-if(saves[i].fieldData[keys[ki]]) fd[keys[ki]]=saves[i].fieldData[keys[ki]];
-}
-}
-}
-return fd;
-}
-
-/* Append form sheets section to report */
-function appendFormSheets(wk, byForm) {
-var cats=[],catMap={};
-for(var fi=0;fi<ALL_FORMS.length;fi++){
-var f=ALL_FORMS[fi];
-if(!catMap[f.cat]){catMap[f.cat]=[];cats.push(f.cat);}
-catMap[f.cat].push(f);
-}
-var html=’<div class="report">’;
-html+=’<div style="background:#1a1a1a;color:white;border-radius:12px;padding:20px;margin-bottom:24px;">’;
-html+=’<div style="font-size:11px;opacity:0.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Moriarty Group SuperValu</div>’;
-html+=’<div style="font-size:20px;font-weight:700;">📋 Form Sheets – ‘+esc(weekLabel(wk))+’</div>’;
-html+=’<div style="font-size:12px;opacity:0.6;margin-top:4px;">Pre-filled with all data recorded this week</div>’;
-html+=’</div>’;
-for(var ci=0;ci<cats.length;ci++){
-var cat=cats[ci],forms=catMap[cat];
-html+=’<div class="section-divider">’+esc(cat)+’</div>’;
-html+=’<div class="form-block">’;
-for(var ri=0;ri<forms.length;ri++){
-var form=forms[ri];
-var saves=byForm[form.id]||[];
-var fd=buildMergedFd(saves);
-var hasSaves=saves.length>0;
-html+=’<div class="form-sheet">’;
-html+=’<div class="form-sheet-header" style="'+(hasSaves?'':'background:#fff8f0;border-color:#e65100;')+'">’;
-html+=’<h3>’+(hasSaves?‘✅’:‘⚠️’)+’ ‘+esc(form.name);
-if(hasSaves) html+=’ <span style="font-size:12px;font-weight:400;color:#666;">· ‘+saves.length+’ save’+(saves.length!==1?‘s’:’’)+’</span>’;
-else html+=’ <span style="font-size:12px;font-weight:400;color:#e65100;">· Not submitted this week</span>’;
-html+=’</h3></div>’;
-html+=renderFormSheet(form.id, form.name, fd);
-html+=’</div>’;
-}
-html+=’</div>’;
-}
-html+=’</div>’;
-var container=document.createElement(‘div’);
-container.innerHTML=html;
-document.body.appendChild(container);
-}
-
-/* Load data */
+function err(msg){document.getElementById('content').innerHTML='<p style="padding:30px;text-align:center;color:#c00;">'+msg+'</p>';}
 var params=new URLSearchParams(window.location.search);
-var weekKeyParam=params.get(‘week’);
-var weekKey=weekKeyParam||getWeekKey();
-document.getElementById(‘content’).innerHTML=’<div class="loading">📋 Loading report…</div>’;
-
-var reportRendered=false;
-
-function loadAllFromIndexedDB() {
-try {
-var DB_NAME=‘MoriartyHACCP’, DB_VER=2;
-var req=indexedDB.open(DB_NAME,DB_VER);
+var wkParam=params.get('week');
+/* Open IndexedDB */
+var req=indexedDB.open('MoriartyHACCP',2);
+req.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('records'))d.createObjectStore('records',{keyPath:'id'});if(!d.objectStoreNames.contains('live'))d.createObjectStore('live',{keyPath:'id'});if(!d.objectStoreNames.contains('weeks'))d.createObjectStore('weeks',{keyPath:'weekKey'});};
 req.onsuccess=function(e){
-var db=e.target.result;
-var stores=[];
-try{var sn=db.objectStoreNames;for(var si2=0;si2<sn.length;si2++)stores.push(sn[si2]);}catch(ex){}
-if(stores.indexOf(‘records’)===-1){
-if(!reportRendered) document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ No local records found. Save some forms first, then close the week.<br><br><a href="index.html" style="color:#00703c;">← Back to Forms</a></div>’;
-return;
-}
-var tx=db.transaction(‘records’,‘readonly’);
-var r=tx.objectStore(‘records’).getAll();
-r.onsuccess=function(ev){
-if(reportRendered) return;
-var all=ev.target.result||[];
-if(!all.length){
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ No records found in local storage.<br><br><a href="index.html" style="color:#00703c;">Go fill in some forms first</a></div>’;
-return;
-}
-/* if specific week requested, filter to it; otherwise use most recent week */
-var rows=[];
-if(weekKeyParam){
-for(var i=0;i<all.length;i++){if(all[i].weekKey===weekKeyParam)rows.push(all[i]);}
-} else {
-/* find most recent week */
-var wks={};
-for(var j=0;j<all.length;j++) wks[all[j].weekKey]=1;
-var wkList=Object.keys(wks).sort().reverse();
-weekKey=wkList[0];
-for(var k=0;k<all.length;k++){if(all[k].weekKey===weekKey)rows.push(all[k]);}
-}
-if(!rows.length){
-var availWks={};
-for(var ai=0;ai<all.length;ai++) availWks[all[ai].weekKey]=1;
-var avail=Object.keys(availWks).sort().reverse();
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ No records for week ‘+esc(weekKey)+’.<br>Available weeks: ‘+avail.join(’, ‘)+’<br><br><a href="records.html" style="color:#00703c;">← Back to Records</a></div>’;
-return;
-}
-reportRendered=true;
-renderReport(weekKey,rows);
+  var db=e.target.result;
+  var tx=db.transaction('records','readonly');
+  var r=tx.objectStore('records').getAll();
+  r.onsuccess=function(ev){
+    var all=ev.target.result||[];
+    if(!all.length){err('No records found. Fill in and save some forms first.');return;}
+    var rows=[],wk=wkParam;
+    if(wk){
+      for(var i=0;i<all.length;i++){if(all[i].weekKey===wk)rows.push(all[i]);}
+    }
+    if(!rows.length){
+      var wks={};
+      for(var j=0;j<all.length;j++)wks[all[j].weekKey]=1;
+      var wkList=Object.keys(wks).sort().reverse();
+      wk=wkList[0];
+      rows=[];
+      for(var k=0;k<all.length;k++){if(all[k].weekKey===wk)rows.push(all[k]);}
+    }
+    render(wk,rows);
+  };
+  r.onerror=function(){err('DB read error.');};
 };
-r.onerror=function(ev){
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ DB read error</div>’;
-};
-};
-req.onerror=function(){
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Cannot open database</div>’;
-};
-req.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains(“records”))d.createObjectStore(“records”,{keyPath:“id”});if(!d.objectStoreNames.contains(“live”))d.createObjectStore(“live”,{keyPath:“id”});if(!d.objectStoreNames.contains(“weeks”))d.createObjectStore(“weeks”,{keyPath:“weekKey”});};
-} catch(ex){
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Error: ‘+esc(String(ex))+’</div>’;
-}
-}
-
-/* Load from IndexedDB immediately */
-loadAllFromIndexedDB();
-/* fallback timeout - if nothing loaded after 8 seconds show error */
+req.onerror=function(){err('Cannot open database.');};
 setTimeout(function(){
-if(!reportRendered){
-document.getElementById(‘content’).innerHTML=’<div class="error" style="padding:30px 20px;text-align:center;">⚠️ Could not load records.<br><br>Records are stored locally on the device used to fill in the forms. Open this report on the same device.<br><br><a href="records.html" style="color:#00703c;font-weight:700;">← Back to Records</a></div>’;
-}
-},8000);
-document.getElementById(‘lightbox’).addEventListener(‘click’,function(e){
-if(e.target===this){this.className=‘lightbox’;document.getElementById(‘lbImg’).src=’’;}
-});
+  var c=document.getElementById('content');
+  if(c&&c.innerHTML.indexOf('Loading')!==-1) err('Timed out. Try again.');
+},6000);
 </script>
-
 </body>
 </html>

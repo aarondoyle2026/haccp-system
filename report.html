@@ -127,7 +127,13 @@ function appendFormSheets(){
       html+='<div class="card" style="overflow-x:auto;">';
       html+='<div class="form-hdr" style="background:'+(has?'#e8f5ee':'#fff8f0')+';margin:-14px -14px 10px;">';
       html+='<div class="form-title" style="color:'+(has?'#005a30':'#e65100')+';">'+(has?'\u2705':'\u26a0\ufe0f')+' '+esc(form.name)+'</div></div>';
-      if(has&&window.renderFormSheet)html+=window.renderFormSheet(form.id,mfd);
+      if(has&&window.renderFormSheet){
+        html+=window.renderFormSheet(form.id,mfd);
+        /* debug: show first 3 keys */
+        var dbgKeys=Object.keys(mfd).slice(0,3);
+        if(dbgKeys.length)html+='<div style="font-size:9px;color:#999;padding:4px;">Keys: '+esc(dbgKeys.join(', '))+'</div>';
+        else html+='<div style="font-size:9px;color:#c00;padding:4px;">No field data keys found</div>';
+      }
       else if(!has)html+='<div class="missing">Not submitted this week</div>';
       html+='</div>';
     }

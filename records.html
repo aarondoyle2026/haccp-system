@@ -325,7 +325,7 @@ function render(liveDone,curByForm,pastRecs,wk,weekClosed){
           }
         });
       })(pwk, buildByFormArray(pastRecs, pwk));
-      var body=document.createElement('div');body.className='acc-body';
+      trigger.appendChild(reportBtn);body.className='acc-body';
       var inner=document.createElement('div');body.appendChild(inner);
       var built=false;
       trigger.addEventListener('click',function(){

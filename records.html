@@ -150,6 +150,12 @@ function openDB(){
     req.onblocked=function(){if(done)return;done=true;clearTimeout(timer);rej(new Error('DB blocked \u2014 close other tabs'));};
   });
 }
+/* Returns flat array of all records for a week */
+function buildByFormArray(recs,wk){
+  var arr=[];
+  for(var i=0;i<recs.length;i++){if(recs[i].weekKey===wk)arr.push(recs[i]);}
+  return arr;
+}
 /* Build map of formId -> array of all saves sorted oldest first */
 function buildByForm(recs,wk){
   var m={};
@@ -304,11 +310,21 @@ function render(liveDone,curByForm,pastRecs,wk,weekClosed){
       var item=document.createElement('div');item.className='acc-item';
       var trigger=document.createElement('div');trigger.className='acc-trigger';
       trigger.innerHTML='<div class="acc-left"><div class="acc-week">'+esc(weekLabel(pwk))+'</div><div class="acc-sub">'+pwDone+' / '+total+' forms completed</div></div><span class="'+badgeClass+'">'+pwPct+'%</span><span class="acc-chevron">&#8250;</span>';
-      var reportBtn=document.createElement('a');
-      reportBtn.href='report.html?week='+pwk;
-      reportBtn.style.cssText='background:#005a30;color:white;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;margin-left:8px;';
+      var reportBtn=document.createElement('button');
+      reportBtn.style.cssText='background:#005a30;color:white;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;border:none;cursor:pointer;white-space:nowrap;margin-left:8px;font-family:inherit;';
       reportBtn.textContent='Full Report';
-      trigger.appendChild(reportBtn);
+      (function(weekKey2, weekRecs){
+        reportBtn.addEventListener('click',function(){
+          try {
+            /* store records in sessionStorage for report.html to read */
+            var payload={weekKey:weekKey2,records:weekRecs};
+            sessionStorage.setItem('haccp_report',JSON.stringify(payload));
+            window.location.href='report.html?week='+weekKey2;
+          } catch(e) {
+            window.location.href='report.html?week='+weekKey2;
+          }
+        });
+      })(pwk, buildByFormArray(pastRecs, pwk));
       var body=document.createElement('div');body.className='acc-body';
       var inner=document.createElement('div');body.appendChild(inner);
       var built=false;

@@ -649,21 +649,22 @@ document.body.appendChild(container);
 
 /* Load data */
 var params=new URLSearchParams(window.location.search);
-var weekKey=params.get(‘week’)||getWeekKey();
-document.getElementById(‘content’).innerHTML=’<div class="loading">📋 Loading report for ‘+esc(weekLabel(weekKey))+’…</div>’;
+var weekKeyParam=params.get(‘week’);
+var weekKey=weekKeyParam||getWeekKey();
+document.getElementById(‘content’).innerHTML=’<div class="loading">📋 Loading report…</div>’;
 
-/* Try IndexedDB immediately, also try Supabase - whichever responds first with data wins */
 var reportRendered=false;
-function tryRenderFromIndexedDB(wk) {
+
+function loadAllFromIndexedDB() {
 try {
 var DB_NAME=‘MoriartyHACCP’, DB_VER=2;
 var req=indexedDB.open(DB_NAME,DB_VER);
 req.onsuccess=function(e){
 var db=e.target.result;
 var stores=[];
-try{var sn=db.objectStoreNames;for(var i=0;i<sn.length;i++)stores.push(sn[i]);}catch(ex){}
+try{var sn=db.objectStoreNames;for(var si2=0;si2<sn.length;si2++)stores.push(sn[si2]);}catch(ex){}
 if(stores.indexOf(‘records’)===-1){
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Local database has no records store. Records may only exist in Supabase.</div>’;
+if(!reportRendered) document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ No local records found. Save some forms first, then close the week.<br><br><a href="index.html" style="color:#00703c;">← Back to Forms</a></div>’;
 return;
 }
 var tx=db.transaction(‘records’,‘readonly’);
@@ -671,37 +672,49 @@ var r=tx.objectStore(‘records’).getAll();
 r.onsuccess=function(ev){
 if(reportRendered) return;
 var all=ev.target.result||[];
+if(!all.length){
+document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ No records found in local storage.<br><br><a href="index.html" style="color:#00703c;">Go fill in some forms first</a></div>’;
+return;
+}
+/* if specific week requested, filter to it; otherwise use most recent week */
 var rows=[];
-for(var i=0;i<all.length;i++){if(all[i].weekKey===wk)rows.push(all[i]);}
+if(weekKeyParam){
+for(var i=0;i<all.length;i++){if(all[i].weekKey===weekKeyParam)rows.push(all[i]);}
+} else {
+/* find most recent week */
+var wks={};
+for(var j=0;j<all.length;j++) wks[all[j].weekKey]=1;
+var wkList=Object.keys(wks).sort().reverse();
+weekKey=wkList[0];
+for(var k=0;k<all.length;k++){if(all[k].weekKey===weekKey)rows.push(all[k]);}
+}
 if(!rows.length){
-/* show what weeks ARE available */
 var availWks={};
 for(var ai=0;ai<all.length;ai++) availWks[all[ai].weekKey]=1;
-var wkList=Object.keys(availWks).sort().reverse();
-var msg=‘No records found for week ‘+esc(wk)+’.’;
-if(wkList.length) msg+=’ Available weeks: ‘+wkList.join(’, ‘);
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ ‘+msg+’<br><br><a href="records.html" style="color:#00703c;">← Back to Records</a></div>’;
+var avail=Object.keys(availWks).sort().reverse();
+document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ No records for week ‘+esc(weekKey)+’.<br>Available weeks: ‘+avail.join(’, ‘)+’<br><br><a href="records.html" style="color:#00703c;">← Back to Records</a></div>’;
 return;
 }
 reportRendered=true;
-renderReport(wk,rows);
+renderReport(weekKey,rows);
 };
-r.onerror=function(e){
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ DB read error: ‘+(e.target.error||‘unknown’)+’</div>’;
+r.onerror=function(ev){
+document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ DB read error</div>’;
 };
 };
-req.onerror=function(e){
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Cannot open DB: ‘+(e.target.error||‘unknown’)+’</div>’;
+req.onerror=function(){
+document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Cannot open database</div>’;
 };
-} catch(ex) {
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Exception: ‘+esc(String(ex))+’</div>’;
+req.onupgradeneeded=function(e){
+/* handle version upgrade gracefully */
+};
+} catch(ex){
+document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Error: ‘+esc(String(ex))+’</div>’;
 }
 }
-function loadFromIndexedDB(wk) {
-tryRenderFromIndexedDB(wk);
-}
-/* start IndexedDB load immediately */
-tryRenderFromIndexedDB(weekKey);
+
+/* Load from IndexedDB immediately */
+loadAllFromIndexedDB();
 /* also fetch from Supabase - 5 second timeout */
 var fetchDone=false;
 var fetchTimeout=setTimeout(function(){

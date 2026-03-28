@@ -705,9 +705,7 @@ document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ DB
 req.onerror=function(){
 document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Cannot open database</div>’;
 };
-req.onupgradeneeded=function(e){
-/* handle version upgrade gracefully */
-};
+req.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains(“records”))d.createObjectStore(“records”,{keyPath:“id”});if(!d.objectStoreNames.contains(“live”))d.createObjectStore(“live”,{keyPath:“id”});if(!d.objectStoreNames.contains(“weeks”))d.createObjectStore(“weeks”,{keyPath:“weekKey”});};
 } catch(ex){
 document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Error: ‘+esc(String(ex))+’</div>’;
 }
@@ -715,36 +713,12 @@ document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Er
 
 /* Load from IndexedDB immediately */
 loadAllFromIndexedDB();
-/* also fetch from Supabase - 5 second timeout */
-var fetchDone=false;
-var fetchTimeout=setTimeout(function(){
-if(!fetchDone){
-fetchDone=true;
-/* IndexedDB already tried - if still loading show message */
+/* fallback timeout - if nothing loaded after 8 seconds show error */
+setTimeout(function(){
 if(!reportRendered){
-var cur=document.getElementById(‘content’).innerHTML;
-if(cur.indexOf(‘Loading’)!==-1){
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Could not load from cloud or local storage.<br><br>Make sure you close the week from index.html first, then open the report from the Records page Full Report button.<br><br><a href="records.html" style="color:#00703c;">← Back to Records</a></div>’;
+document.getElementById(‘content’).innerHTML=’<div class="error" style="padding:30px 20px;text-align:center;">⚠️ Could not load records.<br><br>Records are stored locally on the device used to fill in the forms. Open this report on the same device.<br><br><a href="records.html" style="color:#00703c;font-weight:700;">← Back to Records</a></div>’;
 }
-}
-}
-},5000);
-fetch(SB_URL+’/rest/v1/haccp_records?week_key=eq.’+weekKey+’&order=saved_at.asc’,{
-headers:{‘apikey’:SB_KEY,‘Authorization’:’Bearer ’+SB_KEY}
-}).then(function(r){return r.json();}).then(function(rows){
-fetchDone=true;
-clearTimeout(fetchTimeout);
-if(reportRendered) return;
-if(!rows||!rows.length||rows.error){
-/* Supabase empty - IndexedDB already running */
-return;
-}
-reportRendered=true;
-renderReport(weekKey,rows);
-}).catch(function(){
-fetchDone=true;
-clearTimeout(fetchTimeout);
-});
+},8000);
 document.getElementById(‘lightbox’).addEventListener(‘click’,function(e){
 if(e.target===this){this.className=‘lightbox’;document.getElementById(‘lbImg’).src=’’;}
 });

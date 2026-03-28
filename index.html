@@ -1310,18 +1310,59 @@ if (recs[j].weekKey === wk) updateFormBadge(recs[j].formId, true);
 /* ===== WEEK CLOSE ===== */
 function closeWeek(manual) {
 var wk = getWeekKey();
-dbGetAll('live').then(function(liveRecs) {
+dbGetAll('records').then(function(allRecs) {
 var wkRecs = [];
+for (var i = 0; i < allRecs.length; i++) {
+if (allRecs[i].weekKey === wk) wkRecs.push(allRecs[i]);
+}
+/* push any records not yet in Supabase */
+var sbRows = [];
+for (var ri = 0; ri < wkRecs.length; ri++) {
+var r = wkRecs[ri];
+sbRows.push({
+id: String(r.id),
+form_id: r.formId,
+week_key: r.weekKey,
+saved_at: r.savedAt,
+store_id: '424',
+data: {
+weekEnding: r.weekEnding,
+champion: r.champion,
+timestamp: r.timestamp,
+correctiveAction: r.correctiveAction,
+fieldData: r.fieldData,
+photoCount: r.photoCount,
+photos: r.photos,
+signatures: r.signatures
+}
+});
+}
+return Promise.all([
+dbGetAll('live'),
+sbRows.length ? fetch(SB_URL + '/rest/v1/haccp_records', {
+method: 'POST',
+headers: {
+'apikey': SB_KEY,
+'Authorization': 'Bearer ' + SB_KEY,
+'Content-Type': 'application/json',
+'Prefer': 'resolution=merge-duplicates'
+},
+body: JSON.stringify(sbRows)
+}).catch(function() {}) : Promise.resolve()
+]);
+}).then(function(results) {
+var liveRecs = results[0] || [];
+var wkLiveRecs = [];
 for (var i = 0; i < liveRecs.length; i++) {
-if (liveRecs[i].weekKey === wk) wkRecs.push(liveRecs[i]);
+if (liveRecs[i].weekKey === wk) wkLiveRecs.push(liveRecs[i]);
 }
 var label = getWeekLabel(wk);
 var weekBundle = {
 weekKey: wk,
 label: label,
 closedAt: new Date().toISOString(),
-formCount: wkRecs.length,
-forms: wkRecs
+formCount: wkLiveRecs.length,
+forms: wkLiveRecs
 };
 return dbPut('weeks', weekBundle);
 }).then(function() {
@@ -1329,7 +1370,6 @@ return dbClearStore('live');
 }).then(function() {
 showToast('Week closed & saved to Records!', 4000);
 updateBannerCount();
-/* clear all badge ticks */
 var badges = document.querySelectorAll('.form-saved-badge');
 for (var b = 0; b < badges.length; b++) badges[b].parentNode.removeChild(badges[b]);
 if (manual) showWeekCloseConfirm();

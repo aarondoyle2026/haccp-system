@@ -120,7 +120,9 @@ function appendFormSheets(){
     for(var ri=0;ri<forms.length;ri++){
       var form=forms[ri];var saves=reportByForm[form.id]||[];
       var mfd={};
-      for(var si=0;si<saves.length;si++){var sfd=saves[si].fieldData||{};var sk=Object.keys(sfd);for(var ki=0;ki<sk.length;ki++){if(sfd[sk[ki]])mfd[sk[ki]]=sfd[sk[ki]];}}
+      for(var si=0;si<saves.length;si++){
+        var sfd=saves[si].fieldData||(saves[si].data&&saves[si].data.fieldData)||{};
+        var sk=Object.keys(sfd);for(var ki=0;ki<sk.length;ki++){if(sfd[sk[ki]])mfd[sk[ki]]=sfd[sk[ki]];}}
       var has=saves.length>0;
       html+='<div class="card" style="overflow-x:auto;">';
       html+='<div class="form-hdr" style="background:'+(has?'#e8f5ee':'#fff8f0')+';margin:-14px -14px 10px;">';

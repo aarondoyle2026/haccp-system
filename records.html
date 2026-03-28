@@ -316,12 +316,30 @@ function render(liveDone,curByForm,pastRecs,wk,weekClosed){
       (function(weekKey2, weekRecs){
         reportBtn.addEventListener('click',function(){
           try {
-            /* store records in sessionStorage for report.html to read */
-            var payload={weekKey:weekKey2,records:weekRecs};
+            /* strip base64 dataUrls to keep payload small - keep only URLs */
+            var cleaned=[];
+            for(var ri=0;ri<weekRecs.length;ri++){
+              var rec=JSON.parse(JSON.stringify(weekRecs[ri]));
+              if(rec.photos){for(var pi=0;pi<rec.photos.length;pi++){if(rec.photos[pi].dataUrl&&!rec.photos[pi].url)delete rec.photos[pi].dataUrl;}}
+              if(rec.signatures){for(var si=0;si<rec.signatures.length;si++){if(rec.signatures[si].dataUrl&&rec.signatures[si].dataUrl.length>500&&!rec.signatures[si].url)rec.signatures[si].dataUrl=null;}}
+              cleaned.push(rec);
+            }
+            var payload={weekKey:weekKey2,records:cleaned};
             sessionStorage.setItem('haccp_report',JSON.stringify(payload));
             window.location.href='report.html?week='+weekKey2;
           } catch(e) {
-            window.location.href='report.html?week='+weekKey2;
+            /* if sessionStorage fails (quota), try with minimal data */
+            try {
+              var minimal=[];
+              for(var ri2=0;ri2<weekRecs.length;ri2++){
+                var r2=weekRecs[ri2];
+                minimal.push({id:r2.id,formId:r2.formId,weekKey:r2.weekKey,savedAt:r2.savedAt,champion:r2.champion,fieldData:r2.fieldData,correctiveAction:r2.correctiveAction,signatures:[],photos:[]});
+              }
+              sessionStorage.setItem('haccp_report',JSON.stringify({weekKey:weekKey2,records:minimal}));
+              window.location.href='report.html?week='+weekKey2;
+            } catch(e2){
+              window.location.href='report.html?week='+weekKey2;
+            }
           }
         });
       })(pwk, buildByFormArray(pastRecs, pwk));

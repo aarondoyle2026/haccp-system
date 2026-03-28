@@ -337,7 +337,7 @@ function renderReport(wk, rows){
   html+='</div>';
   document.getElementById('content').innerHTML=html;
   document.getElementById('headerTitle').textContent='Report: '+weekLabel(wk);
-  document.title='HACCP Report '+wk+' – Moriarty Group';
+  document.title='HACCP Report '+wk+' \u2013 Moriarty Group';
   appendFormSheets(wk, byForm);
 }
 function toggleForm(bar){

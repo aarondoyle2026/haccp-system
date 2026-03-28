@@ -652,6 +652,29 @@ var params=new URLSearchParams(window.location.search);
 var weekKey=params.get(‘week’)||getWeekKey();
 document.getElementById(‘content’).innerHTML=’<div class="loading">📋 Loading report for ‘+esc(weekLabel(weekKey))+’…</div>’;
 
+/* Try IndexedDB immediately, also try Supabase - whichever responds first with data wins */
+var reportRendered=false;
+function tryRenderFromIndexedDB(wk) {
+var DB_NAME=‘MoriartyHACCP’, DB_VER=2;
+var req=indexedDB.open(DB_NAME,DB_VER);
+req.onsuccess=function(e){
+var db=e.target.result;
+var stores=[];
+try{stores=Array.from(db.objectStoreNames);}catch(ex){}
+if(stores.indexOf(‘records’)===-1){return;}
+var tx=db.transaction(‘records’,‘readonly’);
+var r=tx.objectStore(‘records’).getAll();
+r.onsuccess=function(ev){
+if(reportRendered) return;
+var all=ev.target.result||[];
+var rows=[];
+for(var i=0;i<all.length;i++){if(all[i].weekKey===wk)rows.push(all[i]);}
+if(!rows.length) return; /* let Supabase try */
+reportRendered=true;
+renderReport(wk,rows);
+};
+};
+}
 function loadFromIndexedDB(wk) {
 var DB_NAME=‘MoriartyHACCP’, DB_VER=2;
 var req=indexedDB.open(DB_NAME,DB_VER);
@@ -660,13 +683,15 @@ var db=e.target.result;
 var tx=db.transaction(‘records’,‘readonly’);
 var r=tx.objectStore(‘records’).getAll();
 r.onsuccess=function(ev){
+if(reportRendered) return;
 var all=ev.target.result||[];
 var rows=[];
 for(var i=0;i<all.length;i++){if(all[i].weekKey===wk)rows.push(all[i]);}
 if(!rows.length){
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ No records found for week of ‘+esc(weekLabel(wk))+’.<br><br>This week may not have been closed yet, or records exist only on the device that saved them.<br><br><a href="records.html" style="color:#00703c;">← Back to Records</a></div>’;
+document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ No records found for week of ‘+esc(weekLabel(wk))+’.<br><br>Open this report from the <a href="records.html" style="color:#00703c;">Records page</a> using the Full Report button on a closed week.</div>’;
 return;
 }
+reportRendered=true;
 renderReport(wk,rows);
 };
 r.onerror=function(){
@@ -677,33 +702,32 @@ req.onerror=function(){
 document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Could not open local database.</div>’;
 };
 }
-
-/* fetch from Supabase with 10 second timeout */
+/* start IndexedDB load immediately */
+tryRenderFromIndexedDB(weekKey);
+/* also fetch from Supabase - 5 second timeout */
 var fetchDone=false;
 var fetchTimeout=setTimeout(function(){
 if(!fetchDone){
 fetchDone=true;
-loadFromIndexedDB(weekKey);
+if(!reportRendered) loadFromIndexedDB(weekKey);
 }
-},10000);
-
+},5000);
 fetch(SB_URL+’/rest/v1/haccp_records?week_key=eq.’+weekKey+’&order=saved_at.asc’,{
 headers:{‘apikey’:SB_KEY,‘Authorization’:‘Bearer ‘+SB_KEY}
 }).then(function(r){return r.json();}).then(function(rows){
-if(fetchDone) return;
 fetchDone=true;
 clearTimeout(fetchTimeout);
+if(reportRendered) return;
 if(!rows||!rows.length){
-/* fall back to IndexedDB */
 loadFromIndexedDB(weekKey);
 return;
 }
+reportRendered=true;
 renderReport(weekKey,rows);
 }).catch(function(){
-if(fetchDone) return;
 fetchDone=true;
 clearTimeout(fetchTimeout);
-loadFromIndexedDB(weekKey);
+if(!reportRendered) loadFromIndexedDB(weekKey);
 });
 document.getElementById(‘lightbox’).addEventListener(‘click’,function(e){
 if(e.target===this){this.className=‘lightbox’;document.getElementById(‘lbImg’).src=’’;}

@@ -13,25 +13,24 @@ body{font-family:sans-serif;background:#f4f6f4;color:#1a1a1a;font-size:14px;}
 .btn-back{background:rgba(255,255,255,0.2);color:white;}
 #content{padding:14px;}
 .card{background:white;border-radius:10px;padding:14px;margin-bottom:12px;border:1px solid #d0d0d0;}
-.card-hdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#666;margin-bottom:10px;}
-.stat-row{display:flex;gap:10px;margin-bottom:12px;}
+.stat-row{display:flex;gap:10px;margin-bottom:4px;}
 .stat{background:#e8f5ee;border-radius:8px;padding:10px 14px;flex:1;text-align:center;}
 .stat .v{font-size:22px;font-weight:700;color:#00703c;}
 .stat .l{font-size:10px;color:#666;text-transform:uppercase;}
-.form-item{border-bottom:1px solid #eee;padding:10px 0;}
-.form-item:last-child{border:none;}
-.form-name{font-size:13px;font-weight:700;color:#005a30;}
-.form-saves{font-size:11px;color:#666;margin-top:3px;}
 .save-block{background:#f8faf8;border-radius:8px;padding:10px;margin:8px 0;}
 .save-hdr{background:#005a30;color:white;border-radius:5px;padding:6px 10px;font-size:12px;font-weight:700;margin-bottom:8px;}
 .kv{display:flex;border-bottom:1px solid #eee;padding:3px 0;font-size:11px;}
-.kv:last-child{border:none;}
+.kv:last-child{border:none;padding-bottom:0;}
 .kv .k{color:#888;width:45%;flex-shrink:0;}
 .kv .v{font-weight:600;}
-.sig-img{height:40px;border:1px solid #ddd;border-radius:4px;margin:3px 3px 0 0;}
-.photo-img{width:70px;height:70px;object-fit:cover;border-radius:6px;border:1px solid #ddd;margin:3px 3px 0 0;cursor:pointer;}
+.sig-img{height:40px;border:1px solid #ddd;border-radius:4px;margin:3px 3px 0 0;vertical-align:middle;}
+.photo-img{width:70px;height:70px;object-fit:cover;border-radius:6px;border:1px solid #ddd;margin:3px;cursor:pointer;}
 .missing{color:#e65100;font-size:12px;}
-.cat-hdr{background:#1a1a1a;color:white;padding:8px 12px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:0.05em;margin:14px 0 6px;}
+.cat-hdr{background:#1a1a1a;color:white;padding:8px 12px;border-radius:6px;font-size:11px;font-weight:700;margin:14px 0 6px;}
+.form-hdr{padding:10px 14px;border-bottom:1px solid #d0d0d0;}
+.form-title{font-size:13px;font-weight:700;}
+.form-subtitle{font-size:11px;margin-top:2px;}
+.section-btn{display:inline-block;background:#005a30;color:white;border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;margin:10px 0 4px;font-family:inherit;}
 @media print{.hdr{display:none;}.save-block{page-break-inside:avoid;}}
 </style>
 </head>
@@ -42,20 +41,22 @@ body{font-family:sans-serif;background:#f4f6f4;color:#1a1a1a;font-size:14px;}
   <button class="btn" onclick="window.print()">Print</button>
 </div>
 <div id="content"><p style="padding:40px;text-align:center;color:#666;">Loading...</p></div>
+<div id="formSheets"></div>
 <script>
 var ALL_FORMS=[{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},{id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},{id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},{id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},{id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},{id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},{id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},{id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},{id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},{id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},{id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},{id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},{id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},{id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},{id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},{id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},{id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},{id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},{id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},{id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},{id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},{id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},{id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},{id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},{id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},{id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},{id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},{id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},{id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},{id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},{id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}];
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+var escF=esc;
 function wkLabel(wk){var s=new Date(wk+'T00:00:00'),e=new Date(s);e.setDate(s.getDate()+6);return s.toLocaleDateString('en-IE',{day:'numeric',month:'short'})+' \u2013 '+e.toLocaleDateString('en-IE',{day:'numeric',month:'short',year:'numeric'});}
+var reportByForm={};
 function render(wk,rows){
   rows.sort(function(a,b){return a.savedAt<b.savedAt?-1:1;});
-  var byForm={};
+  reportByForm={};
   for(var i=0;i<rows.length;i++){
-    var r=rows[i];
-    var fid=r.formId||r.form_id;
-    if(!byForm[fid])byForm[fid]=[];
-    byForm[fid].push(r);
+    var r=rows[i];var fid=r.formId||r.form_id;
+    if(!reportByForm[fid])reportByForm[fid]=[];
+    reportByForm[fid].push(r);
   }
-  var done=Object.keys(byForm).length;
+  var done=Object.keys(reportByForm).length;
   document.getElementById('hTitle').textContent=wkLabel(wk);
   var html='<div class="card"><div class="stat-row">';
   html+='<div class="stat"><div class="v">'+done+'/41</div><div class="l">Forms</div></div>';
@@ -68,12 +69,10 @@ function render(wk,rows){
     var forms=catMap[cats[ci]];
     html+='<div class="cat-hdr">'+esc(cats[ci])+'</div>';
     for(var ri=0;ri<forms.length;ri++){
-      var form=forms[ri];
-      var saves=byForm[form.id]||[];
+      var form=forms[ri];var saves=reportByForm[form.id]||[];
       html+='<div class="card">';
       if(saves.length){
-        html+='<div class="form-name">\u2705 '+esc(form.name)+'</div>';
-        html+='<div class="form-saves">'+saves.length+' save'+(saves.length!==1?'s':'')+'</div>';
+        html+='<div class="form-hdr" style="background:#e8f5ee;"><div class="form-title" style="color:#005a30;">\u2705 '+esc(form.name)+'</div><div class="form-subtitle" style="color:#666;">'+saves.length+' save'+(saves.length!==1?'s':'')+'</div></div>';
         for(var si=0;si<saves.length;si++){
           var sv=saves[si];
           var fd=sv.fieldData||(sv.data&&sv.data.fieldData)||{};
@@ -84,94 +83,74 @@ function render(wk,rows){
           var photos=sv.photos||(sv.data&&sv.data.photos)||[];
           var dt=new Date(sv.savedAt||sv.saved_at||'');
           var dtStr=dt.toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
-          html+='<div class="save-block">';
-          html+='<div class="save-hdr">'+dtStr+(champ?' \u00b7 '+esc(champ):'')+'</div>';
+          html+='<div class="save-block"><div class="save-hdr">'+dtStr+(champ?' \u00b7 '+esc(champ):'')+'</div>';
           if(ts)html+='<div class="kv"><span class="k">Timestamp</span><span class="v" style="color:#00703c">'+esc(ts)+'</span></div>';
           if(ca&&ca!=='None')html+='<div class="kv"><span class="k">Corrective Action</span><span class="v" style="color:#e65100">'+esc(ca)+'</span></div>';
           var keys=Object.keys(fd);
-          for(var ki=0;ki<keys.length;ki++){
-            var v=fd[keys[ki]];
-            if(v&&String(v).trim()){
-              var lbl=keys[ki].replace(/^(we-|fsc-|inp_|sel_|cb_|radio_)/,'').replace(/-/g,' ');
-              html+='<div class="kv"><span class="k">'+esc(lbl)+'</span><span class="v">'+esc(String(v)==='checked'?'\u2713':v)+'</span></div>';
-            }
-          }
-          if(sigs&&sigs.length){
-            html+='<div style="margin-top:6px;">';
-            for(var sgi=0;sgi<sigs.length;sgi++){
-              var src=sigs[sgi].url||sigs[sgi].dataUrl||null;
-              if(src&&sigs[sgi].hasSignature) html+='<img src="'+esc(src)+'" class="sig-img" title="'+esc((sigs[sgi].id||'').replace(/^sig-/,'').replace(/-/g,' '))+'"><br><small style="font-size:9px;color:#999;">'+esc((sigs[sgi].id||'').replace(/^sig-/,'').replace(/-/g,' '))+'</small> ';
-            }
-            html+='</div>';
-          }
-          if(photos&&photos.length){
-            html+='<div style="margin-top:6px;">';
-            for(var phi=0;phi<photos.length;phi++){
-              var psrc=photos[phi].url||photos[phi].src||photos[phi].dataUrl||null;
-              if(psrc) html+='<img src="'+esc(psrc)+'" class="photo-img" onclick="this.style.width=this.style.width?\'\':\' 100%\'">';
-            }
-            html+='</div>';
-          }
+          for(var ki=0;ki<keys.length;ki++){var v=fd[keys[ki]];if(v&&String(v).trim()){var lbl=keys[ki].replace(/^(we-|fsc-|inp_|sel_|cb_|radio_)/,'').replace(/-/g,' ');html+='<div class="kv"><span class="k">'+esc(lbl)+'</span><span class="v">'+esc(String(v)==='checked'?'\u2713':v)+'</span></div>';}}
+          if(sigs&&sigs.length){html+='<div style="margin-top:6px;">';for(var sgi=0;sgi<sigs.length;sgi++){var src=sigs[sgi].url||sigs[sgi].dataUrl||null;if(src&&sigs[sgi].hasSignature)html+='<img src="'+esc(src)+'" class="sig-img"><small style="font-size:9px;color:#999;"> '+esc((sigs[sgi].id||'').replace(/^sig-/,'').replace(/-/g,' '))+'</small> ';}html+='</div>';}
+          if(photos&&photos.length){html+='<div style="margin-top:6px;">';for(var phi=0;phi<photos.length;phi++){var psrc=photos[phi].url||photos[phi].src||null;if(psrc)html+='<img src="'+esc(psrc)+'" class="photo-img">';}html+='</div>';}
           html+='</div>';
         }
       } else {
-        html+='<div class="form-name" style="color:#999;">\u26a0\ufe0f '+esc(form.name)+'</div>';
-        html+='<div class="missing">Not submitted this week</div>';
+        html+='<div class="form-hdr" style="background:#fff8f0;"><div class="form-title" style="color:#e65100;">\u26a0\ufe0f '+esc(form.name)+'</div><div class="form-subtitle missing">Not submitted this week</div></div>';
       }
       html+='</div>';
     }
   }
-  /* Append form sheets section */
-  html+='<div style="background:#1a1a1a;color:white;border-radius:8px;padding:12px 14px;margin-top:20px;margin-bottom:8px;"><div style="font-size:11px;opacity:0.6;text-transform:uppercase;letter-spacing:1px;">Form Sheets – Merged Week View</div><div style="font-size:14px;font-weight:700;margin-top:3px;">All 41 forms with data filled in</div></div>';
-  var cats2=[],catMap2={};
-  for(var fi2=0;fi2<ALL_FORMS.length;fi2++){var ff=ALL_FORMS[fi2];if(!catMap2[ff.cat]){catMap2[ff.cat]=[];cats2.push(ff.cat);}catMap2[ff.cat].push(ff);}
-  for(var ci2=0;ci2<cats2.length;ci2++){
-    html+='<div style="background:#1a1a1a;color:white;padding:8px 12px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:0.05em;margin:14px 0 6px;">'+escF(cats2[ci2])+'</div>';
-    var forms2=catMap2[cats2[ci2]];
-    for(var ri2=0;ri2<forms2.length;ri2++){
-      var form2=forms2[ri2];
-      var saves2=byForm[form2.id]||[];
-      /* merge field data from all saves */
-      var mfd={};
-      for(var si2=0;si2<saves2.length;si2++){var sfd=saves2[si2].fieldData||{};var sk=Object.keys(sfd);for(var ki2=0;ki2<sk.length;ki2++){if(sfd[sk[ki2]])mfd[sk[ki2]]=sfd[sk[ki2]];}}
-      var hasSaves2=saves2.length>0;
-      html+='<div style="background:white;border-radius:8px;margin-bottom:10px;border:1px solid #d0d0d0;overflow:hidden;">';
-      html+='<div style="background:'+(hasSaves2?'#e8f5ee':'#fff8f0')+';padding:10px 14px;border-bottom:1px solid #d0d0d0;">';
-      html+='<div style="font-size:13px;font-weight:700;color:'+(hasSaves2?'#005a30':'#e65100')+';">'+(hasSaves2?'✅':'⚠️')+' '+escF(form2.name)+'</div>';
-      if(hasSaves2)html+='<div style="font-size:11px;color:#666;margin-top:2px;">'+saves2.length+' save'+(saves2.length!==1?'s':'')+' this week</div>';
-      else html+='<div style="font-size:11px;color:#e65100;">Not submitted this week</div>';
-      html+='</div>';
-      if(typeof window!=='undefined'&&window.renderFormSheet&&hasSaves2){
-        html+='<div style="padding:12px;overflow-x:auto;">'+window.renderFormSheet(form2.id,mfd)+'</div>';
-      }
-      html+='</div>';
-    }
-  }
+  html+='<div id="fsBtn" style="text-align:center;padding:10px 0 20px;"><button class="section-btn" onclick="loadFormSheets()">&#128203; Load Form Sheets</button></div>';
   document.getElementById('content').innerHTML=html;
+}
+function loadFormSheets(){
+  document.getElementById('fsBtn').innerHTML='<span style="color:#666;font-size:13px;">Loading form sheets...</span>';
+  var fs=document.createElement('script');
+  fs.src='report-forms.js';
+  fs.onload=function(){appendFormSheets();};
+  document.body.appendChild(fs);
+}
+function appendFormSheets(){
+  var wk=document.getElementById('hTitle').textContent;
+  var cats=[],catMap={};
+  for(var fi=0;fi<ALL_FORMS.length;fi++){var f=ALL_FORMS[fi];if(!catMap[f.cat]){catMap[f.cat]=[];cats.push(f.cat);}catMap[f.cat].push(f);}
+  var html='<div style="padding:14px;">';
+  html+='<div style="background:#1a1a1a;color:white;border-radius:8px;padding:12px 14px;margin-bottom:12px;"><div style="font-size:11px;opacity:0.6;text-transform:uppercase;letter-spacing:1px;">Form Sheets</div><div style="font-size:14px;font-weight:700;margin-top:3px;">'+esc(wk)+'</div></div>';
+  for(var ci=0;ci<cats.length;ci++){
+    html+='<div class="cat-hdr">'+esc(cats[ci])+'</div>';
+    var forms=catMap[cats[ci]];
+    for(var ri=0;ri<forms.length;ri++){
+      var form=forms[ri];var saves=reportByForm[form.id]||[];
+      var mfd={};
+      for(var si=0;si<saves.length;si++){var sfd=saves[si].fieldData||{};var sk=Object.keys(sfd);for(var ki=0;ki<sk.length;ki++){if(sfd[sk[ki]])mfd[sk[ki]]=sfd[sk[ki]];}}
+      var has=saves.length>0;
+      html+='<div class="card" style="overflow-x:auto;">';
+      html+='<div class="form-hdr" style="background:'+(has?'#e8f5ee':'#fff8f0')+';margin:-14px -14px 10px;">';
+      html+='<div class="form-title" style="color:'+(has?'#005a30':'#e65100')+';">'+(has?'\u2705':'\u26a0\ufe0f')+' '+esc(form.name)+'</div></div>';
+      if(has&&window.renderFormSheet)html+=window.renderFormSheet(form.id,mfd);
+      else if(!has)html+='<div class="missing">Not submitted this week</div>';
+      html+='</div>';
+    }
+  }
+  html+='</div>';
+  document.getElementById('formSheets').innerHTML=html;
+  document.getElementById('fsBtn').style.display='none';
 }
 function err(msg){document.getElementById('content').innerHTML='<p style="padding:30px;text-align:center;color:#c00;">'+msg+'</p>';}
 var params=new URLSearchParams(window.location.search);
 var wkParam=params.get('week');
-/* Open IndexedDB */
-/* Read data passed from records.html via sessionStorage */
 try {
   var stored=sessionStorage.getItem('haccp_report');
   if(stored){
     var payload=JSON.parse(stored);
-    var wk=payload.weekKey||wkParam||getWeekKey();
+    var wk=payload.weekKey||wkParam;
     var rows=payload.records||[];
     if(rows.length){render(wk,rows);}
     else{err('No records found for this week.');}
   } else {
-    err('No report data found. Please open this report using the Full Report button from the Records page.<br><br><a href="records.html" style="color:#00703c;font-weight:700;">Go to Records page</a>');
+    err('No report data found.<br><br>Please use the <a href="records.html" style="color:#00703c;font-weight:700;">Full Report button on the Records page</a>.');
   }
 } catch(ex){
-  err('Error loading report: '+escF(String(ex)));
+  err('Error: '+esc(String(ex)));
 }
-/* Load form rendering script */
-var fs=document.createElement('script');
-fs.src='report-forms.js';
-document.body.appendChild(fs);
 </script>
 </body>
 </html>

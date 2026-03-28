@@ -34,7 +34,6 @@ body{font-family:sans-serif;background:#f4f6f4;color:#1a1a1a;font-size:14px;}
 .cat-hdr{background:#1a1a1a;color:white;padding:8px 12px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:0.05em;margin:14px 0 6px;}
 @media print{.hdr{display:none;}.save-block{page-break-inside:avoid;}}
 </style>
-<script src="report-forms.js"></script>
 </head>
 <body>
 <div class="hdr">
@@ -154,10 +153,12 @@ function err(msg){document.getElementById('content').innerHTML='<p style="paddin
 var params=new URLSearchParams(window.location.search);
 var wkParam=params.get('week');
 /* Open IndexedDB */
-var req=indexedDB.open('MoriartyHACCP',2);
+var req=indexedDB.open('MoriartyHACCP');
 req.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('records'))d.createObjectStore('records',{keyPath:'id'});if(!d.objectStoreNames.contains('live'))d.createObjectStore('live',{keyPath:'id'});if(!d.objectStoreNames.contains('weeks'))d.createObjectStore('weeks',{keyPath:'weekKey'});};
 req.onsuccess=function(e){
   var db=e.target.result;
+  /* check records store exists */
+  if(!db.objectStoreNames.contains('records')){err('No records store found.');return;}
   var tx=db.transaction('records','readonly');
   var r=tx.objectStore('records').getAll();
   r.onsuccess=function(ev){
@@ -182,8 +183,12 @@ req.onsuccess=function(e){
 req.onerror=function(){err('Cannot open database.');};
 setTimeout(function(){
   var c=document.getElementById('content');
-  if(c&&c.innerHTML.indexOf('Loading')!==-1) err('Timed out. Try again.');
-},6000);
+  if(c&&c.innerHTML.indexOf('Loading')!==-1) err('Timed out. Records may not exist for this week yet. Try saving and closing the week first.');
+},12000);
+/* Load form rendering script dynamically after page loads */
+var fs=document.createElement('script');
+fs.src='report-forms.js';
+document.body.appendChild(fs);
 </script>
 </body>
 </html>

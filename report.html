@@ -153,39 +153,22 @@ function err(msg){document.getElementById('content').innerHTML='<p style="paddin
 var params=new URLSearchParams(window.location.search);
 var wkParam=params.get('week');
 /* Open IndexedDB */
-var req=indexedDB.open('MoriartyHACCP');
-req.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('records'))d.createObjectStore('records',{keyPath:'id'});if(!d.objectStoreNames.contains('live'))d.createObjectStore('live',{keyPath:'id'});if(!d.objectStoreNames.contains('weeks'))d.createObjectStore('weeks',{keyPath:'weekKey'});};
-req.onsuccess=function(e){
-  var db=e.target.result;
-  /* check records store exists */
-  if(!db.objectStoreNames.contains('records')){err('No records store found.');return;}
-  var tx=db.transaction('records','readonly');
-  var r=tx.objectStore('records').getAll();
-  r.onsuccess=function(ev){
-    var all=ev.target.result||[];
-    if(!all.length){err('No records found. Fill in and save some forms first.');return;}
-    var rows=[],wk=wkParam;
-    if(wk){
-      for(var i=0;i<all.length;i++){if(all[i].weekKey===wk)rows.push(all[i]);}
-    }
-    if(!rows.length){
-      var wks={};
-      for(var j=0;j<all.length;j++)wks[all[j].weekKey]=1;
-      var wkList=Object.keys(wks).sort().reverse();
-      wk=wkList[0];
-      rows=[];
-      for(var k=0;k<all.length;k++){if(all[k].weekKey===wk)rows.push(all[k]);}
-    }
-    render(wk,rows);
-  };
-  r.onerror=function(){err('DB read error.');};
-};
-req.onerror=function(){err('Cannot open database.');};
-setTimeout(function(){
-  var c=document.getElementById('content');
-  if(c&&c.innerHTML.indexOf('Loading')!==-1) err('Timed out. Records may not exist for this week yet. Try saving and closing the week first.');
-},12000);
-/* Load form rendering script dynamically after page loads */
+/* Read data passed from records.html via sessionStorage */
+try {
+  var stored=sessionStorage.getItem('haccp_report');
+  if(stored){
+    var payload=JSON.parse(stored);
+    var wk=payload.weekKey||wkParam||getWeekKey();
+    var rows=payload.records||[];
+    if(rows.length){render(wk,rows);}
+    else{err('No records found for this week.');}
+  } else {
+    err('No report data found. Please open this report using the Full Report button from the Records page.<br><br><a href="records.html" style="color:#00703c;font-weight:700;">Go to Records page</a>');
+  }
+} catch(ex){
+  err('Error loading report: '+escF(String(ex)));
+}
+/* Load form rendering script */
 var fs=document.createElement('script');
 fs.src='report-forms.js';
 document.body.appendChild(fs);

@@ -650,18 +650,60 @@ document.body.appendChild(container);
 /* Load data */
 var params=new URLSearchParams(window.location.search);
 var weekKey=params.get(‘week’)||getWeekKey();
-/* fetch from Supabase */
+document.getElementById(‘content’).innerHTML=’<div class="loading">📋 Loading report for ‘+esc(weekLabel(weekKey))+’…</div>’;
+
+function loadFromIndexedDB(wk) {
+var DB_NAME=‘MoriartyHACCP’, DB_VER=2;
+var req=indexedDB.open(DB_NAME,DB_VER);
+req.onsuccess=function(e){
+var db=e.target.result;
+var tx=db.transaction(‘records’,‘readonly’);
+var r=tx.objectStore(‘records’).getAll();
+r.onsuccess=function(ev){
+var all=ev.target.result||[];
+var rows=[];
+for(var i=0;i<all.length;i++){if(all[i].weekKey===wk)rows.push(all[i]);}
+if(!rows.length){
+document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ No records found for week of ‘+esc(weekLabel(wk))+’.<br><br>This week may not have been closed yet, or records exist only on the device that saved them.<br><br><a href="records.html" style="color:#00703c;">← Back to Records</a></div>’;
+return;
+}
+renderReport(wk,rows);
+};
+r.onerror=function(){
+document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Could not read local data.</div>’;
+};
+};
+req.onerror=function(){
+document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Could not open local database.</div>’;
+};
+}
+
+/* fetch from Supabase with 10 second timeout */
+var fetchDone=false;
+var fetchTimeout=setTimeout(function(){
+if(!fetchDone){
+fetchDone=true;
+loadFromIndexedDB(weekKey);
+}
+},10000);
+
 fetch(SB_URL+’/rest/v1/haccp_records?week_key=eq.’+weekKey+’&order=saved_at.asc’,{
-headers:{‘apikey’:SB_KEY,‘Authorization’:’Bearer ’+SB_KEY}
+headers:{‘apikey’:SB_KEY,‘Authorization’:‘Bearer ‘+SB_KEY}
 }).then(function(r){return r.json();}).then(function(rows){
+if(fetchDone) return;
+fetchDone=true;
+clearTimeout(fetchTimeout);
 if(!rows||!rows.length){
-/* try loading from local IndexedDB as fallback */
-document.getElementById(‘content’).innerHTML=’<div class="loading">📋 No cloud data found for this week. Try opening from the Records page.</div>’;
+/* fall back to IndexedDB */
+loadFromIndexedDB(weekKey);
 return;
 }
 renderReport(weekKey,rows);
-}).catch(function(e){
-document.getElementById(‘content’).innerHTML=’<div class="error">⚠️ Could not load report: ‘+esc(e.message||‘Network error’)+’<br><br>Check your internet connection and try again.</div>’;
+}).catch(function(){
+if(fetchDone) return;
+fetchDone=true;
+clearTimeout(fetchTimeout);
+loadFromIndexedDB(weekKey);
 });
 document.getElementById(‘lightbox’).addEventListener(‘click’,function(e){
 if(e.target===this){this.className=‘lightbox’;document.getElementById(‘lbImg’).src=’’;}

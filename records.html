@@ -316,6 +316,13 @@ function render(liveDone,curByForm,pastRecs,wk,weekClosed){
       (function(weekKey2, weekRecs){
         reportBtn.addEventListener('click',function(){
           try {
+            /* debug - log first record */
+            if(weekRecs.length>0){
+              var dbg=weekRecs[0];
+              console.log('Record keys:',Object.keys(dbg));
+              console.log('fieldData:',dbg.fieldData);
+              console.log('formId:',dbg.formId||dbg.form_id);
+            }
             /* strip base64 dataUrls to keep payload small - keep only URLs */
             var cleaned=[];
             for(var ri=0;ri<weekRecs.length;ri++){

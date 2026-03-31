@@ -292,6 +292,7 @@ function render(liveDone,curByForm,pastRecs,wk,weekClosed){
     var curContainer=document.createElement('div');
     curContainer.style.cssText='margin:0 14px;';
     renderWeekSections(curContainer,curByForm);
+    attachListeners(curContainer);
     mc.appendChild(curContainer);
   }
   /* Previous weeks from records store */
@@ -358,7 +359,7 @@ function render(liveDone,curByForm,pastRecs,wk,weekClosed){
         var isOpen=body.className.indexOf('open')!==-1;
         body.className=isOpen?'acc-body':'acc-body open';
         trigger.querySelector('.acc-chevron').className=isOpen?'acc-chevron':'acc-chevron open';
-        if(!isOpen&&!built){renderWeekSections(inner,pwByForm);built=true;}
+        if(!isOpen&&!built){renderWeekSections(inner,pwByForm);attachListeners(inner);built=true;}
       });
       item.appendChild(trigger);item.appendChild(body);
       mc.appendChild(item);

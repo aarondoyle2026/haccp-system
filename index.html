@@ -918,6 +918,16 @@ var rad = allRadios[ri];
 var rk = 'radio_' + rad.name;
 if (data[rk] !== undefined && rad.value === data[rk]) rad.checked = true;
 }
+/* Safari iOS repaint fix: last inputs in long tables appear blank after
+   programmatic value set. Force layout recalc + GPU repaint. */
+setTimeout(function() {
+  var allInputs = scr.querySelectorAll('input[type=text]');
+  for (var fi = 0; fi < allInputs.length; fi++) {
+    if (allInputs[fi].value) { void allInputs[fi].offsetParent; }
+  }
+  scr.style.webkitTransform = 'translateZ(0)';
+  setTimeout(function() { scr.style.webkitTransform = ''; }, 60);
+}, 80);
 }
 /* ---- restore signatures into canvases ---- */
 function restoreSignatures(formId, signatures) {

@@ -216,6 +216,24 @@ function renderRecDetail(rec){
   return html;
 }
 /* Attach listeners to a rendered container */
+function toggleRow(row,e){
+  var detail=row.querySelector('.rec-detail');
+  var chev=row.querySelector('.fr-chev');
+  if(!detail)return;
+  /* Use data attribute to track state reliably */
+  var isOpen=row.getAttribute('data-open')==='1';
+  /* If open and clicking inside detail, don't toggle */
+  if(e&&isOpen&&detail.contains(e.target))return;
+  if(isOpen){
+    detail.style.display='none';
+    row.setAttribute('data-open','0');
+    if(chev)chev.style.transform='';
+  } else {
+    detail.style.display='block';
+    row.setAttribute('data-open','1');
+    if(chev)chev.style.transform='rotate(90deg)';
+  }
+}
 function attachListeners(container){
   /* expand/collapse - fires on any click within the row */
   var rows=container.querySelectorAll('.form-row.done');
@@ -257,9 +275,10 @@ function renderWeekSections(container,byForm){
         var dt2=new Date(latest.savedAt),ts2=dt2.toLocaleString('en-IE',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
         var saveCount=saves.length>1?' \u00b7 '+saves.length+' saves':'';
         var champStr=latest.champion?' \u00b7 '+esc(latest.champion):'';
-        html+='<div class="form-row done">';
-        html+='<div class="fr-top"><div class="fr-icon">\u2705</div><div class="fr-info"><div class="fr-name">'+esc(form.name)+esc(saveCount)+'</div><div class="fr-meta">'+ts2+champStr+'</div></div><div class="fr-chev">&#8250;</div></div>';
-        html+='<div class="rec-detail">';
+        var rowId='row-'+form.id.replace(/[^a-z0-9]/g,'-')+'-'+ci+'-'+ri;
+        html+='<div class="form-row done" id="'+rowId+'" onclick="toggleRow(this,event)">';
+        html+='<div class="fr-top"><div class="fr-icon">\u2705</div><div class="fr-info"><div class="fr-name">'+esc(form.name)+esc(saveCount)+'</div><div class="fr-meta">'+ts2+champStr+'</div></div><div class="fr-chev" id="chev-'+rowId+'">&#8250;</div></div>';
+        html+='<div class="rec-detail" id="detail-'+rowId+'">';
         for(var si=0;si<saves.length;si++){
           var sv=saves[si];
           var svDt=new Date(sv.savedAt);
@@ -435,18 +454,17 @@ function loadRecords(){
     /* check if current week has been closed */
     var weekClosed=false;
     for(var wi=0;wi<closedWeeks.length;wi++){if(closedWeeks[wi].weekKey===wk){weekClosed=true;break;}}
-    /* Progress count from live store - 0 if week closed */
-    var liveDone=weekClosed?0:0;
-    if(!weekClosed){
-      for(var li=0;li<liveRecs.length;li++){if(liveRecs[li].weekKey===wk)liveDone++;}
-    }
-    /* Current week records: only show if week not closed */
+    /* Current week records: Supabase first, then local fallback */
     var seen={};
     var curRecs=[];
     if(!weekClosed){
       for(var si=0;si<sbCurRecs.length;si++){var nr=normaliseRow(sbCurRecs[si]);if(!seen[nr.id]){seen[nr.id]=1;curRecs.push(nr);}}
       for(var ai=0;ai<archRecs.length;ai++){var ar=archRecs[ai];if(ar.weekKey===wk&&!seen[String(ar.id)]){seen[String(ar.id)]=1;curRecs.push(ar);}}
+      /* Also check live store */
+      for(var li=0;li<liveRecs.length;li++){var lr=liveRecs[li];if(lr.weekKey===wk&&!seen[String(lr.id)]){seen[String(lr.id)]=1;curRecs.push(lr);}}
     }
+    /* Count unique forms completed from ALL sources */
+    var liveDone=weekClosed?0:Object.keys(buildByForm(curRecs,wk)).length;
     /* Past weeks: combine Supabase past records + local past records */
     var pastSeen={};
     var pastRecs=[];

@@ -840,10 +840,10 @@ tx.onerror = function(e) { rej(e.target.error); };
 });
 }
 function getWeekKey() {
+/* Use UTC throughout to avoid DST timezone shift bugs */
 var d = new Date();
-var s = new Date(d);
-s.setDate(d.getDate() - d.getDay());
-s.setHours(0,0,0,0);
+var dayUTC = d.getUTCDay();
+var s = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - dayUTC));
 return s.toISOString().split('T')[0];
 }
 function getWeekLabel(wk) {

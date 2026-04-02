@@ -1146,7 +1146,7 @@ return dbPut('live', liveRec);
 }).then(function() {
 return dbPut('records', archRec);
 }).then(function() {
-/* push to Supabase with media URLs */
+/* push to Supabase via sbFetch (handles headers correctly cross-browser) */
 var sbRec = {
 id: String(archRec.id),
 form_id: archRec.formId,
@@ -1164,16 +1164,7 @@ photos: archRec.photos,
 signatures: archRec.signatures
 }
 };
-return fetch(SB_URL + '/rest/v1/haccp_records', {
-method: 'POST',
-headers: {
-'apikey': SB_KEY,
-'Authorization': 'Bearer ' + SB_KEY,
-'Content-Type': 'application/json',
-'Prefer': 'resolution=merge-duplicates'
-},
-body: JSON.stringify([sbRec])
-});
+return sbFetch('haccp_records', 'POST', [sbRec]);
 }).then(function() {
 showToast('Saved!');
 updateBannerCount();
@@ -1367,16 +1358,7 @@ signatures: r.signatures
 }
 return Promise.all([
 dbGetAll('live'),
-sbRows.length ? fetch(SB_URL + '/rest/v1/haccp_records', {
-method: 'POST',
-headers: {
-'apikey': SB_KEY,
-'Authorization': 'Bearer ' + SB_KEY,
-'Content-Type': 'application/json',
-'Prefer': 'resolution=merge-duplicates'
-},
-body: JSON.stringify(sbRows)
-}).catch(function() {}) : Promise.resolve()
+sbRows.length ? sbFetch('haccp_records', 'POST', sbRows).catch(function() {}) : Promise.resolve()
 ]);
 }).then(function(results) {
 var liveRecs = results[0] || [];

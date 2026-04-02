@@ -668,14 +668,15 @@ var DB_NAME = 'MoriartyHACCP', DB_VER = 2, db = null;
 var SB_URL = 'https://mnebkteiwjxbbmnfotse.supabase.co';
 var SB_KEY = 'sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
 function sbFetch(path, method, body) {
-return fetch(SB_URL + '/rest/v1/' + path, {
-method: method || 'GET',
-headers: {
+var headers = {
 'apikey': SB_KEY,
 'Authorization': 'Bearer ' + SB_KEY,
-'Content-Type': 'application/json',
-'Prefer': method === 'POST' ? 'resolution=merge-duplicates' : ''
-},
+'Content-Type': 'application/json'
+};
+if (method === 'POST') headers['Prefer'] = 'resolution=merge-duplicates';
+return fetch(SB_URL + '/rest/v1/' + path, {
+method: method || 'GET',
+headers: headers,
 body: body ? JSON.stringify(body) : undefined
 });
 }
@@ -1303,19 +1304,36 @@ if (tsBtn) { tsBtn.textContent = 'Record Time'; tsBtn.className = 'ts-btn'; }
 }).catch(function() {});
 }
 function updateBannerCount() {
+var wk = getWeekKey();
+/* Try Supabase first for accurate cross-browser count */
+sbFetch('haccp_records?week_key=eq.' + wk + '&order=saved_at.asc', 'GET')
+.then(function(r) { return r.json(); })
+.then(function(rows) {
+if (!Array.isArray(rows)) throw new Error('not array');
+/* get unique form IDs */
+var seen = {};
+for (var i = 0; i < rows.length; i++) {
+var fid = rows[i].form_id || rows[i].formId;
+if (fid) seen[fid] = 1;
+}
+var done = Object.keys(seen).length;
+document.getElementById('home-banner-sub').textContent = done + ' of ' + ALL_FORMS.length + ' forms completed this week';
+for (var fid2 in seen) updateFormBadge(fid2, true);
+})
+.catch(function() {
+/* fall back to local IndexedDB */
 if (!db) return;
 dbGetAll('live').then(function(recs) {
-var wk = getWeekKey();
 var done = 0;
 for (var i = 0; i < recs.length; i++) {
 if (recs[i].weekKey === wk) done++;
 }
 document.getElementById('home-banner-sub').textContent = done + ' of ' + ALL_FORMS.length + ' forms completed this week';
-/* update badges */
 for (var j = 0; j < recs.length; j++) {
 if (recs[j].weekKey === wk) updateFormBadge(recs[j].formId, true);
 }
 }).catch(function() {});
+});
 }
 /* ===== WEEK CLOSE ===== */
 function closeWeek(manual) {

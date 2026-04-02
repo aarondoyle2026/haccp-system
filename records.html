@@ -134,7 +134,7 @@ var SB_KEY='sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
 function sbFetch(path,method,body){return fetch(SB_URL+'/rest/v1/'+path,{method:method||'GET',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show';setTimeout(function(){t.className='toast';},3000);}
-function getWeekKey(){var d=new Date(),s=new Date(d);s.setDate(d.getDate()-d.getDay());s.setHours(0,0,0,0);return s.toISOString().split('T')[0];}
+function getWeekKey(){var d=new Date(),day=d.getUTCDay(),s=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()-day));return s.toISOString().split('T')[0];}
 function weekLabel(wk){var s=new Date(wk+'T00:00:00'),e=new Date(s);e.setDate(s.getDate()+6);var o={day:'numeric',month:'short'};return s.toLocaleDateString('en-IE',o)+' \u2013 '+e.toLocaleDateString('en-IE',o)+' '+e.getFullYear();}
 function satMidnight(wk){var s=new Date(wk+'T00:00:00');s.setDate(s.getDate()+6);s.setHours(23,59,59,0);return s;}
 function timeRemaining(wk){var diff=satMidnight(wk)-new Date();if(diff<=0)return 'Week ended';var d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000);return(d>0?d+'d ':'')+h+'h '+m+'m until close';}

@@ -1189,20 +1189,8 @@ if (fd[pk[j]]) prevMerged[pk[j]] = fd[pk[j]];
 }
 }
 }
-if (Object.keys(prevMerged).length) { doSaveWithDelta(prevMerged); return; }
-/* fall back to local */
-if (!db) { doSaveWithDelta({}); return; }
-dbGetAll('records').then(function(recs) {
-for (var i = 0; i < recs.length; i++) {
-if (recs[i].formId === formId && recs[i].weekKey === wk && recs[i].fieldData) {
-var pk2 = Object.keys(recs[i].fieldData);
-for (var j2 = 0; j2 < pk2.length; j2++) {
-if (recs[i].fieldData[pk2[j2]]) prevMerged[pk2[j2]] = recs[i].fieldData[pk2[j2]];
-}
-}
-}
+/* Supabase had data - use it and stop, do NOT fall through to local DB */
 doSaveWithDelta(prevMerged);
-}).catch(function() { doSaveWithDelta({}); });
 })
 .catch(function() {
 if (!db) { doSaveWithDelta({}); return; }

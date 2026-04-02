@@ -443,8 +443,14 @@ function normaliseRow(r){
 function loadRecords(){
   var wk=getWeekKey();
   /* fetch current week AND all past weeks from Supabase */
-  var sbCurPromise=sbFetch('haccp_records?week_key=eq.'+wk+'&order=saved_at.asc','GET').then(function(r){return r.json();}).then(function(d){return Array.isArray(d)?d:[];}).catch(function(){return[];});
-  var sbPastPromise=sbFetch('haccp_records?week_key=neq.'+wk+'&order=saved_at.asc','GET').then(function(r){return r.json();}).then(function(d){return Array.isArray(d)?d:[];}).catch(function(){return[];});
+  var sbCurPromise=sbFetch('haccp_records?week_key=eq.'+wk+'&order=saved_at.asc','GET').then(function(r){
+    if(!r.ok){document.getElementById('statusBar').textContent='SB error: '+r.status+' '+r.statusText;return [];}
+    return r.json();
+  }).then(function(d){
+    if(!Array.isArray(d)){document.getElementById('statusBar').textContent='SB bad response: '+JSON.stringify(d).slice(0,80);return [];}
+    return d;
+  }).catch(function(e){document.getElementById('statusBar').textContent='SB fetch failed: '+(e.message||e);return[];});
+  var sbPastPromise=sbFetch('haccp_records?week_key=neq.'+wk+'&order=saved_at.asc','GET').then(function(r){return r.ok?r.json():[];}).then(function(d){return Array.isArray(d)?d:[];}).catch(function(){return[];});
   Promise.all([dbGetAll('live'),dbGetAll('records'),dbGetAll('weeks'),sbCurPromise,sbPastPromise]).then(function(results){
     var liveRecs=results[0];
     var archRecs=results[1];

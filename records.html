@@ -159,9 +159,14 @@ function buildByFormArray(recs,wk){
 /* Build map of formId -> array of all saves sorted oldest first */
 function buildByForm(recs,wk){
   var m={};
+  var seenSave={};
   for(var i=0;i<recs.length;i++){
     var r=recs[i];
     if(r.weekKey!==wk)continue;
+    /* deduplicate by formId+savedAt to prevent double entries */
+    var dupKey=r.formId+'|'+r.savedAt;
+    if(seenSave[dupKey])continue;
+    seenSave[dupKey]=1;
     if(!m[r.formId])m[r.formId]=[];
     m[r.formId].push(r);
   }
@@ -464,17 +469,16 @@ function loadRecords(){
     var seen={};
     var curRecs=[];
     if(!weekClosed){
-      for(var si=0;si<sbCurRecs.length;si++){var nr=normaliseRow(sbCurRecs[si]);if(!seen[nr.id]){seen[nr.id]=1;curRecs.push(nr);}}
+      for(var si=0;si<sbCurRecs.length;si++){var nr=normaliseRow(sbCurRecs[si]);var nid=String(nr.id);if(!seen[nid]){seen[nid]=1;curRecs.push(nr);}}
+      /* local archRecs as fallback only - liveRecs excluded (contains fullFieldData, causes duplicates) */
       for(var ai=0;ai<archRecs.length;ai++){var ar=archRecs[ai];if(ar.weekKey===wk&&!seen[String(ar.id)]){seen[String(ar.id)]=1;curRecs.push(ar);}}
-      /* Also check live store */
-      for(var li=0;li<liveRecs.length;li++){var lr=liveRecs[li];if(lr.weekKey===wk&&!seen[String(lr.id)]){seen[String(lr.id)]=1;curRecs.push(lr);}}
     }
     /* Count unique forms completed from ALL sources */
     var liveDone=weekClosed?0:Object.keys(buildByForm(curRecs,wk)).length;
     /* Past weeks: combine Supabase past records + local past records */
     var pastSeen={};
     var pastRecs=[];
-    for(var pi=0;pi<sbPastRecs.length;pi++){var pr=normaliseRow(sbPastRecs[pi]);if(!pastSeen[pr.id]){pastSeen[pr.id]=1;pastRecs.push(pr);}}
+    for(var pi=0;pi<sbPastRecs.length;pi++){var pr=normaliseRow(sbPastRecs[pi]);var pid=String(pr.id);if(!pastSeen[pid]){pastSeen[pid]=1;pastRecs.push(pr);}}
     for(var pai=0;pai<archRecs.length;pai++){var par=archRecs[pai];if(par.weekKey!==wk&&!pastSeen[String(par.id)]){pastSeen[String(par.id)]=1;pastRecs.push(par);}}
     /* also include records from closed weeks store if not already in pastRecs */
     for(var cwi=0;cwi<closedWeeks.length;cwi++){

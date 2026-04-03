@@ -1,0 +1,846 @@
+<!DOCTYPE html><html lang="en">
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Moriarty Group – Appraisals</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:100vh;}
+.top-nav{background:#00703c;color:white;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.back-btn{background:rgba(255,255,255,0.2);border:none;color:white;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-family:inherit;display:none;}
+.nav-title{font-size:16px;font-weight:600;flex:1;}
+.nav-logo{font-size:12px;opacity:0.8;text-align:right;line-height:1.2;}
+/* Home */
+#home{display:block;}
+.home-header{background:linear-gradient(135deg,#005a30,#00703c);color:white;padding:28px 20px 24px;text-align:center;}
+.home-header .brand{font-size:22px;font-weight:700;letter-spacing:1.5px;}
+.home-header .sub{font-size:12px;opacity:0.75;margin-top:2px;letter-spacing:2px;}
+.home-header .title{font-size:15px;font-weight:500;margin-top:10px;opacity:0.9;}
+.category-section{padding:16px 16px 8px;}
+.category-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#666;padding:0 4px;margin-bottom:10px;}
+.form-grid{display:flex;flex-direction:column;gap:8px;}
+.form-card{background:white;border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;border:1px solid #d0d0d0;}
+.form-card:active{transform:scale(0.98);background:#e8f5ee;}
+.form-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.form-info{flex:1;}
+.form-name{font-size:14px;font-weight:600;color:#1a1a1a;}
+.form-desc{font-size:12px;color:#666;margin-top:2px;}
+.form-arrow{color:#666;font-size:16px;}
+/* Form screens */
+.form-screen{display:none;padding-bottom:60px;}
+.form-header{background:white;border-bottom:3px solid #00703c;padding:16px;}
+.form-header h2{font-size:17px;font-weight:700;color:#005a30;}
+.form-header p{font-size:12px;color:#666;margin-top:4px;}
+.form-body{padding:16px;}
+.field-group{margin-bottom:16px;}
+.field-label{font-size:12px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block;}
+.field-input{width:100%;padding:10px 12px;border:1.5px solid #d0d0d0;border-radius:8px;font-size:14px;font-family:inherit;background:white;color:#1a1a1a;-webkit-appearance:none;}
+.field-input:focus{outline:none;border-color:#00703c;}
+.field-row{display:flex;gap:10px;}
+.field-row .field-group{flex:1;}
+textarea.field-input{resize:vertical;min-height:80px;}
+.section-title{font-size:13px;font-weight:700;color:#005a30;margin:18px 0 10px;padding-bottom:6px;border-bottom:2px solid #e8f5ee;}
+.info-box{background:#e8f5ee;border-left:3px solid #00703c;border-radius:6px;padding:10px 12px;font-size:11px;color:#666;margin-bottom:14px;line-height:1.6;}
+.info-box strong{color:#1a1a1a;}
+/* Rating table */
+.rating-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;}
+.rating-table th{background:#00703c;color:white;padding:8px 6px;text-align:left;font-size:11px;font-weight:600;border:1px solid #005a30;}
+.rating-table td{border:1px solid #d0d0d0;padding:6px;vertical-align:middle;}
+.rating-table td.area{font-weight:600;font-size:11px;background:#fafafa;min-width:120px;}
+.rating-table td.area small{font-weight:400;color:#666;display:block;margin-top:2px;font-size:10px;}
+.rating-table input[type=number],.rating-table select{width:100%;border:none;background:transparent;font-size:12px;font-family:inherit;padding:2px;text-align:center;}
+.rating-table textarea{width:100%;border:none;background:transparent;font-size:11px;font-family:inherit;padding:2px;resize:none;min-height:40px;}
+.rating-table th.mgr-col{background:#005a30;}
+/* Yes/No table */
+.yn-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;}
+.yn-table th{background:#00703c;color:white;padding:8px 6px;text-align:center;font-size:11px;font-weight:600;border:1px solid #005a30;}
+.yn-table th.area{text-align:left;padding-left:8px;}
+.yn-table td{border:1px solid #d0d0d0;padding:6px;text-align:center;vertical-align:middle;}
+.yn-table td.area{text-align:left;font-size:11px;background:#fafafa;}
+.yn-table input[type=checkbox]{width:16px;height:16px;accent-color:#00703c;}
+.yn-table input[type=text]{width:100%;border:none;background:transparent;font-size:11px;font-family:inherit;padding:2px;}
+/* Goals table */
+.goals-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;}
+.goals-table th{background:#00703c;color:white;padding:8px 6px;text-align:left;font-size:11px;font-weight:600;border:1px solid #005a30;}
+.goals-table td{border:1px solid #d0d0d0;padding:6px;vertical-align:top;}
+.goals-table textarea{width:100%;border:none;background:transparent;font-size:11px;font-family:inherit;resize:none;min-height:50px;padding:2px;}
+.goals-table input[type=text]{width:100%;border:none;background:transparent;font-size:11px;font-family:inherit;padding:2px;}
+/* Performance table with radio buttons */
+.perf-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;}
+.perf-table th{background:#00703c;color:white;padding:8px 6px;text-align:center;font-size:11px;font-weight:600;border:1px solid #005a30;}
+.perf-table th.area{text-align:left;padding-left:8px;}
+.perf-table td{border:1px solid #d0d0d0;padding:6px;text-align:center;vertical-align:middle;}
+.perf-table td.area{text-align:left;font-size:11px;background:#fafafa;font-weight:600;}
+.perf-table input[type=radio]{accent-color:#00703c;width:14px;height:14px;}
+.perf-table input[type=text]{width:100%;border:none;background:transparent;font-size:11px;font-family:inherit;padding:2px;}
+/* Sig */
+.sig-box{border:2px dashed #d0d0d0;border-radius:8px;background:white;position:relative;overflow:hidden;margin-bottom:8px;}
+.sig-box canvas{display:block;width:100%;touch-action:none;}
+.sig-clear{position:absolute;top:6px;right:8px;background:rgba(255,255,255,0.9);border:1px solid #d0d0d0;border-radius:5px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit;color:#d32f2f;}
+/* Buttons */
+.btn-save{background:#005a30;color:white;width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-bottom:10px;margin-top:14px;display:block;}
+.btn-save:active{background:#003d20;}
+.btn-print{background:white;color:#005a30;width:100%;padding:12px;border:2px solid #005a30;border-radius:10px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;margin-bottom:10px;}
+/* Records panel */
+.records-section{margin-top:20px;background:white;border-radius:10px;border:1px solid #d0d0d0;overflow:hidden;}
+.records-header{background:#1a1a1a;color:white;padding:10px 14px;font-size:12px;font-weight:700;letter-spacing:0.05em;}
+.record-item{padding:12px 14px;border-bottom:1px solid #eee;cursor:pointer;}
+.record-item:last-child{border-bottom:none;}
+.record-item:active{background:#f0f0f0;}
+.record-meta{font-size:12px;font-weight:600;color:#1a1a1a;}
+.record-sub{font-size:11px;color:#666;margin-top:2px;}
+.record-detail{display:none;padding:12px 14px;background:#fafafa;border-top:1px solid #eee;}
+.record-detail.open{display:block;}
+.detail-row{display:flex;border-bottom:1px solid #eee;padding:4px 0;font-size:11px;}
+.detail-row:last-child{border:none;}
+.detail-row .dk{color:#888;width:45%;flex-shrink:0;}
+.detail-row .dv{font-weight:600;}
+.sig-thumb{height:36px;border:1px solid #ddd;border-radius:4px;margin:3px 2px 0 0;vertical-align:middle;}
+/* Toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#005a30;color:white;padding:12px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:9999;transition:transform 0.3s;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+/* Culture circles */
+.culture-options{display:flex;gap:16px;margin:10px 0;}
+.culture-opt{display:flex;align-items:center;gap:6px;font-size:14px;}
+.culture-opt input{width:18px;height:18px;accent-color:#00703c;}
+/* Number inputs */
+.number-input{width:60px;padding:8px;border:1.5px solid #d0d0d0;border-radius:6px;font-size:14px;font-family:inherit;text-align:center;}
+/* Section header dark */
+.section-hdr-dark{background:#1a1a1a;color:white;padding:8px 12px;font-size:11px;font-weight:700;letter-spacing:0.05em;margin:14px -16px 10px;padding-left:16px;}
+@media print{
+  .top-nav,.btn-save,.btn-print,.records-section,.toast{display:none!important;}
+  .form-screen{display:block!important;}
+  #home{display:none!important;}
+  body{background:white;}
+  .form-body{padding:8px;}
+}
+</style>
+</head>
+<body>
+<div class="top-nav">
+  <button class="back-btn" id="backBtn">&#8592; Back</button>
+  <div class="nav-title" id="navTitle">Appraisals</div>
+  <div class="nav-logo">MORIARTY<br>GROUP</div>
+</div>
+
+<!-- HOME -->
+
+<div id="home">
+  <div class="home-header">
+    <div class="brand">MORIARTY GROUP</div>
+    <div class="sub">SUPERVALU &#183; ESTD 1987</div>
+    <div class="title">&#128203; Staff Appraisal Forms</div>
+  </div>
+  <div class="category-section">
+    <div class="category-label">&#128101; Performance Reviews</div>
+    <div class="form-grid">
+      <div class="form-card" data-form="f-3month"><div class="form-icon" style="background:#e8f5ee">&#128203;</div><div class="form-info"><div class="form-name">3-Month Appraisal</div><div class="form-desc">Feedback framework – what's working, what's not</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="f-6month"><div class="form-icon" style="background:#e8f5ee">&#128197;</div><div class="form-info"><div class="form-name">6-Month Probation Review</div><div class="form-desc">Probationary performance review – self & manager</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="f-annual-emp"><div class="form-icon" style="background:#fff8e1">&#9733;</div><div class="form-info"><div class="form-name">Annual Appraisal – Employee</div><div class="form-desc">Team member annual review prep form</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="f-annual-mgr"><div class="form-icon" style="background:#fce4ec">&#127775;</div><div class="form-info"><div class="form-name">Annual Review – Manager</div><div class="form-desc">Manager performance evaluation form</div></div><div class="form-arrow">&#8250;</div></div>
+    </div>
+  </div>
+  <div style="height:20px"></div>
+</div>
+
+<!-- 3-MONTH APPRAISAL -->
+
+<div id="f-3month" class="form-screen">
+<div class="form-header"><h2>&#128203; 3-Month Appraisal</h2><p>Feedback Framework – MidPro-S</p></div>
+<div class="form-body">
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Employee Name</label><input class="field-input" type="text" id="3m-name" placeholder="Full name"></div>
+    <div class="field-group"><label class="field-label">Start Date</label><input class="field-input" type="date" id="3m-start"></div>
+  </div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Department</label><input class="field-input" type="text" id="3m-dept" placeholder="Department"></div>
+    <div class="field-group"><label class="field-label">Review Date</label><input class="field-input" type="date" id="3m-date"></div>
+  </div>
+  <div class="section-title">How have you found the past 3 months working in SuperValu?</div>
+  <textarea class="field-input" id="3m-general" rows="4" placeholder="General feedback..."></textarea>
+
+  <div class="section-title">Feedback Framework</div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">What's Working Well</label><textarea class="field-input" id="3m-well1" rows="3" placeholder="1."></textarea><textarea class="field-input" id="3m-well2" rows="3" placeholder="2." style="margin-top:6px"></textarea><textarea class="field-input" id="3m-well3" rows="3" placeholder="3." style="margin-top:6px"></textarea></div>
+    <div class="field-group"><label class="field-label">What's Not Working Well</label><textarea class="field-input" id="3m-notwell1" rows="3" placeholder="1."></textarea><textarea class="field-input" id="3m-notwell2" rows="3" placeholder="2." style="margin-top:6px"></textarea><textarea class="field-input" id="3m-notwell3" rows="3" placeholder="3." style="margin-top:6px"></textarea></div>
+  </div>
+  <div class="field-row" style="margin-top:10px">
+    <div class="field-group"><label class="field-label">What's Missing</label><textarea class="field-input" id="3m-missing1" rows="3" placeholder="1."></textarea><textarea class="field-input" id="3m-missing2" rows="3" placeholder="2." style="margin-top:6px"></textarea></div>
+    <div class="field-group"><label class="field-label">What's Possible</label><textarea class="field-input" id="3m-possible1" rows="3" placeholder="1."></textarea><textarea class="field-input" id="3m-possible2" rows="3" placeholder="2." style="margin-top:6px"></textarea></div>
+  </div>
+
+  <div class="section-title">Points to be Discussed</div>
+  <textarea class="field-input" id="3m-discuss" rows="4" placeholder="Any points for discussion..."></textarea>
+
+  <div class="section-title">&#9999;&#65039; Signature</div>
+  <label class="field-label">Employee Signature</label>
+  <div class="sig-box"><canvas id="sig-3m-emp" height="80"></canvas><button class="sig-clear" data-sigid="sig-3m-emp">Clear</button></div>
+  <div class="field-group"><label class="field-label">Date</label><input class="field-input" type="date" id="3m-sig-date"></div>
+
+<button class="btn-save" data-saveid="f-3month">💾 Save to Records</button>
+<button class="btn-print" onclick="printForm()">🖨 Print / PDF</button>
+
+  <div id="records-f-3month" class="records-section" style="display:none">
+    <div class="records-header">&#128202; Saved Records</div>
+    <div id="records-list-f-3month"></div>
+  </div>
+</div>
+</div>
+
+<!-- 6-MONTH PROBATION -->
+
+<div id="f-6month" class="form-screen">
+<div class="form-header"><h2>&#128197; 6-Month Probationary Review</h2><p>Two-way performance dialogue form</p></div>
+<div class="form-body">
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Employee Name</label><input class="field-input" type="text" id="6m-name" placeholder="Full name"></div>
+    <div class="field-group"><label class="field-label">HOD Name</label><input class="field-input" type="text" id="6m-hod" placeholder="Manager name"></div>
+  </div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Job Title</label><input class="field-input" type="text" id="6m-title" placeholder="Job title"></div>
+    <div class="field-group"><label class="field-label">Started On</label><input class="field-input" type="date" id="6m-start"></div>
+  </div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Department</label><input class="field-input" type="text" id="6m-dept" placeholder="Department"></div>
+    <div class="field-group"><label class="field-label">Date of Review</label><input class="field-input" type="date" id="6m-date"></div>
+  </div>
+
+  <div class="info-box">Rate yourself where <strong>1 = Poor</strong> and <strong>5 = Excellent</strong> under each category.</div>
+
+  <div class="section-title">Performance Review</div>
+  <div style="overflow-x:auto">
+  <table class="perf-table">
+    <thead><tr><th class="area">Area</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th style="min-width:120px">Manager's Comment</th></tr></thead>
+    <tbody id="6m-perf-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">A – Employee Questions</div>
+  <div id="6m-questions"></div>
+
+  <div class="section-title">B – Time & Attendance</div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Days Absent – 3 Months</label><input class="field-input number-input" type="number" id="6m-abs3" min="0"></div>
+    <div class="field-group"><label class="field-label">Days Absent – 6 Months</label><input class="field-input number-input" type="number" id="6m-abs6" min="0"></div>
+    <div class="field-group"><label class="field-label">Days Late – 3 Months</label><input class="field-input number-input" type="number" id="6m-late3" min="0"></div>
+    <div class="field-group"><label class="field-label">Days Late – 6 Months</label><input class="field-input number-input" type="number" id="6m-late6" min="0"></div>
+  </div>
+
+  <div class="section-title">Development Plan</div>
+  <div style="overflow-x:auto">
+  <table class="goals-table">
+    <thead><tr><th>Area for Development</th><th>Activity Planned</th><th>Responsibility</th><th>Review When</th></tr></thead>
+    <tbody id="6m-dev-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">Comments</div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Employee Comments</label><textarea class="field-input" id="6m-emp-comments" rows="4" placeholder="Employee comments..."></textarea></div>
+    <div class="field-group"><label class="field-label">Manager Comments</label><textarea class="field-input" id="6m-mgr-comments" rows="4" placeholder="Manager comments..."></textarea></div>
+  </div>
+
+  <div class="section-title">Recommendation</div>
+  <div class="culture-options" style="flex-direction:column;gap:10px;">
+    <label class="culture-opt"><input type="radio" name="6m-rec" value="continue" id="6m-rec-cont"> Continue Employment</label>
+    <label class="culture-opt"><input type="radio" name="6m-rec" value="extend" id="6m-rec-ext"> Extend Probation (up to 9 months)</label>
+    <label class="culture-opt"><input type="radio" name="6m-rec" value="terminate" id="6m-rec-term"> Possible Termination</label>
+  </div>
+  <div class="field-group" style="margin-top:10px"><label class="field-label">Summary Recommendation</label><textarea class="field-input" id="6m-summary" rows="3" placeholder="Summary..."></textarea></div>
+
+  <div class="section-title">&#9999;&#65039; Signatures</div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Employee Signature</label><div class="sig-box"><canvas id="sig-6m-emp" height="80"></canvas><button class="sig-clear" data-sigid="sig-6m-emp">Clear</button></div></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-6m-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-6m-mgr">Clear</button></div></div>
+  </div>
+
+<button class="btn-save" data-saveid="f-6month">💾 Save to Records</button>
+<button class="btn-print" onclick="printForm()">🖨 Print / PDF</button>
+
+  <div id="records-f-6month" class="records-section" style="display:none">
+    <div class="records-header">&#128202; Saved Records</div>
+    <div id="records-list-f-6month"></div>
+  </div>
+</div>
+</div>
+
+<!-- ANNUAL EMPLOYEE -->
+
+<div id="f-annual-emp" class="form-screen">
+<div class="form-header"><h2>&#9733; Annual Appraisal – Employee Prep</h2><p>SuperValu Annual Team Member Appraisal Form</p></div>
+<div class="form-body">
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Employee Name</label><input class="field-input" type="text" id="ae-name" placeholder="Full name"></div>
+    <div class="field-group"><label class="field-label">HOD Name</label><input class="field-input" type="text" id="ae-hod" placeholder="Manager name"></div>
+  </div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Job Title</label><input class="field-input" type="text" id="ae-title" placeholder="Job title"></div>
+    <div class="field-group"><label class="field-label">Started On</label><input class="field-input" type="date" id="ae-start"></div>
+  </div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Department</label><input class="field-input" type="text" id="ae-dept" placeholder="Department"></div>
+    <div class="field-group"><label class="field-label">Appraisal Date</label><input class="field-input" type="date" id="ae-date"></div>
+  </div>
+
+  <div class="info-box"><strong>Rating Scale:</strong> 1 = Needs to Improve &nbsp;|&nbsp; 2 = Meets Standards &nbsp;|&nbsp; 3 = Above Standards &nbsp;|&nbsp; 4 = Exceeds Standards</div>
+
+  <div class="section-title">Section A – Performance Review (Part 1)</div>
+  <div style="overflow-x:auto">
+  <table class="rating-table" id="ae-perf1-table">
+    <thead><tr><th style="min-width:130px">Area</th><th colspan="2">Team Member</th><th colspan="2" class="mgr-col">Manager</th></tr>
+    <tr><th></th><th style="width:40px">Rating</th><th>Comments</th><th style="width:40px" class="mgr-col">Rating</th><th class="mgr-col">Comments</th></tr></thead>
+    <tbody id="ae-perf1-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">Section A – Performance Review (Part 2)</div>
+  <div style="overflow-x:auto">
+  <table class="rating-table">
+    <thead><tr><th style="min-width:130px">Area</th><th colspan="2">Team Member</th><th colspan="2" class="mgr-col">Manager</th></tr>
+    <tr><th></th><th style="width:40px">Rating</th><th>Comments</th><th style="width:40px" class="mgr-col">Rating</th><th class="mgr-col">Comments</th></tr></thead>
+    <tbody id="ae-perf2-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">Section B – Review Goals for Last Year</div>
+  <div style="overflow-x:auto">
+  <table class="rating-table">
+    <thead><tr><th>Goal Description</th><th colspan="2">Team Member</th><th colspan="2" class="mgr-col">Manager</th></tr>
+    <tr><th></th><th style="width:40px">Rating</th><th>Comments</th><th style="width:40px" class="mgr-col">Rating</th><th class="mgr-col">Comments</th></tr></thead>
+    <tbody id="ae-goals-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">Section C – Goal Setting for Upcoming Year</div>
+  <div style="overflow-x:auto">
+  <table class="goals-table">
+    <thead><tr><th>Goal Description</th><th>How Measured</th><th>What Success Looks Like</th><th>Deadline</th><th>Employee</th><th>Manager</th></tr></thead>
+    <tbody id="ae-newgoals-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">Section D – Personal Development Needs</div>
+  <div id="ae-dev-items"></div>
+  <div class="field-group"><label class="field-label">Other Comments – Appraisee</label><textarea class="field-input" id="ae-comments-emp" rows="4" placeholder="Your comments..."></textarea></div>
+  <div class="field-group"><label class="field-label">Manager Comments</label><textarea class="field-input" id="ae-comments-mgr" rows="4" placeholder="Manager comments..."></textarea></div>
+
+  <div class="section-title">&#9999;&#65039; Signatures</div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Employee Signature</label><div class="sig-box"><canvas id="sig-ae-emp" height="80"></canvas><button class="sig-clear" data-sigid="sig-ae-emp">Clear</button></div><input class="field-input" type="date" id="ae-sig-date-emp" style="margin-top:6px"></div>
+    <div class="field-group"><label class="field-label">Manager Signature</label><div class="sig-box"><canvas id="sig-ae-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-ae-mgr">Clear</button></div><input class="field-input" type="date" id="ae-sig-date-mgr" style="margin-top:6px"></div>
+  </div>
+
+<button class="btn-save" data-saveid="f-annual-emp">💾 Save to Records</button>
+<button class="btn-print" onclick="printForm()">🖨 Print / PDF</button>
+
+  <div id="records-f-annual-emp" class="records-section" style="display:none">
+    <div class="records-header">&#128202; Saved Records</div>
+    <div id="records-list-f-annual-emp"></div>
+  </div>
+</div>
+</div>
+
+<!-- ANNUAL MANAGER -->
+
+<div id="f-annual-mgr" class="form-screen">
+<div class="form-header"><h2>&#127775; Annual Review – Manager Evaluation</h2><p>Performance Evaluation Form</p></div>
+<div class="form-body">
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Employee Name</label><input class="field-input" type="text" id="am-name" placeholder="Full name"></div>
+    <div class="field-group"><label class="field-label">Job Title</label><input class="field-input" type="text" id="am-title" placeholder="Job title"></div>
+  </div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Department</label><input class="field-input" type="text" id="am-dept" placeholder="Department"></div>
+    <div class="field-group"><label class="field-label">Senior Manager</label><input class="field-input" type="text" id="am-senior" placeholder="Senior Manager name"></div>
+  </div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Review Period From</label><input class="field-input" type="date" id="am-from"></div>
+    <div class="field-group"><label class="field-label">Review Period To</label><input class="field-input" type="date" id="am-to"></div>
+  </div>
+
+  <div class="section-title">Top Line Results</div>
+  <div style="overflow-x:auto">
+  <table class="goals-table">
+    <thead><tr><th>Department</th><th>Sales 2024 YTD</th><th>Sales 2025 YTD</th><th>Margin 2024 YTD</th><th>Margin 2025 YTD</th></tr></thead>
+    <tbody id="am-results-body"></tbody>
+  </table>
+  </div>
+
+  <div class="info-box"><strong>Rating Scale:</strong> 1 = Underperforming &nbsp;|&nbsp; 2 = Developing &nbsp;|&nbsp; 3 = Satisfactory &nbsp;|&nbsp; 4 = Strong &nbsp;|&nbsp; 5 = Exceptional</div>
+
+  <div class="section-title">Key Responsibilities</div>
+  <div id="am-resp-items"></div>
+
+  <div class="section-title">General Overview</div>
+  <div style="overflow-x:auto">
+  <table class="rating-table">
+    <thead><tr><th style="min-width:120px">Area</th><th colspan="2">Manager Evaluation</th><th colspan="2" class="mgr-col">Senior Management</th></tr>
+    <tr><th></th><th style="width:40px">Rating</th><th>Comments</th><th style="width:40px" class="mgr-col">Rating</th><th class="mgr-col">Comments</th></tr></thead>
+    <tbody id="am-general-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">General Review</div>
+  <div style="overflow-x:auto">
+  <table class="rating-table">
+    <thead><tr><th style="min-width:120px">Area</th><th colspan="2">Manager Evaluation</th><th colspan="2" class="mgr-col">Senior Management</th></tr>
+    <tr><th></th><th style="width:40px">Rating</th><th>Comments</th><th style="width:40px" class="mgr-col">Rating</th><th class="mgr-col">Comments</th></tr></thead>
+    <tbody id="am-review-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">Leadership & Teamwork</div>
+  <div style="overflow-x:auto">
+  <table class="rating-table">
+    <thead><tr><th style="min-width:120px">Area</th><th colspan="2">Manager Evaluation</th><th colspan="2" class="mgr-col">Senior Management</th></tr>
+    <tr><th></th><th style="width:40px">Rating</th><th>Comments</th><th style="width:40px" class="mgr-col">Rating</th><th class="mgr-col">Comments</th></tr></thead>
+    <tbody id="am-leadership-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">Driving Sales</div>
+  <div style="overflow-x:auto">
+  <table class="rating-table">
+    <thead><tr><th style="min-width:120px">Area</th><th colspan="2">Manager Evaluation</th><th colspan="2" class="mgr-col">Senior Management</th></tr>
+    <tr><th></th><th style="width:40px">Rating</th><th>Comments</th><th style="width:40px" class="mgr-col">Rating</th><th class="mgr-col">Comments</th></tr></thead>
+    <tbody id="am-sales-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">Goals & Objectives</div>
+  <div class="field-group"><label class="field-label">What do you want to achieve this year?</label>
+    <textarea class="field-input" id="am-goals-achieve" rows="4" placeholder="1.&#10;2.&#10;3."></textarea></div>
+  <div class="field-group"><label class="field-label">How would you like to develop yourself?</label>
+    <textarea class="field-input" id="am-goals-develop" rows="4" placeholder="1.&#10;2.&#10;3.&#10;4."></textarea></div>
+  <div class="field-group"><label class="field-label">How do you plan on Driving Sales & Margin?</label>
+    <textarea class="field-input" id="am-goals-sales" rows="5" placeholder="1.&#10;2.&#10;3.&#10;4.&#10;5."></textarea></div>
+
+  <div class="section-title">Store Culture</div>
+  <label class="field-label">How do you feel the culture is within the store?</label>
+  <div class="culture-options">
+    <label class="culture-opt"><input type="radio" name="am-culture" value="positive" id="am-cult-pos"> Positive</label>
+    <label class="culture-opt"><input type="radio" name="am-culture" value="average" id="am-cult-avg"> Average</label>
+    <label class="culture-opt"><input type="radio" name="am-culture" value="poor" id="am-cult-poor"> Poor</label>
+  </div>
+  <div class="field-group" style="margin-top:10px"><label class="field-label">If Average or Poor – Main Contributors</label><textarea class="field-input" id="am-culture-reason" rows="3" placeholder="Contributors..."></textarea></div>
+
+  <div class="section-title">Human Resources</div>
+  <div style="overflow-x:auto">
+  <table class="yn-table">
+    <thead><tr><th class="area">Item</th><th>Yes</th><th>No</th><th style="min-width:100px">Comments</th></tr></thead>
+    <tbody id="am-hr-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">Health & Safety</div>
+  <div style="overflow-x:auto">
+  <table class="yn-table">
+    <thead><tr><th class="area">Item</th><th>Yes</th><th>No</th><th style="min-width:100px">Comments</th></tr></thead>
+    <tbody id="am-hs-body"></tbody>
+  </table>
+  </div>
+
+  <div class="section-title">Q&A</div>
+  <div id="am-qa-items"></div>
+
+  <div class="section-title">Goal Setting</div>
+  <div style="overflow-x:auto">
+  <table class="goals-table">
+    <thead><tr><th>Goal Description</th><th>How Measured</th><th>Deadline</th><th>Manager Comments</th></tr></thead>
+    <tbody id="am-goalsetting-body"></tbody>
+  </table>
+  </div>
+
+  <div class="field-group"><label class="field-label">Other Comments</label><textarea class="field-input" id="am-other-comments" rows="4" placeholder="Other comments..."></textarea></div>
+
+  <div class="section-title">&#9999;&#65039; Signatures</div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Employee Signature</label><div class="sig-box"><canvas id="sig-am-emp" height="80"></canvas><button class="sig-clear" data-sigid="sig-am-emp">Clear</button></div><input class="field-input" type="date" id="am-sig-date-emp" style="margin-top:6px"></div>
+    <div class="field-group"><label class="field-label">Manager/Director Signature</label><div class="sig-box"><canvas id="sig-am-mgr" height="80"></canvas><button class="sig-clear" data-sigid="sig-am-mgr">Clear</button></div><input class="field-input" type="date" id="am-sig-date-mgr" style="margin-top:6px"></div>
+  </div>
+
+<button class="btn-save" data-saveid="f-annual-mgr">💾 Save to Records</button>
+<button class="btn-print" onclick="printForm()">🖨 Print / PDF</button>
+
+  <div id="records-f-annual-mgr" class="records-section" style="display:none">
+    <div class="records-header">&#128202; Saved Records</div>
+    <div id="records-list-f-annual-mgr"></div>
+  </div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== CONFIG ===== */
+var SB_URL='https://mnebkteiwjxbbmnfotse.supabase.co';
+var SB_KEY='sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
+var DB_NAME='MoriartyAppraisals',DB_VER=1,db=null;
+var currentForm=null,sigPads={};
+var _saving={};
+
+function sbFetch(path,method,body){
+  var headers={'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'};
+  if(method==='POST')headers['Prefer']='resolution=merge-duplicates';
+  return fetch(SB_URL+'/rest/v1/'+path,{method:method||'GET',headers:headers,body:body?JSON.stringify(body):undefined});
+}
+function openDB(){
+  return new Promise(function(res,rej){
+    var req=indexedDB.open(DB_NAME,DB_VER);
+    req.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('appraisals'))d.createObjectStore('appraisals',{keyPath:'id'});};
+    req.onsuccess=function(e){db=e.target.result;res(db);};
+    req.onerror=function(e){rej(e.target.error);};
+  });
+}
+function dbPut(obj){return new Promise(function(res,rej){var tx=db.transaction('appraisals','readwrite');tx.objectStore('appraisals').put(obj);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);};});}
+function dbGetAll(){return new Promise(function(res,rej){var tx=db.transaction('appraisals','readonly');var r=tx.objectStore('appraisals').getAll();r.onsuccess=function(e){res(e.target.result);};r.onerror=function(e){rej(e.target.error);};});}
+function dbDelete(id){return new Promise(function(res,rej){var tx=db.transaction('appraisals','readwrite');tx.objectStore('appraisals').delete(id);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);};});}
+
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show';setTimeout(function(){t.className='toast';},3000);}
+
+/* ===== SIGNATURE PADS ===== */
+function initSig(canvasId){
+  var canvas=document.getElementById(canvasId);
+  if(!canvas||sigPads[canvasId])return;
+  canvas.width=canvas.parentElement.offsetWidth||300;
+  canvas.height=parseInt(canvas.getAttribute('height'))||80;
+  var ctx=canvas.getContext('2d');
+  ctx.strokeStyle='#1a1a1a';ctx.lineWidth=2;ctx.lineCap='round';ctx.lineJoin='round';
+  var drawing=false,lx=0,ly=0;
+  function pos(e){var r=canvas.getBoundingClientRect(),sx=canvas.width/r.width,sy=canvas.height/r.height;if(e.touches)return{x:(e.touches[0].clientX-r.left)*sx,y:(e.touches[0].clientY-r.top)*sy};return{x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy};}
+  function start(e){e.preventDefault();drawing=true;var p=pos(e);lx=p.x;ly=p.y;ctx.beginPath();ctx.arc(p.x,p.y,1,0,Math.PI*2);ctx.fill();}
+  function move(e){if(!drawing)return;e.preventDefault();var p=pos(e);ctx.beginPath();ctx.moveTo(lx,ly);ctx.lineTo(p.x,p.y);ctx.stroke();lx=p.x;ly=p.y;}
+  function stop(){drawing=false;}
+  canvas.addEventListener('mousedown',start);canvas.addEventListener('mousemove',move);canvas.addEventListener('mouseup',stop);canvas.addEventListener('mouseleave',stop);
+  canvas.addEventListener('touchstart',start,{passive:false});canvas.addEventListener('touchmove',move,{passive:false});canvas.addEventListener('touchend',stop);
+  sigPads[canvasId]={clear:function(){ctx.clearRect(0,0,canvas.width,canvas.height);}};
+}
+function clearSig(id){if(sigPads[id])sigPads[id].clear();}
+function getSigData(id){
+  var canvas=document.getElementById(id);
+  if(!canvas)return null;
+  try{var ctx=canvas.getContext('2d'),img=ctx.getImageData(0,0,canvas.width,canvas.height);for(var px=3;px<img.data.length;px+=4)if(img.data[px]>0)return canvas.toDataURL('image/png');}catch(e){}
+  return null;
+}
+
+/* ===== COLLECT FIELD DATA ===== */
+function collectFields(formId){
+  var scr=document.getElementById(formId);
+  if(!scr)return{};
+  var data={};
+  var inputs=scr.querySelectorAll('input[type=text],input[type=date],input[type=number],textarea');
+  for(var i=0;i<inputs.length;i++){var inp=inputs[i];var key=inp.id||('inp_'+i);if(inp.value&&inp.value.trim())data[key]=inp.value;}
+  var radios=scr.querySelectorAll('input[type=radio]:checked');
+  for(var ri=0;ri<radios.length;ri++){data['radio_'+radios[ri].name]=radios[ri].value;}
+  return data;
+}
+function restoreFields(formId,data){
+  if(!data)return;
+  var scr=document.getElementById(formId);if(!scr)return;
+  var inputs=scr.querySelectorAll('input[type=text],input[type=date],input[type=number],textarea');
+  for(var i=0;i<inputs.length;i++){var inp=inputs[i];var key=inp.id||('inp_'+i);if(data[key]!==undefined)inp.value=data[key];}
+  var allRadios=scr.querySelectorAll('input[type=radio]');
+  for(var ri=0;ri<allRadios.length;ri++){var rad=allRadios[ri];var rk='radio_'+rad.name;if(data[rk]!==undefined&&rad.value===data[rk])rad.checked=true;}
+}
+function collectSigs(formId){
+  var scr=document.getElementById(formId);if(!scr)return[];
+  var sigs=[];
+  var canvases=scr.querySelectorAll('canvas');
+  for(var i=0;i<canvases.length;i++){var d=getSigData(canvases[i].id);sigs.push({id:canvases[i].id,dataUrl:d,hasSignature:!!d});}
+  return sigs;
+}
+
+/* ===== SAVE ===== */
+function saveForm(formId){
+  if(_saving[formId])return;
+  _saving[formId]=true;
+  var now=new Date();
+  var scr=document.getElementById(formId);
+  var nameEl=scr.querySelector('input[type=text]');
+  var empName=nameEl?nameEl.value:'';
+  var fieldData=collectFields(formId);
+  var signatures=collectSigs(formId);
+  var rec={
+    id:now.getTime(),
+    formId:formId,
+    savedAt:now.toISOString(),
+    employeeName:empName,
+    fieldData:fieldData,
+    signatures:signatures
+  };
+  var sbRow={id:String(rec.id),form_id:formId,saved_at:rec.savedAt,data:{employeeName:empName,fieldData:fieldData,signatures:signatures.map(function(s){return{id:s.id,hasSignature:s.hasSignature};}) }};
+  dbPut(rec).then(function(){
+    return sbFetch('appraisal_records','POST',[sbRow]);
+  }).then(function(){
+    _saving[formId]=false;
+    showToast('Saved!');
+    loadRecords(formId);
+  }).catch(function(e){
+    _saving[formId]=false;
+    showToast('Save failed: '+(e.message||e));
+  });
+}
+
+/* ===== LOAD RECORDS ===== */
+function loadRecords(formId){
+  var container=document.getElementById('records-list-'+formId);
+  var section=document.getElementById('records-'+formId);
+  if(!container)return;
+  /* Try Supabase first */
+  sbFetch('appraisal_records?form_id=eq.'+formId+'&order=saved_at.desc','GET')
+  .then(function(r){return r.json();})
+  .then(function(rows){
+    if(!Array.isArray(rows)||!rows.length)throw new Error('empty');
+    renderRecords(container,section,rows.map(function(r){
+      return{id:r.id,savedAt:r.saved_at,employeeName:(r.data&&r.data.employeeName)||'',fieldData:(r.data&&r.data.fieldData)||{},signatures:(r.data&&r.data.signatures)||[]};
+    }));
+  }).catch(function(){
+    /* Fall back to local */
+    if(!db)return;
+    dbGetAll().then(function(recs){
+      var filtered=recs.filter(function(r){return r.formId===formId;}).sort(function(a,b){return a.savedAt<b.savedAt?1:-1;});
+      renderRecords(container,section,filtered);
+    });
+  });
+}
+
+function renderRecords(container,section,recs){
+  if(!recs.length){section.style.display='none';return;}
+  section.style.display='block';
+  var html='';
+  for(var i=0;i<recs.length;i++){
+    var r=recs[i];
+    var dt=new Date(r.savedAt);
+    var ts=dt.toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false});
+    html+='<div class="record-item" onclick="toggleRecord(this)">';
+    html+='<div class="record-meta">&#128100; '+(r.employeeName||'Unnamed')+'</div>';
+    html+='<div class="record-sub">'+ts+'</div>';
+    html+='<div class="record-detail">';
+    /* field data */
+    var keys=Object.keys(r.fieldData||{});
+    for(var ki=0;ki<keys.length;ki++){
+      var lbl=keys[ki].replace(/^(ae-|am-|6m-|3m-|sig-)/,'').replace(/-/g,' ');
+      html+='<div class="detail-row"><span class="dk">'+esc(lbl)+'</span><span class="dv">'+esc(String(r.fieldData[keys[ki]]))+'</span></div>';
+    }
+    /* sigs */
+    if(r.signatures&&r.signatures.length){
+      var hasSig=false;
+      for(var si=0;si<r.signatures.length;si++){if(r.signatures[si].dataUrl){hasSig=true;break;}}
+      if(hasSig){
+        html+='<div class="detail-row"><span class="dk">Signatures</span><span class="dv">';
+        for(var sj=0;sj<r.signatures.length;sj++){if(r.signatures[sj].dataUrl)html+='<img src="'+r.signatures[sj].dataUrl+'" class="sig-thumb">';}
+        html+='</span></div>';
+      }
+    }
+    html+='<button style="width:100%;margin-top:8px;padding:8px;background:white;border:1.5px solid #d32f2f;color:#d32f2f;border-radius:6px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;" data-delid="'+r.id+'" onclick="deleteRecord(event,this)">&#128465; Delete this record</button>';
+    html+='</div></div>';
+  }
+  container.innerHTML=html;
+}
+
+function toggleRecord(el){
+  var detail=el.querySelector('.record-detail');
+  if(!detail)return;
+  var open=el.getAttribute('data-open')==='1';
+  detail.className=open?'record-detail':'record-detail open';
+  el.setAttribute('data-open',open?'0':'1');
+}
+function deleteRecord(e,btn){
+  e.stopPropagation();
+  if(!confirm('Delete this record?'))return;
+  var id=btn.getAttribute('data-delid');
+  /* try numeric id for local */
+  var numId=parseInt(id,10);
+  dbDelete(isNaN(numId)?id:numId).catch(function(){});
+  /* also delete from Supabase */
+  sbFetch('appraisal_records?id=eq.'+encodeURIComponent(id),'DELETE').catch(function(){});
+  btn.closest('.record-item').remove();
+  showToast('Deleted');
+}
+
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* ===== NAV ===== */
+function showForm(id){
+  document.getElementById('home').style.display='none';
+  if(currentForm)document.getElementById(currentForm).style.display='none';
+  var scr=document.getElementById(id);if(!scr)return;
+  scr.style.display='block';
+  currentForm=id;
+  document.getElementById('backBtn').style.display='block';
+  var h2=scr.querySelector('h2');
+  document.getElementById('navTitle').textContent=h2?h2.textContent:id;
+  window.scrollTo(0,0);
+  setTimeout(function(){
+    var canvases=scr.querySelectorAll('canvas');
+    for(var ci=0;ci<canvases.length;ci++)initSig(canvases[ci].id);
+    loadRecords(id);
+  },100);
+}
+function goBack(){
+  if(currentForm)document.getElementById(currentForm).style.display='none';
+  document.getElementById('home').style.display='block';
+  document.getElementById('backBtn').style.display='none';
+  document.getElementById('navTitle').textContent='Appraisals';
+  currentForm=null;window.scrollTo(0,0);
+}
+function printForm(){window.print();}
+
+/* ===== BUILD TABLES ===== */
+function makeRatingRows(bodyId,items){
+  var tbody=document.getElementById(bodyId);if(!tbody)return;
+  for(var i=0;i<items.length;i++){
+    var tr=document.createElement('tr');
+    var base=bodyId.replace('-body','').replace('ae-','').replace('am-','');
+    var key=base+'-'+i;
+    tr.innerHTML='<td class="area">'+items[i][0]+(items[i][1]?'<small>'+items[i][1]+'</small>':'')+'</td>'+
+      '<td style="width:50px"><select data-label="'+key+'-emp-rating"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td>'+
+      '<td><textarea data-label="'+key+'-emp-comment" rows="2"></textarea></td>'+
+
+```
+  '<td style="width:50px"><select data-label="'+key+'-mgr-rating"><option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td>'+
+  '<td><textarea data-label="'+key+'-mgr-comment" rows="2"></textarea></td>';
+tbody.appendChild(tr);
+```
+
+}
+}
+function makePerfRows(bodyId,items){
+var tbody=document.getElementById(bodyId);if(!tbody)return;
+for(var i=0;i<items.length;i++){
+var tr=document.createElement(‘tr’);
+var key=bodyId+’-’+i;
+tr.innerHTML=’<td class="area">’+items[i]+’</td>’+
+‘<td><input type="radio" name="'+key+'" value="1"></td>’+
+‘<td><input type="radio" name="'+key+'" value="2"></td>’+
+‘<td><input type="radio" name="'+key+'" value="3"></td>’+
+‘<td><input type="radio" name="'+key+'" value="4"></td>’+
+‘<td><input type="radio" name="'+key+'" value="5"></td>’+
+‘<td><textarea data-label="'+key+'-comment" rows="2" style="width:100%;border:none;font-size:11px;font-family:inherit;resize:none;background:transparent;padding:2px;"></textarea></td>’;
+tbody.appendChild(tr);
+}
+}
+function makeGoalRows(bodyId,cols,rows){
+var tbody=document.getElementById(bodyId);if(!tbody)return;
+for(var i=0;i<rows;i++){
+var tr=document.createElement(‘tr’);
+var c=’’;
+for(var j=0;j<cols;j++)c+=’<td><textarea data-label="'+bodyId+'-r'+i+'c'+j+'" rows="2" style="width:100%;border:none;font-size:11px;font-family:inherit;resize:none;background:transparent;padding:2px;"></textarea></td>’;
+tr.innerHTML=c;tbody.appendChild(tr);
+}
+}
+function makeResultRows(bodyId,rows){
+var tbody=document.getElementById(bodyId);if(!tbody)return;
+for(var i=0;i<rows;i++){
+var tr=document.createElement(‘tr’);
+tr.innerHTML=’<td><input type="text" data-label="'+bodyId+'-dept'+i+'"></td>’+
+‘<td><input type="text" data-label="'+bodyId+'-s24'+i+'"></td>’+
+‘<td><input type="text" data-label="'+bodyId+'-s25'+i+'"></td>’+
+‘<td><input type="text" data-label="'+bodyId+'-m24'+i+'"></td>’+
+‘<td><input type="text" data-label="'+bodyId+'-m25'+i+'"></td>’;
+tbody.appendChild(tr);
+}
+}
+function makeYNRows(bodyId,items){
+var tbody=document.getElementById(bodyId);if(!tbody)return;
+for(var i=0;i<items.length;i++){
+var tr=document.createElement(‘tr’);
+var key=bodyId+’-’+i;
+tr.innerHTML=’<td class="area">’+items[i]+’</td>’+
+‘<td><input type="checkbox" data-label="'+key+'-yes"></td>’+
+‘<td><input type="checkbox" data-label="'+key+'-no"></td>’+
+‘<td><input type="text" data-label="'+key+'-comment"></td>’;
+tbody.appendChild(tr);
+}
+}
+function makeTextItems(containerId,labels,prefix,rows){
+var c=document.getElementById(containerId);if(!c)return;
+for(var i=0;i<labels.length;i++){
+var div=document.createElement(‘div’);div.className=‘field-group’;
+div.innerHTML=’<label class="field-label">’+labels[i]+’</label><textarea class="field-input" id="'+prefix+'-'+i+'" rows="'+(rows||3)+'" placeholder="..."></textarea>’;
+c.appendChild(div);
+}
+}
+function makeNumberedItems(containerId,count,prefix,placeholder){
+var c=document.getElementById(containerId);if(!c)return;
+for(var i=0;i<count;i++){
+var div=document.createElement(‘div’);div.className=‘field-group’;
+div.innerHTML=’<label class="field-label">’+(i+1)+’.</label><textarea class="field-input" id="'+prefix+'-'+i+'" rows="2" placeholder="'+(placeholder||'')+'"></textarea>’;
+c.appendChild(div);
+}
+}
+
+/* ===== DATA SETUP ===== */
+/* 6-month perf items */
+var perf6Items=[‘Job Performance’,‘Technical Skills’,‘Application of Learning to the Job’,‘Quality of Work’,‘Attitude to Supervision’,‘Attitude to Colleagues’,‘Attitude to the Business’,‘Ability to Follow Instructions’,‘Time Keeping’,‘Attendance’,‘Flexibility’,‘Uniform / Presentation’,‘Clocking’];
+var questions6=[‘How do you think you are doing? What have you achieved since you started?’,‘Please list what technical knowledge / skills you were able to learn since you started in your role:’,‘Please describe any challenges that make it difficult for you to effectively fulfil your responsibilities:’,‘Is there any area where you feel you need support or direction?’,‘What do you feel you could do to improve your performance and meet your objectives more efficiently?’,‘Do you have any questions about what is expected of you? Are there any unclear areas?’];
+/* Annual employee perf */
+var aePerf1=[[‘Job Knowledge’,‘familiar with all aspects of the role, technical ability’],[‘Living Organisational Values’,‘integrity, sustainability, commercial awareness’],[‘Customer Service’,‘anticipating needs, commitment to customers’],[‘Ownership & Initiative’,‘responsible for assigned tasks, suggesting improvements’]];
+var aePerf2=[[‘Productivity’,‘speed of work, amount of work done, consistent productivity, meeting deadlines’],[‘Quality of Work’,‘accuracy and attention to detail, lack of errors, observance of high standards’],[‘Personal Development’,‘takes initiative in training, takes feedback well, self-directed learning’],[‘Professional Image’,‘uniform in good repair, wears name badge, clean presentation’],[‘Judgement’,‘ability to make sound decisions using facts and data’],[‘Teamwork’,‘relationship with colleagues, approach to work, flexibility’]];
+/* Annual manager */
+var amGeneral=[[‘Appearance’,’’],[‘Attendance’,’’],[‘Time Keeping’,’’],[‘Attitude’,’’],[‘Commitment’,’’]];
+var amReview=[[‘Energy & Work Rate’,‘Give 100% Every Day? Time Management? Delegate the Work Out?’],[‘Role Aspects’,‘Product Knowledge, Orders, Stock, Department Costings, Procure Wizard?’],[‘Look to Improve Departments Weekly?’,‘Incl. Cleanliness of departments/property?’]];
+var amLeadership=[[‘Leadership & Teamwork’,‘Leads by Example, Brings out the Best in Team Members, Resolves Conflict, Delegates Clearly’],[‘People Management’,‘Effectively allocates resources, monitors & controls quality, up to date with policies, trains team, gives feedback and recognition, motivates staff’]];
+var amSales=[[‘Financials’,‘Understands financial objectives, aware of payroll, keeps within budget, recommends cost solutions’],[‘Drive for Results’,‘Ability to focus on desired result, setting challenging goals, meeting or exceeding them’]];
+var amHR=[‘Strandum HR – able to Review Rosters, Staff Details, Authorise Leave’,‘Do you ensure HR Policies are being adhered to?’,‘Do you attend HOD meetings and participate?’,‘Are staff appraisals completed?’,‘Are you familiar with the stores TNA?’,‘Is all mandatory training completed?’,‘Have you an active training agenda?’];
+var amHS=[‘Are Monthly H&S meetings taking place?’,‘Is there a H&S Agenda in place in the store?’,‘Are Monthly H&S Reports being completed?’,‘Are RTW forms being completed?’,‘Are all H&S documents available for inspection (Safety Statement, Fire Log, H&S Agenda, H&S Minutes)?’];
+var amQA=[‘I would describe my management style in one word as:’,‘My biggest day-to-day challenge is:’,‘One thing I would love to change about how the store is working:’,‘My strength(s) as a Manager are:’,‘My weakness(es) as a Manager are:’,‘I feel I need to improve in the following areas to become a better Manager:’];
+
+document.addEventListener(‘DOMContentLoaded’,function(){
+openDB().catch(function(){});
+
+/* Build 6-month tables */
+makePerfRows(‘6m-perf-body’,perf6Items);
+var qContainer=document.getElementById(‘6m-questions’);
+for(var qi=0;qi<questions6.length;qi++){
+var d=document.createElement(‘div’);d.className=‘field-group’;
+d.innerHTML=’<label class="field-label">’+(qi+1)+’. ‘+questions6[qi]+’</label>’+
+‘<div class="field-row"><div class="field-group"><label class="field-label" style="font-size:10px">Employee</label><textarea class="field-input" id="6m-q'+qi+'-emp" rows="3"></textarea></div>’+
+‘<div class="field-group"><label class="field-label" style="font-size:10px">Manager</label><textarea class="field-input" id="6m-q'+qi+'-mgr" rows="3"></textarea></div></div>’;
+qContainer.appendChild(d);
+}
+makeGoalRows(‘6m-dev-body’,4,4);
+
+/* Build annual employee tables */
+makeRatingRows(‘ae-perf1-body’,aePerf1);
+makeRatingRows(‘ae-perf2-body’,aePerf2);
+makeGoalRows(‘ae-goals-body’,5,6);
+makeGoalRows(‘ae-newgoals-body’,6,4);
+makeNumberedItems(‘ae-dev-items’,5,‘ae-dev’,‘Step or activity…’);
+
+/* Build annual manager tables */
+makeResultRows(‘am-results-body’,4);
+makeNumberedItems(‘am-resp-items’,8,‘am-resp’,‘Responsibility…’);
+makeRatingRows(‘am-general-body’,amGeneral);
+makeRatingRows(‘am-review-body’,amReview);
+makeRatingRows(‘am-leadership-body’,amLeadership);
+makeRatingRows(‘am-sales-body’,amSales);
+makeYNRows(‘am-hr-body’,amHR);
+makeYNRows(‘am-hs-body’,amHS);
+makeTextItems(‘am-qa-items’,amQA,‘am-qa’,4);
+makeGoalRows(‘am-goalsetting-body’,4,5);
+
+/* Nav */
+document.getElementById(‘backBtn’).addEventListener(‘click’,goBack);
+var cards=document.querySelectorAll(’.form-card’);
+for(var ci=0;ci<cards.length;ci++){
+(function(card){card.addEventListener(‘click’,function(){var fid=card.getAttribute(‘data-form’);if(fid)showForm(fid);});})(cards[ci]);
+}
+/* Save buttons */
+var saveBtns=document.querySelectorAll(’.btn-save’);
+for(var si=0;si<saveBtns.length;si++){
+(function(btn){btn.addEventListener(‘click’,function(){var fid=btn.getAttribute(‘data-saveid’);if(!fid)return;if(btn.getAttribute(‘data-saving’))return;btn.setAttribute(‘data-saving’,‘1’);btn.style.opacity=‘0.6’;setTimeout(function(){btn.removeAttribute(‘data-saving’);btn.style.opacity=’’;},3000);saveForm(fid);});})(saveBtns[si]);
+}
+/* Sig clear buttons */
+var sigBtns=document.querySelectorAll(’.sig-clear’);
+for(var sgi=0;sgi<sigBtns.length;sgi++){
+(function(btn){btn.addEventListener(‘click’,function(){clearSig(btn.getAttribute(‘data-sigid’));});})(sigBtns[sgi]);
+}
+});
+</script>
+
+</body>
+</html>

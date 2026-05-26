@@ -6,22 +6,22 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Moriarty Group – HACCP System v2</title>
+<title>SuperValu – HACCP System</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:100vh;}
-.top-nav{background:#00703c;color:white;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.top-nav{background:#e41e26;color:white;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
 .back-btn{background:rgba(255,255,255,0.2);border:none;color:white;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-family:inherit;display:none;}
 .nav-title{font-size:16px;font-weight:600;flex:1;}
 .nav-logo{font-size:12px;opacity:0.8;text-align:right;line-height:1.2;}
-#home{display:block;}
-.home-header{background:linear-gradient(135deg,#005a30,#00703c);color:white;padding:28px 20px 24px;text-align:center;}
+#home{display:none;}
+.home-header{background:linear-gradient(135deg,#c0161c,#e41e26);color:white;padding:28px 20px 24px;text-align:center;}
 .home-header .brand{font-size:22px;font-weight:700;letter-spacing:1.5px;}
 .home-header .sub{font-size:12px;opacity:0.75;margin-top:2px;letter-spacing:2px;}
 .home-header .title{font-size:15px;font-weight:500;margin-top:10px;opacity:0.9;}
-.records-banner{background:#005a30;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-decoration:none;}
-.records-banner:active{background:#003d20;}
+.records-banner{background:#c0161c;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-decoration:none;}
+.records-banner:active{background:#9a1010;}
 .rb-left{display:flex;align-items:center;gap:10px;}
 .rb-icon{font-size:20px;}
 .rb-text{color:white;font-size:14px;font-weight:600;}
@@ -31,77 +31,77 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 .category-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#666;padding:0 4px;margin-bottom:10px;}
 .form-grid{display:flex;flex-direction:column;gap:8px;}
 .form-card{background:white;border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;border:1px solid #d0d0d0;}
-.form-card:active{transform:scale(0.98);background:#e8f5ee;}
+.form-card:active{transform:scale(0.98);background:#fdecea;}
 .form-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
 .form-info{flex:1;}
 .form-name{font-size:14px;font-weight:600;color:#1a1a1a;}
 .form-desc{font-size:12px;color:#666;margin-top:2px;}
 .form-arrow{color:#666;font-size:16px;}
 .form-screen{display:none;padding-bottom:40px;}
-.form-header{background:white;border-bottom:3px solid #00703c;padding:16px;}
-.form-header h2{font-size:17px;font-weight:700;color:#005a30;}
+.form-header{background:white;border-bottom:3px solid #e41e26;padding:16px;}
+.form-header h2{font-size:17px;font-weight:700;color:#c0161c;}
 .form-header p{font-size:12px;color:#666;margin-top:4px;}
 .form-body{padding:16px;}
 .field-group{margin-bottom:16px;}
 .field-label{font-size:12px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block;}
 .field-input{width:100%;padding:10px 12px;border:1.5px solid #d0d0d0;border-radius:8px;font-size:14px;font-family:inherit;background:white;color:#1a1a1a;-webkit-appearance:none;}
-.field-input:focus{outline:none;border-color:#00703c;}
+.field-input:focus{outline:none;border-color:#e41e26;}
 .field-row{display:flex;gap:10px;}
 .field-row .field-group{flex:1;}
 .week-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;}
 .week-table{border-collapse:collapse;width:100%;min-width:600px;font-size:12px;}
-.week-table th{background:#00703c;color:white;padding:7px 5px;text-align:center;font-weight:600;font-size:11px;border:1px solid #005a30;white-space:nowrap;}
-.week-table th.product-col{background:#005a30;text-align:left;padding-left:8px;min-width:130px;}
+.week-table th{background:#e41e26;color:white;padding:7px 5px;text-align:center;font-weight:600;font-size:11px;border:1px solid #c0161c;white-space:nowrap;}
+.week-table th.product-col{background:#c0161c;text-align:left;padding-left:8px;min-width:130px;}
 .week-table td{border:1px solid #d0d0d0;padding:4px 3px;text-align:center;vertical-align:middle;}
-.week-table td.product-name{font-size:11px;font-weight:600;text-align:left;padding:6px 8px;background:#e8f5ee;line-height:1.3;}
+.week-table td.product-name{font-size:11px;font-weight:600;text-align:left;padding:6px 8px;background:#fdecea;line-height:1.3;}
 .week-table td.product-name small{font-weight:400;color:#666;display:block;}
 .week-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;color:#1a1a1a;}
-.week-table input[type=text]:focus{outline:1px solid #00703c;border-radius:3px;background:#fffde7;}
+.week-table input[type=text]:focus{outline:1px solid #e41e26;border-radius:3px;background:#fffde7;}
 .temp-table th.unit-col{min-width:160px;text-align:left;padding-left:8px;}
 .temp-table th.temp-col{min-width:55px;}
 .temp-table td.unit-name{text-align:left;padding:6px 8px;font-size:11px;background:#fafafa;}
-.temp-table td.target{font-weight:600;color:#005a30;font-size:11px;background:#e8f5ee;}
+.temp-table td.target{font-weight:600;color:#c0161c;font-size:11px;background:#fdecea;}
 .log-table{border-collapse:collapse;width:100%;font-size:12px;}
-.log-table th{background:#00703c;color:white;padding:8px 6px;text-align:left;font-weight:600;font-size:11px;border:1px solid #005a30;}
+.log-table th{background:#e41e26;color:white;padding:8px 6px;text-align:left;font-weight:600;font-size:11px;border:1px solid #c0161c;}
 .log-table td{border:1px solid #d0d0d0;padding:4px;vertical-align:middle;}
 .log-table input[type=text]{width:100%;border:none;background:transparent;font-size:12px;font-family:inherit;padding:4px 2px;color:#1a1a1a;}
 .log-table tr:nth-child(even) td{background:#fafafa;}
 .clean-table{border-collapse:collapse;width:100%;min-width:420px;font-size:12px;}
-.clean-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:center;}
+.clean-table th{background:#e41e26;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #c0161c;text-align:center;}
 .clean-table th.area-col{text-align:left;padding-left:8px;min-width:150px;}
 .clean-table th.chem-col{min-width:100px;text-align:left;padding-left:8px;}
 .clean-table th.day-col{min-width:32px;}
 .clean-table td{border:1px solid #d0d0d0;padding:5px 4px;text-align:center;vertical-align:middle;}
 .clean-table td.area-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;}
 .clean-table td.chem-name{text-align:left;padding:5px 8px;font-size:11px;color:#666;}
-.clean-section-header{background:#005a30!important;color:white!important;font-weight:700!important;font-size:11px!important;text-align:left!important;padding:5px 8px!important;}
-.clean-table input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:#00703c;}
+.clean-section-header{background:#c0161c!important;color:white!important;font-weight:700!important;font-size:11px!important;text-align:left!important;padding:5px 8px!important;}
+.clean-table input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:#e41e26;}
 .clean-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;}
 .hourly-table{border-collapse:collapse;width:100%;font-size:11px;min-width:700px;}
-.hourly-table th{background:#00703c;color:white;padding:6px 4px;text-align:center;font-weight:600;font-size:10px;border:1px solid #005a30;white-space:nowrap;}
-.hourly-table th.time-col{min-width:45px;background:#005a30;}
+.hourly-table th{background:#e41e26;color:white;padding:6px 4px;text-align:center;font-weight:600;font-size:10px;border:1px solid #c0161c;white-space:nowrap;}
+.hourly-table th.time-col{min-width:45px;background:#c0161c;}
 .hourly-table td{border:1px solid #d0d0d0;padding:3px 2px;text-align:center;vertical-align:middle;}
-.hourly-table td.time-cell{background:#e8f5ee!important;font-weight:600;font-size:11px;}
+.hourly-table td.time-cell{background:#fdecea!important;font-weight:600;font-size:11px;}
 .hourly-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:1px;}
 .gs-table{border-collapse:collapse;width:100%;font-size:12px;min-width:600px;}
-.gs-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:center;}
+.gs-table th{background:#e41e26;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #c0161c;text-align:center;}
 .gs-table th.day-col{text-align:left;padding-left:8px;min-width:90px;}
 .gs-table td{border:1px solid #d0d0d0;padding:4px;text-align:center;vertical-align:middle;}
 .gs-table td.day-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;font-weight:600;}
-.gs-table td.week-header{background:#005a30!important;color:white!important;font-weight:700;font-size:11px;text-align:left;padding:5px 8px;}
+.gs-table td.week-header{background:#c0161c!important;color:white!important;font-weight:700;font-size:11px;text-align:left;padding:5px 8px;}
 .gs-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:11px;font-family:inherit;padding:2px;}
 .gs-table select{border:none;background:transparent;font-size:11px;font-family:inherit;width:100%;}
 .cook-table{border-collapse:collapse;width:100%;font-size:12px;min-width:550px;}
-.cook-table th{background:#00703c;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #005a30;text-align:left;padding-left:6px;}
+.cook-table th{background:#e41e26;color:white;padding:7px 5px;font-size:11px;font-weight:600;border:1px solid #c0161c;text-align:left;padding-left:6px;}
 .cook-table td{border:1px solid #d0d0d0;padding:4px;vertical-align:middle;}
 .cook-table td.prod-name{text-align:left;padding:5px 8px;font-size:11px;background:#fafafa;}
-.cook-table td.section-hdr{background:#005a30!important;color:white!important;font-weight:700;font-size:11px;text-align:left;padding:5px 8px;}
+.cook-table td.section-hdr{background:#c0161c!important;color:white!important;font-weight:700;font-size:11px;text-align:left;padding:5px 8px;}
 .cook-table input[type=text]{width:100%;border:none;background:transparent;font-size:11px;font-family:inherit;padding:2px;text-align:center;}
 .deli-trace-table{border-collapse:collapse;width:100%;font-size:11px;min-width:640px;}
-.deli-trace-table th{background:#00703c;color:white;padding:6px 4px;text-align:center;font-size:10px;font-weight:600;border:1px solid #005a30;white-space:nowrap;}
-.deli-trace-table th.prod-col{background:#005a30;text-align:left;padding-left:8px;min-width:120px;}
+.deli-trace-table th{background:#e41e26;color:white;padding:6px 4px;text-align:center;font-size:10px;font-weight:600;border:1px solid #c0161c;white-space:nowrap;}
+.deli-trace-table th.prod-col{background:#c0161c;text-align:left;padding-left:8px;min-width:120px;}
 .deli-trace-table td{border:1px solid #d0d0d0;padding:3px 2px;text-align:center;vertical-align:middle;}
-.deli-trace-table td.prod-name{text-align:left;padding:5px 8px;font-size:11px;font-weight:600;background:#e8f5ee;}
+.deli-trace-table td.prod-name{text-align:left;padding:5px 8px;font-size:11px;font-weight:600;background:#fdecea;}
 .deli-trace-table input[type=text]{width:100%;border:none;background:transparent;text-align:center;font-size:10px;font-family:inherit;padding:1px;}
 .compliance-zone{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
 .zone-badge{padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;}
@@ -109,23 +109,23 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 .zone-orange{background:#fff3e0;color:#e65100;border:1px solid #ffcc80;}
 .zone-red{background:#ffebee;color:#c62828;border:1px solid #ef9a9a;}
 .compliance-table{border-collapse:collapse;width:100%;font-size:12px;}
-.compliance-table th{background:#00703c;color:white;padding:7px 6px;text-align:left;font-size:11px;font-weight:600;border:1px solid #005a30;}
+.compliance-table th{background:#e41e26;color:white;padding:7px 6px;text-align:left;font-size:11px;font-weight:600;border:1px solid #c0161c;}
 .compliance-table td{border:1px solid #d0d0d0;padding:6px;font-size:12px;vertical-align:middle;}
-.compliance-table td.dept{font-weight:700;color:#005a30;background:#e8f5ee;}
+.compliance-table td.dept{font-weight:700;color:#c0161c;background:#fdecea;}
 .score-radio{display:flex;gap:6px;justify-content:center;}
 .score-radio label{cursor:pointer;display:flex;flex-direction:column;align-items:center;font-size:10px;gap:2px;}
-.score-radio input[type=radio]{accent-color:#00703c;}
+.score-radio input[type=radio]{accent-color:#e41e26;}
 .max-row td{background:#f5f5f5;font-weight:600;font-size:11px;}
 .sig-box{border:2px dashed #d0d0d0;border-radius:8px;background:white;position:relative;overflow:hidden;}
 .sig-box canvas{display:block;width:100%;touch-action:none;}
 .sig-clear{position:absolute;top:6px;right:8px;background:rgba(255,255,255,0.9);border:1px solid #d0d0d0;border-radius:5px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit;color:#d32f2f;}
-.btn-save{background:#005a30;color:white;width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-bottom:10px;margin-top:14px;display:block;}
-.btn-save:active{background:#003d20;}
-.info-box{background:#e8f5ee;border-left:3px solid #00703c;border-radius:6px;padding:10px 12px;font-size:11px;color:#666;margin-bottom:14px;line-height:1.5;}
+.btn-save{background:#c0161c;color:white;width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-bottom:10px;margin-top:14px;display:block;}
+.btn-save:active{background:#9a1010;}
+.info-box{background:#fdecea;border-left:3px solid #e41e26;border-radius:6px;padding:10px 12px;font-size:11px;color:#666;margin-bottom:14px;line-height:1.5;}
 .info-box strong{color:#1a1a1a;}
 .warn-box{background:#fff8e1;border-left:3px solid #e65100;border-radius:6px;padding:10px 12px;font-size:11px;color:#555;margin-bottom:14px;line-height:1.5;}
-.section-title{font-size:13px;font-weight:700;color:#005a30;margin:18px 0 10px;padding-bottom:6px;border-bottom:2px solid #e8f5ee;}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#005a30;color:white;padding:12px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:9999;transition:transform 0.3s;white-space:nowrap;}
+.section-title{font-size:13px;font-weight:700;color:#c0161c;margin:18px 0 10px;padding-bottom:6px;border-bottom:2px solid #fdecea;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#c0161c;color:white;padding:12px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:9999;transition:transform 0.3s;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 .photo-timestamp-box{background:white;border:1.5px solid #d0d0d0;border-radius:10px;overflow:hidden;margin-bottom:14px;}
 .timestamp-display{background:#1e1e2e;color:#cdd6f4;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
@@ -140,24 +140,78 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 .photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
 .photo-thumb .photo-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);color:white;font-size:9px;padding:3px 5px;text-align:center;}
 .photo-thumb .photo-delete{position:absolute;top:4px;right:4px;width:20px;height:20px;background:rgba(211,47,47,0.85);border:none;border-radius:50%;color:white;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
-.photo-add-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;background:#e8f5ee;border:2px dashed #00703c;border-radius:8px;color:#005a30;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;}
+.photo-add-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;background:#fdecea;border:2px dashed #e41e26;border-radius:8px;color:#c0161c;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;}
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;align-items:center;justify-content:center;flex-direction:column;}
 .lightbox.open{display:flex;}
 .lightbox img{max-width:95vw;max-height:80vh;border-radius:8px;object-fit:contain;}
 .lightbox-info{color:white;font-size:12px;margin-top:10px;opacity:0.8;text-align:center;}
 .lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;}
+.pin-screen{position:fixed;inset:0;background:linear-gradient(135deg,#c0161c,#e41e26);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;padding:20px;}
+.pin-logo{font-size:28px;font-weight:700;color:white;letter-spacing:2px;margin-bottom:4px;}
+.pin-sub{font-size:12px;color:rgba(255,255,255,0.75);letter-spacing:2px;margin-bottom:32px;}
+.pin-store-select{display:flex;flex-direction:column;gap:12px;width:100%;max-width:320px;margin-bottom:24px;}
+.pin-store-btn{background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.4);color:white;padding:16px;border-radius:12px;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;text-align:center;-webkit-tap-highlight-color:transparent;}
+.pin-store-btn.selected{background:rgba(255,255,255,0.3);border-color:white;}
+.pin-entry{display:none;flex-direction:column;align-items:center;width:100%;max-width:320px;}
+.pin-store-label{font-size:18px;font-weight:700;color:white;margin-bottom:6px;}
+.pin-store-code{font-size:12px;color:rgba(255,255,255,0.7);margin-bottom:20px;}
+.pin-dots{display:flex;gap:12px;margin-bottom:24px;}
+.pin-dot{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.3);border:2px solid rgba(255,255,255,0.6);}
+.pin-dot.filled{background:white;}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;}
+.pin-key{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:18px;border-radius:12px;font-size:22px;font-weight:600;font-family:inherit;cursor:pointer;text-align:center;-webkit-tap-highlight-color:transparent;}
+.pin-key:active{background:rgba(255,255,255,0.35);}
+.pin-error{color:#ffcdd2;font-size:13px;margin-top:12px;font-weight:600;min-height:20px;}
+.pin-back-link{color:rgba(255,255,255,0.7);font-size:13px;margin-top:16px;cursor:pointer;text-decoration:underline;}
 </style>
 </head>
 <body>
+
+<div class="pin-screen" id="pinScreen">
+  <div class="pin-logo">SuperValu</div>
+  <div class="pin-sub">HACCP FOOD SAFETY SYSTEM</div>
+  <div class="pin-store-select" id="pinStoreSelect">
+    <button class="pin-store-btn" id="pinBtn356">Palmerstown</button>
+    <button class="pin-store-btn" id="pinBtn374">Balbriggan</button>
+    <button class="pin-store-btn" id="pinBtn424">Skerries</button>
+  </div>
+  <div class="pin-entry" id="pinEntry">
+    <div class="pin-store-label" id="pinStoreName"></div>
+    <div class="pin-store-code" id="pinStoreCode"></div>
+    <div class="pin-dots" id="pinDots">
+      <div class="pin-dot" id="pd0"></div>
+      <div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div>
+      <div class="pin-dot" id="pd3"></div>
+    </div>
+    <div class="pin-pad">
+      <button class="pin-key" id="pk1">1</button>
+      <button class="pin-key" id="pk2">2</button>
+      <button class="pin-key" id="pk3">3</button>
+      <button class="pin-key" id="pk4">4</button>
+      <button class="pin-key" id="pk5">5</button>
+      <button class="pin-key" id="pk6">6</button>
+      <button class="pin-key" id="pk7">7</button>
+      <button class="pin-key" id="pk8">8</button>
+      <button class="pin-key" id="pk9">9</button>
+      <button class="pin-key" id="pkClear" style="font-size:14px;">Clear</button>
+      <button class="pin-key" id="pk0">0</button>
+      <button class="pin-key" id="pkDel" style="font-size:14px;">&#9003;</button>
+    </div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="pin-back-link" id="pinBackLink">Choose a different store</div>
+  </div>
+</div>
+
 <div class="top-nav">
   <button class="back-btn" id="backBtn">&#8592; Back</button>
   <div class="nav-title" id="navTitle">HACCP System</div>
-  <div class="nav-logo">MORIARTY<br>GROUP</div>
+  <div class="nav-logo" id="navStoreName">SuperValu</div>
 </div>
 <div id="home">
   <div class="home-header">
-    <div class="brand">MORIARTY GROUP</div>
-    <div class="sub">SUPERVALU &#183; ESTD 1987</div>
+    <div class="brand">SuperValu</div>
+    <div class="sub" id="homeStoreSub">HACCP FOOD SAFETY SYSTEM</div>
     <div class="title">&#128203; HACCP Food Safety System</div>
   </div>
   <a class="records-banner" href="records.html">
@@ -167,12 +221,12 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
     </div>
     <div class="rb-arrow">&#8250;</div>
   </a>
-  <div style="padding:10px 16px 0;"><button onclick="if(confirm('Close this week? All saved forms will be archived to Records and cleared for next week.')){closeWeek(true);}" style="background:#c8102e;color:white;border:none;padding:10px 16px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;width:100%;">&#128197; Close Week &amp; Archive to Records</button></div>
+  <div style="padding:10px 16px 0;"><button id="closeWeekBtn" style="background:#c0161c;color:white;border:none;padding:10px 16px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;width:100%;">&#128197; Close Week &amp; Archive to Records</button></div>
   <div class="category-section">
     <div class="category-label">&#127777;&#65039; Temperature Checks</div>
     <div class="form-grid">
-      <div class="form-card" data-form="temp-meat"><div class="form-icon" style="background:#e8f5ee">&#129385;</div><div class="form-info"><div class="form-name">Meat Dept Temperature</div><div class="form-desc">Fish Display, Poultry, Pork, Raw Meat, Walk-in</div></div><div class="form-arrow">&#8250;</div></div>
-      <div class="form-card" data-form="temp-prepack"><div class="form-icon" style="background:#e8f5ee">&#129810;</div><div class="form-info"><div class="form-name">Pre-pack Dept Temperature</div><div class="form-desc">20 refrigerated units &#8211; AM &amp; PM checks</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="temp-meat"><div class="form-icon" style="background:#fdecea">&#129385;</div><div class="form-info"><div class="form-name">Meat Dept Temperature</div><div class="form-desc">Fish Display, Poultry, Pork, Raw Meat, Walk-in</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="temp-prepack"><div class="form-icon" style="background:#fdecea">&#129810;</div><div class="form-info"><div class="form-name">Pre-pack Dept Temperature</div><div class="form-desc">20 refrigerated units &#8211; AM &amp; PM checks</div></div><div class="form-arrow">&#8250;</div></div>
       <div class="form-card" data-form="temp-dairy"><div class="form-icon" style="background:#fff8e1">&#129371;</div><div class="form-info"><div class="form-name">Dairy Dept Temperature</div><div class="form-desc">Milk, Cheese, Yoghurts, Fish Fridge, Coffee Machine</div></div><div class="form-arrow">&#8250;</div></div>
       <div class="form-card" data-form="temp-frozen"><div class="form-icon" style="background:#e3f2fd">&#10052;&#65039;</div><div class="form-info"><div class="form-name">Frozen Temperature</div><div class="form-desc">Ice cream, freezer wells, back-up freezer</div></div><div class="form-arrow">&#8250;</div></div>
       <div class="form-card" data-form="temp-fruitveg"><div class="form-icon" style="background:#e8f5e9">&#129382;</div><div class="form-info"><div class="form-name">Fruit &amp; Veg Temperature</div><div class="form-desc">Display fridges, Salad Fridge, Walk-in, Berry Fridges</div></div><div class="form-arrow">&#8250;</div></div>
@@ -186,9 +240,9 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
       <div class="form-card" data-form="hotfood-bar-temp"><div class="form-icon" style="background:#fff3e0">&#127777;&#65039;</div><div class="form-info"><div class="form-name">Hot Food Bar Hourly Temps</div><div class="form-desc">Up to 12 products per time slot, Mon&#8211;Sun</div></div><div class="form-arrow">&#8250;</div></div>
       <div class="form-card" data-form="hotfood-soup-temp"><div class="form-icon" style="background:#fff8e1">&#127842;</div><div class="form-info"><div class="form-name">Soup Kettle Hourly Temps</div><div class="form-desc">S1 &amp; S2, 9am&#8211;6pm, Mon&#8211;Sun. Min 63&#176;C</div></div><div class="form-arrow">&#8250;</div></div>
       <div class="form-card" data-form="hotfood-after-cook"><div class="form-icon" style="background:#fce4ec">&#9989;</div><div class="form-info"><div class="form-name">After Cook Check Sheet</div><div class="form-desc">Breakfast &amp; Lunch &#8211; Core temp min 75&#176;C</div></div><div class="form-arrow">&#8250;</div></div>
-      <div class="form-card" data-form="hotfood-greaseshield"><div class="form-icon" style="background:#e8f5ee">&#128167;</div><div class="form-info"><div class="form-name">GreaseShield Daily Maintenance</div><div class="form-desc">4-week cycle &#8211; FOG &amp; Solids containers, wiper blade</div></div><div class="form-arrow">&#8250;</div></div>
-      <div class="form-card" data-form="hotfood-daily-clean"><div class="form-icon" style="background:#e8f5ee">&#129532;</div><div class="form-info"><div class="form-name">Hot Food Daily Cleaning</div><div class="form-desc">18 items &#8211; daily schedule with chemicals</div></div><div class="form-arrow">&#8250;</div></div>
-      <div class="form-card" data-form="hotfood-weekly-clean"><div class="form-icon" style="background:#e8f5ee">&#129529;</div><div class="form-info"><div class="form-name">Hot Food Weekly Cleaning</div><div class="form-desc">13 items &#8211; deep clean schedule</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="hotfood-greaseshield"><div class="form-icon" style="background:#fdecea">&#128167;</div><div class="form-info"><div class="form-name">GreaseShield Daily Maintenance</div><div class="form-desc">4-week cycle &#8211; FOG &amp; Solids containers, wiper blade</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="hotfood-daily-clean"><div class="form-icon" style="background:#fdecea">&#129532;</div><div class="form-info"><div class="form-name">Hot Food Daily Cleaning</div><div class="form-desc">18 items &#8211; daily schedule with chemicals</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="hotfood-weekly-clean"><div class="form-icon" style="background:#fdecea">&#129529;</div><div class="form-info"><div class="form-name">Hot Food Weekly Cleaning</div><div class="form-desc">13 items &#8211; deep clean schedule</div></div><div class="form-arrow">&#8250;</div></div>
       <div class="form-card" data-form="cookedmeat-clean"><div class="form-icon" style="background:#fbe9e7">&#129532;</div><div class="form-info"><div class="form-name">Cooked Meats &amp; Bakery Daily Cleaning</div><div class="form-desc">14 items &#8211; daily schedule with chemicals</div></div><div class="form-arrow">&#8250;</div></div>
       <div class="form-card" data-form="cookedmeat-weekly-clean"><div class="form-icon" style="background:#fbe9e7">&#129529;</div><div class="form-info"><div class="form-name">Cooked Meats &amp; Bakery Weekly Cleaning</div><div class="form-desc">8 items &#8211; deep clean schedule</div></div><div class="form-arrow">&#8250;</div></div>
       <div class="form-card" data-form="thawing-check"><div class="form-icon" style="background:#e3f2fd">&#129938;</div><div class="form-info"><div class="form-name">Thawing Check Sheet</div><div class="form-desc">Frozen product, thaw times, core temp, use by dates</div></div><div class="form-arrow">&#8250;</div></div>
@@ -231,7 +285,7 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
   <div class="category-section">
     <div class="category-label">&#129529; Cleaning Schedules</div>
     <div class="form-grid">
-      <div class="form-card" data-form="clean-redmeat"><div class="form-icon" style="background:#e8f5ee">&#129532;</div><div class="form-info"><div class="form-name">Red Meat Dept Cleaning</div><div class="form-desc">Daily &amp; weekly cleaning schedule with chemicals</div></div><div class="form-arrow">&#8250;</div></div>
+      <div class="form-card" data-form="clean-redmeat"><div class="form-icon" style="background:#fdecea">&#129532;</div><div class="form-info"><div class="form-name">Red Meat Dept Cleaning</div><div class="form-desc">Daily &amp; weekly cleaning schedule with chemicals</div></div><div class="form-arrow">&#8250;</div></div>
       <div class="form-card" data-form="clean-fruitveg"><div class="form-icon" style="background:#e8f5e9">&#129382;</div><div class="form-info"><div class="form-name">Fruit &amp; Veg Cleaning</div><div class="form-desc">Daily AM/PM and weekly deep clean</div></div><div class="form-arrow">&#8250;</div></div>
       <div class="form-card" data-form="clean-stockroom"><div class="form-icon" style="background:#f3e5f5">&#128230;</div><div class="form-info"><div class="form-name">Grocery Stockroom Cleaning</div><div class="form-desc">Daily and weekly cleaning schedule</div></div><div class="form-arrow">&#8250;</div></div>
     </div>
@@ -558,7 +612,7 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 <div id="trace-butcher" class="form-screen"><div class="form-header"><h2>&#128298; Prep by Butcher / Fishmonger Traceability</h2><p>Each batch saves separately with its own signature and photo.</p></div><div class="form-body">
 <div class="field-row"><div class="field-group"><label class="field-label">Week Commencing</label><input class="field-input" type="date" id="we-trace-butcher"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-trace-butcher"></div></div>
 <div id="butcher-batches"></div>
-<button id="add-butcher-batch-btn" style="background:#e8f5ee;border:1px solid #00703c;color:#005a30;padding:10px 18px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;width:100%;margin-top:8px">+ Add Batch</button>
+<button id="add-butcher-batch-btn" style="background:#fdecea;border:1px solid #e41e26;color:#c0161c;padding:10px 18px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;width:100%;margin-top:8px">+ Add Batch</button>
 </div></div>
 <div id="prod-mince" class="form-screen"><div class="form-header"><h2>&#129385; Mince Control Sheet</h2><p>Record details each time mince is produced.</p></div><div class="form-body">
 <div class="field-row"><div class="field-group"><label class="field-label">Week Ending</label><input class="field-input" type="date" id="we-prod-mince"></div><div class="field-group"><label class="field-label">Food Safety Champion</label><input class="field-input" type="text" placeholder="Name" id="fsc-prod-mince"></div></div>
@@ -632,6 +686,128 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 <div class="toast" id="toast">&#9989; Saved!</div>
 <div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightbox-close-btn">&#10005;</button><img id="lightbox-img" src="" alt=""><div class="lightbox-info" id="lightbox-info"></div></div>
 <script>
+var STORE_PINS = {'356':'0356','374':'0374','424':'0424'};
+var STORE_NAMES = {'356':'Palmerstown','374':'Balbriggan','424':'Skerries'};
+var selectedStoreId = null;
+var pinEntry = '';
+
+function initPinScreen() {
+var stored = sessionStorage.getItem('haccp_store');
+if (stored && STORE_NAMES[stored]) {
+selectedStoreId = stored;
+hidePinScreen();
+return;
+}
+var btn356 = document.getElementById('pinBtn356');
+var btn374 = document.getElementById('pinBtn374');
+var btn424 = document.getElementById('pinBtn424');
+if (btn356) { btn356.addEventListener('click', function() { selectPinStore('356'); }); }
+if (btn374) { btn374.addEventListener('click', function() { selectPinStore('374'); }); }
+if (btn424) { btn424.addEventListener('click', function() { selectPinStore('424'); }); }
+var keys = ['1','2','3','4','5','6','7','8','9','0'];
+for (var ki = 0; ki < keys.length; ki++) {
+(function(k) {
+var btn = document.getElementById('pk' + k);
+if (btn) { btn.addEventListener('click', function() { pinPress(k); }); }
+})(keys[ki]);
+}
+var clearBtn = document.getElementById('pkClear');
+var delBtn = document.getElementById('pkDel');
+var backLink = document.getElementById('pinBackLink');
+if (clearBtn) { clearBtn.addEventListener('click', function() { pinClear(); }); }
+if (delBtn) { delBtn.addEventListener('click', function() { pinDel(); }); }
+if (backLink) { backLink.addEventListener('click', function() { pinBack(); }); }
+}
+
+function selectPinStore(code) {
+selectedStoreId = code;
+pinEntry = '';
+var storeSelect = document.getElementById('pinStoreSelect');
+var pinEntryDiv = document.getElementById('pinEntry');
+var storeName = document.getElementById('pinStoreName');
+var storeCode = document.getElementById('pinStoreCode');
+var errEl = document.getElementById('pinError');
+if (storeSelect) { storeSelect.style.display = 'none'; }
+if (pinEntryDiv) { pinEntryDiv.style.display = 'flex'; }
+if (storeName) { storeName.textContent = STORE_NAMES[code]; }
+if (storeCode) { storeCode.textContent = 'Store ' + code; }
+if (errEl) { errEl.textContent = ''; }
+updatePinDots();
+}
+
+function pinPress(digit) {
+if (pinEntry.length >= 4) return;
+pinEntry += digit;
+updatePinDots();
+if (pinEntry.length === 4) {
+setTimeout(function() { checkPin(); }, 150);
+}
+}
+
+function pinDel() {
+if (pinEntry.length > 0) {
+pinEntry = pinEntry.slice(0, -1);
+updatePinDots();
+}
+}
+
+function pinClear() {
+pinEntry = '';
+updatePinDots();
+var errEl = document.getElementById('pinError');
+if (errEl) { errEl.textContent = ''; }
+}
+
+function updatePinDots() {
+for (var i = 0; i < 4; i++) {
+var dot = document.getElementById('pd' + i);
+if (dot) {
+if (i < pinEntry.length) {
+dot.className = 'pin-dot filled';
+} else {
+dot.className = 'pin-dot';
+}
+}
+}
+}
+
+function checkPin() {
+var correct = STORE_PINS[selectedStoreId];
+if (pinEntry === correct) {
+sessionStorage.setItem('haccp_store', selectedStoreId);
+hidePinScreen();
+} else {
+pinEntry = '';
+updatePinDots();
+var errEl = document.getElementById('pinError');
+if (errEl) { errEl.textContent = 'Incorrect PIN. Please try again.'; }
+}
+}
+
+function pinBack() {
+selectedStoreId = null;
+pinEntry = '';
+var storeSelect = document.getElementById('pinStoreSelect');
+var pinEntryDiv = document.getElementById('pinEntry');
+var errEl = document.getElementById('pinError');
+if (storeSelect) { storeSelect.style.display = 'flex'; }
+if (pinEntryDiv) { pinEntryDiv.style.display = 'none'; }
+if (errEl) { errEl.textContent = ''; }
+updatePinDots();
+}
+
+function hidePinScreen() {
+var pinScreen = document.getElementById('pinScreen');
+if (pinScreen) { pinScreen.style.display = 'none'; }
+var home = document.getElementById('home');
+if (home) { home.style.display = 'block'; }
+var navStore = document.getElementById('navStoreName');
+var homeSub = document.getElementById('homeStoreSub');
+var storeName = STORE_NAMES[selectedStoreId] || 'SuperValu';
+if (navStore) { navStore.textContent = storeName; }
+if (homeSub) { homeSub.textContent = storeName.toUpperCase() + ' - HACCP FOOD SAFETY SYSTEM'; }
+}
+
 var DAYS = ['Mon','Tue','Wed','Thur','Fri','Sat','Sun'];
 var meatTempUnits = [['Fish Display Unit','0-5\u00b0C'],['Poultry','0-5\u00b0C'],['Pork','0-5\u00b0C'],['Raw Meat','0-5\u00b0C'],['Walk in fridge','0-5\u00b0C'],['Pre-pack fish doors','0-5\u00b0C']];
 var prepackTempUnits = [['1. Stand up juice fridge at front door','0-5\u00b0C'],['2. Meat spider at food academy','0-5\u00b0C'],['3. Meat spider at food academy','0-5\u00b0C'],['4. Meat spider at food academy','0-5\u00b0C'],['5. Superquinn spider','0-5\u00b0C'],['6. Spider fishmonger','0-5\u00b0C'],['7. Dairy spider at fish pre pack','0-5\u00b0C'],['8. Ham spider fridge','0-5\u00b0C'],['9. Provisions promo bay',''],['10. Food Academy Fridge','0-5\u00b0C'],['11. Butchers Prepack','0-5\u00b0C'],['12. Prepared by the Butcher','0-5\u00b0C'],['13. Poultry','0-5\u00b0C'],['14. Cheese Prepack','0-5\u00b0C'],['15. Bacon/Special Offers','0-5\u00b0C'],['16. Sausages/Rashers','0-5\u00b0C'],['17. Pudding/Superquinn/Continental','0-5\u00b0C'],['18. Cooked Meats/Signature Range','0-5\u00b0C'],['19. Ready meals','0-5\u00b0C'],['20. Meal deck','0-5\u00b0C']];
@@ -664,1444 +840,175 @@ var cleaningItemsWeekly = [['Prep room racking','Degreaser'],['Serveover - Raw',
 var complianceDepts = [{name:'1. Serveover Raw/Fish',items:['Mince control','Fish Tracker','Temperature Checks','Daily cleaning schedule','Weekly cleaning schedule','Burger control sheet','PBOB Trace','Pork and Bacon Trace','Breaded chicken trace','Beef Trace']},{name:'2. Cold Deli',items:['Cooked meat tracker','Sandwich tracker','Salami & olive tracker','Savoury tracker','Salad tracker','Temp checks','Daily cleaning schedule','Weekly cleaning schedule']},{name:'3. Hot Food Bar/Bakery',items:['After cook sheet','Hot holding sheet','Temp checks bakery','Daily cleaning schedule','Weekly cleaning schedule']},{name:'4. Prepack Deli Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'5. Fruit & Veg Food Safety',items:['Temperature checks','Deep clean UTD']},{name:'6. Dairy Food Safety',items:['Temperature Checks','Deep Clean']},{name:'7. Frozen Food Safety',items:['Load Levels','Temperature Checks','Deep clean UTD']},{name:'8. Goods Inwards Food Safety',items:['FSR1 - Fresh Van checks','FSR2 - Dry Grocery Van checks','Cleaning schedule - Daily','Cleaning schedule - Deep clean']}];
 var ALL_FORMS = [{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},{id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},{id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},{id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},{id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},{id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},{id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},{id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},{id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},{id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},{id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},{id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},{id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},{id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},{id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},{id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},{id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},{id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},{id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},{id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},{id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},{id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},{id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},{id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},{id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},{id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},{id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},{id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},{id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},{id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},{id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}];
 var DB_NAME = 'MoriartyHACCP', DB_VER = 2, db = null;
-/* ===== SUPABASE CONFIG ===== */
 var SB_URL = 'https://mnebkteiwjxbbmnfotse.supabase.co';
 var SB_KEY = 'sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
 function sbFetch(path, method, body) {
-var headers = {
-'apikey': SB_KEY,
-'Authorization': 'Bearer ' + SB_KEY,
-'Content-Type': 'application/json'
-};
+var headers = {'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'};
 if (method === 'POST') headers['Prefer'] = 'resolution=merge-duplicates';
-return fetch(SB_URL + '/rest/v1/' + path, {
-method: method || 'GET',
-headers: headers,
-body: body ? JSON.stringify(body) : undefined
-});
+return fetch(SB_URL+'/rest/v1/'+path,{method:method||'GET',headers:headers,body:body?JSON.stringify(body):undefined});
+}
+function getStoreId() {
+return sessionStorage.getItem('haccp_store') || '424';
 }
 function sbUpsert(record) {
-/* strip photos/signatures from Supabase to keep payload small - stored locally only */
-var row = {
-id: String(record.id),
-form_id: record.formId,
-week_key: record.weekKey,
-saved_at: record.savedAt,
-store_id: '424',
-data: {
-weekEnding: record.weekEnding,
-champion: record.champion,
-timestamp: record.timestamp,
-correctiveAction: record.correctiveAction,
-fieldData: record.fieldData,
-photoCount: record.photoCount
-}
-};
-return sbFetch('haccp_records', 'POST', [row]).then(function(r) {
-if (!r.ok) return r.text().then(function(t) { console.warn('Supabase upsert failed:', t); });
-});
+var row = {id:String(record.id),form_id:record.formId,week_key:record.weekKey,saved_at:record.savedAt,store_id:getStoreId(),data:{weekEnding:record.weekEnding,champion:record.champion,timestamp:record.timestamp,correctiveAction:record.correctiveAction,fieldData:record.fieldData,photoCount:record.photoCount}};
+return sbFetch('haccp_records','POST',[row]).then(function(r){if(!r.ok)return r.text().then(function(t){console.warn('Supabase upsert failed:',t);});});
 }
 function sbGetWeek(weekKey) {
-return sbFetch('haccp_records?week_key=eq.' + weekKey + '&order=saved_at.asc', 'GET')
-.then(function(r) { return r.json(); })
-.catch(function() { return []; });
+var sid = getStoreId();
+return sbFetch('haccp_records?week_key=eq.'+weekKey+'&store_id=eq.'+sid+'&order=saved_at.asc','GET').then(function(r){return r.json();}).catch(function(){return[];});
 }
-/* Upload a base64 dataURL to Supabase Storage, return public URL */
-function sbUploadMedia(path, dataUrl) {
-return new Promise(function(resolve) {
-if (!dataUrl) { resolve(null); return; }
-/* convert base64 to blob */
-var parts = dataUrl.split(',');
-var mime = parts[0].match(/:(.*?);/)[1];
-var bstr = atob(parts[1]);
-var n = bstr.length;
-var u8arr = new Uint8Array(n);
-for (var i = 0; i < n; i++) u8arr[i] = bstr.charCodeAt(i);
-var blob = new Blob([u8arr], {type: mime});
-fetch(SB_URL + '/storage/v1/object/haccp-media/' + path, {
-method: 'POST',
-headers: {
-'apikey': SB_KEY,
-'Authorization': 'Bearer ' + SB_KEY,
-'Content-Type': mime,
-'x-upsert': 'true'
-},
-body: blob
-}).then(function(r) {
-if (r.ok) {
-resolve(SB_URL + '/storage/v1/object/public/haccp-media/' + path);
-} else {
-resolve(null);
-}
-}).catch(function() { resolve(null); });
+function sbUploadMedia(path,dataUrl) {
+return new Promise(function(resolve){
+if(!dataUrl){resolve(null);return;}
+var parts=dataUrl.split(',');
+var mime=parts[0].match(/:(.*?);/)[1];
+var bstr=atob(parts[1]);
+var n=bstr.length;
+var u8arr=new Uint8Array(n);
+for(var i=0;i<n;i++)u8arr[i]=bstr.charCodeAt(i);
+var blob=new Blob([u8arr],{type:mime});
+fetch(SB_URL+'/storage/v1/object/haccp-media/'+path,{method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':mime,'x-upsert':'true'},body:blob}).then(function(r){if(r.ok){resolve(SB_URL+'/storage/v1/object/public/haccp-media/'+path);}else{resolve(null);}}).catch(function(){resolve(null);});
 });
 }
-/* Upload all photos and signatures for a record, return updated arrays with URLs */
-function sbUploadRecordMedia(recordId, photos, signatures) {
-var promises = [];
-var photoUrls = [];
-var sigUrls = [];
-/* photos */
-for (var pi = 0; pi < photos.length; pi++) {
-(function(idx, photo) {
-var path = 'photos/' + recordId + '_' + idx + '.jpg';
-promises.push(
-sbUploadMedia(path, photo.dataUrl).then(function(url) {
-photoUrls[idx] = {name: photo.name, timestamp: photo.timestamp, url: url, dataUrl: photo.dataUrl};
-})
-);
-})(pi, photos[pi]);
-}
-/* signatures */
-for (var si = 0; si < signatures.length; si++) {
-(function(idx, sig) {
-if (!sig.hasSignature || !sig.dataUrl) {
-sigUrls[idx] = sig;
-return;
-}
-var path = 'signatures/' + recordId + '_' + sig.id + '.png';
-promises.push(
-sbUploadMedia(path, sig.dataUrl).then(function(url) {
-sigUrls[idx] = {id: sig.id, hasSignature: sig.hasSignature, dataUrl: sig.dataUrl, url: url};
-})
-);
-})(si, signatures[si]);
-}
-return Promise.all(promises).then(function() {
-return {photos: photoUrls, signatures: sigUrls};
-});
+function sbUploadRecordMedia(recordId,photos,signatures) {
+var promises=[];var photoUrls=[];var sigUrls=[];
+for(var pi=0;pi<photos.length;pi++){(function(idx,photo){var path='photos/'+recordId+'_'+idx+'.jpg';promises.push(sbUploadMedia(path,photo.dataUrl).then(function(url){photoUrls[idx]={name:photo.name,timestamp:photo.timestamp,url:url,dataUrl:photo.dataUrl};}));})(pi,photos[pi]);}
+for(var si=0;si<signatures.length;si++){(function(idx,sig){if(!sig.hasSignature||!sig.dataUrl){sigUrls[idx]=sig;return;}var path='signatures/'+recordId+'_'+sig.id+'.png';promises.push(sbUploadMedia(path,sig.dataUrl).then(function(url){sigUrls[idx]={id:sig.id,hasSignature:sig.hasSignature,dataUrl:sig.dataUrl,url:url};}));})(si,signatures[si]);}
+return Promise.all(promises).then(function(){return{photos:photoUrls,signatures:sigUrls};});
 }
 function openDB() {
-return new Promise(function(res, rej) {
-var done = false;
-var timer = setTimeout(function() {
-if (done) return; done = true;
-rej(new Error('DB timeout'));
-}, 6000);
-var r;
-try { r = indexedDB.open(DB_NAME, DB_VER); } catch(e) { clearTimeout(timer); rej(e); return; }
-r.onupgradeneeded = function(e) {
-var d = e.target.result;
-if (!d.objectStoreNames.contains('records')) {
-var s = d.createObjectStore('records', {keyPath:'id'});
-s.createIndex('formId','formId',{unique:false});
-s.createIndex('weekKey','weekKey',{unique:false});
-}
-if (!d.objectStoreNames.contains('weeks')) {
-d.createObjectStore('weeks', {keyPath:'weekKey'});
-}
-if (!d.objectStoreNames.contains('live')) {
-d.createObjectStore('live', {keyPath:'id'});
-}
-};
-r.onsuccess = function(e) { if (done) return; done=true; clearTimeout(timer); db=e.target.result; res(db); };
-r.onerror = function(e) { if (done) return; done=true; clearTimeout(timer); rej(e.target.error); };
-r.onblocked = function() { if (done) return; done=true; clearTimeout(timer); rej(new Error('DB blocked')); };
+return new Promise(function(res,rej){
+var done=false;
+var timer=setTimeout(function(){if(done)return;done=true;rej(new Error('DB timeout'));},6000);
+var r;try{r=indexedDB.open(DB_NAME,DB_VER);}catch(e){clearTimeout(timer);rej(e);return;}
+r.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('records')){var s=d.createObjectStore('records',{keyPath:'id'});s.createIndex('formId','formId',{unique:false});s.createIndex('weekKey','weekKey',{unique:false});}if(!d.objectStoreNames.contains('weeks')){d.createObjectStore('weeks',{keyPath:'weekKey'});}if(!d.objectStoreNames.contains('live')){d.createObjectStore('live',{keyPath:'id'});}};
+r.onsuccess=function(e){if(done)return;done=true;clearTimeout(timer);db=e.target.result;res(db);};
+r.onerror=function(e){if(done)return;done=true;clearTimeout(timer);rej(e.target.error);};
+r.onblocked=function(){if(done)return;done=true;clearTimeout(timer);rej(new Error('DB blocked'));};
 });
 }
-function dbPut(store, obj) {
-return new Promise(function(res, rej) {
-var tx = db.transaction(store, 'readwrite');
-tx.objectStore(store).put(obj);
-tx.oncomplete = res;
-tx.onerror = function(e) { rej(e.target.error); };
-});
-}
-function dbGet(store, key) {
-return new Promise(function(res, rej) {
-var tx = db.transaction(store, 'readonly');
-var r = tx.objectStore(store).get(key);
-r.onsuccess = function(e) { res(e.target.result); };
-r.onerror = function(e) { rej(e.target.error); };
-});
-}
-function dbGetAll(store) {
-return new Promise(function(res, rej) {
-var tx = db.transaction(store, 'readonly');
-var r = tx.objectStore(store).getAll();
-r.onsuccess = function(e) { res(e.target.result); };
-r.onerror = function(e) { rej(e.target.error); };
-});
-}
-function dbDelete(store, key) {
-return new Promise(function(res, rej) {
-var tx = db.transaction(store, 'readwrite');
-tx.objectStore(store).delete(key);
-tx.oncomplete = res;
-tx.onerror = function(e) { rej(e.target.error); };
-});
-}
-function dbClearStore(store) {
-return new Promise(function(res, rej) {
-var tx = db.transaction(store, 'readwrite');
-tx.objectStore(store).clear();
-tx.oncomplete = res;
-tx.onerror = function(e) { rej(e.target.error); };
-});
-}
-function getWeekKey() {
-/* Use UTC throughout to avoid DST timezone shift bugs */
-var d = new Date();
-var dayUTC = d.getUTCDay();
-var s = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - dayUTC));
-return s.toISOString().split('T')[0];
-}
-function getWeekLabel(wk) {
-var sun = new Date(wk + 'T00:00:00');
-var sat = new Date(sun); sat.setDate(sat.getDate() + 6);
-var fmt = function(dt) { return dt.toLocaleDateString('en-IE',{day:'numeric',month:'short'}); };
-return fmt(sun) + ' \u2013 ' + fmt(sat) + ' ' + sat.getFullYear();
-}
-function getSatClose(wk) {
-var sun = new Date(wk + 'T00:00:00');
-var sat = new Date(sun); sat.setDate(sat.getDate() + 6);
-sat.setHours(23,59,59,0);
-return sat;
-}
-/* ---- collect all field values from a form screen ---- */
-function collectFieldData(formId) {
-var scr = document.getElementById(formId);
-if (!scr) return {};
-var data = {};
-var inputs = scr.querySelectorAll('input[type=text],input[type=date],input[type=number],input[type=time],textarea');
-for (var i = 0; i < inputs.length; i++) {
-var inp = inputs[i];
-var key = inp.getAttribute('data-label') || inp.id || ('inp_' + i);
-if (inp.value && inp.value.trim()) data[key] = inp.value;
-}
-var sels = scr.querySelectorAll('select');
-for (var si = 0; si < sels.length; si++) {
-var sel = sels[si];
-var sk = sel.getAttribute('data-label') || sel.id || ('sel_' + si);
-if (sel.value) data[sk] = sel.value;
-}
-var cbs = scr.querySelectorAll('input[type=checkbox]');
-for (var ci = 0; ci < cbs.length; ci++) {
-var cb = cbs[ci];
-if (cb.checked) {
-var ck = cb.getAttribute('data-label') || cb.id || ('cb_' + ci);
-data[ck] = 'checked';
-}
-}
-var radios = scr.querySelectorAll('input[type=radio]:checked');
-for (var ri = 0; ri < radios.length; ri++) {
-var rad = radios[ri];
-data['radio_' + rad.name] = rad.value;
-}
-return data;
-}
-/* ---- restore field values into a form screen ---- */
-function restoreFieldData(formId, data) {
-if (!data) return;
-var scr = document.getElementById(formId);
-if (!scr) return;
-var inputs = scr.querySelectorAll('input[type=text],input[type=date],input[type=number],input[type=time],textarea');
-for (var i = 0; i < inputs.length; i++) {
-var inp = inputs[i];
-var key = inp.getAttribute('data-label') || inp.id || ('inp_' + i);
-if (data[key] !== undefined) inp.value = data[key];
-}
-var sels = scr.querySelectorAll('select');
-for (var si = 0; si < sels.length; si++) {
-var sel = sels[si];
-var sk = sel.getAttribute('data-label') || sel.id || ('sel_' + si);
-if (data[sk] !== undefined) sel.value = data[sk];
-}
-var cbs = scr.querySelectorAll('input[type=checkbox]');
-for (var ci = 0; ci < cbs.length; ci++) {
-var cb = cbs[ci];
-var ck = cb.getAttribute('data-label') || cb.id || ('cb_' + ci);
-if (data[ck] === 'checked') cb.checked = true;
-}
-var allRadios = scr.querySelectorAll('input[type=radio]');
-for (var ri = 0; ri < allRadios.length; ri++) {
-var rad = allRadios[ri];
-var rk = 'radio_' + rad.name;
-if (data[rk] !== undefined && rad.value === data[rk]) rad.checked = true;
-}
-/* Safari iOS repaint fix: last inputs in long tables appear blank after
-   programmatic value set. Force layout recalc + GPU repaint. */
-setTimeout(function() {
-  var allInputs = scr.querySelectorAll('input[type=text]');
-  for (var fi = 0; fi < allInputs.length; fi++) {
-    if (allInputs[fi].value) { void allInputs[fi].offsetParent; }
-  }
-  scr.style.webkitTransform = 'translateZ(0)';
-  setTimeout(function() { scr.style.webkitTransform = ''; }, 60);
-}, 80);
-}
-/* ---- restore signatures into canvases ---- */
-function restoreSignatures(formId, signatures) {
-if (!signatures || !signatures.length) return;
-var scr = document.getElementById(formId);
-if (!scr) return;
-for (var i = 0; i < signatures.length; i++) {
-var sig = signatures[i];
-if (!sig.dataUrl || !sig.hasSignature) continue;
-var canvas = document.getElementById(sig.id);
-if (!canvas) continue;
-(function(cv, url) {
-var img = new Image();
-img.onload = function() {
-var ctx = cv.getContext('2d');
-ctx.clearRect(0,0,cv.width,cv.height);
-ctx.drawImage(img,0,0,cv.width,cv.height);
-};
-img.src = url;
-})(canvas, sig.dataUrl);
-}
-}
-/* ---- restore photos ---- */
-function restorePhotos(formId, photos) {
-if (!photos || !photos.length) return;
-formPhotos[formId] = [];
-var grid = document.getElementById('photo-grid-' + formId);
-if (!grid) return;
-grid.innerHTML = '';
-for (var i = 0; i < photos.length; i++) {
-var idx = formPhotos[formId].push(photos[i]) - 1;
-renderPhotoThumb(grid, photos[i], formId, idx);
-}
-}
-var currentForm = null, formTimestamps = {}, formPhotos = {}, sigPads = {};
-function showForm(id) {
-document.getElementById('home').style.display = 'none';
-if (currentForm) document.getElementById(currentForm).style.display = 'none';
-var scr = document.getElementById(id);
-if (!scr) return;
-scr.style.display = 'block';
-currentForm = id;
-document.getElementById('backBtn').style.display = 'block';
-var h2 = scr.querySelector('h2');
-document.getElementById('navTitle').textContent = h2 ? h2.textContent : id;
-window.scrollTo(0,0);
-setTimeout(function() {
-var canvases = scr.querySelectorAll('canvas');
-for (var ci = 0; ci < canvases.length; ci++) { initSig(canvases[ci].id); }
-/* merge all previous saves into the table so staff see full week */
-restoreMergedWeekData(id);
-}, 120);
-}
-/* Merge all saves for this form this week into the table fields */
-function mergeAndDisplay(formId, saves) {
-if (!saves.length) return;
-saves.sort(function(a,b){ return a.savedAt < b.savedAt ? -1 : 1; });
-var merged = {};
-for (var si = 0; si < saves.length; si++) {
-var fd = saves[si].fieldData || (saves[si].data && saves[si].data.fieldData);
-if (fd) {
-var keys = Object.keys(fd);
-for (var ki = 0; ki < keys.length; ki++) {
-if (fd[keys[ki]]) merged[keys[ki]] = fd[keys[ki]];
-}
-}
-}
-restoreFieldData(formId, merged);
-var scr = document.getElementById(formId);
-if (!scr) return;
-var banner = scr.querySelector('.week-save-banner');
-if (!banner) {
-banner = document.createElement('div');
-banner.className = 'week-save-banner';
-banner.style.cssText = 'background:#e8f5ee;border-left:3px solid #00703c;padding:8px 14px;font-size:12px;color:#005a30;font-weight:600;margin-bottom:12px;';
-var body = scr.querySelector('.form-body');
-if (body) body.insertBefore(banner, body.firstChild);
-}
-var latest = saves[saves.length-1];
-var latestSavedAt = latest.savedAt || (latest.data && latest.data.timestamp) || '';
-var latestTs = latestSavedAt ? new Date(latestSavedAt).toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false}) : '';
-var champion = latest.champion || (latest.data && latest.data.champion) || '';
-banner.textContent = '\u2705 ' + saves.length + ' save' + (saves.length!==1?'s':'') + ' this week' + (latestTs?' \u00b7 Last: '+latestTs:'') + (champion?' \u00b7 '+champion:'') + ' \u00b7 Fill in today\u2019s data and save';
-}
-function restoreMergedWeekData(formId) {
-var wk = getWeekKey();
-/* try Supabase first for multi-device data, fall back to local */
-sbFetch('haccp_records?form_id=eq.' + formId + '&week_key=eq.' + wk + '&order=saved_at.asc', 'GET')
-.then(function(r) { return r.json(); })
-.then(function(sbRows) {
-if (sbRows && sbRows.length) {
-mergeAndDisplay(formId, sbRows);
-return;
-}
-/* fall back to local IndexedDB */
-if (!db) return;
-dbGetAll('records').then(function(recs) {
-var saves = [];
-for (var i = 0; i < recs.length; i++) {
-if (recs[i].formId === formId && recs[i].weekKey === wk) saves.push(recs[i]);
-}
-mergeAndDisplay(formId, saves);
-}).catch(function() {});
-})
-.catch(function() {
-/* offline - use local only */
-if (!db) return;
-dbGetAll('records').then(function(recs) {
-var saves = [];
-for (var i = 0; i < recs.length; i++) {
-if (recs[i].formId === formId && recs[i].weekKey === wk) saves.push(recs[i]);
-}
-mergeAndDisplay(formId, saves);
-}).catch(function() {});
-});
-}
-function goBack() {
-if (currentForm) document.getElementById(currentForm).style.display = 'none';
-document.getElementById('home').style.display = 'block';
-document.getElementById('backBtn').style.display = 'none';
-document.getElementById('navTitle').textContent = 'HACCP System';
-currentForm = null;
-window.scrollTo(0,0);
-}
-function collectSignatures(formId) {
-var signatures = [];
-var scr = document.getElementById(formId);
-if (!scr) return signatures;
-var canvases = scr.querySelectorAll('canvas');
-for (var si = 0; si < canvases.length; si++) {
-var cv = canvases[si];
-var sigData = null, hasSig = false;
-if (cv.width > 0 && cv.height > 0) {
-try {
-var cvCtx = cv.getContext('2d');
-var cvImg = cvCtx.getImageData(0,0,cv.width,cv.height);
-for (var px = 3; px < cvImg.data.length; px += 4) {
-if (cvImg.data[px] > 0) { hasSig = true; break; }
-}
-if (hasSig) sigData = cv.toDataURL('image/png');
-} catch(e2) {}
-}
-signatures.push({id:cv.id, dataUrl:sigData, hasSignature:hasSig});
-}
-return signatures;
-}
-function saveForm(formId) {
-var we = document.getElementById('we-' + formId);
-var fsc = document.getElementById('fsc-' + formId);
-var now = new Date();
-var wk = getWeekKey();
-var photos = formPhotos[formId] || [];
-var photoData = [];
-for (var pi = 0; pi < photos.length; pi++) {
-photoData.push({dataUrl:photos[pi].dataUrl, name:photos[pi].name, timestamp:photos[pi].timestamp});
-}
-var correctiveAction = '';
-var scr = document.getElementById(formId);
-if (scr) { var ta = scr.querySelector('textarea'); if (ta) correctiveAction = ta.value || ''; }
-var signatures = collectSignatures(formId);
-var fullFieldData = collectFieldData(formId);
-var ts = formTimestamps[formId] || now.toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});
-/* build merged previous data so we can diff against it */
-var doSaveWithDelta = function(prevMerged) {
-/* delta = only keys that are NEW or CHANGED compared to previous merged data */
-var deltaFieldData = {};
-var keys = Object.keys(fullFieldData);
-for (var ki = 0; ki < keys.length; ki++) {
-var k = keys[ki];
-var newVal = fullFieldData[k];
-var oldVal = prevMerged[k] || '';
-/* include if value exists and differs from what was already saved */
-if (newVal && newVal !== oldVal) {
-deltaFieldData[k] = newVal;
-}
-}
-/* live record stores FULL data for form display */
-var liveRec = {
-id: formId + '::' + wk,
-formId: formId,
-weekKey: wk,
-savedAt: now.toISOString(),
-weekEnding: we ? we.value : '',
-champion: fsc ? fsc.value : '',
-timestamp: ts,
-photos: photoData,
-photoCount: photoData.length,
-correctiveAction: correctiveAction,
-signatures: signatures,
-fieldData: fullFieldData
-};
-/* archive record stores only DELTA - what this person newly entered */
-var archRec = {
-id: now.getTime(),
-formId: formId,
-weekKey: wk,
-savedAt: now.toISOString(),
-weekEnding: we ? we.value : '',
-champion: fsc ? fsc.value : '',
-timestamp: ts,
-photos: photoData,
-photoCount: photoData.length,
-correctiveAction: correctiveAction,
-signatures: signatures,
-fieldData: deltaFieldData
-};
-/* upload photos and signatures to Supabase Storage first */
-sbUploadRecordMedia(archRec.id, photoData, signatures).then(function(media) {
-/* update records with storage URLs */
-liveRec.photos = media.photos;
-liveRec.signatures = media.signatures;
-archRec.photos = media.photos;
-archRec.signatures = media.signatures;
-return dbPut('live', liveRec);
-}).then(function() {
-return dbPut('records', archRec);
-}).then(function() {
-/* push to Supabase via sbFetch (handles headers correctly cross-browser) */
-var sbRec = {
-id: String(archRec.id),
-form_id: archRec.formId,
-week_key: archRec.weekKey,
-saved_at: archRec.savedAt,
-store_id: '424',
-data: {
-weekEnding: archRec.weekEnding,
-champion: archRec.champion,
-timestamp: archRec.timestamp,
-correctiveAction: archRec.correctiveAction,
-fieldData: archRec.fieldData,
-photoCount: archRec.photoCount,
-photos: archRec.photos,
-signatures: archRec.signatures
-}
-};
-return sbFetch('haccp_records', 'POST', [sbRec]);
-}).then(function() {
-showToast('Saved!');
-updateBannerCount();
-updateFormBadge(formId, true);
-clearFormAfterSave(formId);
-restoreMergedWeekData(formId);
-}).catch(function(e) { showToast('Save failed: ' + e.message); });
-};
-/* load existing records (Supabase first, then local) to compute previous merged state */
-var runSave = function() {
-sbFetch('haccp_records?form_id=eq.' + formId + '&week_key=eq.' + wk + '&order=saved_at.asc', 'GET')
-.then(function(r) { return r.json(); })
-.then(function(sbRows) {
-var prevMerged = {};
-var rows = (sbRows && sbRows.length) ? sbRows : [];
-for (var i = 0; i < rows.length; i++) {
-var fd = rows[i].fieldData || (rows[i].data && rows[i].data.fieldData);
-if (fd) {
-var pk = Object.keys(fd);
-for (var j = 0; j < pk.length; j++) {
-if (fd[pk[j]]) prevMerged[pk[j]] = fd[pk[j]];
-}
-}
-}
-/* Supabase had data - use it and stop, do NOT fall through to local DB */
-doSaveWithDelta(prevMerged);
-})
-.catch(function() {
-if (!db) { doSaveWithDelta({}); return; }
-dbGetAll('records').then(function(recs) {
-var prevMerged = {};
-for (var i = 0; i < recs.length; i++) {
-if (recs[i].formId === formId && recs[i].weekKey === wk && recs[i].fieldData) {
-var pk = Object.keys(recs[i].fieldData);
-for (var j = 0; j < pk.length; j++) {
-if (recs[i].fieldData[pk[j]]) prevMerged[pk[j]] = recs[i].fieldData[pk[j]];
-}
-}
-}
-doSaveWithDelta(prevMerged);
-}).catch(function() { doSaveWithDelta({}); });
-});
-};
-if (!db) { openDB().then(function() { runSave(); }); } else { runSave(); }
-}
-function updateFormBadge(formId, saved) {
-var cards = document.querySelectorAll('.form-card');
-for (var i = 0; i < cards.length; i++) {
-if (cards[i].getAttribute('data-form') === formId) {
-var existing = cards[i].querySelector('.form-saved-badge');
-if (saved && !existing) {
-var badge = document.createElement('span');
-badge.className = 'form-saved-badge';
-badge.textContent = '\u2713';
-badge.style.cssText = 'color:#00703c;font-weight:700;font-size:16px;margin-left:4px;';
-cards[i].querySelector('.form-info').appendChild(badge);
-}
-break;
-}
-}
-}
-function clearFormAfterSave(formId) {
-var scr = document.getElementById(formId);
-if (!scr) return;
-/* get the previously merged data so we know what to keep */
-var wk = getWeekKey();
-dbGetAll('records').then(function(recs) {
-var prevMerged = {};
-for (var i = 0; i < recs.length; i++) {
-if (recs[i].formId === formId && recs[i].weekKey === wk && recs[i].fieldData) {
-var pk = Object.keys(recs[i].fieldData);
-for (var j = 0; j < pk.length; j++) {
-if (recs[i].fieldData[pk[j]]) prevMerged[pk[j]] = recs[i].fieldData[pk[j]];
-}
-}
-}
-/* only clear inputs whose value is NOT in the merged previous data */
-var inputs = scr.querySelectorAll('input[type=text],input[type=date],input[type=number],input[type=time],textarea');
-for (var ii = 0; ii < inputs.length; ii++) {
-var inp = inputs[ii];
-var key = inp.getAttribute('data-label') || inp.id || ('inp_' + ii);
-if (!prevMerged[key]) inp.value = '';
-}
-/* always clear selects not in previous data */
-var sels = scr.querySelectorAll('select');
-for (var si = 0; si < sels.length; si++) {
-var sel = sels[si];
-var sk = sel.getAttribute('data-label') || sel.id || ('sel_' + si);
-if (!prevMerged[sk]) sel.selectedIndex = 0;
-}
-/* always clear checkboxes not in previous data */
-var cbs = scr.querySelectorAll('input[type=checkbox]');
-for (var ci = 0; ci < cbs.length; ci++) {
-var cb = cbs[ci];
-var ck = cb.getAttribute('data-label') || cb.id || ('cb_' + ci);
-if (!prevMerged[ck]) cb.checked = false;
-}
-/* always clear radios */
-var radios = scr.querySelectorAll('input[type=radio]');
-for (var ri = 0; ri < radios.length; ri++) radios[ri].checked = false;
-/* always clear signatures - these are per-save */
-var canvases = scr.querySelectorAll('canvas');
-for (var ki = 0; ki < canvases.length; ki++) {
-if (sigPads[canvases[ki].id]) sigPads[canvases[ki].id].clear();
-}
-/* always clear photos - these are per-save */
-formPhotos[formId] = [];
-var grid = document.getElementById('photo-grid-' + formId);
-if (grid) grid.innerHTML = '';
-/* reset timestamp */
-formTimestamps[formId] = null;
-var tsEl = document.querySelector('#ts-' + formId + ' .ts-text');
-var tsBtn = document.querySelector('#ts-' + formId + ' .ts-btn');
-if (tsEl) { tsEl.textContent = 'Tap to record timestamp'; tsEl.className = 'ts-text'; }
-if (tsBtn) { tsBtn.textContent = 'Record Time'; tsBtn.className = 'ts-btn'; }
-}).catch(function() {});
-}
-function updateBannerCount() {
-var wk = getWeekKey();
-/* Try Supabase first for accurate cross-browser count */
-sbFetch('haccp_records?week_key=eq.' + wk + '&order=saved_at.asc', 'GET')
-.then(function(r) { return r.json(); })
-.then(function(rows) {
-if (!Array.isArray(rows)) throw new Error('not array');
-/* get unique form IDs */
-var seen = {};
-for (var i = 0; i < rows.length; i++) {
-var fid = rows[i].form_id || rows[i].formId;
-if (fid) seen[fid] = 1;
-}
-var done = Object.keys(seen).length;
-document.getElementById('home-banner-sub').textContent = done + ' of ' + ALL_FORMS.length + ' forms completed this week';
-for (var fid2 in seen) updateFormBadge(fid2, true);
-})
-.catch(function() {
-/* fall back to local IndexedDB */
-if (!db) return;
-dbGetAll('live').then(function(recs) {
-var done = 0;
-for (var i = 0; i < recs.length; i++) {
-if (recs[i].weekKey === wk) done++;
-}
-document.getElementById('home-banner-sub').textContent = done + ' of ' + ALL_FORMS.length + ' forms completed this week';
-for (var j = 0; j < recs.length; j++) {
-if (recs[j].weekKey === wk) updateFormBadge(recs[j].formId, true);
-}
-}).catch(function() {});
-});
-}
-/* ===== WEEK CLOSE ===== */
-function closeWeek(manual) {
-var wk = getWeekKey();
-dbGetAll('records').then(function(allRecs) {
-var wkRecs = [];
-for (var i = 0; i < allRecs.length; i++) {
-if (allRecs[i].weekKey === wk) wkRecs.push(allRecs[i]);
-}
-/* push any records not yet in Supabase */
-var sbRows = [];
-for (var ri = 0; ri < wkRecs.length; ri++) {
-var r = wkRecs[ri];
-sbRows.push({
-id: String(r.id),
-form_id: r.formId,
-week_key: r.weekKey,
-saved_at: r.savedAt,
-store_id: '424',
-data: {
-weekEnding: r.weekEnding,
-champion: r.champion,
-timestamp: r.timestamp,
-correctiveAction: r.correctiveAction,
-fieldData: r.fieldData,
-photoCount: r.photoCount,
-photos: r.photos,
-signatures: r.signatures
-}
-});
-}
-return Promise.all([
-dbGetAll('live'),
-sbRows.length ? sbFetch('haccp_records', 'POST', sbRows).catch(function() {}) : Promise.resolve()
-]);
-}).then(function(results) {
-var liveRecs = results[0] || [];
-var wkLiveRecs = [];
-for (var i = 0; i < liveRecs.length; i++) {
-if (liveRecs[i].weekKey === wk) wkLiveRecs.push(liveRecs[i]);
-}
-var label = getWeekLabel(wk);
-var weekBundle = {
-weekKey: wk,
-label: label,
-closedAt: new Date().toISOString(),
-formCount: wkLiveRecs.length,
-forms: wkLiveRecs
-};
-return dbPut('weeks', weekBundle);
-}).then(function() {
-return dbClearStore('live');
-}).then(function() {
-showToast('Week closed & saved to Records!', 4000);
-updateBannerCount();
-var badges = document.querySelectorAll('.form-saved-badge');
-for (var b = 0; b < badges.length; b++) badges[b].parentNode.removeChild(badges[b]);
-if (manual) showWeekCloseConfirm();
-}).catch(function(e) { showToast('Close failed: ' + e.message); });
-}
-function showWeekCloseConfirm() {
-showToast('Week archived! Forms cleared for new week.', 5000);
-}
-function checkAutoWeekClose() {
-var wk = getWeekKey();
-var closes = getSatClose(wk);
-var now = new Date();
-if (now >= closes) {
-dbGet('weeks', wk).then(function(existing) {
-if (!existing) closeWeek(false);
-}).catch(function() {});
-}
-}
-function showToast(msg, dur) {
-var t = document.getElementById('toast');
-t.textContent = msg;
-t.className = 'toast show';
-setTimeout(function() { t.className = 'toast'; }, dur || 3000);
-}
-function initSig(canvasId) {
-var canvas = document.getElementById(canvasId);
-if (!canvas || sigPads[canvasId]) return;
-canvas.width = canvas.parentElement.offsetWidth || 320;
-canvas.height = parseInt(canvas.getAttribute('height')) || 80;
-var ctx = canvas.getContext('2d');
-ctx.strokeStyle = '#1a1a1a';
-ctx.lineWidth = 2;
-ctx.lineCap = 'round';
-ctx.lineJoin = 'round';
-var drawing = false, lx = 0, ly = 0;
-function pos(e) {
-var r = canvas.getBoundingClientRect();
-var sx = canvas.width / r.width, sy = canvas.height / r.height;
-if (e.touches) return {x:(e.touches[0].clientX-r.left)*sx, y:(e.touches[0].clientY-r.top)*sy};
-return {x:(e.clientX-r.left)*sx, y:(e.clientY-r.top)*sy};
-}
-function start(e) { e.preventDefault(); drawing=true; var p=pos(e); lx=p.x; ly=p.y; ctx.beginPath(); ctx.arc(p.x,p.y,1,0,Math.PI*2); ctx.fill(); }
-function move(e) { if(!drawing)return; e.preventDefault(); var p=pos(e); ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y); ctx.stroke(); lx=p.x; ly=p.y; }
-function stop() { drawing=false; }
-canvas.addEventListener('mousedown', start);
-canvas.addEventListener('mousemove', move);
-canvas.addEventListener('mouseup', stop);
-canvas.addEventListener('mouseleave', stop);
-canvas.addEventListener('touchstart', start, {passive:false});
-canvas.addEventListener('touchmove', move, {passive:false});
-canvas.addEventListener('touchend', stop);
-sigPads[canvasId] = {clear: function() { ctx.clearRect(0,0,canvas.width,canvas.height); }};
-}
-function clearSig(id) { if (sigPads[id]) sigPads[id].clear(); }
-function recordTimestamp(formId) {
-var now = new Date();
-var ts = now.toLocaleString('en-IE', {weekday:'short',year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'Europe/Dublin',hour12:false});
-formTimestamps[formId] = ts;
-var el = document.querySelector('#ts-' + formId + ' .ts-text');
-var btn = document.querySelector('#ts-' + formId + ' .ts-btn');
-if (el) { el.textContent = ts; el.className = 'ts-text recorded'; }
-if (btn) { btn.textContent = 'Update'; btn.className = 'ts-btn recorded-btn'; }
-showToast('Timestamp recorded');
-}
-function handlePhotos(input, formId) {
-if (!formPhotos[formId]) formPhotos[formId] = [];
-var files = input.files;
-for (var fi = 0; fi < files.length; fi++) {
-(function(file) {
-var reader = new FileReader();
-reader.onload = function(e) {
-var ts = formTimestamps[formId] || new Date().toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});
-var obj = {dataUrl:e.target.result, name:file.name, timestamp:ts};
-var idx = formPhotos[formId].push(obj) - 1;
-renderPhotoThumb(document.getElementById('photo-grid-' + formId), obj, formId, idx);
-};
-reader.readAsDataURL(file);
-})(files[fi]);
-}
-}
-function renderPhotoThumb(grid, photo, formId, idx) {
-var div = document.createElement('div');
-div.className = 'photo-thumb';
-var img = document.createElement('img');
-img.src = photo.dataUrl;
-(function(i) { img.addEventListener('click', function() { openLightbox(formId, i); }); })(idx);
-var lbl = document.createElement('div');
-lbl.className = 'photo-label';
-lbl.textContent = photo.timestamp;
-var del = document.createElement('button');
-del.className = 'photo-delete';
-del.textContent = 'x';
-(function(i) { del.addEventListener('click', function() { deletePhoto(formId, i); }); })(idx);
-div.appendChild(img); div.appendChild(lbl); div.appendChild(del);
-grid.appendChild(div);
-}
-function deletePhoto(formId, idx) {
-formPhotos[formId].splice(idx, 1);
-var g = document.getElementById('photo-grid-' + formId);
-g.innerHTML = '';
-for (var i = 0; i < formPhotos[formId].length; i++) {
-renderPhotoThumb(g, formPhotos[formId][i], formId, i);
-}
-}
-function openLightbox(formId, idx) {
-var p = formPhotos[formId] && formPhotos[formId][idx];
-if (!p) return;
-document.getElementById('lightbox-img').src = p.dataUrl;
-document.getElementById('lightbox-info').textContent = p.name + ' - ' + p.timestamp;
-document.getElementById('lightbox').className = 'lightbox open';
-}
-function closeLightbox() {
-document.getElementById('lightbox').className = 'lightbox';
-document.getElementById('lightbox-img').src = '';
-}
-function makeTempRows(units, bodyId) {
-var tbody = document.getElementById(bodyId);
-if (!tbody) return;
-var ampm = ['AM','PM'];
-for (var i = 0; i < units.length; i++) {
-var tr = document.createElement('tr');
-var unitName = units[i][0];
-var c = '<td class="unit-name">' + unitName + '</td><td class="target">' + units[i][1] + '</td>';
-for (var d = 0; d < 7; d++) {
-for (var ap = 0; ap < 2; ap++) {
-c += '<td><input type="text" maxlength="6" data-label="' + unitName + ' ' + DAYS[d] + ' ' + ampm[ap] + '"></td>';
-}
-}
-c += '<td><input type="text" data-label="' + unitName + ' Comments"></td>';
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-}
-function makeHourlyTable(tableId, mode) {
-var table = document.getElementById(tableId);
-if (!table) return;
-var thead = document.createElement('thead');
-var tbody = document.createElement('tbody');
-var r1 = '<tr><th class="time-col">Time</th>';
-var r2 = '<tr><th class="time-col"></th>';
-for (var d = 0; d < 7; d++) {
-r1 += '<th colspan="2">' + DAYS[d] + '</th>';
-r2 += mode === 's1s2' ? '<th>S1 \u00b0C</th><th>S2 \u00b0C</th>' : '<th>Product</th><th>Temp \u00b0C</th>';
-}
-thead.innerHTML = r1 + '</tr>' + r2 + '</tr>';
-table.appendChild(thead);
-for (var ti = 0; ti < hotfoodTimes.length; ti++) {
-var tr = document.createElement('tr');
-var c = '<td class="time-cell">' + hotfoodTimes[ti] + '</td>';
-for (var d2 = 0; d2 < 7; d2++) {
-if (mode === 's1s2') {
-c += '<td><input type="text" maxlength="10" data-label="' + DAYS[d2] + ' ' + hotfoodTimes[ti] + ' S1"></td>';
-c += '<td><input type="text" maxlength="6" data-label="' + DAYS[d2] + ' ' + hotfoodTimes[ti] + ' S2"></td>';
-} else {
-c += '<td><input type="text" maxlength="10" data-label="' + DAYS[d2] + ' ' + hotfoodTimes[ti] + ' Product"></td>';
-c += '<td><input type="text" maxlength="6" data-label="' + DAYS[d2] + ' ' + hotfoodTimes[ti] + ' Temp"></td>';
-}
-}
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-var signCells = '';
-for (var sc = 0; sc < 14; sc++) signCells += '<td><input type="text" maxlength="15" data-label="Sign ' + DAYS[Math.floor(sc/2)] + ' ' + (sc%2===0?'S1':'S2') + '"></td>';
-var sr = document.createElement('tr');
-sr.innerHTML = '<td class="time-cell" style="font-size:10px">Sign</td>' + signCells;
-tbody.appendChild(sr);
-table.appendChild(tbody);
-}
-function makeGSTable() {
-var tbody = document.getElementById('gs-tbody');
-if (!tbody) return;
-var weeks = ['Week 1','Week 2','Week 3','Week 4'];
-var days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-for (var wi = 0; wi < weeks.length; wi++) {
-var wr = document.createElement('tr');
-wr.innerHTML = '<td class="week-header" colspan="10">' + weeks[wi] + '</td>';
-tbody.appendChild(wr);
-for (var di = 0; di < days.length; di++) {
-var tr = document.createElement('tr');
-tr.innerHTML = '<td class="day-name">' + days[di] + '</td>' +
-'<td><input type="text" maxlength="12" data-label="' + weeks[wi] + ' ' + days[di] + ' Date"></td>' +
-'<td><select data-label="' + weeks[wi] + ' ' + days[di] + ' Wiper Blade Cleaned"><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><select data-label="' + weeks[wi] + ' ' + days[di] + ' Wiper Blade No"><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><select data-label="' + weeks[wi] + ' ' + days[di] + ' FOG Containers Cleaned"><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><select data-label="' + weeks[wi] + ' ' + days[di] + ' FOG Containers No"><option></option><option>\u2713</option><option>\u2717</option></select></td>' +
-'<td><input type="text" maxlength="8" data-label="' + weeks[wi] + ' ' + days[di] + ' FOG Litres"></td>' +
-'<td><input type="text" maxlength="8" data-label="' + weeks[wi] + ' ' + days[di] + ' Solids Litres"></td>' +
-'<td><input type="text" maxlength="8" data-label="' + weeks[wi] + ' ' + days[di] + ' Staff Initials"></td>' +
-'<td><input type="text" maxlength="6" data-label="' + weeks[wi] + ' ' + days[di] + ' Time"></td>';
-tbody.appendChild(tr);
-}
-}
-}
-function makeAfterCookTable() {
-var tbody = document.getElementById('after-cook-tbody');
-if (!tbody) return;
-function addSection(label) {
-var tr = document.createElement('tr');
-tr.innerHTML = '<td colspan="6" class="section-hdr">' + label + '</td>';
-tbody.appendChild(tr);
-}
-function addRow(name) {
-var tr = document.createElement('tr');
-tr.innerHTML = '<td><input type="text" maxlength="8" data-label="' + name + ' Time"></td>' +
-'<td class="prod-name">' + name + '</td>' +
-'<td><input type="text" maxlength="15" data-label="' + name + ' Batch/Use By"></td>' +
-'<td><input type="text" maxlength="6" style="color:#c00;font-weight:700" data-label="' + name + ' Core Temp"></td>' +
-'<td><input type="text" maxlength="12" data-label="' + name + ' Supplier Use By"></td>' +
-'<td><input type="text" maxlength="20" data-label="' + name + ' Signature"></td>';
-tbody.appendChild(tr);
-}
-addSection('Breakfast:');
-for (var i = 0; i < breakfastItems.length; i++) addRow(breakfastItems[i]);
-addSection('Lunch:');
-for (var j = 0; j < lunchItems.length; j++) addRow(lunchItems[j]);
-}
-function makeCleanRows(bodyId, items) {
-var tbody = document.getElementById(bodyId);
-if (!tbody) return;
-for (var i = 0; i < items.length; i++) {
-var tr = document.createElement('tr');
-var areaName = items[i][0];
-var c = '<td class="area-name">' + areaName + '</td><td class="chem-name">' + items[i][1] + '</td>';
-for (var d = 0; d < 7; d++) c += '<td><input type="text" maxlength="3" data-label="' + areaName + ' ' + DAYS[d] + '" style="width:100%;border:none;text-align:center;font-size:12px;font-family:inherit;padding:2px;background:transparent"></td>';
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-}
-function makeDeliTraceTable(tableId, products, cols) {
-var table = document.getElementById(tableId);
-if (!table) return;
-var cl = cols.length;
-var r1 = '<tr><th class="prod-col" rowspan="2">Product</th>';
-var r2 = '<tr>';
-for (var d = 0; d < 7; d++) {
-r1 += '<th colspan="' + cl + '">' + DAYS[d] + '</th>';
-for (var ci = 0; ci < cl; ci++) r2 += '<th style="font-size:9px">' + cols[ci] + '</th>';
-}
-var thead = document.createElement('thead');
-thead.innerHTML = r1 + '</tr>' + r2 + '</tr>';
-table.appendChild(thead);
-var tbody = document.createElement('tbody');
-for (var i = 0; i < products.length; i++) {
-var tr = document.createElement('tr');
-var prodName = products[i];
-var c = '<td class="prod-name">' + prodName + '</td>';
-for (var d2 = 0; d2 < 7; d2++) {
-for (var ci2 = 0; ci2 < cl; ci2++) {
-c += '<td><input type="text" maxlength="12" data-label="' + prodName + ' ' + DAYS[d2] + ' ' + cols[ci2] + '"></td>';
-}
-}
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-table.appendChild(tbody);
-}
-function makeIUBDTable(containerId, products, cols) {
-var container = document.getElementById(containerId);
-if (!container) return;
-var cl = cols.length;
-var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
-for (var d = 0; d < 7; d++) {
-for (var ci = 0; ci < cl; ci++) html += '<th>' + (ci === 0 ? DAYS[d] : '') + '</th>';
-}
-html += '</tr><tr><th class="product-col"></th>';
-for (var d2 = 0; d2 < 7; d2++) {
-for (var ci2 = 0; ci2 < cl; ci2++) html += '<th style="font-size:10px">' + cols[ci2] + '</th>';
-}
-html += '</tr></thead><tbody>';
-for (var i = 0; i < products.length; i++) {
-var pname = products[i].name;
-html += '<tr><td class="product-name">' + pname + (products[i].ingr ? '<small>' + products[i].ingr + '</small>' : '') + '</td>';
-for (var dj = 0; dj < 7; dj++) {
-for (var cj = 0; cj < cl; cj++) {
-html += '<td><input type="text" maxlength="12" data-label="' + pname + ' ' + DAYS[dj] + ' ' + cols[cj] + '"></td>';
-}
-}
-html += '</tr>';
-}
-html += '</tbody></table>';
-container.innerHTML = html;
-}
-function makeOUBDTable(containerId, products, col2, col3) {
-var c2 = col2 || 'DO', c3 = col3 || 'UBD';
-var container = document.getElementById(containerId);
-if (!container) return;
-var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
-for (var d = 0; d < 7; d++) html += '<th></th><th>' + DAYS[d] + '</th><th></th>';
-html += '</tr><tr><th class="product-col"></th>';
-for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">' + c2 + '</th><th style="font-size:10px">' + c3 + '</th>';
-html += '</tr></thead><tbody>';
-for (var i = 0; i < products.length; i++) {
-var name = typeof products[i] === 'string' ? products[i] : products[i].name;
-html += '<tr><td class="product-name">' + name + '</td>';
-for (var dj = 0; dj < 7; dj++) {
-html += '<td><input type="text" maxlength="12" data-label="' + name + ' ' + DAYS[dj] + ' OUBD"></td>';
-html += '<td><input type="text" maxlength="12" data-label="' + name + ' ' + DAYS[dj] + ' ' + c2 + '"></td>';
-html += '<td><input type="text" maxlength="12" data-label="' + name + ' ' + DAYS[dj] + ' ' + c3 + '"></td>';
-}
-html += '</tr>';
-}
-html += '</tbody></table>';
-container.innerHTML = html;
-}
-function makeCookedMeatsTable() {
-var container = document.getElementById('cooked-meats-tables');
-if (!container) return;
-var html = '<table class="week-table"><thead><tr><th class="product-col" style="min-width:130px">Name of Product</th>';
-for (var d = 0; d < 7; d++) html += '<th></th><th>' + DAYS[d] + '</th><th></th>';
-html += '</tr><tr><th class="product-col"></th>';
-for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>';
-html += '</tr></thead><tbody>';
-for (var i = 0; i < cookedMeats.length; i++) {
-var cm = cookedMeats[i];
-html += '<tr><td class="product-name">' + cm + '</td>';
-for (var dj = 0; dj < 7; dj++) {
-html += '<td><input type="text" maxlength="12" data-label="' + cm + ' ' + DAYS[dj] + ' OUBD"></td>';
-html += '<td><input type="text" maxlength="12" data-label="' + cm + ' ' + DAYS[dj] + ' Bulk DU"></td>';
-html += '<td><input type="text" maxlength="12" data-label="' + cm + ' ' + DAYS[dj] + ' Slice DU"></td>';
-}
-html += '</tr>';
-}
-html += '</tbody></table>';
-container.innerHTML = html;
-}
-function makeCheeseTable() {
-var container = document.getElementById('cheese-table');
-if (!container) return;
-var html = '<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';
-for (var d = 0; d < 7; d++) html += '<th></th><th>' + DAYS[d] + '</th><th></th>';
-html += '</tr><tr><th class="product-col"></th>';
-for (var d2 = 0; d2 < 7; d2++) html += '<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>';
-html += '</tr></thead><tbody>';
-for (var i = 0; i < 10; i++) {
-html += '<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name" data-label="Cheese Product ' + (i+1) + ' Name"></td>';
-var cheeseCols2=['OUBD','DO','UBD'];
-for (var dj2=0;dj2<7;dj2++){for(var cj2=0;cj2<3;cj2++) html+='<td><input type="text" maxlength="12" data-label="Cheese ' + (i+1) + ' ' + DAYS[dj2] + ' ' + cheeseCols2[cj2] + '"></td>';}
-html += '</tr>';
-}
-html += '</tbody></table>';
-container.innerHTML = html;
-}
-function makeFishRows() {
-var tbody = document.getElementById('fish-body');
-if (!tbody) return;
-var fishDays = ['Mon','Tue','Wed','Thu','Fri','Sat'];
-for (var i = 0; i < 12; i++) {
-var tr = document.createElement('tr');
-var c = '<td><input type="text" placeholder="Product name" data-label="Fish Product row' + (i+1) + '"></td>';
-for (var d = 0; d < 6; d++) {
-c += '<td><input type="text" maxlength="10" data-label="Fish ' + fishDays[d] + ' Country row' + (i+1) + '"></td>';
-c += '<td><input type="text" maxlength="12" data-label="Fish ' + fishDays[d] + ' Display Until row' + (i+1) + '"></td>';
-c += '<td><input type="text" maxlength="15" data-label="Fish ' + fishDays[d] + ' Trace No row' + (i+1) + '"></td>';
-}
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-}
-function makePorkRows() {
-var tbody = document.getElementById('pork-body');
-if (!tbody) return;
-var porkCols = ['Product','OUBD','Date Opened/Cut/Displayed','Scales Use By','Batch No','Signature'];
-for (var i = 0; i < 25; i++) {
-var tr = document.createElement('tr');
-var c = '';
-for (var pc = 0; pc < porkCols.length; pc++) c += '<td><input type="text" data-label="' + porkCols[pc] + ' row' + (i+1) + '"></td>';
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-}
-var LOG_HEADERS = {
-'thawing-body': ['Date','Frozen Product','Time Commenced','Time Completed','Core Temp','Date Cooked/Displayed','Original Use By','New Use By'],
-'mince-body': ['Date/Time','Person','Meat/Batch Code','Cut Type','Temp After Chilling','Scales Use By','Date Removed'],
-'burger-body': ['Date/Time','Person','Meat/Batch Code','Burger Mix','Scales Use By','Date Removed']
-};
-function makeLogRows(bodyId, cols, rows) {
-var tbody = document.getElementById(bodyId);
-if (!tbody) return;
-rows = rows || 20;
-var headers = LOG_HEADERS[bodyId] || [];
-for (var i = 0; i < rows; i++) {
-var tr = document.createElement('tr');
-var c = '';
-for (var j = 0; j < cols; j++) {
-var lbl = headers[j] ? (headers[j] + ' row' + (i+1)) : ('row' + (i+1) + ' col' + (j+1));
-c += '<td><input type="text" data-label="' + lbl + '"></td>';
-}
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-}
-function makeRedMeatClean() {
-var tbody = document.getElementById('clean-redmeat-body');
-if (!tbody) return;
-var skeys = ['DAILY CLEANING SCHEDULE','WEEKLY CLEANING SCHEDULE'];
-var sdata = [cleaningItemsDaily, cleaningItemsWeekly];
-for (var si = 0; si < skeys.length; si++) {
-var hr = document.createElement('tr');
-hr.innerHTML = '<td colspan="9" class="clean-section-header">' + skeys[si] + '</td>';
-tbody.appendChild(hr);
-var items = sdata[si];
-for (var ii = 0; ii < items.length; ii++) {
-var tr = document.createElement('tr');
-var c = '<td class="area-name">' + items[ii][0] + '</td><td class="chem-name">' + items[ii][1] + '</td>';
-for (var d = 0; d < 7; d++) c += '<td><input type="checkbox" data-label="' + items[ii][0] + ' ' + DAYS[d] + '"></td>';
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-}
-}
-function makeFruitVegClean() {
-var tbody = document.getElementById('clean-fruitveg-body');
-if (!tbody) return;
-var daily = [['Floor','Floors','Mop & bucket/degreaser'],['Scales','Scales','Sanitiser'],['Juicer','Juicer','Wash up liq/Sanitiser'],['Salad display','Salad display area','Sanitiser'],['Potato stands','Potato stands','Sanitiser']];
-for (var i = 0; i < daily.length; i++) {
-var tr = document.createElement('tr');
-var c = '<td class="area-name">' + daily[i][0] + '</td><td class="area-name">' + daily[i][1] + '</td><td class="chem-name">' + daily[i][2] + '</td>';
-var ampm2=['M AM','M PM','T AM','T PM','W AM','W PM','T AM','T PM','F AM','F PM','S AM','S PM','S AM','S PM'];
-for (var d = 0; d < 14; d++) c += '<td><input type="text" maxlength="4" data-label="' + daily[i][0] + ' ' + ampm2[d] + '" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-var wh = document.createElement('tr');
-wh.innerHTML = '<td colspan="17" class="clean-section-header">WEEKLY DEEP CLEAN</td>';
-tbody.appendChild(wh);
-var weekly = [['All shelving','Shelving units','Degreaser'],['Cold rooms','Cold room walls/floors','Degreaser/Sanitiser'],['Display fridges','Interior walls','Degreaser/Sanitiser'],['Potato hoppers','Hoppers & surrounds','Degreaser']];
-for (var j = 0; j < weekly.length; j++) {
-var tr2 = document.createElement('tr');
-var c2 = '<td class="area-name">' + weekly[j][0] + '</td><td class="area-name">' + weekly[j][1] + '</td><td class="chem-name">' + weekly[j][2] + '</td>';
-var ampm3=['M AM','M PM','T AM','T PM','W AM','W PM','T AM','T PM','F AM','F PM','S AM','S PM','S AM','S PM'];
-for (var d2 = 0; d2 < 14; d2++) c2 += '<td><input type="text" maxlength="4" data-label="' + weekly[j][0] + ' ' + ampm3[d2] + '" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';
-tr2.innerHTML = c2;
-tbody.appendChild(tr2);
-}
-}
-function makeStockroomClean() {
-var tbody = document.getElementById('clean-stockroom-body');
-if (!tbody) return;
-var dh = document.createElement('tr');
-dh.innerHTML = '<td colspan="9" class="clean-section-header">DAILY CLEANING SCHEDULE</td>';
-tbody.appendChild(dh);
-var dailyItems = [['Yard','Degreaser/Mop'],['Back-up cold room','Degreaser/Sanitiser'],['Ground floor stockroom','Degreaser/Mop'],['First floor stockroom','Degreaser/Mop'],['Sluice room','Degreaser/Sanitiser'],['Bailer area','Degreaser/Mop'],['Returns area','Degreaser/Mop'],['Frozen back-up','Degreaser/Sanitiser'],['Dairy back-up','Degreaser/Sanitiser'],['Office','Sanitiser']];
-for (var i = 0; i < dailyItems.length; i++) {
-var tr = document.createElement('tr');
-var c = '<td class="area-name">' + dailyItems[i][0] + '</td><td class="chem-name">' + dailyItems[i][1] + '</td>';
-for (var d = 0; d < 7; d++) c += '<td><input type="checkbox" data-label="' + dailyItems[i][0] + ' ' + DAYS[d] + '"></td>';
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-var wh = document.createElement('tr');
-wh.innerHTML = '<td colspan="9" class="clean-section-header">WEEKLY DEEP CLEAN</td>';
-tbody.appendChild(wh);
-var weeklyItems = [['Full deep clean - all areas','Degreaser/Sanitiser'],['Racking & shelving','Degreaser'],['Light fittings & vents','Damp cloth']];
-for (var j = 0; j < weeklyItems.length; j++) {
-var tr2 = document.createElement('tr');
-var c2 = '<td class="area-name">' + weeklyItems[j][0] + '</td><td class="chem-name">' + weeklyItems[j][1] + '</td>';
-for (var d2 = 0; d2 < 7; d2++) c2 += '<td><input type="checkbox" data-label="' + weeklyItems[j][0] + ' ' + DAYS[d2] + '"></td>';
-tr2.innerHTML = c2;
-tbody.appendChild(tr2);
-}
-}
-var GOODS_COLS = ['Date','Supplier','Temp Check','Food Safety Checks','Docket No','Product Dating','Product Name','Accept/Reject','Delivery Comments','Signature'];
-function makeGoodsRows(bodyId) {
-var tbody = document.getElementById(bodyId);
-if (!tbody) return;
-for (var i = 0; i < 20; i++) {
-var tr = document.createElement('tr');
-var c = '';
-for (var j = 0; j < 10; j++) {
-var lbl = (GOODS_COLS[j] || ('col'+j)) + ' row' + (i+1);
-c += '<td><input type="text" data-label="' + lbl + '" style="width:100%;border:none;padding:3px;font-size:11px;font-family:inherit"></td>';
-}
-tr.innerHTML = c;
-tbody.appendChild(tr);
-}
-}
-function makeComplianceTables() {
-var container = document.getElementById('compliance-tables');
-if (!container) return;
-for (var di = 0; di < complianceDepts.length; di++) {
-var dept = complianceDepts[di];
-var deptKey = 'dept' + di;
-var html = '<div style="margin-bottom:16px"><table class="compliance-table"><thead>';
-html += '<tr><th style="min-width:120px">Dept</th><th>System</th>';
-html += '<th colspan="3" style="text-align:center">Result (0/3/5)</th>';
-html += '<th>Issues</th><th>Action Taken</th></tr></thead><tbody>';
-for (var ii = 0; ii < dept.items.length; ii++) {
-var radioName = deptKey + 'item' + ii;
-html += '<tr>';
-if (ii === 0) html += '<td class="dept" rowspan="' + dept.items.length + '">' + dept.name + '</td>';
-html += '<td>' + dept.items[ii] + '</td>';
-html += '<td style="text-align:center;width:90px"><div class="score-radio">';
-html += '<label><input type="radio" name="' + radioName + '" value="0">0</label>';
-html += '<label><input type="radio" name="' + radioName + '" value="3">3</label>';
-html += '<label><input type="radio" name="' + radioName + '" value="5">5</label>';
-html += '</div></td>';
-html += '<td><input type="text" data-label="' + dept.name + ' ' + dept.items[ii] + ' Issues" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';
-html += '<td><input type="text" data-label="' + dept.name + ' ' + dept.items[ii] + ' Action" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';
-html += '</tr>';
-}
-var mx = dept.items.length * 5;
-html += '<tr class="max-row"><td colspan="2">Max=' + mx + ' Actual=</td>';
-html += '<td colspan="2"><input type="text" placeholder="Actual" style="border:1px solid #ddd;padding:4px;width:80px;border-radius:4px;font-family:inherit"></td>';
-html += '<td colspan="2" style="font-size:11px;color:#666">(Actual/max)x100=%</td></tr>';
-html += '</tbody></table></div>';
-container.innerHTML += html;
-}
-var zones = document.getElementById('dept-zones');
-var dz = ['1. Serve over deli - Raw Meat/Fish','2. Serve over deli - Ready to eat foods','3. Hot Food bar, salad bar, bakery','4. Deli Pre Pack','5. Fruit & vegetable','6. Dairy','7. Frozen','8. Goods Inwards & Yard'];
-var zh = '<table class="compliance-table"><thead><tr><th>Department</th><th>Red</th><th>Orange</th><th>Green</th></tr></thead><tbody>';
-for (var zi = 0; zi < dz.length; zi++) {
-zh += '<tr><td>' + dz[zi] + '</td>';
-zh += '<td style="text-align:center"><input type="checkbox" style="accent-color:#d32f2f"></td>';
-zh += '<td style="text-align:center"><input type="checkbox" style="accent-color:#e65100"></td>';
-zh += '<td style="text-align:center"><input type="checkbox" style="accent-color:#00703c"></td>';
-zh += '</tr>';
-}
-zh += '</tbody></table>';
-zones.innerHTML = zh;
-}
-var butcherBatchCount = 0;
-function addButcherBatch() {
-butcherBatchCount++;
-var bn = butcherBatchCount;
-var container = document.getElementById('butcher-batches');
-var div = document.createElement('div');
-div.style.cssText = 'background:white;border:2px solid #00703c;border-radius:10px;padding:14px;margin-bottom:16px;';
-var photoId = 'butcher-batch-' + bn;
-var sigId = 'sig-butcher-batch-' + bn;
-var rows = '';
-for (var i = 0; i < 5; i++) {
-rows += '<tr><td><input type="text" data-label="Batch ' + bn + ' Ingredient ' + (i+1) + '" style="width:100%;border:none;padding:4px;font-family:inherit" placeholder="Ingredient"></td>';
-rows += '<td><input type="text" data-label="Batch ' + bn + ' Ingredient ' + (i+1) + ' Code" style="width:100%;border:none;padding:4px;font-family:inherit" placeholder="Code/Date"></td></tr>';
-}
-div.innerHTML =
-'<div style="font-weight:700;color:#005a30;margin-bottom:12px;font-size:14px;">Batch ' + bn + '</div>' +
-'<div class="field-group"><label class="field-label">Product Name</label><input class="field-input" type="text" data-label="Batch ' + bn + ' Product Name" placeholder="e.g. Chicken Tikka"></div>' +
-'<div class="field-row">' +
-'<div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date" data-label="Batch ' + bn + ' Production Date"></div>' +
-'<div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text" data-label="Batch ' + bn + ' Produced By" placeholder="Name"></div>' +
-'</div>' +
-'<div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date" data-label="Batch ' + bn + ' Use By Date"></div>' +
-'<div class="section-title" style="font-size:12px;margin:10px 0 8px">Ingredients</div>' +
-'<table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead><tbody>' + rows + '</tbody></table>' +
-'<div class="section-title" style="margin-top:14px;">Signature</div>' +
-'<div class="sig-box"><canvas id="' + sigId + '" height="80"></canvas><button class="sig-clear" data-sigid="' + sigId + '">Clear</button></div>' +
-'<div style="margin-top:10px;">' +
-'<div class="photo-timestamp-box">' +
-'<div class="timestamp-display" id="ts-' + photoId + '"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="' + photoId + '">Record Time</button></div>' +
-'<div class="photo-upload-area"><div class="photo-grid" id="photo-grid-' + photoId + '"></div>' +
-'<label class="photo-add-btn" for="photo-input-' + photoId + '">&#128247; Add Photo<input type="file" id="photo-input-' + photoId + '" accept="image/*" capture="environment" multiple style="display:none" data-photoid="' + photoId + '"></label>' +
-'</div></div>' +
-'</div>' +
-'<button style="background:#005a30;color:white;width:100%;padding:12px;border:none;border-radius:8px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:12px;" data-batchsave="' + bn + '">&#128190; Save Batch ' + bn + ' to Records</button>';
-container.appendChild(div);
-/* init sig pad for this batch */
-setTimeout(function() { initSig(sigId); }, 100);
-/* wire up photo input */
-var pInp = document.getElementById('photo-input-' + photoId);
-if (pInp) {
-(function(pid){ pInp.addEventListener('change', function() { handlePhotos(pInp, pid); }); })(photoId);
-}
-/* wire up timestamp btn */
-var tsBtn = div.querySelector('[data-tsid="' + photoId + '"]');
-if (tsBtn) {
-(function(tid){ tsBtn.addEventListener('click', function() { recordTimestamp(tid); }); })(photoId);
-}
-/* wire up save btn */
-var saveBtn = div.querySelector('[data-batchsave="' + bn + '"]');
-if (saveBtn) {
-(function(batchNum, batchDiv, bSigId, bPhotoId){ 
-saveBtn.addEventListener('click', function() { saveBatchRecord(batchNum, batchDiv, bSigId, bPhotoId); });
-})(bn, div, sigId, photoId);
-}
-}
-function saveBatchRecord(bn, batchDiv, sigId, photoId) {
-var we = document.getElementById('we-trace-butcher');
-var fsc = document.getElementById('fsc-trace-butcher');
-var now = new Date();
-var wk = getWeekKey();
-/* collect field data from this batch div only */
-var fieldData = {};
-var inputs = batchDiv.querySelectorAll('input[type=text],input[type=date]');
-for (var i = 0; i < inputs.length; i++) {
-var inp = inputs[i];
-var key = inp.getAttribute('data-label') || ('inp_' + i);
-if (inp.value && inp.value.trim()) fieldData[key] = inp.value;
-}
-/* get product name for champion display */
-var productNameEl = batchDiv.querySelector('[data-label="Batch ' + bn + ' Product Name"]');
-var productName = productNameEl ? productNameEl.value : ('Batch ' + bn);
-/* signature */
-var signatures = [];
-var cv = document.getElementById(sigId);
-if (cv) {
-var sigData = null, hasSig = false;
-try {
-var ctx = cv.getContext('2d');
-var imgData = ctx.getImageData(0,0,cv.width,cv.height);
-for (var px = 3; px < imgData.data.length; px += 4) { if (imgData.data[px] > 0) { hasSig = true; break; } }
-if (hasSig) sigData = cv.toDataURL('image/png');
-} catch(e) {}
-signatures.push({id: sigId, dataUrl: sigData, hasSignature: hasSig});
-}
-/* photos */
-var photos = formPhotos[photoId] || [];
-var photoData = [];
-for (var pi = 0; pi < photos.length; pi++) photoData.push({dataUrl:photos[pi].dataUrl, name:photos[pi].name, timestamp:photos[pi].timestamp});
-var ts = formTimestamps[photoId] || now.toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});
-var record = {
-id: now.getTime(),
-formId: 'trace-butcher',
-weekKey: wk,
-savedAt: now.toISOString(),
-weekEnding: we ? we.value : '',
-champion: (fsc && fsc.value ? fsc.value + ' – ' : '') + productName,
-timestamp: ts,
-photos: photoData,
-photoCount: photoData.length,
-correctiveAction: '',
-signatures: signatures,
-fieldData: fieldData
-};
-var liveRec = {
-id: 'trace-butcher::' + wk,
-formId: 'trace-butcher',
-weekKey: wk,
-savedAt: now.toISOString(),
-champion: record.champion,
-weekEnding: record.weekEnding
-};
-var doSave = function() {
-dbPut('live', liveRec).then(function() {
-return dbPut('records', record);
-}).then(function() {
-showToast('Batch ' + bn + ' saved!');
-updateBannerCount();
-updateFormBadge('trace-butcher', true);
-}).catch(function(e) { showToast('Save failed: ' + e.message); });
-};
-if (!db) { openDB().then(function() { doSave(); }); } else { doSave(); }
-}
+function dbPut(store,obj){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).put(obj);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);};});}
+function dbGet(store,key){return new Promise(function(res,rej){var tx=db.transaction(store,'readonly');var r=tx.objectStore(store).get(key);r.onsuccess=function(e){res(e.target.result);};r.onerror=function(e){rej(e.target.error);};});}
+function dbGetAll(store){return new Promise(function(res,rej){var tx=db.transaction(store,'readonly');var r=tx.objectStore(store).getAll();r.onsuccess=function(e){res(e.target.result);};r.onerror=function(e){rej(e.target.error);};});}
+function dbDelete(store,key){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).delete(key);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);};});}
+function dbClearStore(store){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).clear();tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);};});}
+function getWeekKey(){var d=new Date();var dayUTC=d.getUTCDay();var s=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()-dayUTC));return s.toISOString().split('T')[0];}
+function getWeekLabel(wk){var sun=new Date(wk+'T00:00:00');var sat=new Date(sun);sat.setDate(sat.getDate()+6);var fmt=function(dt){return dt.toLocaleDateString('en-IE',{day:'numeric',month:'short'});};return fmt(sun)+' \u2013 '+fmt(sat)+' '+sat.getFullYear();}
+function getSatClose(wk){var sun=new Date(wk+'T00:00:00');var sat=new Date(sun);sat.setDate(sat.getDate()+6);sat.setHours(23,59,59,0);return sat;}
+function collectFieldData(formId){var scr=document.getElementById(formId);if(!scr)return{};var data={};var inputs=scr.querySelectorAll('input[type=text],input[type=date],input[type=number],input[type=time],textarea');for(var i=0;i<inputs.length;i++){var inp=inputs[i];var key=inp.getAttribute('data-label')||inp.id||('inp_'+i);if(inp.value&&inp.value.trim())data[key]=inp.value;}var sels=scr.querySelectorAll('select');for(var si=0;si<sels.length;si++){var sel=sels[si];var sk=sel.getAttribute('data-label')||sel.id||('sel_'+si);if(sel.value)data[sk]=sel.value;}var cbs=scr.querySelectorAll('input[type=checkbox]');for(var ci=0;ci<cbs.length;ci++){var cb=cbs[ci];if(cb.checked){var ck=cb.getAttribute('data-label')||cb.id||('cb_'+ci);data[ck]='checked';}}var radios=scr.querySelectorAll('input[type=radio]:checked');for(var ri=0;ri<radios.length;ri++){var rad=radios[ri];data['radio_'+rad.name]=rad.value;}return data;}
+function restoreFieldData(formId,data){if(!data)return;var scr=document.getElementById(formId);if(!scr)return;var inputs=scr.querySelectorAll('input[type=text],input[type=date],input[type=number],input[type=time],textarea');for(var i=0;i<inputs.length;i++){var inp=inputs[i];var key=inp.getAttribute('data-label')||inp.id||('inp_'+i);if(data[key]!==undefined)inp.value=data[key];}var sels=scr.querySelectorAll('select');for(var si=0;si<sels.length;si++){var sel=sels[si];var sk=sel.getAttribute('data-label')||sel.id||('sel_'+si);if(data[sk]!==undefined)sel.value=data[sk];}var cbs=scr.querySelectorAll('input[type=checkbox]');for(var ci=0;ci<cbs.length;ci++){var cb=cbs[ci];var ck=cb.getAttribute('data-label')||cb.id||('cb_'+ci);if(data[ck]==='checked')cb.checked=true;}var allRadios=scr.querySelectorAll('input[type=radio]');for(var ri=0;ri<allRadios.length;ri++){var rad=allRadios[ri];var rk='radio_'+rad.name;if(data[rk]!==undefined&&rad.value===data[rk])rad.checked=true;}setTimeout(function(){var allInputs=scr.querySelectorAll('input[type=text]');for(var fi=0;fi<allInputs.length;fi++){if(allInputs[fi].value){void allInputs[fi].offsetParent;}}scr.style.webkitTransform='translateZ(0)';setTimeout(function(){scr.style.webkitTransform='';},60);},80);}
+function restoreSignatures(formId,signatures){if(!signatures||!signatures.length)return;var scr=document.getElementById(formId);if(!scr)return;for(var i=0;i<signatures.length;i++){var sig=signatures[i];if(!sig.dataUrl||!sig.hasSignature)continue;var canvas=document.getElementById(sig.id);if(!canvas)continue;(function(cv,url){var img=new Image();img.onload=function(){var ctx=cv.getContext('2d');ctx.clearRect(0,0,cv.width,cv.height);ctx.drawImage(img,0,0,cv.width,cv.height);};img.src=url;})(canvas,sig.dataUrl);}}
+function restorePhotos(formId,photos){if(!photos||!photos.length)return;formPhotos[formId]=[];var grid=document.getElementById('photo-grid-'+formId);if(!grid)return;grid.innerHTML='';for(var i=0;i<photos.length;i++){var idx=formPhotos[formId].push(photos[i])-1;renderPhotoThumb(grid,photos[i],formId,idx);}}
+var currentForm=null,formTimestamps={},formPhotos={},sigPads={};
+function showForm(id){document.getElementById('home').style.display='none';if(currentForm)document.getElementById(currentForm).style.display='none';var scr=document.getElementById(id);if(!scr)return;scr.style.display='block';currentForm=id;document.getElementById('backBtn').style.display='block';var h2=scr.querySelector('h2');document.getElementById('navTitle').textContent=h2?h2.textContent:id;window.scrollTo(0,0);setTimeout(function(){var canvases=scr.querySelectorAll('canvas');for(var ci=0;ci<canvases.length;ci++){initSig(canvases[ci].id);}restoreMergedWeekData(id);},120);}
+function mergeAndDisplay(formId,saves){if(!saves.length)return;saves.sort(function(a,b){return a.savedAt<b.savedAt?-1:1;});var merged={};for(var si=0;si<saves.length;si++){var fd=saves[si].fieldData||(saves[si].data&&saves[si].data.fieldData);if(fd){var keys=Object.keys(fd);for(var ki=0;ki<keys.length;ki++){if(fd[keys[ki]])merged[keys[ki]]=fd[keys[ki]];}}}restoreFieldData(formId,merged);var scr=document.getElementById(formId);if(!scr)return;var banner=scr.querySelector('.week-save-banner');if(!banner){banner=document.createElement('div');banner.className='week-save-banner';banner.style.cssText='background:#fdecea;border-left:3px solid #e41e26;padding:8px 14px;font-size:12px;color:#c0161c;font-weight:600;margin-bottom:12px;';var body=scr.querySelector('.form-body');if(body)body.insertBefore(banner,body.firstChild);}var latest=saves[saves.length-1];var latestSavedAt=latest.savedAt||(latest.data&&latest.data.timestamp)||'';var latestTs=latestSavedAt?new Date(latestSavedAt).toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false}):'';var champion=latest.champion||(latest.data&&latest.data.champion)||'';banner.textContent='\u2705 '+saves.length+' save'+(saves.length!==1?'s':'')+' this week'+(latestTs?' \u00b7 Last: '+latestTs:'')+(champion?' \u00b7 '+champion:'')+' \u00b7 Fill in today\u2019s data and save';}
+function restoreMergedWeekData(formId){var wk=getWeekKey();var sid=getStoreId();sbFetch('haccp_records?form_id=eq.'+formId+'&week_key=eq.'+wk+'&store_id=eq.'+sid+'&order=saved_at.asc','GET').then(function(r){return r.json();}).then(function(sbRows){if(sbRows&&sbRows.length){mergeAndDisplay(formId,sbRows);return;}if(!db)return;dbGetAll('records').then(function(recs){var saves=[];for(var i=0;i<recs.length;i++){if(recs[i].formId===formId&&recs[i].weekKey===wk)saves.push(recs[i]);}mergeAndDisplay(formId,saves);}).catch(function(){});}).catch(function(){if(!db)return;dbGetAll('records').then(function(recs){var saves=[];for(var i=0;i<recs.length;i++){if(recs[i].formId===formId&&recs[i].weekKey===wk)saves.push(recs[i]);}mergeAndDisplay(formId,saves);}).catch(function(){});});}
+function goBack(){if(currentForm)document.getElementById(currentForm).style.display='none';document.getElementById('home').style.display='block';document.getElementById('backBtn').style.display='none';document.getElementById('navTitle').textContent='HACCP System';currentForm=null;window.scrollTo(0,0);}
+function collectSignatures(formId){var signatures=[];var scr=document.getElementById(formId);if(!scr)return signatures;var canvases=scr.querySelectorAll('canvas');for(var si=0;si<canvases.length;si++){var cv=canvases[si];var sigData=null,hasSig=false;if(cv.width>0&&cv.height>0){try{var cvCtx=cv.getContext('2d');var cvImg=cvCtx.getImageData(0,0,cv.width,cv.height);for(var px=3;px<cvImg.data.length;px+=4){if(cvImg.data[px]>0){hasSig=true;break;}}if(hasSig)sigData=cv.toDataURL('image/png');}catch(e2){}}signatures.push({id:cv.id,dataUrl:sigData,hasSignature:hasSig});}return signatures;}
+function saveForm(formId){var we=document.getElementById('we-'+formId);var fsc=document.getElementById('fsc-'+formId);var now=new Date();var wk=getWeekKey();var sid=getStoreId();var photos=formPhotos[formId]||[];var photoData=[];for(var pi=0;pi<photos.length;pi++){photoData.push({dataUrl:photos[pi].dataUrl,name:photos[pi].name,timestamp:photos[pi].timestamp});}var correctiveAction='';var scr=document.getElementById(formId);if(scr){var ta=scr.querySelector('textarea');if(ta)correctiveAction=ta.value||'';}var signatures=collectSignatures(formId);var fullFieldData=collectFieldData(formId);var ts=formTimestamps[formId]||now.toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});
+var doSaveWithDelta=function(prevMerged){var deltaFieldData={};var keys=Object.keys(fullFieldData);for(var ki=0;ki<keys.length;ki++){var k=keys[ki];var newVal=fullFieldData[k];var oldVal=prevMerged[k]||'';if(newVal&&newVal!==oldVal){deltaFieldData[k]=newVal;}}
+var liveRec={id:formId+'::'+wk,formId:formId,weekKey:wk,savedAt:now.toISOString(),weekEnding:we?we.value:'',champion:fsc?fsc.value:'',timestamp:ts,photos:photoData,photoCount:photoData.length,correctiveAction:correctiveAction,signatures:signatures,fieldData:fullFieldData};
+var archRec={id:now.getTime(),formId:formId,weekKey:wk,savedAt:now.toISOString(),weekEnding:we?we.value:'',champion:fsc?fsc.value:'',timestamp:ts,photos:photoData,photoCount:photoData.length,correctiveAction:correctiveAction,signatures:signatures,fieldData:deltaFieldData};
+sbUploadRecordMedia(archRec.id,photoData,signatures).then(function(media){liveRec.photos=media.photos;liveRec.signatures=media.signatures;archRec.photos=media.photos;archRec.signatures=media.signatures;return dbPut('live',liveRec);}).then(function(){return dbPut('records',archRec);}).then(function(){var sbRec={id:String(archRec.id),form_id:archRec.formId,week_key:archRec.weekKey,saved_at:archRec.savedAt,store_id:sid,data:{weekEnding:archRec.weekEnding,champion:archRec.champion,timestamp:archRec.timestamp,correctiveAction:archRec.correctiveAction,fieldData:archRec.fieldData,photoCount:archRec.photoCount,photos:archRec.photos,signatures:archRec.signatures}};return sbFetch('haccp_records','POST',[sbRec]);}).then(function(){showToast('Saved!');updateBannerCount();updateFormBadge(formId,true);clearFormAfterSave(formId);restoreMergedWeekData(formId);}).catch(function(e){showToast('Save failed: '+e.message);});};
+var runSave=function(){sbFetch('haccp_records?form_id=eq.'+formId+'&week_key=eq.'+wk+'&store_id=eq.'+sid+'&order=saved_at.asc','GET').then(function(r){return r.json();}).then(function(sbRows){var prevMerged={};var rows=(sbRows&&sbRows.length)?sbRows:[];for(var i=0;i<rows.length;i++){var fd=rows[i].fieldData||(rows[i].data&&rows[i].data.fieldData);if(fd){var pk=Object.keys(fd);for(var j=0;j<pk.length;j++){if(fd[pk[j]])prevMerged[pk[j]]=fd[pk[j]];}}}doSaveWithDelta(prevMerged);}).catch(function(){if(!db){doSaveWithDelta({});return;}dbGetAll('records').then(function(recs){var prevMerged={};for(var i=0;i<recs.length;i++){if(recs[i].formId===formId&&recs[i].weekKey===wk&&recs[i].fieldData){var pk=Object.keys(recs[i].fieldData);for(var j=0;j<pk.length;j++){if(recs[i].fieldData[pk[j]])prevMerged[pk[j]]=recs[i].fieldData[pk[j]];}}}doSaveWithDelta(prevMerged);}).catch(function(){doSaveWithDelta({});});});};
+if(!db){openDB().then(function(){runSave();});}else{runSave();}}
+function updateFormBadge(formId,saved){var cards=document.querySelectorAll('.form-card');for(var i=0;i<cards.length;i++){if(cards[i].getAttribute('data-form')===formId){var existing=cards[i].querySelector('.form-saved-badge');if(saved&&!existing){var badge=document.createElement('span');badge.className='form-saved-badge';badge.textContent='\u2713';badge.style.cssText='color:#e41e26;font-weight:700;font-size:16px;margin-left:4px;';cards[i].querySelector('.form-info').appendChild(badge);}break;}}}
+function clearFormAfterSave(formId){var scr=document.getElementById(formId);if(!scr)return;var wk=getWeekKey();dbGetAll('records').then(function(recs){var prevMerged={};for(var i=0;i<recs.length;i++){if(recs[i].formId===formId&&recs[i].weekKey===wk&&recs[i].fieldData){var pk=Object.keys(recs[i].fieldData);for(var j=0;j<pk.length;j++){if(recs[i].fieldData[pk[j]])prevMerged[pk[j]]=recs[i].fieldData[pk[j]];}}}var inputs=scr.querySelectorAll('input[type=text],input[type=date],input[type=number],input[type=time],textarea');for(var ii=0;ii<inputs.length;ii++){var inp=inputs[ii];var key=inp.getAttribute('data-label')||inp.id||('inp_'+ii);if(!prevMerged[key])inp.value='';}var sels=scr.querySelectorAll('select');for(var si=0;si<sels.length;si++){var sel=sels[si];var sk=sel.getAttribute('data-label')||sel.id||('sel_'+si);if(!prevMerged[sk])sel.selectedIndex=0;}var cbs=scr.querySelectorAll('input[type=checkbox]');for(var ci=0;ci<cbs.length;ci++){var cb=cbs[ci];var ck=cb.getAttribute('data-label')||cb.id||('cb_'+ci);if(!prevMerged[ck])cb.checked=false;}var radios=scr.querySelectorAll('input[type=radio]');for(var ri=0;ri<radios.length;ri++)radios[ri].checked=false;var canvases=scr.querySelectorAll('canvas');for(var ki=0;ki<canvases.length;ki++){if(sigPads[canvases[ki].id])sigPads[canvases[ki].id].clear();}formPhotos[formId]=[];var grid=document.getElementById('photo-grid-'+formId);if(grid)grid.innerHTML='';formTimestamps[formId]=null;var tsEl=document.querySelector('#ts-'+formId+' .ts-text');var tsBtn=document.querySelector('#ts-'+formId+' .ts-btn');if(tsEl){tsEl.textContent='Tap to record timestamp';tsEl.className='ts-text';}if(tsBtn){tsBtn.textContent='Record Time';tsBtn.className='ts-btn';}}).catch(function(){});}
+function updateBannerCount(){var wk=getWeekKey();var sid=getStoreId();sbFetch('haccp_records?week_key=eq.'+wk+'&store_id=eq.'+sid+'&order=saved_at.asc','GET').then(function(r){return r.json();}).then(function(rows){if(!Array.isArray(rows))throw new Error('not array');var seen={};for(var i=0;i<rows.length;i++){var fid=rows[i].form_id||rows[i].formId;if(fid)seen[fid]=1;}var done=Object.keys(seen).length;document.getElementById('home-banner-sub').textContent=done+' of '+ALL_FORMS.length+' forms completed this week';for(var fid2 in seen)updateFormBadge(fid2,true);}).catch(function(){if(!db)return;dbGetAll('live').then(function(recs){var done=0;for(var i=0;i<recs.length;i++){if(recs[i].weekKey===wk)done++;}document.getElementById('home-banner-sub').textContent=done+' of '+ALL_FORMS.length+' forms completed this week';for(var j=0;j<recs.length;j++){if(recs[j].weekKey===wk)updateFormBadge(recs[j].formId,true);}}).catch(function(){});});}
+function closeWeek(manual){var wk=getWeekKey();var sid=getStoreId();dbGetAll('records').then(function(allRecs){var wkRecs=[];for(var i=0;i<allRecs.length;i++){if(allRecs[i].weekKey===wk)wkRecs.push(allRecs[i]);}var sbRows=[];for(var ri=0;ri<wkRecs.length;ri++){var r=wkRecs[ri];sbRows.push({id:String(r.id),form_id:r.formId,week_key:r.weekKey,saved_at:r.savedAt,store_id:sid,data:{weekEnding:r.weekEnding,champion:r.champion,timestamp:r.timestamp,correctiveAction:r.correctiveAction,fieldData:r.fieldData,photoCount:r.photoCount,photos:r.photos,signatures:r.signatures}});}return Promise.all([dbGetAll('live'),sbRows.length?sbFetch('haccp_records','POST',sbRows).catch(function(){}):Promise.resolve()]);}).then(function(results){var liveRecs=results[0]||[];var wkLiveRecs=[];for(var i=0;i<liveRecs.length;i++){if(liveRecs[i].weekKey===wk)wkLiveRecs.push(liveRecs[i]);}var label=getWeekLabel(wk);var weekBundle={weekKey:wk,label:label,closedAt:new Date().toISOString(),formCount:wkLiveRecs.length,forms:wkLiveRecs};return dbPut('weeks',weekBundle);}).then(function(){return dbClearStore('live');}).then(function(){showToast('Week closed & saved to Records!',4000);updateBannerCount();var badges=document.querySelectorAll('.form-saved-badge');for(var b=0;b<badges.length;b++)badges[b].parentNode.removeChild(badges[b]);if(manual)showToast('Week archived! Forms cleared for new week.',5000);}).catch(function(e){showToast('Close failed: '+e.message);});}
+function checkAutoWeekClose(){var wk=getWeekKey();var closes=getSatClose(wk);var now=new Date();if(now>=closes){dbGet('weeks',wk).then(function(existing){if(!existing)closeWeek(false);}).catch(function(){});}}
+function showToast(msg,dur){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show';setTimeout(function(){t.className='toast';},dur||3000);}
+function initSig(canvasId){var canvas=document.getElementById(canvasId);if(!canvas||sigPads[canvasId])return;canvas.width=canvas.parentElement.offsetWidth||320;canvas.height=parseInt(canvas.getAttribute('height'))||80;var ctx=canvas.getContext('2d');ctx.strokeStyle='#1a1a1a';ctx.lineWidth=2;ctx.lineCap='round';ctx.lineJoin='round';var drawing=false,lx=0,ly=0;function pos(e){var r=canvas.getBoundingClientRect();var sx=canvas.width/r.width,sy=canvas.height/r.height;if(e.touches)return{x:(e.touches[0].clientX-r.left)*sx,y:(e.touches[0].clientY-r.top)*sy};return{x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy};}function start(e){e.preventDefault();drawing=true;var p=pos(e);lx=p.x;ly=p.y;ctx.beginPath();ctx.arc(p.x,p.y,1,0,Math.PI*2);ctx.fill();}function move(e){if(!drawing)return;e.preventDefault();var p=pos(e);ctx.beginPath();ctx.moveTo(lx,ly);ctx.lineTo(p.x,p.y);ctx.stroke();lx=p.x;ly=p.y;}function stop(){drawing=false;}canvas.addEventListener('mousedown',start);canvas.addEventListener('mousemove',move);canvas.addEventListener('mouseup',stop);canvas.addEventListener('mouseleave',stop);canvas.addEventListener('touchstart',start,{passive:false});canvas.addEventListener('touchmove',move,{passive:false});canvas.addEventListener('touchend',stop);sigPads[canvasId]={clear:function(){ctx.clearRect(0,0,canvas.width,canvas.height);}};}
+function clearSig(id){if(sigPads[id])sigPads[id].clear();}
+function recordTimestamp(formId){var now=new Date();var ts=now.toLocaleString('en-IE',{weekday:'short',year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'Europe/Dublin',hour12:false});formTimestamps[formId]=ts;var el=document.querySelector('#ts-'+formId+' .ts-text');var btn=document.querySelector('#ts-'+formId+' .ts-btn');if(el){el.textContent=ts;el.className='ts-text recorded';}if(btn){btn.textContent='Update';btn.className='ts-btn recorded-btn';}showToast('Timestamp recorded');}
+function handlePhotos(input,formId){if(!formPhotos[formId])formPhotos[formId]=[];var files=input.files;for(var fi=0;fi<files.length;fi++){(function(file){var reader=new FileReader();reader.onload=function(e){var ts=formTimestamps[formId]||new Date().toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});var obj={dataUrl:e.target.result,name:file.name,timestamp:ts};var idx=formPhotos[formId].push(obj)-1;renderPhotoThumb(document.getElementById('photo-grid-'+formId),obj,formId,idx);};reader.readAsDataURL(file);})(files[fi]);}}
+function renderPhotoThumb(grid,photo,formId,idx){var div=document.createElement('div');div.className='photo-thumb';var img=document.createElement('img');img.src=photo.dataUrl;(function(i){img.addEventListener('click',function(){openLightbox(formId,i);});})(idx);var lbl=document.createElement('div');lbl.className='photo-label';lbl.textContent=photo.timestamp;var del=document.createElement('button');del.className='photo-delete';del.textContent='x';(function(i){del.addEventListener('click',function(){deletePhoto(formId,i);});})(idx);div.appendChild(img);div.appendChild(lbl);div.appendChild(del);grid.appendChild(div);}
+function deletePhoto(formId,idx){formPhotos[formId].splice(idx,1);var g=document.getElementById('photo-grid-'+formId);g.innerHTML='';for(var i=0;i<formPhotos[formId].length;i++){renderPhotoThumb(g,formPhotos[formId][i],formId,i);}}
+function openLightbox(formId,idx){var p=formPhotos[formId]&&formPhotos[formId][idx];if(!p)return;document.getElementById('lightbox-img').src=p.dataUrl;document.getElementById('lightbox-info').textContent=p.name+' - '+p.timestamp;document.getElementById('lightbox').className='lightbox open';}
+function closeLightbox(){document.getElementById('lightbox').className='lightbox';document.getElementById('lightbox-img').src='';}
+function makeTempRows(units,bodyId){var tbody=document.getElementById(bodyId);if(!tbody)return;var ampm=['AM','PM'];for(var i=0;i<units.length;i++){var tr=document.createElement('tr');var unitName=units[i][0];var c='<td class="unit-name">'+unitName+'</td><td class="target">'+units[i][1]+'</td>';for(var d=0;d<7;d++){for(var ap=0;ap<2;ap++){c+='<td><input type="text" maxlength="6" data-label="'+unitName+' '+DAYS[d]+' '+ampm[ap]+'"></td>';}}c+='<td><input type="text" data-label="'+unitName+' Comments"></td>';tr.innerHTML=c;tbody.appendChild(tr);}}
+function makeHourlyTable(tableId,mode){var table=document.getElementById(tableId);if(!table)return;var thead=document.createElement('thead');var tbody=document.createElement('tbody');var r1='<tr><th class="time-col">Time</th>';var r2='<tr><th class="time-col"></th>';for(var d=0;d<7;d++){r1+='<th colspan="2">'+DAYS[d]+'</th>';r2+=mode==='s1s2'?'<th>S1 \u00b0C</th><th>S2 \u00b0C</th>':'<th>Product</th><th>Temp \u00b0C</th>';}thead.innerHTML=r1+'</tr>'+r2+'</tr>';table.appendChild(thead);for(var ti=0;ti<hotfoodTimes.length;ti++){var tr=document.createElement('tr');var c='<td class="time-cell">'+hotfoodTimes[ti]+'</td>';for(var d2=0;d2<7;d2++){if(mode==='s1s2'){c+='<td><input type="text" maxlength="10" data-label="'+DAYS[d2]+' '+hotfoodTimes[ti]+' S1"></td>';c+='<td><input type="text" maxlength="6" data-label="'+DAYS[d2]+' '+hotfoodTimes[ti]+' S2"></td>';}else{c+='<td><input type="text" maxlength="10" data-label="'+DAYS[d2]+' '+hotfoodTimes[ti]+' Product"></td>';c+='<td><input type="text" maxlength="6" data-label="'+DAYS[d2]+' '+hotfoodTimes[ti]+' Temp"></td>';}}tr.innerHTML=c;tbody.appendChild(tr);}var signCells='';for(var sc=0;sc<14;sc++)signCells+='<td><input type="text" maxlength="15" data-label="Sign '+DAYS[Math.floor(sc/2)]+' '+(sc%2===0?'S1':'S2')+'"></td>';var sr=document.createElement('tr');sr.innerHTML='<td class="time-cell" style="font-size:10px">Sign</td>'+signCells;tbody.appendChild(sr);table.appendChild(tbody);}
+function makeGSTable(){var tbody=document.getElementById('gs-tbody');if(!tbody)return;var weeks=['Week 1','Week 2','Week 3','Week 4'];var days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];for(var wi=0;wi<weeks.length;wi++){var wr=document.createElement('tr');wr.innerHTML='<td class="week-header" colspan="10">'+weeks[wi]+'</td>';tbody.appendChild(wr);for(var di=0;di<days.length;di++){var tr=document.createElement('tr');tr.innerHTML='<td class="day-name">'+days[di]+'</td>'+'<td><input type="text" maxlength="12" data-label="'+weeks[wi]+' '+days[di]+' Date"></td>'+'<td><select data-label="'+weeks[wi]+' '+days[di]+' Wiper Blade Cleaned"><option></option><option>\u2713</option><option>\u2717</option></select></td>'+'<td><select data-label="'+weeks[wi]+' '+days[di]+' Wiper Blade No"><option></option><option>\u2713</option><option>\u2717</option></select></td>'+'<td><select data-label="'+weeks[wi]+' '+days[di]+' FOG Containers Cleaned"><option></option><option>\u2713</option><option>\u2717</option></select></td>'+'<td><select data-label="'+weeks[wi]+' '+days[di]+' FOG Containers No"><option></option><option>\u2713</option><option>\u2717</option></select></td>'+'<td><input type="text" maxlength="8" data-label="'+weeks[wi]+' '+days[di]+' FOG Litres"></td>'+'<td><input type="text" maxlength="8" data-label="'+weeks[wi]+' '+days[di]+' Solids Litres"></td>'+'<td><input type="text" maxlength="8" data-label="'+weeks[wi]+' '+days[di]+' Staff Initials"></td>'+'<td><input type="text" maxlength="6" data-label="'+weeks[wi]+' '+days[di]+' Time"></td>';tbody.appendChild(tr);}}}
+function makeAfterCookTable(){var tbody=document.getElementById('after-cook-tbody');if(!tbody)return;function addSection(label){var tr=document.createElement('tr');tr.innerHTML='<td colspan="6" class="section-hdr">'+label+'</td>';tbody.appendChild(tr);}function addRow(name){var tr=document.createElement('tr');tr.innerHTML='<td><input type="text" maxlength="8" data-label="'+name+' Time"></td>'+'<td class="prod-name">'+name+'</td>'+'<td><input type="text" maxlength="15" data-label="'+name+' Batch/Use By"></td>'+'<td><input type="text" maxlength="6" style="color:#c00;font-weight:700" data-label="'+name+' Core Temp"></td>'+'<td><input type="text" maxlength="12" data-label="'+name+' Supplier Use By"></td>'+'<td><input type="text" maxlength="20" data-label="'+name+' Signature"></td>';tbody.appendChild(tr);}addSection('Breakfast:');for(var i=0;i<breakfastItems.length;i++)addRow(breakfastItems[i]);addSection('Lunch:');for(var j=0;j<lunchItems.length;j++)addRow(lunchItems[j]);}
+function makeCleanRows(bodyId,items){var tbody=document.getElementById(bodyId);if(!tbody)return;for(var i=0;i<items.length;i++){var tr=document.createElement('tr');var areaName=items[i][0];var c='<td class="area-name">'+areaName+'</td><td class="chem-name">'+items[i][1]+'</td>';for(var d=0;d<7;d++)c+='<td><input type="text" maxlength="3" data-label="'+areaName+' '+DAYS[d]+'" style="width:100%;border:none;text-align:center;font-size:12px;font-family:inherit;padding:2px;background:transparent"></td>';tr.innerHTML=c;tbody.appendChild(tr);}}
+function makeDeliTraceTable(tableId,products,cols){var table=document.getElementById(tableId);if(!table)return;var cl=cols.length;var r1='<tr><th class="prod-col" rowspan="2">Product</th>';var r2='<tr>';for(var d=0;d<7;d++){r1+='<th colspan="'+cl+'">'+DAYS[d]+'</th>';for(var ci=0;ci<cl;ci++)r2+='<th style="font-size:9px">'+cols[ci]+'</th>';}var thead=document.createElement('thead');thead.innerHTML=r1+'</tr>'+r2+'</tr>';table.appendChild(thead);var tbody=document.createElement('tbody');for(var i=0;i<products.length;i++){var tr=document.createElement('tr');var prodName=products[i];var c='<td class="prod-name">'+prodName+'</td>';for(var d2=0;d2<7;d2++){for(var ci2=0;ci2<cl;ci2++){c+='<td><input type="text" maxlength="12" data-label="'+prodName+' '+DAYS[d2]+' '+cols[ci2]+'"></td>';}}tr.innerHTML=c;tbody.appendChild(tr);}table.appendChild(tbody);}
+function makeIUBDTable(containerId,products,cols){var container=document.getElementById(containerId);if(!container)return;var cl=cols.length;var html='<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';for(var d=0;d<7;d++){for(var ci=0;ci<cl;ci++)html+='<th>'+(ci===0?DAYS[d]:'')+'</th>';}html+='</tr><tr><th class="product-col"></th>';for(var d2=0;d2<7;d2++){for(var ci2=0;ci2<cl;ci2++)html+='<th style="font-size:10px">'+cols[ci2]+'</th>';}html+='</tr></thead><tbody>';for(var i=0;i<products.length;i++){var pname=products[i].name;html+='<tr><td class="product-name">'+pname+(products[i].ingr?'<small>'+products[i].ingr+'</small>':'')+'</td>';for(var dj=0;dj<7;dj++){for(var cj=0;cj<cl;cj++){html+='<td><input type="text" maxlength="12" data-label="'+pname+' '+DAYS[dj]+' '+cols[cj]+'"></td>';}}html+='</tr>';}html+='</tbody></table>';container.innerHTML=html;}
+function makeOUBDTable(containerId,products,col2,col3){var c2=col2||'DO',c3=col3||'UBD';var container=document.getElementById(containerId);if(!container)return;var html='<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';for(var d=0;d<7;d++)html+='<th></th><th>'+DAYS[d]+'</th><th></th>';html+='</tr><tr><th class="product-col"></th>';for(var d2=0;d2<7;d2++)html+='<th style="font-size:10px">OUBD</th><th style="font-size:10px">'+c2+'</th><th style="font-size:10px">'+c3+'</th>';html+='</tr></thead><tbody>';for(var i=0;i<products.length;i++){var name=typeof products[i]==='string'?products[i]:products[i].name;html+='<tr><td class="product-name">'+name+'</td>';for(var dj=0;dj<7;dj++){html+='<td><input type="text" maxlength="12" data-label="'+name+' '+DAYS[dj]+' OUBD"></td>';html+='<td><input type="text" maxlength="12" data-label="'+name+' '+DAYS[dj]+' '+c2+'"></td>';html+='<td><input type="text" maxlength="12" data-label="'+name+' '+DAYS[dj]+' '+c3+'"></td>';}html+='</tr>';}html+='</tbody></table>';container.innerHTML=html;}
+function makeCookedMeatsTable(){var container=document.getElementById('cooked-meats-tables');if(!container)return;var html='<table class="week-table"><thead><tr><th class="product-col" style="min-width:130px">Name of Product</th>';for(var d=0;d<7;d++)html+='<th></th><th>'+DAYS[d]+'</th><th></th>';html+='</tr><tr><th class="product-col"></th>';for(var d2=0;d2<7;d2++)html+='<th style="font-size:10px">OUBD</th><th style="font-size:10px">Bulk DU</th><th style="font-size:10px">Slice DU</th>';html+='</tr></thead><tbody>';for(var i=0;i<cookedMeats.length;i++){var cm=cookedMeats[i];html+='<tr><td class="product-name">'+cm+'</td>';for(var dj=0;dj<7;dj++){html+='<td><input type="text" maxlength="12" data-label="'+cm+' '+DAYS[dj]+' OUBD"></td>';html+='<td><input type="text" maxlength="12" data-label="'+cm+' '+DAYS[dj]+' Bulk DU"></td>';html+='<td><input type="text" maxlength="12" data-label="'+cm+' '+DAYS[dj]+' Slice DU"></td>';}html+='</tr>';}html+='</tbody></table>';container.innerHTML=html;}
+function makeCheeseTable(){var container=document.getElementById('cheese-table');if(!container)return;var html='<table class="week-table"><thead><tr><th class="product-col">Name of Product</th>';for(var d=0;d<7;d++)html+='<th></th><th>'+DAYS[d]+'</th><th></th>';html+='</tr><tr><th class="product-col"></th>';for(var d2=0;d2<7;d2++)html+='<th style="font-size:10px">OUBD</th><th style="font-size:10px">DO</th><th style="font-size:10px">UBD</th>';html+='</tr></thead><tbody>';for(var i=0;i<10;i++){html+='<tr><td class="product-name"><input type="text" style="width:100%;border:none;font-size:11px;padding:2px;font-family:inherit" placeholder="Product name" data-label="Cheese Product '+(i+1)+' Name"></td>';var cc2=['OUBD','DO','UBD'];for(var dj2=0;dj2<7;dj2++){for(var cj2=0;cj2<3;cj2++)html+='<td><input type="text" maxlength="12" data-label="Cheese '+(i+1)+' '+DAYS[dj2]+' '+cc2[cj2]+'"></td>';}html+='</tr>';}html+='</tbody></table>';container.innerHTML=html;}
+function makeFishRows(){var tbody=document.getElementById('fish-body');if(!tbody)return;var fishDays=['Mon','Tue','Wed','Thu','Fri','Sat'];for(var i=0;i<12;i++){var tr=document.createElement('tr');var c='<td><input type="text" placeholder="Product name" data-label="Fish Product row'+(i+1)+'"></td>';for(var d=0;d<6;d++){c+='<td><input type="text" maxlength="10" data-label="Fish '+fishDays[d]+' Country row'+(i+1)+'"></td>';c+='<td><input type="text" maxlength="12" data-label="Fish '+fishDays[d]+' Display Until row'+(i+1)+'"></td>';c+='<td><input type="text" maxlength="15" data-label="Fish '+fishDays[d]+' Trace No row'+(i+1)+'"></td>';}tr.innerHTML=c;tbody.appendChild(tr);}}
+function makePorkRows(){var tbody=document.getElementById('pork-body');if(!tbody)return;var porkCols=['Product','OUBD','Date Opened/Cut/Displayed','Scales Use By','Batch No','Signature'];for(var i=0;i<25;i++){var tr=document.createElement('tr');var c='';for(var pc=0;pc<porkCols.length;pc++)c+='<td><input type="text" data-label="'+porkCols[pc]+' row'+(i+1)+'"></td>';tr.innerHTML=c;tbody.appendChild(tr);}}
+var LOG_HEADERS={'thawing-body':['Date','Frozen Product','Time Commenced','Time Completed','Core Temp','Date Cooked/Displayed','Original Use By','New Use By'],'mince-body':['Date/Time','Person','Meat/Batch Code','Cut Type','Temp After Chilling','Scales Use By','Date Removed'],'burger-body':['Date/Time','Person','Meat/Batch Code','Burger Mix','Scales Use By','Date Removed']};
+function makeLogRows(bodyId,cols,rows){var tbody=document.getElementById(bodyId);if(!tbody)return;rows=rows||20;var headers=LOG_HEADERS[bodyId]||[];for(var i=0;i<rows;i++){var tr=document.createElement('tr');var c='';for(var j=0;j<cols;j++){var lbl=headers[j]?(headers[j]+' row'+(i+1)):('row'+(i+1)+' col'+(j+1));c+='<td><input type="text" data-label="'+lbl+'"></td>';}tr.innerHTML=c;tbody.appendChild(tr);}}
+function makeRedMeatClean(){var tbody=document.getElementById('clean-redmeat-body');if(!tbody)return;var skeys=['DAILY CLEANING SCHEDULE','WEEKLY CLEANING SCHEDULE'];var sdata=[cleaningItemsDaily,cleaningItemsWeekly];for(var si=0;si<skeys.length;si++){var hr=document.createElement('tr');hr.innerHTML='<td colspan="9" class="clean-section-header">'+skeys[si]+'</td>';tbody.appendChild(hr);var items=sdata[si];for(var ii=0;ii<items.length;ii++){var tr=document.createElement('tr');var c='<td class="area-name">'+items[ii][0]+'</td><td class="chem-name">'+items[ii][1]+'</td>';for(var d=0;d<7;d++)c+='<td><input type="checkbox" data-label="'+items[ii][0]+' '+DAYS[d]+'"></td>';tr.innerHTML=c;tbody.appendChild(tr);}}}
+function makeFruitVegClean(){var tbody=document.getElementById('clean-fruitveg-body');if(!tbody)return;var daily=[['Floor','Floors','Mop & bucket/degreaser'],['Scales','Scales','Sanitiser'],['Juicer','Juicer','Wash up liq/Sanitiser'],['Salad display','Salad display area','Sanitiser'],['Potato stands','Potato stands','Sanitiser']];for(var i=0;i<daily.length;i++){var tr=document.createElement('tr');var c='<td class="area-name">'+daily[i][0]+'</td><td class="area-name">'+daily[i][1]+'</td><td class="chem-name">'+daily[i][2]+'</td>';var ampm2=['M AM','M PM','T AM','T PM','W AM','W PM','T AM','T PM','F AM','F PM','S AM','S PM','S AM','S PM'];for(var d=0;d<14;d++)c+='<td><input type="text" maxlength="4" data-label="'+daily[i][0]+' '+ampm2[d]+'" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';tr.innerHTML=c;tbody.appendChild(tr);}var wh=document.createElement('tr');wh.innerHTML='<td colspan="17" class="clean-section-header">WEEKLY DEEP CLEAN</td>';tbody.appendChild(wh);var weekly=[['All shelving','Shelving units','Degreaser'],['Cold rooms','Cold room walls/floors','Degreaser/Sanitiser'],['Display fridges','Interior walls','Degreaser/Sanitiser'],['Potato hoppers','Hoppers & surrounds','Degreaser']];for(var j=0;j<weekly.length;j++){var tr2=document.createElement('tr');var c2='<td class="area-name">'+weekly[j][0]+'</td><td class="area-name">'+weekly[j][1]+'</td><td class="chem-name">'+weekly[j][2]+'</td>';var ampm3=['M AM','M PM','T AM','T PM','W AM','W PM','T AM','T PM','F AM','F PM','S AM','S PM','S AM','S PM'];for(var d2=0;d2<14;d2++)c2+='<td><input type="text" maxlength="4" data-label="'+weekly[j][0]+' '+ampm3[d2]+'" style="width:100%;border:none;text-align:center;font-size:11px;padding:2px;font-family:inherit;background:transparent"></td>';tr2.innerHTML=c2;tbody.appendChild(tr2);}}
+function makeStockroomClean(){var tbody=document.getElementById('clean-stockroom-body');if(!tbody)return;var dh=document.createElement('tr');dh.innerHTML='<td colspan="9" class="clean-section-header">DAILY CLEANING SCHEDULE</td>';tbody.appendChild(dh);var dailyItems=[['Yard','Degreaser/Mop'],['Back-up cold room','Degreaser/Sanitiser'],['Ground floor stockroom','Degreaser/Mop'],['First floor stockroom','Degreaser/Mop'],['Sluice room','Degreaser/Sanitiser'],['Bailer area','Degreaser/Mop'],['Returns area','Degreaser/Mop'],['Frozen back-up','Degreaser/Sanitiser'],['Dairy back-up','Degreaser/Sanitiser'],['Office','Sanitiser']];for(var i=0;i<dailyItems.length;i++){var tr=document.createElement('tr');var c='<td class="area-name">'+dailyItems[i][0]+'</td><td class="chem-name">'+dailyItems[i][1]+'</td>';for(var d=0;d<7;d++)c+='<td><input type="checkbox" data-label="'+dailyItems[i][0]+' '+DAYS[d]+'"></td>';tr.innerHTML=c;tbody.appendChild(tr);}var wh=document.createElement('tr');wh.innerHTML='<td colspan="9" class="clean-section-header">WEEKLY DEEP CLEAN</td>';tbody.appendChild(wh);var weeklyItems=[['Full deep clean - all areas','Degreaser/Sanitiser'],['Racking & shelving','Degreaser'],['Light fittings & vents','Damp cloth']];for(var j=0;j<weeklyItems.length;j++){var tr2=document.createElement('tr');var c2='<td class="area-name">'+weeklyItems[j][0]+'</td><td class="chem-name">'+weeklyItems[j][1]+'</td>';for(var d2=0;d2<7;d2++)c2+='<td><input type="checkbox" data-label="'+weeklyItems[j][0]+' '+DAYS[d2]+'"></td>';tr2.innerHTML=c2;tbody.appendChild(tr2);}}
+var GOODS_COLS=['Date','Supplier','Temp Check','Food Safety Checks','Docket No','Product Dating','Product Name','Accept/Reject','Delivery Comments','Signature'];
+function makeGoodsRows(bodyId){var tbody=document.getElementById(bodyId);if(!tbody)return;for(var i=0;i<20;i++){var tr=document.createElement('tr');var c='';for(var j=0;j<10;j++){var lbl=(GOODS_COLS[j]||('col'+j))+' row'+(i+1);c+='<td><input type="text" data-label="'+lbl+'" style="width:100%;border:none;padding:3px;font-size:11px;font-family:inherit"></td>';}tr.innerHTML=c;tbody.appendChild(tr);}}
+function makeComplianceTables(){var container=document.getElementById('compliance-tables');if(!container)return;for(var di=0;di<complianceDepts.length;di++){var dept=complianceDepts[di];var deptKey='dept'+di;var html='<div style="margin-bottom:16px"><table class="compliance-table"><thead>';html+='<tr><th style="min-width:120px">Dept</th><th>System</th>';html+='<th colspan="3" style="text-align:center">Result (0/3/5)</th>';html+='<th>Issues</th><th>Action Taken</th></tr></thead><tbody>';for(var ii=0;ii<dept.items.length;ii++){var radioName=deptKey+'item'+ii;html+='<tr>';if(ii===0)html+='<td class="dept" rowspan="'+dept.items.length+'">'+dept.name+'</td>';html+='<td>'+dept.items[ii]+'</td>';html+='<td style="text-align:center;width:90px"><div class="score-radio">';html+='<label><input type="radio" name="'+radioName+'" value="0">0</label>';html+='<label><input type="radio" name="'+radioName+'" value="3">3</label>';html+='<label><input type="radio" name="'+radioName+'" value="5">5</label>';html+='</div></td>';html+='<td><input type="text" data-label="'+dept.name+' '+dept.items[ii]+' Issues" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';html+='<td><input type="text" data-label="'+dept.name+' '+dept.items[ii]+' Action" style="width:100%;border:none;font-size:12px;padding:4px;font-family:inherit"></td>';html+='</tr>';}var mx=dept.items.length*5;html+='<tr class="max-row"><td colspan="2">Max='+mx+' Actual=</td>';html+='<td colspan="2"><input type="text" placeholder="Actual" style="border:1px solid #ddd;padding:4px;width:80px;border-radius:4px;font-family:inherit"></td>';html+='<td colspan="2" style="font-size:11px;color:#666">(Actual/max)x100=%</td></tr>';html+='</tbody></table></div>';container.innerHTML+=html;}var zones=document.getElementById('dept-zones');var dz=['1. Serve over deli - Raw Meat/Fish','2. Serve over deli - Ready to eat foods','3. Hot Food bar, salad bar, bakery','4. Deli Pre Pack','5. Fruit & vegetable','6. Dairy','7. Frozen','8. Goods Inwards & Yard'];var zh='<table class="compliance-table"><thead><tr><th>Department</th><th>Red</th><th>Orange</th><th>Green</th></tr></thead><tbody>';for(var zi=0;zi<dz.length;zi++){zh+='<tr><td>'+dz[zi]+'</td>';zh+='<td style="text-align:center"><input type="checkbox" style="accent-color:#d32f2f"></td>';zh+='<td style="text-align:center"><input type="checkbox" style="accent-color:#e65100"></td>';zh+='<td style="text-align:center"><input type="checkbox" style="accent-color:#e41e26"></td>';zh+='</tr>';}zh+='</tbody></table>';zones.innerHTML=zh;}
+var butcherBatchCount=0;
+function addButcherBatch(){butcherBatchCount++;var bn=butcherBatchCount;var container=document.getElementById('butcher-batches');var div=document.createElement('div');div.style.cssText='background:white;border:2px solid #e41e26;border-radius:10px;padding:14px;margin-bottom:16px;';var photoId='butcher-batch-'+bn;var sigId='sig-butcher-batch-'+bn;var rows='';for(var i=0;i<5;i++){rows+='<tr><td><input type="text" data-label="Batch '+bn+' Ingredient '+(i+1)+'" style="width:100%;border:none;padding:4px;font-family:inherit" placeholder="Ingredient"></td>';rows+='<td><input type="text" data-label="Batch '+bn+' Ingredient '+(i+1)+' Code" style="width:100%;border:none;padding:4px;font-family:inherit" placeholder="Code/Date"></td></tr>';}div.innerHTML='<div style="font-weight:700;color:#c0161c;margin-bottom:12px;font-size:14px;">Batch '+bn+'</div>'+'<div class="field-group"><label class="field-label">Product Name</label><input class="field-input" type="text" data-label="Batch '+bn+' Product Name" placeholder="e.g. Chicken Tikka"></div>'+'<div class="field-row"><div class="field-group"><label class="field-label">Production Date</label><input class="field-input" type="date" data-label="Batch '+bn+' Production Date"></div><div class="field-group"><label class="field-label">Produced By</label><input class="field-input" type="text" data-label="Batch '+bn+' Produced By" placeholder="Name"></div></div>'+'<div class="field-group"><label class="field-label">Product Use By Date</label><input class="field-input" type="date" data-label="Batch '+bn+' Use By Date"></div>'+'<div class="section-title" style="font-size:12px;margin:10px 0 8px">Ingredients</div>'+'<table class="log-table"><thead><tr><th>Ingredient</th><th>Code / BB / Use By</th></tr></thead><tbody>'+rows+'</tbody></table>'+'<div class="section-title" style="margin-top:14px;">Signature</div>'+'<div class="sig-box"><canvas id="'+sigId+'" height="80"></canvas><button class="sig-clear" data-sigid="'+sigId+'">Clear</button></div>'+'<div style="margin-top:10px;"><div class="photo-timestamp-box"><div class="timestamp-display" id="ts-'+photoId+'"><span class="ts-icon">&#128336;</span><span class="ts-text">Tap to record timestamp</span><button class="ts-btn" data-tsid="'+photoId+'">Record Time</button></div><div class="photo-upload-area"><div class="photo-grid" id="photo-grid-'+photoId+'"></div><label class="photo-add-btn" for="photo-input-'+photoId+'">&#128247; Add Photo<input type="file" id="photo-input-'+photoId+'" accept="image/*" capture="environment" multiple style="display:none" data-photoid="'+photoId+'"></label></div></div></div>'+'<button style="background:#c0161c;color:white;width:100%;padding:12px;border:none;border-radius:8px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:12px;" data-batchsave="'+bn+'">&#128190; Save Batch '+bn+' to Records</button>';container.appendChild(div);setTimeout(function(){initSig(sigId);},100);var pInp=document.getElementById('photo-input-'+photoId);if(pInp){(function(pid){pInp.addEventListener('change',function(){handlePhotos(pInp,pid);});})(photoId);}var tsBtn=div.querySelector('[data-tsid="'+photoId+'"]');if(tsBtn){(function(tid){tsBtn.addEventListener('click',function(){recordTimestamp(tid);});})(photoId);}var saveBtn=div.querySelector('[data-batchsave="'+bn+'"]');if(saveBtn){(function(batchNum,batchDiv,bSigId,bPhotoId){saveBtn.addEventListener('click',function(){saveBatchRecord(batchNum,batchDiv,bSigId,bPhotoId);});})(bn,div,sigId,photoId);}}
+function saveBatchRecord(bn,batchDiv,sigId,photoId){var we=document.getElementById('we-trace-butcher');var fsc=document.getElementById('fsc-trace-butcher');var now=new Date();var wk=getWeekKey();var sid=getStoreId();var fieldData={};var inputs=batchDiv.querySelectorAll('input[type=text],input[type=date]');for(var i=0;i<inputs.length;i++){var inp=inputs[i];var key=inp.getAttribute('data-label')||('inp_'+i);if(inp.value&&inp.value.trim())fieldData[key]=inp.value;}var productNameEl=batchDiv.querySelector('[data-label="Batch '+bn+' Product Name"]');var productName=productNameEl?productNameEl.value:('Batch '+bn);var signatures=[];var cv=document.getElementById(sigId);if(cv){var sigData=null,hasSig=false;try{var ctx=cv.getContext('2d');var imgData=ctx.getImageData(0,0,cv.width,cv.height);for(var px=3;px<imgData.data.length;px+=4){if(imgData.data[px]>0){hasSig=true;break;}}if(hasSig)sigData=cv.toDataURL('image/png');}catch(e){}signatures.push({id:sigId,dataUrl:sigData,hasSignature:hasSig});}var photos=formPhotos[photoId]||[];var photoData=[];for(var pi=0;pi<photos.length;pi++)photoData.push({dataUrl:photos[pi].dataUrl,name:photos[pi].name,timestamp:photos[pi].timestamp});var ts=formTimestamps[photoId]||now.toLocaleString('en-IE',{timeZone:'Europe/Dublin',hour12:false});var record={id:now.getTime(),formId:'trace-butcher',weekKey:wk,savedAt:now.toISOString(),weekEnding:we?we.value:'',champion:(fsc&&fsc.value?fsc.value+' - ':'')+productName,timestamp:ts,photos:photoData,photoCount:photoData.length,correctiveAction:'',signatures:signatures,fieldData:fieldData};var liveRec={id:'trace-butcher::'+wk,formId:'trace-butcher',weekKey:wk,savedAt:now.toISOString(),champion:record.champion,weekEnding:record.weekEnding};var doSave=function(){dbPut('live',liveRec).then(function(){return dbPut('records',record);}).then(function(){showToast('Batch '+bn+' saved!');updateBannerCount();updateFormBadge('trace-butcher',true);}).catch(function(e){showToast('Save failed: '+e.message);});};if(!db){openDB().then(function(){doSave();});}else{doSave();}}
 document.addEventListener('DOMContentLoaded', function() {
-openDB().then(function() { updateBannerCount(); checkAutoWeekClose(); setInterval(checkAutoWeekClose, 60000); }).catch(function() {});
-window.addEventListener('pagehide', function() {
-try { if (db) { db.close(); } } catch(e) {}
+initPinScreen();
+openDB().then(function(){
+var stored = sessionStorage.getItem('haccp_store');
+if (stored) { updateBannerCount(); checkAutoWeekClose(); setInterval(checkAutoWeekClose,60000); }
+}).catch(function(){});
+window.addEventListener('pagehide',function(){try{if(db){db.close();}}catch(e){}});
+document.getElementById('backBtn').addEventListener('click',goBack);
+document.getElementById('lightbox').addEventListener('click',closeLightbox);
+document.getElementById('lightbox-close-btn').addEventListener('click',function(e){e.stopPropagation();closeLightbox();});
+var closeWeekBtn = document.getElementById('closeWeekBtn');
+if (closeWeekBtn) {
+closeWeekBtn.addEventListener('click', function() {
+if (confirm('Close this week? All saved forms will be archived to Records and cleared for next week.')) {
+closeWeek(true);
+}
 });
-document.getElementById('backBtn').addEventListener('click', goBack);
-document.getElementById('lightbox').addEventListener('click', closeLightbox);
-document.getElementById('lightbox-close-btn').addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
-var recBanner = document.querySelector('.records-banner');
-if (recBanner) {
-  recBanner.addEventListener('click', function() {
-    try { if (db) { db.close(); db = null; } } catch(e) {}
-  });
 }
-var cards = document.querySelectorAll('.form-card');
-for (var ci = 0; ci < cards.length; ci++) {
-(function(card) {
-card.addEventListener('click', function() {
-var fid = card.getAttribute('data-form');
-if (fid) showForm(fid);
-});
-})(cards[ci]);
-}
-var saveBtns = document.querySelectorAll('.btn-save');
-for (var si = 0; si < saveBtns.length; si++) {
-(function(btn) {
-btn.addEventListener('click', function() {
-var fid = btn.getAttribute('data-saveid');
-if (fid) saveForm(fid);
-});
-})(saveBtns[si]);
-}
-var sigBtns = document.querySelectorAll('.sig-clear');
-for (var sgi = 0; sgi < sigBtns.length; sgi++) {
-(function(btn) {
-btn.addEventListener('click', function() {
-var sid = btn.getAttribute('data-sigid');
-if (sid) clearSig(sid);
-});
-})(sigBtns[sgi]);
-}
-var tsBtns = document.querySelectorAll('.ts-btn');
-for (var ti = 0; ti < tsBtns.length; ti++) {
-(function(btn) {
-btn.addEventListener('click', function() {
-var tsid = btn.getAttribute('data-tsid');
-if (tsid) recordTimestamp(tsid);
-});
-})(tsBtns[ti]);
-}
-var photoInputs = document.querySelectorAll('input[data-photoid]');
-for (var pi = 0; pi < photoInputs.length; pi++) {
-(function(inp) {
-inp.addEventListener('change', function() { handlePhotos(inp, inp.getAttribute('data-photoid')); });
-})(photoInputs[pi]);
-}
-var addBatchBtn = document.getElementById('add-butcher-batch-btn');
-if (addBatchBtn) { addBatchBtn.addEventListener('click', addButcherBatch); }
-makeTempRows(meatTempUnits, 'temp-meat-body');
-makeTempRows(prepackTempUnits, 'temp-prepack-body');
-makeTempRows(dairyTempUnits, 'temp-dairy-body');
-makeTempRows(frozenTempUnits, 'temp-frozen-body');
-makeTempRows(fruitVegTempUnits, 'temp-fruitveg-body');
-makeTempRows(deliTempUnits, 'temp-deli-body');
-makeHourlyTable('chicken-hourly-table', 's1s2');
-makeHourlyTable('hotbar-hourly-table', 'prodtemp');
-makeHourlyTable('soup-hourly-table', 's1s2');
+var recBanner=document.querySelector('.records-banner');if(recBanner){recBanner.addEventListener('click',function(){try{if(db){db.close();db=null;}}catch(e){}});}
+var cards=document.querySelectorAll('.form-card');for(var ci=0;ci<cards.length;ci++){(function(card){card.addEventListener('click',function(){var fid=card.getAttribute('data-form');if(fid)showForm(fid);});})(cards[ci]);}
+var saveBtns=document.querySelectorAll('.btn-save');for(var si=0;si<saveBtns.length;si++){(function(btn){btn.addEventListener('click',function(){var fid=btn.getAttribute('data-saveid');if(fid)saveForm(fid);});})(saveBtns[si]);}
+var sigBtns=document.querySelectorAll('.sig-clear');for(var sgi=0;sgi<sigBtns.length;sgi++){(function(btn){btn.addEventListener('click',function(){var sid=btn.getAttribute('data-sigid');if(sid)clearSig(sid);});})(sigBtns[sgi]);}
+var tsBtns=document.querySelectorAll('.ts-btn');for(var ti=0;ti<tsBtns.length;ti++){(function(btn){btn.addEventListener('click',function(){var tsid=btn.getAttribute('data-tsid');if(tsid)recordTimestamp(tsid);});})(tsBtns[ti]);}
+var photoInputs=document.querySelectorAll('input[data-photoid]');for(var pi=0;pi<photoInputs.length;pi++){(function(inp){inp.addEventListener('change',function(){handlePhotos(inp,inp.getAttribute('data-photoid'));});})(photoInputs[pi]);}
+var addBatchBtn=document.getElementById('add-butcher-batch-btn');if(addBatchBtn){addBatchBtn.addEventListener('click',addButcherBatch);}
+makeTempRows(meatTempUnits,'temp-meat-body');
+makeTempRows(prepackTempUnits,'temp-prepack-body');
+makeTempRows(dairyTempUnits,'temp-dairy-body');
+makeTempRows(frozenTempUnits,'temp-frozen-body');
+makeTempRows(fruitVegTempUnits,'temp-fruitveg-body');
+makeTempRows(deliTempUnits,'temp-deli-body');
+makeHourlyTable('chicken-hourly-table','s1s2');
+makeHourlyTable('hotbar-hourly-table','prodtemp');
+makeHourlyTable('soup-hourly-table','s1s2');
 makeGSTable();
 makeAfterCookTable();
-makeCleanRows('hotfood-daily-clean-body', hotfoodDailyClean);
-makeCleanRows('hotfood-weekly-clean-body', hotfoodWeeklyClean);
-makeCleanRows('cookedmeat-clean-body', cookedmeatClean);
-makeCleanRows('cookedmeat-weekly-clean-body', cookedmeatWeeklyClean);
-makeLogRows('thawing-body', 8, 25);
-makeDeliTraceTable('deli-trace-stuffing-table', deliTraceStuffing, ['OUBD','DP','UBD','D']);
-makeDeliTraceTable('deli-trace-butter-table', deliTraceButter, ['OUBD','DP','UBD','D']);
-makeDeliTraceTable('deli-trace-chicken-table', deliTraceChicken, ['OUBD','DP','UBD']);
-makeDeliTraceTable('deli-trace-saladveg-table', deliTraceSaladVeg, ['OUBD','DP','UBD','D']);
-makeDeliTraceTable('deli-trace-eggtuna-table', deliTraceEggTuna, ['OUBD','DP','UBD']);
-makeIUBDTable('sandwich-tables', sandwiches, ['IUBD','UBD']);
-makeIUBDTable('wrap-tables', wraps, ['IUBD','UBD']);
-makeIUBDTable('pizza-tables', pizzas, ['IUBD','UBD']);
-makeIUBDTable('salad-made-tables', saladsMade, ['IUBD','DM','DD']);
-makeIUBDTable('salad-prepack-tables', saladsPrepack, ['IUBD/OUBD','DM/DO','DD']);
-makeOUBDTable('savouries-table', savouries);
+makeCleanRows('hotfood-daily-clean-body',hotfoodDailyClean);
+makeCleanRows('hotfood-weekly-clean-body',hotfoodWeeklyClean);
+makeCleanRows('cookedmeat-clean-body',cookedmeatClean);
+makeCleanRows('cookedmeat-weekly-clean-body',cookedmeatWeeklyClean);
+makeLogRows('thawing-body',8,25);
+makeDeliTraceTable('deli-trace-stuffing-table',deliTraceStuffing,['OUBD','DP','UBD','D']);
+makeDeliTraceTable('deli-trace-butter-table',deliTraceButter,['OUBD','DP','UBD','D']);
+makeDeliTraceTable('deli-trace-chicken-table',deliTraceChicken,['OUBD','DP','UBD']);
+makeDeliTraceTable('deli-trace-saladveg-table',deliTraceSaladVeg,['OUBD','DP','UBD','D']);
+makeDeliTraceTable('deli-trace-eggtuna-table',deliTraceEggTuna,['OUBD','DP','UBD']);
+makeIUBDTable('sandwich-tables',sandwiches,['IUBD','UBD']);
+makeIUBDTable('wrap-tables',wraps,['IUBD','UBD']);
+makeIUBDTable('pizza-tables',pizzas,['IUBD','UBD']);
+makeIUBDTable('salad-made-tables',saladsMade,['IUBD','DM','DD']);
+makeIUBDTable('salad-prepack-tables',saladsPrepack,['IUBD/OUBD','DM/DO','DD']);
+makeOUBDTable('savouries-table',savouries);
 makeCookedMeatsTable();
-makeOUBDTable('salami-table', salamiOlives);
+makeOUBDTable('salami-table',salamiOlives);
 makeCheeseTable();
 makeFishRows();
 makePorkRows();
-makeLogRows('mince-body', 7, 20);
-makeLogRows('burger-body', 6, 20);
+makeLogRows('mince-body',7,20);
+makeLogRows('burger-body',6,20);
 makeRedMeatClean();
 makeFruitVegClean();
 makeStockroomClean();

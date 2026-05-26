@@ -1,24 +1,23 @@
 <!DOCTYPE html><html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HACCP Report</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:sans-serif;background:#f4f6f4;color:#1a1a1a;font-size:14px;}
-.hdr{background:#00703c;color:white;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+body{font-family:sans-serif;background:#f4f0f0;color:#1a1a1a;font-size:14px;}
+.hdr{background:#e41e26;color:white;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
 .hdr h1{font-size:15px;font-weight:700;flex:1;text-align:center;}
-.btn{background:white;color:#00703c;border:none;padding:7px 14px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;}
+.btn{background:white;color:#e41e26;border:none;padding:7px 14px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;}
 .btn-back{background:rgba(255,255,255,0.2);color:white;}
 #content{padding:14px;}
 .card{background:white;border-radius:10px;padding:14px;margin-bottom:12px;border:1px solid #d0d0d0;}
 .stat-row{display:flex;gap:10px;margin-bottom:4px;}
-.stat{background:#e8f5ee;border-radius:8px;padding:10px 14px;flex:1;text-align:center;}
-.stat .v{font-size:22px;font-weight:700;color:#00703c;}
+.stat{background:#fdecea;border-radius:8px;padding:10px 14px;flex:1;text-align:center;}
+.stat .v{font-size:22px;font-weight:700;color:#e41e26;}
 .stat .l{font-size:10px;color:#666;text-transform:uppercase;}
-.save-block{background:#f8faf8;border-radius:8px;padding:10px;margin:8px 0;}
-.save-hdr{background:#005a30;color:white;border-radius:5px;padding:6px 10px;font-size:12px;font-weight:700;margin-bottom:8px;}
+.save-block{background:#faf8f8;border-radius:8px;padding:10px;margin:8px 0;}
+.save-hdr{background:#c0161c;color:white;border-radius:5px;padding:6px 10px;font-size:12px;font-weight:700;margin-bottom:8px;}
 .kv{display:flex;border-bottom:1px solid #eee;padding:3px 0;font-size:11px;}
 .kv:last-child{border:none;padding-bottom:0;}
 .kv .k{color:#888;width:45%;flex-shrink:0;}
@@ -30,7 +29,7 @@ body{font-family:sans-serif;background:#f4f6f4;color:#1a1a1a;font-size:14px;}
 .form-hdr{padding:10px 14px;border-bottom:1px solid #d0d0d0;}
 .form-title{font-size:13px;font-weight:700;}
 .form-subtitle{font-size:11px;margin-top:2px;}
-.section-btn{display:inline-block;background:#005a30;color:white;border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;margin:10px 0 4px;font-family:inherit;}
+.section-btn{display:inline-block;background:#c0161c;color:white;border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;margin:10px 0 4px;font-family:inherit;}
 @media print{.hdr{display:none;}.save-block{page-break-inside:avoid;}}
 </style>
 </head>
@@ -51,11 +50,7 @@ var reportByForm={};
 function render(wk,rows){
   rows.sort(function(a,b){return a.savedAt<b.savedAt?-1:1;});
   reportByForm={};
-  for(var i=0;i<rows.length;i++){
-    var r=rows[i];var fid=r.formId||r.form_id;
-    if(!reportByForm[fid])reportByForm[fid]=[];
-    reportByForm[fid].push(r);
-  }
+  for(var i=0;i<rows.length;i++){var r=rows[i];var fid=r.formId||r.form_id;if(!reportByForm[fid])reportByForm[fid]=[];reportByForm[fid].push(r);}
   var done=Object.keys(reportByForm).length;
   document.getElementById('hTitle').textContent=wkLabel(wk);
   var html='<div class="card"><div class="stat-row">';
@@ -72,7 +67,7 @@ function render(wk,rows){
       var form=forms[ri];var saves=reportByForm[form.id]||[];
       html+='<div class="card">';
       if(saves.length){
-        html+='<div class="form-hdr" style="background:#e8f5ee;"><div class="form-title" style="color:#005a30;">\u2705 '+esc(form.name)+'</div><div class="form-subtitle" style="color:#666;">'+saves.length+' save'+(saves.length!==1?'s':'')+'</div></div>';
+        html+='<div class="form-hdr" style="background:#fdecea;"><div class="form-title" style="color:#c0161c;">\u2705 '+esc(form.name)+'</div><div class="form-subtitle" style="color:#666;">'+saves.length+' save'+(saves.length!==1?'s':'')+'</div></div>';
         for(var si=0;si<saves.length;si++){
           var sv=saves[si];
           var fd=sv.fieldData||(sv.data&&sv.data.fieldData)||{};
@@ -84,7 +79,7 @@ function render(wk,rows){
           var dt=new Date(sv.savedAt||sv.saved_at||'');
           var dtStr=dt.toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
           html+='<div class="save-block"><div class="save-hdr">'+dtStr+(champ?' \u00b7 '+esc(champ):'')+'</div>';
-          if(ts)html+='<div class="kv"><span class="k">Timestamp</span><span class="v" style="color:#00703c">'+esc(ts)+'</span></div>';
+          if(ts)html+='<div class="kv"><span class="k">Timestamp</span><span class="v" style="color:#e41e26">'+esc(ts)+'</span></div>';
           if(ca&&ca!=='None')html+='<div class="kv"><span class="k">Corrective Action</span><span class="v" style="color:#e65100">'+esc(ca)+'</span></div>';
           var keys=Object.keys(fd);
           for(var ki=0;ki<keys.length;ki++){var v=fd[keys[ki]];if(v&&String(v).trim()){var lbl=keys[ki].replace(/^(we-|fsc-|inp_|sel_|cb_|radio_)/,'').replace(/-/g,' ');html+='<div class="kv"><span class="k">'+esc(lbl)+'</span><span class="v">'+esc(String(v)==='checked'?'\u2713':v)+'</span></div>';}}
@@ -101,10 +96,7 @@ function render(wk,rows){
   html+='<div id="fsBtn" style="text-align:center;padding:10px 0 20px;"><button class="section-btn" onclick="loadFormSheets()">&#128203; Load Form Sheets</button></div>';
   document.getElementById('content').innerHTML=html;
 }
-function loadFormSheets(){
-  document.getElementById('fsBtn').innerHTML='<span style="color:#666;font-size:13px;">Loading...</span>';
-  setTimeout(appendFormSheets,50);
-}
+function loadFormSheets(){document.getElementById('fsBtn').innerHTML='<span style="color:#666;font-size:13px;">Loading...</span>';setTimeout(appendFormSheets,50);}
 function appendFormSheets(){
   var wk=document.getElementById('hTitle').textContent;
   var cats=[],catMap={};
@@ -117,21 +109,13 @@ function appendFormSheets(){
     for(var ri=0;ri<forms.length;ri++){
       var form=forms[ri];var saves=reportByForm[form.id]||[];
       var mfd={};
-      for(var si=0;si<saves.length;si++){
-        var sfd=saves[si].fieldData||(saves[si].data&&saves[si].data.fieldData)||{};
-        var sk=Object.keys(sfd);for(var ki=0;ki<sk.length;ki++){if(sfd[sk[ki]])mfd[sk[ki]]=sfd[sk[ki]];}}
+      for(var si=0;si<saves.length;si++){var sfd=saves[si].fieldData||(saves[si].data&&saves[si].data.fieldData)||{};var sk=Object.keys(sfd);for(var ki=0;ki<sk.length;ki++){if(sfd[sk[ki]])mfd[sk[ki]]=sfd[sk[ki]];}}
       var has=saves.length>0;
       html+='<div class="card" style="overflow-x:auto;">';
-      html+='<div class="form-hdr" style="background:'+(has?'#e8f5ee':'#fff8f0')+';margin:-14px -14px 10px;">';
-      html+='<div class="form-title" style="color:'+(has?'#005a30':'#e65100')+';">'+(has?'\u2705':'\u26a0\ufe0f')+' '+esc(form.name)+'</div></div>';
-      if(has&&renderFormSheet){
-        html+=renderFormSheet(form.id,mfd);
-        /* debug: show first 3 keys */
-        var dbgKeys=Object.keys(mfd).slice(0,3);
-        if(dbgKeys.length)html+='<div style="font-size:9px;color:#999;padding:4px;">Keys: '+esc(dbgKeys.join(', '))+'</div>';
-        else html+='<div style="font-size:9px;color:#c00;padding:4px;">No field data keys found</div>';
-      }
-      else if(!has)html+='<div class="missing">Not submitted this week</div>';
+      html+='<div class="form-hdr" style="background:'+(has?'#fdecea':'#fff8f0')+';margin:-14px -14px 10px;">';
+      html+='<div class="form-title" style="color:'+(has?'#c0161c':'#e65100')+';">'+(has?'\u2705':'\u26a0\ufe0f')+' '+esc(form.name)+'</div></div>';
+      if(has)html+=renderFormSheet(form.id,mfd);
+      else html+='<div class="missing">Not submitted this week</div>';
       html+='</div>';
     }
   }
@@ -142,20 +126,11 @@ function appendFormSheets(){
 function err(msg){document.getElementById('content').innerHTML='<p style="padding:30px;text-align:center;color:#c00;">'+msg+'</p>';}
 var params=new URLSearchParams(window.location.search);
 var wkParam=params.get('week');
-try {
+try{
   var stored=sessionStorage.getItem('haccp_report');
-  if(stored){
-    var payload=JSON.parse(stored);
-    var wk=payload.weekKey||wkParam;
-    var rows=payload.records||[];
-    if(rows.length){render(wk,rows);}
-    else{err('No records found for this week.');}
-  } else {
-    err('No report data found.<br><br>Please use the <a href="records.html" style="color:#00703c;font-weight:700;">Full Report button on the Records page</a>.');
-  }
-} catch(ex){
-  err('Error: '+esc(String(ex)));
-}
+  if(stored){var payload=JSON.parse(stored);var wk=payload.weekKey||wkParam;var rows=payload.records||[];if(rows.length){render(wk,rows);}else{err('No records found for this week.');}}
+  else{err('No report data found.<br><br>Please use the <a href="records.html" style="color:#e41e26;font-weight:700;">Full Report button on the Records page</a>.');}
+}catch(ex){err('Error: '+esc(String(ex)));}
 var DAYS=['Mon','Tue','Wed','Thur','Fri','Sat','Sun'];
 var meatTempUnits=[['Fish Display Unit','0-5\u00b0C'],['Poultry','0-5\u00b0C'],['Pork','0-5\u00b0C'],['Raw Meat','0-5\u00b0C'],['Walk in fridge','0-5\u00b0C'],['Pre-pack fish doors','0-5\u00b0C']];
 var prepackTempUnits=[['1. Stand up juice fridge at front door','0-5\u00b0C'],['2. Meat spider at food academy','0-5\u00b0C'],['3. Meat spider at food academy','0-5\u00b0C'],['4. Meat spider at food academy','0-5\u00b0C'],['5. Superquinn spider','0-5\u00b0C'],['6. Spider fishmonger','0-5\u00b0C'],['7. Dairy spider at fish pre pack','0-5\u00b0C'],['8. Ham spider fridge','0-5\u00b0C'],['9. Provisions promo bay',''],['10. Food Academy Fridge','0-5\u00b0C'],['11. Butchers Prepack','0-5\u00b0C'],['12. Prepared by the Butcher','0-5\u00b0C'],['13. Poultry','0-5\u00b0C'],['14. Cheese Prepack','0-5\u00b0C'],['15. Bacon/Special Offers','0-5\u00b0C'],['16. Sausages/Rashers','0-5\u00b0C'],['17. Pudding/Superquinn/Continental','0-5\u00b0C'],['18. Cooked Meats/Signature Range','0-5\u00b0C'],['19. Ready meals','0-5\u00b0C'],['20. Meal deck','0-5\u00b0C']];
@@ -163,7 +138,6 @@ var dairyTempUnits=[['1. Milk','0-5\u00b0C'],['2. Cream/Deserts/Juice','0-5\u00b
 var frozenTempUnits=[['1. Ice Cream Bay 1 Door','-23\u00b0C'],['2. Ice Cream Bay 1 Well','-23\u00b0C'],['3. Ice Cream Bay 2 Door','-23\u00b0C'],['4. Ice Cream Bay 2 Well','-23\u00b0C'],['5. Ice Cream Bay 3 Door','-23\u00b0C'],['6. Ice Cream Bay 3 Well','-23\u00b0C'],['7. Ice Cream Stick Fridge','-23\u00b0C'],['8. Special Offer Well no 1','-18\u00b0C'],['9. Potato Product Well','-18\u00b0C'],['10. Chip Well','-18\u00b0C'],['11. Chicken and Burger Well','-18\u00b0C'],['12. Veg Well','-18\u00b0C'],['13. Ready Meal Well','-18\u00b0C'],['14. Special Offer Well no 2','-18\u00b0C'],['15. Fish Product Well','-18\u00b0C'],['16. Fish Well','-18\u00b0C'],['17. Pizza Well 1','-18\u00b0C'],['18. Pizza Well 2','-18\u00b0C'],['19. Vegetarian Food Well','-18\u00b0C'],['20. Back-up Freezer','-18\u00b0C']];
 var fruitVegTempUnits=[['Display Fridge Veg 1','0-5\u00b0C'],['Display Fridge Veg 2','0-5\u00b0C'],['Display Fridge Fruit','0-5\u00b0C'],['Salad Fridge','0-5\u00b0C'],['Walk-in Back-up','0-5\u00b0C'],['Berry Fridge 1','0-5\u00b0C'],['Berry Fridge 2','0-5\u00b0C']];
 var deliTempUnits=[['Bakery Serveover Fridge 1','0-5\u00b0C'],['Bakery Serveover Fridge 2','0-5\u00b0C'],['Sandwich Bar Fridge','0-5\u00b0C'],['Sandwich Bar Serveover','0-5\u00b0C'],['Deli Counter Fridge 1','0-5\u00b0C'],['Deli Counter Fridge 2','0-5\u00b0C'],['Hot Food Serveover','0-5\u00b0C'],['Prep Fridge','0-5\u00b0C'],['Walk-in Chill','0-5\u00b0C']];
-var hotfoodTimes=['9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm'];
 var hotfoodDailyClean=[['Hot bar glass front and back, sides and counter top, trays','Glass cleaner, degreaser'],['Scales and shelf','Sanitizer'],['Sandwich bar glass front and back, sides and bar counter top, trays','Sanitizer, Glass cleaner'],['Fresh Cream bakery serveover glass','Glass cleaner'],['Bakery serveover fridge x2, glass doors and handles','Glass cleaner'],['Counter tops / Stainless steel','Sanitiser'],['Equipment sink top and bottom','Sanitiser'],['Handsink / requisites','Sanitizer'],['Utensils / equipment / trays','Sanitizer'],['Bin','Sanitiser'],['Temperature probe','Sanitizer'],['Hot food oven, surfaces in direct contact with food, trays, racks','Sanitiser'],['Bakery oven and stand x2, surfaces in direct contact with food, trays, racks','Sanitiser'],['Grease trap, empty and wash out holder','Degreaser, Sanitiser'],['Floor swept and mopped (under tables inc. back up)','Floor cleaner'],['Chicken Unit','Degreaser, Sanitiser'],['Turbo chef machine, direct contact with food, trays','Sanitiser'],['Soup kettle','Sanitiser']];
 var hotfoodWeeklyClean=[['Hot food bar, full deep clean','Degreaser, Oven cleaner'],['Sandwich bar, full deep clean','Sanitiser'],['Fresh cream bakery serveover, full deep clean','Sanitiser'],['Bakery serveover fridge x2, full deep clean','Sanitiser'],['Presses inside out, inc. door handles','Sanitiser'],['Stainless steel prep area (wheels, casters, legs, walls)','Sanitizer'],['Bakery display table x3','Sanitizer'],['Bread display','Sanitizer'],['Canopy filter','Degreaser'],['Chicken oven, full deep clean','Degreaser, Oven cleaner'],['Bakery oven x2, full deep clean','Oven cleaner'],['Hot food oven, full deep clean','Degreaser, Oven cleaner'],['Chicken prep trolley','Sanitizer']];
 var cookedmeatClean=[['Serveover front glass, counter top, sides','Glass cleaner'],['Serveover inside, along sides and front','Sanitiser'],['Scales and shelve','Sanitizer'],['Equipment / trays / chopping boards','Sanitiser'],['Counter tops','Sanitiser'],['Tables (tops & legs)','Sanitizer'],['Meat slicer','Sanitiser'],['Cling film unit','Sanitizer'],['Temperature probe x2','Sanitiser'],['Bins x3','Sanitiser'],['Bread slicer','Sanitiser'],['Floor sweep and mop','Floor cleaner'],['Cheese cutter Pasteurised','Detergent Sanitizer'],['Bread Crumber','Sanitizer']];
@@ -183,12 +157,11 @@ var saladsPrepack=['Egg Mayo','Beetroot','Asian Noodles','Pasta Spinach Pinenut'
 var savouries=['Beef Lasagne','Chicken & Mushroom Vol au Vent','Red Pepper Goats Cheese Quiche','Black pudding s. rolls','Honey & mustard s. rolls'];
 var cookedMeats=["Ryan's Low Salt","Honey Glazed","Moriarty's Turkey","Carroll's Crumbed","Turkey OTB","Oak Smoked Ham","Corned Beef","Brady's Crumbed","Brady's Baked","Hazlett","Wiltshire Ham OTB"];
 var salamiOlives=['Mixed Olives','Sundried Tomatoes','Cheese Filled Peppers','Chorizo Extra','Pre pack Mixed olives','Pre pack Sundried tomatoes','Pre pack Cheese filled peppers','Pre Pack Stuffing'];
-function escF(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function gv(fd,k){return fd&&fd[k]?'<td style="background:#e8f5ee;font-weight:700;font-size:11px;padding:4px;text-align:center;">'+escF(fd[k])+'</td>':'<td style="font-size:11px;padding:4px;border:1px solid #eee;"></td>';}
-var TH='background:#00703c;color:white;padding:5px 4px;font-size:10px;font-weight:700;text-align:center;border:1px solid #005a30;white-space:nowrap;';
+var TH='background:#e41e26;color:white;padding:5px 4px;font-size:10px;font-weight:700;text-align:center;border:1px solid #c0161c;white-space:nowrap;';
 var TD='border:1px solid #d0d0d0;';
 var UN='text-align:left;padding:5px 8px;background:#fafafa;font-size:11px;font-weight:500;';
-var TG='color:#005a30;font-weight:700;background:#e8f5ee;text-align:center;font-size:11px;padding:4px;';
+var TG='color:#c0161c;font-weight:700;background:#fdecea;text-align:center;font-size:11px;padding:4px;';
+function gv(fd,k){return fd&&fd[k]?'<td style="background:#fdecea;font-weight:700;font-size:11px;padding:4px;text-align:center;">'+escF(fd[k])+'</td>':'<td style="font-size:11px;padding:4px;border:1px solid #eee;"></td>';}
 function tempTable(units,fd){
   var h='<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:11px;"><thead><tr><th style="'+TH+';min-width:140px;text-align:left;">Unit</th><th style="'+TH+'">Target</th>';
   for(var d=0;d<7;d++)h+='<th style="'+TH+'" colspan="2">'+DAYS[d]+'</th>';
@@ -197,9 +170,7 @@ function tempTable(units,fd){
   h+='<th style="'+TH+'"></th></tr></thead><tbody>';
   for(var i=0;i<units.length;i++){
     h+='<tr><td style="'+TD+UN+'">'+escF(units[i][0])+'</td><td style="'+TD+TG+'">'+escF(units[i][1])+'</td>';
-    for(var d3=0;d3<7;d3++){
-      h+=gv(fd,units[i][0]+' '+DAYS[d3]+' AM')+gv(fd,units[i][0]+' '+DAYS[d3]+' PM');
-    }
+    for(var d3=0;d3<7;d3++){h+=gv(fd,units[i][0]+' '+DAYS[d3]+' AM')+gv(fd,units[i][0]+' '+DAYS[d3]+' PM');}
     h+=gv(fd,units[i][0]+' Comments')+'</tr>';
   }
   return h+'</tbody></table></div>';
@@ -212,12 +183,8 @@ function hourlyTable(fd,mode){
   h+='</tr></thead><tbody>';
   for(var ti=0;ti<10;ti++){
     var t=['9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm'][ti];
-    h+='<tr><td style="background:#e8f5ee;font-weight:700;text-align:center;font-size:11px;padding:4px;">'+t+'</td>';
-    for(var d3=0;d3<7;d3++){
-      var k1=DAYS[d3]+' '+t+(mode==='s1s2'?' S1':' Product');
-      var k2=DAYS[d3]+' '+t+(mode==='s1s2'?' S2':' Temp');
-      h+=gv(fd,k1)+gv(fd,k2);
-    }
+    h+='<tr><td style="background:#fdecea;font-weight:700;text-align:center;font-size:11px;padding:4px;">'+t+'</td>';
+    for(var d3=0;d3<7;d3++){var k1=DAYS[d3]+' '+t+(mode==='s1s2'?' S1':' Product');var k2=DAYS[d3]+' '+t+(mode==='s1s2'?' S2':' Temp');h+=gv(fd,k1)+gv(fd,k2);}
     h+='</tr>';
   }
   return h+'</tbody></table></div>';
@@ -294,17 +261,14 @@ function logTable(headers,rows,fd){
   h+='</tr></thead><tbody>';
   for(var i=1;i<=rows;i++){
     h+='<tr>';
-    for(var hi2=0;hi2<headers.length;hi2++){
-      var k=headers[hi2]+' row'+i;
-      h+=fd&&fd[k]?'<td style="'+TD+';background:#e8f5ee;font-weight:600;padding:4px;font-size:11px;">'+escF(fd[k])+'</td>':'<td style="'+TD+';padding:4px;font-size:11px;">&nbsp;</td>';
-    }
+    for(var hi2=0;hi2<headers.length;hi2++){var k=headers[hi2]+' row'+i;h+=fd&&fd[k]?'<td style="'+TD+';background:#fdecea;font-weight:600;padding:4px;font-size:11px;">'+escF(fd[k])+'</td>':'<td style="'+TD+';padding:4px;font-size:11px;">&nbsp;</td>';}
     h+='</tr>';
   }
   return h+'</tbody></table>';
 }
 function redMeatClean(fd){
-  var s1h='<tr><td colspan="9" style="background:#005a30;color:white;font-weight:700;font-size:11px;padding:4px 8px;">DAILY</td></tr>';
-  var s2h='<tr><td colspan="9" style="background:#005a30;color:white;font-weight:700;font-size:11px;padding:4px 8px;">WEEKLY</td></tr>';
+  var s1h='<tr><td colspan="9" style="background:#c0161c;color:white;font-weight:700;font-size:11px;padding:4px 8px;">DAILY</td></tr>';
+  var s2h='<tr><td colspan="9" style="background:#c0161c;color:white;font-weight:700;font-size:11px;padding:4px 8px;">WEEKLY</td></tr>';
   var rows1='',rows2='';
   for(var i=0;i<cleaningItemsDaily.length;i++){
     rows1+='<tr><td style="'+TD+UN+'">'+escF(cleaningItemsDaily[i][0])+'</td><td style="'+TD+';font-size:10px;color:#666;padding:4px;">'+escF(cleaningItemsDaily[i][1])+'</td>';
@@ -355,8 +319,7 @@ function renderFormSheet(formId,fd){
   if(formId==='clean-stockroom')return cleanTable([['Yard','Degreaser/Mop'],['Back-up cold room','Degreaser/Sanitiser'],['Ground floor stockroom','Degreaser/Mop'],['First floor stockroom','Degreaser/Mop'],['Sluice room','Degreaser/Sanitiser'],['Bailer area','Degreaser/Mop'],['Returns area','Degreaser/Mop'],['Frozen back-up','Degreaser/Sanitiser'],['Dairy back-up','Degreaser/Sanitiser'],['Office','Sanitiser']],fd);
   if(formId==='goods-chilled'||formId==='goods-ambient')return logTable(['Date','Supplier','Temp Check','Food Safety Checks','Docket No','Product Dating','Product Name','Accept/Reject','Comments','Signature'],20,fd);
   return '<p style="color:#999;font-style:italic;padding:8px;">See audit section for field data</p>';
-};
-
+}
 </script>
 </body>
 </html>

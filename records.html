@@ -1,5 +1,4 @@
 <!DOCTYPE html><html lang="en">
-
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
@@ -7,15 +6,14 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:100vh;}
-.top-nav{background:#00703c;color:white;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
+body{font-family:'Inter',sans-serif;background:#f4f0f0;color:#1a1a1a;min-height:100vh;}
+.top-nav{background:#e41e26;color:white;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
 .nav-back{background:rgba(255,255,255,0.2);border:none;color:white;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit;}
 .nav-title{font-size:17px;font-weight:700;flex:1;}
 .nav-logo{font-size:11px;opacity:0.75;text-align:right;line-height:1.3;font-weight:600;}
-.status-bar{background:#005a30;color:white;text-align:center;padding:7px 16px;font-size:11px;font-family:'Courier New',monospace;}
-.status-bar.err{background:#b71c1c;}
-/* Current week card */
-.cur-card{margin:14px 14px 0;background:#00703c;border-radius:12px;padding:14px 16px;color:white;}
+.status-bar{background:#c0161c;color:white;text-align:center;padding:7px 16px;font-size:11px;font-family:'Courier New',monospace;}
+.status-bar.err{background:#7f0000;}
+.cur-card{margin:14px 14px 0;background:#e41e26;border-radius:12px;padding:14px 16px;color:white;}
 .cur-label{font-size:10px;font-weight:700;letter-spacing:0.1em;opacity:0.75;text-transform:uppercase;}
 .cur-week{font-size:17px;font-weight:700;margin-top:3px;}
 .cur-row{display:flex;justify-content:space-between;align-items:flex-end;margin-top:8px;}
@@ -23,31 +21,28 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .cur-sub{font-size:11px;opacity:0.75;margin-top:2px;}
 .cur-right{text-align:right;font-size:13px;font-weight:600;}
 .prog-wrap{margin:10px 14px 0;background:white;border-radius:8px;overflow:hidden;height:8px;}
-.prog-fill{height:100%;background:#00703c;transition:width 0.4s;}
-/* Week accordion */
+.prog-fill{height:100%;background:#e41e26;transition:width 0.4s;}
 .prev-header{margin:20px 14px 6px;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;}
-.acc-item{margin:6px 14px 0;border-radius:10px;overflow:hidden;border:1.5px solid #d0ddd0;}
+.acc-item{margin:6px 14px 0;border-radius:10px;overflow:hidden;border:1.5px solid #e0d0d0;}
 .acc-trigger{background:white;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;}
 .acc-left{flex:1;}
 .acc-week{font-size:13px;font-weight:700;color:#1a1a1a;}
 .acc-sub{font-size:11px;color:#666;margin-top:2px;}
 .acc-badge{border-radius:12px;padding:3px 10px;font-size:11px;font-weight:700;flex-shrink:0;}
-.acc-badge.full{background:#e8f5ee;color:#00703c;}
+.acc-badge.full{background:#fdecea;color:#e41e26;}
 .acc-badge.partial{background:#fff3e0;color:#e65100;}
 .acc-badge.empty{background:#f5f5f5;color:#aaa;}
 .acc-chevron{font-size:18px;color:#aaa;line-height:1;flex-shrink:0;transition:transform 0.2s;}
 .acc-chevron.open{transform:rotate(90deg);}
 .acc-body{display:none;border-top:1px solid #eee;background:#fafafa;}
 .acc-body.open{display:block;}
-/* Category sections inside accordion */
 .cat-section{margin:10px 12px 0;}
 .cat-head{background:#1a1a1a;color:white;padding:8px 12px;border-radius:6px 6px 0 0;font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;display:flex;justify-content:space-between;}
 .cat-pct{font-size:11px;opacity:0.8;}
-/* Form rows */
-.form-row{background:white;border-left:1px solid #d8e8d8;border-right:1px solid #d8e8d8;border-bottom:1px solid #ececec;padding:11px 12px;}
-.form-row:last-child{border-bottom:1px solid #d8e8d8;border-radius:0 0 6px 6px;}
-.form-row.done{border-left:3px solid #00703c;cursor:pointer;}
-.form-row.done:active{background:#f0f7f0;}
+.form-row{background:white;border-left:1px solid #e8d0d0;border-right:1px solid #e8d0d0;border-bottom:1px solid #ececec;padding:11px 12px;}
+.form-row:last-child{border-bottom:1px solid #e8d0d0;border-radius:0 0 6px 6px;}
+.form-row.done{border-left:3px solid #e41e26;cursor:pointer;}
+.form-row.done:active{background:#fdecea;}
 .form-row.missing{border-left:3px solid #e65100;}
 .fr-top{display:flex;align-items:center;gap:10px;}
 .fr-icon{font-size:16px;flex-shrink:0;width:22px;text-align:center;}
@@ -57,41 +52,34 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 .fr-miss{font-size:11px;color:#e65100;font-weight:600;margin-top:2px;}
 .fr-chev{font-size:18px;color:#aaa;line-height:1;flex-shrink:0;transition:transform 0.2s;}
 .fr-chev.open{transform:rotate(90deg);}
-/* Expanded record detail */
-.rec-detail{display:none;margin-top:10px;border-top:2px solid #e8f5ee;padding-top:10px;}
+.rec-detail{display:none;margin-top:10px;border-top:2px solid #fdecea;padding-top:10px;}
 .rec-detail.open{display:block;}
-/* Meta grid */
 .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;}
-.mc{background:#f8faf8;border-radius:6px;padding:8px 10px;}
+.mc{background:#faf8f8;border-radius:6px;padding:8px 10px;}
 .mc-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:3px;}
 .mc-val{font-size:12px;color:#1a1a1a;line-height:1.4;}
-.mc-val.ok{color:#00703c;font-weight:700;font-family:'Courier New',monospace;}
+.mc-val.ok{color:#e41e26;font-weight:700;font-family:'Courier New',monospace;}
 .mc-val.na{color:#bbb;font-style:italic;}
-/* Corrective action */
 .ca-box{background:#fff8e1;border-left:3px solid #e65100;border-radius:5px;padding:8px 10px;margin-bottom:10px;}
 .ca-lbl{font-size:9px;font-weight:700;text-transform:uppercase;color:#e65100;margin-bottom:3px;}
 .ca-val{font-size:12px;white-space:pre-wrap;line-height:1.5;}
-/* Saved signatures */
 .sigs-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
 .sig-item{text-align:center;}
 .sig-img{display:block;width:88px;height:44px;object-fit:contain;background:white;border:1px solid #ddd;border-radius:5px;cursor:pointer;}
 .sig-name{font-size:9px;color:#999;margin-top:2px;max-width:88px;}
-/* Saved photos */
 .photos-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
 .photo-thumb{width:70px;height:70px;object-fit:cover;border-radius:7px;border:1px solid #d0d0d0;cursor:pointer;}
-/* Field data table */
 .section-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#999;margin:10px 0 6px;}
 .field-data-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:10px;}
 .field-data-table td{border:1px solid #e0e0e0;padding:5px 7px;vertical-align:top;}
 .field-data-table td:first-child{background:#f5f5f5;color:#666;font-size:10px;width:40%;word-break:break-word;}
 .field-data-table td:last-child{color:#1a1a1a;font-weight:500;}
 .no-data{font-size:11px;color:#bbb;font-style:italic;margin-bottom:10px;}
-/* Tools */
 .tools-section{margin:20px 14px 0;}
 .tools-title{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#666;margin-bottom:8px;}
 .tools-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.tool-btn{background:white;border:1.5px solid #c8d8c8;border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;}
-.tool-btn:active{border-color:#00703c;background:#e8f5ee;}
+.tool-btn{background:white;border:1.5px solid #e0c8c8;border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;}
+.tool-btn:active{border-color:#e41e26;background:#fdecea;}
 .tb-icon{font-size:22px;margin-bottom:4px;}
 .tb-label{font-size:12px;font-weight:700;color:#1a1a1a;}
 .tb-sub{font-size:10px;color:#888;margin-top:2px;}
@@ -108,7 +96,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:
 <div class="top-nav">
   <button class="nav-back" id="btnBack">&#8592; Forms</button>
   <div class="nav-title">&#128202; Weekly Records</div>
-  <div class="nav-logo">MORIARTY<br>GROUP</div>
+  <div class="nav-logo" id="navStore">SuperValu</div>
 </div>
 <div class="status-bar" id="statusBar">Connecting...</div>
 <div id="mainContent"></div>
@@ -131,6 +119,11 @@ var ALL_FORMS=[{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Che
 var DB_NAME='MoriartyHACCP',DB_VER=2,db=null;
 var SB_URL='https://mnebkteiwjxbbmnfotse.supabase.co';
 var SB_KEY='sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
+var STORE_NAMES={'356':'Palmerstown','374':'Balbriggan','424':'Skerries'};
+
+function getStoreId(){return sessionStorage.getItem('haccp_store')||'424';}
+function getStoreName(){return STORE_NAMES[getStoreId()]||'SuperValu';}
+
 function sbFetch(path,method,body){return fetch(SB_URL+'/rest/v1/'+path,{method:method||'GET',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show';setTimeout(function(){t.className='toast';},3000);}
@@ -138,32 +131,23 @@ function getWeekKey(){var d=new Date(),day=d.getUTCDay(),s=new Date(Date.UTC(d.g
 function weekLabel(wk){var s=new Date(wk+'T00:00:00'),e=new Date(s);e.setDate(s.getDate()+6);var o={day:'numeric',month:'short'};return s.toLocaleDateString('en-IE',o)+' \u2013 '+e.toLocaleDateString('en-IE',o)+' '+e.getFullYear();}
 function satMidnight(wk){var s=new Date(wk+'T00:00:00');s.setDate(s.getDate()+6);s.setHours(23,59,59,0);return s;}
 function timeRemaining(wk){var diff=satMidnight(wk)-new Date();if(diff<=0)return 'Week ended';var d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000);return(d>0?d+'d ':'')+h+'h '+m+'m until close';}
-/* DB */
 function openDB(){
   return new Promise(function(res,rej){
     var done=false;
-    var timer=setTimeout(function(){if(done)return;done=true;rej(new Error('DB timeout \u2014 tap to retry'));},5000);
+    var timer=setTimeout(function(){if(done)return;done=true;rej(new Error('DB timeout'));},5000);
     var req;try{req=indexedDB.open(DB_NAME,DB_VER);}catch(e){clearTimeout(timer);rej(e);return;}
     req.onupgradeneeded=function(e){var d2=e.target.result;if(!d2.objectStoreNames.contains('records')){var st=d2.createObjectStore('records',{keyPath:'id'});st.createIndex('formId','formId',{unique:false});st.createIndex('weekKey','weekKey',{unique:false});}if(!d2.objectStoreNames.contains('weeks'))d2.createObjectStore('weeks',{keyPath:'weekKey'});if(!d2.objectStoreNames.contains('live'))d2.createObjectStore('live',{keyPath:'id'});};
     req.onsuccess=function(e){if(done)return;done=true;clearTimeout(timer);db=e.target.result;res(db);};
     req.onerror=function(e){if(done)return;done=true;clearTimeout(timer);rej(e.target.error);};
-    req.onblocked=function(){if(done)return;done=true;clearTimeout(timer);rej(new Error('DB blocked \u2014 close other tabs'));};
+    req.onblocked=function(){if(done)return;done=true;clearTimeout(timer);rej(new Error('DB blocked'));};
   });
 }
-/* Returns flat array of all records for a week */
-function buildByFormArray(recs,wk){
-  var arr=[];
-  for(var i=0;i<recs.length;i++){if(recs[i].weekKey===wk)arr.push(recs[i]);}
-  return arr;
-}
-/* Build map of formId -> array of all saves sorted oldest first */
+function buildByFormArray(recs,wk){var arr=[];for(var i=0;i<recs.length;i++){if(recs[i].weekKey===wk)arr.push(recs[i]);}return arr;}
 function buildByForm(recs,wk){
-  var m={};
-  var seenSave={};
+  var m={},seenSave={};
   for(var i=0;i<recs.length;i++){
     var r=recs[i];
     if(r.weekKey!==wk)continue;
-    /* deduplicate by formId+savedAt to prevent double entries */
     var dupKey=r.formId+'|'+r.savedAt;
     if(seenSave[dupKey])continue;
     seenSave[dupKey]=1;
@@ -174,96 +158,49 @@ function buildByForm(recs,wk){
   for(var k=0;k<keys.length;k++){m[keys[k]].sort(function(a,b){return a.savedAt<b.savedAt?-1:1;});}
   return m;
 }
-/* Render field data as a simple key/value table */
 function renderFieldData(fieldData){
-  if(!fieldData) return '<div class="no-data">No field data captured.</div>';
-  var keys=Object.keys(fieldData);
-  var filled=[];
-  for(var i=0;i<keys.length;i++){
-    var v=fieldData[keys[i]];
-    if(v!==undefined&&v!==null&&String(v).trim()!=='') filled.push({k:keys[i],v:v});
-  }
-  if(!filled.length) return '<div class="no-data">Form saved \u2013 no values entered yet.</div>';
+  if(!fieldData)return '<div class="no-data">No field data captured.</div>';
+  var keys=Object.keys(fieldData),filled=[];
+  for(var i=0;i<keys.length;i++){var v=fieldData[keys[i]];if(v!==undefined&&v!==null&&String(v).trim()!=='')filled.push({k:keys[i],v:v});}
+  if(!filled.length)return '<div class="no-data">Form saved - no values entered yet.</div>';
   var html='<div class="section-lbl">&#128203; Form Data</div><table class="field-data-table">';
-  for(var j=0;j<filled.length;j++){
-    /* Clean up key: remove common prefixes, dashes to spaces */
-    var keyLabel=String(filled[j].k)
-      .replace(/^(we-|fsc-|inp_|sel_|cb_|radio_)/,'')
-      .replace(/-/g,' ');
-    var val=String(filled[j].v);
-    if(val==='checked') val='\u2713';
-    html+='<tr><td>'+esc(keyLabel)+'</td><td>'+esc(val)+'</td></tr>';
-  }
-  html+='</table>';
-  return html;
+  for(var j=0;j<filled.length;j++){var keyLabel=String(filled[j].k).replace(/^(we-|fsc-|inp_|sel_|cb_|radio_)/,'').replace(/-/g,' ');var val=String(filled[j].v);if(val==='checked')val='\u2713';html+='<tr><td>'+esc(keyLabel)+'</td><td>'+esc(val)+'</td></tr>';}
+  html+='</table>';return html;
 }
-/* Render one expanded record */
 function renderRecDetail(rec){
   var dt=new Date(rec.savedAt),dtStr=dt.toLocaleString('en-IE',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false});
-  var html='';
-  /* Meta */
-  html+='<div class="meta-grid">';
+  var html='<div class="meta-grid">';
   html+='<div class="mc"><div class="mc-lbl">Submitted</div><div class="mc-val">'+esc(dtStr)+'</div></div>';
   html+='<div class="mc"><div class="mc-lbl">Food Safety Champion</div><div class="mc-val '+(rec.champion?'ok':'na')+'">'+esc(rec.champion||'Not recorded')+'</div></div>';
   html+='<div class="mc"><div class="mc-lbl">Timestamp</div><div class="mc-val '+(rec.timestamp?'ok':'na')+'">'+esc(rec.timestamp||'Not recorded')+'</div></div>';
   html+='<div class="mc"><div class="mc-lbl">Week Ending</div><div class="mc-val">'+esc(rec.weekEnding||'\u2014')+'</div></div>';
   html+='</div>';
-  /* Corrective action */
   if(rec.correctiveAction&&rec.correctiveAction.trim())html+='<div class="ca-box"><div class="ca-lbl">&#9888;&#65039; Corrective Action</div><div class="ca-val">'+esc(rec.correctiveAction)+'</div></div>';
-  /* Signatures */
   if(rec.signatures&&rec.signatures.length){var signed=[];for(var si=0;si<rec.signatures.length;si++){var ss=rec.signatures[si];var ssrc=ss.url||ss.dataUrl||null;if(ss.hasSignature&&ssrc)signed.push({id:ss.id,src:ssrc});}if(signed.length){html+='<div class="section-lbl">&#9999;&#65039; Signatures</div><div class="sigs-row">';for(var sgi=0;sgi<signed.length;sgi++){var lbl=signed[sgi].id.replace(/^sig-/,'').replace(/-/g,' ');html+='<div class="sig-item"><img class="sig-img" src="'+signed[sgi].src+'" data-lb="'+signed[sgi].src+'" alt="sig"><div class="sig-name">'+esc(lbl)+'</div></div>';}html+='</div>';}}
-  /* Photos */
   if(rec.photos&&rec.photos.length){html+='<div class="section-lbl">&#128247; Photo Evidence</div><div class="photos-row">';for(var pi=0;pi<rec.photos.length;pi++){var ph=rec.photos[pi];var psrc=ph.url||ph.src||ph.dataUrl||null;if(psrc)html+='<img class="photo-thumb" src="'+psrc+'" data-lb="'+psrc+'" alt="photo">';}html+='</div>';}
-  /* Field data */
   html+=renderFieldData(rec.fieldData);
-  /* Delete */
   html+='<button style="width:100%;padding:9px;background:white;border:1.5px solid #d32f2f;color:#d32f2f;border-radius:7px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:4px;" data-delid="'+rec.id+'">&#128465; Delete this record</button>';
   return html;
 }
-/* Attach listeners to a rendered container */
-function toggleRow(row,e){
-  var detail=row.querySelector('.rec-detail');
-  var chev=row.querySelector('.fr-chev');
-  if(!detail)return;
-  /* Use data attribute to track state reliably */
-  var isOpen=row.getAttribute('data-open')==='1';
-  /* If open and clicking inside detail, don't toggle */
-  if(e&&isOpen&&detail.contains(e.target))return;
-  if(isOpen){
-    detail.style.display='none';
-    row.setAttribute('data-open','0');
-    if(chev)chev.style.transform='';
-  } else {
-    detail.style.display='block';
-    row.setAttribute('data-open','1');
-    if(chev)chev.style.transform='rotate(90deg)';
-  }
-}
 function attachListeners(container){
-  /* expand/collapse - fires on any click within the row */
   var rows=container.querySelectorAll('.form-row.done');
   for(var i=0;i<rows.length;i++){(function(row){
     var detail=row.querySelector('.rec-detail');
     var chev=row.querySelector('.fr-chev');
     if(!detail)return;
     row.addEventListener('click',function(e){
-      /* Don't toggle when clicking inside the already-open detail area */
       if(detail.className.indexOf('open')!==-1&&detail.contains(e.target))return;
-      /* Don't toggle for button/img clicks */
       if(e.target.tagName==='BUTTON'||e.target.tagName==='IMG')return;
       var open=detail.className.indexOf('open')!==-1;
       detail.className=open?'rec-detail':'rec-detail open';
       if(chev)chev.className=open?'fr-chev':'fr-chev open';
     });
   })(rows[i]);}
-  /* lightbox */
   var lbItems=container.querySelectorAll('[data-lb]');
   for(var li=0;li<lbItems.length;li++){(function(el){el.addEventListener('click',function(){document.getElementById('lbImg').src=el.getAttribute('data-lb');document.getElementById('lightbox').className='lightbox open';});})(lbItems[li]);}
-  /* delete */
   var dels=container.querySelectorAll('[data-delid]');
   for(var di=0;di<dels.length;di++){(function(btn){btn.addEventListener('click',function(){var id=parseInt(btn.getAttribute('data-delid'),10);if(!confirm('Delete this record?'))return;dbDelete('records',id).then(function(){showToast('Deleted');loadRecords();}).catch(function(){showToast('Delete failed');});});})(dels[di]);}
 }
-/* Render category sections for one week - ALL saves per form shown separately */
 function renderWeekSections(container,byForm){
   var cats=[],catMap={};
   for(var fi=0;fi<ALL_FORMS.length;fi++){var f=ALL_FORMS[fi];if(!catMap[f.cat]){catMap[f.cat]=[];cats.push(f.cat);}catMap[f.cat].push(f);}
@@ -281,22 +218,21 @@ function renderWeekSections(container,byForm){
         var saveCount=saves.length>1?' \u00b7 '+saves.length+' saves':'';
         var champStr=latest.champion?' \u00b7 '+esc(latest.champion):'';
         var rowId='row-'+form.id.replace(/[^a-z0-9]/g,'-')+'-'+ci+'-'+ri;
-        html+='<div class="form-row done" id="'+rowId+'" onclick="toggleRow(this,event)">';
+        html+='<div class="form-row done" id="'+rowId+'">';
         html+='<div class="fr-top"><div class="fr-icon">\u2705</div><div class="fr-info"><div class="fr-name">'+esc(form.name)+esc(saveCount)+'</div><div class="fr-meta">'+ts2+champStr+'</div></div><div class="fr-chev" id="chev-'+rowId+'">&#8250;</div></div>';
         html+='<div class="rec-detail" id="detail-'+rowId+'">';
         for(var si=0;si<saves.length;si++){
           var sv=saves[si];
           var svDt=new Date(sv.savedAt);
           var svTs=svDt.toLocaleString('en-IE',{weekday:'short',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false});
-          html+='<div style="background:#005a30;color:white;border-radius:6px;padding:8px 12px;margin-bottom:10px;">';
+          html+='<div style="background:#c0161c;color:white;border-radius:6px;padding:8px 12px;margin-bottom:10px;">';
           html+='<div style="font-size:12px;font-weight:700;">&#128336; '+svTs+'</div>';
-          if(sv.champion) html+='<div style="font-size:11px;margin-top:3px;opacity:0.85;">&#128100; Food Safety Champion: '+esc(sv.champion)+'</div>';
+          if(sv.champion)html+='<div style="font-size:11px;margin-top:3px;opacity:0.85;">&#128100; Food Safety Champion: '+esc(sv.champion)+'</div>';
           html+='</div>';
           html+=renderRecDetail(sv);
-          if(si<saves.length-1) html+='<div style="height:2px;background:#e8f5ee;margin:14px 0;border-radius:2px;"></div>';
+          if(si<saves.length-1)html+='<div style="height:2px;background:#fdecea;margin:14px 0;border-radius:2px;"></div>';
         }
-        html+='</div>';
-        html+='</div>';
+        html+='</div></div>';
       } else {
         html+='<div class="form-row missing"><div class="fr-top"><div class="fr-icon">\u26a0\ufe0f</div><div class="fr-info"><div class="fr-name">'+esc(form.name)+'</div><div class="fr-miss">Not submitted this week</div></div></div></div>';
       }
@@ -307,39 +243,24 @@ function renderWeekSections(container,byForm){
   container.innerHTML=html;
   attachListeners(container);
 }
-/* Main render */
 function render(liveDone,curByForm,pastRecs,wk,weekClosed){
   var total=ALL_FORMS.length;
   var curDone=Object.keys(curByForm).length,curPct=Math.round(liveDone/total*100);
   var sb=document.getElementById('statusBar');
-  if(weekClosed){
-    sb.textContent='\u2705 Week closed \u00b7 New week started';
-  } else {
-    sb.textContent='\u25cf '+liveDone+' form'+(liveDone!==1?'s':'')+' saved this week \u00b7 '+timeRemaining(wk);
-  }
+  sb.textContent=(weekClosed?'\u2705 Week closed \u00b7 New week started':'\u25cf '+liveDone+' form'+(liveDone!==1?'s':'')+' saved this week \u00b7 '+timeRemaining(wk));
   sb.className='status-bar';
   var mc=document.getElementById('mainContent');
-  mc.innerHTML='<div class="cur-card"><div class="cur-label">This Week (forms app)</div><div class="cur-week">'+esc(weekLabel(wk))+'</div><div class="cur-row"><div><div class="cur-pct">'+(weekClosed?'Closed':curPct+'%')+'</div><div class="cur-sub">'+(weekClosed?'Week archived':'Complete')+'</div></div><div class="cur-right">'+(weekClosed?'Week closed \u2013 see below':''+liveDone+' / '+total+' forms saved<br><span style="font-size:11px;opacity:0.75">Closes Saturday midnight</span>')+'</div></div></div><div class="prog-wrap"><div class="prog-fill" style="width:'+(weekClosed?100:curPct)+'%;'+(weekClosed?'background:#666;':'')+'"></div></div>';
-  /* Current week form list - only if not closed */
+  mc.innerHTML='<div class="cur-card"><div class="cur-label">This Week ('+esc(getStoreName())+')</div><div class="cur-week">'+esc(weekLabel(wk))+'</div><div class="cur-row"><div><div class="cur-pct">'+(weekClosed?'Closed':curPct+'%')+'</div><div class="cur-sub">'+(weekClosed?'Week archived':'Complete')+'</div></div><div class="cur-right">'+(weekClosed?'Week closed \u2013 see below':''+liveDone+' / '+total+' forms saved<br><span style="font-size:11px;opacity:0.75">Closes Saturday midnight</span>')+'</div></div></div><div class="prog-wrap"><div class="prog-fill" style="width:'+(weekClosed?100:curPct)+'%;'+(weekClosed?'background:#666;':'')+'"></div></div>';
   if(!weekClosed&&curDone>0){
-    var totalSaves=0;
-    var fkeys=Object.keys(curByForm);
-    for(var fi2=0;fi2<fkeys.length;fi2++) totalSaves+=curByForm[fkeys[fi2]].length;
-    mc.innerHTML+='<div class="prev-header">This Week \u2013 '+curDone+' form'+(curDone!==1?'s':'')+', '+totalSaves+' save'+(totalSaves!==1?'s':'')+'</div>';
-    var curContainer=document.createElement('div');
-    curContainer.style.cssText='margin:0 14px;';
-    renderWeekSections(curContainer,curByForm);
-    attachListeners(curContainer);
-    mc.appendChild(curContainer);
+    var totalSaves=0;var fkeys=Object.keys(curByForm);for(var fi2=0;fi2<fkeys.length;fi2++)totalSaves+=curByForm[fkeys[fi2]].length;
+    mc.innerHTML+='<div class="prev-header">This Week \u2013 '+curDone+' form'+(curDone!==1?'s:':': ')+', '+totalSaves+' save'+(totalSaves!==1?'s':'')+'</div>';
+    var curContainer=document.createElement('div');curContainer.style.cssText='margin:0 14px;';
+    renderWeekSections(curContainer,curByForm);attachListeners(curContainer);mc.appendChild(curContainer);
   }
-  /* Previous weeks from records store */
   var allWks={};
   for(var i=0;i<pastRecs.length;i++){allWks[pastRecs[i].weekKey]=1;}
   var prevKeys=Object.keys(allWks).sort().reverse();
-  if(!prevKeys.length){
-    if(curDone===0) mc.innerHTML+='<div class="prev-header">No previous weeks recorded yet</div>';
-    return;
-  }
+  if(!prevKeys.length){if(curDone===0)mc.innerHTML+='<div class="prev-header">No previous weeks recorded yet</div>';return;}
   mc.innerHTML+='<div class="prev-header">Previous Weeks ('+prevKeys.length+')</div>';
   for(var pi=0;pi<prevKeys.length;pi++){
     (function(pwk){
@@ -349,45 +270,30 @@ function render(liveDone,curByForm,pastRecs,wk,weekClosed){
       var trigger=document.createElement('div');trigger.className='acc-trigger';
       trigger.innerHTML='<div class="acc-left"><div class="acc-week">'+esc(weekLabel(pwk))+'</div><div class="acc-sub">'+pwDone+' / '+total+' forms completed</div></div><span class="'+badgeClass+'">'+pwPct+'%</span><span class="acc-chevron">&#8250;</span>';
       var reportBtn=document.createElement('button');
-      reportBtn.style.cssText='background:#005a30;color:white;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;border:none;cursor:pointer;white-space:nowrap;margin-left:8px;font-family:inherit;';
+      reportBtn.style.cssText='background:#c0161c;color:white;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;border:none;cursor:pointer;white-space:nowrap;margin-left:8px;font-family:inherit;';
       reportBtn.textContent='Full Report';
-      (function(weekKey2, weekRecs){
+      (function(weekKey2,weekRecs){
         reportBtn.addEventListener('click',function(){
-          try {
-            /* debug - log first record */
-            if(weekRecs.length>0){
-              var dbg=weekRecs[0];
-              console.log('Record keys:',Object.keys(dbg));
-              console.log('fieldData:',dbg.fieldData);
-              console.log('formId:',dbg.formId||dbg.form_id);
-            }
-            /* strip base64 dataUrls to keep payload small - keep only URLs */
+          try{
             var cleaned=[];
             for(var ri=0;ri<weekRecs.length;ri++){
               var rec=JSON.parse(JSON.stringify(weekRecs[ri]));
-              if(rec.photos){for(var pi=0;pi<rec.photos.length;pi++){if(rec.photos[pi].dataUrl&&!rec.photos[pi].url)delete rec.photos[pi].dataUrl;}}
-              if(rec.signatures){for(var si=0;si<rec.signatures.length;si++){if(rec.signatures[si].dataUrl&&rec.signatures[si].dataUrl.length>500&&!rec.signatures[si].url)rec.signatures[si].dataUrl=null;}}
+              if(rec.photos){for(var pi2=0;pi2<rec.photos.length;pi2++){if(rec.photos[pi2].dataUrl&&!rec.photos[pi2].url)delete rec.photos[pi2].dataUrl;}}
+              if(rec.signatures){for(var si2=0;si2<rec.signatures.length;si2++){if(rec.signatures[si2].dataUrl&&rec.signatures[si2].dataUrl.length>500&&!rec.signatures[si2].url)rec.signatures[si2].dataUrl=null;}}
               cleaned.push(rec);
             }
-            var payload={weekKey:weekKey2,records:cleaned};
-            sessionStorage.setItem('haccp_report',JSON.stringify(payload));
+            sessionStorage.setItem('haccp_report',JSON.stringify({weekKey:weekKey2,records:cleaned}));
             window.location.href='report.html?week='+weekKey2;
-          } catch(e) {
-            /* if sessionStorage fails (quota), try with minimal data */
-            try {
+          }catch(e){
+            try{
               var minimal=[];
-              for(var ri2=0;ri2<weekRecs.length;ri2++){
-                var r2=weekRecs[ri2];
-                minimal.push({id:r2.id,formId:r2.formId,weekKey:r2.weekKey,savedAt:r2.savedAt,champion:r2.champion,fieldData:r2.fieldData,correctiveAction:r2.correctiveAction,signatures:[],photos:[]});
-              }
+              for(var ri2=0;ri2<weekRecs.length;ri2++){var r2=weekRecs[ri2];minimal.push({id:r2.id,formId:r2.formId,weekKey:r2.weekKey,savedAt:r2.savedAt,champion:r2.champion,fieldData:r2.fieldData,correctiveAction:r2.correctiveAction,signatures:[],photos:[]});}
               sessionStorage.setItem('haccp_report',JSON.stringify({weekKey:weekKey2,records:minimal}));
               window.location.href='report.html?week='+weekKey2;
-            } catch(e2){
-              window.location.href='report.html?week='+weekKey2;
-            }
+            }catch(e2){window.location.href='report.html?week='+weekKey2;}
           }
         });
-      })(pwk, buildByFormArray(pastRecs, pwk));
+      })(pwk,buildByFormArray(pastRecs,pwk));
       trigger.appendChild(reportBtn);
       var body=document.createElement('div');body.className='acc-body';
       var inner=document.createElement('div');body.appendChild(inner);
@@ -398,8 +304,7 @@ function render(liveDone,curByForm,pastRecs,wk,weekClosed){
         trigger.querySelector('.acc-chevron').className=isOpen?'acc-chevron':'acc-chevron open';
         if(!isOpen&&!built){renderWeekSections(inner,pwByForm);attachListeners(inner);built=true;}
       });
-      item.appendChild(trigger);item.appendChild(body);
-      mc.appendChild(item);
+      item.appendChild(trigger);item.appendChild(body);mc.appendChild(item);
     })(prevKeys[pi]);
   }
 }
@@ -407,94 +312,41 @@ function dbGetAll(store){return new Promise(function(res,rej){var tx=db.transact
 function dbPut(store,obj){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).put(obj);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);};});}
 function dbDelete(store,id){return new Promise(function(res,rej){var tx=db.transaction(store,'readwrite');tx.objectStore(store).delete(id);tx.oncomplete=res;tx.onerror=function(e){rej(e.target.error);};});}
 function normaliseRow(r){
-  /* Supabase rows have data nested under .data, local rows are flat */
   if(r.data&&typeof r.data==='object'){
-    /* build signatures array - use url if available, fall back to dataUrl */
     var sigs=[];
-    if(r.data.signatures&&r.data.signatures.length){
-      for(var si=0;si<r.data.signatures.length;si++){
-        var s=r.data.signatures[si];
-        sigs.push({
-          id:s.id,
-          hasSignature:s.hasSignature,
-          dataUrl:s.url||s.dataUrl||null,
-          url:s.url||null
-        });
-      }
-    }
-    /* build photos array */
+    if(r.data.signatures&&r.data.signatures.length){for(var si=0;si<r.data.signatures.length;si++){var s=r.data.signatures[si];sigs.push({id:s.id,hasSignature:s.hasSignature,dataUrl:s.url||s.dataUrl||null,url:s.url||null});}}
     var photos=[];
-    if(r.data.photos&&r.data.photos.length){
-      for(var pi=0;pi<r.data.photos.length;pi++){
-        var p=r.data.photos[pi];
-        photos.push({
-          name:p.name||'',
-          timestamp:p.timestamp||'',
-          src:p.url||p.dataUrl||null
-        });
-      }
-    }
-    return {
-      id: r.id, formId: r.form_id||r.formId, weekKey: r.week_key||r.weekKey,
-      savedAt: r.saved_at||r.savedAt, champion: r.data.champion||'',
-      weekEnding: r.data.weekEnding||'', timestamp: r.data.timestamp||'',
-      correctiveAction: r.data.correctiveAction||'',
-      fieldData: r.data.fieldData||{}, photoCount: r.data.photoCount||0,
-      signatures: sigs, photos: photos
-    };
+    if(r.data.photos&&r.data.photos.length){for(var pi=0;pi<r.data.photos.length;pi++){var p=r.data.photos[pi];photos.push({name:p.name||'',timestamp:p.timestamp||'',src:p.url||p.dataUrl||null});}}
+    return{id:r.id,formId:r.form_id||r.formId,weekKey:r.week_key||r.weekKey,savedAt:r.saved_at||r.savedAt,champion:r.data.champion||'',weekEnding:r.data.weekEnding||'',timestamp:r.data.timestamp||'',correctiveAction:r.data.correctiveAction||'',fieldData:r.data.fieldData||{},photoCount:r.data.photoCount||0,signatures:sigs,photos:photos};
   }
   return r;
 }
 function loadRecords(){
   var wk=getWeekKey();
-  /* fetch current week AND all past weeks from Supabase */
-  var sbCurPromise=sbFetch('haccp_records?week_key=eq.'+wk+'&order=saved_at.asc','GET').then(function(r){
-    if(!r.ok){document.getElementById('statusBar').textContent='SB error: '+r.status+' '+r.statusText;return [];}
-    return r.json();
-  }).then(function(d){
-    if(!Array.isArray(d)){document.getElementById('statusBar').textContent='SB bad response: '+JSON.stringify(d).slice(0,80);return [];}
-    return d;
-  }).catch(function(e){document.getElementById('statusBar').textContent='SB fetch failed: '+(e.message||e);return[];});
-  var sbPastPromise=sbFetch('haccp_records?week_key=neq.'+wk+'&order=saved_at.asc','GET').then(function(r){return r.ok?r.json():[];}).then(function(d){return Array.isArray(d)?d:[];}).catch(function(){return[];});
+  var sid=getStoreId();
+  var sbCurPromise=sbFetch('haccp_records?week_key=eq.'+wk+'&store_id=eq.'+sid+'&order=saved_at.asc','GET').then(function(r){return r.ok?r.json():[];}).then(function(d){return Array.isArray(d)?d:[];}).catch(function(){return[];});
+  var sbPastPromise=sbFetch('haccp_records?week_key=neq.'+wk+'&store_id=eq.'+sid+'&order=saved_at.asc','GET').then(function(r){return r.ok?r.json():[];}).then(function(d){return Array.isArray(d)?d:[];}).catch(function(){return[];});
   Promise.all([dbGetAll('live'),dbGetAll('records'),dbGetAll('weeks'),sbCurPromise,sbPastPromise]).then(function(results){
-    var liveRecs=results[0];
-    var archRecs=results[1];
-    var closedWeeks=results[2]||[];
-    var sbCurRecs=results[3]||[];
-    var sbPastRecs=results[4]||[];
-    /* check if current week has been closed */
+    var liveRecs=results[0],archRecs=results[1],closedWeeks=results[2]||[],sbCurRecs=results[3]||[],sbPastRecs=results[4]||[];
     var weekClosed=false;
     for(var wi=0;wi<closedWeeks.length;wi++){if(closedWeeks[wi].weekKey===wk){weekClosed=true;break;}}
-    /* Current week records: Supabase first, then local fallback */
-    var seen={};
-    var curRecs=[];
+    var seen={},curRecs=[];
     if(!weekClosed){
       for(var si=0;si<sbCurRecs.length;si++){var nr=normaliseRow(sbCurRecs[si]);var nid=String(nr.id);if(!seen[nid]){seen[nid]=1;curRecs.push(nr);}}
-      /* local archRecs as fallback only - liveRecs excluded (contains fullFieldData, causes duplicates) */
-      for(var ai=0;ai<archRecs.length;ai++){var ar=archRecs[ai];if(ar.weekKey===wk&&!seen[String(ar.id)]){seen[String(ar.id)]=1;curRecs.push(ar);}}
+      for(var ai=0;ai<archRecs.length;ai++){var ar=archRecs[ai];if(ar.weekKey===wk&&ar.store_id===sid&&!seen[String(ar.id)]){seen[String(ar.id)]=1;curRecs.push(ar);}}
     }
-    /* Count unique forms completed from ALL sources */
     var liveDone=weekClosed?0:Object.keys(buildByForm(curRecs,wk)).length;
-    /* Past weeks: combine Supabase past records + local past records */
-    var pastSeen={};
-    var pastRecs=[];
+    var pastSeen={},pastRecs=[];
     for(var pi=0;pi<sbPastRecs.length;pi++){var pr=normaliseRow(sbPastRecs[pi]);var pid=String(pr.id);if(!pastSeen[pid]){pastSeen[pid]=1;pastRecs.push(pr);}}
-    for(var pai=0;pai<archRecs.length;pai++){var par=archRecs[pai];if(par.weekKey!==wk&&!pastSeen[String(par.id)]){pastSeen[String(par.id)]=1;pastRecs.push(par);}}
-    /* also include records from closed weeks store if not already in pastRecs */
+    for(var pai=0;pai<archRecs.length;pai++){var par=archRecs[pai];if(par.weekKey!==wk&&par.store_id===sid&&!pastSeen[String(par.id)]){pastSeen[String(par.id)]=1;pastRecs.push(par);}}
     for(var cwi=0;cwi<closedWeeks.length;cwi++){
-      var cw=closedWeeks[cwi];
-      if(cw.weekKey===wk) continue; /* skip current week if somehow closed */
-      /* check if we have records for this week already */
-      var hasWeek=false;
-      for(var pri=0;pri<pastRecs.length;pri++){if(pastRecs[pri].weekKey===cw.weekKey){hasWeek=true;break;}}
-      if(!hasWeek&&cw.forms&&cw.forms.length){
-        for(var cfi=0;cfi<cw.forms.length;cfi++) pastRecs.push(cw.forms[cfi]);
-      }
+      var cw=closedWeeks[cwi];if(cw.weekKey===wk)continue;
+      var hasWeek=false;for(var pri=0;pri<pastRecs.length;pri++){if(pastRecs[pri].weekKey===cw.weekKey){hasWeek=true;break;}}
+      if(!hasWeek&&cw.forms&&cw.forms.length){for(var cfi=0;cfi<cw.forms.length;cfi++)pastRecs.push(cw.forms[cfi]);}
     }
-    /* if week was closed, add its records to pastRecs */
     if(weekClosed){
       for(var si2=0;si2<sbCurRecs.length;si2++){var nr2=normaliseRow(sbCurRecs[si2]);if(!pastSeen[nr2.id]){pastSeen[nr2.id]=1;pastRecs.push(nr2);}}
-      for(var ai2=0;ai2<archRecs.length;ai2++){var ar2=archRecs[ai2];if(ar2.weekKey===wk&&!pastSeen[String(ar2.id)]){pastSeen[String(ar2.id)]=1;pastRecs.push(ar2);}}
+      for(var ai2=0;ai2<archRecs.length;ai2++){var ar2=archRecs[ai2];if(ar2.weekKey===wk&&ar2.store_id===sid&&!pastSeen[String(ar2.id)]){pastSeen[String(ar2.id)]=1;pastRecs.push(ar2);}}
     }
     var curByForm=buildByForm(curRecs,wk);
     render(liveDone,curByForm,pastRecs,wk,weekClosed);
@@ -503,6 +355,8 @@ function loadRecords(){
 function doBackup(){Promise.all([dbGetAll('records'),dbGetAll('weeks')]).then(function(r){var data={exportedAt:new Date().toISOString(),records:r[0],weeks:r[1]};var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='haccp-backup-'+new Date().toISOString().split('T')[0]+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('Backup downloaded');}).catch(function(){showToast('Backup failed');});}
 function doRestore(file){var reader=new FileReader();reader.onload=function(e){try{var data=JSON.parse(e.target.result);if(!data.records||!Array.isArray(data.records))throw new Error('bad format');var puts=[];for(var ri=0;ri<data.records.length;ri++)puts.push(dbPut('records',data.records[ri]));if(data.weeks&&Array.isArray(data.weeks))for(var wi=0;wi<data.weeks.length;wi++)puts.push(dbPut('weeks',data.weeks[wi]));Promise.all(puts).then(function(){loadRecords();showToast('\u2705 Restored');document.getElementById('fileInput').value='';}).catch(function(){showToast('Restore failed');});}catch(err){showToast('Invalid file');}};reader.readAsText(file);}
 document.addEventListener('DOMContentLoaded',function(){
+  var navStore=document.getElementById('navStore');
+  if(navStore)navStore.textContent=getStoreName();
   document.getElementById('btnBack').addEventListener('click',function(){try{if(db){db.close();db=null;}}catch(e){}window.location.href='index.html';});
   window.addEventListener('pagehide',function(){try{if(db){db.close();db=null;}}catch(e){}});
   document.getElementById('btnBackup').addEventListener('click',doBackup);
@@ -511,7 +365,7 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('lbClose').addEventListener('click',function(){document.getElementById('lightbox').className='lightbox';document.getElementById('lbImg').src='';});
   document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this){this.className='lightbox';document.getElementById('lbImg').src='';}});
   var sb=document.getElementById('statusBar');
-  function boot(){sb.textContent='Connecting...';sb.className='status-bar';openDB().then(function(){loadRecords();}).catch(function(e){sb.textContent=(e.message||'Error')+' \u2014 Tap to retry';sb.className='status-bar err';sb.style.cursor='pointer';sb.addEventListener('click',function h(){sb.removeEventListener('click',h);boot();});});}
+  function boot(){sb.textContent='Connecting...';sb.className='status-bar';openDB().then(function(){loadRecords();}).catch(function(e){sb.textContent=(e.message||'Error')+' - Tap to retry';sb.className='status-bar err';sb.style.cursor='pointer';sb.addEventListener('click',function h(){sb.removeEventListener('click',h);boot();});});}
   boot();
 });
 </script>

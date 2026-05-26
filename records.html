@@ -115,15 +115,20 @@ body{font-family:'Inter',sans-serif;background:#f4f0f0;color:#1a1a1a;min-height:
   <img id="lbImg" src="" alt="">
 </div>
 <script>
+if (!sessionStorage.getItem('haccp_store')) {
+  window.location.href = 'index.html';
+}
 var ALL_FORMS=[{id:'temp-meat',name:'Meat Dept Temperature',cat:'Temperature Checks'},{id:'temp-prepack',name:'Pre-pack Temperature',cat:'Temperature Checks'},{id:'temp-dairy',name:'Dairy Temperature',cat:'Temperature Checks'},{id:'temp-frozen',name:'Frozen Temperature',cat:'Temperature Checks'},{id:'temp-fruitveg',name:'Fruit & Veg Temperature',cat:'Temperature Checks'},{id:'temp-deli',name:'Deli Temperature',cat:'Temperature Checks'},{id:'hotfood-chicken-temp',name:'Chicken Unit Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-bar-temp',name:'Hot Food Bar Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-soup-temp',name:'Soup Kettle Hourly Temps',cat:'Hot Food & Deli'},{id:'hotfood-after-cook',name:'After Cook Check Sheet',cat:'Hot Food & Deli'},{id:'hotfood-greaseshield',name:'GreaseShield Maintenance',cat:'Hot Food & Deli'},{id:'hotfood-daily-clean',name:'Hot Food Daily Cleaning',cat:'Hot Food & Deli'},{id:'hotfood-weekly-clean',name:'Hot Food Weekly Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-clean',name:'Cooked Meats Daily Cleaning',cat:'Hot Food & Deli'},{id:'cookedmeat-weekly-clean',name:'Cooked Meats Weekly Cleaning',cat:'Hot Food & Deli'},{id:'thawing-check',name:'Thawing Check Sheet',cat:'Hot Food & Deli'},{id:'deli-trace-stuffing',name:'Sandwich Log - Stuffing & Wraps',cat:'Deli Traceability'},{id:'deli-trace-butter',name:'Sandwich Log - Butter/Ham/Turkey',cat:'Deli Traceability'},{id:'deli-trace-chicken',name:'Sandwich Log - Chicken Tikka',cat:'Deli Traceability'},{id:'deli-trace-saladveg',name:'Sandwich Log - Salad Veg',cat:'Deli Traceability'},{id:'deli-trace-eggtuna',name:'Sandwich Log - Egg & Tuna',cat:'Deli Traceability'},{id:'trace-sandwich',name:'Pre-Pack Sandwich Tracker',cat:'Traceability Logs'},{id:'trace-wrap',name:'Pre-Pack Wrap Tracker',cat:'Traceability Logs'},{id:'trace-pizza',name:'Pre-Pack Pizza Tracker',cat:'Traceability Logs'},{id:'trace-salad-made',name:'Salads Made in Store',cat:'Traceability Logs'},{id:'trace-salad-prepack',name:'Pre-Pack Salads',cat:'Traceability Logs'},{id:'trace-savouries',name:'Savouries Traceability',cat:'Traceability Logs'},{id:'trace-cooked-meats',name:'Cooked Meat Traceability',cat:'Traceability Logs'},{id:'trace-salami',name:'Salami / Olives Traceability',cat:'Traceability Logs'},{id:'trace-cheese',name:'Cheese Traceability',cat:'Traceability Logs'},{id:'trace-fish',name:'Fish Tracker',cat:'Traceability Logs'},{id:'trace-pork',name:'Pork & Bacon Traceability',cat:'Traceability Logs'},{id:'trace-butcher',name:'Prep by Butcher/Fishmonger',cat:'Traceability Logs'},{id:'prod-mince',name:'Mince Control Sheet',cat:'Production Logs'},{id:'prod-burger',name:'Burger Control Sheet',cat:'Production Logs'},{id:'clean-redmeat',name:'Red Meat Cleaning',cat:'Cleaning Schedules'},{id:'clean-fruitveg',name:'Fruit & Veg Cleaning',cat:'Cleaning Schedules'},{id:'clean-stockroom',name:'Stockroom Cleaning',cat:'Cleaning Schedules'},{id:'goods-chilled',name:'Goods Inwards Chilled/Frozen',cat:'Goods Inwards'},{id:'goods-ambient',name:'Goods Inwards Ambient',cat:'Goods Inwards'},{id:'compliance',name:'HACCP Compliance Report',cat:'Compliance'}];
 var DB_NAME='MoriartyHACCP',DB_VER=2,db=null;
 var SB_URL='https://mnebkteiwjxbbmnfotse.supabase.co';
 var SB_KEY='sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
 var STORE_NAMES={'356':'Palmerstown','374':'Balbriggan','424':'Skerries'};
-
-function getStoreId(){return sessionStorage.getItem('haccp_store')||'424';}
+function getStoreId(){
+  var sid=sessionStorage.getItem('haccp_store');
+  if(!sid){window.location.href='index.html';return '424';}
+  return sid;
+}
 function getStoreName(){return STORE_NAMES[getStoreId()]||'SuperValu';}
-
 function sbFetch(path,method,body){return fetch(SB_URL+'/rest/v1/'+path,{method:method||'GET',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show';setTimeout(function(){t.className='toast';},3000);}
@@ -253,7 +258,7 @@ function render(liveDone,curByForm,pastRecs,wk,weekClosed){
   mc.innerHTML='<div class="cur-card"><div class="cur-label">This Week ('+esc(getStoreName())+')</div><div class="cur-week">'+esc(weekLabel(wk))+'</div><div class="cur-row"><div><div class="cur-pct">'+(weekClosed?'Closed':curPct+'%')+'</div><div class="cur-sub">'+(weekClosed?'Week archived':'Complete')+'</div></div><div class="cur-right">'+(weekClosed?'Week closed \u2013 see below':''+liveDone+' / '+total+' forms saved<br><span style="font-size:11px;opacity:0.75">Closes Saturday midnight</span>')+'</div></div></div><div class="prog-wrap"><div class="prog-fill" style="width:'+(weekClosed?100:curPct)+'%;'+(weekClosed?'background:#666;':'')+'"></div></div>';
   if(!weekClosed&&curDone>0){
     var totalSaves=0;var fkeys=Object.keys(curByForm);for(var fi2=0;fi2<fkeys.length;fi2++)totalSaves+=curByForm[fkeys[fi2]].length;
-    mc.innerHTML+='<div class="prev-header">This Week \u2013 '+curDone+' form'+(curDone!==1?'s:':': ')+', '+totalSaves+' save'+(totalSaves!==1?'s':'')+'</div>';
+    mc.innerHTML+='<div class="prev-header">This Week \u2013 '+curDone+' form'+(curDone!==1?'s':'')+ ', '+totalSaves+' save'+(totalSaves!==1?'s':'')+'</div>';
     var curContainer=document.createElement('div');curContainer.style.cssText='margin:0 14px;';
     renderWeekSections(curContainer,curByForm);attachListeners(curContainer);mc.appendChild(curContainer);
   }

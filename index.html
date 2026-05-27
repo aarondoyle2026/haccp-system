@@ -214,7 +214,7 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
     <div class="sub" id="homeStoreSub">HACCP FOOD SAFETY SYSTEM</div>
     <div class="title">&#128203; HACCP Food Safety System</div>
   </div>
-  <a class="records-banner" href="records.html">
+  <a class="records-banner" id="recordsBanner" href="records.html">
     <div class="rb-left">
       <div class="rb-icon">&#128202;</div>
       <div><div class="rb-text">Weekly Records &amp; Top Sheet</div><div class="rb-sub" id="home-banner-sub">Tap to view records</div></div>
@@ -806,7 +806,10 @@ var homeSub = document.getElementById('homeStoreSub');
 var storeName = STORE_NAMES[selectedStoreId] || 'SuperValu';
 if (navStore) { navStore.textContent = storeName; }
 if (homeSub) { homeSub.textContent = storeName.toUpperCase() + ' - HACCP FOOD SAFETY SYSTEM'; }
+var banner = document.getElementById('recordsBanner');
+if (banner) { banner.href = 'records.html?store=' + selectedStoreId; }
 }
+
 
 var DAYS = ['Mon','Tue','Wed','Thur','Fri','Sat','Sun'];
 var meatTempUnits = [['Fish Display Unit','0-5\u00b0C'],['Poultry','0-5\u00b0C'],['Pork','0-5\u00b0C'],['Raw Meat','0-5\u00b0C'],['Walk in fridge','0-5\u00b0C'],['Pre-pack fish doors','0-5\u00b0C']];
@@ -847,8 +850,17 @@ var headers = {'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'
 if (method === 'POST') headers['Prefer'] = 'resolution=merge-duplicates';
 return fetch(SB_URL+'/rest/v1/'+path,{method:method||'GET',headers:headers,body:body?JSON.stringify(body):undefined});
 }
-function getStoreId() {
-return sessionStorage.getItem('haccp_store') || '424';
+function getStoreId(){
+var params = new URLSearchParams(window.location.search);
+var urlStore = params.get('store');
+if (urlStore && (urlStore==='356'||urlStore==='374'||urlStore==='424')) {
+sessionStorage.setItem('haccp_store', urlStore);
+return urlStore;
+}
+var sid = sessionStorage.getItem('haccp_store');
+if (sid) { return sid; }
+window.location.href = 'index.html';
+return '424';
 }
 function sbUpsert(record) {
 var row = {id:String(record.id),form_id:record.formId,week_key:record.weekKey,saved_at:record.savedAt,store_id:getStoreId(),data:{weekEnding:record.weekEnding,champion:record.champion,timestamp:record.timestamp,correctiveAction:record.correctiveAction,fieldData:record.fieldData,photoCount:record.photoCount}};

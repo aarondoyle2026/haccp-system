@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8">
+<title>SuperValu Portal Login</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Inter',sans-serif;background:#111;min-height:100vh;display:flex;align-items:center;justify-content:center;}
+.login-wrap{width:100%;max-width:380px;padding:24px;}
+.logo{text-align:center;margin-bottom:32px;}
+.logo-badge{background:#e41e26;color:white;font-size:13px;font-weight:700;letter-spacing:3px;padding:8px 20px;border-radius:4px;display:inline-block;margin-bottom:12px;}
+.logo-title{color:white;font-size:20px;font-weight:700;}
+.logo-sub{color:#666;font-size:12px;margin-top:4px;letter-spacing:1px;}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:28px;}
+.field{margin-bottom:18px;}
+.field label{display:block;font-size:11px;font-weight:700;color:#666;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.field input{width:100%;background:#111;border:1.5px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:15px;color:white;font-family:inherit;-webkit-appearance:none;}
+.field input:focus{outline:none;border-color:#e41e26;}
+.field input::placeholder{color:#444;}
+.pin-wrap{display:flex;gap:10px;}
+.pin-dot{width:18px;height:18px;border-radius:50%;background:#2a2a2a;border:2px solid #333;flex-shrink:0;margin-top:3px;}
+.pin-dot.filled{background:#e41e26;border-color:#e41e26;}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px;}
+.pin-key{background:#222;border:1px solid #2a2a2a;color:white;padding:16px;border-radius:10px;font-size:20px;font-weight:600;font-family:inherit;cursor:pointer;text-align:center;-webkit-tap-highlight-color:transparent;}
+.pin-key:active{background:#333;}
+.pin-key.del{font-size:14px;color:#888;}
+.pin-key.clear{font-size:13px;color:#888;}
+.btn-login{background:#e41e26;color:white;width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:20px;letter-spacing:0.5px;}
+.btn-login:active{background:#c0161c;}
+.btn-login:disabled{background:#333;color:#666;cursor:not-allowed;}
+.error{background:#2a0a0a;border:1px solid #5a1010;border-radius:8px;padding:10px 14px;color:#ff6666;font-size:12px;margin-top:14px;text-align:center;display:none;}
+.error.show{display:block;}
+.loading{text-align:center;color:#666;font-size:13px;margin-top:14px;display:none;}
+.loading.show{display:block;}
+</style>
+</head>
+<body>
+<div class="login-wrap">
+  <div class="logo">
+    <div class="logo-badge">SUPERVALU</div>
+    <div class="logo-title">Store Management Portal</div>
+    <div class="logo-sub">MORIARTY GROUP</div>
+  </div>
+  <div class="card">
+    <div class="field">
+      <label>Username</label>
+      <input type="text" id="username" placeholder="e.g. skerries.manager" autocomplete="off" autocapitalize="none">
+    </div>
+    <div class="field">
+      <label>PIN</label>
+      <div class="pin-wrap">
+        <div class="pin-dot" id="pd0"></div>
+        <div class="pin-dot" id="pd1"></div>
+        <div class="pin-dot" id="pd2"></div>
+        <div class="pin-dot" id="pd3"></div>
+      </div>
+    </div>
+    <div class="pin-pad">
+      <button class="pin-key" id="pk1">1</button>
+      <button class="pin-key" id="pk2">2</button>
+      <button class="pin-key" id="pk3">3</button>
+      <button class="pin-key" id="pk4">4</button>
+      <button class="pin-key" id="pk5">5</button>
+      <button class="pin-key" id="pk6">6</button>
+      <button class="pin-key" id="pk7">7</button>
+      <button class="pin-key" id="pk8">8</button>
+      <button class="pin-key" id="pk9">9</button>
+      <button class="pin-key clear" id="pkClear">Clear</button>
+      <button class="pin-key" id="pk0">0</button>
+      <button class="pin-key del" id="pkDel">&#9003;</button>
+    </div>
+    <button class="btn-login" id="loginBtn" disabled>Sign In</button>
+    <div class="error" id="errorBox"></div>
+    <div class="loading" id="loadingBox">Signing in...</div>
+  </div>
+</div>
+<script>
+var SB_FUNC = 'https://mnebkteiwjxbbmnfotse.supabase.co/functions/v1/portal-login';
+var pin = '';
+var busy = false;
+
+var ROLE_REDIRECT = {
+  admin:         '/index.html',
+  store_manager: '/index.html',
+  duty:          '/index.html',
+  deli:          '/index.html',
+  butcher:       '/index.html',
+  shopfloor:     '/index.html',
+  fv:            '/index.html',
+  hr:            '/index.html'
+};
+
+function updateDots() {
+  for (var i = 0; i < 4; i++) {
+    var dot = document.getElementById('pd' + i);
+    if (dot) {
+      dot.className = i < pin.length ? 'pin-dot filled' : 'pin-dot';
+    }
+  }
+  var btn = document.getElementById('loginBtn');
+  var username = document.getElementById('username').value.trim();
+  btn.disabled = pin.length < 4 || !username || busy;
+}
+
+function pressKey(digit) {
+  if (pin.length >= 4 || busy) return;
+  pin += digit;
+  updateDots();
+  if (pin.length === 4) {
+    setTimeout(function() { tryLogin(); }, 150);
+  }
+}
+
+function delKey() {
+  if (busy) return;
+  pin = pin.slice(0, -1);
+  updateDots();
+}
+
+function clearPin() {
+  if (busy) return;
+  pin = '';
+  updateDots();
+}
+
+function showError(msg) {
+  var el = document.getElementById('errorBox');
+  el.textContent = msg;
+  el.className = 'error show';
+  document.getElementById('loadingBox').className = 'loading';
+}
+
+function tryLogin() {
+  var username = document.getElementById('username').value.trim();
+  if (!username || pin.length < 4 || busy) return;
+  busy = true;
+  document.getElementById('loginBtn').disabled = true;
+  document.getElementById('errorBox').className = 'error';
+  document.getElementById('loadingBox').className = 'loading show';
+
+  fetch(SB_FUNC, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: username, pin: pin })
+  }).then(function(r) { return r.json(); }).then(function(data) {
+    busy = false;
+    document.getElementById('loadingBox').className = 'loading';
+    if (data.error) {
+      showError(data.error);
+      pin = '';
+      updateDots();
+      return;
+    }
+    sessionStorage.setItem('portal_session', JSON.stringify({
+      session_id: data.session_id,
+      user: data.user
+    }));
+    var redirect = ROLE_REDIRECT[data.user.role] || '/index.html';
+    window.location.href = redirect;
+  }).catch(function() {
+    busy = false;
+    document.getElementById('loadingBox').className = 'loading';
+    showError('Connection error. Please try again.');
+    pin = '';
+    updateDots();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var keys = ['1','2','3','4','5','6','7','8','9','0'];
+  keys.forEach(function(k) {
+    var btn = document.getElementById('pk' + k);
+    if (btn) { btn.addEventListener('click', function() { pressKey(k); }); }
+  });
+  document.getElementById('pkDel').addEventListener('click', delKey);
+  document.getElementById('pkClear').addEventListener('click', clearPin);
+  document.getElementById('loginBtn').addEventListener('click', tryLogin);
+  document.getElementById('username').addEventListener('input', updateDots);
+  document.getElementById('username').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { document.getElementById('pk1').focus(); }
+  });
+});
+</script>
+</body>
+</html>

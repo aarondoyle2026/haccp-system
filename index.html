@@ -166,6 +166,64 @@ body{font-family:'Inter',sans-serif;background:#f4f6f4;color:#1a1a1a;min-height:
 </style>
 </head>
 <body>
+<script>
+(function() {
+  var SESSION_KEY = 'portal_session';
+  var THIS_PAGE = window.location.pathname.split('/').pop() || 'index.html';
+  var IS_HACCP = window.location.pathname.indexOf('haccp-system') !== -1;
+  var LOGIN_URL = IS_HACCP
+    ? 'https://aarondoyle2026.github.io/haccp-system/login.html'
+    : 'https://aarondoyle2026.github.io/login.html';
+
+  var PAGE_ACCESS = {
+    'index.html':           ['admin','store_manager','duty','deli','butcher','shopfloor','fv','hr'],
+    'ai-insights.html':     ['admin','store_manager','duty'],
+    'appraisals.html':      ['admin','store_manager','duty','hr'],
+    'claims.html':          ['admin','store_manager','duty'],
+    'dockets.html':         ['admin','store_manager','duty','shopfloor'],
+    'fire-drill.html':      ['admin','store_manager','duty','hr'],
+    'managers-report.html': ['admin','store_manager','duty'],
+    'reports.html':         ['admin','store_manager','duty'],
+    'roster.html':          ['admin','store_manager','duty','hr'],
+    'rtw_form.html':        ['admin','store_manager','duty','hr'],
+    'sales_analysis.html':  ['admin','store_manager','duty'],
+    'training.html':        ['admin','store_manager','duty','hr'],
+    'push_data.html':       ['admin'],
+    'records.html':         ['admin','store_manager','duty','deli','butcher','shopfloor','fv','hr'],
+    'report.html':          ['admin','store_manager','duty'],
+    'formview.html':        ['admin','store_manager','duty','deli','butcher','shopfloor','fv','hr']
+  };
+
+  var raw = sessionStorage.getItem(SESSION_KEY);
+  if (!raw) { window.location.href = LOGIN_URL; return; }
+
+  var session;
+  try { session = JSON.parse(raw); } catch(e) {
+    sessionStorage.removeItem(SESSION_KEY);
+    window.location.href = LOGIN_URL;
+    return;
+  }
+
+  if (!session || !session.user) {
+    window.location.href = LOGIN_URL;
+    return;
+  }
+
+  var role = session.user.role;
+  var allowed = PAGE_ACCESS[THIS_PAGE] || ['admin'];
+  var canAccess = false;
+  for (var i = 0; i < allowed.length; i++) {
+    if (allowed[i] === role) { canAccess = true; break; }
+  }
+
+  if (!canAccess) { window.location.href = LOGIN_URL; return; }
+
+  window.PORTAL_USER = session.user;
+  window.PORTAL_ROLE = role;
+  window.PORTAL_STORE = session.user.store_code;
+  window.PORTAL_STORES = session.user.allowed_stores || [];
+})();
+</script>
 
 <div class="pin-screen" id="pinScreen">
   <div class="pin-logo">SuperValu</div>

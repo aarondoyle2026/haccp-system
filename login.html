@@ -86,7 +86,7 @@ function tryLogin() {
         fv:            { haccp:true,  kpi:false, reports:false, pnl:false, ai:false, operations:false },
         hr:            { haccp:false, kpi:false, reports:false, pnl:false, ai:false, operations:true  }
       };
-      sessionStorage.setItem('portal_session', JSON.stringify({
+      localStorage.setItem('portal_session', JSON.stringify({
         session_id: user.id,
         user: {
           username: user.username,

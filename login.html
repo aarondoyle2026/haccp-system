@@ -80,7 +80,7 @@ var busy = false;
 
 function hashPin(p) {
   var msgBuffer = new TextEncoder().encode(p);
-  return crypto.subtle.digest('SHA-256', msgBuffer).then(function(hashBuffer) {
+  return window.crypto.subtle.digest('SHA-256', msgBuffer).then(function(hashBuffer) {
     var hashArray = Array.from(new Uint8Array(hashBuffer));
     return hashArray.map(function(b) {
       var hex = b.toString(16);
@@ -125,6 +125,13 @@ function showError(msg) {
   document.getElementById('loadingBox').className = 'loading';
 }
 
+function resetLogin() {
+  busy = false;
+  pin = '';
+  updateDots();
+  document.getElementById('loadingBox').className = 'loading';
+}
+
 function tryLogin() {
   var username = document.getElementById('username').value.trim().toLowerCase();
   if (!username || pin.length < 4 || busy) return;
@@ -133,27 +140,31 @@ function tryLogin() {
   document.getElementById('errorBox').className = 'error';
   document.getElementById('loadingBox').className = 'loading show';
 
-  hashPin(pin).then(function(pinHash) {
+  var currentPin = pin;
+
+  hashPin(currentPin).then(function(pinHash) {
     return fetch(SB_URL + '/rest/v1/portal_users?username=eq.' + encodeURIComponent(username) + '&pin_hash=eq.' + pinHash + '&active=eq.true&select=id,username,group_id,store_code,role,display_name', {
       headers: {
         'apikey': SB_KEY,
-        'Authorization': 'Bearer ' + SB_KEY,
-        'Content-Type': 'application/json'
+        'Authorization': 'Bearer ' + SB_KEY
       }
     });
-  }).then(function(r) { return r.json(); }).then(function(users) {
+  }).then(function(r) {
+    if (!r.ok) { throw new Error('Auth query failed: ' + r.status); }
+    return r.json();
+  }).then(function(users) {
     if (!users || users.length === 0) {
-      busy = false;
-      document.getElementById('loadingBox').className = 'loading';
+      resetLogin();
       showError('Invalid username or PIN');
-      pin = '';
-      updateDots();
       return;
     }
     var user = users[0];
     return fetch(SB_URL + '/rest/v1/group_stores?group_id=eq.' + user.group_id + (user.role !== 'admin' ? '&store_code=eq.' + user.store_code : '') + '&select=store_code,store_name', {
       headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
-    }).then(function(r) { return r.json(); }).then(function(stores) {
+    }).then(function(r) {
+      if (!r.ok) { throw new Error('Stores query failed: ' + r.status); }
+      return r.json();
+    }).then(function(stores) {
       var moduleAccess = {
         admin:         { haccp:true,  kpi:true,  reports:true,  pnl:true,  ai:true,  operations:true  },
         store_manager: { haccp:true,  kpi:true,  reports:true,  pnl:true,  ai:true,  operations:true  },
@@ -179,11 +190,8 @@ function tryLogin() {
       window.location.href = 'https://aarondoyle2026.github.io/haccp-system/index.html';
     });
   }).catch(function(e) {
-    busy = false;
-    document.getElementById('loadingBox').className = 'loading';
-    showError('Connection error. Please try again.');
-    pin = '';
-    updateDots();
+    resetLogin();
+    showError(e && e.message ? e.message : 'Connection error. Please try again.');
   });
 }
 

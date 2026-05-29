@@ -2,7 +2,7 @@
 
 <head>
 <script>
-(function(){if(!localStorage.getItem('portal_session')){window.location.replace('https://aarondoyle2026.github.io/haccp-system/login.html');}})();
+(function(){var a=sessionStorage.getItem('portal_auth_token');if(a){sessionStorage.removeItem('portal_auth_token');}else{localStorage.removeItem('portal_session');window.location.replace('https://aarondoyle2026.github.io/haccp-system/login.html?to='+encodeURIComponent(window.location.href));}})();
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">

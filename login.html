@@ -1,11 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Login – Moriarty Group</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{background:#0d1f13;}
+body{font-family:'DM Sans',sans-serif;background:#0d1f13;color:white;min-height:100vh;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;padding:32px 20px;}
+.brand{text-align:center;margin-bottom:28px;}
+.logo-mark{display:-webkit-inline-flex;display:inline-flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;width:64px;height:64px;background:#00703c;border-radius:16px;font-size:28px;margin-bottom:14px;box-shadow:0 8px 32px rgba(0,112,60,0.5);}
+.brand-name{font-size:18px;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+.brand-sub{font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.45);margin-top:4px;text-transform:uppercase;}
+.card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 20px;width:100%;max-width:340px;}
+.field{margin-bottom:20px;}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px;}
+.field input{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:13px 14px;font-size:16px;color:white;font-family:inherit;outline:none;-webkit-appearance:none;appearance:none;}
+.field input:focus{border-color:#00703c;outline:none;}
+.field input::-webkit-input-placeholder{color:rgba(255,255,255,0.3);}
+.field input::placeholder{color:rgba(255,255,255,0.3);}
+.dots{display:-webkit-flex;display:flex;-webkit-justify-content:center;justify-content:center;gap:16px;margin-bottom:24px;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,0.12);border:2px solid rgba(255,255,255,0.2);-webkit-transition:all 0.15s;transition:all 0.15s;}
+.pin-dot.filled{background:#00703c;border-color:#00703c;box-shadow:0 0 8px rgba(0,112,60,0.7);}
+.keypad{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
+.key{-webkit-flex:0 0 calc(33.333% - 7px);flex:0 0 calc(33.333% - 7px);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px 8px;font-size:20px;font-weight:600;color:white;cursor:pointer;text-align:center;font-family:inherit;-webkit-appearance:none;appearance:none;touch-action:manipulation;-webkit-transition:background 0.1s;transition:background 0.1s;}
+.key:active{background:rgba(0,112,60,0.45);}
+.key.action{font-size:14px;font-weight:700;color:rgba(255,255,255,0.55);}
+#loginBtn{width:100%;background:#00703c;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:700;color:white;font-family:inherit;cursor:pointer;touch-action:manipulation;-webkit-transition:opacity 0.2s;transition:opacity 0.2s;-webkit-appearance:none;appearance:none;}
+#loginBtn:disabled{opacity:0.3;cursor:default;}
+#loginBtn:active{opacity:0.75;}
+.error{display:none;background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.3);border-radius:8px;padding:10px 14px;font-size:13px;color:#fca5a5;text-align:center;margin-top:12px;}
+.error.show{display:block;}
+.loading{display:none;text-align:center;margin-top:14px;font-size:13px;color:rgba(255,255,255,0.45);letter-spacing:0.5px;}
+.loading.show{display:block;}
+</style>
+</head>
+<body>
+<div class="brand">
+  <div class="logo-mark">&#127978;</div>
+  <div class="brand-name">Moriarty Group</div>
+  <div class="brand-sub">Store Portal</div>
+</div>
+<div class="card">
+  <div class="field">
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter your username" autocomplete="username" autocorrect="off" autocapitalize="off" spellcheck="false">
+  </div>
+  <div class="dots">
+    <div class="pin-dot" id="pd0"></div>
+    <div class="pin-dot" id="pd1"></div>
+    <div class="pin-dot" id="pd2"></div>
+    <div class="pin-dot" id="pd3"></div>
+  </div>
+  <div class="keypad">
+    <button class="key" id="pk1">1</button>
+    <button class="key" id="pk2">2</button>
+    <button class="key" id="pk3">3</button>
+    <button class="key" id="pk4">4</button>
+    <button class="key" id="pk5">5</button>
+    <button class="key" id="pk6">6</button>
+    <button class="key" id="pk7">7</button>
+    <button class="key" id="pk8">8</button>
+    <button class="key" id="pk9">9</button>
+    <button class="key action" id="pkClear">CLR</button>
+    <button class="key" id="pk0">0</button>
+    <button class="key action" id="pkDel">&#9003;</button>
+  </div>
+  <button id="loginBtn" disabled>Sign In</button>
+  <div class="error" id="errorBox"></div>
+  <div class="loading" id="loadingBox">Signing in…</div>
+</div>
 <script>
 var SB_URL = 'https://mnebkteiwjxbbmnfotse.supabase.co';
 var SB_KEY = 'sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
 var pin = '';
 var busy = false;
 
-function hashPin(pin) {
-  var msgBuffer = new TextEncoder().encode(pin);
+function hashPin(p) {
+  var msgBuffer = new TextEncoder().encode(p);
   return crypto.subtle.digest('SHA-256', msgBuffer).then(function(hashBuffer) {
     var hashArray = Array.from(new Uint8Array(hashBuffer));
     return hashArray.map(function(b) {
@@ -102,8 +175,7 @@ function tryLogin() {
           access: moduleAccess[user.role] || moduleAccess.shopfloor
         }
       }));
-      var IS_HACCP = window.location.pathname.indexOf('haccp-system') !== -1;
-      window.location.href = IS_HACCP ? '/haccp-system/index.html' : '/index.html';
+      window.location.href = 'https://aarondoyle2026.github.io/haccp-system/index.html';
     });
   }).catch(function(e) {
     busy = false;
@@ -126,3 +198,5 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('username').addEventListener('input', updateDots);
 });
 </script>
+</body>
+</html>

@@ -7,32 +7,32 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html{background:#140000;}
-body{font-family:'DM Sans',sans-serif;background:#140000;color:white;min-height:100vh;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;padding:32px 20px;}
+html{background:#f5f0f0;}
+body{font-family:'DM Sans',sans-serif;background:#f5f0f0;color:#1a1a1a;min-height:100vh;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;padding:32px 20px;}
 .brand{text-align:center;margin-bottom:28px;}
-.logo-mark{display:-webkit-inline-flex;display:inline-flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;width:64px;height:64px;background:#e41e26;border-radius:16px;font-size:28px;margin-bottom:14px;box-shadow:0 8px 32px rgba(228,30,38,0.5);}
-.brand-name{font-size:18px;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
-.brand-sub{font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.45);margin-top:4px;text-transform:uppercase;}
-.card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 20px;width:100%;max-width:340px;}
+.logo-mark{display:-webkit-inline-flex;display:inline-flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;width:64px;height:64px;background:#e41e26;border-radius:16px;font-size:28px;margin-bottom:14px;box-shadow:0 8px 32px rgba(228,30,38,0.3);}
+.brand-name{font-size:18px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#1a1a1a;}
+.brand-sub{font-size:11px;letter-spacing:2px;color:rgba(0,0,0,0.45);margin-top:4px;text-transform:uppercase;}
+.card{background:white;border:1px solid rgba(0,0,0,0.08);border-radius:20px;padding:24px 20px;width:100%;max-width:340px;box-shadow:0 2px 16px rgba(0,0,0,0.08);}
 .field{margin-bottom:20px;}
-.field label{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px;}
-.field input{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:13px 14px;font-size:16px;color:white;font-family:inherit;outline:none;-webkit-appearance:none;appearance:none;}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:8px;}
+.field input{width:100%;background:white;border:1px solid #ddd;border-radius:10px;padding:13px 14px;font-size:16px;color:#1a1a1a;font-family:inherit;outline:none;-webkit-appearance:none;appearance:none;}
 .field input:focus{border-color:#e41e26;outline:none;}
-.field input::-webkit-input-placeholder{color:rgba(255,255,255,0.3);}
-.field input::placeholder{color:rgba(255,255,255,0.3);}
+.field input::-webkit-input-placeholder{color:rgba(0,0,0,0.3);}
+.field input::placeholder{color:rgba(0,0,0,0.3);}
 .dots{display:-webkit-flex;display:flex;-webkit-justify-content:center;justify-content:center;gap:16px;margin-bottom:24px;}
-.pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,0.12);border:2px solid rgba(255,255,255,0.2);-webkit-transition:all 0.15s;transition:all 0.15s;}
-.pin-dot.filled{background:#e41e26;border-color:#e41e26;box-shadow:0 0 8px rgba(228,30,38,0.7);}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(0,0,0,0.08);border:2px solid rgba(0,0,0,0.15);-webkit-transition:all 0.15s;transition:all 0.15s;}
+.pin-dot.filled{background:#e41e26;border-color:#e41e26;box-shadow:0 0 8px rgba(228,30,38,0.4);}
 .keypad{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
-.key{-webkit-flex:0 0 calc(33.333% - 7px);flex:0 0 calc(33.333% - 7px);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px 8px;font-size:20px;font-weight:600;color:white;cursor:pointer;text-align:center;font-family:inherit;-webkit-appearance:none;appearance:none;touch-action:manipulation;-webkit-transition:background 0.1s;transition:background 0.1s;}
-.key:active{background:rgba(228,30,38,0.45);}
-.key.action{font-size:14px;font-weight:700;color:rgba(255,255,255,0.55);}
+.key{-webkit-flex:0 0 calc(33.333% - 7px);flex:0 0 calc(33.333% - 7px);background:white;border:1px solid rgba(0,0,0,0.1);border-radius:12px;padding:16px 8px;font-size:20px;font-weight:600;color:#1a1a1a;cursor:pointer;text-align:center;font-family:inherit;-webkit-appearance:none;appearance:none;touch-action:manipulation;-webkit-transition:background 0.1s;transition:background 0.1s;}
+.key:active{background:rgba(228,30,38,0.1);}
+.key.action{font-size:14px;font-weight:700;color:rgba(0,0,0,0.4);}
 #loginBtn{width:100%;background:#e41e26;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:700;color:white;font-family:inherit;cursor:pointer;touch-action:manipulation;-webkit-transition:opacity 0.2s;transition:opacity 0.2s;-webkit-appearance:none;appearance:none;}
 #loginBtn:disabled{opacity:0.3;cursor:default;}
 #loginBtn:active{opacity:0.75;}
-.error{display:none;background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.3);border-radius:8px;padding:10px 14px;font-size:13px;color:#fca5a5;text-align:center;margin-top:12px;}
+.error{display:none;background:rgba(228,30,38,0.08);border:1px solid rgba(228,30,38,0.2);border-radius:8px;padding:10px 14px;font-size:13px;color:#c0161c;text-align:center;margin-top:12px;}
 .error.show{display:block;}
-.loading{display:none;text-align:center;margin-top:14px;font-size:13px;color:rgba(255,255,255,0.45);letter-spacing:0.5px;}
+.loading{display:none;text-align:center;margin-top:14px;font-size:13px;color:rgba(0,0,0,0.45);letter-spacing:0.5px;}
 .loading.show{display:block;}
 </style>
 </head>

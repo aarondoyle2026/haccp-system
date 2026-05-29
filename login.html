@@ -4,11 +4,15 @@ var SB_KEY = 'sb_publishable_eutRHOftOW4ZJNlVrDKXOg_XtnBQ7cM';
 var pin = '';
 var busy = false;
 
-async function hashPin(pin) {
+function hashPin(pin) {
   var msgBuffer = new TextEncoder().encode(pin);
-  var hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  var hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+  return crypto.subtle.digest('SHA-256', msgBuffer).then(function(hashBuffer) {
+    var hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(function(b) {
+      var hex = b.toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    }).join('');
+  });
 }
 
 function updateDots() {

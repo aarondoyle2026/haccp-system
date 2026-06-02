@@ -1298,6 +1298,19 @@ dbPut('live',liveRec).then(function(){return dbPut('records',record);})
 updateFormBadge('trace-butcher',true);}).catch(function(e){showToast('Save failed: '+e.message);});};
 if(!db){openDB().then(function(){doSave();});}else{doSave();}}
 
+
+var provisionsTempUnits = [['Butter Fridge','0-5°C'],['Cheese Fridge','0-5°C'],['Cooked Meat Fridge','0-5°C'],['Deli Counter Fridge','0-5°C'],['Salad Fridge','0-5°C']];
+var sandwichBarTempUnits = [['Sandwich Bar Fridge 1','0-5°C'],['Sandwich Bar Fridge 2','0-5°C']];
+var bakeryTempUnits = [['Fresh Cream Display Fridge 1','0-5°C'],['Fresh Cream Display Fridge 2','0-5°C'],['Fresh Cream Display Fridge 3','0-5°C'],['Scratch Bakery Prep Fridge','0-5°C']];
+function makeBakeryTempRows(){
+var tbody=document.getElementById('temp-bakery-body');if(!tbody)return;
+var slots=['10am','4pm'];
+for(var i=0;i<bakeryTempUnits.length;i++){var tr=document.createElement('tr');
+var unitName=bakeryTempUnits[i][0];
+var c='<td class="unit-name">'+unitName+'</td><td class="target">'+bakeryTempUnits[i][1]+'</td>';
+for(var d=0;d<7;d++){for(var s=0;s<2;s++){c+='<td><input type="text" maxlength="6" data-label="'+unitName+' '+['Mon','Tue','Wed','Thur','Fri','Sat','Sun'][d]+' '+slots[s]+'"></td>';}}
+c+='<td><input type="text" data-label="'+unitName+' Comments"></td>';
+tr.innerHTML=c;tbody.appendChild(tr);}}
 document.addEventListener('DOMContentLoaded', function() {
 initPinScreen();
 openDB().then(function(){

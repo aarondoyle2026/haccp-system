@@ -433,13 +433,9 @@ function checkPin() {
 var correct = STORE_PINS[selectedStoreId];
 if (pinEntry === correct) {
 sessionStorage.setItem('haccp_store', selectedStoreId);
-if (selectedStoreId === '374') {
-window.location.href = 'index-374.html';
-} else if (selectedStoreId === '356') {
-window.location.href = 'index-356.html';
-} else {
-hidePinScreen();
-}
+if (selectedStoreId === '374') { window.location.href = 'index-374.html'; }
+else if (selectedStoreId === '356') { window.location.href = 'index-356.html'; }
+else { hidePinScreen(); }
 } else {
 pinEntry = '';
 updatePinDots();

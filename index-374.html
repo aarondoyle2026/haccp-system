@@ -902,7 +902,7 @@ closeWeek(true);
 }
 });
 }
-var recBanner=document.querySelector('.records-banner');if(recBanner){recBanner.addEventListener('click',function(){try{if(db){db.close();db=null;}}catch(e){}});}
+var recBanner=document.querySelector('.records-banner');if(recBanner){recBanner.addEventListener('click',function(){try{if(db){db.close();db=null;}}catch(e){}sessionStorage.setItem('portal_auth_token','1');});}
 var cards=document.querySelectorAll('.form-card');for(var ci=0;ci<cards.length;ci++){(function(card){card.addEventListener('click',function(){var fid=card.getAttribute('data-form');if(fid)showForm(fid);});})(cards[ci]);}
 var saveBtns=document.querySelectorAll('.btn-save');for(var si=0;si<saveBtns.length;si++){(function(btn){btn.addEventListener('click',function(){var fid=btn.getAttribute('data-saveid');if(fid)saveForm(fid);});})(saveBtns[si]);}
 var sigBtns=document.querySelectorAll('.sig-clear');for(var sgi=0;sgi<sigBtns.length;sgi++){(function(btn){btn.addEventListener('click',function(){var sid=btn.getAttribute('data-sigid');if(sid)clearSig(sid);});})(sigBtns[sgi]);}
